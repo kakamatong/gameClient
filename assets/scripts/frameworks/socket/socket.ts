@@ -15,6 +15,7 @@ export class Socket {
     private connectWebSocket(url: string) {
         try {
             this.socket = new WebSocket(url);
+            this.socket.binaryType = 'arraybuffer';
             this.setupEventListeners();
         } catch (error) {
             log('WebSocket 连接创建失败:', error);
@@ -73,8 +74,8 @@ export class Socket {
     public sendMessage(data: any) {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             try {
-                const message = JSON.stringify(data);
-                this.socket.send(message);
+                //const message = JSON.stringify(data);
+                this.socket.send(data);
             } catch (error) {
                 log('消息发送失败:', error);
             }
