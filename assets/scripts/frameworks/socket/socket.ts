@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, log } from 'cc';
+import { _decorator, Component, Node, log,assetManager,BufferAsset } from 'cc';
+import sproto from '../sproto/sproto.js';
 const { ccclass, property } = _decorator;
 
 @ccclass('Socket')
@@ -69,6 +70,7 @@ export class Socket {
         // 处理接收到的消息
         log('收到消息:', message);
         // TODO: 根据消息类型进行处理
+
     }
 
     // 发送消息方法
@@ -77,6 +79,7 @@ export class Socket {
             try {
                 // 直接发送二进制数据
                 const buffer = new Uint8Array(data);
+                console.log('buffer:', buffer);
                 this.socket.send(buffer);
             } catch (error) {
                 log('消息发送失败:', error);

@@ -34,12 +34,13 @@ export class splashScreen extends Component {
                 log('loadBundle error', err);
                 return;
             }
-            bundle.load('sproto',(err,asset:BufferAsset) => {
+            bundle.load('c2s',(err,asset:BufferAsset) => {
                 log('loadAsset error', err);
 
                 const buffer = new Uint8Array(asset.buffer());
-                const mysproto = sproto.createNew(buffer);
-                log('mysproto', mysproto)
+                const clientSproto = sproto.createNew(buffer);
+                const client = clientSproto.host('package');
+                const request = client.attach(clientSproto);
 
                 // username 0 : string
                 // password 1 : string
@@ -51,15 +52,17 @@ export class splashScreen extends Component {
                     device: 'pc',
                     version: '0.0.1'
                 }
-                const req = mysproto.encode('auth.request', loginInfo);
-                this.socket.sendMessage(req);
-                // socket.sendMessage({
-                //     type: 'login',
-                //     data: {
-                //         username: 'admin',
-                //         password: '123456'
-                //     }
-                // });
+
+                this.socket.sendMessage(request('auth', loginInfo));
+            });
+
+            bundle.load('s2c',(err,asset:BufferAsset) => {
+                log('loadAsset error', err);
+
+                const buffer = new Uint8Array(asset.buffer());
+                const serverSproto = sproto.createNew(buffer);
+                const server = serverSproto.host('package');
+
             });
         });
         // 读取协议文件
