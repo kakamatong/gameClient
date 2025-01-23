@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, log,assetManager,BufferAsset } from 'cc';
-import sproto from '../sproto/sproto.js';
+import { handleSocketMessage } from '../config/config';
 const { ccclass, property } = _decorator;
 
 @ccclass('Socket')
@@ -8,9 +8,13 @@ export class Socket {
     private reconnectAttempts: number = 0;
     private readonly maxReconnectAttempts: number = 5;
     private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
-
+    private handleSocketMessage: handleSocketMessage;
     init(url: string = 'ws://192.168.1.182:8001') {
         this.connectWebSocket(url);
+    }
+
+    setHandleMessage(handleSocketMessage: handleSocketMessage) {
+        this.handleSocketMessage = handleSocketMessage;
     }
 
     private connectWebSocket(url: string) {
@@ -29,6 +33,8 @@ export class Socket {
         this.socket.onopen = (event) => {
             log('WebSocket 连接成功！');
             this.reconnectAttempts = 0;
+
+            this.handleSocketMessage && this.handleSocketMessage.onOpen(event);
         };
 
         // 接收消息
@@ -36,7 +42,7 @@ export class Socket {
             try {
                 // 直接处理二进制数据
                 const uint8Array = new Uint8Array(event.data);
-                this.handleMessage(Array.from(uint8Array));
+                this.handleSocketMessage && this.handleSocketMessage.onMessage(uint8Array);
             } catch (error) {
                 log('消息解析错误:', error);
             }
