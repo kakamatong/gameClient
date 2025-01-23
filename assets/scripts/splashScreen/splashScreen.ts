@@ -14,10 +14,17 @@ export class splashScreen extends Component implements handleSocketMessage {
     private server: any;
     start() {
         log('splashScreen');
+        this.loadProtocol();
+
+        setTimeout(() => {
+            this.initSocket();
+        }, 1000);
+    }
+
+    initSocket() {
         this.socket = new Socket();
         this.socket.init();
         this.socket.setHandleMessage(this);
-        this.loadProtocol();
     }
 
     sendLogin() {
@@ -32,7 +39,7 @@ export class splashScreen extends Component implements handleSocketMessage {
             device: 'pc',
             version: '0.0.1'
         }
-        this.request && this.sendMessage(this.request('auth', loginInfo, 1));
+        this.request && this.sendMessage(this.request('auth', loginInfo, 100));
     }
 
     sendMessage(message: any) {
@@ -46,23 +53,26 @@ export class splashScreen extends Component implements handleSocketMessage {
                 log('loadBundle error', err);
                 return;
             }
-            bundle.load('c2s',(err,asset:BufferAsset) => {
-                log('loadAsset error', err);
 
-                const buffer = new Uint8Array(asset.buffer());
-                const clientSproto = sproto.createNew(buffer);
-                this.client = clientSproto.host('package');
-                this.request = this.client.attach(clientSproto);
-            });
-
+            // 必须先读取服务端协议
             bundle.load('s2c',(err,asset:BufferAsset) => {
                 log('loadAsset error', err);
 
                 const buffer = new Uint8Array(asset.buffer());
                 const serverSproto = sproto.createNew(buffer);
-                this.server = serverSproto.host('package');
-                this.response = this.server.attach(serverSproto);
+                this.client = serverSproto.host('package');
+
+                // 然后读取客户端协议
+                bundle.load('c2s',(err,asset:BufferAsset) => {
+                    log('loadAsset error', err);
+    
+                    const buffer = new Uint8Array(asset.buffer());
+                    const clientSproto = sproto.createNew(buffer);
+                    this.request = this.client.attach(clientSproto);
+                });
             });
+
+            
         });
         // 读取协议文件
         //const protocolData = readFileSync(protocolPath);
@@ -75,9 +85,8 @@ export class splashScreen extends Component implements handleSocketMessage {
 
     onOpen(event: any) {
         log('onOpen', event);
-        setTimeout(() => {
-            this.sendLogin();
-        }, 1000);
+        this.sendLogin();
+
     }
 
     onMessage(message: Uint8Array) {
