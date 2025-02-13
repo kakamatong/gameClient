@@ -9,7 +9,7 @@ export class Socket {
     private readonly maxReconnectAttempts: number = 5;
     private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
     private handleSocketMessage: handleSocketMessage;
-    init(url: string = 'ws://192.168.1.182:8001') {
+    init(url: string = 'ws://192.168.1.182:9002') {
         this.connectWebSocket(url);
     }
 
@@ -51,7 +51,7 @@ export class Socket {
         // 连接关闭
         this.socket.onclose = (event) => {
             log('WebSocket 连接关闭:', event.code, event.reason);
-            this.handleReconnection();
+            //this.handleReconnection();
         };
 
         // 错误处理

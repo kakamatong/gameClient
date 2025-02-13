@@ -2,7 +2,7 @@ import { _decorator, Component, log,sys,assetManager,BufferAsset} from 'cc';
 import { Socket } from '../frameworks/socket/socket';
 import sproto from '../frameworks/sproto/sproto.js';
 import { handleSocketMessage } from '../frameworks/config/config';
-
+import { Login } from '../login/login';
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -14,11 +14,14 @@ export class splashScreen extends Component implements handleSocketMessage {
     private server: any;
     start() {
         log('splashScreen');
-        this.loadProtocol();
+        //this.loadProtocol();
 
-        setTimeout(() => {
-            this.initSocket();
-        }, 1000);
+        // setTimeout(() => {
+        //     this.initSocket();
+        // }, 1000);
+
+        const login = new Login();
+        login.start();
     }
 
     initSocket() {
@@ -103,5 +106,3 @@ export class splashScreen extends Component implements handleSocketMessage {
         log('onError', error);
     }
 }
-
-
