@@ -1,89 +1,80 @@
 import CryptoJS from '../libs/crypto-js-4.2.0/crypto-js.js';
 // DH参数配置
-const DH_GENERATOR = CryptoJS.lib.WordArray.create(
-    [0x05000000], // G = 5 (小端序表示)
-    8
-);
-const DH_PRIME = CryptoJS.lib.WordArray.create(
-    [0xffffffff, 0xffffffc5], // P = 0xFFFFFFFFFFFFFFC5
-    8 // 8字节长度
-);
+const DH_GENERATOR = 5n;
+const DH_PRIME = 0xFFFFFFFFFFFFFFC5n;
 
-// 新增模乘运算实现
-const mulModP = (a: bigint, b: bigint): bigint => {
-    const P = 0xFFFFFFFFFFFFFFC5n;
+// 字节转换工具
+const toUint64LE = (wa: CryptoJS.lib.WordArray): bigint => {
+    const bytes = wa.toString(CryptoJS.enc.Hex).match(/.{8}/g) || [];
+    const [low, high] = bytes.map(b => 
+        parseInt(b.split(/(?=(?:..)*$)/).reverse().join(''), 16)
+    );
+    return (BigInt(high) << 32n) | BigInt(low);
+};
+
+const fromUint64LE = (n: bigint): CryptoJS.lib.WordArray => {
+    const buffer = new ArrayBuffer(8);
+    const view = new DataView(buffer);
+    view.setUint32(0, Number(n & 0xFFFFFFFFn), true);
+    view.setUint32(4, Number(n >> 32n), true);
+    return CryptoJS.lib.WordArray.create(new Uint8Array(buffer));
+};
+
+// 与服务端完全一致的模乘算法
+const mul_mod_p = (a: bigint, b: bigint): bigint => {
     let m = 0n;
-    let currentA = a;
-    let currentB = b;
-
-    while (currentB > 0n) {
-        if (currentB & 1n) {
-            const t = P - currentA;
-            m = (m >= t) ? m - t : m + currentA;
-            if (m >= P) m -= P;
+    while (b > 0n) {
+        if (b & 1n) {
+            const t = DH_PRIME - a;
+            m = (m >= t) ? m - t : m + a;
+            if (m >= DH_PRIME) m -= DH_PRIME;
         }
-        currentA = (currentA >= P - currentA) ? 
-            (currentA * 2n - P) : 
-            (currentA * 2n);
-        currentB >>= 1n;
+        a = (a >= DH_PRIME - a) ? 
+            (a * 2n - DH_PRIME) : 
+            (a * 2n);
+        b >>= 1n;
     }
-    return m % P;
+    return m % DH_PRIME;
 };
 
-// 优化后的模幂运算
-const powModP = (a: bigint, b: bigint): bigint => {
-    const P = 0xFFFFFFFFFFFFFFC5n;
+// 递归实现的模幂运算
+const pow_mod_p = (a: bigint, b: bigint): bigint => {
     if (b === 1n) return a;
-    let t = powModP(a, b >> 1n);
-    t = mulModP(t, t);
-    if (b % 2n === 1n) {
-        t = mulModP(t, a);
-    }
-    return t;
+    let t = pow_mod_p(a, b >> 1n);
+    t = mul_mod_p(t, t);
+    return (b % 2n === 1n) ? mul_mod_p(t, a) : t;
 };
 
-// 更新modExp函数
-const modExp = (base: CryptoJS.lib.WordArray, exponent: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
-    // 将WordArray转换为BigInt（小端序）
-    const toBigIntLE = (wa: CryptoJS.lib.WordArray) => {
-        const bytes = CryptoJS.enc.Hex.stringify(wa).match(/.{2}/g) || [];
-        return BigInt('0x' + bytes.reverse().join(''));
-    };
+// 修正缓存实现
+const DH_CACHE = new Map<string, CryptoJS.lib.WordArray>();
 
-    // 将BigInt转回WordArray（小端序）
-    const toWordArrayLE = (n: bigint) => {
-        const hex = n.toString(16).padStart(16, '0');
-        const bytes = hex.match(/(..)/g)?.reverse().join('') || '';
-        return CryptoJS.enc.Hex.parse(bytes);
-    };
-
-    const G = 2n;
-    const P = 0xFFFFFFFFFFFFFFC5n;
-    
-    const x = toBigIntLE(exponent);
-    if (x === 0n) throw new Error("Invalid DH key (zero)");
-
-    // 计算G^x mod P
-    const result = powModP(G, x);
-    
-    return toWordArrayLE(result);
-};
-
-// DH密钥交换实现
+// 与服务端一致的DH交换实现
 export const dhexchange = (clientKey: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
-    // 验证输入密钥长度
-    if (clientKey.sigBytes !== 8) {
-        throw new Error("Invalid DH key size");
+    const cacheKey = clientKey.toString();
+    if (DH_CACHE.has(cacheKey)) {
+        // 返回缓存值的克隆
+        return DH_CACHE.get(cacheKey)!.clone();
     }
-
-    // 执行模幂运算
-    return modExp(DH_GENERATOR, clientKey);
+    
+    const x = toUint64LE(clientKey);
+    if (x === 0n) throw new Error("Invalid DH key");
+    
+    // 生成结果并转换为WordArray
+    const result = fromUint64LE(pow_mod_p(DH_GENERATOR, x));
+    
+    // 存储克隆到缓存
+    DH_CACHE.set(cacheKey, result.clone());
+    
+    // 返回结果克隆
+    return result.clone();
 };
 
-// 密钥派生函数
-export const dhsecret = (clientKey: CryptoJS.lib.WordArray, serverKey: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
-    // 执行模幂运算得到共享密钥
-    return modExp(serverKey, clientKey);
+// 共享密钥计算
+export const dhsecret = (serverKey: CryptoJS.lib.WordArray, clientKey: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+    const B = toUint64LE(serverKey);
+    const a = toUint64LE(clientKey);
+    const result = pow_mod_p(B, a);
+    return fromUint64LE(result);
 };
 
 // 新增HMAC64实现

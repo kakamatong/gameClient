@@ -69,8 +69,17 @@ export class Login implements handleSocketMessage {
             `内容: [${challengeBytes.join(', ')}]`
         );
     
-        // 2. 生成客户端密钥对
-        this.clientPrivateKey = CryptoJS.lib.WordArray.random(8); // 8字节私钥
+        // 生成客户端密钥对前添加日志
+        console.log('生成客户端私钥前:', this.clientPrivateKey ? this.clientPrivateKey.toString() : 'null');
+        
+        this.clientPrivateKey = CryptoJS.lib.WordArray.random(8);
+        
+        // 生成后添加详细日志
+        console.log('客户端私钥详情:', 
+            `Hex: ${this.clientPrivateKey.toString(CryptoJS.enc.Hex)}`,
+            `长度: ${this.clientPrivateKey.sigBytes}字节`
+        );
+        
         const clientPrivateKeyDh = dhexchange(this.clientPrivateKey);
         // 打印客户端公钥字节
         const publicKeyHex = clientPrivateKeyDh.toString(CryptoJS.enc.Hex);
