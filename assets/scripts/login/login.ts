@@ -70,16 +70,9 @@ export class Login implements handleSocketMessage {
         );
     
         // 生成客户端密钥对前添加日志
-        console.log('生成客户端私钥前:', this.clientPrivateKey ? this.clientPrivateKey.toString() : 'null');
-        
-        this.clientPrivateKey = CryptoJS.lib.WordArray.random(8);
-        
-        // 生成后添加详细日志
-        console.log('客户端私钥详情:', 
-            `Hex: ${this.clientPrivateKey.toString(CryptoJS.enc.Hex)}`,
-            `长度: ${this.clientPrivateKey.sigBytes}字节`
-        );
-        
+        //this.clientPrivateKey = CryptoJS.lib.WordArray.random(8);
+        this.clientPrivateKey = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
+
         const clientPrivateKeyDh = dhexchange(this.clientPrivateKey);
         // 打印客户端公钥字节
         const publicKeyHex = clientPrivateKeyDh.toString(CryptoJS.enc.Hex);
@@ -100,9 +93,6 @@ export class Login implements handleSocketMessage {
         const messageBytes = new TextEncoder().encode(messageReq);
         const messageArray = Array.from(messageBytes);
         this.sendMessage(messageArray);
-
-        const rawKey = new Uint8Array(this.clientPrivateKey.words.buffer);
-        console.log('客户端私钥原始字节:', Array.from(rawKey));
     }
 
     // 认证流程主函数
@@ -127,7 +117,8 @@ export class Login implements handleSocketMessage {
         );
     
         // 5. 计算HMAC校验（假设服务端使用HmacMD5）
-        const hmac = hmac64(this.challenge, secret);
+        //const hmac = hmac64(this.challenge, secret);
+        const hmac = hmac64(this.clientPrivateKey, secret);
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
         console.log('hmacB64:', hmacB64);
