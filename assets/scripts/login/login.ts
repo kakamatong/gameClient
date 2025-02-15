@@ -141,5 +141,12 @@ export class Login implements handleSocketMessage {
         const messageBytes = new TextEncoder().encode(messageReq);
         const messageArray = Array.from(messageBytes);
         this.sendMessage(messageArray);   
+
+        // 在performAuthentication2中添加
+        // console.log('HMAC计算参数:',
+        //     `Key: ${this.clientPrivateKey.toString(CryptoJS.enc.Hex)}`,
+        //     `Secret: ${secret.toString(CryptoJS.enc.Hex)}`,
+        //     `W数组: ${JSON.stringify(w)}`
+        // );
     }
 }
