@@ -116,7 +116,7 @@ export class Login implements handleSocketMessage {
             `内容: [${secretBytes.join(', ')}]`
         );
     
-        // 5. 计算HMAC校验（假设服务端使用HmacMD5）
+        // 5. 计算HMAC校验
         //const hmac = hmac64(this.challenge, secret);
         const hmac = hmac64(this.clientPrivateKey, secret);
         //hmac.sigBytes = 8; // 截取前8字节
