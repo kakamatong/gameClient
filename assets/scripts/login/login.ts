@@ -56,34 +56,14 @@ export class Login implements handleSocketMessage {
     performAuthentication1(message: string) {
         // 1. 接收服务端发送的challenge（伪代码示例）
         const challengeB64 = message; // 接收base64字符串
+        console.log('challengeB64:', challengeB64);
         this.challenge = CryptoJS.enc.Base64.parse(challengeB64.trim());
     
-        // 打印challenge实际字节内容
-        const challengeHex = this.challenge.toString(CryptoJS.enc.Hex);
-        const challengeBytes = [];
-        for (let i = 0; i < challengeHex.length; i += 2) {
-            challengeBytes.push(parseInt(challengeHex.substr(i, 2), 16));
-        }
-        console.log('Challenge实际字节:', 
-            `长度: ${this.challenge.sigBytes}字节`,
-            `内容: [${challengeBytes.join(', ')}]`
-        );
-    
         // 生成客户端密钥对前添加日志
-        //this.clientPrivateKey = CryptoJS.lib.WordArray.random(8);
-        this.clientPrivateKey = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
+        this.clientPrivateKey = CryptoJS.lib.WordArray.random(8);
+        //this.clientPrivateKey = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
 
         const clientPrivateKeyDh = dhexchange(this.clientPrivateKey);
-        // 打印客户端公钥字节
-        const publicKeyHex = clientPrivateKeyDh.toString(CryptoJS.enc.Hex);
-        const publicKeyBytes = [];
-        for (let i = 0; i < publicKeyHex.length; i += 2) {
-            publicKeyBytes.push(parseInt(publicKeyHex.substr(i, 2), 16));
-        }
-        console.log('客户端公钥字节:', 
-            `长度: ${clientPrivateKeyDh.sigBytes}字节`,
-            `内容: [${publicKeyBytes.join(', ')}]`
-        );
 
         const clientPublicKeyB64 = CryptoJS.enc.Base64.stringify(clientPrivateKeyDh);
         const messageReq = clientPublicKeyB64
@@ -107,18 +87,9 @@ export class Login implements handleSocketMessage {
         // 打印secret
         const secretHex = secret.toString(CryptoJS.enc.Hex);
         console.log('secretHex:', secretHex);
-        const secretBytes = [];
-        for (let i = 0; i < secretHex.length; i += 2) {
-            secretBytes.push(parseInt(secretHex.substr(i, 2), 16));
-        }
-        console.log('secret字节:', 
-            `长度: ${secret.sigBytes}字节`,
-            `内容: [${secretBytes.join(', ')}]`
-        );
     
         // 5. 计算HMAC校验
-        //const hmac = hmac64(this.challenge, secret);
-        const hmac = hmac64(this.clientPrivateKey, secret);
+        const hmac = hmac64(this.challenge, secret);
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
         console.log('hmacB64:', hmacB64);
@@ -142,11 +113,10 @@ export class Login implements handleSocketMessage {
         const messageArray = Array.from(messageBytes);
         this.sendMessage(messageArray);   
 
-        // 在performAuthentication2中添加
-        // console.log('HMAC计算参数:',
-        //     `Key: ${this.clientPrivateKey.toString(CryptoJS.enc.Hex)}`,
-        //     `Secret: ${secret.toString(CryptoJS.enc.Hex)}`,
-        //     `W数组: ${JSON.stringify(w)}`
-        // );
+
+        console.log('最终HMAC结果:', 
+            `HEX: ${hmac.toString(CryptoJS.enc.Hex)}`,
+            `Base64: ${hmacB64}`
+        );
     }
 }
