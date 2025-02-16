@@ -420,6 +420,10 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
     let X = (keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3];
     let Y = (keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7];
 
+    console.log('keyBytes:', keyBytes);
+    console.log('X:', X);
+    console.log('Y:', Y);
+
     // PC1置换
     let T = ((Y >> 4) ^ X) & 0x0F0F0F0F; X ^= T; Y ^= (T << 4);
     T = ((Y) ^ X) & 0x10101010; X ^= T; Y ^= (T << 1);

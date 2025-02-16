@@ -25,6 +25,7 @@ export class Login implements handleSocketMessage {
         const password = CryptoJS.enc.Utf8.parse('password').toString(CryptoJS.enc.Base64);
         const server = CryptoJS.enc.Utf8.parse('gameServer').toString(CryptoJS.enc.Base64);
         const token = user + '@' + server + ':' + password;
+        console.log('token:', token);
         this.loginMsg = token;
     }
 
@@ -94,6 +95,7 @@ export class Login implements handleSocketMessage {
     
         // 4. 计算共享密钥（根据服务端实现调整）
         const secret = dhsecret(serverPublicKey, this.clientPrivateKey);
+        //const secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
 
         // 打印secret
         const secretHex = secret.toString(CryptoJS.enc.Hex);
