@@ -417,44 +417,58 @@ const SB8: number[] = [
 // 修正子密钥生成函数
 const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
     const keyBytes = wordArrayToBytes(key);
-    let X = (keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3];
-    let Y = (keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7];
-
-    console.log('keyBytes:', keyBytes);
+    
+    // 确保32位无符号整型
+    let X = ((keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3]) >>> 0;
+    let Y = ((keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7]) >>> 0;
     console.log('X:', X);
     console.log('Y:', Y);
 
-    // PC1置换
-    let T = ((Y >> 4) ^ X) & 0x0F0F0F0F; X ^= T; Y ^= (T << 4);
-    T = ((Y) ^ X) & 0x10101010; X ^= T; Y ^= (T << 1);
+    // PC1置换（添加调试日志）
+    let T = ((Y >>> 4) ^ X) & 0x0F0F0F0F;
+    X ^= T; 
+    Y ^= (T << 4);
+    T = ((Y) ^ X) & 0x10101010;
+    X ^= T; 
+    Y ^= (T);
+    console.log('PC1后 X:', X.toString(16), 'Y:', Y.toString(16));
 
-    // 应用LHs和RHs置换表（需补充定义）
-    X = (LHs[(X) & 0xF] << 3) | (LHs[(X >> 8) & 0xF] << 2) |
-        (LHs[(X >> 16) & 0xF] << 1) | LHs[(X >> 24) & 0xF] |
-        (LHs[(X >> 5) & 0xF] << 7) | (LHs[(X >> 13) & 0xF] << 6) |
-        (LHs[(X >> 21) & 0xF] << 5) | (LHs[(X >> 29) & 0xF] << 4);
+    // 应用置换表（强制转换为uint32）
+    X = (
+        (LHs[(X) & 0xF] << 3) | (LHs[(X >>> 8) & 0xF] << 2) |
+        (LHs[(X >>> 16) & 0xF] << 1) | LHs[(X >>> 24) & 0xF] |
+        (LHs[(X >>> 5) & 0xF] << 7) | (LHs[(X >>> 13) & 0xF] << 6) |
+        (LHs[(X >>> 21) & 0xF] << 5) | (LHs[(X >>> 29) & 0xF] << 4)
+    ) >>> 0; // 确保无符号
 
-    Y = (RHs[(Y >> 1) & 0xF] << 3) | (RHs[(Y >> 9) & 0xF] << 2) |
-        (RHs[(Y >> 17) & 0xF] << 1) | RHs[(Y >> 25) & 0xF] |
-        (RHs[(Y >> 4) & 0xF] << 7) | (RHs[(Y >> 12) & 0xF] << 6) |
-        (RHs[(Y >> 20) & 0xF] << 5) | (RHs[(Y >> 28) & 0xF] << 4);
+    Y = (
+        (RHs[(Y >>> 1) & 0xF] << 3) | (RHs[(Y >>> 9) & 0xF] << 2) |
+        (RHs[(Y >>> 17) & 0xF] << 1) | RHs[(Y >>> 25) & 0xF] |
+        (RHs[(Y >>> 4) & 0xF] << 7) | (RHs[(Y >>> 12) & 0xF] << 6) |
+        (RHs[(Y >>> 20) & 0xF] << 5) | (RHs[(Y >>> 28) & 0xF] << 4)
+    ) >>> 0;
+    console.log('置换表后 X:', X,   'Y:', Y);
 
+    // 掩码处理（28位）
     X &= 0x0FFFFFFF;
     Y &= 0x0FFFFFFF;
 
     const subkeys = new Array(32);
     for (let i = 0; i < 16; i++) {
-        // 处理密钥移位
+        // 处理密钥移位（使用无符号右移）
         if (i < 2 || i == 8 || i == 15) {
-            X = ((X << 1) | (X >>> 27)) & 0x0FFFFFFF;
-            Y = ((Y << 1) | (Y >>> 27)) & 0x0FFFFFFF;
+            X = ((X << 1) | (X >>> 27)) & 0x0FFFFFFF >>> 0;
+            Y = ((Y << 1) | (Y >>> 27)) & 0x0FFFFFFF >>> 0;
         } else {
-            X = ((X << 2) | (X >>> 26)) & 0x0FFFFFFF;
-            Y = ((Y << 2) | (Y >>> 26)) & 0x0FFFFFFF;
+            X = ((X << 2) | (X >>> 26)) & 0x0FFFFFFF >>> 0;
+            Y = ((Y << 2) | (Y >>> 26)) & 0x0FFFFFFF >>> 0;
         }
 
-        // 生成两个子密钥
-        subkeys[i*2] = 
+        console.log('X:', X);
+        console.log('Y:', Y);
+
+        // 生成子密钥（强制32位无符号）
+        subkeys[i*2] = (
             ((X << 4) & 0x24000000) | ((X << 28) & 0x10000000) |
             ((X << 14) & 0x08000000) | ((X << 18) & 0x02080000) |
             ((X << 6) & 0x01000000) | ((X << 9) & 0x00200000) |
@@ -465,9 +479,10 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
             ((Y >>> 14) & 0x00000200) | (Y & 0x00000100) |
             ((Y >>> 5) & 0x00000020) | ((Y >>> 10) & 0x00000010) |
             ((Y >>> 3) & 0x00000008) | ((Y >>> 18) & 0x00000004) |
-            ((Y >>> 26) & 0x00000002) | ((Y >>> 24) & 0x00000001);
+            ((Y >>> 26) & 0x00000002) | ((Y >>> 24) & 0x00000001)
+        ) >>> 0;
 
-        subkeys[i*2+1] = 
+        subkeys[i*2+1] = (
             ((X << 15) & 0x20000000) | ((X << 17) & 0x10000000) |
             ((X << 10) & 0x08000000) | ((X << 22) & 0x04000000) |
             ((X >>> 2) & 0x02000000) | ((X << 1) & 0x01000000) |
@@ -478,7 +493,11 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
             ((Y >>> 14) & 0x00000808) | ((Y >>> 9) & 0x00000400) |
             (Y & 0x00000200) | ((Y << 7) & 0x00000100) |
             ((Y >>> 7) & 0x00000020) | ((Y >>> 3) & 0x00000011) |
-            ((Y << 2) & 0x00000004) | ((Y >>> 21) & 0x00000002);
+            ((Y << 2) & 0x00000004) | ((Y >>> 21) & 0x00000002)
+        ) >>> 0;
+    }
+    for(let i = 0; i < 32; i++) {
+        console.log(`subkeys[${i}]:`, subkeys[i]);
     }
     return subkeys;
 };
