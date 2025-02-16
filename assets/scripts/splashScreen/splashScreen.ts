@@ -19,7 +19,6 @@ export class splashScreen extends Component implements handleSocketMessage {
         // setTimeout(() => {
         //     this.initSocket();
         // }, 1000);
-
         const login = new Login();
         login.start();
     }

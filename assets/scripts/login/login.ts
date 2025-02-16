@@ -8,13 +8,19 @@ const { ccclass, property } = _decorator;
 @ccclass('Login')
 export class Login implements handleSocketMessage {
     private socket: Socket;
+    private loginMsg:string = '';
     private stepid = 0
     private clientPrivateKey: CryptoJS.lib.WordArray;
     private challenge: CryptoJS.lib.WordArray;
 
     start() {
         console.log('login');
+        this.initLogin();
         this.initSocket();
+    }
+
+    initLogin(){
+        this.loginMsg = 'testUser@gameServer:password';
     }
 
     initSocket() {
@@ -97,14 +103,17 @@ export class Login implements handleSocketMessage {
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);
     
+        const loginMsgBytes = new TextEncoder().encode(this.loginMsg);
+        const loginMsgArray = Array.from(loginMsgBytes);
+        const loginMsgB64 = CryptoJS.enc.Base64.stringify(CryptoJS.lib.WordArray.create(loginMsgArray));
         // 6. 加密并发送token（DES-ECB + PKCS7）
         const encryptedToken = CryptoJS.DES.encrypt(
-        CryptoJS.enc.Utf8.parse('user|timestamp|signature'),
-        secret,
-        { 
-            mode: CryptoJS.mode.ECB,
-            padding: CryptoJS.pad.Pkcs7 
-        }
+            loginMsgB64,
+            secret,
+            { 
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7 
+            }
         );
 
         const messageReq = encryptedToken.toString();
