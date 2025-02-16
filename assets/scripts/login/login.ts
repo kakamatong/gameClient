@@ -2,7 +2,7 @@ import CryptoJS from '../frameworks/libs/crypto-js-4.2.0/crypto-js.js';
 import { _decorator, Component, log,sys,assetManager,BufferAsset} from 'cc';
 import { Socket } from '../frameworks/socket/socket';
 import { handleSocketMessage } from '../frameworks/config/config';
-import { dhexchange, dhsecret, hmac64 } from '../frameworks/utils/utils';
+import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../frameworks/utils/utils';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login')
@@ -15,12 +15,17 @@ export class Login implements handleSocketMessage {
 
     start() {
         console.log('login');
-        this.initLogin();
+        this.encode_token();
         this.initSocket();
     }
 
-    initLogin(){
-        this.loginMsg = 'testUser@gameServer:password';
+
+    encode_token(){
+        const user = CryptoJS.enc.Utf8.parse('testUser').toString(CryptoJS.enc.Base64);
+        const password = CryptoJS.enc.Utf8.parse('password').toString(CryptoJS.enc.Base64);
+        const server = CryptoJS.enc.Utf8.parse('gameServer').toString(CryptoJS.enc.Base64);
+        const token = user + '@' + server + ':' + password;
+        this.loginMsg = token;
     }
 
     initSocket() {
@@ -103,29 +108,13 @@ export class Login implements handleSocketMessage {
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);
     
-        const loginMsgBytes = new TextEncoder().encode(this.loginMsg);
-        const loginMsgArray = Array.from(loginMsgBytes);
-        const loginMsgB64 = CryptoJS.enc.Base64.stringify(CryptoJS.lib.WordArray.create(loginMsgArray));
-        // 6. 加密并发送token（DES-ECB + PKCS7）
-        const encryptedToken = CryptoJS.DES.encrypt(
-            loginMsgB64,
-            secret,
-            { 
-                mode: CryptoJS.mode.ECB,
-                padding: CryptoJS.pad.Pkcs7 
-            }
-        );
-
-        const messageReq = encryptedToken.toString();
-        // 将base64字符串转换为字节数组
-        const messageBytes = new TextEncoder().encode(messageReq);
-        const messageArray = Array.from(messageBytes);
-        this.sendMessage(messageArray);   
-
+        const encryptedToken = customDESEncrypt(this.loginMsg, secret);
+        this.sendMessage(encryptedToken);
 
         console.log('最终HMAC结果:', 
             `HEX: ${hmac.toString(CryptoJS.enc.Hex)}`,
             `Base64: ${hmacB64}`
         );
     }
+
 }

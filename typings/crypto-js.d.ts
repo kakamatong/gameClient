@@ -1,8 +1,8 @@
 declare module 'crypto-js' {
-  interface WordArray {
+  export interface WordArray {
     words: number[];
     sigBytes: number;
-    toString(encoder?: any): string;
+    clone(): WordArray;
     concat(wordArray: WordArray): WordArray;
   }
 } 

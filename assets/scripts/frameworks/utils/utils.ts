@@ -192,3 +192,331 @@ export const hmac64 = (key: CryptoJS.lib.WordArray, message: CryptoJS.lib.WordAr
     
     return CryptoJS.lib.WordArray.create(new Uint8Array(buffer));
 };
+
+// DES解密核心实现
+export const desdecode = (encrypted: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+    const subkeys = generateSubkeys(key);
+    const blocks = splitIntoBlocks(encrypted);
+    const decryptedBlocks = blocks.map(block => decryptBlock(block, subkeys));
+    return removePadding(mergeBlocks(decryptedBlocks));
+};
+
+// DES核心实现
+const DES_IP = (X: number, Y: number): [number, number] => {
+    let T = ((X >> 4) ^ Y) & 0x0F0F0F0F;
+    Y ^= T; X ^= (T << 4);
+    T = ((X >> 16) ^ Y) & 0x0000FFFF;
+    Y ^= T; X ^= (T << 16);
+    T = ((Y >> 2) ^ X) & 0x33333333;
+    X ^= T; Y ^= (T << 2);
+    T = ((Y >> 8) ^ X) & 0x00FF00FF;
+    X ^= T; Y ^= (T << 8);
+    Y = ((Y << 1) | (Y >>> 31)) & 0xFFFFFFFF;
+    T = (X ^ Y) & 0xAAAAAAAA;
+    Y ^= T; X ^= T;
+    X = ((X << 1) | (X >>> 31)) & 0xFFFFFFFF;
+    return [X, Y];
+};
+
+const DES_FP = (X: number, Y: number): [number, number] => {
+    X = ((X << 31) | (X >>> 1)) & 0xFFFFFFFF;
+    let T = (X ^ Y) & 0xAAAAAAAA;
+    X ^= T; Y ^= T;
+    Y = ((Y << 31) | (Y >>> 1)) & 0xFFFFFFFF;
+    T = ((Y >> 8) ^ X) & 0x00FF00FF;
+    X ^= T; Y ^= (T << 8);
+    T = ((Y >> 2) ^ X) & 0x33333333;
+    X ^= T; Y ^= (T << 2);
+    T = ((X >> 16) ^ Y) & 0x0000FFFF;
+    Y ^= T; X ^= (T << 16);
+    T = ((X >> 4) ^ Y) & 0x0F0F0F0F;
+    Y ^= T; X ^= (T << 4);
+    return [X, Y];
+};
+
+const DES_ROUND = (X: number, Y: number, subkey: number): [number, number] => {
+    let T = subkey ^ X;
+    Y ^= SB8[T & 0x3F] ^ SB6[(T >> 8) & 0x3F] ^ 
+         SB4[(T >> 16) & 0x3F] ^ SB2[(T >> 24) & 0x3F];
+    
+    T = subkey ^ ((X << 28) | (X >> 4));
+    Y ^= SB7[T & 0x3F] ^ SB5[(T >> 8) & 0x3F] ^ 
+         SB3[(T >> 16) & 0x3F] ^ SB1[(T >> 24) & 0x3F];
+    
+    return [Y, X];
+};
+
+// DES S-Boxes (直接来自C语言实现)
+const SB1: number[] = [
+    0x01010400, 0x00000000, 0x00010000, 0x01010404,
+    0x01010004, 0x00010404, 0x00000004, 0x00010000,
+    0x00000400, 0x01010400, 0x01010404, 0x00000400,
+    0x01000404, 0x01010004, 0x01000000, 0x00000004,
+    0x00000404, 0x01000400, 0x01000400, 0x00010400,
+    0x00010400, 0x01010000, 0x01010000, 0x01000404,
+    0x00010004, 0x01000004, 0x01000004, 0x00010004,
+    0x00000000, 0x00000404, 0x00010404, 0x01000000,
+    0x00010000, 0x01010404, 0x00000004, 0x01010000,
+    0x01010400, 0x01000000, 0x01000000, 0x00000400,
+    0x01010004, 0x00010000, 0x00010400, 0x01000004,
+    0x00000400, 0x00000004, 0x01000404, 0x00010404,
+    0x01010404, 0x00010004, 0x01010000, 0x01000404,
+    0x01000004, 0x00000404, 0x00010404, 0x01010400,
+    0x00000404, 0x01000400, 0x01000400, 0x00000000,
+    0x00010004, 0x00010400, 0x00000000, 0x01010004
+];
+
+const SB2: number[] = [
+    0x80108020, 0x80008000, 0x00008000, 0x00108020,
+    0x00100000, 0x00000020, 0x80100020, 0x80008020,
+    0x80000020, 0x80108020, 0x80108000, 0x80000000,
+    0x80008000, 0x00100000, 0x00000020, 0x80100020,
+    0x00108000, 0x00100020, 0x80008020, 0x00000000,
+    0x80000000, 0x00008000, 0x00108020, 0x80100000,
+    0x00100020, 0x80000020, 0x00000000, 0x00108000,
+    0x00008020, 0x80108000, 0x80100000, 0x00008020,
+    0x00000000, 0x00108020, 0x80100020, 0x00100000,
+    0x80008020, 0x80100000, 0x80108000, 0x00008000,
+    0x80100000, 0x80008000, 0x00000020, 0x80108020,
+    0x00108020, 0x00000020, 0x00008000, 0x80000000,
+    0x00008020, 0x80108000, 0x00100000, 0x80000020,
+    0x00100020, 0x80008020, 0x80000020, 0x00100020,
+    0x00108000, 0x00000000, 0x80008000, 0x00008020,
+    0x80000000, 0x80100020, 0x80108020, 0x00108000
+];
+
+// 剩余S-Box定义（结构类似，需完整复制）
+const SB3: number[] = [
+    0x00000208, 0x08020200, 0x00000000, 0x08020008,
+    0x08000200, 0x00000000, 0x00020208, 0x08000200,
+    0x00020008, 0x08000008, 0x08000008, 0x00020000,
+    0x08020208, 0x00020008, 0x08020000, 0x00000208,
+    0x08000000, 0x00000008, 0x08020200, 0x00000200,
+    0x00020200, 0x08020000, 0x08020008, 0x00020208,
+    0x08000208, 0x00020200, 0x00020000, 0x08000208,
+    0x00000008, 0x08020208, 0x00000200, 0x08000000,
+    0x08020200, 0x08000000, 0x00020008, 0x00000208,
+    0x00020000, 0x08020200, 0x08000200, 0x00000000,
+    0x00000200, 0x00020008, 0x08020208, 0x08000200,
+    0x08000008, 0x00000200, 0x00000000, 0x08020008,
+    0x08000208, 0x00020000, 0x08000000, 0x08020208,
+    0x00000008, 0x00020208, 0x00020200, 0x08000008,
+    0x08020000, 0x08000208, 0x00000208, 0x08020000,
+    0x00020208, 0x00000008, 0x08020008, 0x00020200
+];
+
+const SB4: number[] = [
+    0x00802001, 0x00002081, 0x00002081, 0x00000080,
+    0x00802080, 0x00800081, 0x00800001, 0x00002001,
+    0x00000000, 0x00802000, 0x00802000, 0x00802081,
+    0x00000081, 0x00000000, 0x00800080, 0x00800001,
+    0x00000001, 0x00002000, 0x00800000, 0x00802001,
+    0x00000080, 0x00800000, 0x00002001, 0x00002080,
+    0x00800081, 0x00000001, 0x00002080, 0x00800080,
+    0x00002000, 0x00802080, 0x00802081, 0x00000081,
+    0x00800080, 0x00800001, 0x00802000, 0x00802081,
+    0x00000081, 0x00000000, 0x00000000, 0x00802000,
+    0x00002080, 0x00800080, 0x00800081, 0x00000001,
+    0x00802001, 0x00002081, 0x00002081, 0x00000080,
+    0x00802081, 0x00000081, 0x00000001, 0x00002000,
+    0x00800001, 0x00002001, 0x00802080, 0x00800081,
+    0x00002001, 0x00002080, 0x00800000, 0x00802001,
+    0x00000080, 0x00800000, 0x00002000, 0x00802080
+];
+
+const SB5: number[] = [
+    0x00000100, 0x02080100, 0x02080000, 0x42000100,
+    0x00080000, 0x00000100, 0x40000000, 0x02080000,
+    0x40080100, 0x00080000, 0x02000100, 0x40080100,
+    0x42000100, 0x42080000, 0x00080100, 0x40000000,
+    0x02000000, 0x40080000, 0x40080000, 0x00000000,
+    0x40000100, 0x42080100, 0x42080100, 0x02000100,
+    0x42080000, 0x40000100, 0x00000000, 0x42000000,
+    0x02080100, 0x02000000, 0x42000000, 0x00080100,
+    0x00080000, 0x42000100, 0x00000100, 0x02000000,
+    0x40000000, 0x02080000, 0x42000100, 0x40080100,
+    0x02000100, 0x40000000, 0x42080000, 0x02080100,
+    0x40080100, 0x00000100, 0x02000000, 0x42080000,
+    0x42080100, 0x00080100, 0x42000000, 0x42080100,
+    0x02080000, 0x00000000, 0x40080000, 0x42000000,
+    0x00080100, 0x02000100, 0x40000100, 0x00080000,
+    0x00000000, 0x40080000, 0x02080100, 0x40000100
+];
+
+const SB6: number[] = [
+    0x20000010, 0x20400000, 0x00004000, 0x20404010,
+    0x20400000, 0x00000010, 0x20404010, 0x00400000,
+    0x20004000, 0x00404010, 0x00400000, 0x20000010,
+    0x00400010, 0x20004000, 0x20000000, 0x00004010,
+    0x00000000, 0x00400010, 0x20004010, 0x00004000,
+    0x00404000, 0x20004010, 0x00000010, 0x20400010,
+    0x20400010, 0x00000000, 0x00404010, 0x20404000,
+    0x00004010, 0x00404000, 0x20404000, 0x20000000,
+    0x20004000, 0x00000010, 0x20400010, 0x00404000,
+    0x20404010, 0x00400000, 0x00004010, 0x20000010,
+    0x00400000, 0x20004000, 0x20000000, 0x00004010,
+    0x20000010, 0x20404010, 0x00404000, 0x20400000,
+    0x00404010, 0x20404000, 0x00000000, 0x20400010,
+    0x00000010, 0x00004000, 0x20400000, 0x00404010,
+    0x00004000, 0x00400010, 0x20004010, 0x00000000,
+    0x20404000, 0x20000000, 0x00400010, 0x20004010
+];
+
+const SB7: number[] = [
+    0x00200000, 0x04200002, 0x04000802, 0x00000000,
+    0x00000800, 0x04000802, 0x00200802, 0x04200800,
+    0x04200802, 0x00200000, 0x00000000, 0x04000002,
+    0x00000002, 0x04000000, 0x04200002, 0x00000802,
+    0x04000800, 0x00200802, 0x00200002, 0x04000800,
+    0x04000002, 0x04200000, 0x04200800, 0x00200002,
+    0x04200000, 0x00000800, 0x00000802, 0x04200802,
+    0x00200800, 0x00000002, 0x04000000, 0x00200800,
+    0x04000000, 0x00200800, 0x00200000, 0x04000802,
+    0x04000802, 0x04200002, 0x04200002, 0x00000002,
+    0x00200002, 0x04000000, 0x04000800, 0x00200000,
+    0x04200800, 0x00000802, 0x00200802, 0x04200800,
+    0x00000802, 0x04000002, 0x04200802, 0x04200000,
+    0x00200800, 0x00000000, 0x00000002, 0x04200802,
+    0x00000000, 0x00200802, 0x04200000, 0x00000800,
+    0x04000002, 0x04000800, 0x00000800, 0x00200002
+];
+
+const SB8: number[] = [
+    0x10001040, 0x00001000, 0x00040000, 0x10041040,
+    0x10000000, 0x10001040, 0x00000040, 0x10000000,
+    0x00040040, 0x10040000, 0x10041040, 0x00041000,
+    0x10041000, 0x00041040, 0x00001000, 0x00000040,
+    0x10040000, 0x10000040, 0x10001000, 0x00001040,
+    0x00041000, 0x00040040, 0x10040040, 0x10041000,
+    0x00001040, 0x00000000, 0x00000000, 0x10040040,
+    0x10000040, 0x10001000, 0x00041040, 0x00040000,
+    0x00041040, 0x00040000, 0x10041000, 0x00001000,
+    0x00000040, 0x10040040, 0x00001000, 0x00041040,
+    0x10001000, 0x00000040, 0x10000040, 0x10040000,
+    0x10040040, 0x10000000, 0x00040000, 0x10001040,
+    0x00000000, 0x10041040, 0x00040040, 0x10000040,
+    0x10040000, 0x10001000, 0x10001040, 0x00000000,
+    0x10041040, 0x00041000, 0x00041000, 0x00001040,
+    0x00001040, 0x00040040, 0x10000000, 0x10041000
+];
+
+// 修正子密钥生成函数
+const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
+
+    const keyBytes = wordArrayToBytes(key);
+
+    let X = (keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3];
+    let Y = (keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7];
+    
+    // 实现PC1置换
+    let T = ((Y >> 4) ^ X) & 0x0F0F0F0F; X ^= T; Y ^= (T << 4);
+    T = ((Y) ^ X) & 0x10101010; X ^= T; Y ^= (T << 1);
+    
+    const subkeys = new Array(32);
+    // 生成16轮子密钥
+    for (let i = 0; i < 16; i++) {
+        // 密钥左移
+        X = ((X << 2) | (X >> 26)) & 0xFFFFFFFF;
+        Y = ((Y << 2) | (Y >> 26)) & 0xFFFFFFFF;
+        
+        // PC2置换
+        subkeys[i] = (X & 0xFF000000) | ((X & 0x00FF0000) >> 8) |
+                    ((Y & 0xFF000000) >> 16) | ((Y & 0x00FF0000) >> 24);
+    }
+    
+    return subkeys;
+};
+
+// 新增WordArray转换工具函数
+const wordArrayToBytes = (wa: CryptoJS.lib.WordArray): Uint8Array => {
+    const bytes = new Uint8Array(wa.sigBytes);
+    for (let i = 0; i < wa.sigBytes; i++) {
+        bytes[i] = (wa.words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xFF;
+    }
+    return bytes;
+};
+
+const bytesToWordArray = (bytes: Uint8Array): CryptoJS.lib.WordArray => {
+    const words: number[] = [];
+    for (let i = 0; i < bytes.length; i += 4) {
+        let word = 0;
+        for (let j = 0; j < 4 && i + j < bytes.length; j++) {
+            word |= bytes[i + j] << (24 - j * 8);
+        }
+        words.push(word);
+    }
+    return CryptoJS.lib.WordArray.create(words, bytes.length);
+};
+
+// 修改所有使用words.buffer的地方
+const splitIntoBlocks = (data: CryptoJS.lib.WordArray): number[][] => {
+    const bytes = wordArrayToBytes(data);
+    const blocks: number[][] = [];
+    for (let i = 0; i < bytes.length; i += 8) {
+        const block = [
+            (bytes[i]<<24) | (bytes[i+1]<<16) | (bytes[i+2]<<8) | bytes[i+3],
+            (bytes[i+4]<<24) | (bytes[i+5]<<16) | (bytes[i+6]<<8) | bytes[i+7]
+        ];
+        blocks.push(block);
+    }
+    return blocks;
+};
+
+const decryptBlock = (block: number[], subkeys: number[]): number[] => {
+    let [X, Y] = DES_IP(block[0], block[1]);
+    for (let i = 0; i < 16; i++) {
+        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i]); // 使用逆序子密钥
+    }
+    [Y, X] = DES_FP(Y, X);
+    return [Y, X];
+};
+
+const removePadding = (data: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+    const bytes = wordArrayToBytes(data);
+    const padLength = bytes[bytes.length - 1];
+    return bytesToWordArray(bytes.slice(0, bytes.length - padLength));
+};
+
+const mergeBlocks = (blocks: number[][]): CryptoJS.lib.WordArray => {
+    const buffer = new Uint8Array(blocks.length * 8);
+    blocks.forEach((block, i) => {
+        const offset = i * 8;
+        buffer[offset] = (block[0] >> 24) & 0xFF;
+        buffer[offset+1] = (block[0] >> 16) & 0xFF;
+        buffer[offset+2] = (block[0] >> 8) & 0xFF;
+        buffer[offset+3] = block[0] & 0xFF;
+        buffer[offset+4] = (block[1] >> 24) & 0xFF;
+        buffer[offset+5] = (block[1] >> 16) & 0xFF;
+        buffer[offset+6] = (block[1] >> 8) & 0xFF;
+        buffer[offset+7] = block[1] & 0xFF;
+    });
+    return bytesToWordArray(buffer);
+};
+
+// DES加密核心函数
+export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+    const subkeys = generateSubkeys(key);
+    const blocks = splitIntoBlocks(data);
+    
+    const encryptedBlocks = blocks.map(block => {
+        let [X, Y] = DES_IP(block[0], block[1]);
+        for (let i = 0; i < 16; i++) {
+            [X, Y] = DES_ROUND(X, Y, subkeys[i]);
+        }
+        [Y, X] = DES_FP(Y, X);
+        return [Y, X];
+    });
+    
+    return mergeBlocks(encryptedBlocks);
+};
+
+// 修改自定义加密方法
+export const customDESEncrypt = (data: string, key: CryptoJS.lib.WordArray): number[] => {
+    const dataWA = CryptoJS.enc.Utf8.parse(data);
+    const encrypted = desencode(dataWA, key);
+    const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);
+    console.log('tokenB64:', tokenB64);
+    const tokenB64Bytes = new TextEncoder().encode(tokenB64);
+    const tokenB64Array = Array.from(tokenB64Bytes);
+    return tokenB64Array;
+}
