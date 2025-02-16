@@ -234,17 +234,31 @@ const DES_FP = (X: number, Y: number): [number, number] => {
     return [X, Y];
 };
 
-const DES_ROUND = (X: number, Y: number, subkey: number): [number, number] => {
-    let T = subkey ^ X;
+const DES_ROUND = (X: number, Y: number, sk1: number, sk2: number): [number, number] => {
+    let T = sk1 ^ X;
     Y ^= SB8[T & 0x3F] ^ SB6[(T >> 8) & 0x3F] ^ 
          SB4[(T >> 16) & 0x3F] ^ SB2[(T >> 24) & 0x3F];
     
-    T = subkey ^ ((X << 28) | (X >> 4));
+    T = sk2 ^ ((X << 28) | (X >> 4));
     Y ^= SB7[T & 0x3F] ^ SB5[(T >> 8) & 0x3F] ^ 
          SB3[(T >> 16) & 0x3F] ^ SB1[(T >> 24) & 0x3F];
     
     return [Y, X];
 };
+
+const LHs: number[] = [
+	0x00000000, 0x00000001, 0x00000100, 0x00000101,
+	0x00010000, 0x00010001, 0x00010100, 0x00010101,
+	0x01000000, 0x01000001, 0x01000100, 0x01000101,
+	0x01010000, 0x01010001, 0x01010100, 0x01010101
+];
+
+const RHs: number[] = [
+	0x00000000, 0x01000000, 0x00010000, 0x01010000,
+	0x00000100, 0x01000100, 0x00010100, 0x01010100,
+	0x00000001, 0x01000001, 0x00010001, 0x01010001,
+	0x00000101, 0x01000101, 0x00010101, 0x01010101,
+];
 
 // DES S-Boxes (直接来自C语言实现)
 const SB1: number[] = [
@@ -402,28 +416,66 @@ const SB8: number[] = [
 
 // 修正子密钥生成函数
 const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
-
     const keyBytes = wordArrayToBytes(key);
-
     let X = (keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3];
     let Y = (keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7];
-    
-    // 实现PC1置换
+
+    // PC1置换
     let T = ((Y >> 4) ^ X) & 0x0F0F0F0F; X ^= T; Y ^= (T << 4);
     T = ((Y) ^ X) & 0x10101010; X ^= T; Y ^= (T << 1);
-    
+
+    // 应用LHs和RHs置换表（需补充定义）
+    X = (LHs[(X) & 0xF] << 3) | (LHs[(X >> 8) & 0xF] << 2) |
+        (LHs[(X >> 16) & 0xF] << 1) | LHs[(X >> 24) & 0xF] |
+        (LHs[(X >> 5) & 0xF] << 7) | (LHs[(X >> 13) & 0xF] << 6) |
+        (LHs[(X >> 21) & 0xF] << 5) | (LHs[(X >> 29) & 0xF] << 4);
+
+    Y = (RHs[(Y >> 1) & 0xF] << 3) | (RHs[(Y >> 9) & 0xF] << 2) |
+        (RHs[(Y >> 17) & 0xF] << 1) | RHs[(Y >> 25) & 0xF] |
+        (RHs[(Y >> 4) & 0xF] << 7) | (RHs[(Y >> 12) & 0xF] << 6) |
+        (RHs[(Y >> 20) & 0xF] << 5) | (RHs[(Y >> 28) & 0xF] << 4);
+
+    X &= 0x0FFFFFFF;
+    Y &= 0x0FFFFFFF;
+
     const subkeys = new Array(32);
-    // 生成16轮子密钥
     for (let i = 0; i < 16; i++) {
-        // 密钥左移
-        X = ((X << 2) | (X >> 26)) & 0xFFFFFFFF;
-        Y = ((Y << 2) | (Y >> 26)) & 0xFFFFFFFF;
-        
-        // PC2置换
-        subkeys[i] = (X & 0xFF000000) | ((X & 0x00FF0000) >> 8) |
-                    ((Y & 0xFF000000) >> 16) | ((Y & 0x00FF0000) >> 24);
+        // 处理密钥移位
+        if (i < 2 || i == 8 || i == 15) {
+            X = ((X << 1) | (X >>> 27)) & 0x0FFFFFFF;
+            Y = ((Y << 1) | (Y >>> 27)) & 0x0FFFFFFF;
+        } else {
+            X = ((X << 2) | (X >>> 26)) & 0x0FFFFFFF;
+            Y = ((Y << 2) | (Y >>> 26)) & 0x0FFFFFFF;
+        }
+
+        // 生成两个子密钥
+        subkeys[i*2] = 
+            ((X << 4) & 0x24000000) | ((X << 28) & 0x10000000) |
+            ((X << 14) & 0x08000000) | ((X << 18) & 0x02080000) |
+            ((X << 6) & 0x01000000) | ((X << 9) & 0x00200000) |
+            ((X >>> 1) & 0x00100000) | ((X << 10) & 0x00040000) |
+            ((X << 2) & 0x00020000) | ((X >>> 10) & 0x00010000) |
+            ((Y >>> 13) & 0x00002000) | ((Y >>> 4) & 0x00001000) |
+            ((Y << 6) & 0x00000800) | ((Y >>> 1) & 0x00000400) |
+            ((Y >>> 14) & 0x00000200) | (Y & 0x00000100) |
+            ((Y >>> 5) & 0x00000020) | ((Y >>> 10) & 0x00000010) |
+            ((Y >>> 3) & 0x00000008) | ((Y >>> 18) & 0x00000004) |
+            ((Y >>> 26) & 0x00000002) | ((Y >>> 24) & 0x00000001);
+
+        subkeys[i*2+1] = 
+            ((X << 15) & 0x20000000) | ((X << 17) & 0x10000000) |
+            ((X << 10) & 0x08000000) | ((X << 22) & 0x04000000) |
+            ((X >>> 2) & 0x02000000) | ((X << 1) & 0x01000000) |
+            ((X << 16) & 0x00200000) | ((X << 11) & 0x00100000) |
+            ((X << 3) & 0x00080000) | ((X >>> 6) & 0x00040000) |
+            ((X << 15) & 0x00020000) | ((X >>> 4) & 0x00010000) |
+            ((Y >>> 2) & 0x00002000) | ((Y << 8) & 0x00001000) |
+            ((Y >>> 14) & 0x00000808) | ((Y >>> 9) & 0x00000400) |
+            (Y & 0x00000200) | ((Y << 7) & 0x00000100) |
+            ((Y >>> 7) & 0x00000020) | ((Y >>> 3) & 0x00000011) |
+            ((Y << 2) & 0x00000004) | ((Y >>> 21) & 0x00000002);
     }
-    
     return subkeys;
 };
 
@@ -448,14 +500,14 @@ const bytesToWordArray = (bytes: Uint8Array): CryptoJS.lib.WordArray => {
     return CryptoJS.lib.WordArray.create(words, bytes.length);
 };
 
-// 修改所有使用words.buffer的地方
+// 修改块拆分逻辑（大端序）
 const splitIntoBlocks = (data: CryptoJS.lib.WordArray): number[][] => {
     const bytes = wordArrayToBytes(data);
     const blocks: number[][] = [];
     for (let i = 0; i < bytes.length; i += 8) {
         const block = [
-            (bytes[i]<<24) | (bytes[i+1]<<16) | (bytes[i+2]<<8) | bytes[i+3],
-            (bytes[i+4]<<24) | (bytes[i+5]<<16) | (bytes[i+6]<<8) | bytes[i+7]
+            (bytes[i] << 24) | (bytes[i+1] << 16) | (bytes[i+2] << 8) | bytes[i+3],
+            (bytes[i+4] << 24) | (bytes[i+5] << 16) | (bytes[i+6] << 8) | bytes[i+7]
         ];
         blocks.push(block);
     }
@@ -465,7 +517,7 @@ const splitIntoBlocks = (data: CryptoJS.lib.WordArray): number[][] => {
 const decryptBlock = (block: number[], subkeys: number[]): number[] => {
     let [X, Y] = DES_IP(block[0], block[1]);
     for (let i = 0; i < 16; i++) {
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i]); // 使用逆序子密钥
+        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2], subkeys[15 - i*2+1]);
     }
     [Y, X] = DES_FP(Y, X);
     return [Y, X];
@@ -501,13 +553,24 @@ export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordAr
     const encryptedBlocks = blocks.map(block => {
         let [X, Y] = DES_IP(block[0], block[1]);
         for (let i = 0; i < 16; i++) {
-            [X, Y] = DES_ROUND(X, Y, subkeys[i]);
+            [X, Y] = DES_ROUND(X, Y, subkeys[i*2], subkeys[i*2+1]);
         }
         [Y, X] = DES_FP(Y, X);
         return [Y, X];
     });
     
     return mergeBlocks(encryptedBlocks);
+};
+
+// 添加ISO/IEC 7816-4填充
+const addPadding = (data: CryptoJS.lib.WordArray, blockSize: number): CryptoJS.lib.WordArray => {
+    const padLength = blockSize - (data.sigBytes % blockSize);
+    const padded = data.clone();
+    padded.concat(CryptoJS.lib.WordArray.create(
+        new Uint8Array([0x80, ...new Array(padLength-1).fill(0)]),
+        padLength
+    ));
+    return padded;
 };
 
 // 修改自定义加密方法
