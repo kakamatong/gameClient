@@ -203,47 +203,80 @@ export const desdecode = (encrypted: CryptoJS.lib.WordArray, key: CryptoJS.lib.W
 
 // DES核心实现
 const DES_IP = (X: number, Y: number): [number, number] => {
-    let T = ((X >> 4) ^ Y) & 0x0F0F0F0F;
-    Y ^= T; X ^= (T << 4);
-    T = ((X >> 16) ^ Y) & 0x0000FFFF;
-    Y ^= T; X ^= (T << 16);
-    T = ((Y >> 2) ^ X) & 0x33333333;
-    X ^= T; Y ^= (T << 2);
-    T = ((Y >> 8) ^ X) & 0x00FF00FF;
-    X ^= T; Y ^= (T << 8);
+    // 使用无符号右移并强制32位掩码
+    let T = ((X >>> 4) ^ Y) & 0x0F0F0F0F;
+    Y = (Y ^ T) >>> 0;
+    X = (X ^ (T << 4)) >>> 0;
+    
+    T = ((X >>> 16) ^ Y) & 0x0000FFFF;
+    Y = (Y ^ T) >>> 0;
+    X = (X ^ (T << 16)) >>> 0;
+    
+    T = ((Y >>> 2) ^ X) & 0x33333333;
+    X = (X ^ T) >>> 0;
+    Y = (Y ^ (T << 2)) >>> 0;
+    
+    T = ((Y >>> 8) ^ X) & 0x00FF00FF;
+    X = (X ^ T) >>> 0;
+    Y = (Y ^ (T << 8)) >>> 0;
+    
+    // 循环移位使用无符号操作
     Y = ((Y << 1) | (Y >>> 31)) & 0xFFFFFFFF;
     T = (X ^ Y) & 0xAAAAAAAA;
-    Y ^= T; X ^= T;
+    Y = (Y ^ T) >>> 0;
+    X = (X ^ T) >>> 0;
     X = ((X << 1) | (X >>> 31)) & 0xFFFFFFFF;
-    return [X, Y];
+    
+    return [X >>> 0, Y >>> 0];  // 确保无符号
 };
 
 const DES_FP = (X: number, Y: number): [number, number] => {
+    // 初始循环移位修正
     X = ((X << 31) | (X >>> 1)) & 0xFFFFFFFF;
     let T = (X ^ Y) & 0xAAAAAAAA;
-    X ^= T; Y ^= T;
+    X = (X ^ T) >>> 0;
+    Y = (Y ^ T) >>> 0;
+    
     Y = ((Y << 31) | (Y >>> 1)) & 0xFFFFFFFF;
-    T = ((Y >> 8) ^ X) & 0x00FF00FF;
-    X ^= T; Y ^= (T << 8);
-    T = ((Y >> 2) ^ X) & 0x33333333;
-    X ^= T; Y ^= (T << 2);
-    T = ((X >> 16) ^ Y) & 0x0000FFFF;
-    Y ^= T; X ^= (T << 16);
-    T = ((X >> 4) ^ Y) & 0x0F0F0F0F;
-    Y ^= T; X ^= (T << 4);
-    return [X, Y];
+    
+    T = ((Y >>> 8) ^ X) & 0x00FF00FF;
+    X = (X ^ T) >>> 0;
+    Y = (Y ^ (T << 8)) >>> 0;
+    
+    T = ((Y >>> 2) ^ X) & 0x33333333;
+    X = (X ^ T) >>> 0;
+    Y = (Y ^ (T << 2)) >>> 0;
+    
+    T = ((X >>> 16) ^ Y) & 0x0000FFFF;
+    Y = (Y ^ T) >>> 0;
+    X = (X ^ (T << 16)) >>> 0;
+    
+    T = ((X >>> 4) ^ Y) & 0x0F0F0F0F;
+    Y = (Y ^ T) >>> 0;
+    X = (X ^ (T << 4)) >>> 0;
+    
+    return [X >>> 0, Y >>> 0];  // 最终强制无符号
 };
 
 const DES_ROUND = (X: number, Y: number, sk1: number, sk2: number): [number, number] => {
-    let T = sk1 ^ X;
-    Y ^= SB8[T & 0x3F] ^ SB6[(T >> 8) & 0x3F] ^ 
-         SB4[(T >> 16) & 0x3F] ^ SB2[(T >> 24) & 0x3F];
+    // 确保所有中间结果无符号
+    let T = (sk1 ^ X) >>> 0;
+    Y = (Y ^ (
+        SB8[(T & 0x3F)] ^ 
+        SB6[((T >>> 8) & 0x3F)] ^  // 使用无符号右移
+        SB4[((T >>> 16) & 0x3F)] ^ 
+        SB2[((T >>> 24) & 0x3F)]
+    )) >>> 0;
     
-    T = sk2 ^ ((X << 28) | (X >> 4));
-    Y ^= SB7[T & 0x3F] ^ SB5[(T >> 8) & 0x3F] ^ 
-         SB3[(T >> 16) & 0x3F] ^ SB1[(T >> 24) & 0x3F];
+    T = (sk2 ^ ((X << 28) | (X >>> 4))) >>> 0;  // 循环移位修正
+    Y = (Y ^ (
+        SB7[(T & 0x3F)] ^ 
+        SB5[((T >>> 8) & 0x3F)] ^ 
+        SB3[((T >>> 16) & 0x3F)] ^ 
+        SB1[((T >>> 24) & 0x3F)]
+    )) >>> 0;
     
-    return [Y, X];
+    return [Y >>> 0, X >>> 0];  // 输出强制无符号
 };
 
 const LHs: number[] = [
