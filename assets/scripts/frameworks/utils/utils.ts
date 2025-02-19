@@ -224,22 +224,22 @@ export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordAr
         let [X, Y] = DES_IP(block[0], block[1]);
         console.log("encryptedBlocks2:",X, Y);
         // 严格按C语言宏展开顺序执行16轮加密
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2], subkeys[15 - i*2+1]);  // Round 1
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+2], subkeys[15 - i*2+3]);  // Round 2
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+4], subkeys[15 - i*2+5]);  // Round 3
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+6], subkeys[15 - i*2+7]);  // Round 4
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+8], subkeys[15 - i*2+9]);  // Round 5
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+10], subkeys[15 - i*2+11]);  // Round 6
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+12], subkeys[15 - i*2+13]);  // Round 7
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+14], subkeys[15 - i*2+15]);  // Round 8
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+16], subkeys[15 - i*2+17]);  // Round 9
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+18], subkeys[15 - i*2+19]);  // Round 10
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+20], subkeys[15 - i*2+21]);  // Round 11
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+22], subkeys[15 - i*2+23]);  // Round 12
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+24], subkeys[15 - i*2+25]);  // Round 13
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+26], subkeys[15 - i*2+27]);  // Round 14
-        [X, Y] = DES_ROUND(Y, X, subkeys[15 - i*2+28], subkeys[15 - i*2+29]);  // Round 15
-        [X, Y] = DES_ROUND(X, Y, subkeys[15 - i*2+30], subkeys[15 - i*2+31]);  // Round 16
+        [Y, X] = DES_ROUND(Y, X, subkeys[0], subkeys[1]);  // Round 1
+        [X, Y] = DES_ROUND(X, Y, subkeys[2], subkeys[3]);  // Round 2
+        [Y, X] = DES_ROUND(Y, X, subkeys[4], subkeys[5]);  // Round 3
+        [X, Y] = DES_ROUND(X, Y, subkeys[6], subkeys[7]);  // Round 4
+        [Y, X] = DES_ROUND(Y, X, subkeys[8], subkeys[9]);  // Round 5
+        [X, Y] = DES_ROUND(X, Y, subkeys[10], subkeys[11]);  // Round 6
+        [Y, X] = DES_ROUND(Y, X, subkeys[12], subkeys[13]);  // Round 7
+        [X, Y] = DES_ROUND(X, Y, subkeys[14], subkeys[15]);  // Round 8
+        [Y, X] = DES_ROUND(Y, X, subkeys[16], subkeys[17]);  // Round 9
+        [X, Y] = DES_ROUND(X, Y, subkeys[18], subkeys[19]);  // Round 10
+        [Y, X] = DES_ROUND(Y, X, subkeys[20], subkeys[21]);  // Round 11
+        [X, Y] = DES_ROUND(X, Y, subkeys[22], subkeys[23]);  // Round 12
+        [Y, X] = DES_ROUND(Y, X, subkeys[24], subkeys[25]);  // Round 13
+        [X, Y] = DES_ROUND(X, Y, subkeys[26], subkeys[27]);  // Round 14
+        [Y, X] = DES_ROUND(Y, X, subkeys[28], subkeys[29]);  // Round 15
+        [X, Y] = DES_ROUND(X, Y, subkeys[30], subkeys[31]);  // Round 16
         console.log("encryptedBlocks3:",X, Y);
         [Y, X] = DES_FP(X, Y);
         
@@ -351,7 +351,7 @@ const DES_ROUND = (X: number, Y: number, sk1: number, sk2: number): [number, num
         SB1[((T >>> 24) & 0x3F)]
     )) >>> 0;
     
-    return [Y >>> 0, X >>> 0];  // 输出强制无符号
+    return [X, Y];  // 输出强制无符号
 };
 
 const LHs: number[] = [

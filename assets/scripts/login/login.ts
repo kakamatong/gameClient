@@ -94,7 +94,7 @@ export class Login implements handleSocketMessage {
         const serverPublicKey = CryptoJS.enc.Base64.parse(serverPublicKeyB64.trim());
     
         // 4. 计算共享密钥（根据服务端实现调整）
-        const secret = dhsecret(serverPublicKey, this.clientPrivateKey);
+        let secret = dhsecret(serverPublicKey, this.clientPrivateKey);
         //const secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
 
         // 打印secret
@@ -110,6 +110,7 @@ export class Login implements handleSocketMessage {
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);
     
+        secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
         const encryptedToken = customDESEncrypt(this.loginMsg, secret);
         this.sendMessage(encryptedToken);
 
