@@ -556,14 +556,15 @@ const bytesToWordArray = (bytes: Uint8Array): CryptoJS.lib.WordArray => {
     return CryptoJS.lib.WordArray.create(words, bytes.length);
 };
 
-// 修改块拆分逻辑（大端序）
+// 修改块分割逻辑（小端序处理）
 const splitIntoBlocks = (data: CryptoJS.lib.WordArray): number[][] => {
     const bytes = wordArrayToBytes(data);
     const blocks: number[][] = [];
     for (let i = 0; i < bytes.length; i += 8) {
+        // 使用小端序解析32位整数
         const block = [
-            (bytes[i] << 24) | (bytes[i+1] << 16) | (bytes[i+2] << 8) | bytes[i+3],
-            (bytes[i+4] << 24) | (bytes[i+5] << 16) | (bytes[i+6] << 8) | bytes[i+7]
+            bytes[i+3] << 24 | bytes[i+2] << 16 | bytes[i+1] << 8 | bytes[i],
+            bytes[i+7] << 24 | bytes[i+6] << 16 | bytes[i+5] << 8 | bytes[i+4]
         ];
         blocks.push(block);
     }
@@ -589,41 +590,66 @@ const mergeBlocks = (blocks: number[][]): CryptoJS.lib.WordArray => {
     const buffer = new Uint8Array(blocks.length * 8);
     blocks.forEach((block, i) => {
         const offset = i * 8;
-        buffer[offset] = (block[0] >> 24) & 0xFF;
-        buffer[offset+1] = (block[0] >> 16) & 0xFF;
-        buffer[offset+2] = (block[0] >> 8) & 0xFF;
-        buffer[offset+3] = block[0] & 0xFF;
-        buffer[offset+4] = (block[1] >> 24) & 0xFF;
-        buffer[offset+5] = (block[1] >> 16) & 0xFF;
-        buffer[offset+6] = (block[1] >> 8) & 0xFF;
-        buffer[offset+7] = block[1] & 0xFF;
+        // 低位在前的小端序存储
+        const write32 = (value: number, pos: number) => {
+            buffer[pos] = value & 0xFF;
+            buffer[pos+1] = (value >> 8) & 0xFF;
+            buffer[pos+2] = (value >> 16) & 0xFF;
+            buffer[pos+3] = (value >> 24) & 0xFF;
+        };
+        write32(block[0], offset);
+        write32(block[1], offset+4);
     });
     return bytesToWordArray(buffer);
 };
 
-// DES加密核心函数
+// 在desencode函数中添加填充逻辑
 export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+    // 添加ISO/IEC 7816-4填充
+    const paddedData = addPadding(data, 8);
     const subkeys = generateSubkeys(key);
-    const blocks = splitIntoBlocks(data);
+    const blocks = splitIntoBlocks(paddedData);
     
     const encryptedBlocks = blocks.map(block => {
+        // 初始置换
         let [X, Y] = DES_IP(block[0], block[1]);
-        for (let i = 0; i < 16; i++) {
-            [X, Y] = DES_ROUND(X, Y, subkeys[i*2], subkeys[i*2+1]);
-        }
+        
+        // 严格按C语言顺序执行16轮加密
+        [X, Y] = DES_ROUND(Y, X, subkeys[0], subkeys[1]);  // Round 1
+        [Y, X] = DES_ROUND(X, Y, subkeys[2], subkeys[3]);  // Round 2
+        [X, Y] = DES_ROUND(Y, X, subkeys[4], subkeys[5]);  // Round 3
+        [Y, X] = DES_ROUND(X, Y, subkeys[6], subkeys[7]);  // Round 4
+        [X, Y] = DES_ROUND(Y, X, subkeys[8], subkeys[9]);  // Round 5
+        [Y, X] = DES_ROUND(X, Y, subkeys[10], subkeys[11]);  // Round 6
+        [X, Y] = DES_ROUND(Y, X, subkeys[12], subkeys[13]);  // Round 7
+        [Y, X] = DES_ROUND(X, Y, subkeys[14], subkeys[15]);  // Round 8
+        [X, Y] = DES_ROUND(Y, X, subkeys[16], subkeys[17]);  // Round 9
+        [Y, X] = DES_ROUND(X, Y, subkeys[18], subkeys[19]);  // Round 10
+        [X, Y] = DES_ROUND(Y, X, subkeys[20], subkeys[21]);  // Round 11
+        [Y, X] = DES_ROUND(X, Y, subkeys[22], subkeys[23]);  // Round 12
+        [X, Y] = DES_ROUND(Y, X, subkeys[24], subkeys[25]);  // Round 13
+        [Y, X] = DES_ROUND(X, Y, subkeys[26], subkeys[27]);  // Round 14
+        [X, Y] = DES_ROUND(Y, X, subkeys[28], subkeys[29]);  // Round 15
+        [Y, X] = DES_ROUND(X, Y, subkeys[30], subkeys[31]);  // Round 16
+
+        // 最终置换
         [Y, X] = DES_FP(Y, X);
+        
         return [Y, X];
     });
-    
+
+    // 合并结果时保持小端序
     return mergeBlocks(encryptedBlocks);
 };
 
-// 添加ISO/IEC 7816-4填充
+// 修改填充函数实现（与C语言保持一致）
 const addPadding = (data: CryptoJS.lib.WordArray, blockSize: number): CryptoJS.lib.WordArray => {
     const padLength = blockSize - (data.sigBytes % blockSize);
     const padded = data.clone();
+    // ISO/IEC 7816-4 填充：首字节0x80，后续填0x00
+    const padding = new Uint8Array([0x80, ...new Array(padLength-1).fill(0x00)]);
     padded.concat(CryptoJS.lib.WordArray.create(
-        new Uint8Array([0x80, ...new Array(padLength-1).fill(0)]),
+        padding,
         padLength
     ));
     return padded;
