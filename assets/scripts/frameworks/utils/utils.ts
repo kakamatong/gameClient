@@ -175,10 +175,10 @@ export const hmac64 = (key: CryptoJS.lib.WordArray, message: CryptoJS.lib.WordAr
 
     // 执行压缩并处理结果
     const [A, B, C, D] = digestMD5(w);
-    console.log('A:', A);
-    console.log('B:', B);
-    console.log('C:', C);
-    console.log('D:', D);
+    // console.log('A:', A);
+    // console.log('B:', B);
+    // console.log('C:', C);
+    // console.log('D:', D);
     const result = new Uint32Array([
         (C ^ D) >>> 0,  // 小端序低位
         (A ^ B) >>> 0   // 小端序高位
@@ -191,6 +191,33 @@ export const hmac64 = (key: CryptoJS.lib.WordArray, message: CryptoJS.lib.WordAr
     view.setUint32(4, result[1], true);
     
     return CryptoJS.lib.WordArray.create(new Uint8Array(buffer));
+};
+
+// 新增ISO/IEC 7816-4填充函数（与C语言完全一致）
+const paddingAddISO7816_4 = (buffer: Uint8Array, offset: number): void => {
+    if (offset < 0 || offset >= 8) {
+        throw new Error("Invalid padding offset");
+    }
+    
+    // 设置填充起始位
+    buffer[offset] = 0x80;
+    
+    // 填充剩余字节为0x00
+    for (let i = offset + 1; i < 8; i++) {
+        buffer[i] = 0x00;
+    }
+};
+
+// 修改现有填充函数调用
+const addPaddingSingleBlock = (data: Uint8Array): Uint8Array => {
+    const block = new Uint8Array(8);
+    block.set(data);
+    const padOffset = data.length;
+    
+    // 调用标准填充函数
+    paddingAddISO7816_4(block, padOffset);
+    
+    return block;
 };
 
 // DES解密核心实现
@@ -211,18 +238,18 @@ export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordAr
 
     // 处理最后一个不完整块（添加填充）
     const remaining = bytes.slice(i);
-    const padded = addPaddingSingleBlock(remaining);
+    const paddedBlock = addPaddingSingleBlock(remaining);  // 精确控制填充位置
     const lastBlock = [
-        (padded[0] << 24) | (padded[1] << 16) | (padded[2] << 8) | padded[3],
-        (padded[4] << 24) | (padded[5] << 16) | (padded[6] << 8) | padded[7]
+        (paddedBlock[0] << 24) | (paddedBlock[1] << 16) | (paddedBlock[2] << 8) | paddedBlock[3],
+        (paddedBlock[4] << 24) | (paddedBlock[5] << 16) | (paddedBlock[6] << 8) | paddedBlock[7]
     ];
     blocks.push(lastBlock);
 
     // 加密所有块
     const encryptedBlocks = blocks.map(block => {
-        console.log("encryptedBlocks1:",block[0], block[1]);
+        //console.log("encryptedBlocks1:",block[0], block[1]);
         let [X, Y] = DES_IP(block[0], block[1]);
-        console.log("encryptedBlocks2:",X, Y);
+        //console.log("encryptedBlocks2:",X, Y);
         // 严格按C语言宏展开顺序执行16轮加密
         [Y, X] = DES_ROUND(Y, X, subkeys[0], subkeys[1]);  // Round 1
         [X, Y] = DES_ROUND(X, Y, subkeys[2], subkeys[3]);  // Round 2
@@ -240,40 +267,38 @@ export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordAr
         [X, Y] = DES_ROUND(X, Y, subkeys[26], subkeys[27]);  // Round 14
         [Y, X] = DES_ROUND(Y, X, subkeys[28], subkeys[29]);  // Round 15
         [X, Y] = DES_ROUND(X, Y, subkeys[30], subkeys[31]);  // Round 16
-        console.log("encryptedBlocks3:",X, Y);
-        [Y, X] = DES_FP(X, Y);
+        //console.log("encryptedBlocks3:",X, Y);
+        [Y, X] = DES_FP(Y, X);
+        //console.log("encryptedBlocks4:",X, Y);
         
         return [Y, X];
     });
 
     // 拆成8个字节
-    for (let index = 0; index < encryptedBlocks.length; index++) {
-        let tmp :number[] = [];
-        const element = encryptedBlocks[index];
-        tmp.push((element[0]>>>24)>>>0);
-        tmp.push((element[0]>>>16)>>>0);
-        tmp.push((element[0]>>>8)>>>0);
-        tmp.push(element[0]>>>0);
-        tmp.push((element[1]>>>24)>>>0);
-        tmp.push((element[1]>>>16)>>>0);
-        tmp.push((element[1]>>>8)>>>0);
-        tmp.push(element[1]>>>0);
-        console.log(tmp);
-    }
+    // for (let index = 0; index < encryptedBlocks.length; index++) {
+    //     let tmp :number[] = [];
+    //     const element = encryptedBlocks[index];
+    //     // 计算结果转为uint8 并存入tmp
+    //     let result = element[0]>>>24 & 0xFF;
+    //     tmp.push(result);
+    //     result = (element[0]>>>16) & 0xFF;
+    //     tmp.push(result);
+    //     result = (element[0]>>>8) & 0xFF;
+    //     tmp.push(result);
+    //     result = element[0] & 0xFF;
+    //     tmp.push(result);
+    //     result = (element[1]>>>24) & 0xFF;
+    //     tmp.push(result);
+    //     result = (element[1]>>>16) & 0xFF;
+    //     tmp.push(result);
+    //     result = (element[1]>>>8) & 0xFF;
+    //     tmp.push(result);
+    //     result = element[1] & 0xFF;
+    //     tmp.push(result);
+    //     console.log(tmp);
+    // }
 
     return mergeBlocks(encryptedBlocks);
-};
-
-// 单块填充函数（与C语言add_padding一致）
-const addPaddingSingleBlock = (data: Uint8Array): Uint8Array => {
-    const block = new Uint8Array(8);
-    block.set(data);
-    const padLength = 8 - data.length;
-    block[data.length] = 0x80;
-    for (let i = data.length + 1; i < 8; i++) {
-        block[i] = 0x00;
-    }
-    return block;
 };
 
 // DES核心实现
@@ -529,8 +554,8 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
     // 确保32位无符号整型
     let X = ((keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3]) >>> 0;
     let Y = ((keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7]) >>> 0;
-    console.log('X:', X);
-    console.log('Y:', Y);
+    // console.log('X:', X);
+    // console.log('Y:', Y);
 
     // PC1置换（添加调试日志）
     let T = ((Y >>> 4) ^ X) & 0x0F0F0F0F;
@@ -539,7 +564,7 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
     T = ((Y) ^ X) & 0x10101010;
     X ^= T; 
     Y ^= (T);
-    console.log('PC1后 X:', X.toString(16), 'Y:', Y.toString(16));
+    //console.log('PC1后 X:', X.toString(16), 'Y:', Y.toString(16));
 
     // 应用置换表（强制转换为uint32）
     X = (
@@ -555,7 +580,7 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
         (RHs[(Y >>> 4) & 0xF] << 7) | (RHs[(Y >>> 12) & 0xF] << 6) |
         (RHs[(Y >>> 20) & 0xF] << 5) | (RHs[(Y >>> 28) & 0xF] << 4)
     ) >>> 0;
-    console.log('置换表后 X:', X,   'Y:', Y);
+    //console.log('置换表后 X:', X,   'Y:', Y);
 
     // 掩码处理（28位）
     X &= 0x0FFFFFFF;
@@ -572,8 +597,8 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
             Y = ((Y << 2) | (Y >>> 26)) & 0x0FFFFFFF >>> 0;
         }
 
-        console.log('X:', X);
-        console.log('Y:', Y);
+        //console.log('X:', X);
+        //console.log('Y:', Y);
 
         // 生成子密钥（强制32位无符号）
         subkeys[i*2] = (
