@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1688,780">
+  <displayList>
+    <component id="n1_q736" name="UI_BTN_LOGIN" src="q7362" fileName="comp/compBtnScale09.xml" xy="70,57">
+      <Button title="登入" titleColor="#ffffff" titleFontSize="22"/>
+    </component>
+  </displayList>
+</component>

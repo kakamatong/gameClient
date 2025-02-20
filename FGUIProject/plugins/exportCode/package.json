@@ -1,0 +1,11 @@
+{
+  "name": "exportCode",
+  "displayName": "导出代码",
+  "description": "导出代码",
+  "version": "1.0",
+  "author": {
+    "name": "qiudaoyu"
+  },
+  "icon": "",
+  "main": "main.js"
+}

@@ -1,8 +1,11 @@
-import { _decorator, Component, log,sys,assetManager,BufferAsset} from 'cc';
+import { _decorator, Component, log,sys,assetManager,BufferAsset,AssetManager} from 'cc';
+import * as fgui from "fairygui-cc";
 import { Socket } from '../frameworks/socket/socket';
 import sproto from '../frameworks/sproto/sproto.js';
 import { handleSocketMessage } from '../frameworks/config/config';
 import { Login } from '../login/login';
+import testBinder from '../fgui/test/testBinder';
+import TestView from '../view/TestView';
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -13,14 +16,35 @@ export class splashScreen extends Component implements handleSocketMessage {
     private client: any;
     private server: any;
     start() {
+        assetManager.loadBundle('fgui', (err, bundle) => {
+            if (err) {
+                log('loadBundle error', err);
+                return;
+            }
+            this.initView();
+        });
         log('splashScreen');
         //this.loadProtocol();
 
         // setTimeout(() => {
         //     this.initSocket();
         // }, 1000);
-        const login = new Login();
-        login.start();
+        // const login = new Login();
+        // login.start();
+    }
+
+    initView(){
+        fgui.GRoot.create()
+        //testBinder.bindAll();
+        const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
+        fgui.UIPackage.loadPackage(bundle, 'test', (error, pkg)=>{
+            if(error){
+                log('loadPackage error', error);
+                return;
+            }
+            const view = fgui.UIPackage.createObject('test', 'TestView', TestView);
+            fgui.GRoot.inst.addChild(view);
+        });
     }
 
     initSocket() {

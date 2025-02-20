@@ -3,5 +3,8 @@
   "uuid": "ae12f9cf-1c84-4130-b8d1-b98dd20fbb73",
   "creator": {
     "version": "3.8.5"
+  },
+  "dependencies": {
+    "fairygui-cc": "^1.2.2"
   }
 }
