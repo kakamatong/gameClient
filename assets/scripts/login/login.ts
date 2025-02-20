@@ -47,6 +47,18 @@ export class Login implements handleSocketMessage {
         const textDecoder = new TextDecoder('utf-8');
         const text = textDecoder.decode(message);
         log('onMessage', text);
+
+        if(text.includes(' ')){
+            const infos = text.split(' ');
+            const code = infos[0];
+            const msg = infos[1];
+            if(code === '200'){
+                log('登录成功');
+            }else{
+                log('登录失败code:', code);
+            }
+            return;
+        }
         if(this.stepid === 0) {
             this.performAuthentication1(text)
             this.stepid = 1;
@@ -113,11 +125,6 @@ export class Login implements handleSocketMessage {
         //secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
         const encryptedToken = customDESEncrypt(this.loginMsg, secret);
         this.sendMessage(encryptedToken);
-
-        console.log('最终HMAC结果:', 
-            `HEX: ${hmac.toString(CryptoJS.enc.Hex)}`,
-            `Base64: ${hmacB64}`
-        );
     }
 
 }
