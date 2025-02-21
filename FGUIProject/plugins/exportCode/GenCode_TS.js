@@ -47,6 +47,10 @@ function genCode(handler) {
         }
         writer.writeln('public static URL:string = "ui://%s%s";', handler.pkg.id, classInfo.resId);
         writer.writeln();
+
+        writer.writeln('public static packageName:string = "%s";', codePkgName)
+        writer.writeln();
+        
         writer.writeln('public static createInstance():%s', classInfo.className);
         writer.startBlock();
         writer.writeln('return <%s>(%s.UIPackage.createObject("%s", "%s"));', classInfo.className, ns, handler.pkg.name, classInfo.resName);

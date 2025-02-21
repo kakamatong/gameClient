@@ -4,8 +4,8 @@ import { Socket } from '../frameworks/socket/socket';
 import sproto from '../frameworks/sproto/sproto.js';
 import { handleSocketMessage } from '../frameworks/config/config';
 import { Login } from '../login/login';
-import testBinder from '../fgui/test/testBinder';
-import TestView from '../view/TestView';
+import { TestView } from '../view/TestView';
+import { UIManager } from '../frameworks/uimanager';
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -42,8 +42,13 @@ export class splashScreen extends Component implements handleSocketMessage {
                 log('loadPackage error', error);
                 return;
             }
-            const view = fgui.UIPackage.createObject('test', 'TestView', TestView);
-            fgui.GRoot.inst.addChild(view);
+            // const view = fgui.UIPackage.createObject('test', 'TestView', TestView) as TestView;
+            // fgui.GRoot.inst.addChild(view);
+            // view.onShow();
+            // view.dispose();
+            UIManager.instance.addViewClassPath('view/');
+            UIManager.instance.showView('TestView');
+
         });
     }
 
