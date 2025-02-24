@@ -99,7 +99,7 @@ function genCode(handler) {
                 if(newName){
                     const newNames = newName.split('_')
                     const newName2 = newNames.map((v1) => { let name = v1.toLowerCase(); return `${name[0].toUpperCase()}${name.slice(1)}` }).join('');
-                    writer.writeln('private onBtn%s():void{};', newName2);
+                    writer.writeln('onBtn%s():void{};', newName2);
                 }
             }
         }

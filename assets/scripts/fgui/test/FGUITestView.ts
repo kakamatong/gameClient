@@ -20,6 +20,6 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
-	private onBtnLogin():void{};
-	private onBtnClose():void{};
+	onBtnLogin():void{};
+	onBtnClose():void{};
 }
