@@ -4,11 +4,11 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Socket')
 export class Socket {
-    private socket: WebSocket;
-    private reconnectAttempts: number = 0;
-    private readonly maxReconnectAttempts: number = 5;
-    private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
-    private handleSocketMessage: handleSocketMessage;
+    private socket: WebSocket | null = null;
+    // private reconnectAttempts: number = 0;
+    // private readonly maxReconnectAttempts: number = 5;
+    // private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
+    private handleSocketMessage: handleSocketMessage | null = null;
     init(url: string = 'ws://192.168.1.182:9002') {
         this.connectWebSocket(url);
     }
@@ -24,11 +24,14 @@ export class Socket {
             this.setupEventListeners();
         } catch (error) {
             log('WebSocket 连接创建失败:', error);
-            this.handleReconnection();
+            //this.handleReconnection();
         }
     }
 
     private setupEventListeners() {
+        if(!this.socket){
+            return;
+        }
         // 连接成功
         this.socket.onopen = (event) => {
             log('WebSocket 连接成功！');
@@ -60,17 +63,17 @@ export class Socket {
         };
     }
 
-    private handleReconnection() {
-        if (this.reconnectAttempts < this.maxReconnectAttempts) {
-            this.reconnectAttempts++;
-            log(`尝试重新连接... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
-            setTimeout(() => {
-                this.init();
-            }, this.reconnectDelay);
-        } else {
-            log('达到最大重连次数，连接失败');
-        }
-    }
+    // private handleReconnection() {
+    //     if (this.reconnectAttempts < this.maxReconnectAttempts) {
+    //         this.reconnectAttempts++;
+    //         log(`尝试重新连接... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+    //         setTimeout(() => {
+    //             this.init();
+    //         }, this.reconnectDelay);
+    //     } else {
+    //         log('达到最大重连次数，连接失败');
+    //     }
+    // }
 
     private handleMessage(message: Array<number>) {
         // 处理接收到的消息

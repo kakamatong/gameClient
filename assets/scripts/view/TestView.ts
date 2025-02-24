@@ -1,6 +1,8 @@
 import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
 import * as fgui from 'fairygui-cc';
+
+import { Login } from '../login/login';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -26,6 +28,11 @@ export class TestView extends FGUITestView {
 
     onBtnLogin(){
         console.log('onBtnLogin');
+        const func = (b:boolean)=>{
+            console.log('login callback:', b);
+        }
+        const login = new Login();
+        login.start(func);
     }
 
     onBtnClose(){

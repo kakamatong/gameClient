@@ -7,13 +7,15 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Login')
 export class Login implements handleSocketMessage {
-    private socket: Socket;
+    private socket: Socket | null = null;
     private loginMsg:string = '';
     private stepid = 0
     private clientPrivateKey: CryptoJS.lib.WordArray;
     private challenge: CryptoJS.lib.WordArray;
+    private callBack:(b:boolean)=>void = (b:boolean)=>{};
 
-    start() {
+    start(func:(b:boolean)=>void) {
+        this.callBack = func;
         console.log('login');
         this.encode_token();
         this.initSocket();
@@ -36,7 +38,7 @@ export class Login implements handleSocketMessage {
     }
 
     sendMessage(message: any) {
-        this.socket.sendMessage(message);
+        this.socket && this.socket.sendMessage(message);
     }
 
     onOpen(event: any) {
@@ -54,8 +56,10 @@ export class Login implements handleSocketMessage {
             const msg = infos[1];
             if(code === '200'){
                 log('登录成功');
+                this.callBack(true);
             }else{
                 log('登录失败code:', code);
+                this.callBack(false);
             }
             return;
         }
