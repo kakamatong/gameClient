@@ -2,7 +2,8 @@ import * as fgui from "fairygui-cc";
 
 export class UIManager {
     private readonly viewStack: Map<string, any> = new Map();
-    private viewClassPaths: string[] = [];
+    
+    private viewConfig: any;
     //单例
     public static instance: UIManager;
 
@@ -22,21 +23,19 @@ export class UIManager {
             fgui.GRoot.inst.addChild(view);
             return;
         }
-        this.getViewClass(viewName).then(module => {
-            if (!module) {
-                console.log('viewClass not found');
-                return;
-            }
-            if(!module[viewName]){
-                console.log('viewClass not found');
-                return;
-            }
-            if (!this.viewStack.has(viewName)) {
-                const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
-                this.viewStack.set(viewName, view);
-                fgui.GRoot.inst.addChild(view);
-            }
-        });
+
+        const module = this.getViewClass(viewName);
+        if (!module) {
+            console.log('viewClass not found');
+            return;
+        }
+        
+        if (!this.viewStack.has(viewName)) {
+            const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
+            this.viewStack.set(viewName, view);
+            fgui.GRoot.inst.addChild(view);
+        }
+        
         
     }
 
@@ -47,30 +46,12 @@ export class UIManager {
         }
     }
 
-    async getViewClass(viewName: string): Promise<any> {
-        for (const path of this.viewClassPaths) {
-            const classPath = '../' + path + viewName + '.ts';
-            return await this.importViewClass(classPath);
-        }
+     getViewClass(viewName: string) {
+        return this.viewConfig[viewName];
     }
 
-    async importViewClass(path: string): Promise<any> {
-        try {
-            path = '../view/TestView.ts'
-            const {TestView} = await import(path);
-            return TestView;
-        } catch (error) {
-            console.log(`加载视图类失败: ${path}`, error);
-            return null;
-        }
-    }
-
-    addViewClassPath(path: string): void {
-        this.viewClassPaths.push(path);
-    }
-
-    clearViewClassPaths(): void {
-        this.viewClassPaths = [];
+    initViewConfig(viewConfig: any) {
+        this.viewConfig = viewConfig;
     }
 }
 

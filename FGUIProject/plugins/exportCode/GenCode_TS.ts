@@ -84,8 +84,31 @@ function genCode(handler: FairyEditor.PublishHandler) {
                 else
                     writer.writeln('this.%s = this.getTransitionAt(%s);', memberInfo.varName, memberInfo.index);
             }
+
+            if(memberInfo.varName.indexOf('UI_BTN_') == 0){
+                const newName = memberInfo.varName.split('KW_BTN_')[1]
+                if(newName){
+                    const newNames = newName.split('_')
+                    const newName2 = newNames.map((v1: string) => { let name = v1.toLowerCase(); return `${name[0].toUpperCase()}${name.slice(1)}` }).join('');
+                    writer.writeln('this.%s.onClick(this.onBtn%s, this);', memberInfo.varName, newName2);
+                }
+            }
         }
+
         writer.endBlock();
+
+        for (let j: number = 0; j < memberCnt; j++) {
+            let memberInfo = members.get_Item(j);
+
+            if(memberInfo.varName.indexOf('UI_BTN_') == 0){
+                const newName = memberInfo.varName.split('KW_BTN_')[1]
+                if(newName){
+                    const newNames = newName.split('_')
+                    const newName2 = newNames.map((v1: string) => { let name = v1.toLowerCase(); return `${name[0].toUpperCase()}${name.slice(1)}` }).join('');
+                    writer.writeln('private onBtn%s():void', newName2);
+                }
+            }
+        }
 
         writer.endBlock(); //class
 

@@ -4,5 +4,8 @@
     <component id="n1_q736" name="UI_BTN_LOGIN" src="q7362" fileName="comp/compBtnScale09.xml" xy="70,57">
       <Button title="登入" titleColor="#ffffff" titleFontSize="22"/>
     </component>
+    <component id="n2_kgqs" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="914,58">
+      <Button title="关闭" titleColor="#ffffff" titleFontSize="22"/>
+    </component>
   </displayList>
 </component>

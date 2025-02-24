@@ -6,6 +6,7 @@ import { handleSocketMessage } from '../frameworks/config/config';
 import { Login } from '../login/login';
 import { TestView } from '../view/TestView';
 import { UIManager } from '../frameworks/uimanager';
+import { ViewConfig } from '../view/ViewConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -16,6 +17,7 @@ export class splashScreen extends Component implements handleSocketMessage {
     private client: any;
     private server: any;
     start() {
+        UIManager.instance.initViewConfig(ViewConfig);
         assetManager.loadBundle('fgui', (err, bundle) => {
             if (err) {
                 log('loadBundle error', err);
@@ -46,7 +48,7 @@ export class splashScreen extends Component implements handleSocketMessage {
             // fgui.GRoot.inst.addChild(view);
             // view.onShow();
             // view.dispose();
-            UIManager.instance.addViewClassPath('view/');
+
             UIManager.instance.showView('TestView');
 
         });
