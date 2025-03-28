@@ -23,10 +23,11 @@ export class Login implements handleSocketMessage {
 
 
     encode_token(){
-        const user = CryptoJS.enc.Utf8.parse('hello').toString(CryptoJS.enc.Base64);
-        const password = CryptoJS.enc.Utf8.parse('password').toString(CryptoJS.enc.Base64);
-        const server = CryptoJS.enc.Utf8.parse('sample').toString(CryptoJS.enc.Base64);
-        const token = user + '@' + server + ':' + password;
+        const user = CryptoJS.enc.Utf8.parse('test001').toString(CryptoJS.enc.Base64);
+        const password = CryptoJS.enc.Utf8.parse('wlj123456').toString(CryptoJS.enc.Base64);
+        const server = CryptoJS.enc.Utf8.parse('lobbyGate').toString(CryptoJS.enc.Base64);
+        const logtinType = CryptoJS.enc.Utf8.parse('account').toString(CryptoJS.enc.Base64);
+        const token = user + '@' + server + ':' + password + '#' + logtinType;
         console.log('token:', token);
         this.loginMsg = token;
     }
