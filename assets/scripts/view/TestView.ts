@@ -1,5 +1,6 @@
 import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
+import { SocketManager } from '../frameworks/socketManager';
 import * as fgui from 'fairygui-cc';
 
 import { Login } from '../login/login';
@@ -44,4 +45,12 @@ export class TestView extends FGUITestView {
         console.log('TestView onDestroy');
     }
     
+    onBtnCon(): void {
+        SocketManager.instance.loadProtocol()
+        setTimeout(()=>{
+            SocketManager.instance.start("ws://192.168.1.182:9002")
+        }, 1000)
+        
+        //SocketManager.instance.content()
+    }
 }

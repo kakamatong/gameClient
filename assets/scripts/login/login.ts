@@ -3,6 +3,8 @@ import { _decorator, Component, log,sys,assetManager,BufferAsset} from 'cc';
 import { Socket } from '../frameworks/socket/socket';
 import { handleSocketMessage } from '../frameworks/config/config';
 import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../frameworks/utils/utils';
+import { LOGIN_INFO } from '../datacenter/interfaceConfig';
+import { DataCenter } from '../datacenter/datacenter';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login')
@@ -12,6 +14,14 @@ export class Login implements handleSocketMessage {
     private stepid = 0
     private clientPrivateKey: CryptoJS.lib.WordArray;
     private challenge: CryptoJS.lib.WordArray;
+    private loginInfo:LOGIN_INFO = {
+        username:'',
+        password:'',
+        server:'',
+        loginType:'',
+        token:'',
+        subid:0
+    };
     private callBack:(b:boolean)=>void = (b:boolean)=>{};
 
     start(func:(b:boolean)=>void) {
@@ -23,11 +33,20 @@ export class Login implements handleSocketMessage {
 
 
     encode_token(){
-        const user = CryptoJS.enc.Utf8.parse('test001').toString(CryptoJS.enc.Base64);
-        const password = CryptoJS.enc.Utf8.parse('wlj123456').toString(CryptoJS.enc.Base64);
-        const server = CryptoJS.enc.Utf8.parse('lobbyGate').toString(CryptoJS.enc.Base64);
-        const logtinType = CryptoJS.enc.Utf8.parse('account').toString(CryptoJS.enc.Base64);
+        const strUser = 'test001';
+        const strPassword = 'wlj123456';
+        const strServer = 'lobbyGate';
+        const strLogintype = 'account';
+        this.loginInfo.username = strUser;
+        this.loginInfo.password = strPassword;
+        this.loginInfo.server = strServer;
+        this.loginInfo.loginType = strLogintype;
+        const user = CryptoJS.enc.Utf8.parse(strUser).toString(CryptoJS.enc.Base64);
+        const password = CryptoJS.enc.Utf8.parse(strPassword).toString(CryptoJS.enc.Base64);
+        const server = CryptoJS.enc.Utf8.parse(strServer).toString(CryptoJS.enc.Base64);
+        const logtinType = CryptoJS.enc.Utf8.parse(strLogintype).toString(CryptoJS.enc.Base64);
         const token = user + '@' + server + ':' + password + '#' + logtinType;
+        
         console.log('token:', token);
         this.loginMsg = token;
     }
@@ -54,9 +73,11 @@ export class Login implements handleSocketMessage {
         if(text.includes(' ')){
             const infos = text.split(' ');
             const code = infos[0];
-            const msg = infos[1];
+            const msg = atob(infos[1]);
             if(code === '200'){
                 log('登录成功');
+                this.loginInfo.subid = Number(msg);
+                DataCenter.instance.setLoginInfo(this.loginInfo);
                 this.callBack(true);
             }else{
                 log('登录失败code:', code);
@@ -123,6 +144,8 @@ export class Login implements handleSocketMessage {
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
         console.log('hmacB64:', hmacB64);
+        this.loginInfo.token = hmacB64;
+        // 将base64字符串转换为字节数组
         const hmacB64Bytes = new TextEncoder().encode(hmacB64);
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);

@@ -6,6 +6,7 @@ export default class FGUITestView extends fgui.GComponent {
 
 	public UI_BTN_LOGIN:fgui.GButton;
 	public UI_BTN_CLOSE:fgui.GButton;
+	public UI_BTN_CON:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -19,7 +20,10 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
+		this.UI_BTN_CON = <fgui.GButton>(this.getChildAt(2));
+		this.UI_BTN_CON.onClick(this.onBtnCon, this);
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
+	onBtnCon():void{};
 }

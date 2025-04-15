@@ -7,5 +7,8 @@
     <component id="n2_kgqs" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="914,58">
       <Button title="关闭" titleColor="#ffffff" titleFontSize="22"/>
     </component>
+    <component id="n3_of7j" name="UI_BTN_CON" src="q7362" fileName="comp/compBtnScale09.xml" xy="73,127">
+      <Button title="连接游戏" titleColor="#ffffff" titleFontSize="22"/>
+    </component>
   </displayList>
 </component>
