@@ -71,16 +71,31 @@ export class SocketManager implements handleSocketMessage {
         this.socket && this.socket.sendMessage(message);
     }
 
+    dispatchMessage(response: any) {
+        if(response.pname == 'reportContent'){
+            this.onReportContent(response);
+            return
+        }else{
+            // 处理消息
+        }
+    }
+
+    onReportContent(message: any) {
+        if(message.result.code){
+            this.iscontent = true;
+            this.content();
+        }
+    }
+
     onOpen(event: any) {
         log('SocketManager onOpen', event);
-        this.iscontent = true;
-        this.content();
     }
 
     onMessage(message: Uint8Array) {
         log('SocketManager onMessage', message);
         const response = this.client.dispatch(message);
         log('SocketManager onMessage response', response);
+        this.dispatchMessage(response);
     }
 
     onClose(event: any) {
