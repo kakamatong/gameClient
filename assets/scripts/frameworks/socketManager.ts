@@ -11,6 +11,7 @@ export class SocketManager implements handleSocketMessage {
     private iscontent = false;
     private isopen = false;
     private session = 0;
+    private timeid:number = -1;
     private callBacks:Array<(data:any)=>void> = [];
     //单例
     private static _instance: SocketManager;
@@ -61,8 +62,8 @@ export class SocketManager implements handleSocketMessage {
                     const buffer = new Uint8Array(asset.buffer());
                     const clientSproto = sproto.createNew(buffer);
                     this.request = this.client.attach(clientSproto);
-                    callBack && callBack();
                     this.bloaded = true;
+                    callBack && callBack();
                 });
             });
         });
@@ -82,8 +83,27 @@ export class SocketManager implements handleSocketMessage {
             if(data.code){
                 this.iscontent = true;
                 log('认证成功');
+                this.startHeartBeat();
             }
         })
+    }
+
+    sendHeartBeat() {
+        this.sendToServer('heartbeat', {timestamp: Date.now() / 1000}, (data:any)=>{
+            log("心跳 ",data.timestamp)
+        }); 
+    }
+
+    startHeartBeat(){
+       // 每10秒发送一次心跳
+        if(this.timeid){
+            clearInterval(this.timeid); 
+        }
+        this.timeid = setInterval(() => {
+            if(this.isopen && this.iscontent){
+                this.sendHeartBeat();
+            }
+        }, 10000); 
     }
 
     sendToServer(xyname:string,data: any, callBack?:(data:any)=>void){
