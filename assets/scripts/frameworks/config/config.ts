@@ -4,3 +4,9 @@ export interface handleSocketMessage {
     onClose(event: any): void;
     onError(error: any): void;
 }
+
+export interface RESPONSE {
+    type:string;
+    session:number;
+    result:any;
+}

@@ -46,11 +46,8 @@ export class TestView extends FGUITestView {
     }
     
     onBtnCon(): void {
-        SocketManager.instance.loadProtocol()
-        setTimeout(()=>{
+        SocketManager.instance.loadProtocol(()=>{
             SocketManager.instance.start("ws://192.168.1.182:9002")
-        }, 1000)
-        
-        //SocketManager.instance.content()
+        })
     }
 }

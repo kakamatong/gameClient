@@ -3,6 +3,7 @@ import { LOGIN_INFO } from "./interfaceConfig";
 export class DataCenter {
     private loginInfo: LOGIN_INFO = {
         username: '',
+        userid: 0,
         password: '',
         server: '',
         loginType: '',

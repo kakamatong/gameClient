@@ -16,6 +16,7 @@ export class Login implements handleSocketMessage {
     private challenge: CryptoJS.lib.WordArray;
     private loginInfo:LOGIN_INFO = {
         username:'',
+        userid:0,
         password:'',
         server:'',
         loginType:'',
@@ -74,9 +75,11 @@ export class Login implements handleSocketMessage {
             const infos = text.split(' ');
             const code = infos[0];
             const msg = atob(infos[1]);
+            const msg2 = atob(infos[2]);
             if(code === '200'){
                 log('登录成功');
                 this.loginInfo.subid = Number(msg);
+                this.loginInfo.userid = Number(msg2);
                 DataCenter.instance.setLoginInfo(this.loginInfo);
                 this.callBack(true);
             }else{
@@ -138,13 +141,13 @@ export class Login implements handleSocketMessage {
         // 打印secret
         const secretHex = secret.toString(CryptoJS.enc.Hex);
         console.log('secretHex:', secretHex);
-    
+        this.loginInfo.token = secretHex;
         // 5. 计算HMAC校验
         const hmac = hmac64(this.challenge, secret);
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
         console.log('hmacB64:', hmacB64);
-        this.loginInfo.token = hmacB64;
+        
         // 将base64字符串转换为字节数组
         const hmacB64Bytes = new TextEncoder().encode(hmacB64);
         const hmacB64Array = Array.from(hmacB64Bytes);

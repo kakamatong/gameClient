@@ -1,13 +1,17 @@
 import { Socket } from '../frameworks/socket/socket';
 import {assetManager,BufferAsset,log} from 'cc';
 import sproto from './sproto/sproto.js';
-import { handleSocketMessage } from './config/config';
+import { handleSocketMessage, RESPONSE } from './config/config';
 import { DataCenter } from '../datacenter/datacenter';
 export class SocketManager implements handleSocketMessage {
     private socket: Socket | null = null;
     private request: any;
     private client: any;
+    private bloaded = false;
     private iscontent = false;
+    private isopen = false;
+    private session = 0;
+    private callBacks:Array<(data:any)=>void> = [];
     //单例
     private static _instance: SocketManager;
     public static get instance(): SocketManager {
@@ -18,6 +22,9 @@ export class SocketManager implements handleSocketMessage {
     }
 
     initSocket(url:string){
+        this.session = 0;
+        this.iscontent = false;
+        this.isopen = false;
         const socket = new Socket();
         socket.init(url);
         socket.setHandleMessage(this);
@@ -28,7 +35,11 @@ export class SocketManager implements handleSocketMessage {
         this.socket = this.initSocket(url);
     }
     
-    loadProtocol() {
+    loadProtocol(callBack:()=>void) {
+        if(this.bloaded){
+            callBack && callBack();
+            return
+        }
         const bundle = assetManager.loadBundle('protocol', (err, bundle) => {
             if (err) {
                 log('loadBundle error', err);
@@ -50,6 +61,8 @@ export class SocketManager implements handleSocketMessage {
                     const buffer = new Uint8Array(asset.buffer());
                     const clientSproto = sproto.createNew(buffer);
                     this.request = this.client.attach(clientSproto);
+                    callBack && callBack();
+                    this.bloaded = true;
                 });
             });
         });
@@ -60,23 +73,44 @@ export class SocketManager implements handleSocketMessage {
         log('SocketManager loginInfo', loginInfo);
         const contentInfo = {
             username: loginInfo.username,
-            password: loginInfo.password,
+            userid: loginInfo.userid,
+            password: loginInfo.token,
             device: 'pc',
             version: '0.0.1'
         }
-        this.request && this.sendMessage(this.request('auth', contentInfo, loginInfo.subid));
+        this.sendToServer('auth', contentInfo, (data:any)=>{
+            if(data.code){
+                this.iscontent = true;
+                log('认证成功');
+            }
+        })
+    }
+
+    sendToServer(xyname:string,data: any, callBack?:(data:any)=>void){
+        const tmpSession = this.session + 1;
+        if(callBack){
+            this.callBacks[tmpSession] = callBack;
+        }
+        this.request && this.sendMessage(this.request(xyname, data, tmpSession));
     }
     
     sendMessage(message: any) {
         this.socket && this.socket.sendMessage(message);
     }
 
+    // type
+    // session
+    // result
     dispatchMessage(response: any) {
-        if(response.pname == 'reportContent'){
-            this.onReportContent(response);
-            return
-        }else{
-            // 处理消息
+        if(response.type == "RESPONSE"){
+            this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](response.result);
+        }else if(response.type == "REQUEST"){
+            if(response.pname == 'reportContent'){
+                this.onReportContent(response);
+                return
+            }else{
+                // 回调
+            }
         }
     }
 
@@ -89,6 +123,7 @@ export class SocketManager implements handleSocketMessage {
 
     onOpen(event: any) {
         log('SocketManager onOpen', event);
+        this.isopen = true;
     }
 
     onMessage(message: Uint8Array) {
@@ -100,6 +135,8 @@ export class SocketManager implements handleSocketMessage {
 
     onClose(event: any) {
         log('SocketManager onClose', event);
+        this.isopen = false;
+        this.iscontent = false;
     }
 
     onError(event: any) {
