@@ -1,5 +1,6 @@
 import {DataCenter} from '../datacenter/datacenter';
 import { SocketManager } from '../frameworks/socketManager';
+import { UserData } from './userData';
 export class Auth {
     req(){
         SocketManager.instance.loadProtocol(()=>{
@@ -16,6 +17,8 @@ export class Auth {
     resp(result:boolean){
         if(result){
             console.log('auth success')
+            const userData = new UserData()
+            userData.req()
         }else{
             console.log('auth fail')
         }
