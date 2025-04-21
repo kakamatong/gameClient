@@ -1,7 +1,7 @@
-import { LOGIN_INFO } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA } from "./interfaceConfig";
 
 export class DataCenter {
-    private loginInfo: LOGIN_INFO = {
+    private _loginInfo: LOGIN_INFO = {
         username: '',
         userid: 0,
         password: '',
@@ -10,6 +10,17 @@ export class DataCenter {
         token: '',
         subid:0
     };
+
+    private _userData: USER_DATA = {
+        userid: 0,
+        nickname: '',
+        headurl: '',
+        sex: 0,
+        province: '',
+        city: '',
+        ip: '',
+        ext: ''
+    }
 
 
     private static _instance: DataCenter;
@@ -21,15 +32,27 @@ export class DataCenter {
     }
 
     setLoginInfo(info: LOGIN_INFO) {
-        this.loginInfo = info;
+        this._loginInfo = info;
     }
 
     getLoginInfo() {
-        return this.loginInfo;
+        return this._loginInfo;
     }
 
     addSubid(subid:number){
-        this.loginInfo.subid = subid;
+        this._loginInfo.subid = subid;
+    }
+
+    get userid(){
+        return this._loginInfo.userid;
+    }
+
+    set userData(data:USER_DATA){
+        this._userData = data;
+    }
+
+    get userData(){
+        return this._userData;
     }
 
 }

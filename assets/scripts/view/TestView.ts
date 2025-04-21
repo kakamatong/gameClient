@@ -1,6 +1,7 @@
 import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
 import { SocketManager } from '../frameworks/socketManager';
+import {Auth} from '../modules/auth';
 import * as fgui from 'fairygui-cc';
 
 import { Login } from '../login/login';
@@ -46,8 +47,7 @@ export class TestView extends FGUITestView {
     }
     
     onBtnCon(): void {
-        SocketManager.instance.loadProtocol(()=>{
-            SocketManager.instance.start("ws://192.168.1.140:9002")
-        })
+        const auth = new Auth();
+        auth.req();
     }
 }

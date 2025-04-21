@@ -13,6 +13,8 @@ export class SocketManager implements handleSocketMessage {
     private session = 0;
     private timeid:number = -1;
     private callBacks:Array<(data:any)=>void> = [];
+    private callBackContent : ((result:boolean)=>void) | null = null;
+    private callBackAuth : ((result:boolean)=>void) | null = null;
     //单例
     private static _instance: SocketManager;
     public static get instance(): SocketManager {
@@ -32,7 +34,11 @@ export class SocketManager implements handleSocketMessage {
         return socket;
     }
 
-    start(url:string){
+    start(url:string, callBack?:(result:boolean)=>void){
+        if(callBack){
+            this.callBackContent = callBack;
+        }
+
         this.socket = this.initSocket(url);
     }
     
@@ -69,7 +75,10 @@ export class SocketManager implements handleSocketMessage {
         });
     }
 
-    content() {
+    content(callBack?:(result:boolean)=>void) {
+        if(callBack){
+            this.callBackAuth = callBack;
+        }
         const loginInfo = DataCenter.instance.getLoginInfo();
         log('SocketManager loginInfo', loginInfo);
         const contentInfo = {
@@ -86,8 +95,10 @@ export class SocketManager implements handleSocketMessage {
                 log('认证成功');
                 DataCenter.instance.addSubid(loginInfo.subid + 1);
                 this.startHeartBeat();
+                this.callBackAuth && this.callBackAuth(true);
             }else{
                 log('认证失败 ', data.msg);
+                this.callBackAuth && this.callBackAuth(false);
             }
         })
     }
@@ -141,7 +152,11 @@ export class SocketManager implements handleSocketMessage {
     onReportContent(message: any) {
         if(message.result.code){
             this.iscontent = true;
-            this.content();
+            //this.content();
+            this.callBackContent && this.callBackContent(true);
+        }else{
+            this.iscontent = false;
+            this.callBackContent && this.callBackContent(false);
         }
     }
 
