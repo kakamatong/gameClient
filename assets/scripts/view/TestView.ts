@@ -47,7 +47,7 @@ export class TestView extends FGUITestView {
     
     onBtnCon(): void {
         SocketManager.instance.loadProtocol(()=>{
-            SocketManager.instance.start("ws://192.168.1.182:9002")
+            SocketManager.instance.start("ws://192.168.1.140:9002")
         })
     }
 }

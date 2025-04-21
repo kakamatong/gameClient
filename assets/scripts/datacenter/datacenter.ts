@@ -28,4 +28,8 @@ export class DataCenter {
         return this.loginInfo;
     }
 
+    addSubid(subid:number){
+        this.loginInfo.subid = subid;
+    }
+
 }

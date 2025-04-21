@@ -1,7 +1,7 @@
 import { Socket } from '../frameworks/socket/socket';
 import {assetManager,BufferAsset,log} from 'cc';
 import sproto from './sproto/sproto.js';
-import { handleSocketMessage, RESPONSE } from './config/config';
+import { handleSocketMessage, RESPONSE, AUTH_TYPE } from './config/config';
 import { DataCenter } from '../datacenter/datacenter';
 export class SocketManager implements handleSocketMessage {
     private socket: Socket | null = null;
@@ -77,13 +77,17 @@ export class SocketManager implements handleSocketMessage {
             userid: loginInfo.userid,
             password: loginInfo.token,
             device: 'pc',
-            version: '0.0.1'
+            version: '0.0.1',
+            subid : loginInfo.subid,
         }
         this.sendToServer('auth', contentInfo, (data:any)=>{
-            if(data.code){
+            if(data.code == AUTH_TYPE.SUCCESS ){
                 this.iscontent = true;
                 log('认证成功');
+                DataCenter.instance.addSubid(loginInfo.subid + 1);
                 this.startHeartBeat();
+            }else{
+                log('认证失败 ', data.msg);
             }
         })
     }

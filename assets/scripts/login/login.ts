@@ -54,7 +54,7 @@ export class Login implements handleSocketMessage {
 
     initSocket() {
         this.socket = new Socket();
-        this.socket.init('ws://192.168.1.182:8002');
+        this.socket.init('ws://192.168.1.140:8002');
         this.socket.setHandleMessage(this);
     }
 

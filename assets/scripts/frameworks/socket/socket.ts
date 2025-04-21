@@ -9,7 +9,7 @@ export class Socket {
     // private readonly maxReconnectAttempts: number = 5;
     // private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
     private handleSocketMessage: handleSocketMessage | null = null;
-    init(url: string = 'ws://192.168.1.182:9002') {
+    init(url: string = 'ws://192.168.1.140:9002') {
         this.connectWebSocket(url);
     }
 
