@@ -4,7 +4,7 @@ import { SocketManager } from '../frameworks/socketManager';
 import {Auth} from '../modules/auth';
 import * as fgui from 'fairygui-cc';
 
-import { Login } from '../login/login';
+import { Login, ACCOUNT_INFO } from '../login/login';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -33,8 +33,14 @@ export class TestView extends FGUITestView {
         const func = (b:boolean)=>{
             console.log('login callback:', b);
         }
+        const acc = this.UI_INPUT_ACC.text ?? "";
+        const pwd = this.UI_INPUT_PASS.text ?? "";
+        const accInfo: ACCOUNT_INFO = {
+            username: acc,
+            password: pwd,
+        };
         const login = new Login();
-        login.start(func);
+        login.start(accInfo,func);
     }
 
     onBtnClose(){

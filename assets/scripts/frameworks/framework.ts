@@ -1,37 +1,38 @@
-/**
- * 类装饰器配置选项
- */
-type ClassDecoratorOptions = {
-    singleton?: boolean;      // 是否单例模式
-    autoInit?: boolean;       // 是否自动初始化
-    debug?: boolean;          // 是否开启调试日志
-    dependencies?: string[];  // 依赖的服务名称
-};
+type eventFunc = (...args:any[]) =>void
 
-/**
- * 增强型类装饰器工厂函数
- * @param options 装饰器配置选项
- */
-export function EnhanceClass(options: ClassDecoratorOptions = {}) {
-    return function <T extends new (...args: any[]) => any>(constructor: T) {
-        return class extends constructor {
-            // 重写构造函数
-            constructor(...args: any[]) {
-                super(...args);
-            }
-        };
-    };
+const events = new Map<string, eventFunc[]>()
+
+export function AddEventListener(eventName:string, func: eventFunc) {
+    if (!events.has(eventName)) {
+        events.set(eventName, [func])
+        return
+    }else{
+        const funcs = events.get(eventName)
+        if(funcs?.indexOf(func) === -1){
+            funcs?.push(func)
+        }
+    }
 }
 
-// 示例服务管理器（需要提前实现）
-class ServiceManager {
-    private static services = new Map<string, any>();
-
-    static register(name: string, service: any) {
-        this.services.set(name, service);
+export function RemoveEventListener(eventName:string, func: eventFunc) {
+    if (!events.has(eventName)) {
+        return
+    }else{
+        const funcs = events.get(eventName)
+        const index = funcs?.indexOf(func)
+        if(index != null && index !== -1){
+            funcs?.splice(index, 1)
+        }
     }
+}
 
-    static get<T>(name: string): T {
-        return this.services.get(name) as T;
+export function DispatchEvent(eventName:string, ...args:any[]) {
+    if (!events.has(eventName)) {
+        return
+    }else{
+        const funcs = events.get(eventName)
+        funcs?.forEach(func => {
+            func(...args)
+        });
     }
 }
