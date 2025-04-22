@@ -1,5 +1,6 @@
 import { DataCenter } from '../datacenter/datacenter';
 import { SocketManager } from '../frameworks/socketManager';
+import { DispatchEvent } from '../frameworks/framework';
 export class UserData {
     req() {
         SocketManager.instance.sendToServer('userData', { uid: DataCenter.instance.userid }, this.resp.bind(this))
@@ -7,5 +8,6 @@ export class UserData {
 
     resp(data: any) {
         DataCenter.instance.userData = data;
+        DispatchEvent('userData',data)
     }
 }

@@ -12,7 +12,7 @@
     </component>
     <text id="n4_sndo" name="UI_INPUT_ACC" xy="188,58" size="131,39" fontSize="22" color="#ffffff" autoSize="none" text="test001" input="true"/>
     <text id="n5_sndo" name="UI_INPUT_PASS" xy="355,56" size="139,41" fontSize="22" color="#ffffff" autoSize="none" text="wlj123456" input="true"/>
-    <text id="n6_essk" name="UI_TXT_NICKNAME" xy="189,131" size="99,32" fontSize="22" autoSize="none" text=""/>
-    <text id="n7_essk" name="UI_TXT_USERID" xy="334,130" size="99,32" fontSize="22" autoSize="none" text=""/>
+    <text id="n6_essk" name="UI_TXT_NICKNAME" xy="189,131" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <text id="n7_essk" name="UI_TXT_USERID" xy="334,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
   </displayList>
 </component>

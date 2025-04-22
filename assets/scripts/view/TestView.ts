@@ -1,10 +1,11 @@
 import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
-import { SocketManager } from '../frameworks/socketManager';
+import {AddEventListener,RemoveEventListener} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
 import * as fgui from 'fairygui-cc';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
+import { DataCenter } from '../datacenter/datacenter';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -18,10 +19,12 @@ export class TestView extends FGUITestView {
         console.log('TestView onEnable');
         //this.UI_BTN_LOGIN.on(fgui.Event.CLICK, this.onBtnLogin, this);
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
+        AddEventListener('userData',this.showUserInfo, this);
     }
 
     onDisable(){
         console.log('TestView onDisable');
+        RemoveEventListener('userData', this.showUserInfo);
     }
 
     onShow(){
@@ -55,5 +58,10 @@ export class TestView extends FGUITestView {
     onBtnCon(): void {
         const auth = new Auth();
         auth.req();
+    }
+
+    showUserInfo(data:any){
+        this.UI_TXT_NICKNAME.text = data.nickname;
+        this.UI_TXT_USERID.text =`${DataCenter.instance.userid}`
     }
 }
