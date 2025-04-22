@@ -122,11 +122,11 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendToServer(xyname:string,data: any, callBack?:(data:any)=>void){
-        const tmpSession = this.session + 1;
+        this.session++;
         if(callBack){
-            this.callBacks[tmpSession] = callBack;
+            this.callBacks[this.session] = callBack;
         }
-        this.request && this.sendMessage(this.request(xyname, data, tmpSession));
+        this.request && this.sendMessage(this.request(xyname, data, this.session));
     }
     
     sendMessage(message: any) {

@@ -22,6 +22,8 @@ export class DataCenter {
         ext: ''
     }
 
+    private _userRiches: Array<{richType:number, richNums:number}> = []
+
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {
@@ -53,6 +55,14 @@ export class DataCenter {
 
     get userData(){
         return this._userData;
+    }
+
+    set userRiches(data:Array<{richType:number, richNums:number}>) {
+        this._userRiches = data;
+    }
+
+    get userRiches() {
+        return this._userRiches;
     }
 
 }
