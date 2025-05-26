@@ -15,6 +15,7 @@ export class SocketManager implements handleSocketMessage {
     private callBacks:Array<(data:any)=>void> = [];
     private callBackContent : ((result:boolean)=>void) | null = null;
     private callBackAuth : ((result:boolean)=>void) | null = null;
+    private onServerReport:Map<string, (data:any)=>void> | null = null;
     //单例
     private static _instance: SocketManager;
     public static get instance(): SocketManager {
@@ -145,8 +146,25 @@ export class SocketManager implements handleSocketMessage {
                 return
             }else{
                 // 回调
+                this.onReport(response.pname, response.result);
             }
         }
+    }
+
+    onReport(name:string, data:any){
+        if(this.onServerReport){
+            const callBack = this.onServerReport.get(name);
+            callBack && callBack(data);
+        }
+    }
+
+    // 增加服务器广播监听
+    addServerReport(name:string, callBack:(data:any)=>void){
+        if(!this.onServerReport){
+            this.onServerReport = new Map<string, (data:any)=>void>();
+        }
+        
+        this.onServerReport.set(name, callBack);
     }
 
     onReportContent(message: any) {

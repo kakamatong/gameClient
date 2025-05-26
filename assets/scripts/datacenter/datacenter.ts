@@ -1,28 +1,13 @@
-import { LOGIN_INFO,USER_DATA } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS } from "./interfaceConfig";
 
 export class DataCenter {
-    private _loginInfo: LOGIN_INFO = {
-        username: '',
-        userid: 0,
-        password: '',
-        server: '',
-        loginType: '',
-        token: '',
-        subid:0
-    };
+    private _loginInfo: LOGIN_INFO | null = null;
 
-    private _userData: USER_DATA = {
-        userid: 0,
-        nickname: '',
-        headurl: '',
-        sex: 0,
-        province: '',
-        city: '',
-        ip: '',
-        ext: ''
-    }
+    private _userData: USER_DATA | null = null;
 
     private _userRiches: Array<{richType:number, richNums:number}> = []
+
+    private _userStatus: USER_STATUS | null = null;
 
 
     private static _instance: DataCenter;
@@ -37,23 +22,23 @@ export class DataCenter {
         this._loginInfo = info;
     }
 
-    getLoginInfo() {
+    getLoginInfo():LOGIN_INFO | null {
         return this._loginInfo;
     }
 
     addSubid(subid:number){
-        this._loginInfo.subid = subid;
+        this._loginInfo && (this._loginInfo.subid = subid);
     }
 
-    get userid(){
-        return this._loginInfo.userid;
+    get userid():number{
+        return this._loginInfo?.userid ?? 0;
     }
 
     set userData(data:USER_DATA){
         this._userData = data;
     }
 
-    get userData(){
+    get userData():USER_DATA | null{
         return this._userData;
     }
 
@@ -63,6 +48,14 @@ export class DataCenter {
 
     get userRiches() {
         return this._userRiches;
+    }
+
+    set userStatus(data:USER_STATUS) {
+        this._userStatus = data;
+    }
+
+    get userStatus(): USER_STATUS | null  {
+        return this._userStatus;
     }
 
 }

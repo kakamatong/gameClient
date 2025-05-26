@@ -2,6 +2,8 @@ import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
 import {AddEventListener,RemoveEventListener} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
+import {Match} from '../modules/match';
+import { SocketManager } from '../frameworks/socketManager';
 import * as fgui from 'fairygui-cc';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
@@ -20,11 +22,14 @@ export class TestView extends FGUITestView {
         //this.UI_BTN_LOGIN.on(fgui.Event.CLICK, this.onBtnLogin, this);
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
         AddEventListener('userData',this.showUserInfo, this);
+        AddEventListener('userStatus',this.showUserStatus, this);
+        SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
     }
 
     onDisable(){
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
+        RemoveEventListener('userStatus', this.showUserStatus);
     }
 
     onShow(){
@@ -60,8 +65,22 @@ export class TestView extends FGUITestView {
         auth.req();
     }
 
+    onBtnMatch(): void {
+        const match = new Match();
+        match.req();
+    }
+
     showUserInfo(data:any){
         this.UI_TXT_NICKNAME.text = data.nickname;
         this.UI_TXT_USERID.text =`${DataCenter.instance.userid}`
+        
+    }
+
+    showUserStatus(data:any){
+        this.UI_TXT_USER_STATUS.text = `${data.status}`
+    }
+
+    updateUserStatus(data:any){
+        this.UI_TXT_USER_STATUS.text = `${data.status}`
     }
 }

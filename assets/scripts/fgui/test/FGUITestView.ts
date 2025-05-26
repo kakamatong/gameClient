@@ -7,10 +7,12 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_BTN_LOGIN:fgui.GButton;
 	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_BTN_CON:fgui.GButton;
+	public UI_BTN_MATCH:fgui.GButton;
 	public UI_INPUT_ACC:fgui.GTextInput;
 	public UI_INPUT_PASS:fgui.GTextInput;
 	public UI_TXT_NICKNAME:fgui.GTextField;
 	public UI_TXT_USERID:fgui.GTextField;
+	public UI_TXT_USER_STATUS:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -26,12 +28,16 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.UI_BTN_CON = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_CON.onClick(this.onBtnCon, this);
-		this.UI_INPUT_ACC = <fgui.GTextInput>(this.getChildAt(3));
-		this.UI_INPUT_PASS = <fgui.GTextInput>(this.getChildAt(4));
-		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(5));
-		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(6));
+		this.UI_BTN_MATCH = <fgui.GButton>(this.getChildAt(3));
+		this.UI_BTN_MATCH.onClick(this.onBtnMatch, this);
+		this.UI_INPUT_ACC = <fgui.GTextInput>(this.getChildAt(4));
+		this.UI_INPUT_PASS = <fgui.GTextInput>(this.getChildAt(5));
+		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(6));
+		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(7));
+		this.UI_TXT_USER_STATUS = <fgui.GTextField>(this.getChildAt(8));
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
 	onBtnCon():void{};
+	onBtnMatch():void{};
 }

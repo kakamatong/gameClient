@@ -2,6 +2,7 @@ import {DataCenter} from '../datacenter/datacenter';
 import { SocketManager } from '../frameworks/socketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
+import { UserStatus } from './userStatus';
 export class Auth {
     req(){
         SocketManager.instance.loadProtocol(()=>{
@@ -25,6 +26,11 @@ export class Auth {
             // 用户财富
             const userRiches = new UserRiches()
             userRiches.req()
+
+            // 用户状态
+            const userStatus = new UserStatus()
+            userStatus.req()
+
         }else{
             console.log('auth fail')
         }
