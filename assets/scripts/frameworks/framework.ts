@@ -3,6 +3,13 @@ type eventFunc = (...args:any[]) =>void
 const events = new Map<string, eventFunc[]>()
 const eventTargets = new Map<eventFunc, any>()
 
+// 日志颜色
+export class LogColors {
+    static red = (text: string) => `\x1b[31m${text}\x1b[0m`;
+    static green = (text: string) => `\x1b[32m${text}\x1b[0m`;
+    static blue = (text: string) => `\x1b[34m${text}\x1b[0m`;
+}
+
 export function AddEventListener(eventName:string, func: eventFunc, target:any) {
     if (!events.has(eventName)) {
         events.set(eventName, [func])

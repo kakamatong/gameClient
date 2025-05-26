@@ -5,6 +5,7 @@ import { handleSocketMessage } from '../frameworks/config/config';
 import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../frameworks/utils/utils';
 import { LOGIN_INFO } from '../datacenter/interfaceConfig';
 import { DataCenter } from '../datacenter/datacenter';
+import {LogColors} from '../frameworks/framework';
 const { ccclass, property } = _decorator;
 
 export interface ACCOUNT_INFO {
@@ -91,7 +92,7 @@ export class Login implements handleSocketMessage {
             const msg = atob(infos[1]);
             const msg2 = atob(infos[2]);
             if(code === '200'){
-                log('登录成功');
+                log(LogColors.green('登录成功'))
                 this._loginInfo.subid = Number(msg);
                 this._loginInfo.userid = Number(msg2);
                 DataCenter.instance.setLoginInfo(this._loginInfo);
