@@ -1,15 +1,15 @@
 import { SocketManager } from '../frameworks/socketManager';
-import {LogColors} from '../frameworks/framework';
+import { LogColors } from '../frameworks/framework';
 export class Match {
-    req(){
-        SocketManager.instance.sendToServer('match', { gameid: 0, gameSubid:0 }, this.resp.bind(this))
+    req(type = 0) {
+        SocketManager.instance.sendToServer('match', { gameid: 0, gameSubid: 1, type: type }, this.resp.bind(this))
     }
 
-    resp(result:any){
-        if(result && result.code == 0){
-            console.log(LogColors.green("进入匹配列队成功"))
-        }else{
-            console.log('Match fail')
+    resp(result: any) {
+        if (result && result.code == 0) {
+            console.log(LogColors.green(result.msg))
+        } else {
+            result && console.log(LogColors.red(result.msg))
         }
     }
 }
