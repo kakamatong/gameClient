@@ -1,5 +1,5 @@
 import { Socket } from '../frameworks/socket/socket';
-import {assetManager,BufferAsset,log} from 'cc';
+import { assetManager, BufferAsset, log } from 'cc';
 import sproto from './sproto/sproto.js';
 import { handleSocketMessage, RESPONSE, AUTH_TYPE } from './config/config';
 import { DataCenter } from '../datacenter/datacenter';
@@ -11,11 +11,11 @@ export class SocketManager implements handleSocketMessage {
     private iscontent = false;
     private isopen = false;
     private session = 0;
-    private timeid:number = -1;
-    private callBacks:Array<(data:any)=>void> = [];
-    private callBackContent : ((result:boolean)=>void) | null = null;
-    private callBackAuth : ((result:boolean)=>void) | null = null;
-    private onServerReport:Map<string, (data:any)=>void> | null = null;
+    private timeid: number = -1;
+    private callBacks: Array<(data: any) => void> = [];
+    private callBackContent: ((result: boolean) => void) | null = null;
+    private callBackAuth: ((result: boolean) => void) | null = null;
+    private onServerReport: Map<string, (data: any) => void> | null = null;
     //单例
     private static _instance: SocketManager;
     public static get instance(): SocketManager {
@@ -25,7 +25,7 @@ export class SocketManager implements handleSocketMessage {
         return this._instance;
     }
 
-    initSocket(url:string){
+    initSocket(url: string) {
         this.session = 0;
         this.iscontent = false;
         this.isopen = false;
@@ -35,16 +35,16 @@ export class SocketManager implements handleSocketMessage {
         return socket;
     }
 
-    start(url:string, callBack?:(result:boolean)=>void){
-        if(callBack){
+    start(url: string, callBack?: (result: boolean) => void) {
+        if (callBack) {
             this.callBackContent = callBack;
         }
 
         this.socket = this.initSocket(url);
     }
-    
-    loadProtocol(callBack:()=>void) {
-        if(this.bloaded){
+
+    loadProtocol(callBack: () => void) {
+        if (this.bloaded) {
             callBack && callBack();
             return
         }
@@ -55,7 +55,7 @@ export class SocketManager implements handleSocketMessage {
             }
 
             // 必须先读取服务端协议
-            bundle.load('s2c',(err,asset:BufferAsset) => {
+            bundle.load('s2c', (err, asset: BufferAsset) => {
                 log('loadAsset error', err);
 
                 const buffer = new Uint8Array(asset.buffer());
@@ -63,9 +63,9 @@ export class SocketManager implements handleSocketMessage {
                 this.client = serverSproto.host('package');
 
                 // 然后读取客户端协议
-                bundle.load('c2s',(err,asset:BufferAsset) => {
+                bundle.load('c2s', (err, asset: BufferAsset) => {
                     log('loadAsset error', err);
-    
+
                     const buffer = new Uint8Array(asset.buffer());
                     const clientSproto = sproto.createNew(buffer);
                     this.request = this.client.attach(clientSproto);
@@ -76,8 +76,8 @@ export class SocketManager implements handleSocketMessage {
         });
     }
 
-    content(callBack?:(result:boolean)=>void) {
-        if(callBack){
+    content(callBack?: (result: boolean) => void) {
+        if (callBack) {
             this.callBackAuth = callBack;
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
@@ -88,16 +88,16 @@ export class SocketManager implements handleSocketMessage {
             password: loginInfo.token,
             device: 'pc',
             version: '0.0.1',
-            subid : loginInfo.subid,
+            subid: loginInfo.subid,
         }
-        this.sendToServer('auth', contentInfo, (data:any)=>{
-            if(data.code == AUTH_TYPE.SUCCESS ){
+        this.sendToServer('auth', contentInfo, (data: any) => {
+            if (data.code == AUTH_TYPE.SUCCESS) {
                 this.iscontent = true;
                 log('认证成功');
                 DataCenter.instance.addSubid(loginInfo.subid + 1);
                 this.startHeartBeat();
                 this.callBackAuth && this.callBackAuth(true);
-            }else{
+            } else {
                 log('认证失败 ', data.msg);
                 this.callBackAuth && this.callBackAuth(false);
             }
@@ -105,31 +105,31 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendHeartBeat() {
-        this.sendToServer('heartbeat', {timestamp: Date.now() / 1000}, (data:any)=>{
-            log("心跳 ",data.timestamp)
-        }); 
+        this.sendToServer('heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
+            log("心跳 ", data.timestamp)
+        });
     }
 
-    startHeartBeat(){
-       // 每10秒发送一次心跳
-        if(this.timeid){
-            clearInterval(this.timeid); 
+    startHeartBeat() {
+        // 每10秒发送一次心跳
+        if (this.timeid) {
+            clearInterval(this.timeid);
         }
         this.timeid = setInterval(() => {
-            if(this.isopen && this.iscontent){
+            if (this.isopen && this.iscontent) {
                 this.sendHeartBeat();
             }
-        }, 10000); 
+        }, 10000);
     }
 
-    sendToServer(xyname:string,data: any, callBack?:(data:any)=>void){
+    sendToServer(xyname: string, data: any, callBack?: (data: any) => void) {
         this.session++;
-        if(callBack){
+        if (callBack) {
             this.callBacks[this.session] = callBack;
         }
         this.request && this.sendMessage(this.request(xyname, data, this.session));
     }
-    
+
     sendMessage(message: any) {
         this.socket && this.socket.sendMessage(message);
     }
@@ -138,41 +138,41 @@ export class SocketManager implements handleSocketMessage {
     // session
     // result
     dispatchMessage(response: any) {
-        if(response.type == "RESPONSE"){
+        if (response.type == "RESPONSE") {
             this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](response.result);
-        }else if(response.type == "REQUEST"){
-            if(response.pname == 'reportContent'){
+        } else if (response.type == "REQUEST") {
+            if (response.pname == 'reportContent') {
                 this.onReportContent(response);
                 return
-            }else{
+            } else {
                 // 回调
                 this.onReport(response.pname, response.result);
             }
         }
     }
 
-    onReport(name:string, data:any){
-        if(this.onServerReport){
+    onReport(name: string, data: any) {
+        if (this.onServerReport) {
             const callBack = this.onServerReport.get(name);
             callBack && callBack(data);
         }
     }
 
     // 增加服务器广播监听
-    addServerReport(name:string, callBack:(data:any)=>void){
-        if(!this.onServerReport){
-            this.onServerReport = new Map<string, (data:any)=>void>();
+    addServerReport(name: string, callBack: (data: any) => void) {
+        if (!this.onServerReport) {
+            this.onServerReport = new Map<string, (data: any) => void>();
         }
-        
+
         this.onServerReport.set(name, callBack);
     }
 
     onReportContent(message: any) {
-        if(message.result.code){
+        if (message.result.code) {
             this.iscontent = true;
             //this.content();
             this.callBackContent && this.callBackContent(true);
-        }else{
+        } else {
             this.iscontent = false;
             this.callBackContent && this.callBackContent(false);
         }
