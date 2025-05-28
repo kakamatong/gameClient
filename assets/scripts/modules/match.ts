@@ -2,7 +2,7 @@ import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 export class Match {
     req(type = 0) {
-        SocketManager.instance.sendToServer('match', { gameid: 0, gameSubid: 1, type: type }, this.resp.bind(this))
+        SocketManager.instance.sendToServer('match', { gameid: 10001, gameSubid: 1, type: type }, this.resp.bind(this))
     }
 
     resp(result: any) {
