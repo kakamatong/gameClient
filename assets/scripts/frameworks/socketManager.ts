@@ -65,7 +65,7 @@ export class SocketManager implements handleSocketMessage {
 
                 const buffer = new Uint8Array(asset.buffer());
                 const serverSproto = sproto.createNew(buffer);
-                this.client = serverSproto.host('package');
+                this.client = serverSproto?.host('package');
 
                 // 然后读取客户端协议
                 bundle.load('c2s', (err, asset: BufferAsset) => {
