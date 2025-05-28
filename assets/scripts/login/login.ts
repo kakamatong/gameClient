@@ -131,6 +131,9 @@ export class Login implements handleSocketMessage {
         this._clientPrivateKey = CryptoJS.lib.WordArray.random(8);
         //this._clientPrivateKey = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
 
+        if(!this._clientPrivateKey){
+            return;
+        }
         const clientPrivateKeyDh = dhexchange(this._clientPrivateKey);
 
         const clientPublicKeyB64 = CryptoJS.enc.Base64.stringify(clientPrivateKeyDh);
@@ -150,6 +153,9 @@ export class Login implements handleSocketMessage {
         const serverPublicKey = CryptoJS.enc.Base64.parse(serverPublicKeyB64.trim());
     
         // 4. 计算共享密钥（根据服务端实现调整）
+        if(!this._clientPrivateKey){
+            return;
+        }
         const secret = dhsecret(serverPublicKey, this._clientPrivateKey);
         //const secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
 
@@ -158,6 +164,9 @@ export class Login implements handleSocketMessage {
         console.log('secretHex:', secretHex);
         this._loginInfo.token = secretHex;
         // 5. 计算HMAC校验
+        if(!this._challenge){
+            return;
+        }
         const hmac = hmac64(this._challenge, secret);
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
