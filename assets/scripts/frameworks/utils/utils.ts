@@ -4,7 +4,7 @@ const DH_GENERATOR = 5n;
 const DH_PRIME = 0xFFFFFFFFFFFFFFC5n;
 
 // 字节转换工具
-const toUint64LE = (wa: CryptoJS.lib.WordArray): bigint => {
+const toUint64LE = (wa: CryptoJS.WordArray): bigint => {
     const bytes = wa.toString(CryptoJS.enc.Hex).match(/.{8}/g) || [];
     const [low, high] = bytes.map(b => 
         parseInt(b.split(/(?=(?:..)*$)/).reverse().join(''), 16)
@@ -12,7 +12,7 @@ const toUint64LE = (wa: CryptoJS.lib.WordArray): bigint => {
     return (BigInt(high) << 32n) | BigInt(low);
 };
 
-const fromUint64LE = (n: bigint): CryptoJS.lib.WordArray => {
+const fromUint64LE = (n: bigint): CryptoJS.WordArray => {
     const buffer = new ArrayBuffer(8);
     const view = new DataView(buffer);
     view.setUint32(0, Number(n & 0xFFFFFFFFn), true);
@@ -46,10 +46,10 @@ const pow_mod_p = (a: bigint, b: bigint): bigint => {
 };
 
 // 修正缓存实现
-const DH_CACHE = new Map<string, CryptoJS.lib.WordArray>();
+const DH_CACHE = new Map<string, CryptoJS.WordArray>();
 
 // 与服务端一致的DH交换实现
-export const dhexchange = (clientKey: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+export const dhexchange = (clientKey: CryptoJS.WordArray): CryptoJS.WordArray => {
     const cacheKey = clientKey.toString();
     if (DH_CACHE.has(cacheKey)) {
         // 返回缓存值的克隆
@@ -70,7 +70,7 @@ export const dhexchange = (clientKey: CryptoJS.lib.WordArray): CryptoJS.lib.Word
 };
 
 // 共享密钥计算
-export const dhsecret = (serverKey: CryptoJS.lib.WordArray, clientKey: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+export const dhsecret = (serverKey: CryptoJS.WordArray, clientKey: CryptoJS.WordArray): CryptoJS.WordArray => {
     const B = toUint64LE(serverKey);
     const a = toUint64LE(clientKey);
     const result = pow_mod_p(B, a);
@@ -78,7 +78,7 @@ export const dhsecret = (serverKey: CryptoJS.lib.WordArray, clientKey: CryptoJS.
 };
 
 // 64位无符号整数转换（小端序）
-const toUint64PairLE = (wa: CryptoJS.lib.WordArray): [number, number] => {
+const toUint64PairLE = (wa: CryptoJS.WordArray): [number, number] => {
     // 将WordArray转换为8字节的十六进制字符串
     const hex = wa.toString(CryptoJS.enc.Hex).padStart(16, '0');
     
@@ -159,7 +159,7 @@ const digestMD5 = (w: number[]): number[] => {
 };
 
 // 更新后的HMAC64实现
-export const hmac64 = (key: CryptoJS.lib.WordArray, message: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+export const hmac64 = (key: CryptoJS.WordArray, message: CryptoJS.WordArray): CryptoJS.WordArray => {
     // 转换输入为64位无符号整数对
     const keyPair = toUint64PairLE(key);
     const msgPair = toUint64PairLE(message);
@@ -221,7 +221,7 @@ const addPaddingSingleBlock = (data: Uint8Array): Uint8Array => {
 };
 
 // DES解密核心实现
-export const desencode = (data: CryptoJS.lib.WordArray, key: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+export const desencode = (data: CryptoJS.WordArray, key: CryptoJS.WordArray): CryptoJS.WordArray => {
     const subkeys = generateSubkeys(key);
     const bytes = wordArrayToBytes(data);
     const blocks: number[][] = [];
@@ -548,7 +548,7 @@ const SB8: number[] = [
 ];
 
 // 修正子密钥生成函数
-const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
+const generateSubkeys = (key: CryptoJS.WordArray): number[] => {
     const keyBytes = wordArrayToBytes(key);
     
     // 确保32位无符号整型
@@ -636,7 +636,7 @@ const generateSubkeys = (key: CryptoJS.lib.WordArray): number[] => {
 };
 
 // 新增WordArray转换工具函数
-const wordArrayToBytes = (wa: CryptoJS.lib.WordArray): Uint8Array => {
+const wordArrayToBytes = (wa: CryptoJS.WordArray): Uint8Array => {
     const bytes = new Uint8Array(wa.sigBytes);
     for (let i = 0; i < wa.sigBytes; i++) {
         bytes[i] = (wa.words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xFF;
@@ -644,7 +644,7 @@ const wordArrayToBytes = (wa: CryptoJS.lib.WordArray): Uint8Array => {
     return bytes;
 };
 
-const bytesToWordArray = (bytes: Uint8Array): CryptoJS.lib.WordArray => {
+const bytesToWordArray = (bytes: Uint8Array): CryptoJS.WordArray => {
     const words: number[] = [];
     for (let i = 0; i < bytes.length; i += 4) {
         let word = 0;
@@ -657,7 +657,7 @@ const bytesToWordArray = (bytes: Uint8Array): CryptoJS.lib.WordArray => {
 };
 
 // 修改块分割逻辑（小端序处理）
-const splitIntoBlocks = (data: CryptoJS.lib.WordArray): number[][] => {
+const splitIntoBlocks = (data: CryptoJS.WordArray): number[][] => {
     const bytes = wordArrayToBytes(data);
     const blocks: number[][] = [];
     for (let i = 0; i < bytes.length; i += 8) {
@@ -680,13 +680,13 @@ const decryptBlock = (block: number[], subkeys: number[]): number[] => {
     return [Y, X];
 };
 
-const removePadding = (data: CryptoJS.lib.WordArray): CryptoJS.lib.WordArray => {
+const removePadding = (data: CryptoJS.WordArray): CryptoJS.WordArray => {
     const bytes = wordArrayToBytes(data);
     const padLength = bytes[bytes.length - 1];
     return bytesToWordArray(bytes.slice(0, bytes.length - padLength));
 };
 
-const mergeBlocks = (blocks: number[][]): CryptoJS.lib.WordArray => {
+const mergeBlocks = (blocks: number[][]): CryptoJS.WordArray => {
     const buffer = new Uint8Array(blocks.length * 8);
     blocks.forEach((block, i) => {
         const offset = i * 8;
@@ -704,7 +704,7 @@ const mergeBlocks = (blocks: number[][]): CryptoJS.lib.WordArray => {
 };
 
 // 修改自定义加密方法
-export const customDESEncrypt = (data: string, key: CryptoJS.lib.WordArray): number[] => {
+export const customDESEncrypt = (data: string, key: CryptoJS.WordArray): number[] => {
     const dataWA = CryptoJS.enc.Utf8.parse(data);
     const encrypted = desencode(dataWA, key);
     const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);

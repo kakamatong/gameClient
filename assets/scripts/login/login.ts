@@ -19,8 +19,8 @@ export class Login implements handleSocketMessage {
     private _socket: Socket | null = null;
     private _loginMsg:string = '';
     private _stepid = 0
-    private _clientPrivateKey: CryptoJS.lib.WordArray;
-    private _challenge: CryptoJS.lib.WordArray;
+    private _clientPrivateKey: CryptoJS.WordArray | null = null;
+    private _challenge: CryptoJS.WordArray | null = null;
     private _loginInfo:LOGIN_INFO = {
         username:'',
         userid:0,
