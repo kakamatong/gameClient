@@ -1,8 +1,13 @@
 import { Socket } from '../frameworks/socket/socket';
 import { assetManager, BufferAsset, log } from 'cc';
-import sproto from './sproto/sproto.js';
-import { handleSocketMessage, RESPONSE, AUTH_TYPE } from './config/config';
+import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声明，ts会提示any类型警告，但不影响功能
+import { handleSocketMessage, AUTH_TYPE } from './config/config';
 import { DataCenter } from '../datacenter/datacenter';
+
+/**
+ * SocketManager 是用于管理Socket连接的单例类
+ * 负责Socket的初始化、协议加载、消息处理等功能
+ */
 export class SocketManager implements handleSocketMessage {
     private socket: Socket | null = null;
     private request: any;
@@ -83,18 +88,18 @@ export class SocketManager implements handleSocketMessage {
         const loginInfo = DataCenter.instance.getLoginInfo();
         log('SocketManager loginInfo', loginInfo);
         const contentInfo = {
-            username: loginInfo.username,
-            userid: loginInfo.userid,
-            password: loginInfo.token,
+            username: loginInfo?.username,
+            userid: loginInfo?.userid,
+            password: loginInfo?.token,
             device: 'pc',
             version: '0.0.1',
-            subid: loginInfo.subid,
+            subid: loginInfo?.subid,
         }
         this.sendToServer('auth', contentInfo, (data: any) => {
             if (data.code == AUTH_TYPE.SUCCESS) {
                 this.iscontent = true;
                 log('认证成功');
-                DataCenter.instance.addSubid(loginInfo.subid + 1);
+                DataCenter.instance.addSubid(loginInfo?.subid ?? 0 + 1);
                 this.startHeartBeat();
                 this.callBackAuth && this.callBackAuth(true);
             } else {

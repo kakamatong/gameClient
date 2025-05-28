@@ -1,5 +1,5 @@
 import CryptoJS from '../frameworks/libs/crypto-js-4.2.0/crypto-js.js';
-import { _decorator, Component, log,sys,assetManager,BufferAsset} from 'cc';
+import { _decorator, log} from 'cc';
 import { Socket } from '../frameworks/socket/socket';
 import { handleSocketMessage } from '../frameworks/config/config';
 import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../frameworks/utils/utils';

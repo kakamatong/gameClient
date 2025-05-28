@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, log,assetManager,BufferAsset } from 'cc';
+import { _decorator, log } from 'cc';
 import { handleSocketMessage } from '../config/config';
 const { ccclass, property } = _decorator;
 
@@ -35,7 +35,6 @@ export class Socket {
         // 连接成功
         this.socket.onopen = (event) => {
             log('WebSocket 连接成功！');
-            this.reconnectAttempts = 0;
 
             this.handleSocketMessage && this.handleSocketMessage.onOpen(event);
         };
@@ -107,6 +106,9 @@ export class Socket {
 
     // 检查连接状态
     public isConnected(): boolean {
-        return this.socket && this.socket.readyState === WebSocket.OPEN;
+        if(!this.socket){
+            return false;
+        }
+        return this.socket.readyState === WebSocket.OPEN ;
     }
 }
