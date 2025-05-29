@@ -46,7 +46,8 @@ export enum ENUM_USER_STATUS {
 }
 
 export interface USER_STATUS {
-    gameid: number;
+    roomid?: number;
+    gameid?: number;
     status: ENUM_USER_STATUS;
 }
 
