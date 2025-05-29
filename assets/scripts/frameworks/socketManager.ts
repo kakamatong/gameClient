@@ -172,6 +172,13 @@ export class SocketManager implements handleSocketMessage {
         this.onServerReport.set(name, callBack);
     }
 
+    // 移除服务器广播监听
+    removeServerReport(name: string) {
+        if (this.onServerReport) {
+            this.onServerReport.delete(name);
+        }
+    }
+
     onReportContent(message: any) {
         if (message.result.code) {
             this.iscontent = true;

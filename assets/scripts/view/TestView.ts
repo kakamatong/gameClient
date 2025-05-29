@@ -1,6 +1,6 @@
 import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
-import {AddEventListener,RemoveEventListener} from '../frameworks/framework'
+import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
 import {Match} from '../modules/match';
 import { SocketManager } from '../frameworks/socketManager';
@@ -24,12 +24,14 @@ export class TestView extends FGUITestView {
         AddEventListener('userData',this.showUserInfo, this);
         AddEventListener('userStatus',this.showUserStatus, this);
         SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
+        SocketManager.instance.addServerReport("reportMatch", this.onReportMatch.bind(this));
     }
 
     onDisable(){
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
+        SocketManager.instance.removeServerReport("reportUserStatus");
     }
 
     onShow(){
@@ -82,5 +84,12 @@ export class TestView extends FGUITestView {
 
     updateUserStatus(data:any){
         this.UI_TXT_USER_STATUS.text = `${data.status}`
+    }
+
+    onReportMatch(data:any){
+        if(data.code == 0){
+            // 匹配成功
+            console.log(LogColors.green('匹配成功'));
+        }
     }
 }
