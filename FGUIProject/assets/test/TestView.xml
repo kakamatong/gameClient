@@ -18,8 +18,13 @@
     </component>
     <text id="n4_sndo" name="UI_INPUT_ACC" xy="188,58" size="131,39" fontSize="22" color="#ffffff" autoSize="none" text="test001" input="true"/>
     <text id="n5_sndo" name="UI_INPUT_PASS" xy="355,56" size="139,41" fontSize="22" color="#ffffff" autoSize="none" text="wlj123456" input="true"/>
+    <component id="n12_geze" name="UI_BTN_READY" src="q7362" fileName="comp/compBtnScale09.xml" xy="75,339">
+      <Button title="准备" titleColor="#ffffff" titleFontSize="22"/>
+    </component>
     <text id="n6_essk" name="UI_TXT_NICKNAME" xy="189,131" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n7_essk" name="UI_TXT_USERID" xy="334,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n10_quog" name="UI_TXT_USER_STATUS" xy="483,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <text id="n13_geze" name="UI_TXT_PLAYER_STATUS_0" xy="189,339" size="201,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <text id="n14_geze" name="UI_TXT_PLAYER_STATUS_1" xy="426,338" size="229,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
   </displayList>
 </component>

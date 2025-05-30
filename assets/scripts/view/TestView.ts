@@ -108,4 +108,16 @@ export class TestView extends FGUITestView {
             console.log(LogColors.red(data.msg));
         }
     }
+
+    onBtnReady():void {
+        SocketManager.instance.sendToServer('gameReady', { gameid: this._gameid, roomid: this._roomid }, this.respReady.bind(this))
+    }
+
+    respReady(data: any): void {
+        if(data.code == 0){
+            console.log(LogColors.green(data.msg));
+        }else{
+            console.log(LogColors.red(data.msg));
+        }
+    }
 }
