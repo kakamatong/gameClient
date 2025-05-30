@@ -11,6 +11,8 @@ import { DataCenter } from '../datacenter/datacenter';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
+    private _gameid = 0;
+    private _roomid = 0;
     constructor(){
         super();
         console.log('TestView constructor');
@@ -89,7 +91,21 @@ export class TestView extends FGUITestView {
     onReportMatch(data:any){
         if(data.code == 0){
             // 匹配成功
+            this._gameid = data.gameid;
+            this._roomid = data.roomid;
             console.log(LogColors.green('匹配成功'));
+        }
+    }
+
+    onBtnEnterGame(): void {
+        SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
+    }
+
+    respConnectGame(data: any): void {
+        if(data.code == 0){
+            console.log(LogColors.green(data.msg));
+        }else{
+            console.log(LogColors.red(data.msg));
         }
     }
 }
