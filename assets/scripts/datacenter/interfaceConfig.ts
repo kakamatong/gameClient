@@ -51,3 +51,7 @@ export interface USER_STATUS {
     status: ENUM_USER_STATUS;
 }
 
+export enum LOCAL_KEY {
+    LOGIN_INFO = 'loginInfo',
+}
+

@@ -1,4 +1,5 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY } from "./interfaceConfig";
+import { sys } from "cc";
 
 export class DataCenter {
     private _loginInfo: LOGIN_INFO | null = null;
@@ -9,6 +10,7 @@ export class DataCenter {
 
     private _userStatus: USER_STATUS | null = null;
 
+    private LOCAL_KEY_LOGIN_INFO = 'loginInfo';
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {
@@ -18,8 +20,16 @@ export class DataCenter {
         return this._instance;
     }
 
+    private constructor(){
+        const loginInfo = sys.localStorage.getItem(LOCAL_KEY.LOGIN_INFO);
+        if(loginInfo){
+            this._loginInfo = JSON.parse(loginInfo);
+        }
+    }
+
     setLoginInfo(info: LOGIN_INFO) {
         this._loginInfo = info;
+        sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(info));
     }
 
     getLoginInfo():LOGIN_INFO | null {
@@ -28,6 +38,7 @@ export class DataCenter {
 
     addSubid(subid:number){
         this._loginInfo && (this._loginInfo.subid = subid);
+        sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(this._loginInfo));
     }
 
     get userid():number{
