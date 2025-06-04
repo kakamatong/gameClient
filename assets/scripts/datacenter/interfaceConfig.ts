@@ -55,3 +55,27 @@ export enum LOCAL_KEY {
     LOGIN_INFO = 'loginInfo',
 }
 
+// seat 2 : integer
+// status 3 : integer #加载中，进入中，准备中，短线中
+// userid 4 : integer
+// sex 5 : integer
+// nickname 6 : string
+// headurl 7 : string
+// ip 8 : string
+// province 9 : string
+// city 10 : string
+// ext 11 : string
+export interface GAME_PLAYER_INFO {
+    userid: number;
+    nickname: string;
+    headurl: string;
+    sex: number;
+    seat: number;
+    status: number;
+    ip: string;
+    province: string;
+    city: string;
+    ext: string;
+
+}
+
