@@ -1,6 +1,7 @@
 import { TestView } from "./TestView";
-
+import { GameView } from "./GameView";
 
 export const ViewConfig = {
-    TestView: TestView
+    TestView: TestView,
+    GameView: GameView
 }

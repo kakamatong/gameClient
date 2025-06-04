@@ -4,7 +4,7 @@ import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/fra
 import {Auth} from '../modules/auth';
 import {Match} from '../modules/match';
 import { SocketManager } from '../frameworks/socketManager';
-import * as fgui from 'fairygui-cc';
+import { UIManager } from '../frameworks/uimanager';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
 import { DataCenter } from '../datacenter/datacenter';
@@ -94,6 +94,8 @@ export class TestView extends FGUITestView {
             this._gameid = data.gameid;
             this._roomid = data.roomid;
             console.log(LogColors.green('匹配成功'));
+
+            UIManager.instance.showView('GameView');
         }
     }
 
@@ -110,6 +112,7 @@ export class TestView extends FGUITestView {
     }
 
     onBtnReady():void {
+        //UIManager.instance.showView('GameView');
         SocketManager.instance.sendToServer('gameReady', { gameid: this._gameid, roomid: this._roomid }, this.respReady.bind(this))
     }
 
