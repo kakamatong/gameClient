@@ -21,15 +21,15 @@ export class DataCenter {
     }
 
     private constructor(){
-        // const loginInfo = sys.localStorage.getItem(LOCAL_KEY.LOGIN_INFO);
-        // if(loginInfo){
-        //     this._loginInfo = JSON.parse(loginInfo);
-        // }
+        const loginInfo = sys.localStorage.getItem(LOCAL_KEY.LOGIN_INFO);
+        if(loginInfo){
+            this._loginInfo = JSON.parse(loginInfo);
+        }
     }
 
     setLoginInfo(info: LOGIN_INFO) {
         this._loginInfo = info;
-        //sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(info));
+        sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(info));
     }
 
     getLoginInfo():LOGIN_INFO | null {
@@ -38,7 +38,7 @@ export class DataCenter {
 
     addSubid(subid:number){
         this._loginInfo && (this._loginInfo.subid = subid);
-        //sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(this._loginInfo));
+        sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(this._loginInfo));
     }
 
     get userid():number{
