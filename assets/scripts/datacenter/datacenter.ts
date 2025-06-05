@@ -10,7 +10,6 @@ export class DataCenter {
 
     private _userStatus: USER_STATUS | null = null;
 
-    private LOCAL_KEY_LOGIN_INFO = 'loginInfo';
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {

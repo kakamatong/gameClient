@@ -2,21 +2,18 @@ import { _decorator} from 'cc';
 import FGUIGameView from '../fgui/test/FGUIGameView';
 import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
-import { GAME_PLAYER_INFO } from '../datacenter/interfaceConfig';
-import { DataCenter } from '../datacenter/datacenter';
-
-import * as fgui from "fairygui-cc";
+import { DataCenter } from '../datacenter/datacenter'
+import { GameData } from '../datacenter/gamedata';
+import { SELF_LOCAL } from '../datacenter/interfaceGameConfig';
 const { ccclass, property } = _decorator;
-const SELF_LOCAL = 1;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
-    private _maxPlayer = 2;
-    private _playerList: Array<GAME_PLAYER_INFO> = [];
     constructor(){
         super();
     }
 
     onEnable(){
+        GameData.instance.maxPlayer = 2;
         SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
     }
@@ -42,12 +39,8 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    getSelfSeat(): number {
-        return this._playerList[SELF_LOCAL].seat;
-    }
-
     showPlayerInfo(seat:number):void{
-        const playerInfo = this._playerList[seat];
+        const playerInfo = GameData.instance.playerList[seat];
         if(playerInfo){
             if(seat == SELF_LOCAL){
                 this.UI_TXT_NICKNAME_1.text = playerInfo.nickname;
@@ -60,31 +53,15 @@ export class GameView extends FGUIGameView {
     }
 
     onReportGamePlayerInfo(data: any): void {
-        console.log(LogColors.green(data.msg));
         const selfid = DataCenter.instance.userid;
         if(data.userid == selfid){
-            this._playerList[SELF_LOCAL] = data;
+            GameData.instance.playerList[SELF_LOCAL] = data;
             this.showPlayerInfo(SELF_LOCAL);
         }else{
-            const local = this.seat2local(data.seat);
-            this._playerList[local] = data;
+            const local = GameData.instance.seat2local(data.seat);
+            GameData.instance.playerList[local] = data;
             this.showPlayerInfo(local);
         }
-    }
-
-    seat2local(seat: number): number {
-        const selfSeat = this.getSelfSeat();
-        const selfLocal = SELF_LOCAL
-        const d = (seat - selfSeat) % this._maxPlayer;
-        if(d > 0){
-            return selfLocal + d;
-        }else{
-            return selfLocal - d;
-        }
-    }
-
-    local2seat(local: number): number {
-        return this._playerList[local].seat;
     }
     
 }
