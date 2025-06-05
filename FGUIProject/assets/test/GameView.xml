@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1688,780">
+  <controller name="ctrl_out" pages="0,隐藏,1,显示" selected="1"/>
   <displayList>
     <graph id="n7_u4cy" name="n7" xy="0,0" size="1688,780" type="rect" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -28,6 +29,27 @@
     </text>
     <text id="n8_o7cx" name="UI_TXT_GAME_STEP" xy="56,48" size="10,34" fontSize="24" color="#ffffff" text="">
       <relation target="" sidePair="left-left,top-top"/>
+    </text>
+    <component id="n9_o7cx" name="KW_BTN_PAPER" src="q7362" fileName="comp/compBtnScale09.xml" xy="545,471" size="112,61">
+      <gearDisplay controller="ctrl_out" pages="1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+      <Button title="剪刀" titleColor="#ffffff" titleFontSize="30"/>
+    </component>
+    <component id="n10_o7cx" name="KW_BTN_ROCK" src="q7362" fileName="comp/compBtnScale09.xml" xy="765,471" size="112,61">
+      <gearDisplay controller="ctrl_out" pages="1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+      <Button title="石头" titleColor="#ffffff" titleFontSize="30"/>
+    </component>
+    <component id="n11_o7cx" name="KW_BTN_SCISSORS" src="q7362" fileName="comp/compBtnScale09.xml" xy="985,471" size="112,61">
+      <gearDisplay controller="ctrl_out" pages="1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+      <Button title="布" titleColor="#ffffff" titleFontSize="30"/>
+    </component>
+    <text id="n12_o7cx" name="UI_TXT_OUT_HAND_1" xy="839,395" pivot="0.5,0.5" size="10,50" fontSize="37" color="#ffffff" align="center" text="">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <text id="n13_o7cx" name="UI_TXT_OUT_HAND_2" xy="839,208" pivot="0.5,0.5" size="10,50" fontSize="37" color="#ffffff" align="center" text="">
+      <relation target="" sidePair="center-center,middle-middle"/>
     </text>
   </displayList>
 </component>

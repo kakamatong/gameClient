@@ -4,6 +4,7 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUIGameView extends fgui.GComponent {
 
+	public ctrl_out:fgui.Controller;
 	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
 	public UI_TXT_USERID_2:fgui.GTextField;
@@ -11,6 +12,11 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_USERID_1:fgui.GTextField;
 	public UI_TXT_GAME_MSG:fgui.GTextField;
 	public UI_TXT_GAME_STEP:fgui.GTextField;
+	public KW_BTN_PAPER:fgui.GButton;
+	public KW_BTN_ROCK:fgui.GButton;
+	public KW_BTN_SCISSORS:fgui.GButton;
+	public UI_TXT_OUT_HAND_1:fgui.GTextField;
+	public UI_TXT_OUT_HAND_2:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -20,6 +26,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_out = this.getControllerAt(0);
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(3));
@@ -28,6 +35,11 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_USERID_1 = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_GAME_MSG = <fgui.GTextField>(this.getChildAt(7));
 		this.UI_TXT_GAME_STEP = <fgui.GTextField>(this.getChildAt(8));
+		this.KW_BTN_PAPER = <fgui.GButton>(this.getChildAt(9));
+		this.KW_BTN_ROCK = <fgui.GButton>(this.getChildAt(10));
+		this.KW_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(11));
+		this.UI_TXT_OUT_HAND_1 = <fgui.GTextField>(this.getChildAt(12));
+		this.UI_TXT_OUT_HAND_2 = <fgui.GTextField>(this.getChildAt(13));
 	}
 	onBtnClose():void{};
 }
