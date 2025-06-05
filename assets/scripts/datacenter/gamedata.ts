@@ -1,8 +1,9 @@
-import { GAME_PLAYER_INFO,SELF_LOCAL } from "./interfaceGameConfig";
+import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP } from "./interfaceGameConfig";
 
 export class GameData {
     private _playerList: Array<GAME_PLAYER_INFO> = [];
     private _maxPlayer = 2;
+    private _gameStep: ENUM_GAME_STEP = ENUM_GAME_STEP.NONE;
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -13,6 +14,14 @@ export class GameData {
 
     private constructor(){
         
+    }
+
+    get gameStep(): ENUM_GAME_STEP {
+        return this._gameStep;
+    }
+
+    set gameStep(step: ENUM_GAME_STEP){
+        this._gameStep = step;
     }
 
     get maxPlayer(): number {

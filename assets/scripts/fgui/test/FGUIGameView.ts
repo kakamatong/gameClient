@@ -10,6 +10,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_NICKNAME_1:fgui.GTextField;
 	public UI_TXT_USERID_1:fgui.GTextField;
 	public UI_TXT_GAME_MSG:fgui.GTextField;
+	public UI_TXT_GAME_STEP:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -26,6 +27,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_NICKNAME_1 = <fgui.GTextField>(this.getChildAt(5));
 		this.UI_TXT_USERID_1 = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_GAME_MSG = <fgui.GTextField>(this.getChildAt(7));
+		this.UI_TXT_GAME_STEP = <fgui.GTextField>(this.getChildAt(8));
 	}
 	onBtnClose():void{};
 }

@@ -4,7 +4,7 @@ import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL } from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP} from '../datacenter/interfaceGameConfig';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -16,6 +16,7 @@ export class GameView extends FGUIGameView {
         GameData.instance.maxPlayer = 2;
         SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
+        SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
     }
 
     onDisable(){
@@ -61,6 +62,24 @@ export class GameView extends FGUIGameView {
             const local = GameData.instance.seat2local(data.seat);
             GameData.instance.playerList[local] = data;
             this.showPlayerInfo(local);
+        }
+    }
+
+    onReportGameStep(data: any): void {
+        GameData.instance.gameStep = data.stepid;
+        switch(GameData.instance.gameStep){
+            case ENUM_GAME_STEP.START:
+                this.UI_TXT_GAME_STEP.text = '游戏阶段：开始';
+                break;
+            case ENUM_GAME_STEP.OUT_HAND:
+                this.UI_TXT_GAME_STEP.text = '游戏阶段：出招';
+                break;
+            case ENUM_GAME_STEP.ROUND_END:
+                this.UI_TXT_GAME_STEP.text = '游戏阶段：回合结束';
+                break;
+            case ENUM_GAME_STEP.GAME_END:
+                this.UI_TXT_GAME_STEP.text = '游戏阶段：游戏结束';
+                break;
         }
     }
     
