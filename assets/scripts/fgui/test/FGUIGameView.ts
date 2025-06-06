@@ -12,11 +12,12 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_USERID_1:fgui.GTextField;
 	public UI_TXT_GAME_MSG:fgui.GTextField;
 	public UI_TXT_GAME_STEP:fgui.GTextField;
-	public KW_BTN_PAPER:fgui.GButton;
-	public KW_BTN_ROCK:fgui.GButton;
-	public KW_BTN_SCISSORS:fgui.GButton;
+	public UI_BTN_PAPER:fgui.GButton;
+	public UI_BTN_ROCK:fgui.GButton;
+	public UI_BTN_SCISSORS:fgui.GButton;
 	public UI_TXT_OUT_HAND_1:fgui.GTextField;
 	public UI_TXT_OUT_HAND_2:fgui.GTextField;
+	public UI_BTN_SURE:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -35,11 +36,20 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_USERID_1 = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_GAME_MSG = <fgui.GTextField>(this.getChildAt(7));
 		this.UI_TXT_GAME_STEP = <fgui.GTextField>(this.getChildAt(8));
-		this.KW_BTN_PAPER = <fgui.GButton>(this.getChildAt(9));
-		this.KW_BTN_ROCK = <fgui.GButton>(this.getChildAt(10));
-		this.KW_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(11));
+		this.UI_BTN_PAPER = <fgui.GButton>(this.getChildAt(9));
+		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
+		this.UI_BTN_ROCK = <fgui.GButton>(this.getChildAt(10));
+		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
+		this.UI_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(11));
+		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
 		this.UI_TXT_OUT_HAND_1 = <fgui.GTextField>(this.getChildAt(12));
 		this.UI_TXT_OUT_HAND_2 = <fgui.GTextField>(this.getChildAt(13));
+		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(14));
+		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
 	}
 	onBtnClose():void{};
+	onBtnPaper():void{};
+	onBtnRock():void{};
+	onBtnScissors():void{};
+	onBtnSure():void{};
 }

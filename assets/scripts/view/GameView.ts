@@ -4,10 +4,11 @@ import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE} from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG} from '../datacenter/interfaceGameConfig';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
+    private _selectOutHand:number = 0;
     constructor(){
         super();
     }
@@ -18,6 +19,7 @@ export class GameView extends FGUIGameView {
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
         SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
         SocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
+        SocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
     }
 
     onDisable(){
@@ -105,6 +107,50 @@ export class GameView extends FGUIGameView {
             }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
                 //this.UI_TXT_OUT_HAND_2.text = '出招';
             }
+        }
+    }
+
+    getOutHandCNName(flag:number):string{
+        if(flag == HAND_FLAG.ROCK){
+            return '石头';
+        }else if(flag == HAND_FLAG.PAPER){
+            return '剪刀';
+        }else if(flag == HAND_FLAG.SCISSORS){
+            return '布';
+        }
+        return '';
+    }
+
+    onBtnPaper(){
+        console.log('onBtnPaper');
+        this.UI_TXT_OUT_HAND_1.text = this.getOutHandCNName(HAND_FLAG.PAPER);
+        this._selectOutHand = HAND_FLAG.PAPER;
+    }
+
+    onBtnRock(){
+        console.log('onBtnRock');
+        this.UI_TXT_OUT_HAND_1.text = this.getOutHandCNName(HAND_FLAG.ROCK);
+        this._selectOutHand = HAND_FLAG.ROCK;
+    }
+
+    onBtnScissors(){
+        console.log('onBtnScissors');
+        this.UI_TXT_OUT_HAND_1.text = this.getOutHandCNName(HAND_FLAG.SCISSORS);
+        this._selectOutHand = HAND_FLAG.SCISSORS;
+    }
+
+    onBtnSure(){
+        console.log('onBtnSure');
+        SocketManager.instance.sendToServer('gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
+    }
+
+    onReportGameOutHand(data: any): void {
+        console.log('onReportGameOutHand', data);
+        const local = GameData.instance.seat2local(data.seat);
+        if(local == SELF_LOCAL){
+            this.UI_TXT_OUT_HAND_1.text = this.getOutHandCNName(data.flag);
+        }else if(local == 2){
+            this.UI_TXT_OUT_HAND_2.text = this.getOutHandCNName(data.flag);
         }
     }
     

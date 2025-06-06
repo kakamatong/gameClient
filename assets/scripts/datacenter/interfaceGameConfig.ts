@@ -26,4 +26,10 @@ export enum PLAYER_ATTITUDE {
     OUT_HAND = 2, // 出招
 }
 
+export const HAND_FLAG = {
+    ROCK: 0x0001, // 石头
+    PAPER: 0x0010, // 剪刀
+    SCISSORS: 0x0100, // 布
+}
+
 export const SELF_LOCAL = 1;

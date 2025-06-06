@@ -10,6 +10,8 @@ export class DataCenter {
 
     private _userStatus: USER_STATUS | null = null;
 
+    private _gameid: number = 0;
+    private _roomid: number = 0;
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {
@@ -66,6 +68,22 @@ export class DataCenter {
 
     get userStatus(): USER_STATUS | null  {
         return this._userStatus;
+    }
+
+    set gameid(id:number) {
+        this._gameid = id;
+    }
+
+    get gameid():number {
+        return this._gameid;
+    }
+
+    set roomid(id:number) {
+        this._roomid = id;
+    }
+
+    get roomid():number {
+        return this._roomid;
     }
 
 }
