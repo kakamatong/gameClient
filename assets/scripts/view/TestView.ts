@@ -95,29 +95,4 @@ export class TestView extends FGUITestView {
             UIManager.instance.showView('GameView');
         }
     }
-
-    onBtnEnterGame(): void {
-        SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
-    }
-
-    respConnectGame(data: any): void {
-        if(data.code == 0){
-            console.log(LogColors.green(data.msg));
-        }else{
-            console.log(LogColors.red(data.msg));
-        }
-    }
-
-    onBtnReady():void {
-        //UIManager.instance.showView('GameView');
-        SocketManager.instance.sendToServer('gameReady', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid }, this.respReady.bind(this))
-    }
-
-    respReady(data: any): void {
-        if(data.code == 0){
-            console.log(LogColors.green(data.msg));
-        }else{
-            console.log(LogColors.red(data.msg));
-        }
-    }
 }
