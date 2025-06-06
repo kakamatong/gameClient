@@ -59,4 +59,8 @@ export class GameData {
         return this.playerList[local].seat;
     }
 
+    getPlayerBySeat(seat: number): GAME_PLAYER_INFO {
+        return this.playerList[this.seat2local(seat)];
+    }
+
 }

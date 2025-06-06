@@ -4,7 +4,7 @@ import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP} from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE} from '../datacenter/interfaceGameConfig';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -17,6 +17,7 @@ export class GameView extends FGUIGameView {
         SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
         SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
+        SocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
     }
 
     onDisable(){
@@ -80,6 +81,30 @@ export class GameView extends FGUIGameView {
             case ENUM_GAME_STEP.GAME_END:
                 this.UI_TXT_GAME_STEP.text = '游戏阶段：游戏结束';
                 break;
+        }
+    }
+
+    onReportGamePlayerAttitude(data: any): void {
+        console.log('onReportGamePlayerAttitude', data);
+        const local = GameData.instance.seat2local(data.seat);
+        const player = GameData.instance.getPlayerBySeat(data.seat);
+        if(local == SELF_LOCAL){
+            if(data.att == PLAYER_ATTITUDE.THINKING){
+                this.ctrl_out.setSelectedIndex(1);
+            }else if(data.att == PLAYER_ATTITUDE.READY){
+                this.ctrl_out.setSelectedIndex(0);
+            }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
+                this.ctrl_out.setSelectedIndex(0);
+            }
+
+        }else if(local == 2){
+            if(data.att == PLAYER_ATTITUDE.THINKING){
+                this.UI_TXT_OUT_HAND_2.text = '思考';
+            }else if(data.att == PLAYER_ATTITUDE.READY){
+                this.UI_TXT_OUT_HAND_2.text = '准备';
+            }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
+                //this.UI_TXT_OUT_HAND_2.text = '出招';
+            }
         }
     }
     

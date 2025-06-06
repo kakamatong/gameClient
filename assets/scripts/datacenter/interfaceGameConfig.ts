@@ -20,4 +20,10 @@ export enum ENUM_GAME_STEP {
     GAME_END = 4,
 }
 
+export enum PLAYER_ATTITUDE {
+    THINKING = 0, // 思考
+    READY = 1, // 准备
+    OUT_HAND = 2, // 出招
+}
+
 export const SELF_LOCAL = 1;
