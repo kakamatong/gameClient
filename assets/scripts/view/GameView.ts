@@ -20,6 +20,17 @@ export class GameView extends FGUIGameView {
         SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
         SocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
         SocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
+        SocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
+    }
+
+    onReportGameRoundResult(data: any): void {
+        console.log('onReportGameRoundResult', data);
+
+        if(data.info.seat == GameData.instance.getSelfSeat()){
+            this.UI_TXT_GAME_MSG.text = '本局胜利';
+        }else{
+            this.UI_TXT_GAME_MSG.text = '本局失败';
+        }
     }
 
     onDisable(){
