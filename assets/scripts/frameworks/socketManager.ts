@@ -93,10 +93,10 @@ export class SocketManager implements handleSocketMessage {
             password: loginInfo?.token,
             device: 'pc',
             version: '0.0.1',
-            channel: 100000,
+            channel: 'account',
             subid: loginInfo?.subid,
         }
-        this.sendToServer('auth', contentInfo, (data: any) => {
+        this.sendToServer('login', contentInfo, (data: any) => {
             if (data.code == AUTH_TYPE.SUCCESS) {
                 this.iscontent = true;
                 log(LogColors.green('认证成功'));
