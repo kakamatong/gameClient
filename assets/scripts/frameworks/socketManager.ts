@@ -93,6 +93,7 @@ export class SocketManager implements handleSocketMessage {
             password: loginInfo?.token,
             device: 'pc',
             version: '0.0.1',
+            channel: 100000,
             subid: loginInfo?.subid,
         }
         this.sendToServer('auth', contentInfo, (data: any) => {
