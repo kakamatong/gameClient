@@ -10,6 +10,10 @@ export class Match {
             console.log(LogColors.green(result.msg))
         } else {
             result && console.log(LogColors.red(result.msg))
+            // 已经在游戏中，直接进入
+            if(result.code == 3){
+                //console.log(LogColors.red(result.msg))
+            }
         }
     }
 }

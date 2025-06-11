@@ -32,6 +32,7 @@ export class TestView extends FGUITestView {
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
         SocketManager.instance.removeServerReport("reportUserStatus");
+        SocketManager.instance.removeServerReport("reportMatch");
     }
 
     onShow(){
@@ -55,7 +56,8 @@ export class TestView extends FGUITestView {
 
     onBtnClose(){
         console.log('onBtnClose');
-        this.dispose();
+        //this.dispose();
+        UIManager.instance.hideView('TestView');
     }
 
     onDestroy(){
@@ -94,5 +96,9 @@ export class TestView extends FGUITestView {
 
             UIManager.instance.showView('GameView');
         }
+    }
+
+    onBtnShow(): void {
+        UIManager.instance.showView('GameView');
     }
 }

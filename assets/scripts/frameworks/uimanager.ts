@@ -43,10 +43,11 @@ export class UIManager {
         if (this.viewStack.has(viewName)) {
             const view = this.viewStack.get(viewName);
             view.dispose();
+            this.viewStack.delete(viewName);
         }
     }
 
-     getViewClass(viewName: string) {
+    getViewClass(viewName: string) {
         return this.viewConfig[viewName];
     }
 

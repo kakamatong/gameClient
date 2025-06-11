@@ -18,5 +18,8 @@
     <text id="n6_essk" name="UI_TXT_NICKNAME" xy="189,131" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n7_essk" name="UI_TXT_USERID" xy="334,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n10_quog" name="UI_TXT_USER_STATUS" xy="483,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <component id="n11_ep90" name="UI_BTN_SHOW" src="q7362" fileName="comp/compBtnScale09.xml" xy="79,408">
+      <Button title="测试" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
   </displayList>
 </component>

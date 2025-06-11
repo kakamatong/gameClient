@@ -13,6 +13,7 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_TXT_NICKNAME:fgui.GTextField;
 	public UI_TXT_USERID:fgui.GTextField;
 	public UI_TXT_USER_STATUS:fgui.GTextField;
+	public UI_BTN_SHOW:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -35,9 +36,12 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(7));
 		this.UI_TXT_USER_STATUS = <fgui.GTextField>(this.getChildAt(8));
+		this.UI_BTN_SHOW = <fgui.GButton>(this.getChildAt(9));
+		this.UI_BTN_SHOW.onClick(this.onBtnShow, this);
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
 	onBtnCon():void{};
 	onBtnMatch():void{};
+	onBtnShow():void{};
 }

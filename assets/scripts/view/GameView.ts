@@ -5,6 +5,7 @@ import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG} from '../datacenter/interfaceGameConfig';
+import { UIManager } from '../frameworks/uimanager';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -34,7 +35,11 @@ export class GameView extends FGUIGameView {
     }
 
     onDisable(){
-
+        SocketManager.instance.removeServerReport("reportGamePlayerInfo");
+        SocketManager.instance.removeServerReport("reportGameStep");
+        SocketManager.instance.removeServerReport("reportGamePlayerAttitude");
+        SocketManager.instance.removeServerReport("reportGameOutHand");
+        SocketManager.instance.removeServerReport("reportGameRoundResult");
     }
 
     onShow(){
@@ -43,7 +48,8 @@ export class GameView extends FGUIGameView {
 
     onBtnClose(){
         console.log('onBtnClose');
-        this.dispose();
+        //this.dispose();
+        UIManager.instance.hideView('GameView');
     }
 
     respConnectGame(data: any): void {
