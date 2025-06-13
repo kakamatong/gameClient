@@ -8,6 +8,7 @@ import { UIManager } from '../frameworks/uimanager';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
 import { DataCenter } from '../datacenter/datacenter';
+import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -81,11 +82,20 @@ export class TestView extends FGUITestView {
     }
 
     showUserStatus(data:any){
-        this.UI_TXT_USER_STATUS.text = `${data.status}`
+        this.UI_TXT_USER_STATUS.text = this.getStatusText(data.status)
+        if (data.status == ENUM_USER_STATUS.GAMEING){
+            DataCenter.instance.gameid = data.gameid;
+            DataCenter.instance.roomid = data.roomid;
+            console.log(LogColors.green('返回房间'));
+
+            UIManager.instance.showView('GameView');
+        }else{
+
+        }
     }
 
     updateUserStatus(data:any){
-        this.UI_TXT_USER_STATUS.text = `${data.status}`
+        this.UI_TXT_USER_STATUS.text = this.getStatusText(data.status)
     }
 
     onReportMatch(data:any){
@@ -100,5 +110,29 @@ export class TestView extends FGUITestView {
 
     onBtnShow(): void {
         UIManager.instance.showView('GameView');
+    }
+
+    getStatusText(status:number):string{
+        switch(status){
+            case ENUM_USER_STATUS.GAMEING:
+                return '游戏中';
+            case ENUM_USER_STATUS.MATCHING:
+                return '匹配中';
+            case ENUM_USER_STATUS.READY:
+                return '准备中';
+            case ENUM_USER_STATUS.OFFLINE:
+                return '离线';
+            case ENUM_USER_STATUS.ONLINE:
+                return '在线';
+            case ENUM_USER_STATUS.TEAMING:
+                return '匹配中';
+            case ENUM_USER_STATUS.WATCH:
+                return '观战中';
+            case ENUM_USER_STATUS.DISCONNECT:
+                return '断线';
+            default:
+                return '未知';
+        }
+        return '';
     }
 }
