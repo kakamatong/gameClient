@@ -4,7 +4,7 @@ import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG} from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS} from '../datacenter/interfaceGameConfig';
 import { UIManager } from '../frameworks/uimanager';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
@@ -66,10 +66,25 @@ export class GameView extends FGUIGameView {
             if(seat == SELF_LOCAL){
                 this.UI_TXT_NICKNAME_1.text = playerInfo.nickname;
                 this.UI_TXT_USERID_1.text = playerInfo.userid.toString();
+                this.UI_TXT_STATUS_1.text = this.getPlayerStatusText(playerInfo.status);
             }else if (seat == 2){
                 this.UI_TXT_NICKNAME_2.text = playerInfo.nickname;
                 this.UI_TXT_USERID_2.text = playerInfo.userid.toString();
+                this.UI_TXT_STATUS_2.text = this.getPlayerStatusText(playerInfo.status);
             }
+        }
+    }
+
+    getPlayerStatusText(status:number):string{
+        switch(status){
+            case PLAYER_STATUS.LOADING:
+                return '加载中';
+            case PLAYER_STATUS.OFFLINE:
+                return '离线';
+            case PLAYER_STATUS.PLAYING:
+                return '游戏中';
+            default:
+                return '未知';
         }
     }
 

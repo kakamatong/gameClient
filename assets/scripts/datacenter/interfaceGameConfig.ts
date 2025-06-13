@@ -32,4 +32,10 @@ export const HAND_FLAG = {
     SCISSORS: 0x0100, // 布
 }
 
+export const PLAYER_STATUS = {
+    LOADING: 1,
+    OFFLINE: 2,
+    PLAYING: 3,
+}
+
 export const SELF_LOCAL = 1;

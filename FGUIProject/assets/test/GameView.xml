@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1688,780">
-  <controller name="ctrl_out" pages="0,隐藏,1,显示" selected="1"/>
+  <controller name="ctrl_out" pages="0,隐藏,1,显示" selected="0"/>
   <displayList>
     <graph id="n7_u4cy" name="n7" xy="0,0" size="1688,780" type="rect" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -18,7 +18,13 @@
     <text id="n3_u4cy" name="UI_TXT_USERID_2" xy="751,131" size="78,34" fontSize="24" color="#ffffff" autoSize="none" text="">
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>
+    <text id="n15_nxmw" name="UI_TXT_STATUS_2" xy="754,178" size="78,34" fontSize="24" color="#ffffff" autoSize="none" text="">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
     <text id="n4_u4cy" name="UI_TXT_NICKNAME_1" xy="812,638" size="10,34" fontSize="24" color="#ffffff" text="">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <text id="n16_nxmw" name="UI_TXT_STATUS_1" xy="782,728" size="78,34" fontSize="24" color="#ffffff" autoSize="none" text="">
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>
     <text id="n5_u4cy" name="UI_TXT_USERID_1" xy="780,694" size="78,34" fontSize="24" color="#ffffff" autoSize="none" text="">
