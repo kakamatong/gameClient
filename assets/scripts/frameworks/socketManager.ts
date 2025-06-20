@@ -44,7 +44,9 @@ export class SocketManager implements handleSocketMessage {
         if (callBack) {
             this.callBackContent = callBack;
         }
-
+        if (this.socket) {
+            this.socket.close();
+        }
         this.socket = this.initSocket(url);
     }
 

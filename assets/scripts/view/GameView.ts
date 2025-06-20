@@ -26,11 +26,17 @@ export class GameView extends FGUIGameView {
 
     onReportGameRoundResult(data: any): void {
         console.log('onReportGameRoundResult', data);
-
-        if(data.info.seat == GameData.instance.getSelfSeat()){
-            this.UI_TXT_GAME_MSG.text = '本局胜利';
-        }else{
-            this.UI_TXT_GAME_MSG.text = '本局失败';
+        if (data.info && data.info.length > 0){
+            for (let i = 0; i < data.info.length; i++){
+                const info = data.info[i];
+                if(info.seat == GameData.instance.getSelfSeat() && info.endResult == 1){
+                    this.UI_TXT_GAME_MSG.text = '本局胜利';
+                }else if(info.seat == GameData.instance.getSelfSeat() && info.endResult == 2){
+                    this.UI_TXT_GAME_MSG.text = '本局平';
+                }else{
+                    this.UI_TXT_GAME_MSG.text = '本局失败';
+                }
+            }
         }
     }
 

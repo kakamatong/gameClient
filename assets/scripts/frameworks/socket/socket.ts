@@ -111,4 +111,10 @@ export class Socket {
         }
         return this.socket.readyState === WebSocket.OPEN ;
     }
+
+    public close(){
+        if(this.socket){
+            this.socket.close();
+        }
+    }
 }
