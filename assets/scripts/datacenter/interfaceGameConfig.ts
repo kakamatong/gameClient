@@ -28,8 +28,8 @@ export enum PLAYER_ATTITUDE {
 
 export const HAND_FLAG = {
     ROCK: 0x0001, // 石头
-    PAPER: 0x0010, // 剪刀
-    SCISSORS: 0x0100, // 布
+    PAPER: 0x0010, // 布
+    SCISSORS: 0x0100, // 剪刀
 }
 
 export const PLAYER_STATUS = {

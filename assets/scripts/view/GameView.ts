@@ -152,9 +152,9 @@ export class GameView extends FGUIGameView {
         if(flag == HAND_FLAG.ROCK){
             return '石头';
         }else if(flag == HAND_FLAG.PAPER){
-            return '剪刀';
-        }else if(flag == HAND_FLAG.SCISSORS){
             return '布';
+        }else if(flag == HAND_FLAG.SCISSORS){
+            return '剪刀';
         }
         return '';
     }

@@ -39,7 +39,7 @@
     <component id="n9_o7cx" name="UI_BTN_PAPER" src="q7362" fileName="comp/compBtnScale09.xml" xy="545,471" size="112,61">
       <gearDisplay controller="ctrl_out" pages="1"/>
       <relation target="" sidePair="center-center,middle-middle"/>
-      <Button title="剪刀" titleColor="#ffffff" titleFontSize="30"/>
+      <Button title="布" titleColor="#ffffff" titleFontSize="30"/>
     </component>
     <component id="n10_o7cx" name="UI_BTN_ROCK" src="q7362" fileName="comp/compBtnScale09.xml" xy="765,471" size="112,61">
       <gearDisplay controller="ctrl_out" pages="1"/>
@@ -49,7 +49,7 @@
     <component id="n11_o7cx" name="UI_BTN_SCISSORS" src="q7362" fileName="comp/compBtnScale09.xml" xy="985,471" size="112,61">
       <gearDisplay controller="ctrl_out" pages="1"/>
       <relation target="" sidePair="center-center,middle-middle"/>
-      <Button title="布" titleColor="#ffffff" titleFontSize="30"/>
+      <Button title="剪刀" titleColor="#ffffff" titleFontSize="30"/>
     </component>
     <text id="n12_o7cx" name="UI_TXT_OUT_HAND_1" xy="839,395" pivot="0.5,0.5" size="10,50" fontSize="37" color="#ffffff" align="center" text="">
       <relation target="" sidePair="center-center,middle-middle"/>
