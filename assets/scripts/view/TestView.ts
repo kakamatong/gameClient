@@ -44,6 +44,9 @@ export class TestView extends FGUITestView {
         console.log('onBtnLogin');
         const func = (b:boolean)=>{
             console.log('login callback:', b);
+            if(b){
+                this.onBtnCon()
+            }
         }
         const acc = this.UI_INPUT_ACC.text ?? "";
         const pwd = this.UI_INPUT_PASS.text ?? "";
