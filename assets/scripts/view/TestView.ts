@@ -112,7 +112,17 @@ export class TestView extends FGUITestView {
     }
 
     onBtnShow(): void {
-        UIManager.instance.showView('GameView');
+        //UIManager.instance.showView('GameView');
+        const func = (result:any)=>{
+            const a = 1
+            console.log(result);
+            const b = 2
+            if(result && result.code == 1){
+                const res = JSON.parse(result.result);
+                console.log(res.info);
+            }
+        }
+        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "test", args: {a:'nihao', b:123} }, func)
     }
 
     getStatusText(status:number):string{
