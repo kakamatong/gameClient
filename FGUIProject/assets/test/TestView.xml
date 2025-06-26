@@ -21,5 +21,8 @@
     <component id="n11_ep90" name="UI_BTN_SHOW" src="q7362" fileName="comp/compBtnScale09.xml" xy="79,408">
       <Button title="测试" titleColor="#ffffff" titleFontSize="21"/>
     </component>
+    <component id="n12_wm22" name="UI_BTN_TEST1" src="q7362" fileName="comp/compBtnScale09.xml" xy="81,476">
+      <Button title="测试" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
   </displayList>
 </component>

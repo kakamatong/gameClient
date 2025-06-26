@@ -119,10 +119,24 @@ export class TestView extends FGUITestView {
             const b = 2
             if(result && result.code == 1){
                 const res = JSON.parse(result.result);
-                console.log(res.info);
+                console.log(res);
             }
         }
-        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "test", args: {a:'nihao', b:123} }, func)
+        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "getSignInInfo", args: {} }, func)
+    }
+
+    onBtnTest1():void{
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                const res = JSON.parse(result.result);
+                if(res.error){
+                    console.log(LogColors.red(res.error));
+                }else{
+                    console.log(LogColors.green(res.richTypes));
+                }
+            }
+        }
+        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "signIn", args: {} }, func)
     }
 
     getStatusText(status:number):string{
