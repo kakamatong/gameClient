@@ -26,6 +26,7 @@ export class TestView extends FGUITestView {
         AddEventListener('userStatus',this.showUserStatus, this);
         SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
         SocketManager.instance.addServerReport("reportMatch", this.onReportMatch.bind(this));
+        SocketManager.instance.addServerReport("reportUpdateRich", this.onReportUpdateRich.bind(this));
     }
 
     onDisable(){
@@ -76,6 +77,10 @@ export class TestView extends FGUITestView {
     onBtnMatch(): void {
         const match = new Match();
         match.req();
+    }
+
+    onReportUpdateRich(data:any){
+        console.log(data);
     }
 
     showUserInfo(data:any){
