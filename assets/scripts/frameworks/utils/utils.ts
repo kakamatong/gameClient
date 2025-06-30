@@ -713,3 +713,20 @@ export const customDESEncrypt = (data: string, key: CryptoJS.WordArray): number[
     const tokenB64Array = Array.from(tokenB64Bytes);
     return tokenB64Array;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// 去除字符串中的所有空格
+export const removeAllSpaces = (str: string): string => {
+    return str.replace(/\s/g, '');
+}
+
+// 数字格式化万和亿，保留两位小数
+export const formatNumber = (num: number): string => {
+    if (num >= 10000 && num < 100000000) {
+        return (num / 10000).toFixed(2) + '万';
+    } else if (num >= 100000000) {
+        return (num / 100000000).toFixed(2) + '亿';
+    } else {
+        return num.toFixed(2);
+    }
+}
