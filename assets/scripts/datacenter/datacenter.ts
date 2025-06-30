@@ -1,5 +1,5 @@
 import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY } from "./interfaceConfig";
-import { sys } from "cc";
+import { sys,resources } from "cc";
 
 export class DataCenter {
     private _loginInfo: LOGIN_INFO | null = null;
@@ -9,6 +9,8 @@ export class DataCenter {
     private _userRiches: Array<{richType:number, richNums:number}> = []
 
     private _userStatus: USER_STATUS | null = null;
+
+    private _appConfig: any = null;
 
     private _gameid: number = 0;
     private _roomid: number = 0;
@@ -26,6 +28,15 @@ export class DataCenter {
         if(loginInfo){
             this._loginInfo = JSON.parse(loginInfo);
         }
+
+    }
+
+    set appConfig(config:any){
+        this._appConfig = config
+    }
+
+    get appConfig(){
+        return this._appConfig
     }
 
     setLoginInfo(info: LOGIN_INFO) {

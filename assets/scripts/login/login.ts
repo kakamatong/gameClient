@@ -69,7 +69,7 @@ export class Login implements handleSocketMessage {
 
     initSocket() {
         this._socket = new Socket();
-        this._socket.init('ws://192.168.1.140:8002');
+        this._socket.init(DataCenter.instance.appConfig.loginUrl ?? "");
         this._socket.setHandleMessage(this);
     }
 

@@ -6,7 +6,7 @@ import { UserStatus } from './userStatus';
 export class Auth {
     req(){
         SocketManager.instance.loadProtocol(()=>{
-            SocketManager.instance.start("ws://192.168.1.140:9002",this.respContent.bind(this))
+            SocketManager.instance.start(DataCenter.instance.appConfig.authUrl ?? "",this.respContent.bind(this))
         })
     }
 
