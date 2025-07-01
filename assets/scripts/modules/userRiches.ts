@@ -1,5 +1,5 @@
 import { DataCenter } from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/socketManager';
+import { SocketManager } from '../frameworks/SocketManager';
 export class UserRiches {
     req() {
         SocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))

@@ -1,6 +1,6 @@
 import { _decorator} from 'cc';
 import FGUIGameView from '../fgui/test/FGUIGameView';
-import { SocketManager } from '../frameworks/socketManager';
+import { SocketManager } from '../frameworks/SocketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
