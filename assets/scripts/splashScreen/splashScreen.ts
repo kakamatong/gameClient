@@ -10,20 +10,12 @@ const { ccclass, property } = _decorator;
 @ccclass('splashScreen')
 export class splashScreen extends Component {
 
-    private client: any;
-
     start() {
-        assetManager.loadBundle('staticRes', (err, bundle) => {
-            if (err) {
-                log('loadBundle error', err);
-                return;
+        resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
+            if(!err){
+                DataCenter.instance.appConfig = data?.json
             }
-            bundle.load('appConfig/appConfig',(err,data:JsonAsset)=>{
-                if(!err){
-                    DataCenter.instance.appConfig = data?.json
-                }
-            })
-        });
+        })
 
         UIManager.instance.initViewConfig(ViewConfig);
         assetManager.loadBundle('fgui', (err, bundle) => {
@@ -38,32 +30,16 @@ export class splashScreen extends Component {
 
     initView(){
         fgui.GRoot.create()
-        //testBinder.bindAll();
         const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
         fgui.UIPackage.loadPackage(bundle, 'test', (error, pkg)=>{
             if(error){
                 log('loadPackage error', error);
                 return;
             }
-            // const view = fgui.UIPackage.createObject('test', 'TestView', TestView) as TestView;
-            // fgui.GRoot.inst.addChild(view);
-            // view.onShow();
-            // view.dispose();
 
             UIManager.instance.showView('TestView');
 
         });
     }
 
-
-    // sendLogin() {
-    //     console.log('sendLogin');
-    //     const loginInfo = {
-    //         username: 'admin',
-    //         password: '123456',
-    //         device: 'pc',
-    //         version: '0.0.1'
-    //     }
-    //     this.request && this.sendMessage(this.request('auth', loginInfo, 100));
-    // }
 }
