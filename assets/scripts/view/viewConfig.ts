@@ -1,5 +1,5 @@
-import { TestView } from "./TestView";
-import { GameView } from "./GameView";
+import { TestView } from "./testView";
+import { GameView } from "./gameView";
 
 export const ViewConfig = {
     TestView: TestView,
