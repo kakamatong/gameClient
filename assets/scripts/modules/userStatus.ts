@@ -1,5 +1,5 @@
 import { DataCenter } from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/SocketManager';
+import { SocketManager } from '../frameworks/socketManager';
 import { DispatchEvent } from '../frameworks/framework';
 export class UserStatus {
     req() {

@@ -3,7 +3,7 @@ import FGUITestView from '../fgui/test/FGUITestView';
 import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
 import {Match} from '../modules/match';
-import { SocketManager } from '../frameworks/SocketManager';
+import { SocketManager } from '../frameworks/socketManager';
 import { UIManager } from '../frameworks/uimanager';
 
 import { Login, ACCOUNT_INFO } from '../login/login';

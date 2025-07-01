@@ -1,5 +1,5 @@
 import {DataCenter} from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/SocketManager';
+import { SocketManager } from '../frameworks/socketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';

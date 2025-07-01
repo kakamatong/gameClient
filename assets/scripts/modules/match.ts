@@ -1,4 +1,4 @@
-import { SocketManager } from '../frameworks/SocketManager';
+import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 export class Match {
     req(type = 0) {
