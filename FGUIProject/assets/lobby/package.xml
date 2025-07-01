@@ -2,7 +2,7 @@
 <packageDescription id="gv22rev3">
   <resources>
     <component id="sc722" name="LobbyView.xml" path="/" exported="true"/>
-    <image id="rby33" name="bg1.jpg" path="/imgs/"/>
+    <image id="rby33" name="bg1.jpg" path="/imgs/" exported="true"/>
   </resources>
   <publish name=""/>
 </packageDescription>

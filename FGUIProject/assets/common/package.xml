@@ -5,7 +5,7 @@
     <image id="cmlt1" name="buttong.png" path="/imgs/"/>
     <image id="cmlt2" name="buttony.png" path="/imgs/"/>
     <image id="cmlt3" name="closeButton.png" path="/imgs/"/>
-    <component id="cmlt4" name="compBtnScale.xml" path="/comp/"/>
+    <component id="cmlt4" name="compBtnScale.xml" path="/comp/" exported="true"/>
   </resources>
   <publish name=""/>
 </packageDescription>

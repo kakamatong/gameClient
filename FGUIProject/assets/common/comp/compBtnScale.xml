@@ -10,6 +10,6 @@
       <relation target="" sidePair="width-width,height-height"/>
     </text>
   </displayList>
-  <Button downEffect="scale" downEffectValue="1.1"/>
+  <Button downEffect="scale" downEffectValue="0.9"/>
   <customProperty target="title" propertyId="0"/>
 </component>
