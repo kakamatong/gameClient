@@ -1,9 +1,18 @@
 import {DataCenter} from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/socketManager';
+import { SocketManager } from '../frameworks/SocketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
 export class Auth {
+    //Auth
+    private static _instance: Auth;
+    public static get instance(): Auth {
+        if (!this._instance) {
+            this._instance = new Auth();
+        }
+        return this._instance;
+    }
+
     req(){
         SocketManager.instance.loadProtocol(()=>{
             SocketManager.instance.start(DataCenter.instance.appConfig.authUrl ?? "",this.respContent.bind(this))
