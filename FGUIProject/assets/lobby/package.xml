@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="gv22rev3">
   <resources>
-    <image id="sc721" name="bg.png" path="/imgs/" exported="true"/>
     <component id="sc722" name="LobbyView.xml" path="/" exported="true"/>
+    <image id="rby33" name="bg1.jpg" path="/imgs/"/>
   </resources>
   <publish name=""/>
 </packageDescription>
