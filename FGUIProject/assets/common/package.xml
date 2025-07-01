@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="gj0r6g5i">
+  <resources>
+    <image id="cmlt0" name="buttonbule.png" path="/imgs/"/>
+    <image id="cmlt1" name="buttong.png" path="/imgs/"/>
+    <image id="cmlt2" name="buttony.png" path="/imgs/"/>
+    <image id="cmlt3" name="closeButton.png" path="/imgs/"/>
+    <component id="cmlt4" name="compBtnScale.xml" path="/comp/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>
