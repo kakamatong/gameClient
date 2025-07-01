@@ -38,10 +38,7 @@ export class UIManager {
                 this.viewStack.set(viewName, view);
                 fgui.GRoot.inst.addChild(view);
             });
-            
         }
-        
-        
     }
 
     hideView = (viewName: string): void => {

@@ -15,6 +15,7 @@ export class GameView extends FGUIGameView {
     }
 
     onEnable(){
+        super.onEnable();
         GameData.instance.maxPlayer = 2;
         SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
@@ -49,6 +50,7 @@ export class GameView extends FGUIGameView {
     }
 
     onDisable(){
+        super.onDisable();
         SocketManager.instance.removeServerReport("reportGamePlayerInfo");
         SocketManager.instance.removeServerReport("reportGameStep");
         SocketManager.instance.removeServerReport("reportGamePlayerAttitude");

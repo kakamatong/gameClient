@@ -30,8 +30,16 @@ export class splashScreen extends Component {
 
     initView(){
         fgui.GRoot.create()
-        
-        UIManager.instance.showView('TestView');
+        // 加载common包
+        const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
+        fgui.UIPackage.loadPackage(bundle, 'common', (error, pkg)=>{
+            if(error){
+                console.log('loadPackage error', error);
+                return;
+            }
+
+            UIManager.instance.showView('LobbyView');
+        })
     }
 
 }

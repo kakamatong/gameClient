@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <image id="n1_rby3" name="n1" src="rby33" fileName="imgs/bg1.jpg" xy="0,0"/>
+    <image id="n1_rby3" name="UI_IMG_BG" src="rby33" fileName="imgs/bg1.jpg" xy="0,0"/>
   </displayList>
 </component>

@@ -19,6 +19,7 @@ export class TestView extends FGUITestView {
     }
 
     onEnable(){
+        super.onEnable();
         console.log('TestView onEnable');
         //this.UI_BTN_LOGIN.on(fgui.Event.CLICK, this.onBtnLogin, this);
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
@@ -30,6 +31,7 @@ export class TestView extends FGUITestView {
     }
 
     onDisable(){
+        super.onDisable();
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
