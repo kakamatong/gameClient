@@ -35,6 +35,7 @@ export class TestView extends FGUITestView {
         RemoveEventListener('userStatus', this.showUserStatus);
         SocketManager.instance.removeServerReport("reportUserStatus");
         SocketManager.instance.removeServerReport("reportMatch");
+        SocketManager.instance.removeServerReport("reportUpdateRich");
     }
 
     onShow(){
@@ -74,8 +75,7 @@ export class TestView extends FGUITestView {
     }
 
     onBtnMatch(): void {
-        const match = new Match();
-        match.req();
+        Match.instance.req();
     }
 
     onReportUpdateRich(data:any){

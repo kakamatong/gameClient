@@ -1,6 +1,15 @@
 import { SocketManager } from '../frameworks/socketManager';
 import { LogColors } from '../frameworks/framework';
 export class Match {
+    //单例
+    private static _instance: Match;
+    public static get instance(): Match {
+        if (!this._instance) {
+            this._instance = new Match();
+        }
+        return this._instance;
+    }
+
     req(type = 0) {
         SocketManager.instance.sendToServer('match', { gameid: 10001, gameSubid: 1, type: type }, this.resp.bind(this))
     }

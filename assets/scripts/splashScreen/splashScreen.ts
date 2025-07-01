@@ -3,7 +3,7 @@ import * as fgui from "fairygui-cc";
 
 import { handleSocketMessage } from '../frameworks/config/config';
 import { UIManager } from '../frameworks/uimanager';
-import { ViewConfig } from '../view/ViewConfig';
+import { ViewConfig } from '../view/viewConfig';
 import { DataCenter } from '../datacenter/datacenter';
 const { ccclass, property } = _decorator;
 
