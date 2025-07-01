@@ -1,20 +1,16 @@
 import * as fgui from "fairygui-cc";
-
+import { assetManager, AssetManager } from "cc";
 export class UIManager {
     private readonly viewStack: Map<string, any> = new Map();
     
     private viewConfig: any;
     //单例
-    public static instance: UIManager;
-
-    private constructor() {
-        if (UIManager.instance) {
-            throw new Error("UIManager is a singleton!");
+    private static _instance: UIManager;
+    public static get instance(): UIManager {
+        if (!this._instance) {
+            this._instance = new UIManager();
         }
-    }
-
-    static createInstance() {
-        UIManager.instance = new UIManager();
+        return this._instance;
     }
 
     showView = (viewName: string, params?: any): void => {
@@ -31,9 +27,18 @@ export class UIManager {
         }
         
         if (!this.viewStack.has(viewName)) {
-            const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
-            this.viewStack.set(viewName, view);
-            fgui.GRoot.inst.addChild(view);
+            const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
+            fgui.UIPackage.loadPackage(bundle, module.packageName, (error, pkg)=>{
+                if(error){
+                    console.log('loadPackage error', error);
+                    return;
+                }
+    
+                const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
+                this.viewStack.set(viewName, view);
+                fgui.GRoot.inst.addChild(view);
+            });
+            
         }
         
         
@@ -55,6 +60,3 @@ export class UIManager {
         this.viewConfig = viewConfig;
     }
 }
-
-// 导出单例实例
-UIManager.createInstance();
