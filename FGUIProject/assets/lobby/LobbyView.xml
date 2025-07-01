@@ -2,5 +2,6 @@
 <component size="776,1688">
   <displayList>
     <image id="n1_rby3" name="UI_IMG_BG" src="rby33" fileName="imgs/bg1.jpg" xy="0,0"/>
+    <component id="n2_ucoo" name="n2" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="129,572"/>
   </displayList>
 </component>

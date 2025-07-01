@@ -38,7 +38,7 @@ export class splashScreen extends Component {
                 return;
             }
 
-            UIManager.instance.showView('LobbyView');
+            UIManager.instance.showView('TestView');
         })
     }
 
