@@ -87,7 +87,7 @@ export class Socket {
             try {
                 // 直接发送二进制数据
                 const buffer = new Uint8Array(data);
-                console.log('buffer:', buffer);
+                //console.log('buffer:', buffer);
                 this.socket.send(buffer);
             } catch (error) {
                 log('消息发送失败:', error);

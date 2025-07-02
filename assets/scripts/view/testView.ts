@@ -128,7 +128,7 @@ export class TestView extends FGUITestView {
                 console.log(res);
             }
         }
-        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "getSignInInfo", args: {} }, func)
+        SocketManager.instance.callServer('activity','daySignIn','getSignInInfo', {} , func)
     }
 
     onBtnTest1():void{
@@ -142,7 +142,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "signIn", args: {} }, func)
+        SocketManager.instance.callServer('activity','daySignIn','signIn', {} , func)
     }
 
     onBtnTest2():void{
@@ -156,7 +156,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        SocketManager.instance.sendToServer('callActivityFunc', { moduleName: "daySignIn", funcName: "fillSignIn", args: JSON.stringify({index:1})}, func)
+        SocketManager.instance.callServer('activity','daySignIn','fillSignIn', {index:6} , func)
     }
 
     getStatusText(status:number):string{

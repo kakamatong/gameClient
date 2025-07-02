@@ -214,7 +214,7 @@ export class SocketManager implements handleSocketMessage {
     }
 
     onMessage(message: Uint8Array) {
-        log('SocketManager onMessage', message);
+        //log('SocketManager onMessage', message);
         const response = this.client.dispatch(message);
         log('SocketManager onMessage response', response);
         this.dispatchMessage(response);
