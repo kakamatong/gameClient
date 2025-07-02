@@ -2,7 +2,7 @@ import { DataCenter } from '../datacenter/datacenter';
 import { SocketManager } from '../frameworks/socketManager';
 export class UserRiches {
     req() {
-        SocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))
+        SocketManager.instance.callServer('user', '','userRiches', {}, this.resp.bind(this))
     }
 
     resp(data: any) {

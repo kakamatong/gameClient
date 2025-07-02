@@ -25,8 +25,8 @@ export class Auth {
         }
     }
 
-    resp(result:boolean){
-        if(result){
+    resp(success:boolean){
+        if(success){
             console.log('auth success')
             // 用户信息
             const userData = new UserData()

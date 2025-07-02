@@ -98,7 +98,7 @@ export class SocketManager implements handleSocketMessage {
             channel: 'account',
             subid: loginInfo?.subid,
         }
-        this.sendToServer('login', contentInfo, (data: any) => {
+        this.callServer('agent','', 'login',contentInfo, (data: any) => {
             if (data.code == AUTH_TYPE.SUCCESS) {
                 this.iscontent = true;
                 log(LogColors.green('认证成功'));
@@ -113,7 +113,7 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendHeartBeat() {
-        this.sendToServer('heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
+        this.callServer('agent','', 'heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
             log("心跳 ", data.timestamp)
         });
     }
@@ -128,6 +128,17 @@ export class SocketManager implements handleSocketMessage {
                 this.sendHeartBeat();
             }
         }, 10000);
+    }
+
+    callServer(serverName: string, moduleName: string, funcName: string, args:any, callBack?: (data: any) => void){
+        const strArgs = JSON.stringify(args)
+        const data = {
+            serverName: serverName,
+            moduleName: moduleName,
+            funcName:funcName,
+            args: strArgs
+        }
+        this.sendToServer('call', data, callBack)
     }
 
     sendToServer(xyname: string, data: any, callBack?: (data: any) => void) {
@@ -147,7 +158,11 @@ export class SocketManager implements handleSocketMessage {
     // result
     dispatchMessage(response: any) {
         if (response.type == "RESPONSE") {
-            this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](response.result);
+            let result = response.result
+            if(result.code){
+                result = JSON.parse(response.result.result)
+            }
+            this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
             if (response.pname == 'reportContent') {
                 this.onReportContent(response);
