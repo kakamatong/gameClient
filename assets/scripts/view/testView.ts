@@ -27,7 +27,8 @@ export class TestView extends FGUITestView {
         AddEventListener('userStatus',this.showUserStatus, this);
         SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
         SocketManager.instance.addServerReport("reportMatch", this.onReportMatch.bind(this));
-        SocketManager.instance.addServerReport("reportUpdateRich", this.onReportUpdateRich.bind(this));
+        SocketManager.instance.addServerReport("updateRich", this.onSvrUpdateRich.bind(this));
+        SocketManager.instance.addServerReport("surpass", this.onSvrSurpass.bind(this));
     }
 
     onDisable(){
@@ -37,7 +38,7 @@ export class TestView extends FGUITestView {
         RemoveEventListener('userStatus', this.showUserStatus);
         SocketManager.instance.removeServerReport("reportUserStatus");
         SocketManager.instance.removeServerReport("reportMatch");
-        SocketManager.instance.removeServerReport("reportUpdateRich");
+        SocketManager.instance.removeServerReport("updateRich");
     }
 
     onShow(){
@@ -80,7 +81,11 @@ export class TestView extends FGUITestView {
         Match.instance.req();
     }
 
-    onReportUpdateRich(data:any){
+    onSvrUpdateRich(data:any){
+        console.log(data);
+    }
+
+    onSvrSurpass(data:any){
         console.log(data);
     }
 

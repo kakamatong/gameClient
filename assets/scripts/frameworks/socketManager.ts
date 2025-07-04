@@ -167,9 +167,9 @@ export class SocketManager implements handleSocketMessage {
             if (response.pname == 'reportContent') {
                 this.onReportContent(response);
                 return
-            } else {
+            } else if (response.pname == 'svrMsg') {
                 // 回调
-                this.onReport(response.pname, response.result);
+                this.onReport(response.result.type, JSON.parse(response.result.data));
             }
         }
     }
