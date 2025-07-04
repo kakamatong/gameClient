@@ -26,9 +26,10 @@ export class TestView extends FGUITestView {
         AddEventListener('userData',this.showUserInfo, this);
         AddEventListener('userStatus',this.showUserStatus, this);
         SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
-        SocketManager.instance.addServerReport("reportMatch", this.onReportMatch.bind(this));
         SocketManager.instance.addServerReport("updateRich", this.onSvrUpdateRich.bind(this));
         SocketManager.instance.addServerReport("matchOnSure", this.onSvrMatchOnSure.bind(this));
+        SocketManager.instance.addServerReport("gameRoomReady", this.onSvrGameRoomReady.bind(this));
+        SocketManager.instance.addServerReport("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
     }
 
     onDisable(){
@@ -88,6 +89,10 @@ export class TestView extends FGUITestView {
 
     onSvrMatchOnSure(data:any){
         console.log(data);
+        // SocketManager.instance.callServer('match','', 'onSure', {
+        //     id: data.id,
+        //     sure: true
+        // })
     }
 
     showUserInfo(data:any){
@@ -113,14 +118,15 @@ export class TestView extends FGUITestView {
         this.UI_TXT_USER_STATUS.text = this.getStatusText(data.status)
     }
 
-    onReportMatch(data:any){
-        if(data.code == 0){
-            DataCenter.instance.gameid = data.gameid;
-            DataCenter.instance.roomid = data.roomid;
-            console.log(LogColors.green('匹配成功'));
+    onSvrGameRoomReady(data:any){
+        DataCenter.instance.gameid = data.gameid;
+        DataCenter.instance.roomid = data.roomid;
+        console.log(LogColors.green('游戏房间准备完成'));
+        //UIManager.instance.showView('GameView');
+    }
 
-            UIManager.instance.showView('GameView');
-        }
+    onSvrMatchOnSureFail(data:any){
+        console.log(LogColors.red(data.msg));
     }
 
     onBtnShow(): void {

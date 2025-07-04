@@ -8,6 +8,7 @@ export class LogColors {
     static red = (text: string) => `\x1b[31m${text}\x1b[0m`;
     static green = (text: string) => `\x1b[32m${text}\x1b[0m`;
     static blue = (text: string) => `\x1b[34m${text}\x1b[0m`;
+    static yellow = (text: string) => `\x1b[33m${text}\x1b[0m`;
 }
 
 export function AddEventListener(eventName:string, func: eventFunc, target:any) {

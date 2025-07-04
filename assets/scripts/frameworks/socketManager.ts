@@ -114,7 +114,7 @@ export class SocketManager implements handleSocketMessage {
 
     sendHeartBeat() {
         this.callServer('agent','', 'heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
-            log("心跳 ", data.timestamp)
+            //log("心跳 ", data.timestamp)
         });
     }
 
@@ -146,6 +146,7 @@ export class SocketManager implements handleSocketMessage {
         if (callBack) {
             this.callBacks[this.session] = callBack;
         }
+        log(LogColors.blue('SocketManager sendToServer'), data, this.session);
         this.request && this.sendMessage(this.request(xyname, data, this.session));
     }
 
@@ -216,7 +217,7 @@ export class SocketManager implements handleSocketMessage {
     onMessage(message: Uint8Array) {
         //log('SocketManager onMessage', message);
         const response = this.client.dispatch(message);
-        log('SocketManager onMessage response', response);
+        log(LogColors.yellow('SocketManager onMessage '), response);
         this.dispatchMessage(response);
     }
 
