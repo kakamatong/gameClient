@@ -89,10 +89,10 @@ export class TestView extends FGUITestView {
 
     onSvrMatchOnSure(data:any){
         console.log(data);
-        // SocketManager.instance.callServer('match','', 'onSure', {
-        //     id: data.id,
-        //     sure: true
-        // })
+        SocketManager.instance.callServer('match','', 'onSure', {
+            id: data.id,
+            sure: true
+        })
     }
 
     showUserInfo(data:any){
@@ -122,7 +122,7 @@ export class TestView extends FGUITestView {
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
         console.log(LogColors.green('游戏房间准备完成'));
-        //UIManager.instance.showView('GameView');
+        UIManager.instance.showView('GameView');
     }
 
     onSvrMatchOnSureFail(data:any){

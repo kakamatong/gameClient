@@ -17,7 +17,7 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
-        SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
+        //SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
         SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
         SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
         SocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
