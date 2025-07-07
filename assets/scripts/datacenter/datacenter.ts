@@ -48,8 +48,8 @@ export class DataCenter {
         return this._loginInfo;
     }
 
-    addSubid(subid:number){
-        this._loginInfo && (this._loginInfo.subid = subid);
+    addSubid(subid?:number){
+        subid ? this._loginInfo && (this._loginInfo.subid = subid) : this._loginInfo && (this._loginInfo.subid++);
         sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(this._loginInfo));
     }
 

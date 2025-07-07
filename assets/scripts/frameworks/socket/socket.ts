@@ -9,17 +9,17 @@ export class Socket {
     // private readonly maxReconnectAttempts: number = 5;
     // private readonly reconnectDelay: number = 3000; // 重连延迟时间（毫秒）
     private handleSocketMessage: handleSocketMessage | null = null;
-    init(url: string = '') {
-        this.connectWebSocket(url);
+    init(url: string = '', header?: string | string[]) {
+        this.connectWebSocket(url, header);
     }
 
     setHandleMessage(handleSocketMessage: handleSocketMessage) {
         this.handleSocketMessage = handleSocketMessage;
     }
 
-    private connectWebSocket(url: string) {
+    private connectWebSocket(url: string, header?: string | string[]) {
         try {
-            this.socket = new WebSocket(url);
+            this.socket = new WebSocket(url, header);
             this.socket.binaryType = 'arraybuffer';
             this.setupEventListeners();
         } catch (error) {

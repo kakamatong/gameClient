@@ -13,13 +13,12 @@ export class SocketManager implements handleSocketMessage {
     private request: any;
     private client: any;
     private bloaded = false;
-    private iscontent = false;
     private isopen = false;
+    private iscontent = false
     private session = 0;
     private timeid: number = -1;
     private callBacks: Array<(data: any) => void> = [];
-    private callBackContent: ((result: boolean) => void) | null = null;
-    private callBackAuth: ((result: boolean) => void) | null = null;
+    private callBackLink: ((result: boolean) => void) | null = null;
     private onServerReport: Map<string, (data: any) => void> | null = null;
     //单例
     private static _instance: SocketManager;
@@ -30,24 +29,24 @@ export class SocketManager implements handleSocketMessage {
         return this._instance;
     }
 
-    initSocket(url: string) {
+    initSocket(url: string, header?: string | string[]) {
         this.session = 0;
-        this.iscontent = false;
         this.isopen = false;
+        this.iscontent = false
         const socket = new Socket();
-        socket.init(url);
+        socket.init(url, header);
         socket.setHandleMessage(this);
         return socket;
     }
 
-    start(url: string, callBack?: (result: boolean) => void) {
+    start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
         if (callBack) {
-            this.callBackContent = callBack;
+            this.callBackLink = callBack;
         }
         if (this.socket) {
             this.socket.close();
         }
-        this.socket = this.initSocket(url);
+        this.socket = this.initSocket(url, header);
     }
 
     loadProtocol(callBack: () => void) {
@@ -83,35 +82,6 @@ export class SocketManager implements handleSocketMessage {
         });
     }
 
-    content(callBack?: (result: boolean) => void) {
-        if (callBack) {
-            this.callBackAuth = callBack;
-        }
-        const loginInfo = DataCenter.instance.getLoginInfo();
-        log('SocketManager loginInfo', loginInfo);
-        const contentInfo = {
-            username: loginInfo?.username,
-            userid: loginInfo?.userid,
-            password: loginInfo?.token,
-            device: 'pc',
-            version: '0.0.1',
-            channel: 'account',
-            subid: loginInfo?.subid,
-        }
-        this.callServer('agent','', 'login',contentInfo, (data: any) => {
-            if (data.code == AUTH_TYPE.SUCCESS) {
-                this.iscontent = true;
-                log(LogColors.green('认证成功'));
-                DataCenter.instance.addSubid((loginInfo?.subid ?? 0) + 1);
-                this.startHeartBeat();
-                this.callBackAuth && this.callBackAuth(true);
-            } else {
-                log(LogColors.red('认证失败 ' + data.msg));
-                this.callBackAuth && this.callBackAuth(false);
-            }
-        })
-    }
-
     sendHeartBeat() {
         this.callServer('agent','', 'heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
             //log("心跳 ", data.timestamp)
@@ -124,9 +94,7 @@ export class SocketManager implements handleSocketMessage {
             clearInterval(this.timeid);
         }
         this.timeid = setInterval(() => {
-            if (this.isopen && this.iscontent) {
-                this.sendHeartBeat();
-            }
+            this.sendHeartBeat();
         }, 10000);
     }
 
@@ -151,7 +119,11 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendMessage(message: any) {
-        this.socket && this.socket.sendMessage(message);
+        if(this.iscontent && this.isopen){
+            this.socket && this.socket.sendMessage(message);
+        }else{
+            log(LogColors.red("socket 未连接"))
+        }
     }
 
     // type
@@ -165,13 +137,25 @@ export class SocketManager implements handleSocketMessage {
             }
             this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
-            if (response.pname == 'reportContent') {
-                this.onReportContent(response);
+            if (response.pname == 'svrReady') {
+                this.svrReady(response);
                 return
             } else if (response.pname == 'svrMsg') {
                 // 回调
                 this.onReport(response.result.type, JSON.parse(response.result.data));
             }
+        }
+    }
+
+    svrReady(message: any) {
+        if (message.result.code) {
+            this.iscontent = true;
+            //this.content();
+            this.startHeartBeat();
+            this.callBackLink &&  this.callBackLink(true)
+        } else {
+            this.iscontent = false;
+            this.callBackLink &&  this.callBackLink(false)
         }
     }
 
@@ -198,17 +182,6 @@ export class SocketManager implements handleSocketMessage {
         }
     }
 
-    onReportContent(message: any) {
-        if (message.result.code) {
-            this.iscontent = true;
-            //this.content();
-            this.callBackContent && this.callBackContent(true);
-        } else {
-            this.iscontent = false;
-            this.callBackContent && this.callBackContent(false);
-        }
-    }
-
     onOpen(event: any) {
         log('SocketManager onOpen', event);
         this.isopen = true;
@@ -224,7 +197,7 @@ export class SocketManager implements handleSocketMessage {
     onClose(event: any) {
         log('SocketManager onClose', event);
         this.isopen = false;
-        this.iscontent = false;
+        this.callBackLink &&  this.callBackLink(false)
     }
 
     onError(event: any) {

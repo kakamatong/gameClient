@@ -1,4 +1,5 @@
 import {DataCenter} from '../datacenter/datacenter';
+import { LogColors } from '../frameworks/framework';
 import { SocketManager } from '../frameworks/socketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
@@ -15,19 +16,25 @@ export class Auth {
 
     req(){
         SocketManager.instance.loadProtocol(()=>{
-            SocketManager.instance.start(DataCenter.instance.appConfig.authUrl ?? "",this.respContent.bind(this))
+            const loginInfo = DataCenter.instance.getLoginInfo();
+            const authInfo = new URLSearchParams({
+                username: `${loginInfo?.username ?? ''}`,
+                userid: `${loginInfo?.userid ?? ''}`,
+                token: `${loginInfo?.token ?? ''}`,
+                device: 'pc',
+                version: '0.0.1',
+                channel: 'account',
+                subid: `${loginInfo?.subid ?? ''}`,
+            })
+            const url = `${DataCenter.instance.appConfig.authUrl}?${authInfo.toString()}`
+            SocketManager.instance.start(url, undefined, this.resp.bind(this))
         })
-    }
-
-    respContent(result:boolean){
-        if(result){
-            SocketManager.instance.content(this.resp.bind(this))
-        }
     }
 
     resp(success:boolean){
         if(success){
-            console.log('auth success')
+            DataCenter.instance.addSubid();
+            console.log(LogColors.green("认证成功"))
             // 用户信息
             const userData = new UserData()
             userData.req()
