@@ -1,8 +1,7 @@
 import { Socket } from './socket/socket';
 import { assetManager, BufferAsset, log } from 'cc';
 import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声明，ts会提示any类型警告，但不影响功能
-import { handleSocketMessage, AUTH_TYPE } from './config/config';
-import { DataCenter } from '../datacenter/datacenter';
+import { handleSocketMessage } from './config/config';
 import {LogColors} from './framework';
 /**
  * SocketManager 是用于管理Socket连接的单例类
@@ -114,7 +113,10 @@ export class SocketManager implements handleSocketMessage {
         if (callBack) {
             this.callBacks[this.session] = callBack;
         }
-        log(LogColors.blue('SocketManager sendToServer'), data, this.session);
+        if(data.funcName != 'heartbeat'){
+            const logMsg = `[${data.serverName ?? ''}][${data.funcName ?? ''}][${this.session}] `
+            log(LogColors.blue('SocketManager sendToServer '), logMsg, data);
+        }
         this.request && this.sendMessage(this.request(xyname, data, this.session));
     }
 
@@ -190,7 +192,12 @@ export class SocketManager implements handleSocketMessage {
     onMessage(message: Uint8Array) {
         //log('SocketManager onMessage', message);
         const response = this.client.dispatch(message);
-        log(LogColors.yellow('SocketManager onMessage '), response);
+        const type = response.result?.type ?? ""
+        const result = response.result.result ?? ""
+        if(result.indexOf("heartbeat") == -1){
+            const logMsg = `[${response.type}][${type}][${response.session}] `
+            log(LogColors.yellow('SocketManager onMessage '), logMsg, response);
+        }
         this.dispatchMessage(response);
     }
 
