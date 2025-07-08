@@ -3,7 +3,7 @@ import FGUITestView from '../fgui/test/FGUITestView';
 import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
 import {Match} from '../modules/match';
-import { SocketManager } from '../frameworks/socketManager';
+import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { UIManager } from '../frameworks/uimanager';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
@@ -25,11 +25,11 @@ export class TestView extends FGUITestView {
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
         AddEventListener('userData',this.showUserInfo, this);
         AddEventListener('userStatus',this.showUserStatus, this);
-        SocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
-        SocketManager.instance.addServerReport("updateRich", this.onSvrUpdateRich.bind(this));
-        SocketManager.instance.addServerReport("matchOnSure", this.onSvrMatchOnSure.bind(this));
-        SocketManager.instance.addServerReport("gameRoomReady", this.onSvrGameRoomReady.bind(this));
-        SocketManager.instance.addServerReport("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        LobbySocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
+        LobbySocketManager.instance.addServerReport("updateRich", this.onSvrUpdateRich.bind(this));
+        LobbySocketManager.instance.addServerReport("matchOnSure", this.onSvrMatchOnSure.bind(this));
+        LobbySocketManager.instance.addServerReport("gameRoomReady", this.onSvrGameRoomReady.bind(this));
+        LobbySocketManager.instance.addServerReport("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
     }
 
     onDisable(){
@@ -37,10 +37,10 @@ export class TestView extends FGUITestView {
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
-        SocketManager.instance.removeServerReport("reportUserStatus");
-        SocketManager.instance.removeServerReport("reportMatch");
-        SocketManager.instance.removeServerReport("updateRich");
-        SocketManager.instance.removeServerReport("matchOnSure");
+        LobbySocketManager.instance.removeServerReport("reportUserStatus");
+        LobbySocketManager.instance.removeServerReport("reportMatch");
+        LobbySocketManager.instance.removeServerReport("updateRich");
+        LobbySocketManager.instance.removeServerReport("matchOnSure");
     }
 
     onShow(){
@@ -89,7 +89,7 @@ export class TestView extends FGUITestView {
 
     onSvrMatchOnSure(data:any){
         console.log(data);
-        SocketManager.instance.callServer('match','', 'onSure', {
+        LobbySocketManager.instance.callServer('match','', 'onSure', {
             id: data.id,
             sure: true
         })
@@ -140,7 +140,7 @@ export class TestView extends FGUITestView {
                 console.log(res);
             }
         }
-        SocketManager.instance.callServer('activity','daySignIn','getSignInInfo', {} , func)
+        LobbySocketManager.instance.callServer('activity','daySignIn','getSignInInfo', {} , func)
     }
 
     onBtnTest1():void{
@@ -154,7 +154,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        SocketManager.instance.callServer('activity','daySignIn','signIn', {} , func)
+        LobbySocketManager.instance.callServer('activity','daySignIn','signIn', {} , func)
     }
 
     onBtnTest2():void{
@@ -168,7 +168,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        SocketManager.instance.callServer('activity','daySignIn','fillSignIn', {index:6} , func)
+        LobbySocketManager.instance.callServer('activity','daySignIn','fillSignIn', {index:6} , func)
     }
 
     getStatusText(status:number):string{

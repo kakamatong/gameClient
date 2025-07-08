@@ -1,6 +1,6 @@
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
-import { SocketManager } from '../frameworks/socketManager';
+import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
@@ -15,7 +15,7 @@ export class Auth {
     }
 
     req(){
-        SocketManager.instance.loadProtocol(()=>{
+        LobbySocketManager.instance.loadProtocol(()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
             const authInfo = new URLSearchParams({
                 username: `${loginInfo?.username ?? ''}`,
@@ -27,7 +27,7 @@ export class Auth {
                 subid: `${loginInfo?.subid ?? ''}`,
             })
             const url = `${DataCenter.instance.appConfig.authUrl}?${authInfo.toString()}`
-            SocketManager.instance.start(url, undefined, this.resp.bind(this))
+            LobbySocketManager.instance.start(url, undefined, this.resp.bind(this))
         })
     }
 

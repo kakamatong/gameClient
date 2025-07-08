@@ -1,9 +1,9 @@
 import { DataCenter } from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/socketManager';
+import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { DispatchEvent } from '../frameworks/framework';
 export class UserStatus {
     req() {
-        SocketManager.instance.callServer('user', '','userStatus', { uid: DataCenter.instance.userid }, this.resp.bind(this))
+        LobbySocketManager.instance.callServer('user', '','userStatus', { uid: DataCenter.instance.userid }, this.resp.bind(this))
     }
 
     resp(data: any) {

@@ -1,8 +1,8 @@
 import { DataCenter } from '../datacenter/datacenter';
-import { SocketManager } from '../frameworks/socketManager';
+import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 export class UserRiches {
     req() {
-        SocketManager.instance.callServer('user', '','userRiches', {}, this.resp.bind(this))
+        LobbySocketManager.instance.callServer('user', '','userRiches', {}, this.resp.bind(this))
     }
 
     resp(data: any) {

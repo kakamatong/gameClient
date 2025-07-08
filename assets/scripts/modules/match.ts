@@ -1,4 +1,4 @@
-import { SocketManager } from '../frameworks/socketManager';
+import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { LogColors } from '../frameworks/framework';
 export class Match {
     //单例
@@ -11,7 +11,7 @@ export class Match {
     }
 
     req(type = 0) {
-        SocketManager.instance.callServer('match','','join', { gameid: 10001, queueid: 1 }, this.resp.bind(this))
+        LobbySocketManager.instance.callServer('match','','join', { gameid: 10001, queueid: 1 }, this.resp.bind(this))
     }
 
     resp(result: any) {

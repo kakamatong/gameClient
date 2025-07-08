@@ -4,7 +4,7 @@ import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声�
 import { handleSocketMessage } from './config/config';
 import {LogColors} from './framework';
 /**
- * SocketManager 是用于管理Socket连接的单例类
+ * SocketManager 
  * 负责Socket的初始化、协议加载、消息处理等功能
  */
 export class SocketManager implements handleSocketMessage {
@@ -19,23 +19,9 @@ export class SocketManager implements handleSocketMessage {
     private callBacks: Array<(data: any) => void> = [];
     private callBackLink: ((result: boolean) => void) | null = null;
     private onServerReport: Map<string, (data: any) => void> | null = null;
-    //单例
-    private static _instance: SocketManager;
-    public static get instance(): SocketManager {
-        if (!this._instance) {
-            this._instance = new SocketManager();
-        }
-        return this._instance;
-    }
-
-    initSocket(url: string, header?: string | string[]) {
-        this.session = 0;
-        this.isopen = false;
-        this.iscontent = false
-        const socket = new Socket();
-        socket.init(url, header);
-        socket.setHandleMessage(this);
-        return socket;
+    
+    constructor(){
+        this.onServerReport = new Map<string, (data: any) => void>();
     }
 
     start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
@@ -46,6 +32,16 @@ export class SocketManager implements handleSocketMessage {
             this.socket.close();
         }
         this.socket = this.initSocket(url, header);
+    }
+
+    initSocket(url: string, header?: string | string[]) {
+        this.session = 0;
+        this.isopen = false;
+        this.iscontent = false
+        const socket = new Socket();
+        socket.init(url, header);
+        socket.setHandleMessage(this);
+        return socket;
     }
 
     loadProtocol(callBack: () => void) {
