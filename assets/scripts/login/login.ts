@@ -37,7 +37,7 @@ export class Login implements handleSocketMessage {
     start(acc: ACCOUNT_INFO,func:(b:boolean)=>void) {
         this._accountInfo = acc;
         this._callBack = func;
-        console.log('login');
+        //console.log('login');
         this.encode_token();
         this.initSocket();
     }
@@ -63,7 +63,7 @@ export class Login implements handleSocketMessage {
         const logtinType = CryptoJS.enc.Utf8.parse(strLogintype).toString(CryptoJS.enc.Base64);
         const token = user + '@' + server + ':' + password + '#' + logtinType;
         
-        console.log('token:', token);
+        //console.log('token:', token);
         this._loginMsg = token;
     }
 
@@ -84,7 +84,7 @@ export class Login implements handleSocketMessage {
     onMessage(message: Uint8Array) {
         const textDecoder = new TextDecoder('utf-8');
         const text = textDecoder.decode(message);
-        log('onMessage', text);
+        //log('onMessage', text);
 
         if(text.includes(' ')){
             const infos = text.split(' ');
@@ -124,7 +124,7 @@ export class Login implements handleSocketMessage {
     performAuthentication1(message: string) {
         // 1. 接收服务端发送的challenge（伪代码示例）
         const challengeB64 = message; // 接收base64字符串
-        console.log('challengeB64:', challengeB64);
+        //console.log('challengeB64:', challengeB64);
         this._challenge = CryptoJS.enc.Base64.parse(challengeB64.trim());
     
         // 生成客户端密钥对前添加日志
@@ -138,7 +138,7 @@ export class Login implements handleSocketMessage {
 
         const clientPublicKeyB64 = CryptoJS.enc.Base64.stringify(clientPrivateKeyDh);
         const messageReq = clientPublicKeyB64
-        console.log('clientPublicKeyB64:', clientPublicKeyB64);
+        //console.log('clientPublicKeyB64:', clientPublicKeyB64);
 
         // 将base64字符串转换为字节数组
         const messageBytes = new TextEncoder().encode(messageReq);
@@ -161,7 +161,7 @@ export class Login implements handleSocketMessage {
 
         // 打印secret
         const secretHex = secret.toString(CryptoJS.enc.Hex);
-        console.log('secretHex:', secretHex);
+        //console.log('secretHex:', secretHex);
         this._loginInfo.token = secretHex;
         // 5. 计算HMAC校验
         if(!this._challenge){
@@ -170,7 +170,7 @@ export class Login implements handleSocketMessage {
         const hmac = hmac64(this._challenge, secret);
         //hmac.sigBytes = 8; // 截取前8字节
         const hmacB64 = CryptoJS.enc.Base64.stringify(hmac);
-        console.log('hmacB64:', hmacB64);
+        //console.log('hmacB64:', hmacB64);
         
         // 将base64字符串转换为字节数组
         const hmacB64Bytes = new TextEncoder().encode(hmacB64);

@@ -708,7 +708,7 @@ export const customDESEncrypt = (data: string, key: CryptoJS.WordArray): number[
     const dataWA = CryptoJS.enc.Utf8.parse(data);
     const encrypted = desencode(dataWA, key);
     const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);
-    console.log('tokenB64:', tokenB64);
+    //console.log('tokenB64:', tokenB64);
     const tokenB64Bytes = new TextEncoder().encode(tokenB64);
     const tokenB64Array = Array.from(tokenB64Bytes);
     return tokenB64Array;
