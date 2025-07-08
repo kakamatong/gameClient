@@ -8,44 +8,45 @@ import {LogColors} from './framework';
  * 负责Socket的初始化、协议加载、消息处理等功能
  */
 export class SocketManager implements handleSocketMessage {
-    private socket: Socket | null = null;
-    private request: any;
-    private client: any;
-    private bloaded = false;
-    private isopen = false;
-    private iscontent = false
-    private session = 0;
-    private timeid: number = -1;
-    private callBacks: Array<(data: any) => void> = [];
-    private callBackLink: ((result: boolean) => void) | null = null;
-    private onServerReport: Map<string, (data: any) => void> | null = null;
+    protected _name: string = 'SocketManager'
+    private _socket: Socket | null = null;
+    private _request: any;
+    private _client: any;
+    private _bloaded = false;
+    private _isopen = false;
+    private _iscontent = false
+    private _session = 0;
+    private _timeid: number = -1;
+    private _callBacks: Array<(data: any) => void> = [];
+    private _callBackLink: ((result: boolean) => void) | null = null;
+    private _onServerReport: Map<string, (data: any) => void> | null = null;
     
     constructor(){
-        this.onServerReport = new Map<string, (data: any) => void>();
+        this._onServerReport = new Map<string, (data: any) => void>();
     }
 
     start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
         if (callBack) {
-            this.callBackLink = callBack;
+            this._callBackLink = callBack;
         }
-        if (this.socket) {
-            this.socket.close();
+        if (this._socket) {
+            this._socket.close();
         }
-        this.socket = this.initSocket(url, header);
+        this._socket = this.initSocket(url, header);
     }
 
     initSocket(url: string, header?: string | string[]) {
-        this.session = 0;
-        this.isopen = false;
-        this.iscontent = false
-        const socket = new Socket();
-        socket.init(url, header);
-        socket.setHandleMessage(this);
-        return socket;
+        this._session = 0;
+        this._isopen = false;
+        this._iscontent = false
+        const _socket = new Socket();
+        _socket.init(url, header);
+        _socket.setHandleMessage(this);
+        return _socket;
     }
 
     loadProtocol(callBack: () => void) {
-        if (this.bloaded) {
+        if (this._bloaded) {
             callBack && callBack();
             return
         }
@@ -61,7 +62,7 @@ export class SocketManager implements handleSocketMessage {
 
                 const buffer = new Uint8Array(asset.buffer());
                 const serverSproto = sproto.createNew(buffer);
-                this.client = serverSproto?.host('package');
+                this._client = serverSproto?.host('package');
 
                 // 然后读取客户端协议
                 bundle.load('c2s', (err, asset: BufferAsset) => {
@@ -69,8 +70,8 @@ export class SocketManager implements handleSocketMessage {
 
                     const buffer = new Uint8Array(asset.buffer());
                     const clientSproto = sproto.createNew(buffer);
-                    this.request = this.client.attach(clientSproto);
-                    this.bloaded = true;
+                    this._request = this._client.attach(clientSproto);
+                    this._bloaded = true;
                     callBack && callBack();
                 });
             });
@@ -85,10 +86,10 @@ export class SocketManager implements handleSocketMessage {
 
     startHeartBeat() {
         // 每10秒发送一次心跳
-        if (this.timeid) {
-            clearInterval(this.timeid);
+        if (this._timeid) {
+            clearInterval(this._timeid);
         }
-        this.timeid = setInterval(() => {
+        this._timeid = setInterval(() => {
             this.sendHeartBeat();
         }, 10000);
     }
@@ -105,27 +106,27 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendToServer(xyname: string, data: any, callBack?: (data: any) => void) {
-        this.session++;
+        this._session++;
         if (callBack) {
-            this.callBacks[this.session] = callBack;
+            this._callBacks[this._session] = callBack;
         }
         if(data.funcName != 'heartbeat'){
-            const logMsg = `[${data.serverName ?? ''}][${data.funcName ?? ''}][${this.session}] `
-            log(LogColors.blue('SocketManager sendToServer '), logMsg, data);
+            const logMsg = `[${data.serverName ?? ''}][${data.funcName ?? ''}][${this._session}] `
+            log(LogColors.blue(this._name + ' sendToServer '), logMsg, data);
         }
-        this.request && this.sendMessage(this.request(xyname, data, this.session));
+        this._request && this.sendMessage(this._request(xyname, data, this._session));
     }
 
     sendMessage(message: any) {
-        if(this.iscontent && this.isopen){
-            this.socket && this.socket.sendMessage(message);
+        if(this._iscontent && this._isopen){
+            this._socket && this._socket.sendMessage(message);
         }else{
-            log(LogColors.red("socket 未连接"))
+            log(LogColors.red("_socket 未连接"))
         }
     }
 
     // type
-    // session
+    // _session
     // result
     dispatchMessage(response: any) {
         if (response.type == "RESPONSE") {
@@ -133,7 +134,7 @@ export class SocketManager implements handleSocketMessage {
             if(result.code){
                 result = JSON.parse(response.result.result)
             }
-            this.callBacks && this.callBacks[response.session] && this.callBacks[response.session](result);
+            this._callBacks && this._callBacks[response.session] && this._callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
             if (response.pname == 'svrReady') {
                 this.svrReady(response);
@@ -147,63 +148,64 @@ export class SocketManager implements handleSocketMessage {
 
     svrReady(message: any) {
         if (message.result.code) {
-            this.iscontent = true;
+            this._iscontent = true;
             //this.content();
             this.startHeartBeat();
-            this.callBackLink &&  this.callBackLink(true)
+            this._callBackLink &&  this._callBackLink(true)
         } else {
-            this.iscontent = false;
-            this.callBackLink &&  this.callBackLink(false)
+            this._iscontent = false;
+            this._callBackLink &&  this._callBackLink(false)
         }
     }
 
     onReport(name: string, data: any) {
-        if (this.onServerReport) {
-            const callBack = this.onServerReport.get(name);
+        if (this._onServerReport) {
+            const callBack = this._onServerReport.get(name);
             callBack && callBack(data);
         }
     }
 
     // 增加服务器广播监听
     addServerReport(name: string, callBack: (data: any) => void) {
-        if (!this.onServerReport) {
-            this.onServerReport = new Map<string, (data: any) => void>();
+        if (!this._onServerReport) {
+            this._onServerReport = new Map<string, (data: any) => void>();
         }
 
-        this.onServerReport.set(name, callBack);
+        this._onServerReport.set(name, callBack);
     }
 
     // 移除服务器广播监听
     removeServerReport(name: string) {
-        if (this.onServerReport) {
-            this.onServerReport.delete(name);
+        if (this._onServerReport) {
+            this._onServerReport.delete(name);
         }
     }
 
     onOpen(event: any) {
-        log('SocketManager onOpen', event);
-        this.isopen = true;
+        log(this._name + ' onOpen', event);
+        this._isopen = true;
     }
 
     onMessage(message: Uint8Array) {
         //log('SocketManager onMessage', message);
-        const response = this.client.dispatch(message);
+        const response = this._client.dispatch(message);
         const type = response.result?.type ?? ""
         const result = response.result.result ?? ""
         if(result.indexOf("heartbeat") == -1){
             const logMsg = `[${response.type}][${type}][${response.session}] `
-            log(LogColors.yellow('SocketManager onMessage '), logMsg, response);
+            log(LogColors.yellow(this._name + ' onMessage '), logMsg, response);
         }
         this.dispatchMessage(response);
     }
 
     onClose(event: any) {
-        log('SocketManager onClose', event);
-        this.isopen = false;
-        this.callBackLink &&  this.callBackLink(false)
+        log(this._name + ' onClose', event); 
+        this._isopen = false;
+        this._callBackLink &&  this._callBackLink(false)
     }
 
     onError(event: any) {
-        log('SocketManager onError', event);
+
+        log(this._name + ' onError', event);
     }
 }

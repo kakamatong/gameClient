@@ -1,6 +1,7 @@
 import { SocketManager } from './socketManager';
 
 export class GameSocketManager extends SocketManager {
+    protected _name: string = 'GameSocketManager'
     //单例
     private static _instance: GameSocketManager;
     public static get instance(): GameSocketManager {

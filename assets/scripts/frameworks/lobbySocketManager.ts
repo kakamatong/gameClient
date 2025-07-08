@@ -1,6 +1,7 @@
 import { SocketManager } from './socketManager';
 
 export class LobbySocketManager extends SocketManager {
+    protected _name: string = 'LobbySocketManager'
     //单例
     private static _instance: LobbySocketManager;
     public static get instance(): LobbySocketManager {
