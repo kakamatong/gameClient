@@ -1,9 +1,9 @@
 import * as fgui from "fairygui-cc";
 import { assetManager, AssetManager } from "cc";
 export class UIManager {
-    private readonly viewStack: Map<string, any> = new Map();
+    private readonly _viewStack: Map<string, any> = new Map();
     
-    private viewConfig: any;
+    private _viewConfig: any;
     //单例
     private static _instance: UIManager;
     public static get instance(): UIManager {
@@ -14,7 +14,7 @@ export class UIManager {
     }
 
     showView = (viewName: string, params?: any): void => {
-        const view = this.viewStack.get(viewName);
+        const view = this._viewStack.get(viewName);
         if (view) {
             fgui.GRoot.inst.addChild(view);
             return;
@@ -26,7 +26,7 @@ export class UIManager {
             return;
         }
         
-        if (!this.viewStack.has(viewName)) {
+        if (!this._viewStack.has(viewName)) {
             const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
             fgui.UIPackage.loadPackage(bundle, module.packageName, (error, pkg)=>{
                 if(error){
@@ -35,25 +35,25 @@ export class UIManager {
                 }
     
                 const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
-                this.viewStack.set(viewName, view);
+                this._viewStack.set(viewName, view);
                 fgui.GRoot.inst.addChild(view);
             });
         }
     }
 
     hideView = (viewName: string): void => {
-        if (this.viewStack.has(viewName)) {
-            const view = this.viewStack.get(viewName);
+        if (this._viewStack.has(viewName)) {
+            const view = this._viewStack.get(viewName);
             view.dispose();
-            this.viewStack.delete(viewName);
+            this._viewStack.delete(viewName);
         }
     }
 
     getViewClass(viewName: string) {
-        return this.viewConfig[viewName];
+        return this._viewConfig[viewName];
     }
 
     initViewConfig(viewConfig: any) {
-        this.viewConfig = viewConfig;
+        this._viewConfig = viewConfig;
     }
 }
