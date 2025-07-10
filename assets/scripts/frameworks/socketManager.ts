@@ -150,7 +150,7 @@ export class SocketManager implements handleSocketMessage {
         if (message.result.code) {
             this._iscontent = true;
             //this.content();
-            this.startHeartBeat();
+            //this.startHeartBeat();
             this._callBackLink &&  this._callBackLink(true)
         } else {
             this._iscontent = false;
