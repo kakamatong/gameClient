@@ -1,4 +1,4 @@
-import CryptoJS from '../frameworks/libs/crypto-js-4.2.0/crypto-js.js';
+import CryptoJS from 'crypto-js';        
 import { _decorator, log} from 'cc';
 import { Socket } from '../frameworks/socket/socket';
 import { handleSocketMessage } from '../frameworks/config/config';

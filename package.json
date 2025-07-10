@@ -5,6 +5,7 @@
     "version": "3.8.5"
   },
   "dependencies": {
+    "crypto-js": "^4.2.0",
     "fairygui-cc": "^1.2.2"
   }
 }

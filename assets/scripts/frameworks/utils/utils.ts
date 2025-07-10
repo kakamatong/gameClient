@@ -1,4 +1,4 @@
-import CryptoJS from '../libs/crypto-js-4.2.0/crypto-js.js';
+import CryptoJS from 'crypto-js';   
 // DH参数配置
 const DH_GENERATOR = 5n;
 const DH_PRIME = 0xFFFFFFFFFFFFFFC5n;
