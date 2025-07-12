@@ -54,11 +54,13 @@ export class Socket {
         this.socket.onclose = (event) => {
             log('WebSocket 连接关闭:', event.code, event.reason);
             //this.handleReconnection();
+            this.handleSocketMessage && this.handleSocketMessage.onClose(event);
         };
 
         // 错误处理
         this.socket.onerror = (error) => {
             log('WebSocket 错误:', error);
+            this.handleSocketMessage && this.handleSocketMessage.onError(error);
         };
     }
 
