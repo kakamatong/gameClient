@@ -2,6 +2,7 @@ import { _decorator} from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
 import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
+import {AuthGame} from '../modules/authGame';
 import {Match} from '../modules/match';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { UIManager } from '../frameworks/uimanager';
@@ -89,6 +90,10 @@ export class TestView extends FGUITestView {
 
     onSvrMatchOnSure(data:any){
         console.log(data);
+        if(data.readys.indexOf(DataCenter.instance.userid) != -1){
+            console.log(LogColors.red('已准备'));
+            return;
+        }
         LobbySocketManager.instance.callServer('match','', 'onSure', {
             id: data.id,
             sure: true
@@ -122,7 +127,15 @@ export class TestView extends FGUITestView {
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
         console.log(LogColors.green('游戏房间准备完成'));
-        UIManager.instance.showView('GameView');
+        //UIManager.instance.showView('GameView');
+        const callBack = (success:boolean)=>{
+            if(success){
+                //UIManager.instance.showView('GameView');
+                console.log(LogColors.green("游戏服务连接成功"))
+            }
+        }
+        AuthGame.instance.req(DataCenter.instance.gameid, DataCenter.instance.roomid, callBack);
+        
     }
 
     onSvrMatchOnSureFail(data:any){

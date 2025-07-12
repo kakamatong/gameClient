@@ -1,3 +1,4 @@
+import { LogColors } from './framework';
 import { SocketManager } from './socketManager';
 
 export class GameSocketManager extends SocketManager {
@@ -13,5 +14,11 @@ export class GameSocketManager extends SocketManager {
 
     constructor(){
         super();
+    }
+
+    onOpen(event: any): void {
+        console.log(LogColors.green("游戏服务 onOpen"))
+
+        this._callBackLink &&  this._callBackLink(true)
     }
 }

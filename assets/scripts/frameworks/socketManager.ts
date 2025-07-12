@@ -18,7 +18,7 @@ export class SocketManager implements handleSocketMessage {
     private _session = 0;
     private _timeid: number = -1;
     private _callBacks: Array<(data: any) => void> = [];
-    private _callBackLink: ((result: boolean) => void) | null = null;
+    protected _callBackLink: ((result: boolean) => void) | null = null;
     private _onServerReport: Map<string, (data: any) => void> | null = null;
     
     constructor(){
