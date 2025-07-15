@@ -31,10 +31,9 @@ export class Auth {
     }
 
     resp(success:boolean){
+        const dt = Date.now() - this._time
+        console.log('auth time:', dt / 1000)
         if(success){
-            const dt = Date.now() - this._time
-            console.log('auth time:', dt / 1000)
-            
             DataCenter.instance.addSubid();
             console.log(LogColors.green("认证成功"))
             // 用户信息
