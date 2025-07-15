@@ -1,6 +1,6 @@
 import { _decorator} from 'cc';
 import FGUIGameView from '../fgui/test/FGUIGameView';
-import { SocketManager } from '../frameworks/socketManager';
+import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
@@ -17,14 +17,12 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
-        //SocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
-        SocketManager.instance.addServerReport("reportGamePlayerInfo", this.onReportGamePlayerInfo.bind(this));
-        SocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
-        SocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
-        SocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
-        SocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
+        //GameSocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
+        GameSocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
+        GameSocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
+        GameSocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
+        GameSocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
     }
-
     onReportGameRoundResult(data: any): void {
         console.log('******************onReportGameRoundResult', data);
         console.log('selfSeat ', GameData.instance.getSelfSeat())
@@ -51,11 +49,11 @@ export class GameView extends FGUIGameView {
 
     onDisable(){
         super.onDisable();
-        SocketManager.instance.removeServerReport("reportGamePlayerInfo");
-        SocketManager.instance.removeServerReport("reportGameStep");
-        SocketManager.instance.removeServerReport("reportGamePlayerAttitude");
-        SocketManager.instance.removeServerReport("reportGameOutHand");
-        SocketManager.instance.removeServerReport("reportGameRoundResult");
+        GameSocketManager.instance.removeServerReport("reportGamePlayerInfo");
+        GameSocketManager.instance.removeServerReport("reportGameStep");
+        GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
+        GameSocketManager.instance.removeServerReport("reportGameOutHand");
+        GameSocketManager.instance.removeServerReport("reportGameRoundResult");
     }
 
     onShow(){
@@ -189,7 +187,7 @@ export class GameView extends FGUIGameView {
 
     onBtnSure(){
         console.log('onBtnSure');
-        SocketManager.instance.sendToServer('gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
+        GameSocketManager.instance.sendToServer('gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
     }
 
     onReportGameOutHand(data: any): void {
