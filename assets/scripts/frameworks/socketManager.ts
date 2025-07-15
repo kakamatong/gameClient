@@ -14,7 +14,6 @@ export class SocketManager implements handleSocketMessage {
     private _client: any;
     private _bloaded = false;
     private _isopen = false;
-    private _iscontent = false
     private _session = 0;
     private _timeid: number = -1;
     private _callBacks: Array<(data: any) => void> = [];
@@ -38,7 +37,6 @@ export class SocketManager implements handleSocketMessage {
     initSocket(url: string, header?: string | string[]) {
         this._session = 0;
         this._isopen = false;
-        this._iscontent = false
         const _socket = new Socket();
         _socket.init(url, header);
         _socket.setHandleMessage(this);
@@ -118,7 +116,7 @@ export class SocketManager implements handleSocketMessage {
     }
 
     sendMessage(message: any) {
-        if(this._iscontent && this._isopen){
+        if(this._isopen){
             this._socket && this._socket.sendMessage(message);
         }else{
             log(LogColors.red("_socket 未连接"))
@@ -136,25 +134,10 @@ export class SocketManager implements handleSocketMessage {
             }
             this._callBacks && this._callBacks[response.session] && this._callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
-            if (response.pname == 'svrReady') {
-                this.svrReady(response);
-                return
-            } else if (response.pname == 'svrMsg') {
+            if (response.pname == 'svrMsg') {
                 // 回调
                 this.onReport(response.result.type, JSON.parse(response.result.data));
             }
-        }
-    }
-
-    svrReady(message: any) {
-        if (message.result.code) {
-            this._iscontent = true;
-            //this.content();
-            //this.startHeartBeat();
-            this._callBackLink &&  this._callBackLink(true)
-        } else {
-            this._iscontent = false;
-            this._callBackLink &&  this._callBackLink(false)
         }
     }
 
@@ -184,6 +167,7 @@ export class SocketManager implements handleSocketMessage {
     onOpen(event: any) {
         log(this._name + ' onOpen', event);
         this._isopen = true;
+        this._callBackLink &&  this._callBackLink(true)
     }
 
     onMessage(message: Uint8Array) {

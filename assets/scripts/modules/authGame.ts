@@ -31,9 +31,9 @@ export class AuthGame {
 
     resp(success:boolean){
         if(success){
-            
+            console.log(LogColors.green("连接游戏服务成功"))
         }else{
-            console.log('auth fail')
+            console.log(LogColors.red("连接游戏服务失败"))
         }
         this._callBack && this._callBack(success);
     }
