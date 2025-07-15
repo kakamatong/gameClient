@@ -131,7 +131,7 @@ export class TestView extends FGUITestView {
         const callBack = (success:boolean)=>{
             if(success){
                 //UIManager.instance.showView('GameView');
-                console.log(LogColors.green("游戏服务连接成功"))
+                //console.log(LogColors.green("游戏服务连接成功"))
             }
         }
         AuthGame.instance.req(DataCenter.instance.gameid, DataCenter.instance.roomid, callBack);

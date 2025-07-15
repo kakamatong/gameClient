@@ -15,9 +15,4 @@ export class GameSocketManager extends SocketManager {
     constructor(){
         super();
     }
-
-    onOpen(event: any): void {
-        super.onOpen(event);
-        this._callBackLink &&  this._callBackLink(true)
-    }
 }
