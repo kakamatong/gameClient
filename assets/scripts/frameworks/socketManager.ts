@@ -18,10 +18,10 @@ export class SocketManager implements handleSocketMessage {
     private _timeid: number = -1;
     private _callBacks: Array<(data: any) => void> = [];
     protected _callBackLink: ((result: boolean) => void) | null = null;
-    private _onServerReport: Map<string, (data: any) => void> | null = null;
+    private _onServerListen: Map<string, (data: any) => void> | null = null;
     
     constructor(){
-        this._onServerReport = new Map<string, (data: any) => void>();
+        this._onServerListen = new Map<string, (data: any) => void>();
     }
 
     start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
@@ -136,31 +136,32 @@ export class SocketManager implements handleSocketMessage {
         } else if (response.type == "REQUEST") {
             if (response.pname == 'svrMsg') {
                 // 回调
-                this.onReport(response.result.type, JSON.parse(response.result.data));
+                this.onSvrMsg(response.result.type, JSON.parse(response.result.data));
             }
         }
     }
 
-    onReport(name: string, data: any) {
-        if (this._onServerReport) {
-            const callBack = this._onServerReport.get(name);
+    onSvrMsg(name: string, data: any) {
+        if (this._onServerListen) {
+            const callBack = this._onServerListen.get(name);
             callBack && callBack(data);
         }
     }
 
     // 增加服务器广播监听
-    addServerReport(name: string, callBack: (data: any) => void) {
-        if (!this._onServerReport) {
-            this._onServerReport = new Map<string, (data: any) => void>();
+    addServerListen(name: string, callBack: (data: any) => void) {
+
+        if (!this._onServerListen) {
+            this._onServerListen = new Map<string, (data: any) => void>();
         }
 
-        this._onServerReport.set(name, callBack);
+        this._onServerListen.set(name, callBack);
     }
 
     // 移除服务器广播监听
-    removeServerReport(name: string) {
-        if (this._onServerReport) {
-            this._onServerReport.delete(name);
+    removeServerListen(name: string) {
+        if (this._onServerListen) {
+            this._onServerListen.delete(name);
         }
     }
 

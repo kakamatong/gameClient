@@ -26,11 +26,11 @@ export class TestView extends FGUITestView {
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
         AddEventListener('userData',this.showUserInfo, this);
         AddEventListener('userStatus',this.showUserStatus, this);
-        LobbySocketManager.instance.addServerReport("reportUserStatus", this.updateUserStatus.bind(this));
-        LobbySocketManager.instance.addServerReport("updateRich", this.onSvrUpdateRich.bind(this));
-        LobbySocketManager.instance.addServerReport("matchOnSure", this.onSvrMatchOnSure.bind(this));
-        LobbySocketManager.instance.addServerReport("gameRoomReady", this.onSvrGameRoomReady.bind(this));
-        LobbySocketManager.instance.addServerReport("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        LobbySocketManager.instance.addServerListen("reportUserStatus", this.updateUserStatus.bind(this));
+        LobbySocketManager.instance.addServerListen("updateRich", this.onSvrUpdateRich.bind(this));
+        LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
+        LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
+        LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
     }
 
     onDisable(){
@@ -38,10 +38,10 @@ export class TestView extends FGUITestView {
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
-        LobbySocketManager.instance.removeServerReport("reportUserStatus");
-        LobbySocketManager.instance.removeServerReport("reportMatch");
-        LobbySocketManager.instance.removeServerReport("updateRich");
-        LobbySocketManager.instance.removeServerReport("matchOnSure");
+        LobbySocketManager.instance.removeServerListen("reportUserStatus");
+        LobbySocketManager.instance.removeServerListen("reportMatch");
+        LobbySocketManager.instance.removeServerListen("updateRich");
+        LobbySocketManager.instance.removeServerListen("matchOnSure");
     }
 
     onShow(){

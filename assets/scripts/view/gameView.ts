@@ -17,13 +17,28 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
-        GameSocketManager.instance.callServer("room","test",{code : 122})
-        //GameSocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
-        // GameSocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
+        GameSocketManager.instance.callServer("room","clientReady",{})
+        GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
+        //GameSocketManager.instance.addServerListen("reportGameStep", this.onReportGameStep.bind(this));
         // GameSocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
         // GameSocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
         // GameSocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
     }
+
+    onDisable(){
+        super.onDisable();
+        GameSocketManager.instance.removeServerListen("roomInfo");
+        //GameSocketManager.instance.removeServerListen("reportGamePlayerInfo");
+        // GameSocketManager.instance.removeServerReport("reportGameStep");
+        // GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
+        // GameSocketManager.instance.removeServerReport("reportGameOutHand");
+        // GameSocketManager.instance.removeServerReport("reportGameRoundResult");
+    }
+
+    onRoomInfo(data:any){
+        console.log(data)
+    }
+
     onReportGameRoundResult(data: any): void {
         console.log('******************onReportGameRoundResult', data);
         console.log('selfSeat ', GameData.instance.getSelfSeat())
@@ -46,15 +61,6 @@ export class GameView extends FGUIGameView {
                 }
             }
         }
-    }
-
-    onDisable(){
-        super.onDisable();
-        // GameSocketManager.instance.removeServerReport("reportGamePlayerInfo");
-        // GameSocketManager.instance.removeServerReport("reportGameStep");
-        // GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
-        // GameSocketManager.instance.removeServerReport("reportGameOutHand");
-        // GameSocketManager.instance.removeServerReport("reportGameRoundResult");
     }
 
     onShow(){
