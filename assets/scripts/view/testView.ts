@@ -130,7 +130,7 @@ export class TestView extends FGUITestView {
         //UIManager.instance.showView('GameView');
         const callBack = (success:boolean)=>{
             if(success){
-                //UIManager.instance.showView('GameView');
+                UIManager.instance.showView('GameView');
                 //console.log(LogColors.green("游戏服务连接成功"))
             }
         }
