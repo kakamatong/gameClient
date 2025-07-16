@@ -17,11 +17,12 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
+        GameSocketManager.instance.callServer()
         //GameSocketManager.instance.sendToServer('connectGame', { code:1 }, this.respConnectGame.bind(this))
-        GameSocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
-        GameSocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
-        GameSocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
-        GameSocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
+        // GameSocketManager.instance.addServerReport("reportGameStep", this.onReportGameStep.bind(this));
+        // GameSocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
+        // GameSocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
+        // GameSocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
     }
     onReportGameRoundResult(data: any): void {
         console.log('******************onReportGameRoundResult', data);
@@ -49,11 +50,11 @@ export class GameView extends FGUIGameView {
 
     onDisable(){
         super.onDisable();
-        GameSocketManager.instance.removeServerReport("reportGamePlayerInfo");
-        GameSocketManager.instance.removeServerReport("reportGameStep");
-        GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
-        GameSocketManager.instance.removeServerReport("reportGameOutHand");
-        GameSocketManager.instance.removeServerReport("reportGameRoundResult");
+        // GameSocketManager.instance.removeServerReport("reportGamePlayerInfo");
+        // GameSocketManager.instance.removeServerReport("reportGameStep");
+        // GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
+        // GameSocketManager.instance.removeServerReport("reportGameOutHand");
+        // GameSocketManager.instance.removeServerReport("reportGameRoundResult");
     }
 
     onShow(){

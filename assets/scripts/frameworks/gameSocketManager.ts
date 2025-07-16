@@ -15,4 +15,14 @@ export class GameSocketManager extends SocketManager {
     constructor(){
         super();
     }
+
+    callServer(moduleName: string, funcName: string, args:any, callBack?: (data: any) => void){
+        const strArgs = JSON.stringify(args)
+        const data = {
+            moduleName: moduleName,
+            funcName:funcName,
+            args: strArgs
+        }
+        this.sendToServer('call', data, callBack)
+    }
 }

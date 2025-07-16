@@ -17,7 +17,7 @@ export class Auth {
     }
 
     req(){
-        LobbySocketManager.instance.loadProtocol(()=>{
+        LobbySocketManager.instance.loadProtocol("lobby",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
             const params = `username=${loginInfo?.username ?? ''}&userid=${loginInfo?.userid ?? ''}&token=${(loginInfo?.token ?? '')}&device=${'pc'}&version=${'0.0.1'}&channel=${'account'}&subid=${loginInfo?.subid ?? ''}`
             const url = `${DataCenter.instance.appConfig.authUrl}?${params}`

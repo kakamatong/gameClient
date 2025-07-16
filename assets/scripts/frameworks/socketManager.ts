@@ -43,7 +43,7 @@ export class SocketManager implements handleSocketMessage {
         return _socket;
     }
 
-    loadProtocol(callBack: () => void) {
+    loadProtocol(path:string, callBack: () => void) {
         if (this._bloaded) {
             callBack && callBack();
             return
@@ -53,9 +53,9 @@ export class SocketManager implements handleSocketMessage {
                 log('loadBundle error', err);
                 return;
             }
-
+            const protocolPath = path + "/"
             // 必须先读取服务端协议
-            bundle.load('s2c', (err, asset: BufferAsset) => {
+            bundle.load(protocolPath + 's2c', (err, asset: BufferAsset) => {
                 log('loadAsset error', err);
 
                 const buffer = new Uint8Array(asset.buffer());
@@ -63,7 +63,7 @@ export class SocketManager implements handleSocketMessage {
                 this._client = serverSproto?.host('package');
 
                 // 然后读取客户端协议
-                bundle.load('c2s', (err, asset: BufferAsset) => {
+                bundle.load(protocolPath + 'c2s', (err, asset: BufferAsset) => {
                     log('loadAsset error', err);
 
                     const buffer = new Uint8Array(asset.buffer());

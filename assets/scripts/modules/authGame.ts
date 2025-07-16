@@ -21,7 +21,7 @@ export class AuthGame {
     req(gameid:number,roomid:number,callBack:(success:boolean)=>void){
         this._callBack = callBack;
 
-        GameSocketManager.instance.loadProtocol(()=>{
+        GameSocketManager.instance.loadProtocol("game10001",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
             const params = `username=${loginInfo?.username ?? ''}&userid=${loginInfo?.userid ?? ''}&token=${loginInfo?.token ?? ''}&channel=${'account'}&subid=${loginInfo?.subid ?? ''}&gameid=${gameid}&roomid=${roomid}`
             const url = `${DataCenter.instance.appConfig.authGameUrl}?${params}`
