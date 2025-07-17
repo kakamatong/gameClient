@@ -103,6 +103,17 @@ export class SocketManager implements handleSocketMessage {
         this.sendToServer('call', data, callBack)
     }
 
+    sendServer(serverName: string, moduleName: string, funcName: string, args:any){
+        const strArgs = JSON.stringify(args)
+        const data = {
+            serverName: serverName,
+            moduleName: moduleName,
+            funcName:funcName,
+            args: strArgs
+        }
+        this.sendToServer('send', data)
+    }
+
     sendToServer(xyname: string, data: any, callBack?: (data: any) => void) {
         this._session++;
         if (callBack) {
