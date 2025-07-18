@@ -19,10 +19,10 @@ export class GameView extends FGUIGameView {
         GameData.instance.maxPlayer = 2;
         GameSocketManager.instance.sendServer("room","clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
-        GameSocketManager.instance.addServerListen("gameStep", this.onReportGameStep.bind(this));
-        GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
-        GameSocketManager.instance.addServerListen("gameOutHand", this.onReportGameOutHand.bind(this));
-        GameSocketManager.instance.addServerListen("gameRoundResult", this.onReportGameRoundResult.bind(this));
+        GameSocketManager.instance.addServerListen("gameStep", this.onGameStep.bind(this));
+        GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onGamePlayerAttitude.bind(this));
+        GameSocketManager.instance.addServerListen("gameOutHand", this.onGameOutHand.bind(this));
+        GameSocketManager.instance.addServerListen("gameRoundResult", this.onGameRoundResult.bind(this));
     }
 
     onDisable(){
@@ -69,8 +69,8 @@ export class GameView extends FGUIGameView {
 
     }
 
-    onReportGameRoundResult(data: any): void {
-        console.log('******************onReportGameRoundResult', data);
+    onGameRoundResult(data: any): void {
+        console.log('******************onGameRoundResult', data);
         console.log('selfSeat ', GameData.instance.getSelfSeat())
         const selfSeat = GameData.instance.getSelfSeat()
         if (data.info && data.info.length > 0){
@@ -140,7 +140,7 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    onReportGameStep(data: any): void {
+    onGameStep(data: any): void {
         GameData.instance.gameStep = data.stepid;
         switch(GameData.instance.gameStep){
             case ENUM_GAME_STEP.START:
@@ -158,8 +158,8 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    onReportGamePlayerAttitude(data: any): void {
-        console.log('onReportGamePlayerAttitude', data);
+    onGamePlayerAttitude(data: any): void {
+        console.log('onGamePlayerAttitude', data);
         const local = GameData.instance.seat2local(data.seat);
         const player = GameData.instance.getPlayerBySeat(data.seat);
         if(local == SELF_LOCAL){
@@ -216,8 +216,8 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.sendToServer('gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
     }
 
-    onReportGameOutHand(data: any): void {
-        console.log('onReportGameOutHand', data);
+    onGameOutHand(data: any): void {
+        console.log('onGameOutHand', data);
         const local = GameData.instance.seat2local(data.seat);
         if(local == SELF_LOCAL){
             this.UI_TXT_OUT_HAND_1.text = this.getOutHandCNName(data.flag);
