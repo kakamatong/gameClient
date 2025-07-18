@@ -213,7 +213,7 @@ export class GameView extends FGUIGameView {
 
     onBtnSure(){
         console.log('onBtnSure');
-        GameSocketManager.instance.sendToServer('gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
+        GameSocketManager.instance.sendServer('logic','gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
     }
 
     onGameOutHand(data: any): void {
