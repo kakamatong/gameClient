@@ -90,10 +90,17 @@ export class TestView extends FGUITestView {
 
     onSvrMatchOnSure(data:any){
         console.log(data);
-        if(data.readys.indexOf(DataCenter.instance.userid) != -1){
-            console.log(LogColors.red('已准备'));
-            return;
+        if(data.readys && data.readys.length > 0){
+            for(let i = 0; i < data.readys.length; i++){
+                const userid = data.readys[i];
+                if(userid == DataCenter.instance.userid){
+                    console.log(LogColors.red('已准备'));
+                    return;
+                }
+            }
+
         }
+
         LobbySocketManager.instance.callServer('match','', 'onSure', {
             id: data.id,
             sure: true

@@ -6,8 +6,6 @@ export class AuthGame {
     private static _instance: AuthGame;
     private _callBack:((success:boolean)=>void) | null = null;
 
-
-
     public static get instance(): AuthGame {
         if (!this._instance) {
             this._instance = new AuthGame();
