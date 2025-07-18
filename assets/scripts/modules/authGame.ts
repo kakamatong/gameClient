@@ -1,9 +1,6 @@
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
-import { UserData } from './userData';
-import { UserRiches } from './userRiches';
-import { UserStatus } from './userStatus';
 export class AuthGame {
     //Auth
     private static _instance: AuthGame;
