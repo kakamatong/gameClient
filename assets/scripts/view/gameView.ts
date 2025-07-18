@@ -4,7 +4,7 @@ import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS} from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1} from '../datacenter/interfaceGameConfig';
 import { UIManager } from '../frameworks/uimanager';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
@@ -19,24 +19,54 @@ export class GameView extends FGUIGameView {
         GameData.instance.maxPlayer = 2;
         GameSocketManager.instance.sendServer("room","clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
-        //GameSocketManager.instance.addServerListen("reportGameStep", this.onReportGameStep.bind(this));
-        // GameSocketManager.instance.addServerReport("reportGamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
-        // GameSocketManager.instance.addServerReport("reportGameOutHand", this.onReportGameOutHand.bind(this));
-        // GameSocketManager.instance.addServerReport("reportGameRoundResult", this.onReportGameRoundResult.bind(this));
+        GameSocketManager.instance.addServerListen("gameStep", this.onReportGameStep.bind(this));
+        GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onReportGamePlayerAttitude.bind(this));
+        GameSocketManager.instance.addServerListen("gameOutHand", this.onReportGameOutHand.bind(this));
+        GameSocketManager.instance.addServerListen("gameRoundResult", this.onReportGameRoundResult.bind(this));
     }
 
     onDisable(){
         super.onDisable();
         GameSocketManager.instance.removeServerListen("roomInfo");
         //GameSocketManager.instance.removeServerListen("reportGamePlayerInfo");
-        // GameSocketManager.instance.removeServerReport("reportGameStep");
-        // GameSocketManager.instance.removeServerReport("reportGamePlayerAttitude");
-        // GameSocketManager.instance.removeServerReport("reportGameOutHand");
-        // GameSocketManager.instance.removeServerReport("reportGameRoundResult");
+        GameSocketManager.instance.removeServerListen("gameStep");
+        GameSocketManager.instance.removeServerListen("gamePlayerAttitude");
+        GameSocketManager.instance.removeServerListen("gameOutHand");
+        GameSocketManager.instance.removeServerListen("gameRoundResult");
+    }
+
+    dealSeatInfo(data:any){
+        const selfid = DataCenter.instance.userid;
+        for(let i = 0; i < data.playerids.length; i++){
+            const userid = data.playerids[i];
+            const svrSeat = i + 1
+            if (userid == selfid) {
+                GameData.instance.playerList[SELF_LOCAL] = {
+                    userid:userid,
+                    svrSeat: svrSeat
+                }
+            }
+        }
+
+        for(let i = 0; i < data.playerids.length; i++){
+            const userid = data.playerids[i];
+            const svrSeat = i + 1
+            if (userid != selfid) {
+                const localSeat = GameData.instance.seat2local(i + 1);
+                GameData.instance.playerList[localSeat] = {
+                    userid:userid,
+                    svrSeat: svrSeat
+                }
+            }
+        }
     }
 
     onRoomInfo(data:any){
         console.log(data)
+
+        this.dealSeatInfo(data);
+        this.showPlayerInfo();
+
     }
 
     onReportGameRoundResult(data: any): void {
@@ -81,17 +111,18 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    showPlayerInfo(seat:number):void{
-        const playerInfo = GameData.instance.playerList[seat];
-        if(playerInfo){
-            if(seat == SELF_LOCAL){
-                this.UI_TXT_NICKNAME_1.text = playerInfo.nickname;
+    showPlayerInfo():void{
+        const players = GameData.instance.playerList;
+        for(let i = 1; i <= players.length; i++){
+            const playerInfo = players[i];
+            if(i == SEAT_1){
+                this.UI_TXT_NICKNAME_1.text = playerInfo.nickname ?? "";
                 this.UI_TXT_USERID_1.text = playerInfo.userid.toString();
-                this.UI_TXT_STATUS_1.text = this.getPlayerStatusText(playerInfo.status);
-            }else if (seat == 2){
-                this.UI_TXT_NICKNAME_2.text = playerInfo.nickname;
+                this.UI_TXT_STATUS_1.text = this.getPlayerStatusText(playerInfo.status ?? 0);
+            }else if (i == SEAT_2){
+                this.UI_TXT_NICKNAME_2.text = playerInfo.nickname ?? "";
                 this.UI_TXT_USERID_2.text = playerInfo.userid.toString();
-                this.UI_TXT_STATUS_2.text = this.getPlayerStatusText(playerInfo.status);
+                this.UI_TXT_STATUS_2.text = this.getPlayerStatusText(playerInfo.status ?? 0);
             }
         }
     }
@@ -106,18 +137,6 @@ export class GameView extends FGUIGameView {
                 return '游戏中';
             default:
                 return '未知';
-        }
-    }
-
-    onReportGamePlayerInfo(data: any): void {
-        const selfid = DataCenter.instance.userid;
-        if(data.userid == selfid){
-            GameData.instance.playerList[SELF_LOCAL] = data;
-            this.showPlayerInfo(SELF_LOCAL);
-        }else{
-            const local = GameData.instance.seat2local(data.seat);
-            GameData.instance.playerList[local] = data;
-            this.showPlayerInfo(local);
         }
     }
 

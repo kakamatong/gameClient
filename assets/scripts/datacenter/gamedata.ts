@@ -33,7 +33,7 @@ export class GameData {
     }
 
     getSelfSeat(): number {
-        return this._playerList[SELF_LOCAL].seat;
+        return this._playerList[SELF_LOCAL].svrSeat;
     }
 
     set playerList(list: Array<GAME_PLAYER_INFO>){
@@ -56,7 +56,7 @@ export class GameData {
     }
 
     local2seat(local: number): number {
-        return this.playerList[local].seat;
+        return this.playerList[local].svrSeat;
     }
 
     getPlayerBySeat(seat: number): GAME_PLAYER_INFO {
