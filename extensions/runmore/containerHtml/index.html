@@ -1,0 +1,88 @@
+<!----http://localhost:7456/assets/resources/native/index.html?userids=test001,test002,test003,test004&pwd=wlj123456,wlj123456,wlj123456,wlj123456-->>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>多窗口容器</title>
+    <style>
+        body {
+            background-color: #000000;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .window-container {
+            display: grid;
+            gap: 10px;
+            padding: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: minmax(200px, 1fr);
+            grid-auto-flow: row dense;
+            height: auto;
+            min-height: 100vh;
+        }
+        
+        @media (max-width: 1200px) {
+            .window-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .iframe-window {
+            border: 1px solid #333;
+            background: #1a1a1a;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <div class="window-container">
+
+    </div>
+</body>
+<script>
+
+    var userIds = [];
+    var pwds = [];
+    function init() {
+        // 获取URL参数
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // 示例：获取特定参数
+        const ids = urlParams.get('userids').split(',');
+        const tmppwds = urlParams.get('pwd').split(',');
+        const gameId = urlParams.get('pwd');
+        // 修正后的日志输出
+        console.log('初始化参数:', {
+            userIds: ids,
+            pwds: tmppwds
+        });
+        userIds = ids;
+        pwds = tmppwds;
+        initIframes();
+        // 在此添加参数应用逻辑（如：传递给iframe）
+    }
+    // iframe加载完成回调
+    function onIframeLoaded(event) {
+        const frame = event.target;
+        console.log('窗口加载完成:', frame.id);
+        // 在此添加自定义初始化逻辑
+    }
+
+    // 初始化方法
+    function initIframes() {
+        // 删除原有iframe静态代码
+        const container = document.querySelector('.window-container');
+        container.innerHTML = '';
+
+        userIds.forEach((userId, index) => {
+            const iframe = document.createElement('iframe');
+            iframe.id = `window_${index}`;
+            iframe.src = `../../../?userid=${userId}&pwd=${pwds[index]}`;
+            iframe.className = 'iframe-window';
+            iframe.onload = onIframeLoaded;
+            container.appendChild(iframe);
+        });
+    }
+
+
+</script>
+</html>

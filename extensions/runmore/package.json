@@ -1,0 +1,63 @@
+{
+    "$schema": "./@types/schema/package/index.json",
+    "package_version": 2,
+    "name": "runmore",
+    "version": "1.0.0",
+    "author": "Cocos Creator",
+    "editor": ">=3.8.5",
+    "scripts": {
+        "preinstall": "node ./scripts/preinstall.js",
+        "build": "tsc"
+    },
+    "description": "i18n:runmore.description",
+    "main": "./dist/main.js",
+    "dependencies": {
+        "fire-path": "^0.1.9",
+        "fs-extra": "^10.0.0",
+        "typescript": "^5.8.3"
+    },
+    "devDependencies": {
+        "@cocos/creator-types": "^3.8.5",
+        "@types/fs-extra": "^9.0.5",
+        "@types/node": "^18.17.1"
+    },
+    "panels": {
+        "default": {
+            "title": "runmore Default Panel",
+            "type": "dockable",
+            "main": "dist/panels/default",
+            "size": {
+                "min-width": 400,
+                "min-height": 300,
+                "width": 1024,
+                "height": 600
+            }
+        }
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "i18n:menu.panel/runmore",
+                "label": "i18n:runmore.open_panel",
+                "message": "open-panel"
+            },
+            {
+                "path": "i18n:menu.develop/runmore",
+                "label": "i18n:runmore.send_to_panel",
+                "message": "send-to-panel"
+            }
+        ],
+        "messages": {
+            "open-panel": {
+                "methods": [
+                    "openPanel"
+                ]
+            },
+            "send-to-panel": {
+                "methods": [
+                    "default.hello"
+                ]
+            }
+        }
+    }
+}
