@@ -10,6 +10,7 @@ import { UIManager } from '../frameworks/uimanager';
 import { Login, ACCOUNT_INFO } from '../login/login';
 import { DataCenter } from '../datacenter/datacenter';
 import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
+import { UserStatus } from '../modules/userStatus';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -122,6 +123,11 @@ export class TestView extends FGUITestView {
             id: data.id,
             sure: true
         })
+    }
+
+    reqUserStatus(){
+        const userStatus = new UserStatus()
+        userStatus.req()
     }
 
     showUserInfo(data:any){

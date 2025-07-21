@@ -7,6 +7,7 @@ import { GameData } from '../datacenter/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
 import { UIManager } from '../frameworks/uimanager'
 import { Match } from '../modules/match';
+import { UserStatus } from '../modules/userStatus';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -85,6 +86,11 @@ export class GameView extends FGUIGameView {
         this.showPlayerInfo();
     }
 
+    reqUserStatus(){
+        const userStatus = new UserStatus()
+        userStatus.req()
+    }
+
     // 游戏回合结果
     onGameRoundResult(data: any): void {
         console.log('******************onGameRoundResult', data);
@@ -110,6 +116,7 @@ export class GameView extends FGUIGameView {
         }
 
         this.UI_BTN_CONTINUE.visible = true
+        this.reqUserStatus()
     }
 
     onShow(){

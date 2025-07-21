@@ -1,5 +1,6 @@
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { LogColors } from '../frameworks/framework';
+import { UserStatus } from './userStatus';
 export class Match {
     //单例
     private static _instance: Match;
@@ -15,6 +16,8 @@ export class Match {
     }
 
     resp(result: any) {
+        const userStatus = new UserStatus()
+        userStatus.req()
         if (result && result.code == 1) {
             console.log(LogColors.green(result.msg))
         } else {
