@@ -143,7 +143,9 @@ export class TestView extends FGUITestView {
             DataCenter.instance.roomid = data.roomid;
             console.log(LogColors.green('返回房间'));
 
-            UIManager.instance.showView('GameView');
+            // UIManager.instance.showView('GameView');
+            this.onSvrGameRoomReady(data)
+
         }else{
 
         }
