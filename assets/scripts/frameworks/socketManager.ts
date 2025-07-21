@@ -180,6 +180,7 @@ export class SocketManager implements handleSocketMessage {
         log(this._name + ' onOpen', event);
         this._isopen = true;
         this._callBackLink &&  this._callBackLink(true)
+        this._callBackLink = null
     }
 
     onMessage(message: Uint8Array) {
@@ -198,6 +199,7 @@ export class SocketManager implements handleSocketMessage {
         log(this._name + ' onClose', event); 
         this._isopen = false;
         this._callBackLink &&  this._callBackLink(false)
+        this._callBackLink = null
     }
 
     onError(event: any) {
