@@ -49,6 +49,7 @@
         // 示例：获取特定参数
         const ids = urlParams.get('userids').split(',');
         const tmppwds = urlParams.get('pwd').split(',');
+        const gameId = urlParams.get('pwd');
         // 修正后的日志输出
         console.log('初始化参数:', {
             userIds: ids,
@@ -62,8 +63,57 @@
     // iframe加载完成回调
     function onIframeLoaded(event) {
         const frame = event.target;
+        
+        // 创建右键菜单
+        const menu = document.createElement('div');
+        menu.style = `position:absolute;background:#333;color:#fff;padding:8px;display:none;`;
+        
+        const reloadBtn = document.createElement('div');
+        reloadBtn.textContent = '🔄 重启';
+        reloadBtn.style = 'cursor:pointer;padding:4px;';
+        reloadBtn.onclick = () => {
+            frame.src = frame.src; // 重新加载
+            menu.style.display = 'none';
+        };
+    
+        // 右键事件处理
+        // 修改事件绑定方式
+        // 修正事件绑定逻辑
+        frame.contentDocument.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            const iframeRect = frame.getBoundingClientRect();
+            
+            menu.style.left = `${e.clientX + iframeRect.left}px`;
+            menu.style.top = `${e.clientY + iframeRect.top}px`;
+            menu.style.display = 'block';
+        });
+        
+        // 添加菜单到body防止被遮挡
+        document.body.appendChild(menu);
+        
+        // 增加防抖处理
+        let lastClick = 0;
+        frame.contentDocument.addEventListener('mousedown', (e) => {
+            if(Date.now() - lastClick < 300) return;
+            lastClick = Date.now();
+            menu.style.display = 'none';
+        });
+        
+        // 添加菜单容器样式
+        menu.style.position = 'fixed';
+        menu.style.background = '#333';
+        menu.style.borderRadius = '4px';
+        menu.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+        menu.innerHTML = '';
+        menu.appendChild(reloadBtn);
+    
+        // 点击其他地方隐藏菜单
+        document.addEventListener('click', () => {
+            menu.style.display = 'none';
+        });
+    
+        frame.parentNode.appendChild(menu);
         console.log('窗口加载完成:', frame.id);
-        // 在此添加自定义初始化逻辑
     }
 
     // 初始化方法
