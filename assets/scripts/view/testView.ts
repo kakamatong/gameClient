@@ -1,4 +1,4 @@
-import { _decorator} from 'cc';
+import { _decorator, sys } from 'cc';
 import FGUITestView from '../fgui/test/FGUITestView';
 import {AddEventListener,RemoveEventListener, LogColors} from '../frameworks/framework'
 import {Auth} from '../modules/auth';
@@ -31,6 +31,9 @@ export class TestView extends FGUITestView {
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        if(sys.isBrowser){
+            this.checkAutoLogin()
+        }
     }
 
     onDisable(){
@@ -46,6 +49,20 @@ export class TestView extends FGUITestView {
 
     onShow(){
         console.log('TestView onShow');
+    }
+
+    checkAutoLogin(){
+        // http://localhost:7456/assets/resources/native/index.html?userids=test001,test002,test003,test004&pwd=wlj123456,wlj123456,wlj123456,wlj123456
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // 示例：获取特定参数
+        const ids = urlParams.get('userid')
+        const tmppwds = urlParams.get('pwd')
+        if(ids && tmppwds){
+            this.UI_INPUT_ACC.text = ids;
+            this.UI_INPUT_PASS.text = tmppwds;
+            this.onBtnLogin()
+        }
     }
 
     onBtnLogin(){
