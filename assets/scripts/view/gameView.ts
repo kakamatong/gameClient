@@ -5,7 +5,8 @@ import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
-import { UIManager } from '../frameworks/uimanager';
+import { UIManager } from '../frameworks/uimanager'
+import { Match } from '../modules/match';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -106,6 +107,8 @@ export class GameView extends FGUIGameView {
                 }
             }
         }
+
+        this.UI_BTN_CONTINUE.visible = true
     }
 
     onShow(){
@@ -239,6 +242,11 @@ export class GameView extends FGUIGameView {
         }else if(local == 2){
             this.UI_TXT_OUT_HAND_2.text = this.getOutHandCNName(data.flag);
         }
+    }
+
+    onBtnContinue(){
+        Match.instance.req();
+        UIManager.instance.hideView('GameView');
     }
     
 }

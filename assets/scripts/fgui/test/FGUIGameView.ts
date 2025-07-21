@@ -20,6 +20,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_OUT_HAND_1:fgui.GTextField;
 	public UI_TXT_OUT_HAND_2:fgui.GTextField;
 	public UI_BTN_SURE:fgui.GButton;
+	public UI_BTN_CONTINUE:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -50,10 +51,13 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_OUT_HAND_2 = <fgui.GTextField>(this.getChildAt(15));
 		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(16));
 		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
+		this.UI_BTN_CONTINUE = <fgui.GButton>(this.getChildAt(17));
+		this.UI_BTN_CONTINUE.onClick(this.onBtnContinue, this);
 	}
 	onBtnClose():void{};
 	onBtnPaper():void{};
 	onBtnRock():void{};
 	onBtnScissors():void{};
 	onBtnSure():void{};
+	onBtnContinue():void{};
 }

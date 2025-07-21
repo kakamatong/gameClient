@@ -62,5 +62,9 @@
       <relation target="" sidePair="center-center,middle-middle"/>
       <Button title="确定" titleColor="#ffffff" titleFontSize="30"/>
     </component>
+    <component id="n17_ld0a" name="UI_BTN_CONTINUE" src="q7362" fileName="comp/compBtnScale09.xml" xy="751,324" size="186,58" visible="false">
+      <relation target="" sidePair="center-center,middle-middle,right-right,top-top"/>
+      <Button title="继续游戏" titleColor="#ffffff" titleFontSize="34"/>
+    </component>
   </displayList>
 </component>
