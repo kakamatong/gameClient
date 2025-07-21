@@ -38,6 +38,13 @@ export const PLAYER_STATUS = {
     PLAYING: 3,
 }
 
+export const ROOM_END_FLAG = {
+        NONE : 0,
+        GAME_END : 1,
+        OUT_TIME_WAITING : 2,
+        OUT_TIME_PLAYING : 3,
+    }
+
 export const SELF_LOCAL = 1;
 export const SEAT_1 = 1;
 export const SEAT_2 = 2;

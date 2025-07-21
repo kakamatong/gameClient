@@ -4,7 +4,7 @@ import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1} from '../datacenter/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
 import { UIManager } from '../frameworks/uimanager';
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
@@ -23,6 +23,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onGamePlayerAttitude.bind(this));
         GameSocketManager.instance.addServerListen("gameOutHand", this.onGameOutHand.bind(this));
         GameSocketManager.instance.addServerListen("gameRoundResult", this.onGameRoundResult.bind(this));
+        GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
     }
 
     onDisable(){
@@ -33,6 +34,20 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gamePlayerAttitude");
         GameSocketManager.instance.removeServerListen("gameOutHand");
         GameSocketManager.instance.removeServerListen("gameRoundResult");
+        GameSocketManager.instance.removeServerListen("roomEnd");
+    }
+
+    onRoomEnd(data:any){
+        const msg = "房间销毁"
+        if(data.code == ROOM_END_FLAG.GAME_END){
+            console.log("游戏结束 " + msg)
+        }else if(data.code == ROOM_END_FLAG.OUT_TIME_WAITING){
+            console.log("等待超时 " + msg)
+            this.onBtnClose()
+        }else if(data.code == ROOM_END_FLAG.OUT_TIME_PLAYING){
+            console.log("游戏超时 " + msg)
+            this.onBtnClose()
+        }
     }
 
     dealSeatInfo(data:any){
