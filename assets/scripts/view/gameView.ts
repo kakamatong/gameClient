@@ -38,6 +38,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("roomEnd");
     }
 
+    //房间销毁
     onRoomEnd(data:any){
         const msg = "房间销毁"
         if(data.code == ROOM_END_FLAG.GAME_END){
@@ -77,14 +78,14 @@ export class GameView extends FGUIGameView {
         }
     }
 
+    // 房间信息
     onRoomInfo(data:any){
         console.log(data)
-
         this.dealSeatInfo(data);
         this.showPlayerInfo();
-
     }
 
+    // 游戏回合结果
     onGameRoundResult(data: any): void {
         console.log('******************onGameRoundResult', data);
         console.log('selfSeat ', GameData.instance.getSelfSeat())
@@ -121,14 +122,7 @@ export class GameView extends FGUIGameView {
         UIManager.instance.hideView('GameView');
     }
 
-    respConnectGame(data: any): void {
-        if(data.code == 0){
-            console.log(LogColors.green(data.msg));
-        }else{
-            console.log(LogColors.red(data.msg));
-        }
-    }
-
+    // 显示玩家信息
     showPlayerInfo():void{
         const players = GameData.instance.playerList;
         for(let i = 1; i <= players.length; i++){
@@ -158,6 +152,7 @@ export class GameView extends FGUIGameView {
         }
     }
 
+    // 游戏阶段
     onGameStep(data: any): void {
         GameData.instance.gameStep = data.stepid;
         switch(GameData.instance.gameStep){
@@ -176,6 +171,7 @@ export class GameView extends FGUIGameView {
         }
     }
 
+    // 游戏玩家状态
     onGamePlayerAttitude(data: any): void {
         console.log('onGamePlayerAttitude', data);
         const local = GameData.instance.seat2local(data.seat);
