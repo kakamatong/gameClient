@@ -119,10 +119,8 @@ export class SocketManager implements handleSocketMessage {
         if (callBack) {
             this._callBacks[this._session] = callBack;
         }
-        if(data.funcName != 'heartbeat'){
-            const logMsg = `[${xyname}]`
-            log(LogColors.blue(this._name + ' sendToServer '), logMsg, data);
-        }
+        const logMsg = `[${xyname}][${this._session}]`
+        log(LogColors.blue(this._name + ' sendToServer '), logMsg, data);
         this._request && this.sendMessage(this._request(xyname, data, this._session));
     }
 
@@ -186,12 +184,8 @@ export class SocketManager implements handleSocketMessage {
     onMessage(message: Uint8Array) {
         //log('SocketManager onMessage', message);
         const response = this._client.dispatch(message);
-        const type = response.result?.type ?? ""
-        const result = response.result.result ?? ""
-        if(result.indexOf("heartbeat") == -1){
-            const logMsg = `[${response.type}][${type}][${response.session}] `
-            log(LogColors.yellow(this._name + ' onMessage '), logMsg, response);
-        }
+        const logMsg = `[${response.type}][${response.session}] `
+        log(LogColors.yellow(this._name + ' onMessage '), logMsg, response);
         this.dispatchMessage(response);
     }
 
