@@ -12,7 +12,7 @@ export class Match {
     }
 
     req(type = 0) {
-        LobbySocketManager.instance.callServer('match','','join', { gameid: 10001, queueid: 1 }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer('matchJoin',{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
     }
 
     resp(result: any) {

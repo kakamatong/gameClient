@@ -138,15 +138,10 @@ export class SocketManager implements handleSocketMessage {
     dispatchMessage(response: any) {
         if (response.type == "RESPONSE") {
             let result = response.result
-            if(result.code){
-                result = JSON.parse(response.result.result)
-            }
             this._callBacks && this._callBacks[response.session] && this._callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
-            if (response.pname == 'svrMsg') {
-                // 回调
-                this.onSvrMsg(response.result.type, JSON.parse(response.result.data));
-            }
+            // 回调
+            this.onSvrMsg(response.pname, response.result);
         }
     }
 

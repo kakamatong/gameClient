@@ -119,7 +119,7 @@ export class TestView extends FGUITestView {
 
         }
 
-        LobbySocketManager.instance.callServer('match','', 'onSure', {
+        LobbySocketManager.instance.sendToServer('matchOnSure', {
             id: data.id,
             sure: true
         })
@@ -177,15 +177,13 @@ export class TestView extends FGUITestView {
     onBtnShow(): void {
         //UIManager.instance.showView('GameView');
         const func = (result:any)=>{
-            const a = 1
             console.log(result);
-            const b = 2
             if(result && result.code == 1){
                 const res = JSON.parse(result.result);
                 console.log(res);
             }
         }
-        LobbySocketManager.instance.callServer('activity','daySignIn','getSignInInfo', {} , func)
+        LobbySocketManager.instance.sendToServer('callActivityFunc', {moduleName : 'daySignIn', funcName : 'getSignInInfo', args:JSON.stringify({})} , func)
     }
 
     onBtnTest1():void{
@@ -199,7 +197,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        LobbySocketManager.instance.callServer('activity','daySignIn','signIn', {} , func)
+        LobbySocketManager.instance.sendToServer('callActivityFunc', {moduleName : 'daySignIn', funcName : 'signIn', args:JSON.stringify({})} , func)
     }
 
     onBtnTest2():void{
@@ -213,7 +211,7 @@ export class TestView extends FGUITestView {
                 }
             }
         }
-        LobbySocketManager.instance.callServer('activity','daySignIn','fillSignIn', {index:6} , func)
+        LobbySocketManager.instance.sendToServer('callActivityFunc',{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({index:6})} , func)
     }
 
     getStatusText(status:number):string{
