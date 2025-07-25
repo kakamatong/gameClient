@@ -120,7 +120,7 @@ export class SocketManager implements handleSocketMessage {
             this._callBacks[this._session] = callBack;
         }
         if(data.funcName != 'heartbeat'){
-            const logMsg = `[${data.serverName ?? ''}][${data.funcName ?? ''}][${this._session}] `
+            const logMsg = `[${xyname}]`
             log(LogColors.blue(this._name + ' sendToServer '), logMsg, data);
         }
         this._request && this.sendMessage(this._request(xyname, data, this._session));

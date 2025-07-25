@@ -2,7 +2,7 @@ import { DataCenter } from '../datacenter/datacenter';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 export class UserRiches {
     req() {
-        LobbySocketManager.instance.callServer('user', '','userRiches', {}, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))
     }
 
     resp(data: any) {
