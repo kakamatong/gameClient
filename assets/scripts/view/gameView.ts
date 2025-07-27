@@ -21,9 +21,9 @@ export class GameView extends FGUIGameView {
         GameData.instance.maxPlayer = 2;
         GameSocketManager.instance.sendToServer("clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
-        GameSocketManager.instance.addServerListen("gameStep", this.onGameStep.bind(this));
-        GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onGamePlayerAttitude.bind(this));
-        GameSocketManager.instance.addServerListen("gameOutHand", this.onGameOutHand.bind(this));
+        GameSocketManager.instance.addServerListen("stepId", this.onGameStep.bind(this));
+        GameSocketManager.instance.addServerListen("playerAtt", this.onGamePlayerAttitude.bind(this));
+        GameSocketManager.instance.addServerListen("outHandInfo", this.onGameOutHand.bind(this));
         GameSocketManager.instance.addServerListen("gameRoundResult", this.onGameRoundResult.bind(this));
         GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
     }
@@ -32,9 +32,9 @@ export class GameView extends FGUIGameView {
         super.onDisable();
         GameSocketManager.instance.removeServerListen("roomInfo");
         //GameSocketManager.instance.removeServerListen("reportGamePlayerInfo");
-        GameSocketManager.instance.removeServerListen("gameStep");
-        GameSocketManager.instance.removeServerListen("gamePlayerAttitude");
-        GameSocketManager.instance.removeServerListen("gameOutHand");
+        GameSocketManager.instance.removeServerListen("stepId");
+        GameSocketManager.instance.removeServerListen("playerAtt");
+        GameSocketManager.instance.removeServerListen("outHandInfo");
         GameSocketManager.instance.removeServerListen("gameRoundResult");
         GameSocketManager.instance.removeServerListen("roomEnd");
     }
