@@ -19,7 +19,7 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
-        GameSocketManager.instance.sendServer("room","clientReady",{})
+        GameSocketManager.instance.sendToServer("clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
         GameSocketManager.instance.addServerListen("gameStep", this.onGameStep.bind(this));
         GameSocketManager.instance.addServerListen("gamePlayerAttitude", this.onGamePlayerAttitude.bind(this));
