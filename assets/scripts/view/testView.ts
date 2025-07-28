@@ -201,6 +201,20 @@ export class TestView extends FGUITestView {
         LobbySocketManager.instance.sendToServer('callActivityFunc', {moduleName : 'daySignIn', funcName : 'signIn', args:JSON.stringify({})} , func)
     }
 
+    onBtnMatchTest1(): void {
+        const func = (data:any)=>{
+            console.log(LogColors.green(data.msg))
+        }
+        LobbySocketManager.instance.sendToServer('matchTestStart',{code:1},func)
+    }
+
+    onBtnMatchTest2(): void {
+        const func = (data:any)=>{
+            console.log(LogColors.green(data.msg))
+        }
+        LobbySocketManager.instance.sendToServer('matchTestStop',{code:1},func)
+    }
+
     onBtnTest2():void{
         const func = (result:any)=>{
             if(result && result.code == 1){

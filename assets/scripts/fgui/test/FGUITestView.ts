@@ -16,6 +16,8 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_BTN_SHOW:fgui.GButton;
 	public UI_BTN_TEST1:fgui.GButton;
 	public UI_BTN_TEST2:fgui.GButton;
+	public UI_BTN_MATCH_TEST_1:fgui.GButton;
+	public UI_BTN_MATCH_TEST_2:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -44,6 +46,10 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_TEST1.onClick(this.onBtnTest1, this);
 		this.UI_BTN_TEST2 = <fgui.GButton>(this.getChildAt(11));
 		this.UI_BTN_TEST2.onClick(this.onBtnTest2, this);
+		this.UI_BTN_MATCH_TEST_1 = <fgui.GButton>(this.getChildAt(12));
+		this.UI_BTN_MATCH_TEST_1.onClick(this.onBtnMatchTest1, this);
+		this.UI_BTN_MATCH_TEST_2 = <fgui.GButton>(this.getChildAt(13));
+		this.UI_BTN_MATCH_TEST_2.onClick(this.onBtnMatchTest2, this);
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
@@ -52,4 +58,6 @@ export default class FGUITestView extends fgui.GComponent {
 	onBtnShow():void{};
 	onBtnTest1():void{};
 	onBtnTest2():void{};
+	onBtnMatchTest1():void{};
+	onBtnMatchTest2():void{};
 }

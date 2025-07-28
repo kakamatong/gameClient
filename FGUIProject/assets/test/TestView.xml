@@ -19,13 +19,19 @@
     <text id="n7_essk" name="UI_TXT_USERID" xy="395,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n10_quog" name="UI_TXT_USER_STATUS" xy="572,130" size="99,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <component id="n11_ep90" name="UI_BTN_SHOW" src="q7362" fileName="comp/compBtnScale09.xml" xy="79,408">
-      <Button title="测试" titleColor="#ffffff" titleFontSize="21"/>
+      <Button title="拉取签到" titleColor="#ffffff" titleFontSize="21"/>
     </component>
-    <component id="n12_wm22" name="UI_BTN_TEST1" src="q7362" fileName="comp/compBtnScale09.xml" xy="81,477">
+    <component id="n12_wm22" name="UI_BTN_TEST1" src="q7362" fileName="comp/compBtnScale09.xml" xy="325,409">
       <Button title="签到" titleColor="#ffffff" titleFontSize="21"/>
     </component>
-    <component id="n13_t1n2" name="UI_BTN_TEST2" src="q7362" fileName="comp/compBtnScale09.xml" xy="80,580">
+    <component id="n13_t1n2" name="UI_BTN_TEST2" src="q7362" fileName="comp/compBtnScale09.xml" xy="538,407">
       <Button title="补签" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
+    <component id="n14_eo9b" name="UI_BTN_MATCH_TEST_1" src="q7362" fileName="comp/compBtnScale09.xml" xy="31,484" size="252,40">
+      <Button title="开启机器人匹配测试" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
+    <component id="n15_eo9b" name="UI_BTN_MATCH_TEST_2" src="q7362" fileName="comp/compBtnScale09.xml" xy="282,484" size="324,40">
+      <Button title="关闭机器人匹配测试" titleColor="#ffffff" titleFontSize="21"/>
     </component>
   </displayList>
 </component>
