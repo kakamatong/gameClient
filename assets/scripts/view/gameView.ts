@@ -26,6 +26,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("outHandInfo", this.onGameOutHand.bind(this));
         GameSocketManager.instance.addServerListen("roundResult", this.onGameRoundResult.bind(this));
         GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
+        GameSocketManager.instance.addServerListen("playerInfos", this.onSvrPlayerInfos.bind(this));
     }
 
     onDisable(){
@@ -37,6 +38,25 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("outHandInfo");
         GameSocketManager.instance.removeServerListen("roundResult");
         GameSocketManager.instance.removeServerListen("roomEnd");
+        GameSocketManager.instance.removeServerListen("playerInfos");
+    }
+
+    onSvrPlayerInfos(data:any){
+        console.log('onSvrPlayerInfos', data);
+        for(let i = 0; i < data.infos.length; i++){
+            const info = data.infos[i];
+            const svrSeat = i + 1
+            const localSeat = GameData.instance.seat2local(svrSeat);
+            GameData.instance.playerList[localSeat].nickname = info.nickname;
+            GameData.instance.playerList[localSeat].headurl = info.headurl;
+            GameData.instance.playerList[localSeat].sex = info.sex;
+            GameData.instance.playerList[localSeat].province = info.province;
+            GameData.instance.playerList[localSeat].city = info.city;
+            GameData.instance.playerList[localSeat].ext = info.ext;
+            GameData.instance.playerList[localSeat].ip = info.ip;
+            GameData.instance.playerList[localSeat].status = info.status;
+        }
+        this.showPlayerInfo();
     }
 
     //房间销毁
@@ -83,7 +103,6 @@ export class GameView extends FGUIGameView {
     onRoomInfo(data:any){
         console.log(data)
         this.dealSeatInfo(data);
-        this.showPlayerInfo();
     }
 
     reqUserStatus(){

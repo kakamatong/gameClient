@@ -32,6 +32,7 @@ export class TestView extends FGUITestView {
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        
         if(sys.isBrowser){
             this.checkAutoLogin()
         }
