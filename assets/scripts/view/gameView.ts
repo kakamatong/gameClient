@@ -24,7 +24,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("stepId", this.onGameStep.bind(this));
         GameSocketManager.instance.addServerListen("playerAtt", this.onGamePlayerAttitude.bind(this));
         GameSocketManager.instance.addServerListen("outHandInfo", this.onGameOutHand.bind(this));
-        GameSocketManager.instance.addServerListen("gameRoundResult", this.onGameRoundResult.bind(this));
+        GameSocketManager.instance.addServerListen("roundResult", this.onGameRoundResult.bind(this));
         GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
     }
 
@@ -35,7 +35,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("stepId");
         GameSocketManager.instance.removeServerListen("playerAtt");
         GameSocketManager.instance.removeServerListen("outHandInfo");
-        GameSocketManager.instance.removeServerListen("gameRoundResult");
+        GameSocketManager.instance.removeServerListen("roundResult");
         GameSocketManager.instance.removeServerListen("roomEnd");
     }
 
@@ -234,7 +234,7 @@ export class GameView extends FGUIGameView {
 
     onBtnSure(){
         console.log('onBtnSure');
-        GameSocketManager.instance.sendServer('logic','gameOutHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
+        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
     }
 
     onGameOutHand(data: any): void {
