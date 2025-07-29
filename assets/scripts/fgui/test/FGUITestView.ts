@@ -18,6 +18,8 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_BTN_TEST2:fgui.GButton;
 	public UI_BTN_MATCH_TEST_1:fgui.GButton;
 	public UI_BTN_MATCH_TEST_2:fgui.GButton;
+	public UI_BTN_GET_RANK:fgui.GButton;
+	public UI_BTN_GET_RANK_SELF:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -50,6 +52,10 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_MATCH_TEST_1.onClick(this.onBtnMatchTest1, this);
 		this.UI_BTN_MATCH_TEST_2 = <fgui.GButton>(this.getChildAt(13));
 		this.UI_BTN_MATCH_TEST_2.onClick(this.onBtnMatchTest2, this);
+		this.UI_BTN_GET_RANK = <fgui.GButton>(this.getChildAt(14));
+		this.UI_BTN_GET_RANK.onClick(this.onBtnGetRank, this);
+		this.UI_BTN_GET_RANK_SELF = <fgui.GButton>(this.getChildAt(15));
+		this.UI_BTN_GET_RANK_SELF.onClick(this.onBtnGetRankSelf, this);
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
@@ -60,4 +66,6 @@ export default class FGUITestView extends fgui.GComponent {
 	onBtnTest2():void{};
 	onBtnMatchTest1():void{};
 	onBtnMatchTest2():void{};
+	onBtnGetRank():void{};
+	onBtnGetRankSelf():void{};
 }

@@ -252,4 +252,32 @@ export class TestView extends FGUITestView {
         }
         return '';
     }
+
+    onBtnGetRank(): void {
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                const res = JSON.parse(result.result);
+                if(res.error){
+                    console.log(LogColors.red(res.error));
+                }else{
+                    console.log(LogColors.green(res));
+                }
+            }
+        }
+        LobbySocketManager.instance.sendToServer('callActivityFunc',{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , func)
+    }
+
+    onBtnGetRankSelf(): void {
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                const res = JSON.parse(result.result);
+                if(res.error){
+                    console.log(LogColors.red(res.error));
+                }else{
+                    console.log(LogColors.green(res));
+                }
+            }
+        }
+        LobbySocketManager.instance.sendToServer('callActivityFunc',{moduleName : 'gameRank', funcName : 'getRank', args:JSON.stringify({})} , func)
+    }
 }

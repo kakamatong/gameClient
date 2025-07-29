@@ -33,5 +33,11 @@
     <component id="n15_eo9b" name="UI_BTN_MATCH_TEST_2" src="q7362" fileName="comp/compBtnScale09.xml" xy="282,484" size="324,40">
       <Button title="关闭机器人匹配测试" titleColor="#ffffff" titleFontSize="21"/>
     </component>
+    <component id="n16_eo9b" name="UI_BTN_GET_RANK" src="q7362" fileName="comp/compBtnScale09.xml" xy="41,335" size="185,40">
+      <Button title="拉取总排行" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
+    <component id="n17_eo9b" name="UI_BTN_GET_RANK_SELF" src="q7362" fileName="comp/compBtnScale09.xml" xy="303,338" size="148,40">
+      <Button title="拉取自己排名" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
   </displayList>
 </component>
