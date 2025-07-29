@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="285,32">
+  <displayList>
+    <text id="n0_eo9b" name="UI_TXT_RANK" xy="0,0" size="53,32" fontSize="22" color="#ffff00" text="rank"/>
+    <text id="n1_eo9b" name="UI_TXT_NAME" xy="99,0" size="64,32" fontSize="22" color="#ffffff" text="name"/>
+    <text id="n2_eo9b" name="UI_TXT_SCORE" xy="224,0" size="61,32" fontSize="22" color="#ffffff" text="score"/>
+  </displayList>
+</component>

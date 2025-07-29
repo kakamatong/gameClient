@@ -11,9 +11,12 @@ import { Login, ACCOUNT_INFO } from '../login/login';
 import { DataCenter } from '../datacenter/datacenter';
 import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
 import { UserStatus } from '../modules/userStatus';
+import * as fgui from "fairygui-cc";
+import FGUIrankInfo from '../fgui/test/FGUIrankInfo';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
+    private _rankList:any[] = [];
     constructor(){
         super();
         console.log('TestView constructor');
@@ -23,6 +26,7 @@ export class TestView extends FGUITestView {
     onEnable(){
         super.onEnable();
         console.log('TestView onEnable');
+        this.UI_LV_RANKLIST.itemRenderer = this.onRankItemRenderer.bind(this);
         //this.UI_BTN_LOGIN.on(fgui.Event.CLICK, this.onBtnLogin, this);
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
         AddEventListener('userData',this.showUserInfo, this);
@@ -253,6 +257,13 @@ export class TestView extends FGUITestView {
         return '';
     }
 
+    onRankItemRenderer(index:number, item:fgui.GComponent){
+        const data = this._rankList[index];
+        item.getChild('UI_TXT_NAME').text = data.nickname;
+        item.getChild('UI_TXT_SCORE').text = data.score.toString();
+        item.getChild('UI_TXT_RANK').text = index.toString()
+    }
+
     onBtnGetRank(): void {
         const func = (result:any)=>{
             if(result && result.code == 1){
@@ -260,7 +271,8 @@ export class TestView extends FGUITestView {
                 if(res.error){
                     console.log(LogColors.red(res.error));
                 }else{
-                    console.log(LogColors.green(res));
+                    this._rankList = res
+                    this.UI_LV_RANKLIST.numItems = res.length
                 }
             }
         }

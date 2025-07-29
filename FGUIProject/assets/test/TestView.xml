@@ -39,5 +39,6 @@
     <component id="n17_eo9b" name="UI_BTN_GET_RANK_SELF" src="q7362" fileName="comp/compBtnScale09.xml" xy="303,338" size="148,40">
       <Button title="拉取自己排名" titleColor="#ffffff" titleFontSize="21"/>
     </component>
+    <list id="n18_eo9b" name="UI_LV_RANKLIST" xy="962,243" size="344,300" overflow="scroll" defaultItem="ui://ljshfpzyeo9b4"/>
   </displayList>
 </component>
