@@ -261,7 +261,7 @@ export class TestView extends FGUITestView {
         const data = this._rankList[index];
         item.getChild('UI_TXT_NAME').text = data.nickname;
         item.getChild('UI_TXT_SCORE').text = data.score.toString();
-        item.getChild('UI_TXT_RANK').text = index.toString()
+        item.getChild('UI_TXT_RANK').text = (index + 1).toString()
     }
 
     onBtnGetRank(): void {
