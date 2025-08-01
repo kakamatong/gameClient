@@ -51,7 +51,7 @@ export class Login implements handleSocketMessage {
         }
         const strUser = this._accountInfo.username;
         const strPassword = this._accountInfo.password;
-        const strServer = 'lobbyGate';
+        const strServer = 'gate1';
         const strLogintype = 'account';
         this._loginInfo.username = strUser;
         this._loginInfo.password = strPassword;
