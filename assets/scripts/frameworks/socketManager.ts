@@ -25,13 +25,21 @@ export class SocketManager implements handleSocketMessage {
     }
 
     start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
-        if (callBack) {
-            this._callBackLink = callBack;
-        }
         if (this._socket) {
             this._socket.close();
         }
+
+        if (callBack) {
+            this._callBackLink = callBack;
+        }
+        
         this._socket = this.initSocket(url, header);
+    }
+
+    close(){
+        if(this._socket){
+            this._socket.close();
+        }
     }
 
     initSocket(url: string, header?: string | string[]) {
@@ -74,6 +82,11 @@ export class SocketManager implements handleSocketMessage {
                 });
             });
         });
+    }
+
+    isOpen(){
+        return this._isopen;
+
     }
 
     sendHeartBeat() {

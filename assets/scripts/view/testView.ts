@@ -100,7 +100,15 @@ export class TestView extends FGUITestView {
     }
     
     onBtnCon(): void {
-        Auth.instance.req();
+        if(LobbySocketManager.instance.isOpen()){
+            LobbySocketManager.instance.close()
+            setTimeout(()=>{
+                Auth.instance.req();
+            }, 500)
+        }else{
+            Auth.instance.req();
+        }
+        
     }
 
     onBtnMatch(): void {
