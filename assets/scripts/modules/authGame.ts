@@ -1,6 +1,8 @@
+import CryptoJS from 'crypto-js';   
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
+import { customDESEncryptStr } from '../frameworks/utils/utils';
 export class AuthGame {
     //Auth
     private static _instance: AuthGame;
@@ -18,7 +20,20 @@ export class AuthGame {
 
         GameSocketManager.instance.loadProtocol("game10001",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
-            const params = `username=${loginInfo?.username ?? ''}&userid=${loginInfo?.userid ?? ''}&token=${loginInfo?.token ?? ''}&channel=${'account'}&subid=${loginInfo?.subid ?? ''}&gameid=${gameid}&roomid=${roomid}`
+            const loginData = {
+                device:'pc',
+                version:'0.0.1',
+                channel:'account',
+                subid:loginInfo?.subid ?? '',
+                time: Date.now(),
+                username:loginInfo?.username ?? '',
+            }
+            let str = JSON.stringify(loginData)
+            const secret = CryptoJS.enc.Hex.parse(loginInfo?.token ?? "")
+            const token = customDESEncryptStr(str, secret)
+            const urlToken = encodeURIComponent(token)
+
+            const params = `ver=1&userid=${loginInfo?.userid ?? ''}&gameid=${gameid}&roomid=${roomid}&token=${urlToken}`
             const url = `${DataCenter.instance.appConfig.authGameUrl}?${params}`
             GameSocketManager.instance.start(url, undefined, this.resp.bind(this))
         })

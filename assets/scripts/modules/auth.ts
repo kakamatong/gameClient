@@ -5,7 +5,7 @@ import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
-import { stringToWordArray, customDESEncryptStr } from '../frameworks/utils/utils';
+import { customDESEncryptStr } from '../frameworks/utils/utils';
 export class Auth {
     //Auth
     private _time :number = 0
