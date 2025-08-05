@@ -79,11 +79,13 @@ export class TestView extends FGUITestView {
                 this.onBtnCon()
             }
         }
+        const loginInfo = DataCenter.instance.getLoginInfo();
         const acc = this.UI_INPUT_ACC.text ?? "";
         const pwd = this.UI_INPUT_PASS.text ?? "";
         const accInfo: ACCOUNT_INFO = {
             username: acc,
             password: pwd,
+            server: loginInfo?.server ?? "gate1"
         };
         const login = new Login();
         login.start(accInfo,func);

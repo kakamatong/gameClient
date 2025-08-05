@@ -11,7 +11,7 @@ const { ccclass, property } = _decorator;
 export interface ACCOUNT_INFO {
     username: string;
     password: string;
-    server?: string;
+    server: string;
     loginType?: string;
 }
 @ccclass('Login')
@@ -51,7 +51,7 @@ export class Login implements handleSocketMessage {
         }
         const strUser = this._accountInfo.username;
         const strPassword = this._accountInfo.password;
-        const strServer = 'gate1';
+        const strServer = this._accountInfo.server;
         const strLogintype = 'account';
         this._loginInfo.username = strUser;
         this._loginInfo.password = strPassword;
@@ -91,10 +91,12 @@ export class Login implements handleSocketMessage {
             const code = infos[0];
             const msg = atob(infos[1]);
             const msg2 = atob(infos[2]);
+            const svr = atob(infos[3]);
             if(code === '200'){
                 log(LogColors.green('登录成功'))
                 this._loginInfo.subid = Number(msg);
                 this._loginInfo.userid = Number(msg2);
+                this._loginInfo.server = svr
                 DataCenter.instance.setLoginInfo(this._loginInfo);
                 this._callBack(true);
             }else{
