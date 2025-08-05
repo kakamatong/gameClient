@@ -33,7 +33,10 @@ export class Auth {
             const token = customDESEncryptStr(str, secret)
             const urlToken = encodeURIComponent(token)
             const params = `ver=1&userid=${loginInfo?.userid ?? ''}&token=${urlToken}`
-            const url = `${DataCenter.instance.appConfig.authUrl}?${params}`
+            const authList = DataCenter.instance.authList;
+            const addr = authList[loginInfo?.server ?? ""]
+
+            const url = `ws://${addr}?${params}`
             // for(let i = 0; i < 200; i++){
             //     const s =new SocketManager()
             //     s.start(url, undefined, this.resp.bind(this))

@@ -71,6 +71,15 @@ export class TestView extends FGUITestView {
         }
     }
 
+    // 随机取一个认证地址
+    getAuthAddr(): string | undefined{
+        const authList = DataCenter.instance.authList;
+        const keys = Object.keys(authList);
+        if (keys.length === 0) return undefined;
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        return randomKey;
+    }
+
     onBtnLogin(){
         console.log('onBtnLogin');
         const func = (b:boolean)=>{
@@ -85,7 +94,7 @@ export class TestView extends FGUITestView {
         const accInfo: ACCOUNT_INFO = {
             username: acc,
             password: pwd,
-            server: loginInfo?.server ?? "gate1"
+            server: loginInfo?.server ?? (this.getAuthAddr() ?? "")
         };
         const login = new Login();
         login.start(accInfo,func);
