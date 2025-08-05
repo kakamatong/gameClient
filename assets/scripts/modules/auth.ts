@@ -1,10 +1,11 @@
+import CryptoJS from 'crypto-js';   
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
-import { SocketManager } from '../frameworks/socketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
+import { stringToWordArray, customDESEncryptStr } from '../frameworks/utils/utils';
 export class Auth {
     //Auth
     private _time :number = 0
@@ -19,7 +20,19 @@ export class Auth {
     req(){
         LobbySocketManager.instance.loadProtocol("lobby",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
-            const params = `username=${loginInfo?.username ?? ''}&userid=${loginInfo?.userid ?? ''}&token=${(loginInfo?.token ?? '')}&device=${'pc'}&version=${'0.0.1'}&channel=${'account'}&subid=${loginInfo?.subid ?? ''}`
+            const loginData = {
+                device:'pc',
+                version:'0.0.1',
+                channel:'account',
+                subid:loginInfo?.subid ?? '',
+                time: Date.now(),
+                username:loginInfo?.username ?? '',
+            }
+            let str = JSON.stringify(loginData)
+            const secret = CryptoJS.enc.Hex.parse(loginInfo?.token ?? "")
+            const token = customDESEncryptStr(str, secret)
+            const urlToken = encodeURIComponent(token)
+            const params = `ver=1&userid=${loginInfo?.userid ?? ''}&token=${urlToken}`
             const url = `${DataCenter.instance.appConfig.authUrl}?${params}`
             // for(let i = 0; i < 200; i++){
             //     const s =new SocketManager()

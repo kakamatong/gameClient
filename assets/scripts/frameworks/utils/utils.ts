@@ -714,6 +714,13 @@ export const customDESEncrypt = (data: string, key: CryptoJS.WordArray): number[
     return tokenB64Array;
 }
 
+export const customDESEncryptStr = (data: string, key: CryptoJS.WordArray): string => {
+    const dataWA = CryptoJS.enc.Utf8.parse(data);
+    const encrypted = desencode(dataWA, key);
+    const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);
+    return tokenB64
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // 去除字符串中的所有空格
 export const removeAllSpaces = (str: string): string => {
@@ -729,4 +736,10 @@ export const formatNumber = (num: number): string => {
     } else {
         return num.toFixed(2);
     }
+}
+
+// string to wordArr
+export const stringToWordArray = (str: string): CryptoJS.WordArray => {
+    const bytes = new TextEncoder().encode(str);
+    return bytesToWordArray(bytes);
 }
