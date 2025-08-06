@@ -15,7 +15,7 @@ export class AuthGame {
         return this._instance;
     }
 
-    req(addr:string,gameid:number,roomid:number,callBack:(success:boolean)=>void){
+    req(addr:string,gameid:number,roomid:string,callBack:(success:boolean)=>void){
         this._callBack = callBack;
         GameSocketManager.instance.loadProtocol("game10001",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();

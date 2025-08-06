@@ -165,6 +165,7 @@ export class TestView extends FGUITestView {
         if (data.status == ENUM_USER_STATUS.GAMEING){
             DataCenter.instance.gameid = data.gameid;
             DataCenter.instance.roomid = data.roomid;
+            DataCenter.instance.gameAddr = data.addr;
             console.log(LogColors.green('返回房间'));
 
             // UIManager.instance.showView('GameView');

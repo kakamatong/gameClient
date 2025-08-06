@@ -13,7 +13,7 @@ export class DataCenter {
     private _appConfig: any = null;
 
     private _gameid: number = 0;
-    private _roomid: number = 0;
+    private _roomid: string = '';
     private _gameAddr: string = '';
 
     private _authList: {[key:string]:string} = {
@@ -95,11 +95,11 @@ export class DataCenter {
         return this._gameid;
     }
 
-    set roomid(id:number) {
+    set roomid(id:string) {
         this._roomid = id;
     }
 
-    get roomid():number {
+    get roomid():string {
         return this._roomid;
     }
 
