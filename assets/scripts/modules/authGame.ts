@@ -15,9 +15,8 @@ export class AuthGame {
         return this._instance;
     }
 
-    req(gameid:number,roomid:number,callBack:(success:boolean)=>void){
+    req(addr:string,gameid:number,roomid:number,callBack:(success:boolean)=>void){
         this._callBack = callBack;
-
         GameSocketManager.instance.loadProtocol("game10001",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
             const loginData = {
@@ -34,7 +33,7 @@ export class AuthGame {
             const urlToken = encodeURIComponent(token)
 
             const params = `ver=1&userid=${loginInfo?.userid ?? ''}&gameid=${gameid}&roomid=${roomid}&token=${urlToken}`
-            const url = `${DataCenter.instance.appConfig.authGameUrl}?${params}`
+            const url = `ws://${addr}?${params}`
             GameSocketManager.instance.start(url, undefined, this.resp.bind(this))
         })
     }

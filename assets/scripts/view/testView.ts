@@ -182,6 +182,7 @@ export class TestView extends FGUITestView {
     onSvrGameRoomReady(data:any){
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
+        DataCenter.instance.gameAddr = data.addr;
         console.log(LogColors.green('游戏房间准备完成'));
         //UIManager.instance.showView('GameView');
         const callBack = (success:boolean)=>{
@@ -190,7 +191,7 @@ export class TestView extends FGUITestView {
                 //console.log(LogColors.green("游戏服务连接成功"))
             }
         }
-        AuthGame.instance.req(DataCenter.instance.gameid, DataCenter.instance.roomid, callBack);
+        AuthGame.instance.req(DataCenter.instance.gameAddr,DataCenter.instance.gameid, DataCenter.instance.roomid, callBack);
         
     }
 

@@ -14,6 +14,8 @@ export class DataCenter {
 
     private _gameid: number = 0;
     private _roomid: number = 0;
+    private _gameAddr: string = '';
+
     private _authList: {[key:string]:string} = {
         'gate1':'192.168.1.140:9002',
         'gate2':'192.168.1.140:9005',
@@ -100,6 +102,15 @@ export class DataCenter {
     get roomid():number {
         return this._roomid;
     }
+
+    set gameAddr(addr:string) {
+        this._gameAddr = addr;
+    }
+
+    get gameAddr():string {
+        return this._gameAddr;
+    }
+
 
     set authList(list:{[key:string]:string}){
         this._authList = list;
