@@ -17,9 +17,15 @@ export class DataCenter {
     private _gameAddr: string = '';
 
     private _authList: {[key:string]:string} = {
-        'gate1':'192.168.1.140:9002',
-        'gate2':'192.168.1.140:9005',
+        'gate1':'ws://192.168.1.140:9002',
+        'gate2':'ws://192.168.1.140:9005',
     };
+
+    private _gameAuthList: {[key:string]:string} = {
+        'game1':'ws://192.168.1.140:9003',
+        'game2':'ws://192.168.1.140:9006',
+    }
+
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {
@@ -120,4 +126,11 @@ export class DataCenter {
         return this._authList;
     }
 
+    set gameAuthList(list:{[key:string]:string}){
+        this._gameAuthList = list;
+    }
+
+    get gameAuthList():{[key:string]:string} {
+        return this._gameAuthList;
+    }
 }

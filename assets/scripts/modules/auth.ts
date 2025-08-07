@@ -36,7 +36,7 @@ export class Auth {
             const authList = DataCenter.instance.authList;
             const addr = authList[loginInfo?.server ?? ""]
 
-            const url = `ws://${addr}?${params}`
+            const url = `${addr}?${params}`
             // for(let i = 0; i < 200; i++){
             //     const s =new SocketManager()
             //     s.start(url, undefined, this.resp.bind(this))

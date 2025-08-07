@@ -33,7 +33,9 @@ export class AuthGame {
             const urlToken = encodeURIComponent(token)
 
             const params = `ver=1&userid=${loginInfo?.userid ?? ''}&gameid=${gameid}&roomid=${roomid}&token=${urlToken}`
-            const url = `ws://${addr}?${params}`
+            const newAddr = DataCenter.instance.gameAuthList[addr];
+
+            const url = `${newAddr}?${params}`
             GameSocketManager.instance.start(url, undefined, this.resp.bind(this))
         })
     }
