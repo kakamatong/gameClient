@@ -15,6 +15,38 @@ export class AuthList {
         return this._instance;
     }
 
+    // 递归解码对象中的所有URL编码字符串
+    private static decodeURLRecursive(data: any): any {
+        if (data === null || data === undefined) {
+            return data;
+        }
+
+        if (typeof data === 'string') {
+            try {
+                return decodeURIComponent(data);
+            } catch (e) {
+                log(LogColors.yellow(`Failed to decode URL: ${data}, error: ${e.message}`));
+                return data; // 解码失败时返回原始字符串
+            }
+        }
+
+        if (Array.isArray(data)) {
+            return data.map(item => this.decodeURLRecursive(item));
+        }
+
+        if (typeof data === 'object') {
+            const decodedObj: any = {};
+            for (const key in data) {
+                if (Object.prototype.hasOwnProperty.call(data, key)) {
+                    decodedObj[key] = this.decodeURLRecursive(data[key]);
+                }
+            }
+            return decodedObj;
+        }
+
+        return data;
+    }
+
     req(callBack:(success:boolean, data?:any)=>void){
         const url = DataCenter.instance.appConfig.authList;
         if (!url) {
@@ -42,8 +74,13 @@ export class AuthList {
         .then(data => {
             log(LogColors.green('authList request successful!'));
             // 将认证列表数据存储到DataCenter
-            if (data && data.authList) {
-                //DataCenter.instance.appConfig.authListData = data.authList;
+            if (data && data.data) {
+                // 对data.data进行URL解码
+                const decodedData = AuthList.decodeURLRecursive(data.data);
+                DataCenter.instance.authList = decodedData.gate;
+                DataCenter.instance.gameAuthList = decodedData.game;
+                // 同时更新原始data对象中的data字段
+                data.data = decodedData;
             }
             callBack(true, data);
         })
