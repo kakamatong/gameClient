@@ -12,6 +12,8 @@ import { DataCenter } from '../datacenter/datacenter';
 import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
 import { UserStatus } from '../modules/userStatus';
 import * as fgui from "fairygui-cc";
+import { AuthList } from '../modules/authList';
+
 import FGUIrankInfo from '../fgui/test/FGUIrankInfo';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
@@ -57,6 +59,17 @@ export class TestView extends FGUITestView {
         console.log('TestView onShow');
     }
 
+    checkAuthList(callBack?:(success:boolean)=>void){
+        AuthList.instance.req((success:boolean, data?:any)=>{
+            if(success){
+                console.log('authList:', data);
+            }
+            callBack?.(success);
+
+        })
+
+    }
+
     checkAutoLogin(){
         // http://localhost:7456/assets/resources/native/index.html?userids=test001,test002,test003,test004&pwd=wlj123456,wlj123456,wlj123456,wlj123456
         const urlParams = new URLSearchParams(window.location.search);
@@ -80,8 +93,7 @@ export class TestView extends FGUITestView {
         return randomKey;
     }
 
-    onBtnLogin(){
-        console.log('onBtnLogin');
+    login(){
         const func = (b:boolean)=>{
             console.log('login callback:', b);
             if(b){
@@ -98,6 +110,15 @@ export class TestView extends FGUITestView {
         };
         const login = new Login();
         login.start(accInfo,func);
+    }
+
+    onBtnLogin(){
+        console.log('onBtnLogin');
+        this.checkAuthList((success)=>{
+            if(success){
+                this.login();
+            }
+        })
     }
 
     onBtnClose(){

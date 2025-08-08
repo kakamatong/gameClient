@@ -1,5 +1,3 @@
 {
-    "loginUrl":"ws://192.168.1.140:8002",
-    "authUrl": "ws://192.168.1.140:9002",
-    "authGameUrl": "ws://192.168.1.140:9003"
+    "authList":"http://192.168.1.131:8080/api/game/authlist"
 }
