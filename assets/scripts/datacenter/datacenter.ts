@@ -26,6 +26,11 @@ export class DataCenter {
         // 'game2':'ws://192.168.1.140:9006',
     }
 
+    private _loginList: {[key:string]:string} = {
+        // 'game1':'ws://192.168.1.140:9003',
+        // 'game2':'ws://192.168.1.140:9006',
+    }
+
 
     private static _instance: DataCenter;
     public static get instance(): DataCenter {
@@ -125,6 +130,15 @@ export class DataCenter {
     get authList():{[key:string]:string} {
         return this._authList;
     }
+
+    set loginList(list:{[key:string]:string}){
+        this._loginList = list;
+    }
+
+    get loginList():{[key:string]:string} {
+        return this._loginList;
+    }
+
 
     set gameAuthList(list:{[key:string]:string}){
         this._gameAuthList = list;

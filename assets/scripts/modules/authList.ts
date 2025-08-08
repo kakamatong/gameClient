@@ -79,6 +79,8 @@ export class AuthList {
                 const decodedData = AuthList.decodeURLRecursive(data.data);
                 DataCenter.instance.authList = decodedData.gate;
                 DataCenter.instance.gameAuthList = decodedData.game;
+                DataCenter.instance.loginList = decodedData.login;
+
                 // 同时更新原始data对象中的data字段
                 data.data = decodedData;
             }

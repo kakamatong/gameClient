@@ -67,9 +67,17 @@ export class Login implements handleSocketMessage {
         this._loginMsg = token;
     }
 
+    getLoginUrl(){
+        const loginList = DataCenter.instance.loginList;
+        const keys = Object.keys(loginList);
+        if (keys.length === 0) return undefined;
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        return loginList[randomKey];
+    }
+
     initSocket() {
         this._socket = new Socket();
-        this._socket.init(DataCenter.instance.appConfig.loginUrl ?? "");
+        this._socket.init(this.getLoginUrl() ?? "");
         this._socket.setHandleMessage(this);
     }
 
