@@ -13,6 +13,7 @@ import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
 import { UserStatus } from '../modules/userStatus';
 import * as fgui from "fairygui-cc";
 import { AuthList } from '../modules/authList';
+import { Mail } from '../modules/mail';
 
 import FGUIrankInfo from '../fgui/test/FGUIrankInfo';
 const { ccclass, property } = _decorator;
@@ -333,5 +334,14 @@ export class TestView extends FGUITestView {
             }
         }
         LobbySocketManager.instance.sendToServer('callActivityFunc',{moduleName : 'gameRank', funcName : 'getRank', args:JSON.stringify({})} , func)
+    }
+
+    onBtnMail(): void {
+        Mail.instance.list((success:boolean, data?:any)=>{
+            if(success){
+                console.log(LogColors.green(data));
+            }
+        })  
+
     }
 }

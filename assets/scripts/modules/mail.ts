@@ -1,0 +1,70 @@
+
+import {DataCenter} from '../datacenter/datacenter';
+import { LogColors } from '../frameworks/framework';
+
+// 添加console.log别名，方便使用日志颜色
+const log = console.log;
+
+export class Mail {
+    //Auth
+    private static _instance: Mail;
+    public static get instance(): Mail {
+        if (!this._instance) {
+            this._instance = new Mail();
+        }
+        return this._instance;
+    }
+
+    private _url = "http://192.168.1.131:8080/api/mail/";
+
+    list(callBack:(success:boolean, data?:any)=>void){
+        const url = this._url + "list";
+        const body = {
+            'userid':DataCenter.instance.userid
+        }
+
+
+        this.req(url, body,callBack)
+
+    }
+
+    req(url: string, body?:any, callBack?:(success:boolean, data?:any)=>void){
+        if (!url) {
+            log(LogColors.red('authList URL not configured!'));
+            callBack && callBack(false);
+            return;
+        }
+
+        log(LogColors.blue(`Sending POST request to: ${url}`));
+
+        const defaultHeaders = {
+            'Content-Type': 'application/json',
+        }
+
+
+        fetch(url, {
+            method: 'POST',
+            headers: defaultHeaders,
+            // 无参数，所以body为空对象
+            body: JSON.stringify(body)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            log(LogColors.green('mail request successful!'));
+            // 将认证列表数据存储到DataCenter
+            if (data && data.data) {
+                
+            }
+            callBack && callBack(true, data);
+        })
+        .catch(error => {
+            log(LogColors.red(`authList request failed: ${error.message}`));
+            callBack && callBack(false, error);
+        });
+    }
+}
