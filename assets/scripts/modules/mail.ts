@@ -59,7 +59,7 @@ export class Mail {
             if (data && data.data) {
                 
             }
-            callBack && callBack(true, data);
+            callBack && callBack(true, data.data);
         })
         .catch(error => {
             log(LogColors.red(`authList request failed: ${error.message}`));

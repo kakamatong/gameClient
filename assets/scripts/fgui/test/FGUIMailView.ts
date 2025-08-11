@@ -15,9 +15,9 @@ export default class FGUIMailView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(0));
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
-		this.UI_LV_MAILS = <fgui.GList>(this.getChildAt(1));
+		this.UI_LV_MAILS = <fgui.GList>(this.getChildAt(2));
 	}
 	onBtnClose():void{};
 }

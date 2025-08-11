@@ -18,8 +18,12 @@ export class MailView extends FGUIMailView {
         super.onDisable();
     }
 
-    initUI(){
+    show(data:any){
         
+    }
+
+    initUI(){
+
     }
 
     onShow(){

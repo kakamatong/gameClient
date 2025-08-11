@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="800,500">
+<component size="1688,780">
   <displayList>
-    <component id="n0_eatn" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="690,18">
+    <graph id="n3_eatn" name="n3" xy="0,0" size="1688,780" type="rect" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n0_eatn" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="1578,18">
       <relation target="" sidePair="right-right,top-top"/>
       <Button title="关闭" titleColor="#ffffff" titleFontSize="22"/>
     </component>
-    <list id="n1_eatn" name="UI_LV_MAILS" xy="6,93" size="200,300" overflow="scroll" defaultItem="ui://ljshfpzyeatn6" autoClearItems="true">
+    <list id="n1_eatn" name="UI_LV_MAILS" xy="233,221" size="200,300" overflow="scroll" defaultItem="ui://ljshfpzyeatn6" autoClearItems="true">
       <item/>
       <item/>
       <item/>

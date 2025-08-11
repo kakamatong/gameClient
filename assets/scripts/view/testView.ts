@@ -26,6 +26,14 @@ export class TestView extends FGUITestView {
         //this.UI_BTN_LOGIN.on(fgui.Event.CLICK, this.onBtnLogin, this);
     }
 
+    show(){
+        console.log('TestView show');
+        if(sys.isBrowser){
+            this.checkAutoLogin()
+        }
+    }
+
+
     onEnable(){
         super.onEnable();
         console.log('TestView onEnable');
@@ -39,10 +47,6 @@ export class TestView extends FGUITestView {
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
-        
-        if(sys.isBrowser){
-            this.checkAutoLogin()
-        }
     }
 
     onDisable(){
@@ -340,6 +344,7 @@ export class TestView extends FGUITestView {
         Mail.instance.list((success:boolean, data?:any)=>{
             if(success){
                 console.log(LogColors.green(data));
+                UIManager.instance.showView('MailView',data);
             }
         })  
 
