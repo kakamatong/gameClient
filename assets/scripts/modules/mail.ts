@@ -37,6 +37,17 @@ export class Mail {
         this.req(url, body,callBack)
     }
 
+    read(id:number, callBack:(success:boolean, data?:any)=>void){
+        const url = this._url + "read/" + id;
+
+        const body = {
+            'userid':DataCenter.instance.userid,
+        }
+
+        this.req(url, body,callBack)
+    }
+
+
     req(url: string, body?:any, callBack?:(success:boolean, data?:any)=>void){
         if (!url) {
             log(LogColors.red('authList URL not configured!'));

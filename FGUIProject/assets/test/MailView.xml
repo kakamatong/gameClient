@@ -8,7 +8,7 @@
       <relation target="" sidePair="right-right,top-top"/>
       <Button title="关闭" titleColor="#ffffff" titleFontSize="22"/>
     </component>
-    <list id="n1_eatn" name="UI_LV_MAILS" xy="233,221" size="200,300" overflow="scroll" defaultItem="ui://ljshfpzyeatn6" autoClearItems="true">
+    <list id="n1_eatn" name="UI_LV_MAILS" xy="233,221" size="200,300" defaultItem="ui://ljshfpzyeatn6" autoClearItems="true">
       <item/>
       <item/>
       <item/>

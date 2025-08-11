@@ -4,6 +4,7 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUImailTitle extends fgui.GComponent {
 
+	public ctrl_read:fgui.Controller;
 	public title:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyeatn6";
 
@@ -14,6 +15,7 @@ export default class FGUImailTitle extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_read = this.getControllerAt(0);
 		this.title = <fgui.GTextField>(this.getChildAt(0));
 	}
 }

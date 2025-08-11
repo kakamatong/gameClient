@@ -48,6 +48,13 @@ export class MailView extends FGUIMailView {
             }
         })
 
+        Mail.instance.read(itemData.mailid, (success, data)=>{
+            if (success) {
+                console.log('read success', data);
+                itemData.status = 1;
+                item.getController('ctrl_read').selectedIndex = itemData.status;
+            }
+        })
     }
 
     itemRenderer(index:number, item:fgui.GComponent){
@@ -56,7 +63,7 @@ export class MailView extends FGUIMailView {
         item.onClick(()=>{
             this.onBtnTitle(item, index);
         })
-
+        item.getController('ctrl_read').selectedIndex = itemData.status;
     }
 
     onShow(){
