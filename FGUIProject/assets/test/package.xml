@@ -5,6 +5,8 @@
     <component id="q7362" name="compBtnScale09.xml" path="/comp/"/>
     <component id="u4cy3" name="GameView.xml" path="/" exported="true"/>
     <component id="eo9b4" name="rankInfo.xml" path="/comp/"/>
+    <component id="eatn5" name="MailView.xml" path="/" exported="true"/>
+    <component id="eatn6" name="mailTitle.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

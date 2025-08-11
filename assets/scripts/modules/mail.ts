@@ -23,7 +23,6 @@ export class Mail {
             'userid':DataCenter.instance.userid
         }
 
-
         this.req(url, body,callBack)
 
     }
