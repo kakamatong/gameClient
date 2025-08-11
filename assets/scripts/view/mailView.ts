@@ -41,9 +41,10 @@ export class MailView extends FGUIMailView {
 
     onBtnTitle(item:fgui.GComponent, index:number){
         const itemData = this._list[index];
-        Mail.instance.detail(itemData.id, (success, data)=>{
+        Mail.instance.detail(itemData.mailid, (success, data)=>{
             if (success) {
                 console.log('detail success', data);
+                this.UI_TXT_CONTENT.text = data.content;
             }
         })
 
