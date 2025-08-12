@@ -1,7 +1,8 @@
 
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
-
+import CryptoJS from 'crypto-js';   
+import { customDESEncryptStr } from '../frameworks/utils/utils';
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
 
@@ -56,17 +57,25 @@ export class Mail {
         }
 
         log(LogColors.blue(`Sending POST request to: ${url}`));
-
+        const data = {
+            userid: DataCenter.instance.userid,
+            subid: DataCenter.instance.subid,
+            time:Date.now(),
+        }
+        const strData = JSON.stringify(data);
+        const secret = CryptoJS.enc.Hex.parse(DataCenter.instance.loginToken)
+        const token = customDESEncryptStr(strData, secret)
         const defaultHeaders = {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'X-User-ID': `${DataCenter.instance.userid}`,
         }
-
 
         fetch(url, {
             method: 'POST',
             headers: defaultHeaders,
             // 无参数，所以body为空对象
-            body: JSON.stringify(body)
+            body: JSON.stringify(body ?? {})
         })
         .then(response => {
             if (!response.ok) {

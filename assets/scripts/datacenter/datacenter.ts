@@ -147,4 +147,14 @@ export class DataCenter {
     get gameAuthList():{[key:string]:string} {
         return this._gameAuthList;
     }
+
+    get loginToken():string {
+        return this._loginInfo?.token ?? '';
+    }
+
+    get subid(){
+        return this._loginInfo?.subid ?? 0;
+    }
+
+
 }
