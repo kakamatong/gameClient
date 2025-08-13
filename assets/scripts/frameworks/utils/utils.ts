@@ -971,7 +971,7 @@ export const httpPost = (url: string, body: any, payload: object, secretKey: str
 
 // 为方便使用，提供一个使用默认SecretKey和过期时间的httpPost方法
 const DEFAULT_JWT_SECRET_KEY = 'GameWebJWTSecretKey1234567890ABCDEF';
-const DEFAULT_JWT_EXPIRE_TIME = 3600; // 3600秒 = 1小时
+const DEFAULT_JWT_EXPIRE_TIME = 30; // 3600秒 = 1小时
 
 export const httpPostWithDefaultJWT = (url: string, body: any, payload: object): Promise<any> => {
     return httpPost(url, body, payload, DEFAULT_JWT_SECRET_KEY, DEFAULT_JWT_EXPIRE_TIME);
