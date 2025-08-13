@@ -743,3 +743,228 @@ export const stringToWordArray = (str: string): CryptoJS.WordArray => {
     const bytes = new TextEncoder().encode(str);
     return bytesToWordArray(bytes);
 }
+
+export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
+    const data = {
+        userid: userid,
+        subid: subid,
+        time:Date.now(),
+    }
+    const strData = JSON.stringify(data);
+    const secret = CryptoJS.enc.Hex.parse(logintoken)
+    const token = customDESEncryptStr(strData, secret)
+    const defaultHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'X-User-ID': `${userid}`,
+    }
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: 'POST',
+            headers: defaultHeaders,
+            body: JSON.stringify(body),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
+
+/**
+ * JWT工具类
+ * 提供JWT令牌生成和验证功能
+ */
+export class JWTUtils {
+    /**
+     * 生成JWT令牌
+     * @param payload 负载数据
+     * @param secretKey 密钥
+     * @param expireTime 过期时间(秒)
+     * @returns JWT令牌
+     */
+    public static generateToken(payload: object, secretKey: string, expireTime: number): string {
+        // 1. 创建Header
+        const header = {
+            alg: 'HS256',
+            typ: 'JWT'
+        };
+
+        // 2. 创建Payload并添加过期时间
+        const now = Math.floor(Date.now() / 1000);
+        const payloadWithExp = {
+            ...payload,
+            iat: now,
+            exp: now + expireTime
+        };
+
+        // 3. 编码Header和Payload为Base64Url
+        const encodedHeader = this.base64UrlEncode(JSON.stringify(header));
+        const encodedPayload = this.base64UrlEncode(JSON.stringify(payloadWithExp));
+
+        // 4. 生成签名
+        const signature = this.createSignature(encodedHeader + '.' + encodedPayload, secretKey);
+
+        // 5. 组合成JWT令牌
+        return encodedHeader + '.' + encodedPayload + '.' + signature;
+    }
+
+    /**
+     * 验证JWT令牌
+     * @param token JWT令牌
+     * @param secretKey 密钥
+     * @returns 验证结果及解码后的负载
+     */
+    public static verifyToken(token: string, secretKey: string): {
+        valid: boolean,
+        payload: any,
+        message: string
+    } {
+        try {
+            const parts = token.split('.');
+            if (parts.length !== 3) {
+                return {
+                    valid: false,
+                    payload: null,
+                    message: 'Invalid JWT token format'
+                };
+            }
+
+            const [encodedHeader, encodedPayload, signature] = parts;
+
+            // 验证签名
+            const expectedSignature = this.createSignature(encodedHeader + '.' + encodedPayload, secretKey);
+            if (signature !== expectedSignature) {
+                return {
+                    valid: false,
+                    payload: null,
+                    message: 'Invalid JWT signature'
+                };
+            }
+
+            // 解码Payload
+            const payload = JSON.parse(this.base64UrlDecode(encodedPayload));
+
+            // 验证过期时间
+            const now = Math.floor(Date.now() / 1000);
+            if (payload.exp && payload.exp < now) {
+                return {
+                    valid: false,
+                    payload: payload,
+                    message: 'JWT token expired'
+                };
+            }
+
+            return {
+                valid: true,
+                payload: payload,
+                message: 'JWT token is valid'
+            };
+        } catch (error) {
+            return {
+                valid: false,
+                payload: null,
+                message: 'Error verifying JWT token: ' + (error instanceof Error ? error.message : String(error))
+            };
+        }
+    }
+
+    /**
+     * Base64Url编码
+     * @param str 输入字符串
+     * @returns Base64Url编码后的字符串
+     */
+    private static base64UrlEncode(str: string): string {
+        return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(str))
+            .replace(/=/g, '')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
+    }
+
+    /**
+     * Base64Url解码
+     * @param str Base64Url编码的字符串
+     * @returns 解码后的字符串
+     */
+    private static base64UrlDecode(str: string): string {
+        // 补全padding
+        let paddedStr = str;
+        while (paddedStr.length % 4 !== 0) {
+            paddedStr += '=';
+        }
+
+        // 替换特殊字符
+        paddedStr = paddedStr
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+
+        return CryptoJS.enc.Utf8.stringify(CryptoJS.enc.Base64.parse(paddedStr));
+    }
+
+    /**
+     * 创建HMAC-SHA256签名
+     * @param data 要签名的数据
+     * @param secretKey 密钥
+     * @returns 签名结果(Base64Url编码)
+     */
+    private static createSignature(data: string, secretKey: string): string {
+        const hmac = CryptoJS.HmacSHA256(data, secretKey);
+        return this.base64UrlEncode(hmac.toString(CryptoJS.enc.Hex));
+    }
+}
+
+/**
+ * 带JWT验证的HTTP POST请求
+ * @param url 请求URL
+ * @param body 请求体
+ * @param payload JWT负载数据
+ * @param secretKey JWT密钥
+ * @param expireTime JWT过期时间(秒)
+ * @returns 响应数据
+ */
+export const httpPost = (url: string, body: any, payload: object, secretKey: string, expireTime: number = 3600): Promise<any> => {
+    // 生成JWT令牌
+    const token = JWTUtils.generateToken(payload, secretKey, expireTime);
+    console.log('JWT token:', token);
+
+    const defaultHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: 'POST',
+            headers: defaultHeaders,
+            body: JSON.stringify(body),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
+
+// 为方便使用，提供一个使用默认SecretKey和过期时间的httpPost方法
+const DEFAULT_JWT_SECRET_KEY = 'GameWebJWTSecretKey1234567890ABCDEF';
+const DEFAULT_JWT_EXPIRE_TIME = 3600; // 3600秒 = 1小时
+
+export const httpPostWithDefaultJWT = (url: string, body: any, payload: object): Promise<any> => {
+    return httpPost(url, body, payload, DEFAULT_JWT_SECRET_KEY, DEFAULT_JWT_EXPIRE_TIME);
+}
