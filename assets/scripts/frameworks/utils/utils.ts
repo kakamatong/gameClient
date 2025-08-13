@@ -879,11 +879,18 @@ export class JWTUtils {
 
     /**
      * Base64Url编码
-     * @param str 输入字符串
+     * @param data 输入字符串或WordArray
      * @returns Base64Url编码后的字符串
      */
-    private static base64UrlEncode(str: string): string {
-        return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(str))
+    private static base64UrlEncode(data: string | CryptoJS.WordArray): string {
+        let base64: string;
+        if (typeof data === 'string') {
+            base64 = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(data));
+        } else {
+            // 直接对WordArray进行Base64编码
+            base64 = CryptoJS.enc.Base64.stringify(data);
+        }
+        return base64
             .replace(/=/g, '')
             .replace(/\+/g, '-')
             .replace(/\//g, '_');
@@ -917,7 +924,8 @@ export class JWTUtils {
      */
     private static createSignature(data: string, secretKey: string): string {
         const hmac = CryptoJS.HmacSHA256(data, secretKey);
-        return this.base64UrlEncode(hmac.toString(CryptoJS.enc.Hex));
+        // 直接对HMAC的WordArray结果进行Base64Url编码
+        return this.base64UrlEncode(hmac);
     }
 }
 
