@@ -47,7 +47,13 @@ export class Mail {
         this.req(url, body,callBack)
     }
 
-
+    getAwards(id:number, callBack:(success:boolean, data?:any)=>void){
+        const url = this._url + "getaward/" + id;
+        const body = {
+        }
+        this.req(url, body,callBack)
+    }
+    
     req(url: string, body?:any, callBack?:(success:boolean, data?:any)=>void){
         if (!url) {
             log(LogColors.red('authList URL not configured!'));

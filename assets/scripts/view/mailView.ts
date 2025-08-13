@@ -7,7 +7,7 @@ const { ccclass, property } = _decorator;
 @ccclass('MailView')
 export class MailView extends FGUIMailView {
     private _list:any[] = [];
-
+    private _index:number = 0;
     constructor(){
         super();
     }
@@ -39,31 +39,38 @@ export class MailView extends FGUIMailView {
         this.UI_LV_MAILS.itemRenderer = this.itemRenderer.bind(this)
     }
 
+    updateContent(data:any){
+        this.UI_TXT_CONTENT.text = data.content;
+        if(data.awards && data.awards != ""){
+            this.ctrl_award.selectedIndex = 1;
+            if(data.status == 2){
+                this.ctrl_get.selectedIndex = 1;
+            }else{
+                this.ctrl_get.selectedIndex = 0;
+            }
+        }else{
+            this.ctrl_award.selectedIndex = 0;
+        }
+    }
+
+
     onBtnTitle(item:fgui.GComponent, index:number){
+        this._index = index;
         const itemData = this._list[index];
         Mail.instance.detail(itemData.mailid, (success, data)=>{
             if (success) {
                 console.log('detail success', data);
-                this.UI_TXT_CONTENT.text = data.content;
-                if(data.awards && data.awards != ""){
-                    this.ctrl_award.selectedIndex = 1;
-                    if(itemData.status == 2){
-                        this.ctrl_get.selectedIndex = 1;
-                    }else{
-                        this.ctrl_get.selectedIndex = 0;
-                    }
-                }else{
-                    this.ctrl_award.selectedIndex = 0;
-
-                }
+                this.updateContent(data);
             }
         })
 
         Mail.instance.read(itemData.mailid, (success, data)=>{
             if (success) {
                 console.log('read success', data);
-                itemData.status = 1;
-                item.getController('ctrl_read').selectedIndex = itemData.status;
+                if (!itemData.status){
+                    itemData.status = 1;
+                    item.getController('ctrl_read').selectedIndex = itemData.status;
+                }
             }
         })
     }
@@ -74,7 +81,9 @@ export class MailView extends FGUIMailView {
         item.onClick(()=>{
             this.onBtnTitle(item, index);
         })
-        item.getController('ctrl_read').selectedIndex = itemData.status;
+        const tmp = itemData.status ? 1 : 0;
+
+        item.getController('ctrl_read').selectedIndex = tmp;
     }
 
     onShow(){
@@ -88,6 +97,23 @@ export class MailView extends FGUIMailView {
     }
 
     onBtnGet(){
+        const itemData = this._list[this._index];
+        if(itemData.status == 2){
+            return;
+        }
+
+        Mail.instance.getAwards(itemData.mailid, (success, data)=>{
+            if (success) {
+                console.log('getAwards success', data);
+                itemData.status = 2;
+                Mail.instance.detail(itemData.mailid, (success, data)=>{
+                    if (success) {
+                        console.log('detail success', data);
+                        this.updateContent(data);
+                    }
+                })
+            }
+        })
 
     }
 }
