@@ -45,6 +45,17 @@ export class MailView extends FGUIMailView {
             if (success) {
                 console.log('detail success', data);
                 this.UI_TXT_CONTENT.text = data.content;
+                if(data.awards && data.awards != ""){
+                    this.ctrl_award.selectedIndex = 1;
+                    if(itemData.status == 2){
+                        this.ctrl_get.selectedIndex = 1;
+                    }else{
+                        this.ctrl_get.selectedIndex = 0;
+                    }
+                }else{
+                    this.ctrl_award.selectedIndex = 0;
+
+                }
             }
         })
 
@@ -74,5 +85,9 @@ export class MailView extends FGUIMailView {
         console.log('onBtnClose');
         //this.dispose();
         UIManager.instance.hideView('MailView');
+    }
+
+    onBtnGet(){
+
     }
 }
