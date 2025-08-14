@@ -42,6 +42,8 @@ export class TestView extends FGUITestView {
         //this.UI_BTN_LOGIN.onClick(this.onBtnLogin, this);
         AddEventListener('userData',this.showUserInfo, this);
         AddEventListener('userStatus',this.showUserStatus, this);
+        AddEventListener('userRichs',this.showUserRiches, this);
+
         LobbySocketManager.instance.addServerListen("reportUserStatus", this.updateUserStatus.bind(this));
         LobbySocketManager.instance.addServerListen("updateRich", this.onSvrUpdateRich.bind(this));
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
@@ -54,6 +56,8 @@ export class TestView extends FGUITestView {
         console.log('TestView onDisable');
         RemoveEventListener('userData', this.showUserInfo);
         RemoveEventListener('userStatus', this.showUserStatus);
+        RemoveEventListener('userRichs', this.showUserRiches);
+
         LobbySocketManager.instance.removeServerListen("reportUserStatus");
         LobbySocketManager.instance.removeServerListen("reportMatch");
         LobbySocketManager.instance.removeServerListen("updateRich");
@@ -155,6 +159,21 @@ export class TestView extends FGUITestView {
     onSvrUpdateRich(data:any){
         console.log(data);
     }
+
+    showUserRiches(data:any){
+        console.log(data);
+        DataCenter.instance.userRiches.forEach(element => {
+            if(element.richType == 1){
+                this.UI_TXT_RICH_1.text = `财富1数量：${element.richNums}`
+            }
+
+            if(element.richType == 2){
+                this.UI_TXT_RICH_2.text = `财富2数量：${element.richNums}`
+            }
+
+        });
+    }
+
 
     onSvrMatchOnSure(data:any){
         console.log(data);

@@ -22,6 +22,8 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_BTN_GET_RANK_SELF:fgui.GButton;
 	public UI_LV_RANKLIST:fgui.GList;
 	public UI_BTN_MAIL:fgui.GButton;
+	public UI_TXT_RICH_1:fgui.GTextField;
+	public UI_TXT_RICH_2:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -61,6 +63,8 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_LV_RANKLIST = <fgui.GList>(this.getChildAt(16));
 		this.UI_BTN_MAIL = <fgui.GButton>(this.getChildAt(17));
 		this.UI_BTN_MAIL.onClick(this.onBtnMail, this);
+		this.UI_TXT_RICH_1 = <fgui.GTextField>(this.getChildAt(18));
+		this.UI_TXT_RICH_2 = <fgui.GTextField>(this.getChildAt(19));
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};

@@ -3,6 +3,7 @@ import FGUIMailView from '../fgui/test/FGUIMailView';
 import { UIManager } from '../frameworks/uimanager'
 import * as fgui from "fairygui-cc";
 import { Mail } from '../modules/mail';
+import { UserRiches } from '../modules/userRiches';
 const { ccclass, property } = _decorator;
 @ccclass('MailView')
 export class MailView extends FGUIMailView {
@@ -110,10 +111,11 @@ export class MailView extends FGUIMailView {
                     if (success) {
                         console.log('detail success', data);
                         this.updateContent(data);
+                        const userRiches = new UserRiches()
+                        userRiches.req()
                     }
                 })
             }
         })
-
     }
 }

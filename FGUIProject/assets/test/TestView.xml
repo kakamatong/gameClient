@@ -4,7 +4,7 @@
     <component id="n1_q736" name="UI_BTN_LOGIN" src="q7362" fileName="comp/compBtnScale09.xml" xy="70,57">
       <Button title="登入" titleColor="#ffffff" titleFontSize="22"/>
     </component>
-    <component id="n2_kgqs" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="914,58">
+    <component id="n2_kgqs" name="UI_BTN_CLOSE" src="q7362" fileName="comp/compBtnScale09.xml" xy="1544,37">
       <Button title="关闭" titleColor="#ffffff" titleFontSize="22"/>
     </component>
     <component id="n3_of7j" name="UI_BTN_CON" src="q7362" fileName="comp/compBtnScale09.xml" xy="73,127">
@@ -43,5 +43,7 @@
     <component id="n19_eatn" name="UI_BTN_MAIL" src="q7362" fileName="comp/compBtnScale09.xml" xy="1104,242" size="185,40">
       <Button title="邮件" titleColor="#ffffff" titleFontSize="21"/>
     </component>
+    <text id="n20_plb9" name="UI_TXT_RICH_1" xy="752,77" size="281,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <text id="n21_plb9" name="UI_TXT_RICH_2" xy="753,132" size="280,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
   </displayList>
 </component>

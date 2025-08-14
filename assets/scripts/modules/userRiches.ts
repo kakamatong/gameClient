@@ -1,4 +1,5 @@
 import { DataCenter } from '../datacenter/datacenter';
+import { DispatchEvent } from '../frameworks/framework';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 export class UserRiches {
     req() {
@@ -7,7 +8,7 @@ export class UserRiches {
 
     resp(data: any) {
         //DataCenter.instance.userData = data;
-        if (data && data.length > 0 && data.richType && data.richNums && data.richType.length > 0 && data.richNums.length > 0) {
+        if (data  && data.richType && data.richNums && data.richType.length > 0 && data.richNums.length > 0) {
             const riches: Array<{richType:number, richNums:number}> = []
             for (let i = 0; i < data.richType.length; i++) {
                 const tmp = {
@@ -17,8 +18,7 @@ export class UserRiches {
                 riches.push(tmp)
             }
             DataCenter.instance.userRiches = riches
+            DispatchEvent('userRichs',data)
         }
-
-
     }
 }
