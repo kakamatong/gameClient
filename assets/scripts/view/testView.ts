@@ -16,6 +16,7 @@ import { AuthList } from '../modules/authList';
 import { Mail } from '../modules/mail';
 
 import FGUIrankInfo from '../fgui/test/FGUIrankInfo';
+import { AwardNotices } from '../modules/awardNotices';
 const { ccclass, property } = _decorator;
 @ccclass('TestView')
 export class TestView extends FGUITestView {
@@ -266,6 +267,9 @@ export class TestView extends FGUITestView {
                 }else{
                     // 一定要消费noticeid
                     const noticeid = res.noticeid;
+                    const awardNotices = new AwardNotices()
+                    awardNotices.reqRead(noticeid)
+
                     console.log(LogColors.green(res.awards.richTypes));
                 }
             }

@@ -10,4 +10,9 @@ export class AwardNotices {
     resp(data: any) {
         console.log(data);
     }
+
+    reqRead(id:number){
+        LobbySocketManager.instance.sendToServer('setAwardNoticeRead', { id:id})
+    }
+
 }
