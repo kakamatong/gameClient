@@ -6,6 +6,7 @@ import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
 import { customDESEncryptStr } from '../frameworks/utils/utils';
+import { AwardNotices } from './awardNotices';
 export class Auth {
     //Auth
     private _time :number = 0
@@ -63,6 +64,10 @@ export class Auth {
             // 用户状态
             const userStatus = new UserStatus()
             userStatus.req()
+
+            // 奖励通知
+            const awardNotices = new AwardNotices()
+            awardNotices.req()
 
         }else{
             console.log('auth fail')

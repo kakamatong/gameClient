@@ -264,8 +264,8 @@ export class TestView extends FGUITestView {
                 if(res.error){
                     console.log(LogColors.red(res.error));
                 }else{
+                    // 一定要消费noticeid
                     const noticeid = res.noticeid;
-                    
                     console.log(LogColors.green(res.awards.richTypes));
                 }
             }
