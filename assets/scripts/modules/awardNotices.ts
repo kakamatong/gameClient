@@ -8,7 +8,8 @@ export class AwardNotices {
     }
 
     resp(data: any) {
-        console.log(data);
+        // 这是未通知到的奖励，可以一个一个通知，或者合并通知
+        data && data.list && console.log(data.list)
     }
 
     reqRead(id:number){
