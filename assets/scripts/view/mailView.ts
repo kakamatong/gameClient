@@ -4,6 +4,7 @@ import { UIManager } from '../frameworks/uimanager'
 import * as fgui from "fairygui-cc";
 import { Mail } from '../modules/mail';
 import { UserRiches } from '../modules/userRiches';
+import { AwardNotices } from '../modules/awardNotices';
 const { ccclass, property } = _decorator;
 @ccclass('MailView')
 export class MailView extends FGUIMailView {
@@ -103,9 +104,11 @@ export class MailView extends FGUIMailView {
             return;
         }
 
-        Mail.instance.getAwards(itemData.mailid, (success, data)=>{
+        Mail.instance.getAwards(itemData.mailid, (success, awardresp)=>{
             if (success) {
-                console.log('getAwards success', data);
+                console.log('getAwards success', awardresp);
+                const awardNotices = new AwardNotices()
+                awardNotices.reqRead(awardresp.noticeid)
                 itemData.status = 2;
                 Mail.instance.detail(itemData.mailid, (success, data)=>{
                     if (success) {
