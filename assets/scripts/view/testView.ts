@@ -226,20 +226,24 @@ export class TestView extends FGUITestView {
         this.UI_TXT_USER_STATUS.text = this.getStatusText(data.status)
     }
 
-    onSvrGameRoomReady(data:any){
-        DataCenter.instance.gameid = data.gameid;
-        DataCenter.instance.roomid = data.roomid;
-        DataCenter.instance.gameAddr = data.addr;
-        console.log(LogColors.green('游戏房间准备完成'));
-        //UIManager.instance.showView('GameView');
+    connectToGame(addr:string, gameid:number, roomid:string){
         const callBack = (success:boolean)=>{
             if(success){
                 UIManager.instance.showView('GameView');
                 //console.log(LogColors.green("游戏服务连接成功"))
             }
         }
-        AuthGame.instance.req(DataCenter.instance.gameAddr,DataCenter.instance.gameid, DataCenter.instance.roomid, callBack);
-        
+        AuthGame.instance.req(addr,gameid, roomid, callBack);
+    }
+
+
+    onSvrGameRoomReady(data:any){
+        DataCenter.instance.gameid = data.gameid;
+        DataCenter.instance.roomid = data.roomid;
+        DataCenter.instance.gameAddr = data.addr;
+        console.log(LogColors.green('游戏房间准备完成'));
+        //UIManager.instance.showView('GameView');
+        this.connectToGame(data.addr, data.gameid, data.roomid);
     }
 
     onSvrMatchOnSureFail(data:any){
@@ -381,7 +385,11 @@ export class TestView extends FGUITestView {
         }
         const func = (result:any)=>{
             if(result && result.code == 1){
-                
+                DataCenter.instance.gameid = result.gameid;
+                DataCenter.instance.roomid = result.roomid;
+                DataCenter.instance.gameAddr = result.addr;
+                this.UI_TXT_SHORT_ROOM_ID.text = `${result.shortRoomid}`;
+                this.connectToGame(result.addr, result.gameid, result.roomid);
                 
             }
         }
