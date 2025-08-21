@@ -24,6 +24,10 @@ export default class FGUITestView extends fgui.GComponent {
 	public UI_BTN_MAIL:fgui.GButton;
 	public UI_TXT_RICH_1:fgui.GTextField;
 	public UI_TXT_RICH_2:fgui.GTextField;
+	public UI_BTN_CREATE:fgui.GButton;
+	public UI_BTN_JOIN:fgui.GButton;
+	public UI_INPUT_SHORT_ROOM_ID:fgui.GTextInput;
+	public UI_TXT_SHORT_ROOM_ID:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
@@ -65,6 +69,12 @@ export default class FGUITestView extends fgui.GComponent {
 		this.UI_BTN_MAIL.onClick(this.onBtnMail, this);
 		this.UI_TXT_RICH_1 = <fgui.GTextField>(this.getChildAt(18));
 		this.UI_TXT_RICH_2 = <fgui.GTextField>(this.getChildAt(19));
+		this.UI_BTN_CREATE = <fgui.GButton>(this.getChildAt(20));
+		this.UI_BTN_CREATE.onClick(this.onBtnCreate, this);
+		this.UI_BTN_JOIN = <fgui.GButton>(this.getChildAt(21));
+		this.UI_BTN_JOIN.onClick(this.onBtnJoin, this);
+		this.UI_INPUT_SHORT_ROOM_ID = <fgui.GTextInput>(this.getChildAt(22));
+		this.UI_TXT_SHORT_ROOM_ID = <fgui.GTextField>(this.getChildAt(23));
 	}
 	onBtnLogin():void{};
 	onBtnClose():void{};
@@ -78,4 +88,6 @@ export default class FGUITestView extends fgui.GComponent {
 	onBtnGetRank():void{};
 	onBtnGetRankSelf():void{};
 	onBtnMail():void{};
+	onBtnCreate():void{};
+	onBtnJoin():void{};
 }

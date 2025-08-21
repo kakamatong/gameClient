@@ -374,4 +374,24 @@ export class TestView extends FGUITestView {
         })  
 
     }
+
+    onBtnCreate():void{
+        const gameRule = {
+            playerCnt:2
+        }
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                
+                
+            }
+        }
+
+        LobbySocketManager.instance.sendToServer('createPrivateRoom',{gameid:10001, rule:JSON.stringify(gameRule)}, func)
+
+    }
+
+    onBtnJoin(): void {
+        
+    }
+
 }

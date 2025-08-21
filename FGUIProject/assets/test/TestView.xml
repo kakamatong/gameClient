@@ -45,5 +45,13 @@
     </component>
     <text id="n20_plb9" name="UI_TXT_RICH_1" xy="752,77" size="281,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
     <text id="n21_plb9" name="UI_TXT_RICH_2" xy="753,132" size="280,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <component id="n22_pr94" name="UI_BTN_CREATE" src="q7362" fileName="comp/compBtnScale09.xml" xy="1104,315" size="185,40">
+      <Button title="创建私人房" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
+    <component id="n23_pr94" name="UI_BTN_JOIN" src="q7362" fileName="comp/compBtnScale09.xml" xy="1106,379" size="185,40">
+      <Button title="加入私人房" titleColor="#ffffff" titleFontSize="21"/>
+    </component>
+    <text id="n24_pr94" name="UI_INPUT_SHORT_ROOM_ID" xy="1299,384" size="131,39" fontSize="22" color="#ffffff" align="center" autoSize="none" singleLine="true" text="000000" input="true"/>
+    <text id="n25_pr94" name="UI_TXT_SHORT_ROOM_ID" xy="1299,317" size="132,32" fontSize="22" color="#ffffff" align="center" autoSize="none" singleLine="true" text="000000"/>
   </displayList>
 </component>
