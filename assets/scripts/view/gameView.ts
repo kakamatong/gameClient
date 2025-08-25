@@ -12,6 +12,7 @@ const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = 0;
+    private _isPrivateRoom:boolean = false;
     constructor(){
         super();
     }
@@ -19,6 +20,9 @@ export class GameView extends FGUIGameView {
     onEnable(){
         super.onEnable();
         GameData.instance.maxPlayer = 2;
+        if(DataCenter.instance.shortRoomid){
+            this._isPrivateRoom = true;
+        }
         GameSocketManager.instance.sendToServer("clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
         GameSocketManager.instance.addServerListen("stepId", this.onGameStep.bind(this));
@@ -140,7 +144,10 @@ export class GameView extends FGUIGameView {
             }
         }
 
-        this.UI_BTN_CONTINUE.visible = true
+        if(!this._isPrivateRoom){
+            this.UI_BTN_CONTINUE.visible = true
+        }
+        
         this.reqUserStatus()
     }
 

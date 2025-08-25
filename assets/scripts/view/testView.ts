@@ -341,6 +341,7 @@ export class TestView extends FGUITestView {
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
         DataCenter.instance.gameAddr = data.addr;
+        DataCenter.instance.shortRoomid = 0 // 匹配房
         console.log(LogColors.green('游戏房间准备完成'));
         this.connectToGame(data.addr, data.gameid, data.roomid);
     }
@@ -545,8 +546,8 @@ export class TestView extends FGUITestView {
                 
             }
         }
-
-        LobbySocketManager.instance.sendToServer('createPrivateRoom',{gameid:10001, rule:JSON.stringify(gameRule)}, func)
+        const reqData = {gameid:10001, rule:JSON.stringify(gameRule)}
+        LobbySocketManager.instance.sendToServer('createPrivateRoom',reqData, func)
     }
 
     /**
