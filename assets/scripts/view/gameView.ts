@@ -153,6 +153,9 @@ export class GameView extends FGUIGameView {
         const players = GameData.instance.playerList;
         for(let i = 1; i <= players.length; i++){
             const playerInfo = players[i];
+            if(!playerInfo){
+                continue;
+            }
             if(i == SEAT_1){
                 this.UI_TXT_NICKNAME_1.text = playerInfo.nickname ?? "";
                 this.UI_TXT_USERID_1.text = playerInfo.userid.toString();
