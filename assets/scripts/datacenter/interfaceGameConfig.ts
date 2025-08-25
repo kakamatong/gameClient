@@ -33,9 +33,12 @@ export const HAND_FLAG = {
 }
 
 export const PLAYER_STATUS = {
-    LOADING: 1,
-    OFFLINE: 2,
-    PLAYING: 3,
+    LOADING : 1,
+    OFFLINE : 2,
+    ONLINE : 3,
+    PLAYING : 4,
+    READY : 5
+
 }
 
 export const ROOM_END_FLAG = {

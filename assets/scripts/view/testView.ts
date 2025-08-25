@@ -555,18 +555,19 @@ export class TestView extends FGUITestView {
      * @description 加入房间按钮点击事件处理函数。（当前未实现）
      */
     onBtnJoin(): void {
+        const roomid = Number(this.UI_INPUT_SHORT_ROOM_ID.text);
         const func = (result:any)=>{
             if(result && result.code == 1){
                 DataCenter.instance.gameid = result.gameid;
                 DataCenter.instance.roomid = result.roomid;
                 DataCenter.instance.gameAddr = result.addr;
-                DataCenter.instance.shortRoomid = result.shortRoomid;
-                this.UI_TXT_SHORT_ROOM_ID.text = `${result.shortRoomid}`;
+                DataCenter.instance.shortRoomid = roomid;
+                this.UI_TXT_SHORT_ROOM_ID.text = `${roomid}`;
                 this.connectToGame(result.addr, result.gameid, result.roomid);
             }
         }
 
-        const roomid = Number(this.UI_INPUT_SHORT_ROOM_ID.text);
+        
         LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
     }
 

@@ -69,5 +69,9 @@
     <text id="n18_q496" name="UI_TXT_SHORT_ROOMID" xy="199,15" size="88,34" fontSize="24" color="#ffffff" text="000000">
       <relation target="" sidePair="left-left,top-top"/>
     </text>
+    <component id="n19_wl08" name="UI_BTN_READY" src="q7362" fileName="comp/compBtnScale09.xml" xy="1436,667" size="186,58" visible="false">
+      <relation target="" sidePair="center-center,middle-middle,right-right,top-top"/>
+      <Button title="准备" titleColor="#ffffff" titleFontSize="34"/>
+    </component>
   </displayList>
 </component>

@@ -59,6 +59,11 @@ export class GameView extends FGUIGameView {
             GameData.instance.playerList[localSeat].ext = info.ext;
             GameData.instance.playerList[localSeat].ip = info.ip;
             GameData.instance.playerList[localSeat].status = info.status;
+            if(this._isPrivateRoom){
+                if(info.status == PLAYER_STATUS.ONLINE && GameData.instance.playerList[localSeat].userid == DataCenter.instance.userid){
+                    this.UI_BTN_READY.visible = true;
+                }
+            }
         }
         this.showPlayerInfo();
     }
@@ -287,4 +292,12 @@ export class GameView extends FGUIGameView {
         UIManager.instance.hideView('GameView');
     }
     
+    onBtnReady(): void {
+        const func = (res:any)=>{
+            if (res.code) {
+                console.log(res.msg)
+            }
+        }
+        GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
+    }
 }

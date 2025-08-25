@@ -22,6 +22,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CONTINUE:fgui.GButton;
 	public UI_TXT_SHORT_ROOMID:fgui.GTextField;
+	public UI_BTN_READY:fgui.GButton;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -55,6 +56,8 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_CONTINUE = <fgui.GButton>(this.getChildAt(17));
 		this.UI_BTN_CONTINUE.onClick(this.onBtnContinue, this);
 		this.UI_TXT_SHORT_ROOMID = <fgui.GTextField>(this.getChildAt(18));
+		this.UI_BTN_READY = <fgui.GButton>(this.getChildAt(19));
+		this.UI_BTN_READY.onClick(this.onBtnReady, this);
 	}
 	onBtnClose():void{};
 	onBtnPaper():void{};
@@ -62,4 +65,5 @@ export default class FGUIGameView extends fgui.GComponent {
 	onBtnScissors():void{};
 	onBtnSure():void{};
 	onBtnContinue():void{};
+	onBtnReady():void{};
 }
