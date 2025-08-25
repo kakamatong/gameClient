@@ -15,6 +15,7 @@ export class DataCenter {
     private _gameid: number = 0;
     private _roomid: string = '';
     private _gameAddr: string = '';
+    private _shortRoomid:number = 0;
 
     private _authList: {[key:string]:string} = {
         // 'gate1':'ws://192.168.1.140:9002',
@@ -156,5 +157,11 @@ export class DataCenter {
         return this._loginInfo?.subid ?? 0;
     }
 
+    get shortRoomid(){
+        return this._shortRoomid;
+    }
 
+    set shortRoomid(id:number){
+        this._shortRoomid = id;
+    }
 }

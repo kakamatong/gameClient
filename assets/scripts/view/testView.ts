@@ -539,6 +539,7 @@ export class TestView extends FGUITestView {
                 DataCenter.instance.gameid = result.gameid;
                 DataCenter.instance.roomid = result.roomid;
                 DataCenter.instance.gameAddr = result.addr;
+                DataCenter.instance.shortRoomid = result.shortRoomid;
                 this.UI_TXT_SHORT_ROOM_ID.text = `${result.shortRoomid}`;
                 this.connectToGame(result.addr, result.gameid, result.roomid);
                 
@@ -546,7 +547,6 @@ export class TestView extends FGUITestView {
         }
 
         LobbySocketManager.instance.sendToServer('createPrivateRoom',{gameid:10001, rule:JSON.stringify(gameRule)}, func)
-
     }
 
     /**
