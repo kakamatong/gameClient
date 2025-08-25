@@ -102,6 +102,11 @@ export class GameView extends FGUIGameView {
     // 房间信息
     onRoomInfo(data:any){
         console.log(data)
+        if(DataCenter.instance.shortRoomid){
+            this.UI_TXT_SHORT_ROOMID.text = `${DataCenter.instance.shortRoomid}`
+        }else{
+            this.UI_TXT_SHORT_ROOMID.visible = false
+        }
         this.dealSeatInfo(data);
     }
 
