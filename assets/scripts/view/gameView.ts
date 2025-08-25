@@ -103,7 +103,8 @@ export class GameView extends FGUIGameView {
     onRoomInfo(data:any){
         console.log(data)
         if(DataCenter.instance.shortRoomid){
-            this.UI_TXT_SHORT_ROOMID.text = `${DataCenter.instance.shortRoomid}`
+            const shortRoomid = `${DataCenter.instance.shortRoomid}`
+            this.UI_TXT_SHORT_ROOMID.text = shortRoomid.padStart(6, '0')
         }else{
             this.UI_TXT_SHORT_ROOMID.visible = false
         }
