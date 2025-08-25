@@ -296,6 +296,7 @@ export class GameView extends FGUIGameView {
         const func = (res:any)=>{
             if (res.code) {
                 console.log(res.msg)
+                this.UI_BTN_READY.visible = false;
             }
         }
         GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
