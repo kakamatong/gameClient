@@ -36,6 +36,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("gameStart", this.onSvrGameStart.bind(this));
         GameSocketManager.instance.addServerListen("gameEnd", this.onSvrGameEnd.bind(this));
         GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
+        GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrlayerStatusUpdate.bind(this));
     }
 
     onDisable(){
@@ -50,6 +51,14 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerInfos");
         GameSocketManager.instance.removeServerListen("gameStart");
         GameSocketManager.instance.removeServerListen("gameEnd");
+        GameSocketManager.instance.removeServerListen("playerStatusUpdate");
+    }
+
+    onSvrlayerStatusUpdate(data:any){
+        const player = GameData.instance.getPlayerByUserid(data.userid);
+        if (player) {
+            player.status = data.status;
+        }
     }
 
     onSvrPlayerEnter(data:any){
