@@ -470,11 +470,11 @@ export class TestView extends FGUITestView {
      * @param {fgui.GComponent} item - 列表项组件。
      * @description 渲染排行榜列表的单个项目。
      */
-    onRankItemRenderer(index:number, item:fgui.GComponent){
+    onRankItemRenderer(index: number, item: fgui.GObject){
         const data = this._rankList[index];
-        item.getChild('UI_TXT_NAME').text = data.nickname;
-        item.getChild('UI_TXT_SCORE').text = data.score.toString();
-        item.getChild('UI_TXT_RANK').text = (index + 1).toString()
+        item.asCom.getChild('UI_TXT_NAME').text = data.nickname;
+        item.asCom.getChild('UI_TXT_SCORE').text = data.score.toString();
+        item.asCom.getChild('UI_TXT_RANK').text = (index + 1).toString()
     }
 
     /**
