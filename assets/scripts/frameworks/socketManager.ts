@@ -54,10 +54,10 @@ export class SocketManager implements handleSocketMessage {
     private _session = 0;
     
     /**
-     * @property {number} _timeid - 心跳定时器ID
+     * @property {NodeJS.Timeout | null} _timeid - 心跳定时器ID
      * @private
      */
-    private _timeid: number = -1;
+    private _timeid: NodeJS.Timeout | null = null;
     
     /**
      * @property {Array<(data: any) => void>} _callBacks - 回调函数数组，按session索引存储
