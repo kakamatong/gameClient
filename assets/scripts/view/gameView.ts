@@ -19,6 +19,7 @@ export class GameView extends FGUIGameView {
 
     onEnable(){
         super.onEnable();
+        GameData.instance.init();
         GameData.instance.maxPlayer = 2;
         if(DataCenter.instance.shortRoomid){
             this._isPrivateRoom = true;
@@ -31,6 +32,8 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("roundResult", this.onGameRoundResult.bind(this));
         GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
         GameSocketManager.instance.addServerListen("playerInfos", this.onSvrPlayerInfos.bind(this));
+        GameSocketManager.instance.addServerListen("gameStart", this.onSvrGameStart.bind(this));
+        GameSocketManager.instance.addServerListen("gameEnd", this.onSvrGameEnd.bind(this));
     }
 
     onDisable(){
@@ -43,6 +46,8 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("roundResult");
         GameSocketManager.instance.removeServerListen("roomEnd");
         GameSocketManager.instance.removeServerListen("playerInfos");
+        GameSocketManager.instance.removeServerListen("gameStart");
+        GameSocketManager.instance.removeServerListen("gameEnd");
     }
 
     onSvrPlayerInfos(data:any){
@@ -70,6 +75,7 @@ export class GameView extends FGUIGameView {
 
     //房间销毁
     onRoomEnd(data:any){
+        GameData.instance.roomEnd = true;
         const msg = "房间销毁"
         if(data.code == ROOM_END_FLAG.GAME_END){
             console.log("游戏结束 " + msg)
@@ -162,7 +168,15 @@ export class GameView extends FGUIGameView {
 
     onBtnClose(){
         console.log('onBtnClose');
-        //this.dispose();
+        if (this._isPrivateRoom) {
+            if (!GameData.instance.roomEnd) {
+                if (GameData.instance.gameStart) {
+                    console.log('游戏中无法退出');
+                }else{
+                    GameSocketManager.instance.sendToServer("leaveRoom", {flag:1});
+                }
+            }
+        }
         UIManager.instance.hideView('GameView');
     }
 
@@ -275,6 +289,14 @@ export class GameView extends FGUIGameView {
     onBtnSure(){
         console.log('onBtnSure');
         GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:this._selectOutHand })
+    }
+
+    onSvrGameStart(data:any): void { 
+        GameData.instance.gameStart = true;
+    }
+
+    onSvrGameEnd(data:any): void { 
+        GameData.instance.gameStart = false;
     }
 
     onGameOutHand(data: any): void {

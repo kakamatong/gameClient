@@ -4,6 +4,8 @@ export class GameData {
     private _playerList: Array<GAME_PLAYER_INFO> = [];
     private _maxPlayer = 2;
     private _gameStep: ENUM_GAME_STEP = ENUM_GAME_STEP.NONE;
+    private _roomEnd: boolean = false;
+    private _gameStart = false;
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -14,6 +16,13 @@ export class GameData {
 
     private constructor(){
         
+    }
+
+    init(){
+        this.gameStep = ENUM_GAME_STEP.NONE;
+        this.playerList = [];
+        this.roomEnd = false;
+        this.gameStart = false;
     }
 
     get gameStep(): ENUM_GAME_STEP {
@@ -63,4 +72,19 @@ export class GameData {
         return this.playerList[this.seat2local(seat)];
     }
 
+    set roomEnd(end: boolean){
+        this._roomEnd = end;
+    }
+
+    get roomEnd(): boolean{
+        return this._roomEnd;
+    }
+
+    set gameStart(start: boolean){
+        this._gameStart = start;
+    }
+
+    get gameStart(): boolean{
+        return this._gameStart;
+    }
 }
