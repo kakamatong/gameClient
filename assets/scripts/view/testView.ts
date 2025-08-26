@@ -300,8 +300,9 @@ export class TestView extends FGUITestView {
             DataCenter.instance.gameid = data.gameid;
             DataCenter.instance.roomid = data.roomid;
             DataCenter.instance.gameAddr = data.addr;
+            DataCenter.instance.shortRoomid = data.shortRoomid // 匹配房
             console.log(LogColors.green('返回房间'));
-            this.onSvrGameRoomReady(data)
+            this.connectToGame(data.addr, data.gameid, data.roomid);
         }else{
 
         }
