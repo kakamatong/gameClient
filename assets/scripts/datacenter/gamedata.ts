@@ -6,6 +6,7 @@ export class GameData {
     private _gameStep: ENUM_GAME_STEP = ENUM_GAME_STEP.NONE;
     private _roomEnd: boolean = false;
     private _gameStart = false;
+    private _playerInfos: Array<GAME_PLAYER_INFO> = [];
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -72,6 +73,15 @@ export class GameData {
         return this.playerList[this.seat2local(seat)];
     }
 
+    getPlayerByUserid(userid: number): GAME_PLAYER_INFO | null {
+        for(let i = 0; i < this.playerList.length; i++){
+            if(this.playerList[i].userid == userid){
+                return this.playerList[i];
+            }
+        }
+        return null;
+    }
+
     set roomEnd(end: boolean){
         this._roomEnd = end;
     }
@@ -86,5 +96,17 @@ export class GameData {
 
     get gameStart(): boolean{
         return this._gameStart;
+    }
+
+    set playerInfos(infos: Array<GAME_PLAYER_INFO>){
+        this._playerInfos = infos;
+    }
+
+    get playerInfos(): Array<GAME_PLAYER_INFO>{
+        return this._playerInfos;
+    }
+
+    getPlayerInfo(userid: number) {
+        return this.playerInfos.find((player) => player.userid == userid);
     }
 }

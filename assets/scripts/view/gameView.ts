@@ -8,6 +8,7 @@ import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEA
 import { UIManager } from '../frameworks/uimanager'
 import { Match } from '../modules/match';
 import { UserStatus } from '../modules/userStatus';
+import * as fgui from "fairygui-cc";
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
@@ -34,6 +35,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerInfos", this.onSvrPlayerInfos.bind(this));
         GameSocketManager.instance.addServerListen("gameStart", this.onSvrGameStart.bind(this));
         GameSocketManager.instance.addServerListen("gameEnd", this.onSvrGameEnd.bind(this));
+        GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
     }
 
     onDisable(){
@@ -50,27 +52,52 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameEnd");
     }
 
-    onSvrPlayerInfos(data:any){
-        console.log('onSvrPlayerInfos', data);
-        for(let i = 0; i < data.infos.length; i++){
-            const info = data.infos[i];
-            const svrSeat = i + 1
-            const localSeat = GameData.instance.seat2local(svrSeat);
-            GameData.instance.playerList[localSeat].nickname = info.nickname;
-            GameData.instance.playerList[localSeat].headurl = info.headurl;
-            GameData.instance.playerList[localSeat].sex = info.sex;
-            GameData.instance.playerList[localSeat].province = info.province;
-            GameData.instance.playerList[localSeat].city = info.city;
-            GameData.instance.playerList[localSeat].ext = info.ext;
-            GameData.instance.playerList[localSeat].ip = info.ip;
-            GameData.instance.playerList[localSeat].status = info.status;
+    onSvrPlayerEnter(data:any){
+        const selfid = DataCenter.instance.userid;
+        const svrSeat = data.seat;
+        const userid = data.userid;
+        const playerInfo = GameData.instance.getPlayerInfo(userid);
+        if(playerInfo){
+            playerInfo.svrSeat = svrSeat;
+            playerInfo.userid = userid;
+            let localSeat = 0
+            if (selfid == userid) {
+                localSeat = SELF_LOCAL
+            }else{
+                localSeat = GameData.instance.local2seat(svrSeat);
+            }
+            GameData.instance.playerList[localSeat] = playerInfo;
+
             if(this._isPrivateRoom){
-                if(info.status == PLAYER_STATUS.ONLINE && GameData.instance.playerList[localSeat].userid == DataCenter.instance.userid){
+                if(playerInfo.status == PLAYER_STATUS.ONLINE && selfid == userid){
                     this.UI_BTN_READY.visible = true;
                 }
             }
+            this.showPlayerInfoBySeat(localSeat);
         }
-        this.showPlayerInfo();
+
+        
+    }
+
+    onSvrPlayerInfos(data:any){
+        console.log('onSvrPlayerInfos', data);
+        GameData.instance.playerInfos = data.infos;
+        for(let i = 0; i < data.infos.length; i++){
+            const info = data.infos[i];
+            const player = GameData.instance.getPlayerByUserid(data.userid);
+            if (player) {
+                player.nickname = info.nickname;
+                player.headurl = info.headurl;
+                player.sex = info.sex;
+                player.province = info.province;
+                player.city = info.city;
+                player.ext = info.ext;
+                player.ip = info.ip;
+                player.status = info.status;
+                const localSeat = GameData.instance.local2seat(player.svrSeat)
+                this.showPlayerInfoBySeat(localSeat);
+            }
+        }
     }
 
     //房间销毁
@@ -88,32 +115,6 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    dealSeatInfo(data:any){
-        const selfid = DataCenter.instance.userid;
-        for(let i = 0; i < data.playerids.length; i++){
-            const userid = data.playerids[i];
-            const svrSeat = i + 1
-            if (userid == selfid) {
-                GameData.instance.playerList[SELF_LOCAL] = {
-                    userid:userid,
-                    svrSeat: svrSeat
-                }
-            }
-        }
-
-        for(let i = 0; i < data.playerids.length; i++){
-            const userid = data.playerids[i];
-            const svrSeat = i + 1
-            if (userid != selfid) {
-                const localSeat = GameData.instance.seat2local(i + 1);
-                GameData.instance.playerList[localSeat] = {
-                    userid:userid,
-                    svrSeat: svrSeat
-                }
-            }
-        }
-    }
-
     // 房间信息
     onRoomInfo(data:any){
         console.log(data)
@@ -123,7 +124,7 @@ export class GameView extends FGUIGameView {
         }else{
             this.UI_TXT_SHORT_ROOMID.visible = false
         }
-        this.dealSeatInfo(data);
+        //this.dealSeatInfo(data);
     }
 
     reqUserStatus(){
@@ -181,23 +182,11 @@ export class GameView extends FGUIGameView {
     }
 
     // 显示玩家信息
-    showPlayerInfo():void{
-        const players = GameData.instance.playerList;
-        for(let i = 1; i <= players.length; i++){
-            const playerInfo = players[i];
-            if(!playerInfo){
-                continue;
-            }
-            if(i == SEAT_1){
-                this.UI_TXT_NICKNAME_1.text = playerInfo.nickname ?? "";
-                this.UI_TXT_USERID_1.text = playerInfo.userid.toString();
-                this.UI_TXT_STATUS_1.text = this.getPlayerStatusText(playerInfo.status ?? 0);
-            }else if (i == SEAT_2){
-                this.UI_TXT_NICKNAME_2.text = playerInfo.nickname ?? "";
-                this.UI_TXT_USERID_2.text = playerInfo.userid.toString();
-                this.UI_TXT_STATUS_2.text = this.getPlayerStatusText(playerInfo.status ?? 0);
-            }
-        }
+    showPlayerInfoBySeat(localseat:number):void{
+        const player = GameData.instance.playerList[localseat];
+        this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`).text = player.nickname ?? "";
+        this.getChild<fgui.GTextField>(`UI_TXT_USERID_${localseat}`).text = player.userid.toString();
+        this.getChild<fgui.GTextField>(`UI_TXT_STATUS_${localseat}`).text = this.getPlayerStatusText(player.status ?? 0);
     }
 
     getPlayerStatusText(status:number):string{
