@@ -75,7 +75,7 @@ export class GameData {
 
     getPlayerByUserid(userid: number): GAME_PLAYER_INFO | null {
         for(let i = 0; i < this.playerList.length; i++){
-            if(this.playerList[i].userid == userid){
+            if(this.playerList[i] && this.playerList[i].userid == userid){
                 return this.playerList[i];
             }
         }

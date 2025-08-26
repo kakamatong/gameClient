@@ -84,7 +84,7 @@ export class GameView extends FGUIGameView {
         GameData.instance.playerInfos = data.infos;
         for(let i = 0; i < data.infos.length; i++){
             const info = data.infos[i];
-            const player = GameData.instance.getPlayerByUserid(data.userid);
+            const player = GameData.instance.getPlayerByUserid(info.userid);
             if (player) {
                 player.nickname = info.nickname;
                 player.headurl = info.headurl;
