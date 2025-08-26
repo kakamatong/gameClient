@@ -1,39 +1,107 @@
 import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY } from "./interfaceConfig";
 import { sys,resources } from "cc";
 
+/**
+ * @class DataCenter
+ * @description 数据中心，使用单例模式管理全局数据，包括用户信息、游戏数据、服务器地址等
+ * @category 数据管理
+ * @singleton 单例模式
+ */
 export class DataCenter {
+    /**
+     * @property {LOGIN_INFO | null} _loginInfo - 用户登录信息
+     * @private
+     */
     private _loginInfo: LOGIN_INFO | null = null;
 
+    /**
+     * @property {USER_DATA | null} _userData - 用户数据
+     * @private
+     */
     private _userData: USER_DATA | null = null;
 
+    /**
+     * @property {Array<{richType:number, richNums:number}>} _userRiches - 用户财富数据
+     * @private
+     */
     private _userRiches: Array<{richType:number, richNums:number}> = []
 
+    /**
+     * @property {USER_STATUS | null} _userStatus - 用户状态信息
+     * @private
+     */
     private _userStatus: USER_STATUS | null = null;
 
+    /**
+     * @property {any} _appConfig - 应用配置信息
+     * @private
+     */
     private _appConfig: any = null;
 
+    /**
+     * @property {number} _gameid - 当前游戏ID
+     * @private
+     */
     private _gameid: number = 0;
+    
+    /**
+     * @property {string} _roomid - 房间ID
+     * @private
+     */
     private _roomid: string = '';
+    
+    /**
+     * @property {string} _gameAddr - 游戏服务器地址
+     * @private
+     */
     private _gameAddr: string = '';
+    
+    /**
+     * @property {number} _shortRoomid - 短房间ID
+     * @private
+     */
     private _shortRoomid:number = 0;
 
+    /**
+     * @property {Object.<string, string>} _authList - 认证服务器地址列表
+     * @private
+     */
     private _authList: {[key:string]:string} = {
         // 'gate1':'ws://192.168.1.140:9002',
         // 'gate2':'ws://192.168.1.140:9005',
     };
 
+    /**
+     * @property {Object.<string, string>} _gameAuthList - 游戏认证服务器地址列表
+     * @private
+     */
     private _gameAuthList: {[key:string]:string} = {
         // 'game1':'ws://192.168.1.140:9003',
         // 'game2':'ws://192.168.1.140:9006',
     }
 
+    /**
+     * @property {Object.<string, string>} _loginList - 登录服务器地址列表
+     * @private
+     */
     private _loginList: {[key:string]:string} = {
         // 'game1':'ws://192.168.1.140:9003',
         // 'game2':'ws://192.168.1.140:9006',
     }
 
-
+    /**
+     * @property {DataCenter} _instance - 单例实例
+     * @private
+     * @static
+     */
     private static _instance: DataCenter;
+    
+    /**
+     * @method instance
+     * @description 获取DataCenter的单例实例
+     * @static
+     * @returns {DataCenter} DataCenter单例实例
+     */
     public static get instance(): DataCenter {
         if (!this._instance) {
             this._instance = new DataCenter();
@@ -41,6 +109,11 @@ export class DataCenter {
         return this._instance;
     }
 
+    /**
+     * @constructor
+     * @description 私有构造函数，初始化时从本地存储中加载登录信息
+     * @private
+     */
     private constructor(){
         const loginInfo = sys.localStorage.getItem(LOCAL_KEY.LOGIN_INFO);
         if(loginInfo){

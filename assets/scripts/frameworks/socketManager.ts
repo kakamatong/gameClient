@@ -3,27 +3,95 @@ import { assetManager, BufferAsset, log } from 'cc';
 import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声明，ts会提示any类型警告，但不影响功能
 import { handleSocketMessage } from './config/config';
 import {LogColors} from './framework';
+
 /**
- * SocketManager 
- * 负责Socket的初始化、协议加载、消息处理等功能
+ * @class SocketManager
+ * @implements {handleSocketMessage}
+ * @description Socket管理器基类，负责Socket的初始化、协议加载、消息处理等功能
+ * @category 框架组件
  */
 export class SocketManager implements handleSocketMessage {
+    /**
+     * @property {string} _name - 管理器名称
+     * @protected
+     */
     protected _name: string = 'SocketManager'
+    
+    /**
+     * @property {Socket | null} _socket - Socket实例
+     * @private
+     */
     private _socket: Socket | null = null;
+    
+    /**
+     * @property {any} _request - 请求对象，用于打包消息
+     * @private
+     */
     private _request: any;
+    
+    /**
+     * @property {any} _client - 客户端协议对象
+     * @private
+     */
     private _client: any;
+    
+    /**
+     * @property {boolean} _bloaded - 协议是否已加载
+     * @private
+     */
     private _bloaded = false;
+    
+    /**
+     * @property {boolean} _isopen - 连接是否已打开
+     * @private
+     */
     private _isopen = false;
+    
+    /**
+     * @property {number} _session - 会话数字，用于区分不同的请求
+     * @private
+     */
     private _session = 0;
+    
+    /**
+     * @property {number} _timeid - 心跳定时器ID
+     * @private
+     */
     private _timeid: number = -1;
+    
+    /**
+     * @property {Array<(data: any) => void>} _callBacks - 回调函数数组，按session索引存储
+     * @private
+     */
     private _callBacks: Array<(data: any) => void> = [];
+    
+    /**
+     * @property {((result: boolean) => void) | null} _callBackLink - 连接状态回调函数
+     * @protected
+     */
     protected _callBackLink: ((result: boolean) => void) | null = null;
+    
+    /**
+     * @property {Map<string, (data: any) => void> | null} _onServerListen - 服务器消息监听器映射表
+     * @private
+     */
     private _onServerListen: Map<string, (data: any) => void> | null = null;
     
+    /**
+     * @constructor
+     * @description 初始化SocketManager实例
+     */
     constructor(){
         this._onServerListen = new Map<string, (data: any) => void>();
     }
 
+    /**
+     * @method start
+     * @description 启动Socket连接
+     * @param {string} url - WebSocket连接URL
+     * @param {string | string[]} [header] - 连接头信息
+     * @param {(result: boolean) => void} [callBack] - 连接结果回调函数
+     */
     start(url: string, header?: string | string[], callBack?: (result: boolean) => void) {
         if (this._socket) {
             this._socket.close();
@@ -36,12 +104,23 @@ export class SocketManager implements handleSocketMessage {
         this._socket = this.initSocket(url, header);
     }
 
+    /**
+     * @method close
+     * @description 关闭Socket连接
+     */
     close(){
         if(this._socket){
             this._socket.close();
         }
     }
 
+    /**
+     * @method initSocket
+     * @description 初始化Socket实例
+     * @param {string} url - WebSocket连接URL
+     * @param {string | string[]} [header] - 连接头信息
+     * @returns {Socket} 初始化的Socket实例
+     */
     initSocket(url: string, header?: string | string[]) {
         this._session = 0;
         this._isopen = false;
