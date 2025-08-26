@@ -64,7 +64,7 @@ export class GameView extends FGUIGameView {
             if (selfid == userid) {
                 localSeat = SELF_LOCAL
             }else{
-                localSeat = GameData.instance.local2seat(svrSeat);
+                localSeat = GameData.instance.seat2local(svrSeat);
             }
             GameData.instance.playerList[localSeat] = playerInfo;
 
