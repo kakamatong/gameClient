@@ -96,6 +96,7 @@ export class Mail {
     getAwards(id:number, callBack:(success:boolean, data?:any)=>void){
         const url = this._url + "getaward/" + id;
         const body = {
+            'userid':DataCenter.instance.userid,
         }
         this.req(url, body,callBack)
     }
