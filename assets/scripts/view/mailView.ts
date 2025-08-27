@@ -45,7 +45,7 @@ export class MailView extends FGUIMailView {
         this.UI_TXT_CONTENT.text = data.content;
         if(data.awards && data.awards != ""){
             this.ctrl_award.selectedIndex = 1;
-            if(data.status == 2){
+            if(data.isReceived){
                 this.ctrl_get.selectedIndex = 1;
             }else{
                 this.ctrl_get.selectedIndex = 0;
@@ -83,7 +83,7 @@ export class MailView extends FGUIMailView {
         item.onClick(()=>{
             this.onBtnTitle(item, index);
         })
-        const tmp = itemData.status ? 1 : 0;
+        const tmp = itemData.isRead;
 
         item.getController('ctrl_read').selectedIndex = tmp;
     }
@@ -100,7 +100,7 @@ export class MailView extends FGUIMailView {
 
     onBtnGet(){
         const itemData = this._list[this._index];
-        if(itemData.status == 2){
+        if(itemData.isReceived){
             return;
         }
 
@@ -110,6 +110,7 @@ export class MailView extends FGUIMailView {
                 const awardNotices = new AwardNotices()
                 awardNotices.reqRead(awardresp.noticeid)
                 itemData.status = 2;
+                itemData.isReceived = true;
                 Mail.instance.detail(itemData.id, (success, data)=>{
                     if (success) {
                         console.log('detail success', data);
