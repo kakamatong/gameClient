@@ -59,14 +59,14 @@ export class MailView extends FGUIMailView {
     onBtnTitle(item:fgui.GComponent, index:number){
         this._index = index;
         const itemData = this._list[index];
-        Mail.instance.detail(itemData.mailid, (success, data)=>{
+        Mail.instance.detail(itemData.id, (success, data)=>{
             if (success) {
                 console.log('detail success', data);
                 this.updateContent(data);
             }
         })
 
-        Mail.instance.read(itemData.mailid, (success, data)=>{
+        Mail.instance.read(itemData.id, (success, data)=>{
             if (success) {
                 console.log('read success', data);
                 if (!itemData.status){
@@ -104,13 +104,13 @@ export class MailView extends FGUIMailView {
             return;
         }
 
-        Mail.instance.getAwards(itemData.mailid, (success, awardresp)=>{
+        Mail.instance.getAwards(itemData.id, (success, awardresp)=>{
             if (success) {
                 console.log('getAwards success', awardresp);
                 const awardNotices = new AwardNotices()
                 awardNotices.reqRead(awardresp.noticeid)
                 itemData.status = 2;
-                Mail.instance.detail(itemData.mailid, (success, data)=>{
+                Mail.instance.detail(itemData.id, (success, data)=>{
                     if (success) {
                         console.log('detail success', data);
                         this.updateContent(data);
