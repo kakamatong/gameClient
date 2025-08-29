@@ -73,5 +73,9 @@
       <relation target="" sidePair="center-center,middle-middle,right-right,top-top"/>
       <Button title="准备" titleColor="#ffffff" titleFontSize="34"/>
     </component>
+    <component id="n20_nhct" name="UI_BTN_DISMISS_ROOM" src="q7362" fileName="comp/compBtnScale09.xml" xy="1355,38" size="130,58" visible="false">
+      <relation target="" sidePair="right-right,top-top"/>
+      <Button title="解散" titleColor="#ffffff" titleFontSize="34"/>
+    </component>
   </displayList>
 </component>

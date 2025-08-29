@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,300">
+  <displayList>
+    <graph id="n1_nhct" name="n1" xy="0,0" size="400,300" type="rect" fillColor="#ff66cc66"/>
+    <list id="n0_nhct" name="UI_LV_DISMISS" xy="10,3" size="380,210" overflow="scroll" defaultItem="ui://ljshfpzyeo9b4"/>
+    <component id="n2_nhct" name="UI_BTN_DISMISS_AGREE" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="3,216">
+      <property target="title" propertyId="0" value="同意"/>
+    </component>
+    <component id="n3_nhct" name="UI_BTN_DISMISS_REFUSE" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="197,216" controller="ctrl_color,1">
+      <property target="title" propertyId="0" value="拒绝"/>
+    </component>
+  </displayList>
+</component>
