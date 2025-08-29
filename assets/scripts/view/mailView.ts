@@ -83,7 +83,7 @@ export class MailView extends FGUIMailView {
         item.onClick(()=>{
             this.onBtnTitle(item, index);
         })
-        const tmp = itemData.status;
+        const tmp = itemData.status > 0 ? 1 : 0;
 
         item.getController('ctrl_read').selectedIndex = tmp;
     }
