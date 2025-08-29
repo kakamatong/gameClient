@@ -16,7 +16,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
     private _countdownTimer: number | null = null; // 倒计时定时器
     private _timeLeft: number = 0; // 剩余时间
-    private _countdownText: fgui.GTextField | null = null; // 倒计时显示文本
     private _hasVoted: boolean = false; // 是否已投票
 
     constructor() {
@@ -30,7 +29,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
 
     onEnable(){
         // 监听服务器投票解散相关消息
-        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
 
@@ -43,15 +41,8 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
      * 初始化倒计时显示
      */
     private initCountdownDisplay() {
-        // 创建倒计时文本显示
-        this._countdownText = new fgui.GTextField();
-        this._countdownText.text = "等待中...";
-        this._countdownText.fontSize = 18;
-        this._countdownText.color = new Color(255, 255, 0, 255); // 黄色
-        this._countdownText.setSize(200, 30);
-        this._countdownText.x = (this.width - 200) / 2;
-        this._countdownText.y = 10;
-        this.addChild(this._countdownText);
+        this.UI_TXT_LEFT_TIME.text = "等待中...";
+        this.UI_TXT_LEFT_TIME.color = new Color(255, 255, 0, 255); // 黄色
     }
 
     listItemRenderer(index: number, item: fgui.GObject): void { 
@@ -59,7 +50,8 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
             item.asCom.getChild('UI_TXT_NICKNAME').text = player.nickname || `玩家${player.userid}`;
-            item.asCom.getChild('UI_TXT_RESULT').text = this.getVoteStatusText(data.vote)
+            item.asCom.getChild('UI_TXT_RESULT').text = this.getVoteStatusText(data.vote);
+            (item.asCom.getChild('UI_TXT_RESULT') as fgui.GTextField).color = this.getVoteStatusColor(data.vote)
         }
     }
 
@@ -163,7 +155,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     /**
      * 处理服务器发送的投票解散开始消息
      */
-    private onVoteDisbandStart(data: VoteDisbandStartData) {
+    onVoteDisbandStart(data: VoteDisbandStartData) {
         console.log('收到投票解散开始消息:', data);
         
         this._voteId = data.voteId;
@@ -274,14 +266,14 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
      * 更新倒计时显示
      */
     private updateCountdown(timeLeft: number) {
-        if (this._countdownText) {
-            this._countdownText.text = `剩余时间: ${timeLeft}秒`;
+        if (this.UI_TXT_LEFT_TIME) {
+            this.UI_TXT_LEFT_TIME.text = `剩余时间: ${timeLeft}秒`;
             
             // 时间不足时变红色提醒
             if (timeLeft <= 10) {
-                this._countdownText.color = new Color(255, 0, 0, 255);
+                this.UI_TXT_LEFT_TIME.color = new Color(255, 0, 0, 255);
             } else {
-                this._countdownText.color = new Color(255, 255, 0, 255);
+                this.UI_TXT_LEFT_TIME.color = new Color(255, 255, 0, 255);
             }
         }
     }
@@ -350,7 +342,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         this.stopCountdown();
         
         // 清理监听器
-        GameSocketManager.instance.removeServerListen("voteDisbandStart");
         GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
         GameSocketManager.instance.removeServerListen("voteDisbandResult");
 

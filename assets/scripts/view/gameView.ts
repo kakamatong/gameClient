@@ -379,7 +379,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.sendToServer('voteDisbandRoom', data, (response: any) => {
             if (response && response.code === 0) {
                 console.log('发起解散投票成功');
-                this.showDismissRoomPanel();
+                //this.showDismissRoomPanel();
             } else {
                 console.error('发起解散投票失败:', response?.msg || '未知错误');
                 // 可以显示错误提示
@@ -391,7 +391,7 @@ export class GameView extends FGUIGameView {
     /**
      * 显示投票解散面板
      */
-    private showDismissRoomPanel(): void {
+    private showDismissRoomPanel() {
         if (this._dismissRoomPanel) {
             return;
         }
@@ -407,11 +407,12 @@ export class GameView extends FGUIGameView {
             
             // 添加到当前视图
             this.addChild(dismissPanel);
-            
             console.log('投票解散面板已显示');
         } else {
             console.error('创建投票解散面板失败');
         }
+
+        return dismissPanel
     }
 
     /**
@@ -457,7 +458,8 @@ export class GameView extends FGUIGameView {
         
         // 如果不是自己发起的投票，则显示投票面板
         if (data.initiator !== DataCenter.instance.userid) {
-            this.showDismissRoomPanel();
+            const pan = this.showDismissRoomPanel();
+            pan && pan.onVoteDisbandStart(data)
         }
     }
 
