@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="380,60">
   <displayList>
-    <text id="n0_nhct" name="n0" xy="0,8" size="64,42" fontSize="30" color="#ffffff" singleLine="true" text="名称"/>
-    <text id="n1_nhct" name="n1" xy="316,8" pivot="1,0" size="64,42" fontSize="30" color="#66ff00" align="right" singleLine="true" text="同意"/>
+    <text id="n0_nhct" name="UI_TXT_NICKNAME" xy="0,8" size="64,42" fontSize="30" color="#ffffff" singleLine="true" text="名称"/>
+    <text id="n1_nhct" name="UI_TXT_RESULT" xy="316,8" pivot="1,0" size="64,42" fontSize="30" color="#66ff00" align="right" singleLine="true" text="等待"/>
   </displayList>
 </component>

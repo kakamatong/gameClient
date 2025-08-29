@@ -1,4 +1,4 @@
-import { _decorator} from 'cc';
+import { _decorator, Color} from 'cc';
 import FGUIGameView from '../fgui/test/FGUIGameView';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { LogColors } from '../frameworks/framework';
@@ -8,12 +8,14 @@ import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEA
 import { UIManager } from '../frameworks/uimanager'
 import { Match } from '../modules/match';
 import { UserStatus } from '../modules/userStatus';
+import { DismissRoomComponent } from './DismissRoomComponent';
 import * as fgui from "fairygui-cc";
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = 0;
     private _isPrivateRoom:boolean = false;
+    private _dismissRoomPanel: DismissRoomComponent | null = null; // 投票解散面板
     constructor(){
         super();
     }
@@ -24,6 +26,11 @@ export class GameView extends FGUIGameView {
         GameData.instance.maxPlayer = 2;
         if(DataCenter.instance.shortRoomid){
             this._isPrivateRoom = true;
+            // 私人房显示解散按钮
+            this.UI_BTN_DISMISS_ROOM.visible = true;
+        } else {
+            // 非私人房隐藏解散按钮
+            this.UI_BTN_DISMISS_ROOM.visible = false;
         }
         GameSocketManager.instance.sendToServer("clientReady",{})
         GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
@@ -38,6 +45,10 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
         GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
+        // 投票解散相关消息监听
+        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
+        GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
+        GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
     }
 
     onDisable(){
@@ -54,6 +65,13 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameEnd");
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
         GameSocketManager.instance.removeServerListen("playerLeave");
+        // 移除投票解散相关消息监听
+        GameSocketManager.instance.removeServerListen("voteDisbandStart");
+        GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
+        GameSocketManager.instance.removeServerListen("voteDisbandResult");
+        
+        // 清理投票解散面板
+        this.clearDismissRoomPanel();
     }
 
     hideHead(localseat:number){
@@ -334,5 +352,154 @@ export class GameView extends FGUIGameView {
             }
         }
         GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
+    }
+
+    /**
+     * 解散房间按钮点击事件
+     * 发起投票解散房间
+     */
+    onBtnDismissRoom(): void {
+        console.log('点击解散房间按钮');
+        
+        if (!this._isPrivateRoom) {
+            console.log('非私人房，无法解散');
+            return;
+        }
+
+        if (this._dismissRoomPanel) {
+            console.log('投票解散面板已存在');
+            return;
+        }
+
+        // 发起解散房间投票请求
+        const data = {
+            reason: "玩家发起解散" // 解散原因（可选）
+        };
+
+        GameSocketManager.instance.sendToServer('voteDisbandRoom', data, (response: any) => {
+            if (response && response.code === 0) {
+                console.log('发起解散投票成功');
+                this.showDismissRoomPanel();
+            } else {
+                console.error('发起解散投票失败:', response?.msg || '未知错误');
+                // 可以显示错误提示
+                this.showErrorMessage(response?.msg || '发起解散投票失败');
+            }
+        });
+    }
+
+    /**
+     * 显示投票解散面板
+     */
+    private showDismissRoomPanel(): void {
+        if (this._dismissRoomPanel) {
+            return;
+        }
+
+        // 使用fgui.UIPackage.createObject创建投票解散组件
+        const dismissPanel = fgui.UIPackage.createObject('test', 'compDismissRoom', DismissRoomComponent) as DismissRoomComponent;
+        if (dismissPanel) {
+            this._dismissRoomPanel = dismissPanel;
+            
+            // 设置面板位置（居中显示）
+            dismissPanel.x = (this.width - dismissPanel.width) / 2;
+            dismissPanel.y = (this.height - dismissPanel.height) / 2;
+            
+            // 添加到当前视图
+            this.addChild(dismissPanel);
+            
+            console.log('投票解散面板已显示');
+        } else {
+            console.error('创建投票解散面板失败');
+        }
+    }
+
+    /**
+     * 显示错误消息
+     */
+    private showErrorMessage(message: string): void {
+        // 创建临时文本组件显示错误信息
+        const errorText = new fgui.GTextField();
+        errorText.text = message;
+        errorText.fontSize = 16;
+        errorText.color = new Color(255, 0, 0, 255); // 红色
+        errorText.setSize(200, 30);
+        errorText.x = (this.width - 200) / 2;
+        errorText.y = (this.height - 30) / 2;
+        this.addChild(errorText);
+
+        // 2秒后移除
+        setTimeout(() => {
+            if (errorText.parent) {
+                this.removeChild(errorText);
+            }
+        }, 2000);
+    }
+
+    /**
+     * 清理投票解散面板
+     */
+    private clearDismissRoomPanel(): void {
+        if (this._dismissRoomPanel) {
+            if (this._dismissRoomPanel.parent) {
+                this.removeChild(this._dismissRoomPanel);
+            }
+            this._dismissRoomPanel.dispose();
+            this._dismissRoomPanel = null;
+        }
+    }
+
+    /**
+     * 处理服务器发起的投票解散消息
+     */
+    private onVoteDisbandStart(data: any): void {
+        console.log('收到解散房间投票发起消息:', data);
+        
+        // 如果不是自己发起的投票，则显示投票面板
+        if (data.initiator !== DataCenter.instance.userid) {
+            this.showDismissRoomPanel();
+        }
+    }
+
+    /**
+     * 处理投票解散状态更新
+     */
+    private onVoteDisbandUpdate(data: any): void {
+        console.log('收到投票解散状态更新:', data);
+        
+        // 如果投票面板存在，则更新显示
+        if (this._dismissRoomPanel) {
+            // 这里可以向投票面板发送消息，但是DismissRoomComponent已经监听了这个消息
+            // 所以这里不需要做额外的处理
+        }
+    }
+
+    /**
+     * 处理投票解散结果
+     */
+    private onVoteDisbandResult(data: any): void {
+        console.log('收到投票解散结果:', data);
+        
+        if (data.result === 1) {
+            // 投票通过，房间将被解散
+            console.log('投票通过，房间即将解散');
+            
+            // 显示成功消息
+            this.showErrorMessage('投票通过，房间即将解散');
+            
+            // 延时关闭游戏界面，返回大厅
+            setTimeout(() => {
+                this.onBtnClose();
+            }, 3000);
+        } else {
+            // 投票未通过
+            console.log('投票未通过，继续游戏');
+            this.showErrorMessage('投票未通过，继续游戏');
+        }
+        
+        // 清理投票面板
+        setTimeout(() => {
+            this.clearDismissRoomPanel();
+        }, 2000);
     }
 }
