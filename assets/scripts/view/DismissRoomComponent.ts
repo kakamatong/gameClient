@@ -14,7 +14,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     private _voteId: number = 0; // 投票ID
     private _voteData: VoteDisbandStartData | null = null; // 投票开始数据
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
-    private _dismissListItems: fgui.GComponent[] = []; // 投票列表项
     private _countdownTimer: number | null = null; // 倒计时定时器
     private _timeLeft: number = 0; // 剩余时间
     private _countdownText: fgui.GTextField | null = null; // 倒计时显示文本
@@ -26,16 +25,18 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     }
 
     private init() {
+  
+    }
+
+    onEnable(){
         // 监听服务器投票解散相关消息
         GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
-        
+
         // 初始化倒计时显示
         this.initCountdownDisplay();
-        
-        // 初始化投票列表
-        this.initVoteList();
+        this.UI_LV_DISMISS.itemRenderer = this.listItemRenderer.bind(this)
     }
 
     /**
@@ -53,66 +54,13 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         this.addChild(this._countdownText);
     }
 
-    /**
-     * 初始化投票列表显示
-     */
-    private initVoteList() {
-        // 清空现有列表
-        this.UI_LV_DISMISS.removeChildrenToPool();
-        this._dismissListItems = [];
-
-        // 如果有投票数据，则根据数据创建列表
-        if (this._currentVotes.length > 0) {
-            for (let voteInfo of this._currentVotes) {
-                const player = this.getPlayerById(voteInfo.userid);
-                if (player) {
-                    const item = this.createVoteListItem(player, voteInfo.vote);
-                    this.UI_LV_DISMISS.addChild(item);
-                    this._dismissListItems.push(item);
-                }
-            }
-        } else {
-            // 如果没有投票数据，则根据房间玩家创建
-            const players = GameData.instance.playerList;
-            for (let i = 0; i < players.length; i++) {
-                const player = players[i];
-                if (player && player.userid) {
-                    const item = this.createVoteListItem(player, VOTE_STATUS.NOT_VOTED);
-                    this.UI_LV_DISMISS.addChild(item);
-                    this._dismissListItems.push(item);
-                }
-            }
+    listItemRenderer(index: number, item: fgui.GObject): void { 
+        const data = this._currentVotes[index];
+        const player = GameData.instance.getPlayerByUserid(data.userid);
+        if (player) {
+            item.asCom.getChild('UI_TXT_NICKNAME').text = player.nickname || `玩家${player.userid}`;
+            item.asCom.getChild('UI_TXT_RESULT').text = this.getVoteStatusText(data.vote)
         }
-    }
-
-    /**
-     * 创建投票列表项
-     */
-    private createVoteListItem(player: any, voteStatus: number = VOTE_STATUS.NOT_VOTED): fgui.GComponent {
-        // 创建简单的列表项组件
-        const item = new fgui.GComponent();
-        item.setSize(200, 40);
-
-        // 玩家昵称
-        const nameText = new fgui.GTextField();
-        nameText.text = player.nickname || `玩家${player.userid}`;
-        nameText.setSize(100, 30);
-        nameText.x = 10;
-        nameText.y = 5;
-        item.addChild(nameText);
-
-        // 投票状态
-        const statusText = new fgui.GTextField();
-        statusText.text = this.getVoteStatusText(voteStatus);
-        statusText.color = this.getVoteStatusColor(voteStatus);
-        statusText.setSize(80, 30);
-        statusText.x = 110;
-        statusText.y = 5;
-        statusText.name = "status_text";
-        item.addChild(statusText);
-
-        item.data = player.userid; // 存储玩家ID
-        return item;
     }
 
     /**
@@ -166,19 +114,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
 
         // 更新当前投票数据
         this._currentVotes = votes;
-
-        for (let i = 0; i < this._dismissListItems.length; i++) {
-            const item = this._dismissListItems[i];
-            const userid = item.data;
-            const statusText = item.getChild("status_text") as fgui.GTextField;
-
-            // 查找对应的投票状态
-            const voteInfo = votes.find(v => v.userid === userid);
-            const voteStatus = voteInfo ? voteInfo.vote : VOTE_STATUS.NOT_VOTED;
-
-            statusText.text = this.getVoteStatusText(voteStatus);
-            statusText.color = this.getVoteStatusColor(voteStatus);
-        }
+        this.UI_LV_DISMISS.numItems = this._currentVotes.length
     }
 
     /**
@@ -417,9 +353,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         GameSocketManager.instance.removeServerListen("voteDisbandStart");
         GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
         GameSocketManager.instance.removeServerListen("voteDisbandResult");
-        
-        // 清理列表项
-        this._dismissListItems = [];
+
         
         super.dispose();
     }
