@@ -36,7 +36,8 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("gameStart", this.onSvrGameStart.bind(this));
         GameSocketManager.instance.addServerListen("gameEnd", this.onSvrGameEnd.bind(this));
         GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
-        GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrlayerStatusUpdate.bind(this));
+        GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
+        GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
     }
 
     onDisable(){
@@ -52,9 +53,22 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameStart");
         GameSocketManager.instance.removeServerListen("gameEnd");
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
+        GameSocketManager.instance.removeServerListen("playerLeave");
     }
 
-    onSvrlayerStatusUpdate(data:any){
+    hideHead(localseat:number){
+        this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`).visible = false
+        this.getChild<fgui.GTextField>(`UI_TXT_USERID_${localseat}`).visible = false
+        this.getChild<fgui.GTextField>(`UI_TXT_STATUS_${localseat}`).visible = false
+    }
+
+    onSvrPlayerLeave(data:any){
+        const localSeat = GameData.instance.seat2local(data.seat);
+        GameData.instance.playerList.splice(localSeat, 1)
+        this.hideHead(localSeat)
+    }
+
+    onSvrPlayerStatusUpdate(data:any){
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
             player.status = data.status;
