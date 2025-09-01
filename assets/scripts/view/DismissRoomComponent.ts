@@ -140,12 +140,9 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         };
 
         GameSocketManager.instance.sendToServer('voteDisbandResponse', data, (response: any) => {
-            if (response && response.code === 0) {
+            if (response && response.code === 1) {
                 console.log('投票发送成功');
                 this._hasVoted = true;
-                // 禁用按钮，防止重复投票
-                this.UI_BTN_DISMISS_AGREE.enabled = false;
-                this.UI_BTN_DISMISS_REFUSE.enabled = false;
             } else {
                 console.error('投票发送失败:', response?.msg || '未知错误');
             }
