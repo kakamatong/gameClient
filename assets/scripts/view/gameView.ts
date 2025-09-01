@@ -90,7 +90,9 @@ export class GameView extends FGUIGameView {
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
             player.status = data.status;
+            this.showPlayerInfoBySeat(GameData.instance.seat2local(player.svrSeat))
         }
+        
     }
 
     onSvrPlayerEnter(data:any){
