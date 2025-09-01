@@ -238,6 +238,10 @@ export class GameView extends FGUIGameView {
                 return '离线';
             case PLAYER_STATUS.PLAYING:
                 return '游戏中';
+            case PLAYER_STATUS.ONLINE:
+                return '在线';
+            case PLAYER_STATUS.READY:
+                return '准备';
             default:
                 return '未知';
         }
