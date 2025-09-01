@@ -334,7 +334,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         this.stopCountdown();
         
         // 移除服务器监听
-        GameSocketManager.instance.removeServerListen("voteDisbandStart");
         GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
         GameSocketManager.instance.removeServerListen("voteDisbandResult");
 
