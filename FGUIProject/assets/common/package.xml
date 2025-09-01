@@ -6,6 +6,9 @@
     <image id="cmlt2" name="buttony.png" path="/imgs/"/>
     <image id="cmlt3" name="closeButton.png" path="/imgs/"/>
     <component id="cmlt4" name="compBtnScale.xml" path="/comp/" exported="true"/>
+    <image id="xoqi5" name="paper.png" path="/imgs/" exported="true"/>
+    <image id="xoqi6" name="scissors.png" path="/imgs/" exported="true"/>
+    <image id="xoqi7" name="rock.png" path="/imgs/" exported="true"/>
   </resources>
   <publish name=""/>
 </packageDescription>
