@@ -160,11 +160,11 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         
         this._voteId = data.voteId;
         this._voteData = data;
-        this._timeLeft = data.timeLeft;
+        this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
         this._hasVoted = false;
         
         // 更新界面显示
-        this.updateCountdown(data.timeLeft);
+        this.updateCountdown(this._timeLeft);
         this.showVoteInfo(data);
         
         // 启动倒计时
@@ -191,9 +191,9 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         console.log('投票状态更新:', data);
         
         const votes = data.votes 
-        this._timeLeft = data.timeLeft;
+        this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);;
         this.updateVoteList(votes);
-        this.updateCountdown(data.timeLeft);
+        this.updateCountdown(this._timeLeft);
         this.updateVoteProgress(data.agreeCount, data.refuseCount);
 
         // 自己已经同意，隐藏按钮
