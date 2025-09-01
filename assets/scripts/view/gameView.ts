@@ -402,8 +402,8 @@ export class GameView extends FGUIGameView {
             this._dismissRoomPanel = dismissPanel;
             
             // 设置面板位置（居中显示）
-            dismissPanel.x = (this.width - dismissPanel.width) / 2;
-            dismissPanel.y = (this.height - dismissPanel.height) / 2;
+            dismissPanel.x = this.width - dismissPanel.width
+            dismissPanel.y = 0
             
             // 添加到当前视图
             this.addChild(dismissPanel);
