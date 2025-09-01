@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <component id="n0_xoqi" name="n0" src="xoqi6" fileName="comp/CompActLine1.xml" xy="210,902"/>
-    <component id="n1_xoqi" name="n1" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-224,469"/>
-    <component id="n2_xoqi" name="n2" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-665,27"/>
-    <component id="n3_xoqi" name="n3" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-1085,-433"/>
+    <component id="n0_xoqi" name="UI_COMP_BG_ACT_1" src="xoqi6" fileName="comp/CompActLine1.xml" xy="210,902" pivot="0.597,0.655"/>
+    <component id="n1_xoqi" name="UI_COMP_BG_ACT_2" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-224,469" pivot="0.597,0.655"/>
+    <component id="n2_xoqi" name="UI_COMP_BG_ACT_3" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-665,27" pivot="0.597,0.655"/>
+    <component id="n3_xoqi" name="UI_COMP_BG_ACT_4" src="xoqi6" fileName="comp/CompActLine1.xml" xy="-1085,-433" pivot="0.597,0.655"/>
   </displayList>
 </component>

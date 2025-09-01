@@ -1,10 +1,12 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import * as fgui from "fairygui-cc";
+import FGUIBgActView from "./FGUIBgActView";
 
+import * as fgui from "fairygui-cc";
 export default class FGUILobbyView extends fgui.GComponent {
 
 	public UI_IMG_BG:fgui.GImage;
+	public UI_COMP_BG_ACT:FGUIBgActView;
 	public static URL:string = "ui://gv22rev3sc722";
 
 	public static packageName:string = "lobby";
@@ -15,5 +17,6 @@ export default class FGUILobbyView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.UI_IMG_BG = <fgui.GImage>(this.getChildAt(0));
+		this.UI_COMP_BG_ACT = <FGUIBgActView>(this.getChildAt(1));
 	}
 }

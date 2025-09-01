@@ -2,7 +2,7 @@
 <component size="776,1688">
   <displayList>
     <image id="n3_xoqi" name="UI_IMG_BG" src="xoqi4" fileName="imgs/bg.jpg" xy="0,0"/>
-    <component id="n5_xoqi" name="n5" src="xoqi5" fileName="BgActView.xml" xy="0,0"/>
+    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" alpha="0.184"/>
     <component id="n2_ucoo" name="n2" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="129,572"/>
   </displayList>
 </component>
