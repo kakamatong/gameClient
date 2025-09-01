@@ -155,6 +155,13 @@ export class GameView extends FGUIGameView {
         }else if(data.code == ROOM_END_FLAG.OUT_TIME_PLAYING){
             console.log("游戏超时 " + msg)
             this.onBtnClose()
+        }else if(data.code == ROOM_END_FLAG.OWNER_DISBAND){
+            console.log("房主解散 " + msg)
+            this.onBtnClose()
+        }else if(data.code == ROOM_END_FLAG.VOTE_DISBAND){
+            console.log("投票解散 " + msg)
+            //this.onBtnClose()
+
         }
     }
 
@@ -383,7 +390,7 @@ export class GameView extends FGUIGameView {
         };
 
         GameSocketManager.instance.sendToServer('voteDisbandRoom', data, (response: any) => {
-            if (response && response.code === 0) {
+            if (response && response.code === 1) {
                 console.log('发起解散投票成功');
                 //this.showDismissRoomPanel();
             } else {
