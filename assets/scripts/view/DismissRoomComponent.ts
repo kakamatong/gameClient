@@ -174,8 +174,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         if (data.initiator) {
             // 自己发起的投票，隐藏按钮
             if (data.initiator === DataCenter.instance.userid) {
-                this.UI_BTN_DISMISS_AGREE.visible = false;
-                this.UI_BTN_DISMISS_REFUSE.visible = false;
+                this.ctrl_agree.selectedIndex = 1
             }
             const initiatorName = this.getPlayerNameById(data.initiator);
             console.log(`${initiatorName} 发起了解散房间投票`);
@@ -191,10 +190,19 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     private onVoteDisbandUpdate(data: VoteDisbandUpdateData) {
         console.log('投票状态更新:', data);
         
+        const votes = data.votes 
         this._timeLeft = data.timeLeft;
-        this.updateVoteList(data.votes);
+        this.updateVoteList(votes);
         this.updateCountdown(data.timeLeft);
         this.updateVoteProgress(data.agreeCount, data.refuseCount);
+
+        // 自己已经同意，隐藏按钮
+        for (let index = 0; index < votes.length; index++) {
+            const element = votes[index];
+            if(element.userid === DataCenter.instance.userid && element.vote == VOTE_STATUS.AGREE){
+                this.ctrl_agree.selectedIndex = 1
+            }
+        }
     }
 
     /**

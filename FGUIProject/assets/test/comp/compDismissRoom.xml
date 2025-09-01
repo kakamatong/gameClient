@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="400,300">
+  <controller name="ctrl_agree" pages="0,未确定,1,已经确定" selected="1"/>
   <displayList>
     <graph id="n1_nhct" name="n1" xy="0,0" size="400,300" type="rect" fillColor="#ff66cc66"/>
     <list id="n0_nhct" name="UI_LV_DISMISS" xy="10,3" size="380,180" overflow="scroll" defaultItem="ui://ljshfpzynhct8"/>
     <component id="n2_nhct" name="UI_BTN_DISMISS_AGREE" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="3,184">
+      <gearDisplay controller="ctrl_agree" pages="0"/>
       <property target="title" propertyId="0" value="同意"/>
     </component>
     <component id="n3_nhct" name="UI_BTN_DISMISS_REFUSE" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="197,184" controller="ctrl_color,1">
+      <gearDisplay controller="ctrl_agree" pages="0"/>
       <property target="title" propertyId="0" value="拒绝"/>
     </component>
-    <text id="n4_nhct" name="UI_TXT_LEFT_TIME" xy="120,270" pivot="0.5,0.5" size="160,19" fontSize="12" color="#ffffff" autoSize="none" text=""/>
+    <text id="n4_nhct" name="UI_TXT_LEFT_TIME" xy="120,263" pivot="0.5,0.5" size="160,32" fontSize="22" color="#ffffff" autoSize="none" text=""/>
+    <text id="n5_xoqi" name="UI_TXT_LEFT_TIME" xy="40,192" pivot="0.5,0.5" size="320,60" fontSize="45" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="您已同意">
+      <gearDisplay controller="ctrl_agree" pages="1"/>
+    </text>
   </displayList>
 </component>
