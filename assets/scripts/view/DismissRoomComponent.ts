@@ -172,6 +172,11 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         
         // 显示投票发起信息
         if (data.initiator) {
+            // 自己发起的投票，隐藏按钮
+            if (data.initiator === DataCenter.instance.userid) {
+                this.UI_BTN_DISMISS_AGREE.visible = false;
+                this.UI_BTN_DISMISS_REFUSE.visible = false;
+            }
             const initiatorName = this.getPlayerNameById(data.initiator);
             console.log(`${initiatorName} 发起了解散房间投票`);
             if (data.reason) {

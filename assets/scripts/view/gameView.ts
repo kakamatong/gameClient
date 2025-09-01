@@ -457,10 +457,10 @@ export class GameView extends FGUIGameView {
         console.log('收到解散房间投票发起消息:', data);
         
         // 如果不是自己发起的投票，则显示投票面板
-        if (data.initiator !== DataCenter.instance.userid) {
+        //if (data.initiator !== DataCenter.instance.userid) {
             const pan = this.showDismissRoomPanel();
             pan && pan.onVoteDisbandStart(data)
-        }
+        //}
     }
 
     /**
