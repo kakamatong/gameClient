@@ -5,6 +5,9 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" alpha="0.328"/>
-    <component id="n2_ucoo" name="UI_BTN_TEST" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="129,572"/>
+    <component id="n7_gtlg" name="UI_BTN_MATCH_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,593"/>
+    <component id="n8_gtlg" name="UI_BTN_PRIVATE_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,780">
+      <property target="icon" propertyId="1" value="ui://gv22rev3gtlg7"/>
+    </component>
   </displayList>
 </component>

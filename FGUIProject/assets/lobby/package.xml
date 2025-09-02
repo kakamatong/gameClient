@@ -5,6 +5,9 @@
     <image id="xoqi4" name="bg.jpg" path="/imgs/" scale="9grid" scale9grid="194,422,388,844"/>
     <component id="xoqi5" name="BgActView.xml" path="/"/>
     <component id="xoqi6" name="CompActLine1.xml" path="/comp/"/>
+    <image id="gtlg7" name="privateRoom.png" path="/imgs/"/>
+    <image id="gtlg8" name="matchRoom.png" path="/imgs/"/>
+    <component id="gtlg9" name="CompLobbyBtn.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
