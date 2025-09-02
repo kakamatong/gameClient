@@ -2,7 +2,7 @@
 <packageDescription id="gv22rev3">
   <resources>
     <component id="sc722" name="LobbyView.xml" path="/" exported="true"/>
-    <image id="xoqi4" name="bg.jpg" path="/imgs/"/>
+    <image id="xoqi4" name="bg.jpg" path="/imgs/" scale="9grid" scale9grid="194,422,388,844"/>
     <component id="xoqi5" name="BgActView.xml" path="/"/>
     <component id="xoqi6" name="CompActLine1.xml" path="/comp/"/>
   </resources>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <image id="n3_xoqi" name="UI_IMG_BG" src="xoqi4" fileName="imgs/bg.jpg" xy="0,0"/>
-    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" alpha="0.184"/>
-    <component id="n2_ucoo" name="n2" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="129,572"/>
+    <image id="n3_xoqi" name="UI_IMG_BG" src="xoqi4" fileName="imgs/bg.jpg" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" alpha="0.328"/>
+    <component id="n2_ucoo" name="UI_BTN_TEST" src="cmlt4" fileName="comp/compBtnScale.xml" pkg="gj0r6g5i" xy="129,572"/>
   </displayList>
 </component>

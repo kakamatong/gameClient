@@ -70,6 +70,7 @@ export class UIManager {
     
                 const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
                 this._viewStack.set(viewName, view);
+                view.makeFullScreen()
                 fgui.GRoot.inst.addChild(view);
                 view.show && view.show(params);
 
