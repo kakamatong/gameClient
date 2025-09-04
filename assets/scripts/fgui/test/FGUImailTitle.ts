@@ -33,7 +33,8 @@ export default class FGUImailTitle extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUImailTitle.instance && undefined.instance.dispose();
+		FGUImailTitle.instance && FGUImailTitle.instance.dispose();
+		FGUImailTitle.instance = null;
 	}
 	public static createInstance():FGUImailTitle {
 		return <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));

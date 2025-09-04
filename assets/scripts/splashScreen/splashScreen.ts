@@ -2,6 +2,7 @@ import { _decorator, Component, log,sys,assetManager,resources,AssetManager, Jso
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobbyView";
+import { TestView } from '../view/testView';
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -34,7 +35,8 @@ export class splashScreen extends Component {
                 return;
             }
 
-            LobbyView.showView()
+            //LobbyView.showView()
+            TestView.showView()
         })
     }
 

@@ -86,7 +86,8 @@ function genCode(handler: FairyEditor.PublishHandler) {
 
         writer.writeln('public static hideView():void');
         writer.startBlock();
-        writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className);
+        writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className, classInfo.className);
+        writer.writeln('%s.instance = null;', classInfo.className);
         writer.endBlock();
 
         writer.writeln('public static createInstance():%s', classInfo.className);

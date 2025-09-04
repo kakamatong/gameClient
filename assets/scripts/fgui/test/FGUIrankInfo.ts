@@ -34,7 +34,8 @@ export default class FGUIrankInfo extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUIrankInfo.instance && undefined.instance.dispose();
+		FGUIrankInfo.instance && FGUIrankInfo.instance.dispose();
+		FGUIrankInfo.instance = null;
 	}
 	public static createInstance():FGUIrankInfo {
 		return <FGUIrankInfo>(fgui.UIPackage.createObject("test", "rankInfo"));

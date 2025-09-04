@@ -51,7 +51,8 @@ export default class FGUIGameView extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUIGameView.instance && undefined.instance.dispose();
+		FGUIGameView.instance && FGUIGameView.instance.dispose();
+		FGUIGameView.instance = null;
 	}
 	public static createInstance():FGUIGameView {
 		return <FGUIGameView>(fgui.UIPackage.createObject("test", "GameView"));

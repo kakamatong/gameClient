@@ -55,7 +55,8 @@ export default class FGUITestView extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUITestView.instance && undefined.instance.dispose();
+		FGUITestView.instance && FGUITestView.instance.dispose();
+		FGUITestView.instance = null;
 	}
 	public static createInstance():FGUITestView {
 		return <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));

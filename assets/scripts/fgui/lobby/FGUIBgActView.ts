@@ -35,7 +35,8 @@ export default class FGUIBgActView extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUIBgActView.instance && undefined.instance.dispose();
+		FGUIBgActView.instance && FGUIBgActView.instance.dispose();
+		FGUIBgActView.instance = null;
 	}
 	public static createInstance():FGUIBgActView {
 		return <FGUIBgActView>(fgui.UIPackage.createObject("lobby", "BgActView"));

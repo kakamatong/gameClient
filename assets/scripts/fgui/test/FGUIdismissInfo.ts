@@ -33,7 +33,8 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 	}
 
 	public static hideView():void {
-		FGUIdismissInfo.instance && undefined.instance.dispose();
+		FGUIdismissInfo.instance && FGUIdismissInfo.instance.dispose();
+		FGUIdismissInfo.instance = null;
 	}
 	public static createInstance():FGUIdismissInfo {
 		return <FGUIdismissInfo>(fgui.UIPackage.createObject("test", "dismissInfo"));
