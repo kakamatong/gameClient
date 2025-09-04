@@ -35,7 +35,7 @@ function genCode(handler) {
                 let ref = references.get_Item(j);
                 writer.writeln('import %s from "./%s";', ref, ref);
                 // fgui.UIObjectFactory.setExtension(FGUIBgActView.URL, FGUIBgActView)
-                writer.writeln('fgui.UIObjectFactory.setExtension(%s.URL, %s);', ref, ref);
+                //writer.writeln('fgui.UIObjectFactory.setExtension(%s.URL, %s);', ref, ref);
             }
             writer.writeln();
         }
@@ -107,6 +107,8 @@ function genCode(handler) {
             }
         }
         writer.endBlock(); //class
+
+        writer.writeln('fgui.UIObjectFactory.setExtension(%s.URL, %s);', classInfo.className, classInfo.className);
         writer.save(exportCodePath + '/' + classInfo.className + '.ts');
     }
 }

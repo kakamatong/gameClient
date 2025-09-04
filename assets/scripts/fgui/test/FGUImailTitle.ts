@@ -19,3 +19,4 @@ export default class FGUImailTitle extends fgui.GComponent {
 		this.title = <fgui.GTextField>(this.getChildAt(0));
 	}
 }
+fgui.UIObjectFactory.setExtension(FGUImailTitle.URL, FGUImailTitle);

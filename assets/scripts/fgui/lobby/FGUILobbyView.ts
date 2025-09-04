@@ -2,7 +2,6 @@
 
 import * as fgui from "fairygui-cc";
 import FGUIBgActView from "./FGUIBgActView";
-fgui.UIObjectFactory.setExtension(FGUIBgActView.URL, FGUIBgActView);
 
 export default class FGUILobbyView extends fgui.GComponent {
 
@@ -29,3 +28,4 @@ export default class FGUILobbyView extends fgui.GComponent {
 	onBtnMatchRoom():void{};
 	onBtnPrivateRoom():void{};
 }
+fgui.UIObjectFactory.setExtension(FGUILobbyView.URL, FGUILobbyView);

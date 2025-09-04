@@ -31,3 +31,4 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 	onBtnDismissAgree():void{};
 	onBtnDismissRefuse():void{};
 }
+fgui.UIObjectFactory.setExtension(FGUIcompDismissRoom.URL, FGUIcompDismissRoom);

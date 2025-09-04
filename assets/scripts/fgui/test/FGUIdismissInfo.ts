@@ -19,3 +19,4 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 		this.UI_TXT_RESULT = <fgui.GTextField>(this.getChildAt(1));
 	}
 }
+fgui.UIObjectFactory.setExtension(FGUIdismissInfo.URL, FGUIdismissInfo);

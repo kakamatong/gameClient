@@ -91,3 +91,4 @@ export default class FGUITestView extends fgui.GComponent {
 	onBtnCreate():void{};
 	onBtnJoin():void{};
 }
+fgui.UIObjectFactory.setExtension(FGUITestView.URL, FGUITestView);

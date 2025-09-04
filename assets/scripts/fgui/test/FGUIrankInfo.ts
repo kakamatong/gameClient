@@ -21,3 +21,4 @@ export default class FGUIrankInfo extends fgui.GComponent {
 		this.UI_TXT_SCORE = <fgui.GTextField>(this.getChildAt(2));
 	}
 }
+fgui.UIObjectFactory.setExtension(FGUIrankInfo.URL, FGUIrankInfo);

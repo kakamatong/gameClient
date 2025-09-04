@@ -71,3 +71,4 @@ export default class FGUIGameView extends fgui.GComponent {
 	onBtnReady():void{};
 	onBtnDismissRoom():void{};
 }
+fgui.UIObjectFactory.setExtension(FGUIGameView.URL, FGUIGameView);

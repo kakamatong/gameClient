@@ -23,3 +23,4 @@ export default class FGUIBgActView extends fgui.GComponent {
 		this.UI_COMP_BG_ACT_4 = <fgui.GComponent>(this.getChildAt(3));
 	}
 }
+fgui.UIObjectFactory.setExtension(FGUIBgActView.URL, FGUIBgActView);

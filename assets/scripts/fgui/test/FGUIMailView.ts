@@ -31,3 +31,4 @@ export default class FGUIMailView extends fgui.GComponent {
 	onBtnClose():void{};
 	onBtnGet():void{};
 }
+fgui.UIObjectFactory.setExtension(FGUIMailView.URL, FGUIMailView);
