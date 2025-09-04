@@ -58,6 +58,7 @@ function genCode(handler) {
         writer.writeln('public static instance:any | null = null;')
         writer.writeln();
 
+        // showView 用于显示，但只能同时显示一个
         writer.writeln('public static showView(params?:any):void', classInfo.className);
         writer.startBlock();
         writer.writeln('if(%s.instance)',classInfo.className);
@@ -81,6 +82,7 @@ function genCode(handler) {
         writer.endBlock();
         writer.writeln();
 
+        // hideView 用于隐藏，跟showView 是一对
         writer.writeln('public static hideView():void');
         writer.startBlock();
         writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className, classInfo.className);
