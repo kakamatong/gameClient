@@ -573,3 +573,6 @@ export class TestView extends FGUITestView {
     }
 
 }
+
+// 继承出来的对象，必须重写
+fgui.UIObjectFactory.setExtension(TestView.URL, TestView);

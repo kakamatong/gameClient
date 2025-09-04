@@ -358,3 +358,6 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         super.dispose();
     }
 }
+
+// 继承出来的对象，必须重写
+fgui.UIObjectFactory.setExtension(DismissRoomComponent.URL, DismissRoomComponent);

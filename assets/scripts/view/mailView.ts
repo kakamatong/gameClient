@@ -122,3 +122,5 @@ export class MailView extends FGUIMailView {
         })
     }
 }
+// 继承出来的对象，必须重写
+fgui.UIObjectFactory.setExtension(MailView.URL, MailView);
