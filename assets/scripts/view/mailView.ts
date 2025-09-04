@@ -1,6 +1,5 @@
 import { _decorator} from 'cc';
 import FGUIMailView from '../fgui/test/FGUIMailView';
-import { UIManager } from '../frameworks/uimanager'
 import * as fgui from "fairygui-cc";
 import { Mail } from '../modules/mail';
 import { UserRiches } from '../modules/userRiches';
@@ -95,7 +94,7 @@ export class MailView extends FGUIMailView {
     onBtnClose(){
         console.log('onBtnClose');
         //this.dispose();
-        UIManager.instance.hideView('MailView');
+        MailView.hideView()
     }
 
     onBtnGet(){

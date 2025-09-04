@@ -5,7 +5,6 @@ import {Auth} from '../modules/auth';
 import {AuthGame} from '../modules/authGame';
 import {Match} from '../modules/match';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
-import { UIManager } from '../frameworks/uimanager';
 
 import { Login, ACCOUNT_INFO } from '../login/login';
 import { DataCenter } from '../datacenter/datacenter';
@@ -14,8 +13,8 @@ import { UserStatus } from '../modules/userStatus';
 import * as fgui from "fairygui-cc";
 import { AuthList } from '../modules/authList';
 import { Mail } from '../modules/mail';
-
-import FGUIrankInfo from '../fgui/test/FGUIrankInfo';
+import { GameView } from './gameView';
+import {MailView} from './mailView';
 import { AwardNotices } from '../modules/awardNotices';
 const { ccclass, property } = _decorator;
 
@@ -185,7 +184,7 @@ export class TestView extends FGUITestView {
      */
     onBtnClose(){
         console.log('onBtnClose');
-        UIManager.instance.hideView('TestView');
+        TestView.hideView()
     }
 
     /**
@@ -327,7 +326,7 @@ export class TestView extends FGUITestView {
     connectToGame(addr:string, gameid:number, roomid:string){
         const callBack = (success:boolean)=>{
             if(success){
-                UIManager.instance.showView('GameView');
+                GameView.showView();
             }
         }
         AuthGame.instance.req(addr,gameid, roomid, callBack);
@@ -522,7 +521,7 @@ export class TestView extends FGUITestView {
         Mail.instance.list((success:boolean, data?:any)=>{
             if(success){
                 console.log(LogColors.green(data));
-                UIManager.instance.showView('MailView',data);
+                MailView.showView(data)
             }
         })  
 

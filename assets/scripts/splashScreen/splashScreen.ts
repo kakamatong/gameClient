@@ -34,10 +34,7 @@ export class splashScreen extends Component {
                 return;
             }
 
-            //UIManager.instance.showView('LobbyView');
             LobbyView.showView()
-            //lobby.makeFullScreen()
-            //fgui.GRoot.inst.addChild(lobby);
         })
     }
 

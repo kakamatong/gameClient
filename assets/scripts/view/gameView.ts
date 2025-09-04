@@ -5,7 +5,6 @@ import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
 import { GameData } from '../datacenter/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
-import { UIManager } from '../frameworks/uimanager'
 import { Match } from '../modules/match';
 import { UserStatus } from '../modules/userStatus';
 import { DismissRoomComponent } from './DismissRoomComponent';
@@ -220,7 +219,7 @@ export class GameView extends FGUIGameView {
                 }
             }
         }
-        UIManager.instance.hideView('GameView');
+        GameView.hideView()
     }
 
     // 显示玩家信息
@@ -346,7 +345,7 @@ export class GameView extends FGUIGameView {
 
     onBtnContinue(){
         Match.instance.req();
-        UIManager.instance.hideView('GameView');
+        GameView.hideView()
     }
     
     onBtnReady(): void {
