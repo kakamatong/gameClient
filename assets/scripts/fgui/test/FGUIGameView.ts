@@ -2,6 +2,7 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import FGUIcompDismissRoom from "./FGUIcompDismissRoom";
 
 export default class FGUIGameView extends fgui.GComponent {
 
@@ -25,6 +26,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_SHORT_ROOMID:fgui.GTextField;
 	public UI_BTN_READY:fgui.GButton;
 	public UI_BTN_DISMISS_ROOM:fgui.GButton;
+	public UI_COMP_DISMISS:FGUIcompDismissRoom;
 	public static URL:string = "ui://ljshfpzyu4cy3";
 
 	public static packageName:string = "test";
@@ -87,6 +89,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_READY.onClick(this.onBtnReady, this);
 		this.UI_BTN_DISMISS_ROOM = <fgui.GButton>(this.getChildAt(20));
 		this.UI_BTN_DISMISS_ROOM.onClick(this.onBtnDismissRoom, this);
+		this.UI_COMP_DISMISS = <FGUIcompDismissRoom>(this.getChildAt(21));
 	}
 	onBtnClose():void{};
 	onBtnPaper():void{};

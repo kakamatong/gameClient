@@ -7,7 +7,6 @@ import { GameData } from '../datacenter/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
 import { Match } from '../modules/match';
 import { UserStatus } from '../modules/userStatus';
-import { DismissRoomComponent } from './DismissRoomComponent';
 import * as fgui from "fairygui-cc";
 const { ccclass, property } = _decorator;
 @ccclass('GameView')
@@ -43,9 +42,12 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
         GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
-        // 投票解散相关消息监听
-        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
     }
+
+    // public static showView(params?:any){ 
+    //     fgui.UIObjectFactory.setExtension(DismissRoomComponent.URL, DismissRoomComponent);
+    //     super.showView(params);
+    // }
 
     onDisable(){
         super.onDisable();
@@ -61,8 +63,6 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameEnd");
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
         GameSocketManager.instance.removeServerListen("playerLeave");
-        // 移除投票解散相关消息监听
-        GameSocketManager.instance.removeServerListen("voteDisbandStart");
     }
 
     hideHead(localseat:number){
@@ -384,39 +384,9 @@ export class GameView extends FGUIGameView {
         });
     }
 
-    /**
-     * 显示投票解散面板
-     */
-    private showDismissRoomPanel() {
-        // 使用fgui.UIPackage.createObject创建投票解散组件
-        const dismissPanel = fgui.UIPackage.createObject('test', 'compDismissRoom', DismissRoomComponent) as DismissRoomComponent;
-        if (dismissPanel) {
-            // 设置面板位置（居中显示）
-            dismissPanel.x = this.width - dismissPanel.width
-            dismissPanel.y = 0
-            
-            // 添加到当前视图
-            this.addChild(dismissPanel);
-            console.log('投票解散面板已显示');
-        } else {
-            console.error('创建投票解散面板失败');
-        }
-
-        return dismissPanel
-    }
-
-    /**
-     * 处理服务器发起的投票解散消息
-     */
-    private onVoteDisbandStart(data: any): void {
-        console.log('收到解散房间投票发起消息:', data);
-        
-        // 如果不是自己发起的投票，则显示投票面板
-        //if (data.initiator !== DataCenter.instance.userid) {
-            const pan = this.showDismissRoomPanel();
-            pan && pan.onVoteDisbandStart(data)
-        //}
-    }
+    // onVoteDisbandStart():void{
+    //     this.UI_COMP_DISMISS.visible = true;
+    // }
 }
 
 // 继承出来的对象，必须重写

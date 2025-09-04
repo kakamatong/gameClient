@@ -23,15 +23,17 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
         this.init();
     }
 
+    // 此时未显示界面，不要做任何界面相关的操作
     private init() {
-  
+        // 监听服务器投票解散相关消息
+        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
+        GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
+        GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
     }
 
     onEnable(){
-        // 监听服务器投票解散相关消息
-        GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
-        GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
-
+        super.onEnable();
+        
         // 初始化倒计时显示
         this.initCountdownDisplay();
         this.UI_LV_DISMISS.itemRenderer = this.listItemRenderer.bind(this)
@@ -154,7 +156,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
      */
     onVoteDisbandStart(data: VoteDisbandStartData) {
         console.log('收到投票解散开始消息:', data);
-        
+        this.visible = true
         this._voteId = data.voteId;
         this._voteData = data;
         this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
@@ -329,33 +331,7 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     private closeDismissPanel() {
         // 停止倒计时
         this.stopCountdown();
-        
-        // 移除服务器监听
-        GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
-        GameSocketManager.instance.removeServerListen("voteDisbandResult");
-
-        // 从父容器中移除
-        if (this.parent) {
-            this.parent.removeChild(this);
-        }
-        
-        // 释放资源
-        this.dispose();
-    }
-
-    /**
-     * 组件销毁时的清理工作
-     */
-    dispose(): void {
-        // 停止倒计时
-        this.stopCountdown();
-        
-        // 清理监听器
-        GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
-        GameSocketManager.instance.removeServerListen("voteDisbandResult");
-
-        
-        super.dispose();
+        this.visible = false
     }
 }
 

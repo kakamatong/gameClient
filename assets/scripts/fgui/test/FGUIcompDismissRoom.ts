@@ -10,7 +10,7 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 	public UI_BTN_DISMISS_AGREE:fgui.GButton;
 	public UI_BTN_DISMISS_REFUSE:fgui.GButton;
 	public UI_TXT_LEFT_TIME:fgui.GTextField;
-	public UI_TXT_LEFT_TIME_2:fgui.GTextField;
+	public UI_TXT_AGREE:fgui.GTextField;
 	public static URL:string = "ui://ljshfpzynhct7";
 
 	public static packageName:string = "test";
@@ -52,7 +52,7 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 		this.UI_BTN_DISMISS_REFUSE = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_DISMISS_REFUSE.onClick(this.onBtnDismissRefuse, this);
 		this.UI_TXT_LEFT_TIME = <fgui.GTextField>(this.getChildAt(4));
-		this.UI_TXT_LEFT_TIME_2 = <fgui.GTextField>(this.getChildAt(5));
+		this.UI_TXT_AGREE = <fgui.GTextField>(this.getChildAt(5));
 	}
 	onBtnDismissAgree():void{};
 	onBtnDismissRefuse():void{};

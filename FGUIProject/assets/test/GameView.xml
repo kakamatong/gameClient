@@ -77,5 +77,6 @@
       <relation target="" sidePair="right-right,top-top"/>
       <Button title="解散" titleColor="#ffffff" titleFontSize="34"/>
     </component>
+    <component id="n21_cvev" name="UI_COMP_DISMISS" src="nhct7" fileName="comp/compDismissRoom.xml" xy="1285,4" visible="false"/>
   </displayList>
 </component>
