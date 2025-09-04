@@ -58,22 +58,36 @@ function genCode(handler: FairyEditor.PublishHandler) {
         writer.writeln('public static packageName:string = "%s";', codePkgName)
         writer.writeln();
 
+        writer.writeln('public static instance:any | null = null;')
+        writer.writeln();
+
         writer.writeln('public static showView(params?:any):void', classInfo.className);
         writer.startBlock();
+        writer.writeln('if(%s.instance)',classInfo.className);
+        writer.startBlock();
+        writer.writeln('console.log("allready show");');
+        writer.writeln('return;');
+        writer.endBlock();
         writer.writeln('const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;');
         writer.writeln('fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=>');
         writer.startBlock();
         writer.writeln();
         writer.writeln('if(error){console.log("loadPackage error", error);return;}');
-        writer.writeln('const view = <%s>(%s.UIPackage.createObject("%s", "%s"));', classInfo.className, ns, handler.pkg.name, classInfo.resName);
+        writer.writeln('const view = %s.UIPackage.createObject("%s", "%s");', ns, handler.pkg.name, classInfo.resName);
         writer.writeln();
         writer.writeln('view.makeFullScreen();');
+        writer.writeln('%s.instance = view;', classInfo.className);
         writer.writeln('fgui.GRoot.inst.addChild(view);');
         writer.writeln('view.show && view.show(params);');
         writer.endBlock();
         writer.writeln(');');
         writer.endBlock();
         writer.writeln();
+
+        writer.writeln('public static hideView():void');
+        writer.startBlock();
+        writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className);
+        writer.endBlock();
 
         writer.writeln('public static createInstance():%s', classInfo.className);
         writer.startBlock();

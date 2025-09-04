@@ -33,20 +33,30 @@ export default class FGUITestView extends fgui.GComponent {
 
 	public static packageName:string = "test";
 
+	public static instance:any | null = null;
+
 	public static showView(params?:any):void {
+		if(FGUITestView.instance) {
+			console.log("allready show");
+			return;
+		}
 		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));
+			const view = fgui.UIPackage.createObject("test", "TestView");
 
 			view.makeFullScreen();
+			FGUITestView.instance = view;
 			fgui.GRoot.inst.addChild(view);
 			view.show && view.show(params);
 		}
 		);
 	}
 
+	public static hideView():void {
+		FGUITestView.instance && undefined.instance.dispose();
+	}
 	public static createInstance():FGUITestView {
 		return <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));
 	}

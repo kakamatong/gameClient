@@ -11,20 +11,30 @@ export default class FGUImailTitle extends fgui.GComponent {
 
 	public static packageName:string = "test";
 
+	public static instance:any | null = null;
+
 	public static showView(params?:any):void {
+		if(FGUImailTitle.instance) {
+			console.log("allready show");
+			return;
+		}
 		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
+			const view = fgui.UIPackage.createObject("test", "mailTitle");
 
 			view.makeFullScreen();
+			FGUImailTitle.instance = view;
 			fgui.GRoot.inst.addChild(view);
 			view.show && view.show(params);
 		}
 		);
 	}
 
+	public static hideView():void {
+		FGUImailTitle.instance && undefined.instance.dispose();
+	}
 	public static createInstance():FGUImailTitle {
 		return <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
 	}
