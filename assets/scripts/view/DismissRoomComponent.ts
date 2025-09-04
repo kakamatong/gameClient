@@ -18,22 +18,14 @@ export class DismissRoomComponent extends FGUIcompDismissRoom {
     private _timeLeft: number = 0; // 剩余时间
     private _hasVoted: boolean = false; // 是否已投票
 
-    constructor() {
-        super();
-        this.init();
-    }
-
-    // 此时未显示界面，不要做任何界面相关的操作
-    private init() {
+    onConstruct(){
+        // 一定要执行父类的接口
+        super.onConstruct();
+        
         // 监听服务器投票解散相关消息
         GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
-    }
-
-    onEnable(){
-        super.onEnable();
-        
         // 初始化倒计时显示
         this.initCountdownDisplay();
         this.UI_LV_DISMISS.itemRenderer = this.listItemRenderer.bind(this)

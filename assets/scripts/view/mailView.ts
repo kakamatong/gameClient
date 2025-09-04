@@ -13,8 +13,8 @@ export class MailView extends FGUIMailView {
         super();
     }
 
-    onEnable(){
-        super.onEnable();
+    onConstruct(){
+        super.onConstruct();
         this.initUI();
     }
 

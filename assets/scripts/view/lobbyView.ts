@@ -12,8 +12,8 @@ export class LobbyView extends FGUILobbyView {
     private _node4: fgui.GObject | null = null;
 
 
-    onEnable(){
-        super.onEnable();
+    onConstruct(){
+        super.onConstruct();
         this.initUI();
     }
 

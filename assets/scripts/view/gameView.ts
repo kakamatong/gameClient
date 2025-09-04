@@ -13,12 +13,9 @@ const { ccclass, property } = _decorator;
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = 0;
     private _isPrivateRoom:boolean = false;
-    constructor(){
-        super();
-    }
 
-    onEnable(){
-        super.onEnable();
+    onConstruct(){
+        super.onConstruct();
         GameData.instance.init();
         GameData.instance.maxPlayer = 2;
         if(DataCenter.instance.shortRoomid){

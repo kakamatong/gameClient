@@ -56,8 +56,8 @@ export class TestView extends FGUITestView {
      * @method onEnable
      * @description 组件启用时的回调，在此注册事件监听器。
      */
-    onEnable(){
-        super.onEnable();
+    onConstruct(){
+        super.onConstruct();
         console.log('TestView onEnable');
         this.UI_LV_RANKLIST.itemRenderer = this.onRankItemRenderer.bind(this);
         
