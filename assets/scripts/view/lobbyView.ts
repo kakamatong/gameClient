@@ -17,10 +17,10 @@ export class LobbyView extends FGUILobbyView {
     }
 
     initUI(){ 
-        this._node1 = this.UI_COMP_BG_ACT.getChild('UI_COMP_BG_ACT_1')
-        this._node2 = this.UI_COMP_BG_ACT.getChild('UI_COMP_BG_ACT_2')
-        this._node3 = this.UI_COMP_BG_ACT.getChild('UI_COMP_BG_ACT_3')
-        this._node4 = this.UI_COMP_BG_ACT.getChild('UI_COMP_BG_ACT_4')
+        this._node1 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_1
+        this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
+        this._node3 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_3
+        this._node4 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_4
     }
 
     onDisable(){

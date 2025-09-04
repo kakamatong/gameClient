@@ -1,8 +1,9 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import FGUIBgActView from "./FGUIBgActView";
-
 import * as fgui from "fairygui-cc";
+import FGUIBgActView from "./FGUIBgActView";
+fgui.UIObjectFactory.setExtension(FGUIBgActView.URL, FGUIBgActView);
+
 export default class FGUILobbyView extends fgui.GComponent {
 
 	public UI_IMG_BG:fgui.GImage;

@@ -27,18 +27,19 @@ function genCode(handler: FairyEditor.PublishHandler) {
         let references = classInfo.references;
         writer.reset();
         let refCount = references.Count;
-        if (refCount > 0) {
-            for (let j: number = 0; j < refCount; j++) {
-                let ref = references.get_Item(j);
-                writer.writeln('import %s from "./%s";', ref, ref);
-            }
-            writer.writeln();
-        }
-
         if (isThree) {
             writer.writeln('import * as fgui from "fairygui-cc";');
             if (refCount == 0)
                 writer.writeln();
+        }
+        
+        if (refCount > 0) {
+            for (let j: number = 0; j < refCount; j++) {
+                let ref = references.get_Item(j);
+                writer.writeln('import %s from "./%s";', ref, ref);
+                writer.writeln('fgui.UIObjectFactory.setExtension(%s.URL, %s);', ref, ref);
+            }
+            writer.writeln();
         }
 
         writer.writeln('export default class %s extends %s', classInfo.className, classInfo.superClassName);
