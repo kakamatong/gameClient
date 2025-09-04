@@ -1,5 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUIBgActView from "./FGUIBgActView";
 
@@ -12,6 +13,20 @@ export default class FGUILobbyView extends fgui.GComponent {
 	public static URL:string = "ui://gv22rev3sc722";
 
 	public static packageName:string = "lobby";
+
+	public static showView(params?:any):void {
+		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
+		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+
+			if(error){console.log("loadPackage error", error);return;}
+			const view = <FGUILobbyView>(fgui.UIPackage.createObject("lobby", "LobbyView"));
+
+			view.makeFullScreen();
+			fgui.GRoot.inst.addChild(view);
+			view.show && view.show(params);
+		}
+		);
+	}
 
 	public static createInstance():FGUILobbyView {
 		return <FGUILobbyView>(fgui.UIPackage.createObject("lobby", "LobbyView"));

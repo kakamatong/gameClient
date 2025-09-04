@@ -11,6 +11,12 @@ export class LobbyView extends FGUILobbyView {
     private _node3: fgui.GObject | null = null;
     private _node4: fgui.GObject | null = null;
 
+    // 继承出来的对象，必须重写
+    public static showView(params?:any):void {
+        fgui.UIObjectFactory.setExtension(LobbyView.URL, LobbyView);
+        super.showView(params);
+    }
+
     onEnable(){
         super.onEnable();
         this.initUI();

@@ -4,7 +4,7 @@ import * as fgui from "fairygui-cc";
 import { UIManager } from '../frameworks/uimanager';
 import { ViewConfig } from '../view/viewConfig';
 import { DataCenter } from '../datacenter/datacenter';
-import FGUIBgActView from '../fgui/lobby/FGUIBgActView';
+import { LobbyView } from "../view/lobbyView";
 const { ccclass, property } = _decorator;
 
 @ccclass('splashScreen')
@@ -38,7 +38,10 @@ export class splashScreen extends Component {
                 return;
             }
 
-            UIManager.instance.showView('LobbyView');
+            //UIManager.instance.showView('LobbyView');
+            LobbyView.showView()
+            //lobby.makeFullScreen()
+            //fgui.GRoot.inst.addChild(lobby);
         })
     }
 

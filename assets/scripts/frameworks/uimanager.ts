@@ -63,10 +63,7 @@ export class UIManager {
         if (!this._viewStack.has(viewName)) {
             const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
             fgui.UIPackage.loadPackage(bundle, module.packageName, (error, pkg)=>{
-                if(error){
-                    console.log('loadPackage error', error);
-                    return;
-                }
+                if(error){console.log('loadPackage error', error);return;}
     
                 const view = fgui.UIPackage.createObject(module.packageName, viewName, module);
                 this._viewStack.set(viewName, view);

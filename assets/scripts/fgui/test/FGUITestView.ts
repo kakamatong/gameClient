@@ -1,5 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
 export default class FGUITestView extends fgui.GComponent {
@@ -31,6 +32,20 @@ export default class FGUITestView extends fgui.GComponent {
 	public static URL:string = "ui://ljshfpzyb2zj0";
 
 	public static packageName:string = "test";
+
+	public static showView(params?:any):void {
+		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
+		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+
+			if(error){console.log("loadPackage error", error);return;}
+			const view = <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));
+
+			view.makeFullScreen();
+			fgui.GRoot.inst.addChild(view);
+			view.show && view.show(params);
+		}
+		);
+	}
 
 	public static createInstance():FGUITestView {
 		return <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));

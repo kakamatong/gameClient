@@ -24,6 +24,7 @@ function genCode(handler) {
         let members = classInfo.members;
         let references = classInfo.references;
         writer.reset();
+        writer.writeln('import { assetManager, AssetManager } from "cc";');
         let refCount = references.Count;
         if (isThree) {
             writer.writeln('import * as fgui from "fairygui-cc";');
@@ -52,6 +53,23 @@ function genCode(handler) {
         writer.writeln();
 
         writer.writeln('public static packageName:string = "%s";', codePkgName)
+        writer.writeln();
+
+        writer.writeln('public static showView(params?:any):void', classInfo.className);
+        writer.startBlock();
+        writer.writeln('const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;');
+        writer.writeln('fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=>');
+        writer.startBlock();
+        writer.writeln();
+        writer.writeln('if(error){console.log("loadPackage error", error);return;}');
+        writer.writeln('const view = <%s>(%s.UIPackage.createObject("%s", "%s"));', classInfo.className, ns, handler.pkg.name, classInfo.resName);
+        writer.writeln();
+        writer.writeln('view.makeFullScreen();');
+        writer.writeln('fgui.GRoot.inst.addChild(view);');
+        writer.writeln('view.show && view.show(params);');
+        writer.endBlock();
+        writer.writeln(');');
+        writer.endBlock();
         writer.writeln();
         
         writer.writeln('public static createInstance():%s', classInfo.className);

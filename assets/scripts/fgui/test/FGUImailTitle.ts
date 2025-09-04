@@ -1,5 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
 export default class FGUImailTitle extends fgui.GComponent {
@@ -9,6 +10,20 @@ export default class FGUImailTitle extends fgui.GComponent {
 	public static URL:string = "ui://ljshfpzyeatn6";
 
 	public static packageName:string = "test";
+
+	public static showView(params?:any):void {
+		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
+		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+
+			if(error){console.log("loadPackage error", error);return;}
+			const view = <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
+
+			view.makeFullScreen();
+			fgui.GRoot.inst.addChild(view);
+			view.show && view.show(params);
+		}
+		);
+	}
 
 	public static createInstance():FGUImailTitle {
 		return <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
