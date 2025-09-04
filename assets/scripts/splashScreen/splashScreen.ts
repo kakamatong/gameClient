@@ -1,8 +1,5 @@
 import { _decorator, Component, log,sys,assetManager,resources,AssetManager, JsonAsset} from 'cc';
 import * as fgui from "fairygui-cc";
-
-import { UIManager } from '../frameworks/uimanager';
-import { ViewConfig } from '../view/viewConfig';
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobbyView";
 const { ccclass, property } = _decorator;
@@ -17,7 +14,6 @@ export class splashScreen extends Component {
             }
         })
 
-        UIManager.instance.initViewConfig(ViewConfig);
         assetManager.loadBundle('fgui', (err, bundle) => {
             if (err) {
                 log('loadBundle error', err);
