@@ -3,8 +3,6 @@ import { _decorator, log} from 'cc';
 import { Socket } from '../socket/socket';
 import { handleSocketMessage } from '../config/config';
 import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../utils/utils';
-import { LOGIN_INFO } from '../../datacenter/interfaceConfig';
-import { DataCenter } from '../../datacenter/datacenter';
 import {LogColors} from '../framework';
 const { ccclass, property } = _decorator;
 
@@ -21,7 +19,7 @@ export class Login implements handleSocketMessage {
     private _stepid = 0
     private _clientPrivateKey: CryptoJS.WordArray | null = null;
     private _challenge: CryptoJS.WordArray | null = null;
-    private _loginInfo:LOGIN_INFO = {
+    private _loginInfo:any = {
         username:'',
         userid:0,
         password:'',
@@ -30,12 +28,14 @@ export class Login implements handleSocketMessage {
         token:'',
         subid:0
     };
-    private _callBack:(b:boolean)=>void = (b:boolean)=>{};
+    private _callBack:(b:boolean,data?:any)=>void = (b:boolean,data?:any)=>{};
     private _accountInfo: ACCOUNT_INFO | null = null;
+    private _loginUrls:{[key:string]:string} = {};
 
 
-    start(acc: ACCOUNT_INFO,func:(b:boolean)=>void) {
+    start(acc: ACCOUNT_INFO, urls:{[key:string]:string}, func:(b:boolean,data?:any)=>void) {
         this._accountInfo = acc;
+        this._loginUrls = urls;
         this._callBack = func;
         //console.log('login');
         this.encode_token();
@@ -68,7 +68,7 @@ export class Login implements handleSocketMessage {
     }
 
     getLoginUrl(){
-        const loginList = DataCenter.instance.loginList;
+        const loginList = this._loginUrls;
         const keys = Object.keys(loginList);
         if (keys.length === 0) return undefined;
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
@@ -105,8 +105,7 @@ export class Login implements handleSocketMessage {
                 this._loginInfo.subid = Number(msg);
                 this._loginInfo.userid = Number(msg2);
                 this._loginInfo.server = svr
-                DataCenter.instance.setLoginInfo(this._loginInfo);
-                this._callBack(true);
+                this._callBack(true,this._loginInfo);
             }else{
                 log('登录失败code:', code);
                 this._callBack(false);

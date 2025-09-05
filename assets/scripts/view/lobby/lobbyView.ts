@@ -67,9 +67,10 @@ export class LobbyView extends FGUILobbyView {
     }
 
     login(){
-        const func = (b:boolean)=>{
+        const func = (b:boolean, data?:any)=>{
             console.log('login callback:', b);
             if(b){
+                DataCenter.instance.setLoginInfo(data);
                 this.onBtnCon()
             }
         }
@@ -85,7 +86,7 @@ export class LobbyView extends FGUILobbyView {
             server: loginInfo?.server ?? (this.getAuthAddr() ?? "")
         };
         const login = new Login();
-        login.start(accInfo,func);
+        login.start(accInfo, DataCenter.instance.loginList, func);
     }
 
     onBtnCon(): void {
