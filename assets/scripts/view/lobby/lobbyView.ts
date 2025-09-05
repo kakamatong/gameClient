@@ -1,6 +1,8 @@
 import { _decorator} from 'cc';
-import FGUILobbyView from '../fgui/lobby/FGUILobbyView';
+import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
+import { AddEventListener, RemoveEventListener } from '../../frameworks/framework';
+import { DataCenter } from '../../datacenter/datacenter';
 const { ccclass, property } = _decorator;
 
 @ccclass('LobbyView')
@@ -14,7 +16,21 @@ export class LobbyView extends FGUILobbyView {
 
     onConstruct(){
         super.onConstruct();
+        this.initListeners();
         this.initUI();
+    }
+
+    initListeners(){
+        AddEventListener('userData',this.onUserInfo, this);
+        AddEventListener('userStatus',this.onUserStatus, this);
+        AddEventListener('userRichs',this.onUserRiches, this);
+    }
+
+    onDestroy(){
+        super.onDestroy();
+        RemoveEventListener('userData', this.onUserInfo);
+        RemoveEventListener('userStatus', this.onUserStatus);
+        RemoveEventListener('userRichs', this.onUserRiches);
     }
 
     initUI(){ 
@@ -22,6 +38,24 @@ export class LobbyView extends FGUILobbyView {
         this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
         this._node3 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_3
         this._node4 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_4
+    }
+
+    updateUserInfo():void{
+        this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
+        this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userData?.userid ?? 0}`
+    }
+
+    onUserInfo(data:any):void{
+        console.log("userData",data)
+        this.updateUserInfo()
+    }
+
+    onUserStatus(data:any):void{
+        console.log("userStatus",data)
+    }
+
+    onUserRiches(data:any):void{
+        console.log("userRiches",data)
     }
 
     onDisable(){
@@ -72,10 +106,6 @@ export class LobbyView extends FGUILobbyView {
             this._node4.x = 210
             this._node4.y = 902
         }
-    }
-
-    onDestroy():void {
-
     }
 
 }

@@ -4,9 +4,9 @@
     <image id="n3_xoqi" name="UI_IMG_BG" src="xoqi4" fileName="imgs/bg.jpg" xy="0,0">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" alpha="0.328"/>
-    <component id="n7_gtlg" name="UI_BTN_MATCH_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,593"/>
-    <component id="n8_gtlg" name="UI_BTN_PRIVATE_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,780">
+    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" visible="false" alpha="0.328"/>
+    <component id="n7_gtlg" name="UI_BTN_MATCH_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,593" visible="false"/>
+    <component id="n8_gtlg" name="UI_BTN_PRIVATE_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,780" visible="false">
       <property target="icon" propertyId="1" value="ui://gv22rev3gtlg7"/>
     </component>
     <component id="n9_cvev" name="UI_COMP_TOP" src="cveva" fileName="comp/CompTop.xml" xy="0,0"/>
