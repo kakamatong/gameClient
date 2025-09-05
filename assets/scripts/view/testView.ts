@@ -6,7 +6,7 @@ import {AuthGame} from '../modules/authGame';
 import {Match} from '../modules/match';
 import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 
-import { Login, ACCOUNT_INFO } from '../login/login';
+import { Login, ACCOUNT_INFO } from '../frameworks/login/login';
 import { DataCenter } from '../datacenter/datacenter';
 import { ENUM_USER_STATUS } from '../datacenter/interfaceConfig';
 import { UserStatus } from '../modules/userStatus';
@@ -119,7 +119,6 @@ export class TestView extends FGUITestView {
      */
     checkAutoLogin(){
         const urlParams = new URLSearchParams(window.location.search);
-        
         const ids = urlParams.get('userid')
         const tmppwds = urlParams.get('pwd')
         if(ids && tmppwds){

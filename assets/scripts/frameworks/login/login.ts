@@ -1,11 +1,11 @@
 import CryptoJS from 'crypto-js';        
 import { _decorator, log} from 'cc';
-import { Socket } from '../frameworks/socket/socket';
-import { handleSocketMessage } from '../frameworks/config/config';
-import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../frameworks/utils/utils';
-import { LOGIN_INFO } from '../datacenter/interfaceConfig';
-import { DataCenter } from '../datacenter/datacenter';
-import {LogColors} from '../frameworks/framework';
+import { Socket } from '../socket/socket';
+import { handleSocketMessage } from '../config/config';
+import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../utils/utils';
+import { LOGIN_INFO } from '../../datacenter/interfaceConfig';
+import { DataCenter } from '../../datacenter/datacenter';
+import {LogColors} from '../framework';
 const { ccclass, property } = _decorator;
 
 export interface ACCOUNT_INFO {
