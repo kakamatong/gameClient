@@ -3,6 +3,7 @@
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUIBgActView from "./FGUIBgActView";
+import FGUICompTop from "./FGUICompTop";
 
 export default class FGUILobbyView extends fgui.GComponent {
 
@@ -10,6 +11,7 @@ export default class FGUILobbyView extends fgui.GComponent {
 	public UI_COMP_BG_ACT:FGUIBgActView;
 	public UI_BTN_MATCH_ROOM:fgui.GButton;
 	public UI_BTN_PRIVATE_ROOM:fgui.GButton;
+	public UI_COMP_TOP:FGUICompTop;
 	public static URL:string = "ui://gv22rev3sc722";
 
 	public static packageName:string = "lobby";
@@ -50,6 +52,7 @@ export default class FGUILobbyView extends fgui.GComponent {
 		this.UI_BTN_MATCH_ROOM.onClick(this.onBtnMatchRoom, this);
 		this.UI_BTN_PRIVATE_ROOM = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_PRIVATE_ROOM.onClick(this.onBtnPrivateRoom, this);
+		this.UI_COMP_TOP = <FGUICompTop>(this.getChildAt(4));
 	}
 	onBtnMatchRoom():void{};
 	onBtnPrivateRoom():void{};

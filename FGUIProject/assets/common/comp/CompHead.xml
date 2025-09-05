@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="160,160">
+  <displayList>
+    <image id="n0_cvev" name="n0" src="gtlg8" fileName="imgs/headBox.png" xy="0,0"/>
+    <loader id="n1_cvev" name="UI_LOADER_HEAD" xy="9,9" size="142,141" fill="scaleNoBorder"/>
+  </displayList>
+</component>

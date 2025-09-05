@@ -8,6 +8,7 @@
     <image id="gtlg7" name="privateRoom.png" path="/imgs/"/>
     <image id="gtlg8" name="matchRoom.png" path="/imgs/"/>
     <component id="gtlg9" name="CompLobbyBtn.xml" path="/comp/"/>
+    <component id="cveva" name="CompTop.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

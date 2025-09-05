@@ -9,5 +9,6 @@
     <component id="n8_gtlg" name="UI_BTN_PRIVATE_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,780">
       <property target="icon" propertyId="1" value="ui://gv22rev3gtlg7"/>
     </component>
+    <component id="n9_cvev" name="UI_COMP_TOP" src="cveva" fileName="comp/CompTop.xml" xy="0,0"/>
   </displayList>
 </component>
