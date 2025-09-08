@@ -14,7 +14,7 @@
     <image id="muz3f" name="btnclose.png" path="/imgs/"/>
     <component id="muz3g" name="CompPopMessage.xml" path="/comp/"/>
     <component id="muz3h" name="BtnClose.xml" path="/comp/"/>
-    <component id="muz3i" name="PopMessageView.xml" path="/"/>
+    <component id="muz3i" name="PopMessageView.xml" path="/" exported="true"/>
   </resources>
-  <publish name=""/>
+  <publish name="" genCode="true"/>
 </packageDescription>
