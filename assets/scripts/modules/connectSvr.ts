@@ -20,23 +20,23 @@ export class ConnectSvr {
     }
 
     startLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
-        const loginInfo = DataCenter.instance.getLoginInfo();
-        if (loginInfo && loginInfo.userid > 0 && !needLogin) {
-            const func = (b:boolean)=>{ 
-                if (!b) {
-                    this.startLogin(true)
-                }
-            }
-            this.connect(func)
-        }else{
-            this.checkAuthList((success)=>{
-                if(success){
-                    this.login(callBack);
+        this.checkAuthList((success)=>{
+            if(success){
+                const loginInfo = DataCenter.instance.getLoginInfo();
+                if (loginInfo && loginInfo.userid > 0 && !needLogin) {
+                    const func = (b:boolean)=>{ 
+                        if (!b) {
+                            this.startLogin(true)
+                        }
+                    }
+                    this.connect(func)
                 }else{
-                    callBack && callBack(false)
+                    this.login(callBack);
                 }
-            })
-        }
+            }else{
+                callBack && callBack(false)
+            }
+        })
     }
 
     checkAuthList(callBack?:(success:boolean)=>void){
