@@ -16,6 +16,7 @@ import { Mail } from '../modules/mail';
 import { GameView } from './gameView';
 import {MailView} from './mailView';
 import { AwardNotices } from '../modules/awardNotices';
+import { ConnectSvr } from '../modules/connectSvr';
 const { ccclass, property } = _decorator;
 
 /**
@@ -48,7 +49,7 @@ export class TestView extends FGUITestView {
     show(){
         console.log('TestView show');
         if(sys.isBrowser){
-            this.checkAutoLogin()
+            ConnectSvr.instance.checkAutoLogin()
         }
     }
 
@@ -97,84 +98,15 @@ export class TestView extends FGUITestView {
         console.log('TestView onShow');
     }
 
-    /**
-     * @method checkAuthList
-     * @param { (success:boolean)=>void } [callBack] - 请求完成后的回调函数。
-     * @description 请求认证服务器地址列表。
-     */
-    checkAuthList(callBack?:(success:boolean)=>void){
-        AuthList.instance.req((success:boolean, data?:any)=>{
-            if(success){
-                console.log('authList:', data);
-            }
-            callBack?.(success);
-
-        })
-
-    }
-
-    /**
-     * @method checkAutoLogin
-     * @description 检查URL参数，如果包含用户信息，则自动填充并尝试登录。
-     */
-    checkAutoLogin(){
-        const urlParams = new URLSearchParams(window.location.search);
-        const ids = urlParams.get('userid')
-        const tmppwds = urlParams.get('pwd')
-        if(ids && tmppwds){
-            this.UI_INPUT_ACC.text = ids;
-            this.UI_INPUT_PASS.text = tmppwds;
-            this.onBtnLogin()
-        }
-    }
-
-    /**
-     * @method getAuthAddr
-     * @returns {string | undefined} - 返回一个随机的认证服务器地址。
-     * @description 从认证地址列表中随机获取一个地址。
-     */
-    getAuthAddr(): string | undefined{
-        const authList = DataCenter.instance.authList;
-        const keys = Object.keys(authList);
-        if (keys.length === 0) return undefined;
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        return randomKey;
-    }
-
-    /**
-     * @method login
-     * @description 执行登录逻辑，使用UI输入框中的账号和密码。
-     */
-    login(){
-        const func = (b:boolean)=>{
-            console.log('login callback:', b);
-            if(b){
-                this.onBtnCon()
-            }
-        }
-        const loginInfo = DataCenter.instance.getLoginInfo();
-        const acc = this.UI_INPUT_ACC.text ?? "";
-        const pwd = this.UI_INPUT_PASS.text ?? "";
-        const accInfo: ACCOUNT_INFO = {
-            username: acc,
-            password: pwd,
-            server: loginInfo?.server ?? (this.getAuthAddr() ?? "")
-        };
-        const login = new Login();
-        login.start(accInfo,func);
-    }
 
     /**
      * @method onBtnLogin
      * @description 登录按钮点击事件处理函数。先获取认证列表，成功后再执行登录。
      */
     onBtnLogin(){
-        console.log('onBtnLogin');
-        this.checkAuthList((success)=>{
-            if(success){
-                this.login();
-            }
-        })
+        const acc = this.UI_INPUT_ACC.text ?? "";
+        const pwd = this.UI_INPUT_PASS.text ?? "";
+        ConnectSvr.instance.accLogin(acc,pwd)
     }
 
     /**
