@@ -1,6 +1,6 @@
 import { _decorator} from 'cc';
 import FGUIPopMessageView from "../../fgui/common/FGUIPopMessageView";
-
+import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
 import * as fgui from "fairygui-cc";
 
 export class PopMessageView extends FGUIPopMessageView { 
@@ -9,6 +9,7 @@ export class PopMessageView extends FGUIPopMessageView {
     show(data:any){
         this._data = data;
         const data2 = {
+            type: data.type ?? ENUM_POP_MESSAGE_TYPE.NUM0,
             title: data.title ?? "温馨提示",
             content: data.content ?? "",
             closeBack: this.onBtnClose.bind(this) ?? null,

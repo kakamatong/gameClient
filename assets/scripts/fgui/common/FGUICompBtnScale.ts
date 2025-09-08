@@ -36,7 +36,9 @@ export default class FGUICompBtnScale extends fgui.GButton {
 		FGUICompBtnScale.instance && FGUICompBtnScale.instance.dispose();
 		FGUICompBtnScale.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUICompBtnScale {
 		return <FGUICompBtnScale>(fgui.UIPackage.createObject("common", "CompBtnScale"));
 	}

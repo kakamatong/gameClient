@@ -55,3 +55,9 @@ export enum LOCAL_KEY {
     LOGIN_INFO = 'loginInfo',
 }
 
+export enum ENUM_POP_MESSAGE_TYPE {
+    NUM2 = 0, // 2个按钮
+    NUM1SURE = 1, // 1个按钮 确定
+    NUM1CANCEL = 2, // 1个按钮 取消
+    NUM0 = 3, // 无按钮
+}

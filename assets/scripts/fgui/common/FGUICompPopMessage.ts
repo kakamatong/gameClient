@@ -41,7 +41,9 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 		FGUICompPopMessage.instance && FGUICompPopMessage.instance.dispose();
 		FGUICompPopMessage.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUICompPopMessage {
 		return <FGUICompPopMessage>(fgui.UIPackage.createObject("common", "CompPopMessage"));
 	}

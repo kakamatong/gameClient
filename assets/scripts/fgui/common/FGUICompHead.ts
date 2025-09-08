@@ -35,7 +35,9 @@ export default class FGUICompHead extends fgui.GComponent {
 		FGUICompHead.instance && FGUICompHead.instance.dispose();
 		FGUICompHead.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUICompHead {
 		return <FGUICompHead>(fgui.UIPackage.createObject("common", "CompHead"));
 	}

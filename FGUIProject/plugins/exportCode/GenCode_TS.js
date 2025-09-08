@@ -89,8 +89,11 @@ function genCode(handler) {
         writer.writeln('%s.instance = null;', classInfo.className);
         writer.endBlock();
 
+        // show 接口
+        writer.writeln();
         writer.writeln('show(data?:any):void{};');
-        
+        writer.writeln();
+
         writer.writeln('public static createInstance():%s', classInfo.className);
         writer.startBlock();
         writer.writeln('return <%s>(%s.UIPackage.createObject("%s", "%s"));', classInfo.className, ns, handler.pkg.name, classInfo.resName);

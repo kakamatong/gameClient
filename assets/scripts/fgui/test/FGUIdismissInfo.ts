@@ -36,7 +36,9 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 		FGUIdismissInfo.instance && FGUIdismissInfo.instance.dispose();
 		FGUIdismissInfo.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUIdismissInfo {
 		return <FGUIdismissInfo>(fgui.UIPackage.createObject("test", "dismissInfo"));
 	}

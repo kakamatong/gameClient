@@ -56,7 +56,9 @@ export default class FGUIGameView extends fgui.GComponent {
 		FGUIGameView.instance && FGUIGameView.instance.dispose();
 		FGUIGameView.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUIGameView {
 		return <FGUIGameView>(fgui.UIPackage.createObject("test", "GameView"));
 	}

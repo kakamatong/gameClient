@@ -37,7 +37,9 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 		FGUIPopMessageView.instance && FGUIPopMessageView.instance.dispose();
 		FGUIPopMessageView.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUIPopMessageView {
 		return <FGUIPopMessageView>(fgui.UIPackage.createObject("common", "PopMessageView"));
 	}

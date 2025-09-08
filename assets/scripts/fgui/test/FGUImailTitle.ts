@@ -36,7 +36,9 @@ export default class FGUImailTitle extends fgui.GComponent {
 		FGUImailTitle.instance && FGUImailTitle.instance.dispose();
 		FGUImailTitle.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUImailTitle {
 		return <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
 	}

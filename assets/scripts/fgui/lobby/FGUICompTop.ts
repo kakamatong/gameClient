@@ -37,7 +37,9 @@ export default class FGUICompTop extends fgui.GComponent {
 		FGUICompTop.instance && FGUICompTop.instance.dispose();
 		FGUICompTop.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUICompTop {
 		return <FGUICompTop>(fgui.UIPackage.createObject("lobby", "CompTop"));
 	}

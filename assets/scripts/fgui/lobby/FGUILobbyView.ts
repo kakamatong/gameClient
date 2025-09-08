@@ -41,7 +41,9 @@ export default class FGUILobbyView extends fgui.GComponent {
 		FGUILobbyView.instance && FGUILobbyView.instance.dispose();
 		FGUILobbyView.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUILobbyView {
 		return <FGUILobbyView>(fgui.UIPackage.createObject("lobby", "LobbyView"));
 	}

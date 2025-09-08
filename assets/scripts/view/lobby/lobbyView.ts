@@ -1,13 +1,11 @@
-import { _decorator} from 'cc';
+
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
 import { AddEventListener, RemoveEventListener } from '../../frameworks/framework';
 import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
-const { ccclass, property } = _decorator;
-
-@ccclass('LobbyView')
+import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -22,7 +20,7 @@ export class LobbyView extends FGUILobbyView {
         this.initUI();
         const func = (b:boolean) => { 
             if (!b) {
-                PopMessageView.showView({title:'温馨提示', content:'登入失败'})
+                PopMessageView.showView({title:'温馨提示', content:'登入失败', type:ENUM_POP_MESSAGE_TYPE.NUM1SURE})
             }
         }
         ConnectSvr.instance.checkAutoLogin(func)

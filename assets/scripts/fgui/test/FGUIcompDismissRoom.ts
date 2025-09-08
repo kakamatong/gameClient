@@ -40,7 +40,9 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 		FGUIcompDismissRoom.instance && FGUIcompDismissRoom.instance.dispose();
 		FGUIcompDismissRoom.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUIcompDismissRoom {
 		return <FGUIcompDismissRoom>(fgui.UIPackage.createObject("test", "compDismissRoom"));
 	}

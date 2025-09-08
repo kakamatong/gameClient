@@ -37,7 +37,9 @@ export default class FGUIrankInfo extends fgui.GComponent {
 		FGUIrankInfo.instance && FGUIrankInfo.instance.dispose();
 		FGUIrankInfo.instance = null;
 	}
+
 	show(data?:any):void{};
+
 	public static createInstance():FGUIrankInfo {
 		return <FGUIrankInfo>(fgui.UIPackage.createObject("test", "rankInfo"));
 	}
