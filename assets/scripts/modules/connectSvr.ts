@@ -15,18 +15,25 @@ export class ConnectSvr {
         return this._instance;
     }
 
-    checkAutoLogin(){
-        this.startLogin()
+    checkAutoLogin(callBack?:(b:boolean)=>void){
+        this.startLogin(false, callBack)
     }
 
-    startLogin(needLogin:boolean = false):void{
+    startLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
         const loginInfo = DataCenter.instance.getLoginInfo();
         if (loginInfo && loginInfo.userid > 0 && !needLogin) {
-            this.connect()
+            const func = (b:boolean)=>{ 
+                if (!b) {
+                    this.startLogin(true)
+                }
+            }
+            this.connect(func)
         }else{
             this.checkAuthList((success)=>{
                 if(success){
-                    this.login();
+                    this.login(callBack);
+                }else{
+                    callBack && callBack(false)
                 }
             })
         }
@@ -41,12 +48,14 @@ export class ConnectSvr {
         })
     }
 
-    login(){
+    login(callBack?:(b:boolean)=>void){
         const func = (b:boolean, data?:any)=>{
             console.log('login callback:', b);
             if(b){
                 DataCenter.instance.setLoginInfo(data);
-                this.connect()
+                this.connect(callBack)
+            }else{
+                callBack && callBack(false)
             }
         }
 
@@ -64,14 +73,14 @@ export class ConnectSvr {
         login.start(accInfo, DataCenter.instance.loginList, func);
     }
 
-    connect(): void {
+    connect(callBack?:(b:boolean)=>void): void {
         if(LobbySocketManager.instance.isOpen()){
             LobbySocketManager.instance.close()
             setTimeout(()=>{
-                Auth.instance.req();
+                Auth.instance.req(callBack);
             }, 500)
         }else{
-            Auth.instance.req();
+            Auth.instance.req(callBack);
         }
     }
 
