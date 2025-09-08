@@ -19,12 +19,17 @@ export class ConnectSvr {
         this.startLogin()
     }
 
-    startLogin():void{
-        this.checkAuthList((success)=>{
-            if(success){
-                this.login();
-            }
-        })
+    startLogin(needLogin:boolean = false):void{
+        const loginInfo = DataCenter.instance.getLoginInfo();
+        if (loginInfo && loginInfo.userid > 0 && !needLogin) {
+            this.connect()
+        }else{
+            this.checkAuthList((success)=>{
+                if(success){
+                    this.login();
+                }
+            })
+        }
     }
 
     checkAuthList(callBack?:(success:boolean)=>void){
@@ -41,7 +46,7 @@ export class ConnectSvr {
             console.log('login callback:', b);
             if(b){
                 DataCenter.instance.setLoginInfo(data);
-                this.onBtnCon()
+                this.connect()
             }
         }
 
@@ -59,7 +64,7 @@ export class ConnectSvr {
         login.start(accInfo, DataCenter.instance.loginList, func);
     }
 
-    onBtnCon(): void {
+    connect(): void {
         if(LobbySocketManager.instance.isOpen()){
             LobbySocketManager.instance.close()
             setTimeout(()=>{

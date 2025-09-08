@@ -11,6 +11,7 @@ export class Auth {
     //Auth
     private _time :number = 0
     private static _instance: Auth;
+    private _callBack:((b:boolean)=>void) | null = null // 登入成功，但不一定已经拉到数据
     public static get instance(): Auth {
         if (!this._instance) {
             this._instance = new Auth();
@@ -18,7 +19,10 @@ export class Auth {
         return this._instance;
     }
 
-    req(){
+    req(callBack?:(b:boolean)=>void){
+        if (callBack) {
+            this._callBack = callBack;
+        }
         LobbySocketManager.instance.loadProtocol("lobby",()=>{
             const loginInfo = DataCenter.instance.getLoginInfo();
             const loginData = {
@@ -69,8 +73,10 @@ export class Auth {
             const awardNotices = new AwardNotices()
             awardNotices.req()
 
+            this._callBack && this._callBack(true)
         }else{
             console.log('auth fail')
+            this._callBack && this._callBack(false)
         }
     }
 }
