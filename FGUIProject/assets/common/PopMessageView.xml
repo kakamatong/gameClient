@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <graph id="n1_muz3" name="mask" xy="0,0" size="776,1688" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000"/>
+    <component id="n0_muz3" name="UI_COMP_MAIN" src="muz3g" fileName="comp/CompPopMessage.xml" xy="59,373"/>
+  </displayList>
+</component>
