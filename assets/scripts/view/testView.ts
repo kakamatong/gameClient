@@ -194,20 +194,6 @@ export class TestView extends FGUITestView {
         console.log('TestView onDestroy');
     }
     
-    /**
-     * @method onBtnCon
-     * @description 连接按钮点击事件处理函数。如果已连接则先断开，然后请求大厅认证。
-     */
-    onBtnCon(): void {
-        if(LobbySocketManager.instance.isOpen()){
-            LobbySocketManager.instance.close()
-            setTimeout(()=>{
-                Auth.instance.req();
-            }, 500)
-        }else{
-            Auth.instance.req();
-        }
-    }
 
     /**
      * @method onBtnMatch

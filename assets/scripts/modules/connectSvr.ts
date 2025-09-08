@@ -16,23 +16,36 @@ export class ConnectSvr {
     }
 
     checkAutoLogin(callBack?:(b:boolean)=>void){
-        this.startLogin(false, callBack)
+        this.autoLogin(false, callBack)
     }
 
-    startLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
+    autoLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
         this.checkAuthList((success)=>{
             if(success){
                 const loginInfo = DataCenter.instance.getLoginInfo();
                 if (loginInfo && loginInfo.userid > 0 && !needLogin) {
                     const func = (b:boolean)=>{ 
                         if (!b) {
-                            this.startLogin(true)
+                            this.autoLogin(true)
                         }
                     }
                     this.connect(func)
                 }else{
-                    this.login(callBack);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const acc = urlParams.get('userid') ?? "test001"
+                    const pwd = urlParams.get('pwd') ?? "wlj123456"
+                    this.login(acc, pwd, callBack);
                 }
+            }else{
+                callBack && callBack(false)
+            }
+        })
+    }
+
+    accLogin(acc:string, pwd: string,callBack?:(success:boolean)=>void){
+        this.checkAuthList((success)=>{
+            if(success){
+                this.login(acc, pwd, callBack)
             }else{
                 callBack && callBack(false)
             }
@@ -48,7 +61,7 @@ export class ConnectSvr {
         })
     }
 
-    login(callBack?:(b:boolean)=>void){
+    login(acc:string, pwd: string, callBack?:(b:boolean)=>void){
         const func = (b:boolean, data?:any)=>{
             console.log('login callback:', b);
             if(b){
@@ -58,10 +71,6 @@ export class ConnectSvr {
                 callBack && callBack(false)
             }
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const acc = urlParams.get('userid') ?? "wlj001"
-        const pwd = urlParams.get('pwd') ?? "wlj123456"
 
         const loginInfo = DataCenter.instance.getLoginInfo();
         const accInfo: ACCOUNT_INFO = {
