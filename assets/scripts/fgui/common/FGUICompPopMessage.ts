@@ -6,6 +6,7 @@ import FGUICompBtnScale from "./FGUICompBtnScale";
 
 export default class FGUICompPopMessage extends fgui.GComponent {
 
+	public ctrl_btn_type:fgui.Controller;
 	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_BTN_SURE:FGUICompBtnScale;
 	public UI_BTN_CANCEL:FGUICompBtnScale;
@@ -46,6 +47,7 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_btn_type = this.getControllerAt(0);
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.UI_BTN_SURE = <FGUICompBtnScale>(this.getChildAt(2));
