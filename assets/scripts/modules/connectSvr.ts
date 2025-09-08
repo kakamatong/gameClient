@@ -33,7 +33,7 @@ export class ConnectSvr {
                 }else{
                     const urlParams = new URLSearchParams(window.location.search);
                     const acc = urlParams.get('userid') ?? "test001"
-                    const pwd = urlParams.get('pwd') ?? "wlj123456"
+                    const pwd = urlParams.get('pwd') ?? "wlj1234561"
                     this.login(acc, pwd, callBack);
                 }
             }else{
