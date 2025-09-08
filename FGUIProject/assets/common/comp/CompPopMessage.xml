@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="657,789">
+  <displayList>
+    <image id="n0_muz3" name="n0" src="muz3d" fileName="imgs/popbg.png" xy="0,0"/>
+    <component id="n2_muz3" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/BtnClose.xml" xy="575,15"/>
+    <component id="n3_muz3" name="n3" src="cmlt4" fileName="comp/CompBtnScale.xml" xy="356,641"/>
+    <component id="n4_muz3" name="n4" src="cmlt4" fileName="comp/CompBtnScale.xml" xy="72,641" controller="ctrl_color,1">
+      <property target="title" propertyId="0" value="取消"/>
+    </component>
+    <text id="n5_muz3" name="UI_TXT_TITLE" xy="236,72" pivot="0.5,0.5" size="184,60" fontSize="45" align="center" vAlign="middle" singleLine="true" text="温馨提示"/>
+    <text id="n6_muz3" name="UI_TXT_CONTENT" xy="54,187" size="553,384" fontSize="35" autoSize="none" text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"/>
+  </displayList>
+</component>

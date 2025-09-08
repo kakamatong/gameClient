@@ -11,6 +11,9 @@
     <image id="muz3c" name="btn2.png" path="/imgs/"/>
     <image id="muz3d" name="popbg.png" path="/imgs/"/>
     <image id="muz3e" name="btn1.png" path="/imgs/"/>
+    <image id="muz3f" name="btnclose.png" path="/imgs/"/>
+    <component id="muz3g" name="CompPopMessage.xml" path="/comp/"/>
+    <component id="muz3h" name="BtnClose.xml" path="/comp/"/>
   </resources>
   <publish name=""/>
 </packageDescription>
