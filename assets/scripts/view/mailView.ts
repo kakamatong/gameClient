@@ -55,7 +55,7 @@ export class MailView extends FGUIMailView {
     }
 
 
-    onBtnTitle(item:fgui.GComponent, index:number){
+    onBtnTitle(item:fgui.GObject, index:number){
         this._index = index;
         const itemData = this._list[index];
         Mail.instance.detail(itemData.id, (success, data)=>{
@@ -70,21 +70,21 @@ export class MailView extends FGUIMailView {
                 console.log('read success', data);
                 if (!itemData.status){
                     itemData.status = 1;
-                    item.getController('ctrl_read').selectedIndex = itemData.status;
+                    item.asCom.getController('ctrl_read').selectedIndex = itemData.status;
                 }
             }
         })
     }
 
-    itemRenderer(index:number, item:fgui.GComponent){
+    itemRenderer(index:number, item:fgui.GObject){
         const itemData = this._list[index];
-        item.getChild('title').text = itemData.title;
-        item.onClick(()=>{
+        item.asCom.getChild('title').text = itemData.title;
+        item.asCom.onClick(()=>{
             this.onBtnTitle(item, index);
         })
         const tmp = itemData.status > 0 ? 1 : 0;
 
-        item.getController('ctrl_read').selectedIndex = tmp;
+        item.asCom.getController('ctrl_read').selectedIndex = tmp;
     }
 
     onShow(){
