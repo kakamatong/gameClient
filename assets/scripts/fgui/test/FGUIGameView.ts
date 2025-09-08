@@ -42,7 +42,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "GameView");
+			const view = fgui.UIPackage.createObject("test", "GameView") as FGUIGameView;
 
 			view.makeFullScreen();
 			FGUIGameView.instance = view;
@@ -56,6 +56,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		FGUIGameView.instance && FGUIGameView.instance.dispose();
 		FGUIGameView.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIGameView {
 		return <FGUIGameView>(fgui.UIPackage.createObject("test", "GameView"));
 	}

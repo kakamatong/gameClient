@@ -4,7 +4,7 @@ import * as fgui from "fairygui-cc";
 import { AddEventListener, RemoveEventListener } from '../../frameworks/framework';
 import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
-import { PopMessageView } from '../popMessageView';
+import { PopMessageView } from '../common/popMessageView';
 const { ccclass, property } = _decorator;
 
 @ccclass('LobbyView')

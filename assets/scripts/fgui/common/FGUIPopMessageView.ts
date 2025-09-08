@@ -23,7 +23,7 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("common", "PopMessageView");
+			const view = fgui.UIPackage.createObject("common", "PopMessageView") as FGUIPopMessageView;
 
 			view.makeFullScreen();
 			FGUIPopMessageView.instance = view;
@@ -37,6 +37,7 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 		FGUIPopMessageView.instance && FGUIPopMessageView.instance.dispose();
 		FGUIPopMessageView.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIPopMessageView {
 		return <FGUIPopMessageView>(fgui.UIPackage.createObject("common", "PopMessageView"));
 	}

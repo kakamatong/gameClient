@@ -26,7 +26,7 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "compDismissRoom");
+			const view = fgui.UIPackage.createObject("test", "compDismissRoom") as FGUIcompDismissRoom;
 
 			view.makeFullScreen();
 			FGUIcompDismissRoom.instance = view;
@@ -40,6 +40,7 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 		FGUIcompDismissRoom.instance && FGUIcompDismissRoom.instance.dispose();
 		FGUIcompDismissRoom.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIcompDismissRoom {
 		return <FGUIcompDismissRoom>(fgui.UIPackage.createObject("test", "compDismissRoom"));
 	}

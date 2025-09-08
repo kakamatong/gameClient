@@ -23,7 +23,7 @@ export default class FGUICompTop extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("lobby", "CompTop");
+			const view = fgui.UIPackage.createObject("lobby", "CompTop") as FGUICompTop;
 
 			view.makeFullScreen();
 			FGUICompTop.instance = view;
@@ -37,6 +37,7 @@ export default class FGUICompTop extends fgui.GComponent {
 		FGUICompTop.instance && FGUICompTop.instance.dispose();
 		FGUICompTop.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUICompTop {
 		return <FGUICompTop>(fgui.UIPackage.createObject("lobby", "CompTop"));
 	}

@@ -44,7 +44,7 @@ export default class FGUITestView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "TestView");
+			const view = fgui.UIPackage.createObject("test", "TestView") as FGUITestView;
 
 			view.makeFullScreen();
 			FGUITestView.instance = view;
@@ -58,6 +58,7 @@ export default class FGUITestView extends fgui.GComponent {
 		FGUITestView.instance && FGUITestView.instance.dispose();
 		FGUITestView.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUITestView {
 		return <FGUITestView>(fgui.UIPackage.createObject("test", "TestView"));
 	}

@@ -24,7 +24,7 @@ export default class FGUIBgActView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("lobby", "BgActView");
+			const view = fgui.UIPackage.createObject("lobby", "BgActView") as FGUIBgActView;
 
 			view.makeFullScreen();
 			FGUIBgActView.instance = view;
@@ -38,6 +38,7 @@ export default class FGUIBgActView extends fgui.GComponent {
 		FGUIBgActView.instance && FGUIBgActView.instance.dispose();
 		FGUIBgActView.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIBgActView {
 		return <FGUIBgActView>(fgui.UIPackage.createObject("lobby", "BgActView"));
 	}

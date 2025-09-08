@@ -71,7 +71,7 @@ function genCode(handler) {
         writer.startBlock();
         writer.writeln();
         writer.writeln('if(error){console.log("loadPackage error", error);return;}');
-        writer.writeln('const view = %s.UIPackage.createObject("%s", "%s");', ns, handler.pkg.name, classInfo.resName);
+        writer.writeln('const view = %s.UIPackage.createObject("%s", "%s") as %s;', ns, handler.pkg.name, classInfo.resName, classInfo.className);
         writer.writeln();
         writer.writeln('view.makeFullScreen();');
         writer.writeln('%s.instance = view;', classInfo.className);
@@ -88,6 +88,8 @@ function genCode(handler) {
         writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className, classInfo.className);
         writer.writeln('%s.instance = null;', classInfo.className);
         writer.endBlock();
+
+        writer.writeln('show(data?:any):void{};');
         
         writer.writeln('public static createInstance():%s', classInfo.className);
         writer.startBlock();

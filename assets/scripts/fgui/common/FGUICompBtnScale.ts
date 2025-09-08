@@ -22,7 +22,7 @@ export default class FGUICompBtnScale extends fgui.GButton {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("common", "CompBtnScale");
+			const view = fgui.UIPackage.createObject("common", "CompBtnScale") as FGUICompBtnScale;
 
 			view.makeFullScreen();
 			FGUICompBtnScale.instance = view;
@@ -36,6 +36,7 @@ export default class FGUICompBtnScale extends fgui.GButton {
 		FGUICompBtnScale.instance && FGUICompBtnScale.instance.dispose();
 		FGUICompBtnScale.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUICompBtnScale {
 		return <FGUICompBtnScale>(fgui.UIPackage.createObject("common", "CompBtnScale"));
 	}

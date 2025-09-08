@@ -22,7 +22,7 @@ export default class FGUImailTitle extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "mailTitle");
+			const view = fgui.UIPackage.createObject("test", "mailTitle") as FGUImailTitle;
 
 			view.makeFullScreen();
 			FGUImailTitle.instance = view;
@@ -36,6 +36,7 @@ export default class FGUImailTitle extends fgui.GComponent {
 		FGUImailTitle.instance && FGUImailTitle.instance.dispose();
 		FGUImailTitle.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUImailTitle {
 		return <FGUImailTitle>(fgui.UIPackage.createObject("test", "mailTitle"));
 	}

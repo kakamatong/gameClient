@@ -23,7 +23,7 @@ export default class FGUIrankInfo extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "rankInfo");
+			const view = fgui.UIPackage.createObject("test", "rankInfo") as FGUIrankInfo;
 
 			view.makeFullScreen();
 			FGUIrankInfo.instance = view;
@@ -37,6 +37,7 @@ export default class FGUIrankInfo extends fgui.GComponent {
 		FGUIrankInfo.instance && FGUIrankInfo.instance.dispose();
 		FGUIrankInfo.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIrankInfo {
 		return <FGUIrankInfo>(fgui.UIPackage.createObject("test", "rankInfo"));
 	}

@@ -21,7 +21,7 @@ export default class FGUICompHead extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("common", "CompHead");
+			const view = fgui.UIPackage.createObject("common", "CompHead") as FGUICompHead;
 
 			view.makeFullScreen();
 			FGUICompHead.instance = view;
@@ -35,6 +35,7 @@ export default class FGUICompHead extends fgui.GComponent {
 		FGUICompHead.instance && FGUICompHead.instance.dispose();
 		FGUICompHead.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUICompHead {
 		return <FGUICompHead>(fgui.UIPackage.createObject("common", "CompHead"));
 	}

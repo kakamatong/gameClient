@@ -2,10 +2,13 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import FGUICompBtnScale from "./FGUICompBtnScale";
 
 export default class FGUICompPopMessage extends fgui.GComponent {
 
 	public UI_BTN_CLOSE:fgui.GButton;
+	public UI_BTN_SURE:FGUICompBtnScale;
+	public UI_BTN_CANCEL:FGUICompBtnScale;
 	public UI_TXT_TITLE:fgui.GTextField;
 	public UI_TXT_CONTENT:fgui.GTextField;
 	public static URL:string = "ui://gj0r6g5imuz3g";
@@ -23,7 +26,7 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("common", "CompPopMessage");
+			const view = fgui.UIPackage.createObject("common", "CompPopMessage") as FGUICompPopMessage;
 
 			view.makeFullScreen();
 			FGUICompPopMessage.instance = view;
@@ -37,6 +40,7 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 		FGUICompPopMessage.instance && FGUICompPopMessage.instance.dispose();
 		FGUICompPopMessage.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUICompPopMessage {
 		return <FGUICompPopMessage>(fgui.UIPackage.createObject("common", "CompPopMessage"));
 	}
@@ -44,9 +48,15 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 	protected onConstruct():void {
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
+		this.UI_BTN_SURE = <FGUICompBtnScale>(this.getChildAt(2));
+		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
+		this.UI_BTN_CANCEL = <FGUICompBtnScale>(this.getChildAt(3));
+		this.UI_BTN_CANCEL.onClick(this.onBtnCancel, this);
 		this.UI_TXT_TITLE = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_CONTENT = <fgui.GTextField>(this.getChildAt(5));
 	}
 	onBtnClose():void{};
+	onBtnSure():void{};
+	onBtnCancel():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompPopMessage.URL, FGUICompPopMessage);

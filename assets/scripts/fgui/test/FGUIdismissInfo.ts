@@ -22,7 +22,7 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "dismissInfo");
+			const view = fgui.UIPackage.createObject("test", "dismissInfo") as FGUIdismissInfo;
 
 			view.makeFullScreen();
 			FGUIdismissInfo.instance = view;
@@ -36,6 +36,7 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 		FGUIdismissInfo.instance && FGUIdismissInfo.instance.dispose();
 		FGUIdismissInfo.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIdismissInfo {
 		return <FGUIdismissInfo>(fgui.UIPackage.createObject("test", "dismissInfo"));
 	}

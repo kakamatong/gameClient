@@ -26,7 +26,7 @@ export default class FGUIMailView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);return;}
-			const view = fgui.UIPackage.createObject("test", "MailView");
+			const view = fgui.UIPackage.createObject("test", "MailView") as FGUIMailView;
 
 			view.makeFullScreen();
 			FGUIMailView.instance = view;
@@ -40,6 +40,7 @@ export default class FGUIMailView extends fgui.GComponent {
 		FGUIMailView.instance && FGUIMailView.instance.dispose();
 		FGUIMailView.instance = null;
 	}
+	show(data?:any):void{};
 	public static createInstance():FGUIMailView {
 		return <FGUIMailView>(fgui.UIPackage.createObject("test", "MailView"));
 	}
