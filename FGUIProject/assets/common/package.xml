@@ -15,6 +15,9 @@
     <component id="muz3g" name="CompPopMessage.xml" path="/comp/"/>
     <component id="muz3h" name="BtnClose.xml" path="/comp/"/>
     <component id="muz3i" name="PopMessageView.xml" path="/" exported="true"/>
+    <component id="ddz1j" name="TipsView.xml" path="/" exported="true"/>
+    <component id="ddz1k" name="CompTips.xml" path="/comp/"/>
+    <image id="ddz1l" name="tips.png" path="/imgs/" scale="9grid" scale9grid="111,22,222,44"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

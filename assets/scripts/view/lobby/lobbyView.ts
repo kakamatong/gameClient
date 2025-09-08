@@ -6,13 +6,14 @@ import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
 import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
+import { TipsView } from '../common/tipsView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
     private _node2: fgui.GObject | null = null;
     private _node3: fgui.GObject | null = null;
     private _node4: fgui.GObject | null = null;
-
+    private _testCnt :number = 0
 
     onConstruct(){
         super.onConstruct();
@@ -68,8 +69,9 @@ export class LobbyView extends FGUILobbyView {
         super.onDisable();
     }
 
-    onBtnTest(): void {
-        fgui.GRoot.inst.showTooltips("123456")
+    onBtnMatchRoom(): void {
+        this._testCnt++;
+        TipsView.showView({content:`测试${this._testCnt}`})
     }
 
     runBgAct(): void {

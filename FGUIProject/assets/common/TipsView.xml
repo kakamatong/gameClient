@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688" opaque="false">
+  <displayList>
+    <list id="n1_ddz1" name="UI_LV_TIPS" xy="0,0" pivot="0.5,0.5" size="776,641" touchable="false" layout="flow_hz" selectionMode="none" lineGap="10" lineItemCount="1" defaultItem="ui://gj0r6g5iddz1k" align="center" vAlign="bottom" autoClearItems="true">
+      <item title="1" name="1"/>
+      <item title="2" name="2"/>
+      <item title="3" name="3"/>
+    </list>
+  </displayList>
+</component>
