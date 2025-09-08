@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="230,99" pivot="0.5,0.5" extention="Button">
+  <controller name="ctrl_color" exported="true" pages="0,蓝色,1,黄色" selected="1"/>
+  <displayList>
+    <loader id="n5_cmlt" name="UI_ICOM" xy="0,0" size="230,98" url="ui://gj0r6g5imuz3e" fill="scaleFree" autoSize="true">
+      <gearIcon controller="ctrl_color" pages="0,1" values="ui://gj0r6g5imuz3c|ui://gj0r6g5imuz3e"/>
+    </loader>
+    <text id="n3_cmlt" name="title" xy="0,0" size="230,99" fontSize="40" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" singleLine="true" text="确定">
+      <gearColor controller="ctrl_color" pages="0,1" values="#ffffff,#000000|#ffffff,#000000"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+  </displayList>
+  <Button downEffect="scale" downEffectValue="0.9"/>
+  <customProperty target="title" propertyId="0"/>
+</component>
