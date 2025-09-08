@@ -97,16 +97,20 @@ export class Login implements handleSocketMessage {
         if(text.includes(' ')){
             const infos = text.split(' ');
             const code = infos[0];
-            const msg = atob(infos[1]);
-            const msg2 = atob(infos[2]);
-            const svr = atob(infos[3]);
             if(code === '200'){
+                const msg = atob(infos[1]);
+                const msg2 = atob(infos[2]);
+                const svr = atob(infos[3]);
                 log(LogColors.green('登录成功'))
                 this._loginInfo.subid = Number(msg);
                 this._loginInfo.userid = Number(msg2);
                 this._loginInfo.server = svr
                 this._callBack(true,this._loginInfo);
-            }else{
+            }else if(code === "403"){
+                log('登录失败code:', code);
+                this._callBack(false);
+            }
+            else{
                 log('登录失败code:', code);
                 this._callBack(false);
             }
