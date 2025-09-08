@@ -25,10 +25,12 @@ export class PopMessageView extends FGUIPopMessageView {
 
     onBtnCancel(): void {
         this._data.cancelBack && this._data.cancelBack()
+        PopMessageView.hideView()
     }
 
     onBtnSure(): void {
         this._data.sureBack && this._data.sureBack()
+        PopMessageView.hideView()
     }
 
 }
