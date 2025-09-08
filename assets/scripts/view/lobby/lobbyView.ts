@@ -77,21 +77,21 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onUpdate():void{
-        //console.log("1")
         if (!this._node1 || !this._node2 || !this._node3 || !this._node4) {
             return
         }
-        this._node1.x = this._node1.x - 1
-        this._node1.y = this._node1.y - 1
+        const d = 0.5
+        this._node1.x = this._node1.x - d
+        this._node1.y = this._node1.y - d
 
-        this._node2.x = this._node2.x - 1
-        this._node2.y = this._node2.y - 1
+        this._node2.x = this._node2.x - d
+        this._node2.y = this._node2.y - d
 
-        this._node3.x = this._node3.x - 1
-        this._node3.y = this._node3.y - 1
+        this._node3.x = this._node3.x - d
+        this._node3.y = this._node3.y - d
 
-        this._node4.x = this._node4.x - 1
-        this._node4.y = this._node4.y - 1
+        this._node4.x = this._node4.x - d
+        this._node4.y = this._node4.y - d
 
         if (this._node1.x < -1530) {
             this._node1.x = 210
