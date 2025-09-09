@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUILoadingView extends fgui.GComponent {
 
 	public title:fgui.GTextField;
+	public act:fgui.Transition;
 	public static URL:string = "ui://gj0r6g5iis91o";
 
 	public static packageName:string = "common";
@@ -44,6 +45,7 @@ export default class FGUILoadingView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.title = <fgui.GTextField>(this.getChildAt(1));
+		this.act = this.getTransitionAt(0);
 	}
 }
 fgui.UIObjectFactory.setExtension(FGUILoadingView.URL, FGUILoadingView);
