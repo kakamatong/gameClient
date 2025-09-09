@@ -4,5 +4,5 @@
     <component id="is910" name="RankView.xml" path="/" exported="true"/>
     <component id="is911" name="CompRankInfo.xml" path="/comp/"/>
   </resources>
-  <publish name=""/>
+  <publish name="" genCode="true"/>
 </packageDescription>
