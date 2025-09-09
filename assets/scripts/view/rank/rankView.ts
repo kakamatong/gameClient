@@ -5,11 +5,14 @@ import * as fgui from "fairygui-cc";
 
 export class RankView extends FGUIRankView { 
     private _data:any | null = null;
+    private _selfRank:number = 0;
     show(data?:any){
         this.UI_LV_RANK.itemRenderer = this.itemRenderer.bind(this)
         if (data) {
-            this._data = data;
-            this.UI_LV_RANK.numItems = data.length;
+            this._data = JSON.parse(data.rankList);
+            this.UI_LV_RANK.numItems = this._data.length;
+            this._selfRank = data.rank ?? 999999;
+            this.UI_TXT_SELF_RANK.text = `${this._selfRank == 999999 ? '未上榜' : this._selfRank}`
         }
     }
 
