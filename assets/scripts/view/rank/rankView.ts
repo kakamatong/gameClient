@@ -15,7 +15,12 @@ export class RankView extends FGUIRankView {
 
     itemRenderer(index:number, item:fgui.GObject){ 
         const itemData = this._data[index];
+        itemData.rank = `${index + 1}`;
         (item as CompRankInfo).show(itemData);
+    }
+
+    onBtnClose(): void {
+        RankView.hideView()
     }
 }
 fgui.UIObjectFactory.setExtension(RankView.URL, RankView);

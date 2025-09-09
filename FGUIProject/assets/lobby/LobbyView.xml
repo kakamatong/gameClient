@@ -17,11 +17,13 @@
     <component id="n9_cvev" name="UI_COMP_TOP" src="cveva" fileName="comp/CompTop.xml" xy="0,0">
       <relation target="" sidePair="center-center,top-top"/>
     </component>
-    <image id="n10_ddz1" name="UI_BTN_MAIL" src="ddz1b" fileName="imgs/mail.png" xy="599,1566">
+    <component id="n13_is91" name="UI_BTN_MAILS" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="602,1569" size="162,108">
       <relation target="" sidePair="right-right,bottom-bottom"/>
-    </image>
-    <image id="n11_ddz1" name="UI_BTN_RANK" src="ddz1c" fileName="imgs/rank.png" xy="410,1566">
+      <property target="icon" propertyId="1" value="ui://gv22rev3ddz1b"/>
+    </component>
+    <component id="n14_is91" name="UI_BTN_RANK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="407,1569" size="170,108">
       <relation target="" sidePair="right-right,bottom-bottom"/>
-    </image>
+      <property target="icon" propertyId="1" value="ui://gv22rev3ddz1c"/>
+    </component>
   </displayList>
 </component>

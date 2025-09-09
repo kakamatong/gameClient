@@ -78,7 +78,7 @@ export class LobbyView extends FGUILobbyView {
         
     }
 
-    onBtnMail(): void {
+    onBtnMails(): void {
         
     }
 
