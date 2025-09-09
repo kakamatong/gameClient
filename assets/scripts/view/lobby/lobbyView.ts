@@ -10,6 +10,7 @@ import { TipsView } from '../common/tipsView';
 import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { Rank } from '../../modules/rank';
 import { RankView } from '../rank/rankView';
+import { LoadingView } from '../common/loadingView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -79,7 +80,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMails(): void {
-        
+        //LoadingView.showView({content:"测试"});
     }
 
     onBtnRank(): void {

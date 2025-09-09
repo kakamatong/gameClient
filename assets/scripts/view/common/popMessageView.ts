@@ -1,4 +1,3 @@
-import { _decorator} from 'cc';
 import FGUIPopMessageView from "../../fgui/common/FGUIPopMessageView";
 import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
 import * as fgui from "fairygui-cc";
