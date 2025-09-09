@@ -9,7 +9,7 @@
     <component id="cvev9" name="CompHead.xml" path="/comp/" exported="true"/>
     <image id="jin6a" name="mask.png" path="/imgs/" exported="true" scale="9grid" scale9grid="18,12,36,24"/>
     <image id="muz3c" name="btn2.png" path="/imgs/"/>
-    <image id="muz3d" name="popbg.png" path="/imgs/"/>
+    <image id="muz3d" name="popbg.png" path="/imgs/" exported="true"/>
     <image id="muz3e" name="btn1.png" path="/imgs/"/>
     <image id="muz3f" name="btnclose.png" path="/imgs/"/>
     <component id="muz3g" name="CompPopMessage.xml" path="/comp/"/>
