@@ -7,13 +7,15 @@ import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
 import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
 import { TipsView } from '../common/tipsView';
+import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
+import { Rank } from '../../modules/rank';
+import { RankView } from '../rank/rankView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
     private _node2: fgui.GObject | null = null;
     private _node3: fgui.GObject | null = null;
     private _node4: fgui.GObject | null = null;
-    private _testCnt :number = 0
 
     onConstruct(){
         super.onConstruct();
@@ -70,8 +72,6 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMatchRoom(): void {
-        this._testCnt++;
-        TipsView.showView({content:`测试${this._testCnt}`})
     }
 
     onBtnPrivateRoom(): void {
@@ -83,7 +83,14 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnRank(): void {
-        
+        const func = (b:boolean, data:any) => { 
+            if (b) {
+                RankView.showView(data)
+            }else{
+                TipsView.showView({content:`拉取排行榜数据失败`})
+            }
+        }
+        Rank.instance.req(func)
     }
 
     onUpdate():void{
