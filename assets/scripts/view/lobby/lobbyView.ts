@@ -74,8 +74,16 @@ export class LobbyView extends FGUILobbyView {
         TipsView.showView({content:`测试${this._testCnt}`})
     }
 
-    runBgAct(): void {
-        //this.UI_COMP_BG_ACT.runBgAct()
+    onBtnPrivateRoom(): void {
+        
+    }
+
+    onBtnMail(): void {
+        
+    }
+
+    onBtnRank(): void {
+        
     }
 
     onUpdate():void{

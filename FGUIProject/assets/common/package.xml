@@ -13,7 +13,7 @@
     <image id="muz3e" name="btn1.png" path="/imgs/"/>
     <image id="muz3f" name="btnclose.png" path="/imgs/"/>
     <component id="muz3g" name="CompPopMessage.xml" path="/comp/"/>
-    <component id="muz3h" name="BtnClose.xml" path="/comp/"/>
+    <component id="muz3h" name="BtnClose.xml" path="/comp/" exported="true"/>
     <component id="muz3i" name="PopMessageView.xml" path="/" exported="true"/>
     <component id="ddz1j" name="TipsView.xml" path="/" exported="true"/>
     <component id="ddz1k" name="CompTips.xml" path="/comp/"/>

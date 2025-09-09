@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="2a32uf5y">
+  <resources>
+    <component id="is910" name="RankView.xml" path="/" exported="true"/>
+    <component id="is911" name="CompRankInfo.xml" path="/comp/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

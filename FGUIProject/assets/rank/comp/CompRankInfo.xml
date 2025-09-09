@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="595,44">
+  <displayList>
+    <text id="n0_is91" name="UI_TXT_RANK" xy="0,0" pivot="0.5,0.5" size="91,44" fontSize="32" color="#ff0000" align="center" vAlign="middle" autoSize="none" text="rank"/>
+    <text id="n1_is91" name="UI_TXT_NAME" xy="181,0" size="202,44" fontSize="32" color="#ffffff" autoSize="ellipsis" strokeColor="#000000" strokeSize="2" singleLine="true" text="name"/>
+    <text id="n2_is91" name="UI_TXT_SCORE" xy="477,0" pivot="0.5,0.5" size="116,44" fontSize="32" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text="score"/>
+  </displayList>
+</component>

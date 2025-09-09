@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <graph id="n0_is91" name="mask" xy="0,0" size="776,1688" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000"/>
+    <image id="n1_is91" name="n1" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,371"/>
+    <list id="n3_is91" name="UI_LV_RANK" xy="90,450" size="595,669" overflow="scroll" defaultItem="ui://2a32uf5yis911" align="center">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <component id="n2_is91" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/BtnClose.xml" pkg="gj0r6g5i" xy="631,376"/>
+  </displayList>
+</component>
