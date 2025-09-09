@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <graph id="n0_is91" name="n0" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n1_is91" name="title" xy="102,835" pivot="0.5,0.5" size="572,217" fontSize="50" color="#ffffff" align="center" autoSize="none" text="加载中"/>
+  </displayList>
+</component>
