@@ -5,7 +5,6 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUIRankView extends fgui.GComponent {
 
-	public mask:fgui.GGraph;
 	public UI_LV_RANK:fgui.GList;
 	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_TXT_SELF_RANK:fgui.GTextField;
@@ -46,7 +45,6 @@ export default class FGUIRankView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.mask = <fgui.GGraph>(this.getChildAt(0));
 		this.UI_LV_RANK = <fgui.GList>(this.getChildAt(2));
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
