@@ -90,7 +90,8 @@ export class LobbyView extends FGUILobbyView {
                 TipsView.showView({content:`拉取排行榜数据失败`})
             }
         }
-        Rank.instance.req(func)
+        const rank = new Rank()
+        rank.req(func)
     }
 
     onUpdate():void{

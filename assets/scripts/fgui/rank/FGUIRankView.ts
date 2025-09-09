@@ -8,6 +8,7 @@ export default class FGUIRankView extends fgui.GComponent {
 	public mask:fgui.GGraph;
 	public UI_LV_RANK:fgui.GList;
 	public UI_BTN_CLOSE:fgui.GButton;
+	public UI_TXT_SELF_RANK:fgui.GTextField;
 	public static URL:string = "ui://2a32uf5yis910";
 
 	public static packageName:string = "rank";
@@ -49,6 +50,7 @@ export default class FGUIRankView extends fgui.GComponent {
 		this.UI_LV_RANK = <fgui.GList>(this.getChildAt(2));
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
+		this.UI_TXT_SELF_RANK = <fgui.GTextField>(this.getChildAt(5));
 	}
 	onBtnClose():void{};
 }
