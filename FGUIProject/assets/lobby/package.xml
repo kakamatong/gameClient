@@ -9,6 +9,8 @@
     <image id="gtlg8" name="matchRoom.png" path="/imgs/"/>
     <component id="gtlg9" name="CompLobbyBtn.xml" path="/comp/"/>
     <component id="cveva" name="CompTop.xml" path="/comp/"/>
+    <image id="ddz1b" name="mail.png" path="/imgs/"/>
+    <image id="ddz1c" name="rank.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

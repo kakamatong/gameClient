@@ -12,6 +12,8 @@ export default class FGUILobbyView extends fgui.GComponent {
 	public UI_BTN_MATCH_ROOM:fgui.GButton;
 	public UI_BTN_PRIVATE_ROOM:fgui.GButton;
 	public UI_COMP_TOP:FGUICompTop;
+	public UI_BTN_MAIL:fgui.GImage;
+	public UI_BTN_RANK:fgui.GImage;
 	public static URL:string = "ui://gv22rev3sc722";
 
 	public static packageName:string = "lobby";
@@ -56,8 +58,14 @@ export default class FGUILobbyView extends fgui.GComponent {
 		this.UI_BTN_PRIVATE_ROOM = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_PRIVATE_ROOM.onClick(this.onBtnPrivateRoom, this);
 		this.UI_COMP_TOP = <FGUICompTop>(this.getChildAt(4));
+		this.UI_BTN_MAIL = <fgui.GImage>(this.getChildAt(5));
+		this.UI_BTN_MAIL.onClick(this.onBtnMail, this);
+		this.UI_BTN_RANK = <fgui.GImage>(this.getChildAt(6));
+		this.UI_BTN_RANK.onClick(this.onBtnRank, this);
 	}
 	onBtnMatchRoom():void{};
 	onBtnPrivateRoom():void{};
+	onBtnMail():void{};
+	onBtnRank():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUILobbyView.URL, FGUILobbyView);

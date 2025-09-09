@@ -10,5 +10,11 @@
       <property target="icon" propertyId="1" value="ui://gv22rev3gtlg7"/>
     </component>
     <component id="n9_cvev" name="UI_COMP_TOP" src="cveva" fileName="comp/CompTop.xml" xy="0,0"/>
+    <image id="n10_ddz1" name="UI_BTN_MAIL" src="ddz1b" fileName="imgs/mail.png" xy="599,1566">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </image>
+    <image id="n11_ddz1" name="UI_BTN_RANK" src="ddz1c" fileName="imgs/rank.png" xy="410,1566">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </image>
   </displayList>
 </component>
