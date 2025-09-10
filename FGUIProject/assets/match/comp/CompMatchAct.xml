@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="550,200">
+  <controller name="ctrl_act_0" pages="0,剪刀,1,石头,2,布" selected="2"/>
+  <controller name="ctrl_atc_1" pages="0,剪刀,1,石头,2,布" selected="0"/>
+  <controller name="ctrl_act_2" pages="0,剪刀,1,石头,2,布" selected="1"/>
+  <displayList>
+    <image id="n0_wfqx" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="0,0" size="550,200"/>
+    <loader id="n4_wfqx" name="n4" xy="27,31" pivot="0.5,0.5" size="149,147" url="ui://gj0r6g5ixoqi5" autoSize="true">
+      <gearIcon controller="ctrl_act_0" pages="1,2" values="ui://gj0r6g5ixoqi7|ui://gj0r6g5ixoqi5" default="ui://gj0r6g5ixoqi6"/>
+    </loader>
+    <loader id="n5_wfqx" name="n5" xy="204,25" pivot="0.5,0.5" size="158,158" url="ui://gj0r6g5ixoqi6" autoSize="true">
+      <gearIcon controller="ctrl_atc_1" pages="0,1" values="ui://gj0r6g5ixoqi6|ui://gj0r6g5ixoqi7" default="ui://gj0r6g5ixoqi5"/>
+    </loader>
+    <loader id="n6_wfqx" name="n6" xy="367,36" pivot="0.5,0.5" size="170,137" url="ui://gj0r6g5ixoqi7" autoSize="true">
+      <gearIcon controller="ctrl_act_2" pages="0,1" values="ui://gj0r6g5ixoqi6|ui://gj0r6g5ixoqi7" default="ui://gj0r6g5ixoqi5"/>
+    </loader>
+  </displayList>
+</component>

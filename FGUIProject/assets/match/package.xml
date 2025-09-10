@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="y9gp37x6">
+  <resources>
+    <component id="wfqx0" name="MatchView.xml" path="/" exported="true"/>
+    <component id="wfqx1" name="CompMatchAct.xml" path="/comp/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

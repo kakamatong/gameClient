@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <controller name="ctrl_btn_join" pages="0,灰色不可点击,1,可以点击" selected="1"/>
+  <displayList>
+    <graph id="n0_wfqx" name="n0" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <image id="n1_wfqx" name="n1" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449"/>
+    <text id="n2_wfqx" name="n2" xy="206,584" size="364,79" fontSize="60" color="#ffffff" strokeColor="#000000" strokeSize="2" text="正在匹配玩家"/>
+    <component id="n3_wfqx" name="UI_BTN_JOIN" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="419,1078" size="230,99">
+      <gearLook controller="ctrl_btn_join" pages="0" values="1,0,1,0" default="1,0,0,1"/>
+      <property target="title" propertyId="0" value="加入"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n4_wfqx" name="UI_BTN_CANCEL" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="125,1078" size="230,98">
+      <property target="title" propertyId="0" value="取消"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <component id="n5_wfqx" name="UI_COMP_ACT" src="wfqx1" fileName="comp/CompMatchAct.xml" xy="113,757"/>
+  </displayList>
+</component>
