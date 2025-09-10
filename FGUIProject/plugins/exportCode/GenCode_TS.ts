@@ -62,24 +62,26 @@ function genCode(handler: FairyEditor.PublishHandler) {
         writer.writeln();
 
         // showView 用于显示，但只能同时显示一个
-        writer.writeln('public static showView(params?:any):void', classInfo.className);
+        writer.writeln('public static showView(params?:any, callBack?:(b:boolean)=>void):void', classInfo.className);
         writer.startBlock();
         writer.writeln('if(%s.instance)',classInfo.className);
         writer.startBlock();
         writer.writeln('console.log("allready show");');
+        writer.writeln('callBack&&callBack(false);');
         writer.writeln('return;');
         writer.endBlock();
         writer.writeln('const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;');
         writer.writeln('fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=>');
         writer.startBlock();
         writer.writeln();
-        writer.writeln('if(error){console.log("loadPackage error", error);return;}');
+        writer.writeln('if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}');
         writer.writeln('const view = %s.UIPackage.createObject("%s", "%s") as %s;', ns, handler.pkg.name, classInfo.resName, classInfo.className);
         writer.writeln();
         writer.writeln('view.makeFullScreen();');
         writer.writeln('%s.instance = view;', classInfo.className);
         writer.writeln('fgui.GRoot.inst.addChild(view);');
         writer.writeln('view.show && view.show(params);');
+        writer.writeln('callBack&&callBack(true);');
         writer.endBlock();
         writer.writeln(');');
         writer.endBlock();
