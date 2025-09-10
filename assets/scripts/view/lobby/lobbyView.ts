@@ -11,6 +11,7 @@ import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { Rank } from '../../modules/rank';
 import { RankView } from '../rank/rankView';
 import { LoadingView } from '../common/loadingView';
+import { GameView } from '../game10001/gameView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -82,6 +83,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMatchRoom(): void {
+        //this.changeToGameView()
     }
 
     onBtnPrivateRoom(): void {
@@ -102,6 +104,15 @@ export class LobbyView extends FGUILobbyView {
         }
         const rank = new Rank()
         rank.req(func)
+    }
+
+    changeToGameView():void{
+        const func = (b:boolean)=>{ 
+            if (b) {
+                LobbyView.hideView()
+            }
+        }
+        GameView.showView(null, func)
     }
 
     onUpdate():void{

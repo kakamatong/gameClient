@@ -21,8 +21,8 @@
     <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="222,1459" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
     <text id="n13_folo" name="UI_TXT_ID_1" xy="222,1509" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
     <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="57,1407" size="369,160" advanced="true"/>
-    <component id="n14_folo" name="UI_COMP_OUT_HEAD_1" src="folo3" fileName="comp/CompHand.xml" xy="313,936" scale="1.2,1.2"/>
-    <component id="n15_folo" name="UI_COMP_OUT_HEAD_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" rotation="180" controller="ctrl_head,0"/>
+    <component id="n14_folo" name="UI_COMP_OUT_HEAD_1" src="folo3" fileName="comp/CompHand.xml" xy="313,936" scale="1.2,1.2" visible="false"/>
+    <component id="n15_folo" name="UI_COMP_OUT_HEAD_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0"/>
     <component id="n16_folo" name="UI_BTN_SCISSORS" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="73,1212" size="158,158" group="n20_folo">
       <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi6"/>
     </component>
