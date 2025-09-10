@@ -15,6 +15,12 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_GROUP_PLAYER_1:fgui.GGroup;
 	public UI_COMP_OUT_HEAD_1:FGUICompHand;
 	public UI_COMP_OUT_HEAD_2:FGUICompHand;
+	public UI_BTN_SCISSORS:fgui.GButton;
+	public UI_BTN_ROCK:fgui.GButton;
+	public UI_BTN_PAPER:fgui.GButton;
+	public UI_GROUP_SELECT:fgui.GGroup;
+	public UI_BTN_SURE:fgui.GButton;
+	public UI_BTN_CHANGE:fgui.GButton;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -62,7 +68,23 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(11));
 		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(12));
 		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(13));
+		this.UI_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(14));
+		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
+		this.UI_BTN_ROCK = <fgui.GButton>(this.getChildAt(15));
+		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
+		this.UI_BTN_PAPER = <fgui.GButton>(this.getChildAt(16));
+		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
+		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(17));
+		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(18));
+		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
+		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(19));
+		this.UI_BTN_CHANGE.onClick(this.onBtnChange, this);
 	}
 	onBtnBack():void{};
+	onBtnScissors():void{};
+	onBtnRock():void{};
+	onBtnPaper():void{};
+	onBtnSure():void{};
+	onBtnChange():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIGameView.URL, FGUIGameView);
