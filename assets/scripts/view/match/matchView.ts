@@ -23,6 +23,7 @@ export class MatchView extends FGUIMatchView {
                     MatchView.hideView()
                 }else{
                     TipsView.showView({content:"错误"})
+                    MatchView.hideView()
                 }
             }
             LobbySocketManager.instance.sendToServer('matchOnSure', {
