@@ -13,6 +13,7 @@ import { RankView } from '../rank/rankView';
 import { LoadingView } from '../common/loadingView';
 import { GameView } from '../game10001/gameView';
 import { Match } from '../../modules/match';
+import { MatchView } from '../match/matchView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -84,6 +85,7 @@ export class LobbyView extends FGUILobbyView {
         const func = (b:boolean, data?:any)=>{
             if (b) {
                 // 显示匹配view
+                MatchView.showView();
             }else{
                 if (data && data.gameid && data.roomid) {
                     const func2 =()=>{

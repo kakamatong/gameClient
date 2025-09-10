@@ -59,4 +59,21 @@ export class Match {
             this._callBack && this._callBack(false, result)
         }
     }
+
+    reqLeave(callBack?:(b:boolean, data?:any)=>void): void {
+        if (callBack) {
+            this._callBack = callBack
+        }
+        LobbySocketManager.instance.sendToServer('matchLeave',{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
+    }
+
+    respLeave(result:any): void { 
+        const userStatus = new UserStatus()
+        userStatus.req()
+        if (result && result.code == 1) {
+            this._callBack && this._callBack(true)
+        } else {
+            this._callBack && this._callBack(false, result)
+        }
+    }
 }
