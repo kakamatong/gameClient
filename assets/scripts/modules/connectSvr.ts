@@ -26,7 +26,9 @@ export class ConnectSvr {
                 if (loginInfo && loginInfo.userid > 0 && !needLogin) {
                     const func = (b:boolean)=>{ 
                         if (!b) {
-                            this.autoLogin(true)
+                            this.autoLogin(true, callBack)
+                        }else{
+                            callBack && callBack(true)
                         }
                     }
                     this.connect(func)

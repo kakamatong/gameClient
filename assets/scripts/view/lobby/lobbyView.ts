@@ -46,7 +46,9 @@ export class LobbyView extends FGUILobbyView {
     }
 
     startLogin(){
+        LoadingView.showView({content:"登入中..."});
         const func = (b:boolean) => { 
+            LoadingView.hideView();
             if (!b) {
                 const func1 = ()=>{
                     this.startLogin()
@@ -87,7 +89,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMails(): void {
-        //LoadingView.showView({content:"测试"});
+        //
     }
 
     onBtnRank(): void {
