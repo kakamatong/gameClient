@@ -78,10 +78,6 @@ export class LobbyView extends FGUILobbyView {
         console.log("userRiches",data)
     }
 
-    onDisable(){
-        super.onDisable();
-    }
-
     onBtnMatchRoom(): void {
         //this.changeToGameView()
     }
