@@ -12,6 +12,7 @@ import { Rank } from '../../modules/rank';
 import { RankView } from '../rank/rankView';
 import { LoadingView } from '../common/loadingView';
 import { GameView } from '../game10001/gameView';
+import { Match } from '../../modules/match';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -80,6 +81,19 @@ export class LobbyView extends FGUILobbyView {
 
     onBtnMatchRoom(): void {
         //this.changeToGameView()
+        const func = (b:boolean, data?:any)=>{
+            if (b) {
+                // 显示匹配view
+            }else{
+                if (data && data.gameid && data.roomid) {
+                    const func2 =()=>{
+                        //返回房间
+                    }
+                    PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
+                }
+            }
+        }
+        Match.instance.req(0,func);
     }
 
     onBtnPrivateRoom(): void {

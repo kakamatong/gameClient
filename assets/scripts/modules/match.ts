@@ -15,6 +15,8 @@ export class Match {
      * @static
      */
     private static _instance: Match;
+
+    private _callBack: ((b:boolean, data?:any) => void) | null = null;
     
     /**
      * @method instance
@@ -34,7 +36,10 @@ export class Match {
      * @description 请求游戏匹配，向服务器发送匹配请求
      * @param {number} [type=0] - 匹配类型，默认为0
      */
-    req(type = 0) {
+    req(type = 0, callBack?:(b:boolean, data?:any)=>void) {
+        if (callBack) {
+            this._callBack = callBack
+        }
         LobbySocketManager.instance.sendToServer('matchJoin',{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
     }
 
@@ -48,12 +53,10 @@ export class Match {
         userStatus.req()
         if (result && result.code == 1) {
             console.log(LogColors.green(result.msg))
+            this._callBack && this._callBack(true)
         } else {
             result && console.log(LogColors.red(result.msg))
-            // 已经在游戏中，直接进入
-            if(result.code == 3){
-                //console.log(LogColors.red(result.msg))
-            }
+            this._callBack && this._callBack(false, result)
         }
     }
 }
