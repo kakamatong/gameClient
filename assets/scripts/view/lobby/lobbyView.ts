@@ -22,12 +22,7 @@ export class LobbyView extends FGUILobbyView {
         super.onConstruct();
         this.initListeners();
         this.initUI();
-        const func = (b:boolean) => { 
-            if (!b) {
-                PopMessageView.showView({title:'温馨提示', content:'登入失败', type:ENUM_POP_MESSAGE_TYPE.NUM1SURE})
-            }
-        }
-        ConnectSvr.instance.checkAutoLogin(func)
+        this.startLogin();
     }
 
     initListeners(){
@@ -48,6 +43,18 @@ export class LobbyView extends FGUILobbyView {
         this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
         this._node3 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_3
         this._node4 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_4
+    }
+
+    startLogin(){
+        const func = (b:boolean) => { 
+            if (!b) {
+                const func1 = ()=>{
+                    this.startLogin()
+                }
+                PopMessageView.showView({title:'温馨提示', content:'登入失败,是否重新登入？', type:ENUM_POP_MESSAGE_TYPE.NUM1SURE, sureBack: func1})
+            }
+        }
+        ConnectSvr.instance.checkAutoLogin(func)
     }
 
     updateUserInfo():void{
