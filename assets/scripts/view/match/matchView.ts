@@ -8,6 +8,7 @@ import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { DataCenter } from '../../datacenter/datacenter';
 import { LogColors } from '../../frameworks/framework';
 import { TipsView } from '../common/tipsView';
+import {CompMatchAct} from './comp/compMatchAct';
 export class MatchView extends FGUIMatchView {
     private _checkID:number = 0;
     private _beCheck:boolean = false;
@@ -53,6 +54,7 @@ export class MatchView extends FGUIMatchView {
                     console.log(LogColors.red('已准备'));
                     selfReady = true;
                     this.ctrl_enter.selectedIndex = 1;
+                    this.stopAct()
                     break
                 }
             }
@@ -60,10 +62,17 @@ export class MatchView extends FGUIMatchView {
             if (!selfReady) {
                 this._checkID = data.id;
                 this.ctrl_btn_join.selectedIndex = 1;
+                this.ctrl_enter.selectedIndex = 2;
+                this.stopAct()
             }
         }
     }
 
+    stopAct(){
+        (this.UI_COMP_ACT as CompMatchAct).stopSche();
+        (this.UI_COMP_ACT as CompMatchAct).success();
+    }
+    
     onBtnJoin(): void {
         const callBack = (data:any)=>{ 
             if (data.code = 1) {

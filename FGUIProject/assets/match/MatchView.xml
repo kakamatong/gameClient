@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_btn_join" pages="0,灰色不可点击,1,可以点击" selected="1"/>
-  <controller name="ctrl_enter" pages="0,正在匹配,1,等待加入" selected="1"/>
+  <controller name="ctrl_enter" pages="0,正在匹配,1,等待加入,2,匹配成功" selected="2"/>
   <displayList>
     <graph id="n0_wfqx" name="n0" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <image id="n1_wfqx" name="n1" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449"/>
-    <text id="n2_wfqx" name="n2" xy="266,584" pivot="0.5,0.5" size="244,79" fontSize="60" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" text="等待加入">
-      <gearText controller="ctrl_enter" pages="1" values="等待加入" default="正在匹配玩家"/>
+    <text id="n2_wfqx" name="n2" xy="266,584" pivot="0.5,0.5" size="244,79" fontSize="60" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" text="匹配成功">
+      <gearText controller="ctrl_enter" pages="1,2" values="等待加入|匹配成功" default="正在匹配玩家"/>
     </text>
     <component id="n3_wfqx" name="UI_BTN_JOIN" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="419,1078" size="230,99">
-      <gearDisplay controller="ctrl_enter" pages="0"/>
+      <gearDisplay controller="ctrl_enter" pages="0,2"/>
       <gearLook controller="ctrl_btn_join" pages="0" values="1,0,1,0" default="1,0,0,1"/>
       <property target="title" propertyId="0" value="加入"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
     </component>
     <component id="n4_wfqx" name="UI_BTN_CANCEL" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="125,1078" size="230,98">
-      <gearDisplay controller="ctrl_enter" pages="0"/>
+      <gearDisplay controller="ctrl_enter" pages="0,2"/>
       <property target="title" propertyId="0" value="取消"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
