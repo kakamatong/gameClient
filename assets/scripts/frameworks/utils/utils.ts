@@ -976,3 +976,9 @@ const DEFAULT_JWT_EXPIRE_TIME = 30; // 3600秒 = 1小时
 export const httpPostWithDefaultJWT = (url: string, body: any, payload: object): Promise<any> => {
     return httpPost(url, body, payload, DEFAULT_JWT_SECRET_KEY, DEFAULT_JWT_EXPIRE_TIME);
 }
+
+export const getRandomInt = (min: number, max: number): number => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
