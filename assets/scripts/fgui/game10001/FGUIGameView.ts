@@ -2,16 +2,19 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import FGUICompHand from "./FGUICompHand";
 
 export default class FGUIGameView extends fgui.GComponent {
 
 	public UI_BTN_BACK:fgui.GButton;
-	public UI_TXT_NICKNAME:fgui.GTextField;
-	public UI_TXT_ID:fgui.GTextField;
-	public UI_GROUP_PLAYER_2:fgui.GGroup;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
 	public UI_TXT_ID_2:fgui.GTextField;
+	public UI_GROUP_PLAYER_2:fgui.GGroup;
+	public UI_TXT_NICKNAME_1:fgui.GTextField;
+	public UI_TXT_ID_1:fgui.GTextField;
 	public UI_GROUP_PLAYER_1:fgui.GGroup;
+	public UI_COMP_OUT_HEAD_1:FGUICompHand;
+	public UI_COMP_OUT_HEAD_2:FGUICompHand;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -51,12 +54,14 @@ export default class FGUIGameView extends fgui.GComponent {
 	protected onConstruct():void {
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
-		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(4));
-		this.UI_TXT_ID = <fgui.GTextField>(this.getChildAt(5));
+		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(4));
+		this.UI_TXT_ID_2 = <fgui.GTextField>(this.getChildAt(5));
 		this.UI_GROUP_PLAYER_2 = <fgui.GGroup>(this.getChildAt(6));
-		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(9));
-		this.UI_TXT_ID_2 = <fgui.GTextField>(this.getChildAt(10));
+		this.UI_TXT_NICKNAME_1 = <fgui.GTextField>(this.getChildAt(9));
+		this.UI_TXT_ID_1 = <fgui.GTextField>(this.getChildAt(10));
 		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(11));
+		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(12));
+		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(13));
 	}
 	onBtnBack():void{};
 }

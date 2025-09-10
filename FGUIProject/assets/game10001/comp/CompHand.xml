@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="149,147">
+  <controller name="ctrl_head" exported="true" pages="0,剪刀,1,石头,2,布,3,无" selected="3"/>
+  <displayList>
+    <image id="n0_folo" name="n0" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="0,0">
+      <gearDisplay controller="ctrl_head" pages="2"/>
+    </image>
+    <image id="n1_folo" name="n1" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-10,5">
+      <gearDisplay controller="ctrl_head" pages="1"/>
+    </image>
+    <image id="n2_folo" name="n2" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-4,-5">
+      <gearDisplay controller="ctrl_head" pages="0"/>
+    </image>
+  </displayList>
+</component>

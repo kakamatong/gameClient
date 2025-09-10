@@ -11,15 +11,17 @@
     <component id="n4_folo" name="n4" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="565,127" group="n8_folo">
       <relation target="" sidePair="right-right,top-top"/>
     </component>
-    <text id="n10_folo" name="UI_TXT_NICKNAME" xy="554,178" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <text id="n11_folo" name="UI_TXT_ID" xy="554,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <text id="n10_folo" name="UI_TXT_NICKNAME_2" xy="554,178" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <text id="n11_folo" name="UI_TXT_ID_2" xy="554,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
     <group id="n8_folo" name="UI_GROUP_PLAYER_2" xy="363,127" size="362,160" visible="false" advanced="true"/>
     <image id="n6_folo" name="n6" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="206,1454" size="220,100" group="n9_folo"/>
     <component id="n5_folo" name="n5" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="57,1407" group="n9_folo">
       <relation target="" sidePair="left-left,bottom-bottom"/>
     </component>
-    <text id="n12_folo" name="UI_TXT_NICKNAME" xy="222,1459" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <text id="n13_folo" name="UI_TXT_ID" xy="222,1509" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="222,1459" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
+    <text id="n13_folo" name="UI_TXT_ID_1" xy="222,1509" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
     <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="57,1407" size="369,160" advanced="true"/>
+    <component id="n14_folo" name="UI_COMP_OUT_HEAD_1" src="folo3" fileName="comp/CompHand.xml" xy="313,936" scale="1.2,1.2"/>
+    <component id="n15_folo" name="UI_COMP_OUT_HEAD_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" rotation="180" controller="ctrl_head,0"/>
   </displayList>
 </component>
