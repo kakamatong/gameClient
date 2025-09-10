@@ -7,6 +7,7 @@ import FGUICompMatchAct from "./FGUICompMatchAct";
 export default class FGUIMatchView extends fgui.GComponent {
 
 	public ctrl_btn_join:fgui.Controller;
+	public ctrl_enter:fgui.Controller;
 	public UI_BTN_JOIN:fgui.GButton;
 	public UI_BTN_CANCEL:fgui.GButton;
 	public UI_COMP_ACT:FGUICompMatchAct;
@@ -50,6 +51,7 @@ export default class FGUIMatchView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_btn_join = this.getControllerAt(0);
+		this.ctrl_enter = this.getControllerAt(1);
 		this.UI_BTN_JOIN = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_JOIN.onClick(this.onBtnJoin, this);
 		this.UI_BTN_CANCEL = <fgui.GButton>(this.getChildAt(4));
