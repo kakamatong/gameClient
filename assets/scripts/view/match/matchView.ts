@@ -15,6 +15,13 @@ export class MatchView extends FGUIMatchView {
     show(data:any){
         this.ctrl_btn_join.selectedIndex = 0;
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
+        LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+    }
+
+    protected onDestroy(): void {
+        super.onDestroy();
+        LobbySocketManager.instance.removeServerListen("matchOnSure");
+        LobbySocketManager.instance.removeServerListen("matchOnSureFail");
     }
 
     onBtnCancel(): void {
@@ -66,6 +73,11 @@ export class MatchView extends FGUIMatchView {
                 this.stopAct()
             }
         }
+    }
+
+    onSvrMatchOnSureFail(data:any){
+        TipsView.showView({content:data.msg})
+        MatchView.hideView()
     }
 
     stopAct(){
