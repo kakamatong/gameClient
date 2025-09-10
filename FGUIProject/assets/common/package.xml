@@ -20,6 +20,8 @@
     <image id="ddz1l" name="tips.png" path="/imgs/" scale="9grid" scale9grid="111,22,222,44"/>
     <component id="is91n" name="CompBtnCommon.xml" path="/comp/" exported="true"/>
     <component id="is91o" name="LoadingView.xml" path="/" exported="true"/>
+    <image id="is91p" name="back.png" path="/imgs/" exported="true"/>
+    <image id="is91q" name="set.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

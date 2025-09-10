@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="2zsfe53x">
+  <resources>
+    <component id="is911" name="GameView.xml" path="/" exported="true"/>
+    <image id="is912" name="game.jpg" path="/imgs/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>
