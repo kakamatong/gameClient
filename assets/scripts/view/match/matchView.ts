@@ -71,8 +71,25 @@ export class MatchView extends FGUIMatchView {
                 this.ctrl_btn_join.selectedIndex = 1;
                 this.ctrl_enter.selectedIndex = 2;
                 this.stopAct()
+                this.showLeftTime(data.endTime ?? 0)
+                this.node.components[0].schedule(()=>{
+                    this.showLeftTime(data.endTime ?? 0)
+                },1)
             }
         }
+    }
+
+    showLeftTime(endTime:number){
+        const timeNow = Math.floor(Date.now() / 1000)
+        const dt = endTime - timeNow
+        if (dt < 0) {
+            return
+        }
+        this.updateCancelBtn(dt)
+    }
+
+    updateCancelBtn(n:number){
+        this.UI_BTN_CANCEL.title = `取消(${n}s)`
     }
 
     onSvrMatchOnSureFail(data:any){
