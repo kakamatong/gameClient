@@ -155,8 +155,10 @@ export class GameView extends FGUIGameView {
 
     showPlayerInfoBySeat(localseat:number):void{
         const player = GameData.instance.playerList[localseat];
-        this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`).text = player.nickname ?? "";
-        this.getChild<fgui.GTextField>(`UI_TXT_ID_${localseat}`).text = player.userid.toString();
+        const nicknanme = this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`);
+        const id = this.getChild<fgui.GTextField>(`UI_TXT_ID_${localseat}`)
+        nicknanme.text = player.nickname ?? "";
+        id.text = player.userid.toString();
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
                 this.showOffLine(true)
