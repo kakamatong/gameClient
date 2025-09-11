@@ -1,7 +1,7 @@
 
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
-import { AddEventListener, RemoveEventListener } from '../../frameworks/framework';
+import { AddEventListener, LogColors, RemoveEventListener } from '../../frameworks/framework';
 import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
@@ -14,6 +14,7 @@ import { LoadingView } from '../common/loadingView';
 import { GameView } from '../game10001/gameView';
 import { Match } from '../../modules/match';
 import { MatchView } from '../match/matchView';
+import { AuthGame } from '../../modules/authGame';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -32,6 +33,7 @@ export class LobbyView extends FGUILobbyView {
         AddEventListener('userData',this.onUserInfo, this);
         AddEventListener('userStatus',this.onUserStatus, this);
         AddEventListener('userRichs',this.onUserRiches, this);
+        LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
     }
 
     onDestroy(){
@@ -39,6 +41,7 @@ export class LobbyView extends FGUILobbyView {
         RemoveEventListener('userData', this.onUserInfo);
         RemoveEventListener('userStatus', this.onUserStatus);
         RemoveEventListener('userRichs', this.onUserRiches);
+        LobbySocketManager.instance.removeServerListen("gameRoomReady");
     }
 
     initUI(){ 
@@ -81,7 +84,6 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMatchRoom(): void {
-        //this.changeToGameView()
         const func = (b:boolean, data?:any)=>{
             if (b) {
                 // 显示匹配view
@@ -125,6 +127,25 @@ export class LobbyView extends FGUILobbyView {
             }
         }
         GameView.showView(null, func)
+    }
+
+    connectToGame(addr:string, gameid:number, roomid:string){
+        const callBack = (success:boolean)=>{
+            if(success){
+                this.changeToGameView()
+            }
+        }
+        AuthGame.instance.req(addr,gameid, roomid, callBack);
+    }
+
+    onSvrGameRoomReady(data:any):void{
+        console.log("gameRoomReady",data)
+        DataCenter.instance.gameid = data.gameid;
+        DataCenter.instance.roomid = data.roomid;
+        DataCenter.instance.gameAddr = data.addr;
+        DataCenter.instance.shortRoomid = 0 // 匹配房
+        console.log(LogColors.green('游戏房间准备完成'));
+        this.connectToGame(data.addr, data.gameid, data.roomid);
     }
 
     onUpdate():void{
