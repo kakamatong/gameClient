@@ -9,6 +9,7 @@ import { Match } from '../../../modules/match';
 import { UserStatus } from '../../../modules/userStatus';
 import * as fgui from "fairygui-cc";
 export class GameView extends FGUIGameView {
+    private _selectOutHand:number = -1;
     onConstruct(){
         super.onConstruct();
         GameData.instance.init();
@@ -28,6 +29,7 @@ export class GameView extends FGUIGameView {
     show(data:any){
         // 客户端进入完成
         GameSocketManager.instance.sendToServer("clientReady",{})
+        this.ctrl_select.onChanged(this.onChanged, this)
     }
 
     initListeners(){
@@ -75,7 +77,14 @@ export class GameView extends FGUIGameView {
                 this.showThinking(false)
             }
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
+            // 隐藏准备标签
             this.showSignReady(local, false)
+            if (local == SELF_LOCAL) {
+                // 隐藏按钮和选择
+                this.ctrl_btn.selectedIndex = 0
+                this.UI_GROUP_SELECT.visible = false
+            }
+            
         }
     }
 
@@ -219,7 +228,18 @@ export class GameView extends FGUIGameView {
 
     onBtnSure(): void {
         const flag = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
-        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:flag[this.ctrl_select.selectedIndex] })
+        this._selectOutHand = this.ctrl_select.selectedIndex
+        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:flag[this._selectOutHand] })
+    }
+
+    onChanged(event: any):void{
+        if (event.selectedIndex != this._selectOutHand) {
+            if (this._selectOutHand != -1) {
+                this.ctrl_btn.selectedIndex = 2
+            }else{
+                this.ctrl_btn.selectedIndex = 1
+            }
+        }
     }
 }
 fgui.UIObjectFactory.setExtension(GameView.URL, GameView);

@@ -10,6 +10,7 @@ import FGUIBtnSelect from "./FGUIBtnSelect";
 export default class FGUIGameView extends fgui.GComponent {
 
 	public ctrl_select:fgui.Controller;
+	public ctrl_btn:fgui.Controller;
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
 	public UI_TXT_ID_2:fgui.GTextField;
@@ -69,6 +70,7 @@ export default class FGUIGameView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_select = this.getControllerAt(0);
+		this.ctrl_btn = this.getControllerAt(1);
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(4));
