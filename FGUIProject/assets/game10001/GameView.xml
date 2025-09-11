@@ -15,7 +15,7 @@
     <text id="n11_folo" name="UI_TXT_ID_2" xy="554,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
     <component id="n31_qaf2" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="656,219" group="n8_folo" visible="false"/>
     <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="548,119" group="n8_folo" visible="false"/>
-    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" group="n8_folo"/>
+    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" group="n8_folo" visible="false"/>
     <group id="n8_folo" name="UI_GROUP_PLAYER_2" xy="301,119" size="424,307" visible="false" advanced="true"/>
     <image id="n6_folo" name="n6" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="206,1454" size="220,100" group="n9_folo"/>
     <component id="n5_folo" name="n5" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="57,1407" group="n9_folo">
@@ -23,7 +23,7 @@
     </component>
     <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="222,1459" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
     <text id="n13_folo" name="UI_TXT_ID_1" xy="222,1509" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" group="n9_folo"/>
+    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" group="n9_folo" visible="false"/>
     <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="57,1098" size="418,469" advanced="true"/>
     <component id="n14_folo" name="UI_COMP_OUT_HEAD_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false"/>
     <component id="n15_folo" name="UI_COMP_OUT_HEAD_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0"/>

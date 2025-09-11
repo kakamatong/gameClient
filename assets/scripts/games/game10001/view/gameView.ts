@@ -71,7 +71,9 @@ export class GameView extends FGUIGameView {
             this.onPlayerThinking(local)
         }else if(data.att == PLAYER_ATTITUDE.READY){
             this.showSignReady(local, true)
-            this.showThinking(false)
+            if (local != SELF_LOCAL) {
+                this.showThinking(false)
+            }
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
             this.showSignReady(local, false)
         }
@@ -187,9 +189,7 @@ export class GameView extends FGUIGameView {
     }
 
     showThinking(bshow:boolean):void{
-        if (bshow) {
-            this.UI_COMP_THINKING.visible = true;
-        }
+        this.UI_COMP_THINKING.visible = bshow;
     }
 
     onPlayerThinking(localSeat:number):void {
