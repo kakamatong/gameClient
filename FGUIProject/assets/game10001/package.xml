@@ -7,6 +7,8 @@
     <image id="qaf24" name="ready.png" path="/imgs/"/>
     <image id="qaf25" name="clock.png" path="/imgs/"/>
     <component id="qaf26" name="CompClock.xml" path="/comp/"/>
+    <image id="qaf27" name="think.png" path="/imgs/"/>
+    <component id="qaf28" name="CompThinkAct.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

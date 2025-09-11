@@ -68,11 +68,12 @@ export class GameView extends FGUIGameView {
     onGamePlayerAttitude(data:any):void{
         const local = GameData.instance.seat2local(data.seat);
         if(data.att == PLAYER_ATTITUDE.THINKING){
-            
+            this.onPlayerThinking(local)
         }else if(data.att == PLAYER_ATTITUDE.READY){
-            this.showSignReady(local)
+            this.showSignReady(local, true)
+            this.showThinking(false)
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
-            
+            this.showSignReady(local, false)
         }
     }
 
@@ -123,8 +124,22 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    showSignReady(localSeat:number):void{
-        this.getChild<fgui.GImage>(`UI_IMG_SIGN_READY_${localSeat}`).visible = true
+    showSignReady(localSeat:number, bshow:boolean):void{
+        this.getChild<fgui.GImage>(`UI_IMG_SIGN_READY_${localSeat}`).visible = bshow
+    }
+
+    showThinking(bshow:boolean):void{
+        if (bshow) {
+            this.UI_COMP_THINKING.visible = true;
+        }
+    }
+
+    onPlayerThinking(localSeat:number):void {
+        if (localSeat == SELF_LOCAL) {
+            this.UI_GROUP_SELECT.visible = true
+        }else{
+            this.showThinking(true)
+        }
     }
 
     onBtnBack(): void {

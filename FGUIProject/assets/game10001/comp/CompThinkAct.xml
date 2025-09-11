@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="80,33">
+  <displayList>
+    <image id="n0_qaf2" name="n0" src="qaf27" fileName="imgs/think.png" xy="0,0"/>
+    <graph id="n2_qaf2" name="n2" xy="10,12" size="10,10" group="n6_qaf2" type="eclipse" fillColor="#ff000000"/>
+    <graph id="n3_qaf2" name="n3" xy="42,12" size="10,10" group="n6_qaf2" type="eclipse" fillColor="#ff000000"/>
+    <graph id="n4_qaf2" name="n4" xy="26,12" size="10,10" group="n6_qaf2" type="eclipse" fillColor="#ff000000"/>
+    <graph id="n5_qaf2" name="n5" xy="58,12" size="10,10" group="n6_qaf2" type="eclipse" fillColor="#ff000000"/>
+    <group id="n6_qaf2" name="n6" xy="10,12" size="58,10"/>
+  </displayList>
+  <transition name="act" autoPlay="true" autoPlayRepeat="-1">
+    <item time="0" type="Visible" target="n2_qaf2" value="false"/>
+    <item time="0" type="Visible" target="n3_qaf2" value="false"/>
+    <item time="0" type="Visible" target="n4_qaf2" value="false"/>
+    <item time="6" type="Visible" target="n3_qaf2" value="true"/>
+    <item time="12" type="Visible" target="n4_qaf2" value="true"/>
+    <item time="18" type="Visible" target="n2_qaf2" value="true"/>
+  </transition>
+</component>

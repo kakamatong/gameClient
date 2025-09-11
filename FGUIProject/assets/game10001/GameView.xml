@@ -46,5 +46,6 @@
     <group id="n23_folo" name="n23" xy="513,1452" size="231,99" advanced="true">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </group>
+    <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="548,119" visible="false"/>
   </displayList>
 </component>
