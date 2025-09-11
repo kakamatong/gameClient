@@ -11,6 +11,10 @@
     <component id="qaf28" name="CompThinkAct.xml" path="/comp/"/>
     <image id="qaf29" name="offline.png" path="/imgs/"/>
     <component id="qaf2a" name="CompOffline.xml" path="/comp/"/>
+    <image id="qaf2b" name="y1.png" path="/imgs/"/>
+    <image id="qaf2c" name="y2.png" path="/imgs/"/>
+    <image id="qaf2d" name="y3.png" path="/imgs/"/>
+    <component id="qaf2f" name="BtnSelect.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -5,9 +5,11 @@ import * as fgui from "fairygui-cc";
 import FGUICompOffline from "./FGUICompOffline";
 import FGUICompThinkAct from "./FGUICompThinkAct";
 import FGUICompHand from "./FGUICompHand";
+import FGUIBtnSelect from "./FGUIBtnSelect";
 
 export default class FGUIGameView extends fgui.GComponent {
 
+	public ctrl_select:fgui.Controller;
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
 	public UI_TXT_ID_2:fgui.GTextField;
@@ -21,12 +23,12 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_GROUP_PLAYER_1:fgui.GGroup;
 	public UI_COMP_OUT_HEAD_1:FGUICompHand;
 	public UI_COMP_OUT_HEAD_2:FGUICompHand;
-	public UI_BTN_SCISSORS:fgui.GButton;
-	public UI_BTN_ROCK:fgui.GButton;
-	public UI_BTN_PAPER:fgui.GButton;
-	public UI_GROUP_SELECT:fgui.GGroup;
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CHANGE:fgui.GButton;
+	public UI_BTN_PAPER:FGUIBtnSelect;
+	public UI_BTN_ROCK:FGUIBtnSelect;
+	public UI_BTN_SCISSORS:FGUIBtnSelect;
+	public UI_GROUP_SELECT:fgui.GGroup;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -66,6 +68,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_select = this.getControllerAt(0);
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(4));
@@ -80,23 +83,23 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(15));
 		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(16));
 		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(17));
-		this.UI_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(18));
-		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
-		this.UI_BTN_ROCK = <fgui.GButton>(this.getChildAt(19));
-		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
-		this.UI_BTN_PAPER = <fgui.GButton>(this.getChildAt(20));
-		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
-		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(21));
-		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(22));
+		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(18));
 		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
-		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(23));
+		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(19));
 		this.UI_BTN_CHANGE.onClick(this.onBtnChange, this);
+		this.UI_BTN_PAPER = <FGUIBtnSelect>(this.getChildAt(21));
+		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
+		this.UI_BTN_ROCK = <FGUIBtnSelect>(this.getChildAt(22));
+		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
+		this.UI_BTN_SCISSORS = <FGUIBtnSelect>(this.getChildAt(23));
+		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
+		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(24));
 	}
 	onBtnBack():void{};
-	onBtnScissors():void{};
-	onBtnRock():void{};
-	onBtnPaper():void{};
 	onBtnSure():void{};
 	onBtnChange():void{};
+	onBtnPaper():void{};
+	onBtnRock():void{};
+	onBtnScissors():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIGameView.URL, FGUIGameView);
