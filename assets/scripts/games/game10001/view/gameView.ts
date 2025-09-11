@@ -134,11 +134,11 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrGameStart(data:any):void{
-        
+        GameData.instance.gameStart = true;
     }
 
     onSvrGameEnd(data:any):void{
-        
+        GameData.instance.gameStart = false;
     }
 
     onSvrPlayerEnter(data:any):void{
