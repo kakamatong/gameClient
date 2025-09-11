@@ -4,6 +4,7 @@ import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUICompHand from "./FGUICompHand";
 import FGUICompThinkAct from "./FGUICompThinkAct";
+import FGUICompOffline from "./FGUICompOffline";
 
 export default class FGUIGameView extends fgui.GComponent {
 
@@ -25,6 +26,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CHANGE:fgui.GButton;
 	public UI_COMP_THINKING:FGUICompThinkAct;
+	public UI_COMP_OFFLINE:FGUICompOffline;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -88,6 +90,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(21));
 		this.UI_BTN_CHANGE.onClick(this.onBtnChange, this);
 		this.UI_COMP_THINKING = <FGUICompThinkAct>(this.getChildAt(23));
+		this.UI_COMP_OFFLINE = <FGUICompOffline>(this.getChildAt(24));
 	}
 	onBtnBack():void{};
 	onBtnScissors():void{};

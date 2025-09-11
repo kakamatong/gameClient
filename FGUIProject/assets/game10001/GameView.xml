@@ -47,5 +47,6 @@
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </group>
     <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="548,119" visible="false"/>
+    <component id="n31_qaf2" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="656,219" visible="false"/>
   </displayList>
 </component>

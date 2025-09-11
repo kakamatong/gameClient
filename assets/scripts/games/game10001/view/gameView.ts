@@ -90,7 +90,24 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrPlayerInfos(data:any):void{
-        
+        console.log('onSvrPlayerInfos', data);
+        GameData.instance.playerInfos = data.infos;
+        for(let i = 0; i < data.infos.length; i++){
+            const info = data.infos[i];
+            const player = GameData.instance.getPlayerByUserid(info.userid);
+            if (player) {
+                player.nickname = info.nickname;
+                player.headurl = info.headurl;
+                player.sex = info.sex;
+                player.province = info.province;
+                player.city = info.city;
+                player.ext = info.ext;
+                player.ip = info.ip;
+                player.status = info.status;
+                const localSeat = GameData.instance.local2seat(player.svrSeat)
+                this.showPlayerInfoBySeat(localSeat);
+            }
+        }
     }
 
     onSvrGameStart(data:any):void{
@@ -102,11 +119,49 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrPlayerEnter(data:any):void{
-        
+        const selfid = DataCenter.instance.userid;
+        const svrSeat = data.seat;
+        const userid = data.userid;
+        const playerInfo = GameData.instance.getPlayerInfo(userid);
+        if(playerInfo){
+            playerInfo.svrSeat = svrSeat;
+            playerInfo.userid = userid;
+            let localSeat = 0
+            if (selfid == userid) {
+                localSeat = SELF_LOCAL
+            }else{
+                localSeat = GameData.instance.seat2local(svrSeat);
+            }
+            GameData.instance.playerList[localSeat] = playerInfo;
+
+            if(GameData.instance.isPrivateRoom){
+                if(playerInfo.status == PLAYER_STATUS.ONLINE && selfid == userid){
+                    //this.UI_BTN_READY.visible = true;
+                }
+            }
+            this.showPlayerInfoBySeat(localSeat);
+        }
     }
 
     onSvrPlayerStatusUpdate(data:any):void{
-        
+        const player = GameData.instance.getPlayerByUserid(data.userid);
+        if (player) {
+            player.status = data.status;
+            this.showPlayerInfoBySeat(GameData.instance.seat2local(player.svrSeat))
+        }
+    }
+
+    showPlayerInfoBySeat(localseat:number):void{
+        const player = GameData.instance.playerList[localseat];
+        this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`).text = player.nickname ?? "";
+        this.getChild<fgui.GTextField>(`UI_TXT_ID_${localseat}`).text = player.userid.toString();
+        if (localseat != SELF_LOCAL &&player.status == PLAYER_STATUS.OFFLINE) {
+            this.showOffLine(true)
+        }
+    }
+
+    showOffLine(bshow:boolean):void{ 
+        this.UI_COMP_OFFLINE.visible = bshow;
     }
 
     onSvrPlayerLeave(data:any):void{

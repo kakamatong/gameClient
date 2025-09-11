@@ -9,6 +9,8 @@
     <component id="qaf26" name="CompClock.xml" path="/comp/"/>
     <image id="qaf27" name="think.png" path="/imgs/"/>
     <component id="qaf28" name="CompThinkAct.xml" path="/comp/"/>
+    <image id="qaf29" name="offline.png" path="/imgs/"/>
+    <component id="qaf2a" name="CompOffline.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
