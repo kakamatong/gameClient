@@ -6,6 +6,7 @@ export class GameData {
     private _gameStep: ENUM_GAME_STEP = ENUM_GAME_STEP.NONE;
     private _roomEnd: boolean = false;
     private _gameStart = false;
+    private _isPrivateRoom = false;
     private _playerInfos: Array<GAME_PLAYER_INFO> = [];
     private static _instance: GameData;
     public static get instance(): GameData {
@@ -108,5 +109,13 @@ export class GameData {
 
     getPlayerInfo(userid: number) {
         return this.playerInfos.find((player) => player.userid == userid);
+    }
+
+    set isPrivateRoom(flag: boolean){
+        this._isPrivateRoom = flag;
+    }
+
+    get isPrivateRoom(): boolean{
+        return this._isPrivateRoom;
     }
 }
