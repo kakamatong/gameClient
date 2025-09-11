@@ -97,3 +97,5 @@ export interface GAME_DATA {
     robots?: number[];
     rule?: string;
 }
+
+export const HAND_INDEX = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]

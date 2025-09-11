@@ -1,15 +1,17 @@
 
 import FGUIGameView from '../../../fgui/game10001/FGUIGameView';
+import FGUICompHand from '../../../fgui/game10001/FGUICompHand';
 import { GameSocketManager } from '../../../frameworks/gameSocketManager';
 import { LogColors } from '../../../frameworks/framework';
 import { DataCenter } from '../../../datacenter/datacenter'
 import { GameData } from '../data/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../data/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX} from '../data/interfaceGameConfig';
 import { Match } from '../../../modules/match';
 import { UserStatus } from '../../../modules/userStatus';
 import * as fgui from "fairygui-cc";
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
+    
     onConstruct(){
         super.onConstruct();
         GameData.instance.init();
@@ -83,13 +85,23 @@ export class GameView extends FGUIGameView {
                 // 隐藏按钮和选择
                 this.ctrl_btn.selectedIndex = 0
                 this.UI_GROUP_SELECT.visible = false
+            }else{
+                this.showThinking(false)
             }
             
         }
     }
 
+    showOutHand(local:number, index:number){
+        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${local}`)
+        outHand.ctrl_head.selectedIndex = index
+        outHand.visible = true
+    }
+
     onGameOutHand(data:any):void{
-        
+        const local = GameData.instance.seat2local(data.seat);
+        const index = HAND_INDEX.indexOf(data.flag)
+        this.showOutHand(local, index)
     }
 
     onGameRoundResult(data:any):void{
@@ -227,9 +239,9 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnSure(): void {
-        const flag = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
+        
         this._selectOutHand = this.ctrl_select.selectedIndex
-        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:flag[this._selectOutHand] })
+        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this._selectOutHand] })
     }
 
     onChanged(event: any):void{
