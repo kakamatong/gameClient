@@ -216,5 +216,10 @@ export class GameView extends FGUIGameView {
 
     onBtnPaper(): void {
     }
+
+    onBtnSure(): void {
+        const flag = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
+        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:flag[this.ctrl_select.selectedIndex] })
+    }
 }
 fgui.UIObjectFactory.setExtension(GameView.URL, GameView);
