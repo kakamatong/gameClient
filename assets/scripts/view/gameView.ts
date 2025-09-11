@@ -3,8 +3,8 @@ import FGUIGameView from '../fgui/test/FGUIGameView';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { LogColors } from '../frameworks/framework';
 import { DataCenter } from '../datacenter/datacenter'
-import { GameData } from '../datacenter/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../datacenter/interfaceGameConfig';
+import { GameData } from '../games/game10001/data/gamedata';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG} from '../games/game10001/data/interfaceGameConfig';
 import { Match } from '../modules/match';
 import { UserStatus } from '../modules/userStatus';
 import * as fgui from "fairygui-cc";

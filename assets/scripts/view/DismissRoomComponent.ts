@@ -1,8 +1,8 @@
 import FGUIcompDismissRoom from '../fgui/test/FGUIcompDismissRoom';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
 import { DataCenter } from '../datacenter/datacenter';
-import { GameData } from '../datacenter/gamedata';
-import { VoteInfo, VoteDisbandStartData, VoteDisbandUpdateData, VoteDisbandResultData, VOTE_STATUS } from '../datacenter/interfaceGameConfig';
+import { GameData } from '../games/game10001/data/gamedata';
+import { VoteInfo, VoteDisbandStartData, VoteDisbandUpdateData, VoteDisbandResultData, VOTE_STATUS } from '../games/game10001/data/interfaceGameConfig';
 import { Color } from 'cc';
 import * as fgui from "fairygui-cc";
 
