@@ -4,6 +4,7 @@
     <component id="is911" name="GameView.xml" path="/" exported="true"/>
     <image id="is912" name="game.jpg" path="/imgs/"/>
     <component id="folo3" name="CompHand.xml" path="/comp/"/>
+    <image id="qaf24" name="ready.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -1,4 +1,4 @@
-import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP } from "./interfaceGameConfig";
+import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP, GAME_DATA } from "./interfaceGameConfig";
 
 export class GameData {
     private _playerList: Array<GAME_PLAYER_INFO> = [];
@@ -7,6 +7,7 @@ export class GameData {
     private _roomEnd: boolean = false;
     private _gameStart = false;
     private _isPrivateRoom = false;
+    private _gameData: GAME_DATA | null = null;
     private _playerInfos: Array<GAME_PLAYER_INFO> = [];
     private static _instance: GameData;
     public static get instance(): GameData {
@@ -117,5 +118,13 @@ export class GameData {
 
     get isPrivateRoom(): boolean{
         return this._isPrivateRoom;
+    }
+
+    set gameData(data: GAME_DATA){
+        this._gameData = data;
+    }
+
+    get gameData(): GAME_DATA | null{
+        return this._gameData;
     }
 }

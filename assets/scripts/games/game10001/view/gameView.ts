@@ -19,8 +19,13 @@ export class GameView extends FGUIGameView {
         
         this.initListeners()
     }
+
+    protected onDestroy(): void {
+        super.onDestroy();
+        this.removeListeners();
+    }
+
     show(data:any){
-        
         // 客户端进入完成
         GameSocketManager.instance.sendToServer("clientReady",{})
     }
@@ -57,11 +62,18 @@ export class GameView extends FGUIGameView {
     }
 
     onGameStep(data:any):void{
-        
+        GameData.instance.gameStep = data.stepid;
     }
 
     onGamePlayerAttitude(data:any):void{
-        
+        const local = GameData.instance.seat2local(data.seat);
+        if(data.att == PLAYER_ATTITUDE.THINKING){
+            
+        }else if(data.att == PLAYER_ATTITUDE.READY){
+            this.showSignReady(local)
+        }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
+            
+        }
     }
 
     onGameOutHand(data:any):void{
@@ -101,7 +113,18 @@ export class GameView extends FGUIGameView {
     }
 
     onRoomInfo(data:any):void{
+        console.log(data)
+        // 展示好友房信息
+        if(DataCenter.instance.shortRoomid){
+            const shortRoomid = `${DataCenter.instance.shortRoomid}`
+            //this.UI_TXT_SHORT_ROOMID.text = shortRoomid.padStart(6, '0')
+        }else{
+            //this.UI_TXT_SHORT_ROOMID.visible = false
+        }
+    }
 
+    showSignReady(localSeat:number):void{
+        this.getChild<fgui.GImage>(`UI_IMG_SIGN_READY_${localSeat}`).visible = true
     }
 
     onBtnBack(): void {
