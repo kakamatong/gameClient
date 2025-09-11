@@ -2,20 +2,22 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
-import FGUICompHand from "./FGUICompHand";
-import FGUICompThinkAct from "./FGUICompThinkAct";
 import FGUICompOffline from "./FGUICompOffline";
+import FGUICompThinkAct from "./FGUICompThinkAct";
+import FGUICompHand from "./FGUICompHand";
 
 export default class FGUIGameView extends fgui.GComponent {
 
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
 	public UI_TXT_ID_2:fgui.GTextField;
-	public KW_IMG_SIGN_READY_2:fgui.GImage;
+	public UI_COMP_OFFLINE:FGUICompOffline;
+	public UI_COMP_THINKING:FGUICompThinkAct;
+	public UI_IMG_SIGN_READY_2:fgui.GImage;
 	public UI_GROUP_PLAYER_2:fgui.GGroup;
 	public UI_TXT_NICKNAME_1:fgui.GTextField;
 	public UI_TXT_ID_1:fgui.GTextField;
-	public KW_IMG_SIGN_READY_1:fgui.GImage;
+	public UI_IMG_SIGN_READY_1:fgui.GImage;
 	public UI_GROUP_PLAYER_1:fgui.GGroup;
 	public UI_COMP_OUT_HEAD_1:FGUICompHand;
 	public UI_COMP_OUT_HEAD_2:FGUICompHand;
@@ -25,8 +27,6 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_GROUP_SELECT:fgui.GGroup;
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CHANGE:fgui.GButton;
-	public UI_COMP_THINKING:FGUICompThinkAct;
-	public UI_COMP_OFFLINE:FGUICompOffline;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -70,27 +70,27 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_TXT_NICKNAME_2 = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_ID_2 = <fgui.GTextField>(this.getChildAt(5));
-		this.KW_IMG_SIGN_READY_2 = <fgui.GImage>(this.getChildAt(6));
-		this.UI_GROUP_PLAYER_2 = <fgui.GGroup>(this.getChildAt(7));
-		this.UI_TXT_NICKNAME_1 = <fgui.GTextField>(this.getChildAt(10));
-		this.UI_TXT_ID_1 = <fgui.GTextField>(this.getChildAt(11));
-		this.KW_IMG_SIGN_READY_1 = <fgui.GImage>(this.getChildAt(12));
-		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(13));
-		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(14));
-		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(15));
-		this.UI_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(16));
+		this.UI_COMP_OFFLINE = <FGUICompOffline>(this.getChildAt(6));
+		this.UI_COMP_THINKING = <FGUICompThinkAct>(this.getChildAt(7));
+		this.UI_IMG_SIGN_READY_2 = <fgui.GImage>(this.getChildAt(8));
+		this.UI_GROUP_PLAYER_2 = <fgui.GGroup>(this.getChildAt(9));
+		this.UI_TXT_NICKNAME_1 = <fgui.GTextField>(this.getChildAt(12));
+		this.UI_TXT_ID_1 = <fgui.GTextField>(this.getChildAt(13));
+		this.UI_IMG_SIGN_READY_1 = <fgui.GImage>(this.getChildAt(14));
+		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(15));
+		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(16));
+		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(17));
+		this.UI_BTN_SCISSORS = <fgui.GButton>(this.getChildAt(18));
 		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
-		this.UI_BTN_ROCK = <fgui.GButton>(this.getChildAt(17));
+		this.UI_BTN_ROCK = <fgui.GButton>(this.getChildAt(19));
 		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
-		this.UI_BTN_PAPER = <fgui.GButton>(this.getChildAt(18));
+		this.UI_BTN_PAPER = <fgui.GButton>(this.getChildAt(20));
 		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
-		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(19));
-		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(20));
+		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(21));
+		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(22));
 		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
-		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(21));
+		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(23));
 		this.UI_BTN_CHANGE.onClick(this.onBtnChange, this);
-		this.UI_COMP_THINKING = <FGUICompThinkAct>(this.getChildAt(23));
-		this.UI_COMP_OFFLINE = <FGUICompOffline>(this.getChildAt(24));
 	}
 	onBtnBack():void{};
 	onBtnScissors():void{};
