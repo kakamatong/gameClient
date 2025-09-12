@@ -9,6 +9,7 @@ import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEA
 import { Match } from '../../../modules/match';
 import { UserStatus } from '../../../modules/userStatus';
 import * as fgui from "fairygui-cc";
+import { CompClock } from './comp/compClock';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -67,8 +68,19 @@ export class GameView extends FGUIGameView {
 
     }
 
+    showClock(bshow:boolean, clock?:number):void{
+        if (bshow) {
+            const compClock = this.UI_COMP_CLOCK as CompClock
+            compClock.visible = true;
+            compClock.start(clock || 10);
+        }else{
+            const compClock = this.UI_COMP_CLOCK as CompClock
+            compClock.visible = false;
+        }
+    }
+
     onSvrGameClock(data:any):void{
-        
+        this.showClock(true, data.time)
     }
 
     onGameStep(data:any):void{
@@ -85,6 +97,8 @@ export class GameView extends FGUIGameView {
                 this.showThinking(false)
             }
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
+            // 隐藏时钟
+            this.showClock(false)
             // 隐藏准备标签
             this.showSignReady(local, false)
             if (local == SELF_LOCAL) {
