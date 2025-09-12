@@ -2,7 +2,7 @@
 import FGUIGameView from '../../../fgui/game10001/FGUIGameView';
 import FGUICompHand from '../../../fgui/game10001/FGUICompHand';
 import { GameSocketManager } from '../../../frameworks/gameSocketManager';
-import { ChangeScreen, LogColors } from '../../../frameworks/framework';
+import { ChangeScene, LogColors } from '../../../frameworks/framework';
 import { DataCenter } from '../../../datacenter/datacenter'
 import { GameData } from '../data/gamedata';
 import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX} from '../data/interfaceGameConfig';
@@ -250,7 +250,7 @@ export class GameView extends FGUIGameView {
         if (GameSocketManager.instance.isOpen()) {
             GameSocketManager.instance.close()
         }
-        ChangeScreen('lobbyScene')
+        ChangeScene('lobbyScene')
     }
 
     onBtnBack(): void {
