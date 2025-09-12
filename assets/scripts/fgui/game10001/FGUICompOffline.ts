@@ -33,9 +33,12 @@ export default class FGUICompOffline extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompOffline.instance = null;
+	}
 	public static hideView():void {
 		FGUICompOffline.instance && FGUICompOffline.instance.dispose();
-		FGUICompOffline.instance = null;
 	}
 
 	show(data?:any):void{};

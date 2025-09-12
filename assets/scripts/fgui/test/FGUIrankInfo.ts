@@ -35,9 +35,12 @@ export default class FGUIrankInfo extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIrankInfo.instance = null;
+	}
 	public static hideView():void {
 		FGUIrankInfo.instance && FGUIrankInfo.instance.dispose();
-		FGUIrankInfo.instance = null;
 	}
 
 	show(data?:any):void{};

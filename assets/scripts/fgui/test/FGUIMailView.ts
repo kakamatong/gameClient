@@ -38,9 +38,12 @@ export default class FGUIMailView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIMailView.instance = null;
+	}
 	public static hideView():void {
 		FGUIMailView.instance && FGUIMailView.instance.dispose();
-		FGUIMailView.instance = null;
 	}
 
 	show(data?:any):void{};

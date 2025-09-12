@@ -38,9 +38,12 @@ export default class FGUIcompDismissRoom extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIcompDismissRoom.instance = null;
+	}
 	public static hideView():void {
 		FGUIcompDismissRoom.instance && FGUIcompDismissRoom.instance.dispose();
-		FGUIcompDismissRoom.instance = null;
 	}
 
 	show(data?:any):void{};

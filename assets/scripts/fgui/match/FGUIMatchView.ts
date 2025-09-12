@@ -38,9 +38,12 @@ export default class FGUIMatchView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIMatchView.instance = null;
+	}
 	public static hideView():void {
 		FGUIMatchView.instance && FGUIMatchView.instance.dispose();
-		FGUIMatchView.instance = null;
 	}
 
 	show(data?:any):void{};

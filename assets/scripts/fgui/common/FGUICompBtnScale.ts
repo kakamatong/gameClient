@@ -34,9 +34,12 @@ export default class FGUICompBtnScale extends fgui.GButton {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompBtnScale.instance = null;
+	}
 	public static hideView():void {
 		FGUICompBtnScale.instance && FGUICompBtnScale.instance.dispose();
-		FGUICompBtnScale.instance = null;
 	}
 
 	show(data?:any):void{};

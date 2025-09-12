@@ -41,9 +41,12 @@ export default class FGUILobbyView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUILobbyView.instance = null;
+	}
 	public static hideView():void {
 		FGUILobbyView.instance && FGUILobbyView.instance.dispose();
-		FGUILobbyView.instance = null;
 	}
 
 	show(data?:any):void{};

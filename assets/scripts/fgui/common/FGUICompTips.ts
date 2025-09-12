@@ -33,9 +33,12 @@ export default class FGUICompTips extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompTips.instance = null;
+	}
 	public static hideView():void {
 		FGUICompTips.instance && FGUICompTips.instance.dispose();
-		FGUICompTips.instance = null;
 	}
 
 	show(data?:any):void{};

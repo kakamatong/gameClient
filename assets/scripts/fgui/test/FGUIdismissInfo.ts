@@ -34,9 +34,12 @@ export default class FGUIdismissInfo extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIdismissInfo.instance = null;
+	}
 	public static hideView():void {
 		FGUIdismissInfo.instance && FGUIdismissInfo.instance.dispose();
-		FGUIdismissInfo.instance = null;
 	}
 
 	show(data?:any):void{};

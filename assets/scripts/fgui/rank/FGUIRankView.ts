@@ -35,9 +35,12 @@ export default class FGUIRankView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIRankView.instance = null;
+	}
 	public static hideView():void {
 		FGUIRankView.instance && FGUIRankView.instance.dispose();
-		FGUIRankView.instance = null;
 	}
 
 	show(data?:any):void{};

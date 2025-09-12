@@ -33,9 +33,12 @@ export default class FGUITipsView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUITipsView.instance = null;
+	}
 	public static hideView():void {
 		FGUITipsView.instance && FGUITipsView.instance.dispose();
-		FGUITipsView.instance = null;
 	}
 
 	show(data?:any):void{};

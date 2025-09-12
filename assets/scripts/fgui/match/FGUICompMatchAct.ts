@@ -35,9 +35,12 @@ export default class FGUICompMatchAct extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompMatchAct.instance = null;
+	}
 	public static hideView():void {
 		FGUICompMatchAct.instance && FGUICompMatchAct.instance.dispose();
-		FGUICompMatchAct.instance = null;
 	}
 
 	show(data?:any):void{};

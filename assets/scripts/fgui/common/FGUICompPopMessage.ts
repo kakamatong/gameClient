@@ -39,9 +39,12 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompPopMessage.instance = null;
+	}
 	public static hideView():void {
 		FGUICompPopMessage.instance && FGUICompPopMessage.instance.dispose();
-		FGUICompPopMessage.instance = null;
 	}
 
 	show(data?:any):void{};

@@ -33,9 +33,12 @@ export default class FGUICompClock extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompClock.instance = null;
+	}
 	public static hideView():void {
 		FGUICompClock.instance && FGUICompClock.instance.dispose();
-		FGUICompClock.instance = null;
 	}
 
 	show(data?:any):void{};

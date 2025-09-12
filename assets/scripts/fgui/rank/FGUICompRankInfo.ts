@@ -35,9 +35,12 @@ export default class FGUICompRankInfo extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompRankInfo.instance = null;
+	}
 	public static hideView():void {
 		FGUICompRankInfo.instance && FGUICompRankInfo.instance.dispose();
-		FGUICompRankInfo.instance = null;
 	}
 
 	show(data?:any):void{};

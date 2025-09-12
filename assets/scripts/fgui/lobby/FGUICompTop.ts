@@ -35,9 +35,12 @@ export default class FGUICompTop extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompTop.instance = null;
+	}
 	public static hideView():void {
 		FGUICompTop.instance && FGUICompTop.instance.dispose();
-		FGUICompTop.instance = null;
 	}
 
 	show(data?:any):void{};

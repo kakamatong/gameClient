@@ -36,9 +36,12 @@ export default class FGUIBgActView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIBgActView.instance = null;
+	}
 	public static hideView():void {
 		FGUIBgActView.instance && FGUIBgActView.instance.dispose();
-		FGUIBgActView.instance = null;
 	}
 
 	show(data?:any):void{};

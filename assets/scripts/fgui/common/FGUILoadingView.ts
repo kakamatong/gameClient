@@ -34,9 +34,12 @@ export default class FGUILoadingView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUILoadingView.instance = null;
+	}
 	public static hideView():void {
 		FGUILoadingView.instance && FGUILoadingView.instance.dispose();
-		FGUILoadingView.instance = null;
 	}
 
 	show(data?:any):void{};

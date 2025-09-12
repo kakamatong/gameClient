@@ -35,9 +35,12 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIPopMessageView.instance = null;
+	}
 	public static hideView():void {
 		FGUIPopMessageView.instance && FGUIPopMessageView.instance.dispose();
-		FGUIPopMessageView.instance = null;
 	}
 
 	show(data?:any):void{};

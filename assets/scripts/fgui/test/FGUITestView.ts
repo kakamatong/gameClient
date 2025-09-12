@@ -56,9 +56,12 @@ export default class FGUITestView extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUITestView.instance = null;
+	}
 	public static hideView():void {
 		FGUITestView.instance && FGUITestView.instance.dispose();
-		FGUITestView.instance = null;
 	}
 
 	show(data?:any):void{};

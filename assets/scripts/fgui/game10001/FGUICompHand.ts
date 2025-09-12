@@ -33,9 +33,12 @@ export default class FGUICompHand extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompHand.instance = null;
+	}
 	public static hideView():void {
 		FGUICompHand.instance && FGUICompHand.instance.dispose();
-		FGUICompHand.instance = null;
 	}
 
 	show(data?:any):void{};

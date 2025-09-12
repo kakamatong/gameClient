@@ -33,9 +33,12 @@ export default class FGUICompHead extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompHead.instance = null;
+	}
 	public static hideView():void {
 		FGUICompHead.instance && FGUICompHead.instance.dispose();
-		FGUICompHead.instance = null;
 	}
 
 	show(data?:any):void{};

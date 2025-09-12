@@ -33,9 +33,12 @@ export default class FGUICompThinkAct extends fgui.GComponent {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUICompThinkAct.instance = null;
+	}
 	public static hideView():void {
 		FGUICompThinkAct.instance && FGUICompThinkAct.instance.dispose();
-		FGUICompThinkAct.instance = null;
 	}
 
 	show(data?:any):void{};

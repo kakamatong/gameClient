@@ -84,11 +84,16 @@ function genCode(handler) {
         writer.endBlock();
         writer.writeln();
 
+        writer.writeln('protected onDestroy():void');
+        writer.startBlock();
+        writer.writeln('super.onDestroy();');
+        writer.writeln('%s.instance = null;', classInfo.className);
+        writer.endBlock();
+
         // hideView 用于隐藏，跟showView 是一对
         writer.writeln('public static hideView():void');
         writer.startBlock();
         writer.writeln('%s.instance && %s.instance.dispose();', classInfo.className, classInfo.className);
-        writer.writeln('%s.instance = null;', classInfo.className);
         writer.endBlock();
 
         // show 接口

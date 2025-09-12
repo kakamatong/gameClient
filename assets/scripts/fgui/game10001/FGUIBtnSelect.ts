@@ -33,9 +33,12 @@ export default class FGUIBtnSelect extends fgui.GButton {
 		);
 	}
 
+	protected onDestroy():void {
+		super.onDestroy();
+		FGUIBtnSelect.instance = null;
+	}
 	public static hideView():void {
 		FGUIBtnSelect.instance && FGUIBtnSelect.instance.dispose();
-		FGUIBtnSelect.instance = null;
 	}
 
 	show(data?:any):void{};
