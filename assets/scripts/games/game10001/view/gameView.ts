@@ -12,6 +12,7 @@ import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../view/common/popMessageView';
 import { LobbyView } from '../../../view/lobby/lobbyView';
+import { ENUM_POP_MESSAGE_TYPE } from '../../../datacenter/interfaceConfig';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -260,6 +261,7 @@ export class GameView extends FGUIGameView {
     onBtnBack(): void {
         if (GameData.instance.gameStart) {
             PopMessageView.showView({
+                type:ENUM_POP_MESSAGE_TYPE.NUM1SURE,
                 content: '游戏进行中，无法返回',
             })
         }else{
