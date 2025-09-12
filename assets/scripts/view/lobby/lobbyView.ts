@@ -11,7 +11,6 @@ import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { Rank } from '../../modules/rank';
 import { RankView } from '../rank/rankView';
 import { LoadingView } from '../common/loadingView';
-import { GameView } from '../../games/game10001/view/gameView';
 import { Match } from '../../modules/match';
 import { MatchView } from '../match/matchView';
 import { AuthGame } from '../../modules/authGame';
