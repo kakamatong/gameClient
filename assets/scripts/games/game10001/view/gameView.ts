@@ -10,6 +10,8 @@ import { Match } from '../../../modules/match';
 import { UserStatus } from '../../../modules/userStatus';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
+import { PopMessageView } from '../../../view/common/popMessageView';
+import { LobbyView } from '../../../view/lobby/lobbyView';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -243,8 +245,26 @@ export class GameView extends FGUIGameView {
         }
     }
 
+    changeToLobbyView():void{
+        if (GameSocketManager.instance.isOpen()) {
+            GameSocketManager.instance.close()
+        }
+        const func = (b:boolean)=>{ 
+            if (b) {
+                GameView.hideView()
+            }
+        }
+        LobbyView.showView(null, func)
+    }
+
     onBtnBack(): void {
-        
+        if (GameData.instance.gameStart) {
+            PopMessageView.showView({
+                content: '游戏进行中，无法返回',
+            })
+        }else{
+            this.changeToLobbyView()
+        }
     }
 
     onBtnScissors(): void {
