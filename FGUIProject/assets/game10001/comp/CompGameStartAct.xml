@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="511,449">
+  <displayList>
+    <image id="n0_fnug" name="n0" src="fnugg" fileName="imgs/gameStart.png" xy="0,0" pivot="0.5,0.5"/>
+  </displayList>
+  <transition name="act">
+    <item time="0" type="Scale" target="n0_fnug" tween="true" startValue="0.01,0.01" endValue="1.1,1.1" duration="8"/>
+    <item time="8" type="Scale" target="n0_fnug" tween="true" startValue="1.1,1.1" endValue="1,1" duration="8"/>
+    <item time="37" type="Scale" target="n0_fnug" tween="true" startValue="1,1" endValue="0.01,0.01" duration="12"/>
+  </transition>
+</component>

@@ -69,5 +69,6 @@
     <component id="n36_xr4w" name="UI_COMP_CLOCK" src="qaf26" fileName="comp/CompClock.xml" xy="330,778" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
+    <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="132,619" visible="false"/>
   </displayList>
 </component>
