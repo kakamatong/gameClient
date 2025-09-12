@@ -5,8 +5,8 @@ import { LobbyView } from "../view/lobby/lobbyView";
 import { TestView } from '../view/testView';
 const { ccclass, property } = _decorator;
 
-@ccclass('LobbyScreen')
-export class LobbyScreen extends Component {
+@ccclass('lobbyScreen')
+export class lobbyScreen extends Component {
 
     start() {
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{

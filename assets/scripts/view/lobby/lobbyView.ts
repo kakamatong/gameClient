@@ -1,7 +1,7 @@
 
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
-import { AddEventListener, LogColors, RemoveEventListener } from '../../frameworks/framework';
+import { AddEventListener, ChangeScreen, LogColors, RemoveEventListener } from '../../frameworks/framework';
 import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
@@ -105,7 +105,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnPrivateRoom(): void {
-        
+        this.changeToGameView()
     }
 
     onBtnMails(): void {
@@ -125,12 +125,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     changeToGameView():void{
-        const func = (b:boolean)=>{ 
-            if (b) {
-                LobbyView.hideView()
-            }
-        }
-        GameView.showView(null, func)
+        ChangeScreen('gameScene');
     }
 
     connectToGame(addr:string, gameid:number, roomid:string){

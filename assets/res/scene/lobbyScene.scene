@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "lobbyScreen",
+    "_name": "lobbyScene",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -11,7 +11,7 @@
   },
   {
     "__type__": "cc.Scene",
-    "_name": "lobbyScreen",
+    "_name": "lobbyScene",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -274,7 +274,7 @@
     "_id": "c5V1EV8IpMtrIvY1OE9t2u"
   },
   {
-    "__type__": "729be7rmgFFS4frVrlhuw2J",
+    "__type__": "071c3ftvpxA5Iud3N9+3Jug",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -283,7 +283,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_id": "b8vn6VFSJEe58+lg4uh1zB"
+    "_id": "cflfqFkMpLr78DsjDQIFuR"
   },
   {
     "__type__": "cc.SceneGlobals",
