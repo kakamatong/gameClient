@@ -54,9 +54,9 @@ export function DispatchEvent(eventName:string, ...args:any[]) {
 export const ChangeScreen = (name:string):void => {
     const func = (error:Error|null, scene?:Scene)=>{
         if (!error && scene) {
-            Director.instance.runScene(scene)
+            //Director.instance.runScene(scene)
         }
     }
-    Director.instance.preloadScene(name)
+    //Director.instance.preloadScene(name)
     Director.instance.loadScene(name,func)
 }
