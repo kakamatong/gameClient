@@ -105,7 +105,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnPrivateRoom(): void {
-        this.changeToGameView()
+        this.changeToGameScene()
     }
 
     onBtnMails(): void {
@@ -124,14 +124,14 @@ export class LobbyView extends FGUILobbyView {
         rank.req(func)
     }
 
-    changeToGameView():void{
+    changeToGameScene():void{
         ChangeScreen('gameScene');
     }
 
     connectToGame(addr:string, gameid:number, roomid:string){
         const callBack = (success:boolean)=>{
             if(success){
-                this.changeToGameView()
+                this.changeToGameScene()
             }
         }
         AuthGame.instance.req(addr,gameid, roomid, callBack);
