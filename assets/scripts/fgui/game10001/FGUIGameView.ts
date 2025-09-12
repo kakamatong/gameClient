@@ -6,6 +6,7 @@ import FGUICompOffline from "./FGUICompOffline";
 import FGUICompThinkAct from "./FGUICompThinkAct";
 import FGUICompHand from "./FGUICompHand";
 import FGUIBtnSelect from "./FGUIBtnSelect";
+import FGUICompClock from "./FGUICompClock";
 
 export default class FGUIGameView extends fgui.GComponent {
 
@@ -30,6 +31,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_BTN_ROCK:FGUIBtnSelect;
 	public UI_BTN_SCISSORS:FGUIBtnSelect;
 	public UI_GROUP_SELECT:fgui.GGroup;
+	public UI_COMP_CLOCK:FGUICompClock;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -96,6 +98,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_SCISSORS = <FGUIBtnSelect>(this.getChildAt(23));
 		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
 		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(24));
+		this.UI_COMP_CLOCK = <FGUICompClock>(this.getChildAt(25));
 	}
 	onBtnBack():void{};
 	onBtnSure():void{};

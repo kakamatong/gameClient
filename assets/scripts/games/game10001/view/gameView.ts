@@ -47,6 +47,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
         GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
+        GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
     }
 
     removeListeners():void{ 
@@ -62,7 +63,12 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerEnter");
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
         GameSocketManager.instance.removeServerListen("playerLeave");
+        GameSocketManager.instance.removeServerListen("gameClock");
 
+    }
+
+    onSvrGameClock(data:any):void{
+        
     }
 
     onGameStep(data:any):void{
