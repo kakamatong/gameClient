@@ -5,8 +5,8 @@ import { LobbyView } from "../view/lobby/lobbyView";
 import { TestView } from '../view/testView';
 const { ccclass, property } = _decorator;
 
-@ccclass('splashScreen')
-export class splashScreen extends Component {
+@ccclass('LobbyScreen')
+export class LobbyScreen extends Component {
 
     start() {
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
@@ -22,7 +22,7 @@ export class splashScreen extends Component {
             }
             this.initView();
         });
-        log('splashScreen');
+        log('LobbyScreen');
     }
 
     initView(){
