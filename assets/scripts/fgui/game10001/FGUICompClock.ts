@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUICompClock extends fgui.GComponent {
 
 	public title:fgui.GTextField;
+	public act:fgui.Transition;
 	public static URL:string = "ui://2zsfe53xqaf26";
 
 	public static packageName:string = "game10001";
@@ -49,6 +50,7 @@ export default class FGUICompClock extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.title = <fgui.GTextField>(this.getChildAt(1));
+		this.act = this.getTransitionAt(0);
 	}
 }
 fgui.UIObjectFactory.setExtension(FGUICompClock.URL, FGUICompClock);

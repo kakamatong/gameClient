@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="115,131">
   <displayList>
-    <image id="n0_qaf2" name="n0" src="qaf25" fileName="imgs/clock.png" xy="0,0"/>
+    <image id="n0_qaf2" name="n0" src="qaf25" fileName="imgs/clock.png" xy="0,0" pivot="0.5,0.5"/>
     <text id="n1_qaf2" name="title" xy="24,35" pivot="0.5,0.5" size="66,73" fontSize="55" color="#ff9966" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" singleLine="true" text="99"/>
   </displayList>
+  <transition name="act">
+    <item time="0" type="Rotation" target="n0_qaf2" tween="true" startValue="0" endValue="15" duration="2"/>
+    <item time="2" type="Rotation" target="n0_qaf2" tween="true" startValue="15" endValue="0" duration="2"/>
+    <item time="4" type="Rotation" target="n0_qaf2" tween="true" startValue="0" endValue="-15" duration="2"/>
+    <item time="6" type="Rotation" target="n0_qaf2" tween="true" startValue="-15" endValue="0" duration="2"/>
+  </transition>
 </component>
