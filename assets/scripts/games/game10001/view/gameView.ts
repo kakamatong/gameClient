@@ -74,8 +74,8 @@ export class GameView extends FGUIGameView {
         if(data.att == PLAYER_ATTITUDE.THINKING){
             this.onPlayerThinking(local)
         }else if(data.att == PLAYER_ATTITUDE.READY){
-            this.showSignReady(local, true)
             if (local != SELF_LOCAL) {
+                this.showSignReady(local, true)
                 this.showThinking(false)
             }
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
