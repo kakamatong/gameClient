@@ -52,6 +52,10 @@ export class LobbyView extends FGUILobbyView {
     }
 
     startLogin(){
+        if (LobbySocketManager.instance.isOpen()) {
+            this.updateUserInfo()
+            return
+        }
         LoadingView.showView({content:"登入中..."});
         const func = (b:boolean) => { 
             LoadingView.hideView();
