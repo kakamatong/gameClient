@@ -4,8 +4,9 @@
     <image id="fnugk" name="cup.png" path="/imgs/"/>
     <image id="fnugj" name="star.png" path="/imgs/"/>
     <image id="fnugi" name="iconWin.png" path="/imgs/"/>
-    <component id="fnug0" name="CompResultWin.xml" path="/comp/"/>
+    <component id="fnug0" name="ResultView.xml" path="/" exported="true"/>
     <component id="fnug1" name="CompResultInfo.xml" path="/comp/"/>
+    <component id="fnug2" name="CompAct.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

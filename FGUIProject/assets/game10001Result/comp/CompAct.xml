@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="664,353">
+  <controller name="ctrl_show" pages="0,隐藏,1,显示" selected="0"/>
+  <controller name="ctrl_sign" exported="true" pages="0,失败,1,胜利,2,平局" selected="0"/>
+  <displayList>
+    <image id="n0_fnug" name="n0" src="fnugi" fileName="imgs/iconWin.png" xy="18,33"/>
+    <image id="n1_fnug" name="n1" src="fnugj" fileName="imgs/star.png" xy="4,9" pivot="0.5,0.5">
+      <gearDisplay controller="ctrl_show" pages="1"/>
+    </image>
+    <image id="n2_fnug" name="n2" src="fnugj" fileName="imgs/star.png" xy="31,281" pivot="0.5,0.5" size="57,57" rotation="-15">
+      <gearDisplay controller="ctrl_show" pages="1"/>
+    </image>
+    <image id="n3_fnug" name="n3" src="fnugk" fileName="imgs/cup.png" xy="553,21" pivot="0.5,0.5" size="104,94" rotation="15">
+      <gearDisplay controller="ctrl_show" pages="1"/>
+    </image>
+  </displayList>
+  <transition name="act">
+    <item time="0" type="Rotation" target="n1_fnug" value="0"/>
+    <item time="0" type="Rotation" target="n2_fnug" value="-15"/>
+    <item time="12" type="Rotation" target="n1_fnug" value="15"/>
+    <item time="18" type="Rotation" target="n2_fnug" value="10"/>
+    <item time="22" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="24" type="Rotation" target="n1_fnug" value="0"/>
+    <item time="25" type="Rotation" target="n3_fnug" value="5"/>
+    <item time="28" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="31" type="Rotation" target="n3_fnug" value="5"/>
+    <item time="34" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="36" type="Rotation" target="n1_fnug" value="15"/>
+    <item time="36" type="Rotation" target="n2_fnug" value="-15"/>
+    <item time="40" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="48" type="Rotation" target="n1_fnug" value="0"/>
+  </transition>
+</component>

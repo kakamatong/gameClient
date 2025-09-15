@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <controller name="ctrl_flag" pages="0,失败,1,胜利,2,平局" selected="1">
+    <action type="change_page" fromPage="" toPage="0" objectId="n9_fnug" controller="ctrl_sign" targetPage="0"/>
+    <action type="change_page" fromPage="" toPage="1" objectId="n9_fnug" controller="ctrl_sign" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="2" objectId="n9_fnug" controller="ctrl_sign" targetPage="2"/>
+  </controller>
+  <displayList>
+    <image id="n2_fnug" name="n2" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n7_fnug"/>
+    <component id="n4_fnug" name="UI_BTN_CON" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="407,1094" group="n7_fnug">
+      <property target="title" propertyId="0" value="继续"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <component id="n5_fnug" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="137,1094" size="230,99" group="n7_fnug">
+      <property target="title" propertyId="0" value="返回"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <list id="n6_fnug" name="UI_LV_GAME_INFO" xy="120,661" size="540,364" group="n7_fnug" overflow="scroll" defaultItem="ui://5x18e99vfnug1" autoClearItems="true">
+      <item title="1" name="1"/>
+      <item title="2" name="2"/>
+      <item title="3" name="3"/>
+      <item title="4" name="4"/>
+    </list>
+    <group id="n7_fnug" name="UI_GROP_RESULT" xy="59,449" size="657,789" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+    <component id="n9_fnug" name="UI_COMP_ACT_WIN" src="fnug2" fileName="comp/CompAct.xml" xy="56,287">
+      <gearDisplay controller="ctrl_flag" pages="1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+  </displayList>
+  <transition name="act">
+    <item time="0" type="Alpha" target="n7_fnug" value="0"/>
+    <item time="0" type="XY" target="n9_fnug" value="56,667,0.072,0.395"/>
+    <item time="36" type="Alpha" target="n7_fnug" tween="true" startValue="0" endValue="1" duration="12"/>
+    <item time="36" type="XY" target="n9_fnug" tween="true" startValue="56,667" endValue="56,287" duration="12"/>
+  </transition>
+</component>
