@@ -24,6 +24,7 @@
     <image id="is91q" name="set.png" path="/imgs/"/>
     <image id="fnugv" name="select.png" path="/imgs/" exported="true"/>
     <image id="fnugw" name="select2.png" path="/imgs/" exported="true"/>
+    <component id="fnugx" name="CompBtnCheck.xml" path="/comp/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
