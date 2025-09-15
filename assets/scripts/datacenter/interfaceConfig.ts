@@ -53,6 +53,7 @@ export interface USER_STATUS {
 
 export enum LOCAL_KEY {
     LOGIN_INFO = 'loginInfo',
+    MATCH_AUTO_JOIN = 'matchAutoJoin',
 }
 
 export enum ENUM_POP_MESSAGE_TYPE {

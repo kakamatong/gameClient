@@ -2,13 +2,14 @@
 import FGUIMatchView from '../../fgui/match/FGUIMatchView';
 import * as fgui from "fairygui-cc";
 import { Match } from '../../modules/match';
-import { ENUM_POP_MESSAGE_TYPE } from '../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
 import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { DataCenter } from '../../datacenter/datacenter';
 import { LogColors } from '../../frameworks/framework';
 import { TipsView } from '../common/tipsView';
 import {CompMatchAct} from './comp/compMatchAct';
+import { sys } from 'cc';
 export class MatchView extends FGUIMatchView {
     private _checkID:number = 0;
     private _beCheck:boolean = false;
@@ -16,6 +17,12 @@ export class MatchView extends FGUIMatchView {
         this.ctrl_btn_join.selectedIndex = 0;
         LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
         LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        const bauto = sys.localStorage.getItem(LOCAL_KEY.MATCH_AUTO_JOIN);
+        if (bauto == 'true') {
+            this.UI_BTN_AUTO_CHECK.selected = true; 
+        }else{
+            this.UI_BTN_AUTO_CHECK.selected = false;
+        }
     }
 
     protected onDestroy(): void {
@@ -75,7 +82,19 @@ export class MatchView extends FGUIMatchView {
                 this.node.components[0].schedule(()=>{
                     this.showLeftTime(data.endTime ?? 0)
                 },1)
+
+                if (this.UI_BTN_AUTO_CHECK.selected) {
+                    this.onBtnJoin()
+                }
             }
+        }
+    }
+
+    onBtnAutoCheck(): void {
+        if (this.UI_BTN_AUTO_CHECK.selected) {
+            sys.localStorage.setItem(LOCAL_KEY.MATCH_AUTO_JOIN, 'true');
+        }else{
+            sys.localStorage.setItem(LOCAL_KEY.MATCH_AUTO_JOIN, 'false');
         }
     }
 

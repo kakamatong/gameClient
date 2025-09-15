@@ -11,6 +11,8 @@ export default class FGUIMatchView extends fgui.GComponent {
 	public UI_BTN_JOIN:fgui.GButton;
 	public UI_BTN_CANCEL:fgui.GButton;
 	public UI_COMP_ACT:FGUICompMatchAct;
+	public UI_BTN_AUTO_CHECK:fgui.GButton;
+	public UI_GROUP_AUTO:fgui.GGroup;
 	public static URL:string = "ui://y9gp37x6wfqx0";
 
 	public static packageName:string = "match";
@@ -60,8 +62,12 @@ export default class FGUIMatchView extends fgui.GComponent {
 		this.UI_BTN_CANCEL = <fgui.GButton>(this.getChildAt(4));
 		this.UI_BTN_CANCEL.onClick(this.onBtnCancel, this);
 		this.UI_COMP_ACT = <FGUICompMatchAct>(this.getChildAt(5));
+		this.UI_BTN_AUTO_CHECK = <fgui.GButton>(this.getChildAt(6));
+		this.UI_BTN_AUTO_CHECK.onClick(this.onBtnAutoCheck, this);
+		this.UI_GROUP_AUTO = <fgui.GGroup>(this.getChildAt(8));
 	}
 	onBtnJoin():void{};
 	onBtnCancel():void{};
+	onBtnAutoCheck():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIMatchView.URL, FGUIMatchView);
