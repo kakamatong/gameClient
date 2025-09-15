@@ -10,6 +10,7 @@ import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
 import { ENUM_POP_MESSAGE_TYPE } from '../../../../datacenter/interfaceConfig';
+import { ResultView } from '../result/ResultView';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -125,7 +126,7 @@ export class GameView extends FGUIGameView {
     }
 
     onGameRoundResult(data:any):void{
-        
+        ResultView.showView()
     }
 
     onRoomEnd(data:any):void{

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
-  <controller name="ctrl_flag" pages="0,失败,1,胜利,2,平局" selected="0">
+  <controller name="ctrl_flag" pages="0,失败,1,胜利,2,平局" selected="1">
     <action type="change_page" fromPage="" toPage="0" objectId="n9_fnug" controller="ctrl_sign" targetPage="0"/>
     <action type="change_page" fromPage="" toPage="1" objectId="n9_fnug" controller="ctrl_sign" targetPage="1"/>
     <action type="change_page" fromPage="" toPage="2" objectId="n9_fnug" controller="ctrl_sign" targetPage="2"/>
@@ -26,7 +26,6 @@
     </group>
     <component id="n9_fnug" name="UI_COMP_ACT" src="fnug2" fileName="comp/CompAct.xml" xy="56,287">
       <gearDisplay controller="ctrl_flag" pages="1"/>
-      <relation target="" sidePair="center-center,middle-middle"/>
     </component>
   </displayList>
   <transition name="act">

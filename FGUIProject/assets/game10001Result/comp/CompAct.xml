@@ -14,7 +14,7 @@
       <gearDisplay controller="ctrl_show" pages="1"/>
     </image>
   </displayList>
-  <transition name="act">
+  <transition name="act" autoPlay="true" autoPlayRepeat="-1">
     <item time="0" type="Rotation" target="n1_fnug" value="0"/>
     <item time="0" type="Rotation" target="n2_fnug" value="-15"/>
     <item time="12" type="Rotation" target="n1_fnug" value="15"/>
