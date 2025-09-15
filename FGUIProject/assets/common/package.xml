@@ -22,6 +22,8 @@
     <component id="is91o" name="LoadingView.xml" path="/" exported="true"/>
     <image id="is91p" name="back.png" path="/imgs/" exported="true"/>
     <image id="is91q" name="set.png" path="/imgs/"/>
+    <image id="fnugv" name="select.png" path="/imgs/" exported="true"/>
+    <image id="fnugw" name="select2.png" path="/imgs/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
