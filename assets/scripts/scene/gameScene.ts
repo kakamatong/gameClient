@@ -1,6 +1,6 @@
 import { _decorator, Component} from 'cc';
 import * as fgui from "fairygui-cc";
-import { GameView } from '../games/game10001/view/gameView';
+import { GameView } from '../games/game10001/view/game/gameView';
 const { ccclass, property } = _decorator;
 
 @ccclass('gameScreen')

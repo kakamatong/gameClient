@@ -1,5 +1,5 @@
 
-import FGUICompClock from '../../../../fgui/game10001/FGUICompClock';
+import FGUICompClock from '../../../../../fgui/game10001/FGUICompClock';
 import * as fgui from "fairygui-cc";
 export class CompClock extends FGUICompClock {
     private _scheid:((dt:number)=>void) | null = null;
