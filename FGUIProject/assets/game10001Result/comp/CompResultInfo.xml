@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="540,100">
+  <displayList>
+    <text id="n0_fnug" name="title" xy="0,24" size="192,49" fontSize="36" color="#ffffff" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text=""/>
+    <text id="n1_fnug" name="score" xy="346,25" size="192,49" fontSize="36" color="#ffffff" align="right" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text=""/>
+  </displayList>
+</component>
