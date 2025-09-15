@@ -11,7 +11,7 @@ export default class FGUIResultView extends fgui.GComponent {
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_LV_GAME_INFO:fgui.GList;
 	public UI_GROP_RESULT:fgui.GGroup;
-	public UI_COMP_ACT_WIN:FGUICompAct;
+	public UI_COMP_ACT:FGUICompAct;
 	public act:fgui.Transition;
 	public static URL:string = "ui://5x18e99vfnug0";
 
@@ -62,7 +62,7 @@ export default class FGUIResultView extends fgui.GComponent {
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_LV_GAME_INFO = <fgui.GList>(this.getChildAt(3));
 		this.UI_GROP_RESULT = <fgui.GGroup>(this.getChildAt(4));
-		this.UI_COMP_ACT_WIN = <FGUICompAct>(this.getChildAt(5));
+		this.UI_COMP_ACT = <FGUICompAct>(this.getChildAt(5));
 		this.act = this.getTransitionAt(0);
 	}
 	onBtnCon():void{};
