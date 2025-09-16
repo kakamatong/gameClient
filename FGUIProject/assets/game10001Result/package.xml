@@ -7,6 +7,8 @@
     <component id="fnug0" name="ResultView.xml" path="/" exported="true"/>
     <component id="fnug1" name="CompResultInfo.xml" path="/comp/"/>
     <component id="fnug2" name="CompAct.xml" path="/comp/"/>
+    <image id="dkp3l" name="iconLose.png" path="/imgs/"/>
+    <image id="dkp3m" name="l.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

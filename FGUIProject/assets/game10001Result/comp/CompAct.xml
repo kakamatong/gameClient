@@ -3,31 +3,66 @@
   <controller name="ctrl_show" pages="0,隐藏,1,显示" selected="0"/>
   <controller name="ctrl_sign" exported="true" pages="0,失败,1,胜利,2,平局" selected="0"/>
   <displayList>
-    <image id="n0_fnug" name="n0" src="fnugi" fileName="imgs/iconWin.png" xy="18,33"/>
-    <image id="n1_fnug" name="n1" src="fnugj" fileName="imgs/star.png" xy="4,9" pivot="0.5,0.5">
+    <loader id="n4_dkp3" name="n4" xy="18,33" size="642,286" url="ui://5x18e99vdkp3l" autoSize="true">
+      <gearIcon controller="ctrl_sign" pages="0" values="ui://5x18e99vdkp3l" default="ui://5x18e99vfnugi"/>
+    </loader>
+    <image id="n1_fnug" name="n1" src="fnugj" fileName="imgs/star.png" xy="4,9" pivot="0.5,0.5" group="n5_dkp3">
       <gearDisplay controller="ctrl_show" pages="1"/>
+      <gearDisplay2 controller="ctrl_sign" pages="1" condition="0"/>
     </image>
-    <image id="n2_fnug" name="n2" src="fnugj" fileName="imgs/star.png" xy="31,281" pivot="0.5,0.5" size="57,57" rotation="-15">
+    <image id="n2_fnug" name="n2" src="fnugj" fileName="imgs/star.png" xy="31,281" pivot="0.5,0.5" size="57,57" group="n5_dkp3" rotation="-15">
       <gearDisplay controller="ctrl_show" pages="1"/>
+      <gearDisplay2 controller="ctrl_sign" pages="1" condition="0"/>
     </image>
-    <image id="n3_fnug" name="n3" src="fnugk" fileName="imgs/cup.png" xy="553,21" pivot="0.5,0.5" size="104,94" rotation="15">
+    <image id="n3_fnug" name="n3" src="fnugk" fileName="imgs/cup.png" xy="553,21" pivot="0.5,0.5" size="104,94" group="n5_dkp3" rotation="15">
       <gearDisplay controller="ctrl_show" pages="1"/>
+      <gearDisplay2 controller="ctrl_sign" pages="1" condition="0"/>
     </image>
+    <group id="n5_dkp3" name="n5" xy="4,9" size="653,329"/>
+    <image id="n6_dkp3" name="n6" src="dkp3m" fileName="imgs/l.png" xy="607,6" pivot="0.5,0.5" group="n8_dkp3">
+      <gearDisplay controller="ctrl_show" pages="1"/>
+      <gearDisplay2 controller="ctrl_sign" pages="0" condition="0"/>
+    </image>
+    <image id="n7_dkp3" name="n7" src="dkp3m" fileName="imgs/l.png" xy="586,28" pivot="0.5,0.5" size="27,40" group="n8_dkp3">
+      <gearDisplay controller="ctrl_show" pages="1"/>
+      <gearDisplay2 controller="ctrl_sign" pages="0" condition="0"/>
+    </image>
+    <group id="n8_dkp3" name="n8" xy="586,6" size="67,69"/>
   </displayList>
   <transition name="act" autoPlay="true" autoPlayRepeat="-1">
     <item time="0" type="Rotation" target="n1_fnug" value="0"/>
     <item time="0" type="Rotation" target="n2_fnug" value="-15"/>
+    <item time="0" type="Rotation" target="n6_dkp3" value="0"/>
+    <item time="0" type="Rotation" target="n7_dkp3" value="0"/>
+    <item time="5" type="Rotation" target="n7_dkp3" value="10"/>
+    <item time="6" type="Rotation" target="n6_dkp3" value="15"/>
+    <item time="10" type="Rotation" target="n7_dkp3" value="0"/>
     <item time="12" type="Rotation" target="n1_fnug" value="15"/>
+    <item time="12" type="Rotation" target="n6_dkp3" value="0"/>
+    <item time="15" type="Rotation" target="n7_dkp3" value="10"/>
     <item time="18" type="Rotation" target="n2_fnug" value="10"/>
+    <item time="18" type="Rotation" target="n6_dkp3" value="15"/>
+    <item time="20" type="Rotation" target="n7_dkp3" value="0"/>
     <item time="22" type="Rotation" target="n3_fnug" value="15"/>
     <item time="24" type="Rotation" target="n1_fnug" value="0"/>
+    <item time="24" type="Rotation" target="n6_dkp3" value="0"/>
     <item time="25" type="Rotation" target="n3_fnug" value="5"/>
+    <item time="25" type="Rotation" target="n7_dkp3" value="10"/>
     <item time="28" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="30" type="Rotation" target="n6_dkp3" value="15"/>
+    <item time="30" type="Rotation" target="n7_dkp3" value="0"/>
     <item time="31" type="Rotation" target="n3_fnug" value="5"/>
     <item time="34" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="35" type="Rotation" target="n7_dkp3" value="10"/>
     <item time="36" type="Rotation" target="n1_fnug" value="15"/>
     <item time="36" type="Rotation" target="n2_fnug" value="-15"/>
+    <item time="36" type="Rotation" target="n6_dkp3" value="0"/>
     <item time="40" type="Rotation" target="n3_fnug" value="15"/>
+    <item time="40" type="Rotation" target="n7_dkp3" value="0"/>
+    <item time="42" type="Rotation" target="n6_dkp3" value="15"/>
+    <item time="45" type="Rotation" target="n7_dkp3" value="10"/>
     <item time="48" type="Rotation" target="n1_fnug" value="0"/>
+    <item time="48" type="Rotation" target="n6_dkp3" value="0"/>
+    <item time="50" type="Rotation" target="n7_dkp3" value="0"/>
   </transition>
 </component>
