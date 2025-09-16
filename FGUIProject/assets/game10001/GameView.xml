@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏" selected="3"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏" selected="0"/>
   <displayList>
-    <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0" visible="false">
+    <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
