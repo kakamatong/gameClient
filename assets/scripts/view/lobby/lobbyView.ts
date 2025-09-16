@@ -15,6 +15,7 @@ import { Match } from '../../modules/match';
 import { MatchView } from '../match/matchView';
 import { AuthGame } from '../../modules/authGame';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
+import { MailView } from '../mail/mailView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -111,6 +112,7 @@ export class LobbyView extends FGUILobbyView {
 
     onBtnMails(): void {
         //
+        MailView.showView()
     }
 
     onBtnRank(): void {
