@@ -367,7 +367,6 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnSure(): void {
-        
         this._selectOutHand = this.ctrl_select.selectedIndex
         GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this._selectOutHand] })
     }
