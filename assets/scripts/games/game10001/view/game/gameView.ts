@@ -332,6 +332,7 @@ export class GameView extends FGUIGameView {
     onPlayerThinking(localSeat:number):void {
         if (localSeat == SELF_LOCAL) {
             this.UI_GROUP_SELECT.visible = true
+            this.ctrl_btn.selectedIndex = 1
         }else{
             this.showThinking(true)
         }
