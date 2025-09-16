@@ -25,6 +25,7 @@
     <image id="fnugv" name="select.png" path="/imgs/" exported="true"/>
     <image id="fnugw" name="select2.png" path="/imgs/" exported="true"/>
     <component id="fnugx" name="CompBtnCheck.xml" path="/comp/" exported="true"/>
+    <image id="gd4ty" name="strip.png" path="/imgs/" exported="true" scale="9grid" scale9grid="23,17,46,34"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

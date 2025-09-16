@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="8lqwicsu">
+  <resources>
+    <component id="gd4t0" name="MailView.xml" path="/" exported="true"/>
+    <component id="gd4t1" name="CompMailTitle.xml" path="/comp/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

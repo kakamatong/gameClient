@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="580,120">
+  <controller name="ctrl_read" pages="0,未读,1,已读" selected="0"/>
+  <displayList>
+    <image id="n0_gd4t" name="n0" src="gd4ty" fileName="imgs/strip.png" pkg="gj0r6g5i" xy="0,0" size="580,120"/>
+    <text id="n1_gd4t" name="UI_TXT_TITLE" xy="16,10" size="549,54" fontSize="40" color="#ffffff" vAlign="middle" autoSize="shrink" strokeColor="#000000" singleLine="true" text="标题标题标题标题标题"/>
+    <text id="n2_gd4t" name="n2" xy="16,78" size="56,36" fontSize="26" color="#cccccc" vAlign="middle" strokeColor="#000000" text="未读">
+      <gearColor controller="ctrl_read" pages="0" values="#cccccc,#000000" default="#33cc33,#000000"/>
+      <gearText controller="ctrl_read" pages="1" values="已读" default="未读"/>
+    </text>
+    <text id="n3_gd4t" name="UI_TXT_TIME" xy="505,78" pivot="1,0" size="60,36" fontSize="26" color="#cccccc" align="right" vAlign="middle" strokeColor="#000000" text="time">
+      <gearColor controller="ctrl_read" pages="0,1" values="#cccccc,#000000|#999999,#000000"/>
+      <gearText controller="ctrl_read" pages="0,1" values="time|已读"/>
+    </text>
+  </displayList>
+</component>

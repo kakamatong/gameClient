@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <controller name="ctrl_have" pages="0,没有邮件,1,有邮件" selected="1"/>
+  <displayList>
+    <graph id="n7_gd4t" name="n7" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <image id="n0_gd4t" name="n0" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n6_gd4t"/>
+    <text id="n1_gd4t" name="n1" xy="336,493" pivot="0.5,0.5" size="104,66" group="n6_gd4t" fontSize="50" color="#ffffff" strokeColor="#000000" strokeSize="2" text="邮件"/>
+    <image id="n2_gd4t" name="n2" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="90,582" size="595,616" group="n6_gd4t"/>
+    <component id="n3_gd4t" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,461" group="n6_gd4t"/>
+    <list id="n4_gd4t" name="UI_LV_LIST" xy="90,583" size="595,616" group="n6_gd4t" overflow="scroll" margin="7,7,7,0" lineGap="10" defaultItem="ui://8lqwicsugd4t1" align="center" autoClearItems="true">
+      <gearDisplay controller="ctrl_have" pages="1"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <text id="n5_gd4t" name="n5" xy="311,813" size="154,66" group="n6_gd4t" fontSize="50" color="#ffffff" strokeColor="#000000" text="无邮件">
+      <gearDisplay controller="ctrl_have" pages="0"/>
+    </text>
+    <group id="n6_gd4t" name="n6" xy="59,449" size="657,789" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+</component>
