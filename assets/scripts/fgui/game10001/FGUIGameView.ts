@@ -28,6 +28,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_COMP_OUT_HEAD_2:FGUICompHand;
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CHANGE:fgui.GButton;
+	public UI_BTN_CONTINUE:fgui.GButton;
 	public UI_BTN_PAPER:FGUIBtnSelect;
 	public UI_BTN_ROCK:FGUIBtnSelect;
 	public UI_BTN_SCISSORS:FGUIBtnSelect;
@@ -96,19 +97,22 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
 		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(19));
 		this.UI_BTN_CHANGE.onClick(this.onBtnChange, this);
-		this.UI_BTN_PAPER = <FGUIBtnSelect>(this.getChildAt(21));
+		this.UI_BTN_CONTINUE = <fgui.GButton>(this.getChildAt(20));
+		this.UI_BTN_CONTINUE.onClick(this.onBtnContinue, this);
+		this.UI_BTN_PAPER = <FGUIBtnSelect>(this.getChildAt(22));
 		this.UI_BTN_PAPER.onClick(this.onBtnPaper, this);
-		this.UI_BTN_ROCK = <FGUIBtnSelect>(this.getChildAt(22));
+		this.UI_BTN_ROCK = <FGUIBtnSelect>(this.getChildAt(23));
 		this.UI_BTN_ROCK.onClick(this.onBtnRock, this);
-		this.UI_BTN_SCISSORS = <FGUIBtnSelect>(this.getChildAt(23));
+		this.UI_BTN_SCISSORS = <FGUIBtnSelect>(this.getChildAt(24));
 		this.UI_BTN_SCISSORS.onClick(this.onBtnScissors, this);
-		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(24));
-		this.UI_COMP_CLOCK = <FGUICompClock>(this.getChildAt(25));
-		this.UI_COMP_GAME_START = <FGUICompGameStartAct>(this.getChildAt(26));
+		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(25));
+		this.UI_COMP_CLOCK = <FGUICompClock>(this.getChildAt(26));
+		this.UI_COMP_GAME_START = <FGUICompGameStartAct>(this.getChildAt(27));
 	}
 	onBtnBack():void{};
 	onBtnSure():void{};
 	onBtnChange():void{};
+	onBtnContinue():void{};
 	onBtnPaper():void{};
 	onBtnRock():void{};
 	onBtnScissors():void{};

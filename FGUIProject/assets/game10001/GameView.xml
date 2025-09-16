@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换" selected="0"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏" selected="3"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0" visible="false">
       <relation target="" sidePair="width-width,height-height"/>
@@ -44,6 +44,10 @@
     <component id="n22_folo" name="UI_BTN_CHANGE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="514,1452" group="n23_folo" controller="ctrl_color,1">
       <gearDisplay controller="ctrl_btn" pages="2"/>
       <property target="title" propertyId="0" value="更换"/>
+    </component>
+    <component id="n38_dkp3" name="UI_BTN_CONTINUE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="513,1451" group="n23_folo" controller="ctrl_color,0">
+      <gearDisplay controller="ctrl_btn" pages="3"/>
+      <property target="title" propertyId="0" value="继续游戏"/>
     </component>
     <group id="n23_folo" name="n23" xy="513,1451" size="231,100" advanced="true">
       <relation target="" sidePair="right-right,bottom-bottom"/>
