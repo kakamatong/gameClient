@@ -71,6 +71,7 @@ export class LobbyView extends FGUILobbyView {
     updateUserInfo():void{
         this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`
+        this.UI_COMP_TOP.UI_COMP_HEAD.UI_LOADER_HEAD.url = DataCenter.instance.headurl
     }
 
     onUserInfo(data:any):void{

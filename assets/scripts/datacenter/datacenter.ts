@@ -1,4 +1,4 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL } from "./interfaceConfig";
 import { sys,resources } from "cc";
 
 /**
@@ -154,6 +154,14 @@ export class DataCenter {
 
     get userData():USER_DATA | null{
         return this._userData;
+    }
+
+    get headurl():string {
+        if(!this._userData?.headurl){
+            return DEFAULT_HEADURL
+        }else{
+            return this._userData?.headurl
+        }
     }
 
     set userRiches(data:Array<{richType:number, richNums:number}>) {

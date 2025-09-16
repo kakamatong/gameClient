@@ -62,3 +62,5 @@ export enum ENUM_POP_MESSAGE_TYPE {
     NUM1CANCEL = 2, // 1个按钮 取消
     NUM0 = 3, // 无按钮
 }
+
+export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
