@@ -28,6 +28,7 @@ export class GameView extends FGUIGameView {
     init(){
         GameData.instance.init();
         GameData.instance.maxPlayer = 2;
+        this._selectOutHand = -1
         if(DataCenter.instance.shortRoomid){
             GameData.instance.isPrivateRoom = true;
         }
@@ -130,6 +131,11 @@ export class GameView extends FGUIGameView {
         outHand.visible = true
     }
 
+    hideOutHand(local:number){
+        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${local}`)
+        outHand.visible = false
+    }
+
     onGameOutHand(data:any):void{
         const local = GameData.instance.seat2local(data.seat);
         const index = HAND_INDEX.indexOf(data.flag)
@@ -158,6 +164,14 @@ export class GameView extends FGUIGameView {
         this.ctrl_btn.selectedIndex = 3;
     }
 
+    clear():void{
+        for (let index = 0; index < GameData.instance.maxPlayer; index++) {
+            this.hideOutHand(index + 1)
+        }
+        this.ctrl_btn.selectedIndex = 0
+        this._selectOutHand = -1
+    }
+
     // 继续游戏
     onBtnContinue(): void {
         if (GameData.instance.gameStart) {
@@ -184,6 +198,7 @@ export class GameView extends FGUIGameView {
         const callBack = (success:boolean)=>{
             if(success){
                 //this.changeToGameScene()
+                this.clear()
                 this.init()
                 GameSocketManager.instance.sendToServer("clientReady",{})
             }
