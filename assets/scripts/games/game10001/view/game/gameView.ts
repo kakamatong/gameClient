@@ -179,6 +179,7 @@ export class GameView extends FGUIGameView {
         Match.instance.req(0,func);
     }
 
+    // 游戏区匹配：连接游戏服务
     connectToGame(addr:string, gameid:number, roomid:string){
         const callBack = (success:boolean)=>{
             if(success){
@@ -190,8 +191,10 @@ export class GameView extends FGUIGameView {
         AuthGame.instance.req(addr,gameid, roomid, callBack);
     }
 
+    // 游戏区匹配：收到房间准备就绪
     onSvrGameRoomReady(data:any):void{
         console.log("gameRoomReady",data)
+        MatchView.hideView();
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
         DataCenter.instance.gameAddr = data.addr;
