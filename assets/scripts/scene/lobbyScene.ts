@@ -2,8 +2,7 @@ import { _decorator, Component, log,sys,assetManager,resources,AssetManager, Jso
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
-import { TestView } from '../view/testView';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('lobbyScreen')
 export class lobbyScreen extends Component {
@@ -36,7 +35,6 @@ export class lobbyScreen extends Component {
             }
 
             LobbyView.showView()
-            //TestView.showView()
         })
     }
 
