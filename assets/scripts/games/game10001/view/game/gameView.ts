@@ -11,11 +11,12 @@ import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
 import { ENUM_POP_MESSAGE_TYPE } from '../../../../datacenter/interfaceConfig';
 import { ResultView } from '../result/ResultView';
-import { UserStatus } from 'db://assets/scripts/modules/userStatus';
-import { MatchView } from 'db://assets/scripts/view/match/matchView';
-import { Match } from 'db://assets/scripts/modules/match';
-import { LobbySocketManager } from 'db://assets/scripts/frameworks/lobbySocketManager';
-import { AuthGame } from 'db://assets/scripts/modules/authGame';
+import { UserStatus } from '../../../../modules/userStatus';
+import { MatchView } from '../../../../view/match/matchView';
+import { Match } from '../../../..//modules/match';
+import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
+import { AuthGame } from '../../../../modules/authGame';
+import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -292,8 +293,11 @@ export class GameView extends FGUIGameView {
         const player = GameData.instance.playerList[localseat];
         const nicknanme = this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`);
         const id = this.getChild<fgui.GTextField>(`UI_TXT_ID_${localseat}`)
+        const head = this.getChild<FGUICompHead>(`UI_COMP_HEAD_${localseat}`)
+        //const head = this.UI_COMP_HEAD_1
         nicknanme.text = player.nickname ?? "";
         id.text = player.userid.toString();
+        head.UI_LOADER_HEAD.url = GameData.instance.getHeadurl(localseat)
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
                 this.showOffLine(true)

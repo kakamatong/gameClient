@@ -1,3 +1,4 @@
+import { DEFAULT_HEADURL } from "../../../datacenter/interfaceConfig";
 import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP, GAME_DATA } from "./interfaceGameConfig";
 
 export class GameData {
@@ -54,6 +55,13 @@ export class GameData {
 
     get playerList(): Array<GAME_PLAYER_INFO>{
         return this._playerList;
+    }
+
+    getHeadurl(localSeat:number):string{
+        if (!this._playerList[localSeat].headurl) {
+            return DEFAULT_HEADURL
+        }
+        return  this._playerList[localSeat].headurl
     }
 
     seat2local(seat: number): number {
