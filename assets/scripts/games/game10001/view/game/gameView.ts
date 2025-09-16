@@ -11,6 +11,7 @@ import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
 import { ENUM_POP_MESSAGE_TYPE } from '../../../../datacenter/interfaceConfig';
 import { ResultView } from '../result/ResultView';
+import { UserStatus } from 'db://assets/scripts/modules/userStatus';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -126,7 +127,19 @@ export class GameView extends FGUIGameView {
     }
 
     onGameRoundResult(data:any):void{
-        ResultView.showView()
+        const selfSeat = GameData.instance.getSelfSeat()
+        if (data.info && data.info.length > 0){
+            for (let i = 0; i < data.info.length; i++){
+                const info = data.info[i];
+                if(info.seat == selfSeat){
+                    ResultView.showView({flag: info.endResult})
+                    break
+                }
+            }
+        }
+
+        const userStatus = new UserStatus()
+        userStatus.req()
     }
 
     onRoomEnd(data:any):void{

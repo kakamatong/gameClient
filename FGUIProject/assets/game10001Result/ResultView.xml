@@ -27,9 +27,7 @@
     <group id="n7_fnug" name="UI_GROP_RESULT" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
-    <component id="n9_fnug" name="UI_COMP_ACT" src="fnug2" fileName="comp/CompAct.xml" xy="56,287">
-      <gearDisplay controller="ctrl_flag" pages="1"/>
-    </component>
+    <component id="n9_fnug" name="UI_COMP_ACT" src="fnug2" fileName="comp/CompAct.xml" xy="56,287"/>
   </displayList>
   <transition name="act">
     <item time="0" type="Alpha" target="n7_fnug" value="0"/>
