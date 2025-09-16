@@ -12,7 +12,7 @@ export class RankView extends FGUIRankView {
             this._data = JSON.parse(data.rankList);
             this.UI_LV_RANK.numItems = this._data.length;
             this._selfRank = data.rank ?? 999999;
-            this.UI_TXT_SELF_RANK.text = `${this._selfRank == 999999 ? '未上榜' : this._selfRank}`
+            this.UI_TXT_SELF_RANK.text = `${this._selfRank == 999999 ? '未上榜' : this._selfRank + 1}`
         }
     }
 
