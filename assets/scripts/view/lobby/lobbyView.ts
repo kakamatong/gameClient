@@ -58,7 +58,7 @@ export class LobbyView extends FGUILobbyView {
             this.updateUserInfo()
             return
         }
-        LoadingView.showView({content:"登入中..."});
+        LoadingView.showView({content:"登入中...", time:12});
         const func = (b:boolean) => { 
             LoadingView.hideView();
             if (!b) {
@@ -108,7 +108,9 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnPrivateRoom(): void {
-        this.changeToGameScene()
+        //this.changeToGameScene()
+        //LoadingView.showView({content:"正在开发中...", time:12});
+        TipsView.showView({content:"正在开发中..."});
     }
 
     onBtnMails(): void {
@@ -121,7 +123,7 @@ export class LobbyView extends FGUILobbyView {
                 TipsView.showView({content:`拉取邮件数据失败`})
             }
         })  
-        LoadingView.showView({content:"拉取数据中..."});
+        LoadingView.showView({content:"拉取数据中...", time:12});
     }
 
     onBtnRank(): void {
@@ -135,7 +137,7 @@ export class LobbyView extends FGUILobbyView {
         }
         const rank = new Rank()
         rank.req(func)
-        LoadingView.showView({content:"拉取数据中..."});
+        LoadingView.showView({content:"拉取数据中...", time:12});
     }
 
     changeToGameScene():void{
