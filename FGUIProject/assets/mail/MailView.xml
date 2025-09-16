@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
-  <controller name="ctrl_have" pages="0,没有邮件,1,有邮件" selected="1"/>
+  <controller name="ctrl_have" pages="0,没有邮件,1,有邮件" selected="0"/>
   <displayList>
     <graph id="n7_gd4t" name="n7" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -22,5 +22,6 @@
     <group id="n6_gd4t" name="n6" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
+    <component id="n8_gd4t" name="UI_COMP_CONTENT" src="gd4t2" fileName="comp/CompMailContent.xml" xy="59,449" visible="false"/>
   </displayList>
 </component>

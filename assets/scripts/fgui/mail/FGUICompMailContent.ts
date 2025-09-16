@@ -2,22 +2,19 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
-import FGUICompMailContent from "./FGUICompMailContent";
 
-export default class FGUIMailView extends fgui.GComponent {
+export default class FGUICompMailContent extends fgui.GComponent {
 
-	public ctrl_have:fgui.Controller;
 	public UI_BTN_CLOSE:fgui.GButton;
-	public UI_LV_LIST:fgui.GList;
-	public UI_COMP_CONTENT:FGUICompMailContent;
-	public static URL:string = "ui://8lqwicsugd4t0";
+	public title:fgui.GTextField;
+	public static URL:string = "ui://8lqwicsugd4t2";
 
 	public static packageName:string = "mail";
 
 	public static instance:any | null = null;
 
 	public static showView(params?:any, callBack?:(b:boolean)=>void):void {
-		if(FGUIMailView.instance) {
+		if(FGUICompMailContent.instance) {
 			console.log("allready show");
 			callBack&&callBack(false);
 			return;
@@ -26,10 +23,10 @@ export default class FGUIMailView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
-			const view = fgui.UIPackage.createObject("mail", "MailView") as FGUIMailView;
+			const view = fgui.UIPackage.createObject("mail", "CompMailContent") as FGUICompMailContent;
 
 			view.makeFullScreen();
-			FGUIMailView.instance = view;
+			FGUICompMailContent.instance = view;
 			fgui.GRoot.inst.addChild(view);
 			view.show && view.show(params);
 			callBack&&callBack(true);
@@ -39,25 +36,23 @@ export default class FGUIMailView extends fgui.GComponent {
 
 	protected onDestroy():void {
 		super.onDestroy();
-		FGUIMailView.instance = null;
+		FGUICompMailContent.instance = null;
 	}
 	public static hideView():void {
-		FGUIMailView.instance && FGUIMailView.instance.dispose();
+		FGUICompMailContent.instance && FGUICompMailContent.instance.dispose();
 	}
 
 	show(data?:any):void{};
 
-	public static createInstance():FGUIMailView {
-		return <FGUIMailView>(fgui.UIPackage.createObject("mail", "MailView"));
+	public static createInstance():FGUICompMailContent {
+		return <FGUICompMailContent>(fgui.UIPackage.createObject("mail", "CompMailContent"));
 	}
 
 	protected onConstruct():void {
-		this.ctrl_have = this.getControllerAt(0);
-		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(4));
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
-		this.UI_LV_LIST = <fgui.GList>(this.getChildAt(5));
-		this.UI_COMP_CONTENT = <FGUICompMailContent>(this.getChildAt(8));
+		this.title = <fgui.GTextField>(this.getChildAt(3));
 	}
 	onBtnClose():void{};
 }
-fgui.UIObjectFactory.setExtension(FGUIMailView.URL, FGUIMailView);
+fgui.UIObjectFactory.setExtension(FGUICompMailContent.URL, FGUICompMailContent);

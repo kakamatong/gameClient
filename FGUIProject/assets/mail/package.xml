@@ -3,6 +3,7 @@
   <resources>
     <component id="gd4t0" name="MailView.xml" path="/" exported="true"/>
     <component id="gd4t1" name="CompMailTitle.xml" path="/comp/"/>
+    <component id="gd4t2" name="CompMailContent.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
