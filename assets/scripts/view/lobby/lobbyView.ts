@@ -113,6 +113,7 @@ export class LobbyView extends FGUILobbyView {
 
     onBtnMails(): void {
         Mail.instance.list((success:boolean, data?:any)=>{
+            LoadingView.hideView();
             if(success){
                 console.log(LogColors.green(data));
                 MailView.showView(data)
@@ -120,10 +121,12 @@ export class LobbyView extends FGUILobbyView {
                 TipsView.showView({content:`拉取邮件数据失败`})
             }
         })  
+        LoadingView.showView({content:"拉取数据中..."});
     }
 
     onBtnRank(): void {
         const func = (b:boolean, data:any) => { 
+            LoadingView.hideView();
             if (b) {
                 RankView.showView(data)
             }else{
@@ -132,6 +135,7 @@ export class LobbyView extends FGUILobbyView {
         }
         const rank = new Rank()
         rank.req(func)
+        LoadingView.showView({content:"拉取数据中..."});
     }
 
     changeToGameScene():void{
