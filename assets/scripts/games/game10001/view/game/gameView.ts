@@ -12,6 +12,8 @@ import { PopMessageView } from '../../../../view/common/popMessageView';
 import { ENUM_POP_MESSAGE_TYPE } from '../../../../datacenter/interfaceConfig';
 import { ResultView } from '../result/ResultView';
 import { UserStatus } from 'db://assets/scripts/modules/userStatus';
+import { MatchView } from 'db://assets/scripts/view/match/matchView';
+import { Match } from 'db://assets/scripts/modules/match';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -140,6 +142,30 @@ export class GameView extends FGUIGameView {
 
         const userStatus = new UserStatus()
         userStatus.req()
+
+        // 显示继续游戏
+        this.ctrl_btn.selectedIndex = 3;
+    }
+
+    // 继续游戏
+    onBtnContinue(): void {
+        if (GameData.instance.gameStart) {
+            return
+        }
+        const func = (b:boolean, data?:any)=>{
+            if (b) {
+                // 显示匹配view
+                MatchView.showView();
+            }else{
+                if (data && data.gameid && data.roomid) {
+                    const func2 =()=>{
+                        //返回房间
+                    }
+                    PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
+                }
+            }
+        }
+        Match.instance.req(0,func);
     }
 
     onRoomEnd(data:any):void{
