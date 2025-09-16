@@ -14,18 +14,23 @@ import { ResultView } from '../result/ResultView';
 import { UserStatus } from 'db://assets/scripts/modules/userStatus';
 import { MatchView } from 'db://assets/scripts/view/match/matchView';
 import { Match } from 'db://assets/scripts/modules/match';
+import { LobbySocketManager } from 'db://assets/scripts/frameworks/lobbySocketManager';
+import { AuthGame } from 'db://assets/scripts/modules/authGame';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
     onConstruct(){
         super.onConstruct();
+        this.init()
+        this.initListeners()
+    }
+
+    init(){
         GameData.instance.init();
         GameData.instance.maxPlayer = 2;
         if(DataCenter.instance.shortRoomid){
             GameData.instance.isPrivateRoom = true;
         }
-        
-        this.initListeners()
     }
 
     protected onDestroy(): void {
@@ -53,6 +58,8 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
         GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
+
+        LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
     }
 
     removeListeners():void{ 
@@ -69,6 +76,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
         GameSocketManager.instance.removeServerListen("playerLeave");
         GameSocketManager.instance.removeServerListen("gameClock");
+        LobbySocketManager.instance.removeServerListen("gameRoomReady");
 
     }
 
@@ -169,6 +177,27 @@ export class GameView extends FGUIGameView {
             }
         }
         Match.instance.req(0,func);
+    }
+
+    connectToGame(addr:string, gameid:number, roomid:string){
+        const callBack = (success:boolean)=>{
+            if(success){
+                //this.changeToGameScene()
+                this.init()
+                GameSocketManager.instance.sendToServer("clientReady",{})
+            }
+        }
+        AuthGame.instance.req(addr,gameid, roomid, callBack);
+    }
+
+    onSvrGameRoomReady(data:any):void{
+        console.log("gameRoomReady",data)
+        DataCenter.instance.gameid = data.gameid;
+        DataCenter.instance.roomid = data.roomid;
+        DataCenter.instance.gameAddr = data.addr;
+        DataCenter.instance.shortRoomid = 0 // 匹配房
+        console.log(LogColors.green('游戏房间准备完成'));
+        this.connectToGame(data.addr, data.gameid, data.roomid);
     }
 
     onRoomEnd(data:any):void{
