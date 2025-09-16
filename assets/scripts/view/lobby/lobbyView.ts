@@ -16,6 +16,7 @@ import { MatchView } from '../match/matchView';
 import { AuthGame } from '../../modules/authGame';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { MailView } from '../mail/mailView';
+import { Mail } from '../../modules/mail';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -111,8 +112,14 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnMails(): void {
-        //
-        MailView.showView()
+        Mail.instance.list((success:boolean, data?:any)=>{
+            if(success){
+                console.log(LogColors.green(data));
+                MailView.showView(data)
+            }else{
+                TipsView.showView({content:`拉取邮件数据失败`})
+            }
+        })  
     }
 
     onBtnRank(): void {

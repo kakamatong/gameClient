@@ -3,6 +3,9 @@ import * as fgui from "fairygui-cc";
 
 export class MailView extends FGUIMatchView {
 
+    show(data?: any):void{
+        
+    }
 
     onBtnClose(): void {
         MailView.hideView();
