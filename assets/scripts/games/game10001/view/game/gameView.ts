@@ -134,7 +134,10 @@ export class GameView extends FGUIGameView {
             for (let i = 0; i < data.info.length; i++){
                 const info = data.info[i];
                 if(info.seat == selfSeat){
-                    ResultView.showView({flag: info.endResult})
+                    const func = ()=>{
+                        this.onBtnContinue()
+                    }
+                    ResultView.showView({flag: info.endResult, continueFunc:func})
                     break
                 }
             }
