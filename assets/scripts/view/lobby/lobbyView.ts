@@ -17,6 +17,7 @@ import { AuthGame } from '../../modules/authGame';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { MailView } from '../mail/mailView';
 import { Mail } from '../../modules/mail';
+import { PrivateRoomView } from '../privateRoom/privateRoomView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -110,7 +111,8 @@ export class LobbyView extends FGUILobbyView {
     onBtnPrivateRoom(): void {
         //this.changeToGameScene()
         //LoadingView.showView({content:"正在开发中...", time:12});
-        TipsView.showView({content:"正在开发中..."});
+        //TipsView.showView({content:"正在开发中..."});
+        PrivateRoomView.showView()
     }
 
     onBtnMails(): void {
