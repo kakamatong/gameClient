@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="600,550">
+  <displayList>
+    <component id="n0_nomu" name="n0" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="185,435">
+      <property target="title" propertyId="0" value="创建"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+  </displayList>
+</component>

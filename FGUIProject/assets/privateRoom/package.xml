@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="s0qy2rl1">
+  <resources>
+    <component id="nomu0" name="PrivateRoomView.xml" path="/" exported="true"/>
+    <component id="nomu1" name="CompPrivateCreate.xml" path="/comp/"/>
+    <component id="nomu2" name="CompPrivateJoin.xml" path="/comp/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

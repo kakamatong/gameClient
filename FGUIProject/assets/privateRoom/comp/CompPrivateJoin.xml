@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="600,550">
+  <displayList>
+    <image id="n13_nomu" name="n13" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="175,11" size="250,100"/>
+    <component id="n0_nomu" name="n0" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="-11,113" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="1"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n1_nomu" name="n1" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="185,113" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="2"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n2_nomu" name="n2" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="383,113" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="3"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n3_nomu" name="n3" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="-9,219" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="4"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n4_nomu" name="n4" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="187,219" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="5"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n5_nomu" name="n5" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="385,219" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="6"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n6_nomu" name="n6" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="-9,324" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="7"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n7_nomu" name="n7" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="187,324" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="8"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n8_nomu" name="n8" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="385,324" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="9"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n9_nomu" name="n9" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="-10,427" size="230,98" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="清空"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <component id="n10_nomu" name="n10" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="186,427" size="230,99" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="0"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <component id="n11_nomu" name="n11" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="384,427" size="230,98" scale="0.8,0.8">
+      <property target="title" propertyId="0" value="加入"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <text id="n12_nomu" name="n12" xy="178,16" pivot="0.5,0.5" size="244,92" fontSize="70" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" singleLine="true" autoClearText="true" text="000000"/>
+  </displayList>
+</component>
