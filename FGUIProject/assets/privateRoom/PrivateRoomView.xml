@@ -19,7 +19,7 @@
     <component id="n8_nomu" name="UI_COMP_CREATE" src="nomu1" fileName="comp/CompPrivateCreate.xml" xy="92,648">
       <gearDisplay controller="ctrl_private" pages="0"/>
     </component>
-    <component id="n9_nomu" name="n9" src="nomu2" fileName="comp/CompPrivateJoin.xml" xy="92,648">
+    <component id="n9_nomu" name="UI_COMP_JOIN" src="nomu2" fileName="comp/CompPrivateJoin.xml" xy="92,648">
       <gearDisplay controller="ctrl_private" pages="1"/>
     </component>
     <component id="n10_nomu" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="636,459"/>

@@ -1,9 +1,12 @@
+import { DataCenter } from "../../../datacenter/datacenter";
 import FGUICompPrivateJoin from "../../../fgui/privateRoom/FGUICompPrivateJoin";
 import * as fgui from "fairygui-cc";
+import { LobbySocketManager } from "../../../frameworks/lobbySocketManager";
 
 export class CompPrivateJoin extends FGUICompPrivateJoin { 
+    private _data:any|null = null;
     show(data?:any){
-        
+        this._data = data;
     }
 
     onBtnClose(): void {
@@ -11,7 +14,22 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
     }
 
     onBtnJoin(): void {
+        if (this.UI_TXT_ROOMID.text == "") {
+            return
+        }
+        const roomid = Number(this.UI_TXT_ROOMID.text);
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                DataCenter.instance.gameid = result.gameid;
+                DataCenter.instance.roomid = result.roomid;
+                DataCenter.instance.gameAddr = result.addr;
+                DataCenter.instance.shortRoomid = roomid;
+                this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
+            }
+        }
+
         
+        LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
     }
 
     onBtnJoin0(): void {

@@ -23,7 +23,6 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
                 DataCenter.instance.roomid = result.roomid;
                 DataCenter.instance.gameAddr = result.addr;
                 DataCenter.instance.shortRoomid = result.shortRoomid;
-                //this.connectToGame(result.addr, result.gameid, result.roomid);
                 this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
             }
         }
