@@ -112,7 +112,7 @@ export class LobbyView extends FGUILobbyView {
         //this.changeToGameScene()
         //LoadingView.showView({content:"正在开发中...", time:12});
         //TipsView.showView({content:"正在开发中..."});
-        PrivateRoomView.showView()
+        PrivateRoomView.showView({connectToGame:this.connectToGame.bind(this)})
     }
 
     onBtnMails(): void {

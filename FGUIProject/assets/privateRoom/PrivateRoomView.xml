@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
-  <controller name="ctrl_private" pages="0,创建房间,1,加入房间" selected="1"/>
+  <controller name="ctrl_private" pages="0,创建房间,1,加入房间" selected="0"/>
   <displayList>
     <graph id="n0_nomu" name="n0" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <image id="n2_nomu" name="n2" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449"/>
     <component id="n5_nomu" name="n5" src="nomuz" fileName="comp/CompBtnSingleCheck.xml" pkg="gj0r6g5i" xy="136,522" size="230,98">
-      <Button controller="ctrl_private" page="0"/>
+      <Button checked="true" controller="ctrl_private" page="0"/>
       <property target="title" propertyId="0" value="创建房间"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
     <component id="n6_nomu" name="n6" src="nomuz" fileName="comp/CompBtnSingleCheck.xml" pkg="gj0r6g5i" xy="415,522">
-      <Button checked="true" controller="ctrl_private" page="1"/>
+      <Button controller="ctrl_private" page="1"/>
       <property target="title" propertyId="0" value="加入房间"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
     </component>
-    <component id="n8_nomu" name="n8" src="nomu1" fileName="comp/CompPrivateCreate.xml" xy="92,648">
+    <component id="n8_nomu" name="UI_COMP_CREATE" src="nomu1" fileName="comp/CompPrivateCreate.xml" xy="92,648">
       <gearDisplay controller="ctrl_private" pages="0"/>
     </component>
     <component id="n9_nomu" name="n9" src="nomu2" fileName="comp/CompPrivateJoin.xml" xy="92,648">

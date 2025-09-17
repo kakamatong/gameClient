@@ -2,10 +2,12 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import FGUICompPrivateCreate from "./FGUICompPrivateCreate";
 
 export default class FGUIPrivateRoomView extends fgui.GComponent {
 
 	public ctrl_private:fgui.Controller;
+	public UI_COMP_CREATE:FGUICompPrivateCreate;
 	public UI_BTN_CLOSE:fgui.GButton;
 	public static URL:string = "ui://s0qy2rl1nomu0";
 
@@ -50,6 +52,7 @@ export default class FGUIPrivateRoomView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_private = this.getControllerAt(0);
+		this.UI_COMP_CREATE = <FGUICompPrivateCreate>(this.getChildAt(4));
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(6));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
