@@ -5,5 +5,5 @@
     <component id="nomu1" name="CompPrivateCreate.xml" path="/comp/"/>
     <component id="nomu2" name="CompPrivateJoin.xml" path="/comp/"/>
   </resources>
-  <publish name=""/>
+  <publish name="" genCode="true"/>
 </packageDescription>
