@@ -9,5 +9,9 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
     onBtnClose(): void {
         CompPrivateCreate.hideView()
     }
+
+    onBtnCreate(): void {
+        
+    }
 }
 fgui.UIObjectFactory.setExtension(CompPrivateCreate.URL, CompPrivateCreate);
