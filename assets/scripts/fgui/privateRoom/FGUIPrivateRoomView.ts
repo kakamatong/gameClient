@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUIPrivateRoomView extends fgui.GComponent {
 
 	public ctrl_private:fgui.Controller;
+	public UI_BTN_CLOSE:fgui.GButton;
 	public static URL:string = "ui://s0qy2rl1nomu0";
 
 	public static packageName:string = "privateRoom";
@@ -49,6 +50,9 @@ export default class FGUIPrivateRoomView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_private = this.getControllerAt(0);
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(6));
+		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
+	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPrivateRoomView.URL, FGUIPrivateRoomView);
