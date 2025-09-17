@@ -37,7 +37,7 @@ export class MailView extends FGUIMatchView {
             if (success) {
                 console.log('detail success', data);
                 this.UI_COMP_CONTENT.visible = true
-                this.UI_COMP_CONTENT.title = data.content
+                this.UI_COMP_CONTENT.title.text = data.content
             }
         })
 

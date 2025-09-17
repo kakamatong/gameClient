@@ -22,6 +22,9 @@
     <group id="n6_gd4t" name="n6" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
-    <component id="n8_gd4t" name="UI_COMP_CONTENT" src="gd4t2" fileName="comp/CompMailContent.xml" xy="59,449" visible="false"/>
+    <component id="n8_gd4t" name="UI_COMP_CONTENT" src="gd4t2" fileName="comp/CompMailContent.xml" xy="59,449" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+      <property target="title" propertyId="0" value=""/>
+    </component>
   </displayList>
 </component>

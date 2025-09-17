@@ -6,4 +6,5 @@
     <image id="n2_gd4t" name="n2" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="31,104" size="595,650"/>
     <text id="n3_gd4t" name="title" xy="29,104" size="595,650" fontSize="36" color="#ffffff" autoSize="none" text=""/>
   </displayList>
+  <customProperty target="title" propertyId="0"/>
 </component>
