@@ -145,6 +145,22 @@ export class GameView extends FGUIGameView {
 
     onGameRoundResult(data:any):void{
         const selfSeat = GameData.instance.getSelfSeat()
+        const scoreData:Array<{userid:number, score:number, nickname:string}> = []
+        if (data.score) {
+            const scores = JSON.parse(data.score)
+            if (scores && scores.length > 0) {
+                for (let index = 0; index < scores.length; index++) {
+                    const element = scores[index];
+                    const player = GameData.instance.getPlayerBySeat(index)
+                    scoreData.push({
+                        userid: player?.userid ?? 0,
+                        score: element,
+                        nickname: player?.nickname ?? ''
+                    })
+                    
+                }
+            }
+        }
         if (data.info && data.info.length > 0){
             for (let i = 0; i < data.info.length; i++){
                 const info = data.info[i];
@@ -152,7 +168,7 @@ export class GameView extends FGUIGameView {
                     const func = ()=>{
                         this.onBtnContinue()
                     }
-                    ResultView.showView({flag: info.endResult, continueFunc:func})
+                    ResultView.showView({flag: info.endResult, continueFunc:func, scores: scoreData})
                     break
                 }
             }

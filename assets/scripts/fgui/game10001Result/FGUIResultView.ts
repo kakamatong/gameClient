@@ -61,8 +61,8 @@ export default class FGUIResultView extends fgui.GComponent {
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_LV_GAME_INFO = <fgui.GList>(this.getChildAt(4));
-		this.UI_GROP_RESULT = <fgui.GGroup>(this.getChildAt(5));
-		this.UI_COMP_ACT = <FGUICompAct>(this.getChildAt(6));
+		this.UI_GROP_RESULT = <fgui.GGroup>(this.getChildAt(6));
+		this.UI_COMP_ACT = <FGUICompAct>(this.getChildAt(7));
 		this.act = this.getTransitionAt(0);
 	}
 	onBtnCon():void{};

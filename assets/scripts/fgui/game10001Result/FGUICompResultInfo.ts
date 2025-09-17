@@ -5,8 +5,9 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUICompResultInfo extends fgui.GComponent {
 
-	public title:fgui.GTextField;
-	public score:fgui.GTextField;
+	public UI_TXT_NICKNAME:fgui.GTextField;
+	public UI_TXT_SCORE:fgui.GTextField;
+	public UI_TXT_ID:fgui.GTextField;
 	public static URL:string = "ui://5x18e99vfnug1";
 
 	public static packageName:string = "game10001Result";
@@ -49,8 +50,9 @@ export default class FGUICompResultInfo extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.title = <fgui.GTextField>(this.getChildAt(0));
-		this.score = <fgui.GTextField>(this.getChildAt(1));
+		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(0));
+		this.UI_TXT_SCORE = <fgui.GTextField>(this.getChildAt(1));
+		this.UI_TXT_ID = <fgui.GTextField>(this.getChildAt(2));
 	}
 }
 fgui.UIObjectFactory.setExtension(FGUICompResultInfo.URL, FGUICompResultInfo);
