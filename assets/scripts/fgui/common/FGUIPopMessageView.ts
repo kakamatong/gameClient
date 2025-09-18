@@ -6,7 +6,6 @@ import FGUICompPopMessage from "./FGUICompPopMessage";
 
 export default class FGUIPopMessageView extends fgui.GComponent {
 
-	public mask:fgui.GGraph;
 	public UI_COMP_MAIN:FGUICompPopMessage;
 	public static URL:string = "ui://gj0r6g5imuz3i";
 
@@ -50,7 +49,6 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.mask = <fgui.GGraph>(this.getChildAt(0));
 		this.UI_COMP_MAIN = <FGUICompPopMessage>(this.getChildAt(1));
 	}
 }

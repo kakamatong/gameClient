@@ -2,6 +2,8 @@ import { DataCenter } from "../../../datacenter/datacenter";
 import FGUICompPrivateCreate from "../../../fgui/privateRoom/FGUICompPrivateCreate";
 import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/lobbySocketManager";
+import { PopMessageView } from "../../common/popMessageView";
+import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/interfaceConfig";
 
 export class CompPrivateCreate extends FGUICompPrivateCreate { 
     private _data:any|null = null;
@@ -24,6 +26,18 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
                 DataCenter.instance.gameAddr = result.addr;
                 DataCenter.instance.shortRoomid = result.shortRoomid;
                 this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
+            }else if (result && result.code == 0 && result.gameid > 0) {
+                PopMessageView.showView({
+                    content:'您已在游戏中,是否返回',
+                    type:ENUM_POP_MESSAGE_TYPE.NUM2,
+                    sureBack:()=>{
+                        DataCenter.instance.gameid = result.gameid;
+                        DataCenter.instance.roomid = result.roomid;
+                        DataCenter.instance.gameAddr = result.addr;
+                        DataCenter.instance.shortRoomid = result.shortRoomid;
+                        this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
+                    }
+                })
             }
         }
         const reqData = {gameid:10001, rule:JSON.stringify(gameRule)}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <graph id="n1_muz3" name="mask" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+    <graph id="n2_jsve" name="n2" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <component id="n0_muz3" name="UI_COMP_MAIN" src="muz3g" fileName="comp/CompPopMessage.xml" xy="59,373">
