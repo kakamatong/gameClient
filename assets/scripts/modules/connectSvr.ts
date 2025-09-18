@@ -3,8 +3,7 @@ import { LobbySocketManager } from "../frameworks/lobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
 import { Auth } from "./auth";
 import { AuthList } from "./authList";
-
-
+import { sys } from 'cc';
 export class ConnectSvr { 
     private static _instance: ConnectSvr;
 
@@ -22,6 +21,17 @@ export class ConnectSvr {
     autoLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
         this.checkAuthList((success)=>{
             if(success){
+                // 多开处理
+                if (sys.isBrowser) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const acc = urlParams.get('userid')
+                    const pwd = urlParams.get('pwd')
+                    if (acc && pwd) {
+                        this.login(acc, pwd, callBack);
+                        return
+                    }
+                }
+
                 const loginInfo = DataCenter.instance.getLoginInfo();
                 if (loginInfo && loginInfo.userid > 0 && !needLogin) {
                     const func = (b:boolean)=>{ 
@@ -33,10 +43,9 @@ export class ConnectSvr {
                     }
                     this.connect(func)
                 }else{
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const acc = urlParams.get('userid') ?? "test001"
-                    const pwd = urlParams.get('pwd') ?? "wlj123456"
-                    this.login(acc, pwd, callBack);
+                    // 随机注册账号
+                    const acc = `tourist_${new Date().getTime()}`
+                    this.login(acc, 'tourist123', callBack);
                 }
             }else{
                 callBack && callBack(false)
