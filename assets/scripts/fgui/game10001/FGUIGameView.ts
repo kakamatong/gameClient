@@ -13,6 +13,7 @@ export default class FGUIGameView extends fgui.GComponent {
 
 	public ctrl_select:fgui.Controller;
 	public ctrl_btn:fgui.Controller;
+	public ctrl_roomtype:fgui.Controller;
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_COMP_HEAD_2:fgui.GComponent;
 	public UI_TXT_NICKNAME_2:fgui.GTextField;
@@ -37,6 +38,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_GROUP_SELECT:fgui.GGroup;
 	public UI_COMP_CLOCK:FGUICompClock;
 	public UI_COMP_GAME_START:FGUICompGameStartAct;
+	public UI_TXT_ROOMID:fgui.GTextField;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -81,6 +83,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	protected onConstruct():void {
 		this.ctrl_select = this.getControllerAt(0);
 		this.ctrl_btn = this.getControllerAt(1);
+		this.ctrl_roomtype = this.getControllerAt(2);
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 		this.UI_COMP_HEAD_2 = <fgui.GComponent>(this.getChildAt(3));
@@ -112,6 +115,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_GROUP_SELECT = <fgui.GGroup>(this.getChildAt(25));
 		this.UI_COMP_CLOCK = <FGUICompClock>(this.getChildAt(26));
 		this.UI_COMP_GAME_START = <FGUICompGameStartAct>(this.getChildAt(27));
+		this.UI_TXT_ROOMID = <fgui.GTextField>(this.getChildAt(29));
 	}
 	onBtnBack():void{};
 	onBtnSure():void{};

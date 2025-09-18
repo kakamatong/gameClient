@@ -2,6 +2,7 @@
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
   <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏" selected="0"/>
+  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
       <relation target="" sidePair="width-width,height-height"/>
@@ -76,5 +77,11 @@
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
     <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="132,619" visible="false"/>
+    <image id="n39_jsve" name="n39" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="21,124" size="221,100" group="n41_jsve"/>
+    <text id="n40_jsve" name="UI_TXT_ROOMID" xy="29,131" size="205,42" group="n41_jsve" fontSize="30" color="#ffffff" align="center" vAlign="middle" text="房间号:000000"/>
+    <group id="n41_jsve" name="n41" xy="21,124" size="221,100" advanced="true">
+      <gearDisplay controller="ctrl_roomtype" pages="1"/>
+      <relation target="" sidePair="left-left,top-top"/>
+    </group>
   </displayList>
 </component>
