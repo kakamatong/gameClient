@@ -10,6 +10,7 @@ export class GameData {
     private _isPrivateRoom = false;
     private _gameData: GAME_DATA | null = null;
     private _playerInfos: Array<GAME_PLAYER_INFO> = [];
+    private _owner = 0;
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -29,6 +30,7 @@ export class GameData {
         this.gameStart = false;
         this.isPrivateRoom = false;
         this.gameData = null;
+        this._owner = 0;
     }
 
     get gameStep(): ENUM_GAME_STEP {
@@ -136,5 +138,13 @@ export class GameData {
 
     get gameData(): GAME_DATA | null{
         return this._gameData;
+    }
+
+    set owner(userid: number){
+        this._owner = userid;
+    }
+
+    get owner(): number{
+        return this._owner;
     }
 }

@@ -345,6 +345,7 @@ export class GameView extends FGUIGameView {
 
     onRoomInfo(data:any):void{
         console.log(data)
+        GameData.instance.owner = data.owner;
         // 展示好友房信息
         if(data.shortRoomid){
             const shortRoomid = `${data.shortRoomid}`
@@ -377,6 +378,7 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnBack(): void {
+        // 私人房退出 需要发送协议
         if (GameData.instance.isPrivateRoom) {
             if (!GameData.instance.roomEnd) {
                 if (GameData.instance.gameStart) {
@@ -406,6 +408,37 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnPaper(): void {
+    }
+
+    startDisband():void{ 
+        // 发起解散房间投票请求
+        const data = {
+            reason: "玩家发起解散" // 解散原因（可选）
+        };
+
+        GameSocketManager.instance.sendToServer('voteDisbandRoom', data, (response: any) => {
+            if (response && response.code === 1) {
+                console.log('发起解散投票成功');
+            } else {
+                console.error('发起解散投票失败:', response?.msg || '未知错误');
+            }
+        });
+    }
+
+    onBtnDisband(): void {
+        if (GameData.instance.owner == DataCenter.instance.userid) {
+            this.startDisband()
+        }else{
+            if (GameData.instance.gameStart) {
+                this.startDisband()
+            }else{
+                PopMessageView.showView({
+                    type:ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                    content: '非房主只能在游戏开始后，发起解散',
+                })
+
+            }
+        }
     }
 
     onBtnSure(): void {
