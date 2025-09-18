@@ -112,6 +112,12 @@ export class LobbyView extends FGUILobbyView {
                 if (data && data.gameid && data.roomid) {
                     const func2 =()=>{
                         //返回房间
+                        DataCenter.instance.gameid = data.gameid;
+                        DataCenter.instance.roomid = data.roomid;
+                        DataCenter.instance.gameAddr = data.addr;
+                        DataCenter.instance.shortRoomid = data.shortRoomid // 匹配房
+                        console.log(LogColors.green('返回房间'));
+                        this.connectToGame(data.addr, data.gameid, data.roomid);
                     }
                     PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
                 }
