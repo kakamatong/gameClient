@@ -26,7 +26,7 @@
     <component id="fnugx" name="CompBtnCheck.xml" path="/comp/" exported="true"/>
     <image id="gd4ty" name="strip.png" path="/imgs/" exported="true" scale="9grid" scale9grid="23,17,46,34"/>
     <component id="nomuz" name="CompBtnSingleCheck.xml" path="/comp/" exported="true"/>
-    <image id="jsve10" name="disband.png" path="/imgs/"/>
+    <image id="jsve10" name="disband.png" path="/imgs/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

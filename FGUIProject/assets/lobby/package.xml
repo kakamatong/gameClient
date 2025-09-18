@@ -2,7 +2,6 @@
 <packageDescription id="gv22rev3">
   <resources>
     <component id="sc722" name="LobbyView.xml" path="/" exported="true"/>
-    <image id="xoqi4" name="bg.jpg" path="/imgs/" scale="9grid" scale9grid="194,422,388,844"/>
     <component id="xoqi5" name="BgActView.xml" path="/"/>
     <component id="xoqi6" name="CompActLine1.xml" path="/comp/"/>
     <image id="gtlg7" name="privateRoom.png" path="/imgs/"/>
@@ -11,6 +10,7 @@
     <component id="cveva" name="CompTop.xml" path="/comp/"/>
     <image id="ddz1b" name="mail.png" path="/imgs/"/>
     <image id="ddz1c" name="rank.png" path="/imgs/"/>
+    <image id="g8w0d" name="lobbybg.jpg" path="/imgs/" scale="9grid" scale9grid="7,16,14,32"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -244,7 +244,7 @@ export class GameView extends FGUIGameView {
             console.log("游戏结束 " + msg)
         }else if(data.code == ROOM_END_FLAG.OUT_TIME_WAITING){
             console.log("等待超时 " + msg)
-            PopMessageView.instance.show({
+            PopMessageView.showView({
                 content: "等待超时",
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
                 sureBack: () => {
@@ -256,7 +256,7 @@ export class GameView extends FGUIGameView {
             })
         }else if(data.code == ROOM_END_FLAG.OUT_TIME_PLAYING){
             console.log("游戏超时 " + msg)
-            PopMessageView.instance.show({
+            PopMessageView.showView({
                 content: "游戏超时",
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
                 sureBack: () => {
@@ -271,7 +271,7 @@ export class GameView extends FGUIGameView {
             if (GameData.instance.owner ==DataCenter.instance.userid) {
                 endMsg = "您已经解散房间"
             }
-            PopMessageView.instance.show({
+            PopMessageView.showView({
                 content: endMsg,
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
                 sureBack: () => {
@@ -284,7 +284,7 @@ export class GameView extends FGUIGameView {
         }else if(data.code == ROOM_END_FLAG.VOTE_DISBAND){
             console.log("投票解散 " + msg)
             //this.onBtnClose()
-            
+
         }
     }
 
@@ -473,6 +473,9 @@ export class GameView extends FGUIGameView {
 
     onBtnDisband(): void {
         if (GameData.instance.owner == DataCenter.instance.userid) {
+            if (GameData.instance.gameStart) {
+                
+            }
             this.startDisband()
         }else{
             if (GameData.instance.gameStart) {
