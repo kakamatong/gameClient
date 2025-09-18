@@ -4,6 +4,7 @@ import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/lobbySocketManager";
 import { PopMessageView } from "../../common/popMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/interfaceConfig";
+import { TipsView } from "../../common/tipsView";
 
 export class CompPrivateJoin extends FGUICompPrivateJoin { 
     private _data:any|null = null;
@@ -17,6 +18,7 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
 
     onBtnJoin(): void {
         if (this.UI_TXT_ROOMID.text == "") {
+            TipsView.showView({content:"请输入房间号"})
             return
         }
         const roomid = Number(this.UI_TXT_ROOMID.text);
@@ -39,10 +41,12 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
                         this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
                     }
                 })
+            }else{
+                const msg = result && result.msg ? result.msg : '未知错误';
+                TipsView.showView({content:msg})
             }
         }
 
-        
         LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
     }
 

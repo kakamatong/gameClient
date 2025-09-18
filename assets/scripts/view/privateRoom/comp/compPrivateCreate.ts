@@ -4,6 +4,7 @@ import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/lobbySocketManager";
 import { PopMessageView } from "../../common/popMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/interfaceConfig";
+import { TipsView } from "../../common/tipsView";
 
 export class CompPrivateCreate extends FGUICompPrivateCreate { 
     private _data:any|null = null;
@@ -38,6 +39,9 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
                         this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
                     }
                 })
+            }else{
+                const msg = result && result.msg ? result.msg : '未知错误';
+                TipsView.showView({content:msg})
             }
         }
         const reqData = {gameid:10001, rule:JSON.stringify(gameRule)}
