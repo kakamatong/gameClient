@@ -65,28 +65,33 @@ export enum PLAYER_ATTITUDE {
     OUT_HAND = 2, // 出招
 }
 
-export const HAND_FLAG = {
-    ROCK: 0x0001, // 石头
-    PAPER: 0x0010, // 布
-    SCISSORS: 0x0100, // 剪刀
+export enum ROOM_TYPE {
+    MATCH = 0, // 匹配房间
+    PRIVATE = 1, // 私人房间
 }
 
-export const PLAYER_STATUS = {
-    LOADING : 1,
-    OFFLINE : 2,
-    ONLINE : 3,
-    PLAYING : 4,
-    READY : 5
+export enum HAND_FLAG  {
+    ROCK= 0x0001, // 石头
+    PAPER= 0x0010, // 布
+    SCISSORS= 0x0100, // 剪刀
+}
+
+export enum PLAYER_STATUS {
+    LOADING = 1,
+    OFFLINE = 2,
+    ONLINE = 3,
+    PLAYING = 4,
+    READY = 5
 
 }
 
-export const ROOM_END_FLAG = {
-    NONE : 0,
-    GAME_END : 1,
-    OUT_TIME_WAITING : 2,
-    OUT_TIME_PLAYING : 3,
-    VOTE_DISBAND : 4,        // 投票解散
-    OWNER_DISBAND : 5,        // 房主解散
+export enum ROOM_END_FLAG {
+    NONE = 0,
+    GAME_END = 1,
+    OUT_TIME_WAITING = 2,
+    OUT_TIME_PLAYING = 3,
+    VOTE_DISBAND = 4,        // 投票解散
+    OWNER_DISBAND = 5,        // 房主解散
 }
 
 export const SELF_LOCAL = 1;

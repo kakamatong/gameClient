@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/gameSocketManager';
 import { ChangeScene, LogColors } from '../../../../frameworks/framework';
 import { DataCenter } from '../../../../datacenter/datacenter'
 import { GameData } from '../../data/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX} from '../../data/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE} from '../../data/interfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
@@ -44,6 +44,9 @@ export class GameView extends FGUIGameView {
         // 客户端进入完成
         GameSocketManager.instance.sendToServer("clientReady",{})
         this.ctrl_select.onChanged(this.onChanged, this)
+        if (GameData.instance.isPrivateRoom) {
+            this.ctrl_roomtype.selectedIndex = ROOM_TYPE.PRIVATE
+        }
     }
 
     initListeners(){
