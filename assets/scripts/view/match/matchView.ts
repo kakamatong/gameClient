@@ -60,8 +60,8 @@ export class MatchView extends FGUIMatchView {
 
     onSvrMatchOnSure(data:any){
         this._beCheck = true
+        let selfReady = false;
         if(data.readys && data.readys.length > 0){
-            let selfReady = false;
             for(let i = 0; i < data.readys.length; i++){
                 const userid = data.readys[i];
                 if(userid == DataCenter.instance.userid){
@@ -72,20 +72,20 @@ export class MatchView extends FGUIMatchView {
                     break
                 }
             }
+        }
 
-            if (!selfReady) {
-                this._checkID = data.id;
-                this.ctrl_btn_join.selectedIndex = 1;
-                this.ctrl_enter.selectedIndex = 2;
-                this.stopAct()
+        if (!selfReady) {
+            this._checkID = data.id;
+            this.ctrl_btn_join.selectedIndex = 1;
+            this.ctrl_enter.selectedIndex = 2;
+            this.stopAct()
+            this.showLeftTime(data.endTime ?? 0)
+            this.node.components[0].schedule(()=>{
                 this.showLeftTime(data.endTime ?? 0)
-                this.node.components[0].schedule(()=>{
-                    this.showLeftTime(data.endTime ?? 0)
-                },1)
+            },1)
 
-                if (this.UI_BTN_AUTO_CHECK.selected) {
-                    this.onBtnJoin()
-                }
+            if (this.UI_BTN_AUTO_CHECK.selected) {
+                this.onBtnJoin()
             }
         }
     }
