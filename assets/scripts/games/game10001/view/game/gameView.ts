@@ -474,9 +474,17 @@ export class GameView extends FGUIGameView {
     onBtnDisband(): void {
         if (GameData.instance.owner == DataCenter.instance.userid) {
             if (GameData.instance.gameStart) {
-                
+                this.startDisband()
+            }else{
+                PopMessageView.showView({
+                content: "解散后将无法返回此房间",
+                type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                sureBack: () => {
+                    this.startDisband()
+                }
+            })
             }
-            this.startDisband()
+            
         }else{
             if (GameData.instance.gameStart) {
                 this.startDisband()
