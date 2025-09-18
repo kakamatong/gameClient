@@ -154,7 +154,7 @@ export class GameView extends FGUIGameView {
             if (scores && scores.length > 0) {
                 for (let index = 0; index < scores.length; index++) {
                     const element = scores[index];
-                    const player = GameData.instance.getPlayerBySeat(index)
+                    const player = GameData.instance.getPlayerBySeat(index + 1)
                     scoreData.push({
                         userid: player?.userid ?? 0,
                         score: element,
