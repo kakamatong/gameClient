@@ -17,7 +17,6 @@
     <component id="muz3i" name="PopMessageView.xml" path="/" exported="true"/>
     <component id="ddz1j" name="TipsView.xml" path="/" exported="true"/>
     <component id="ddz1k" name="CompTips.xml" path="/comp/"/>
-    <image id="ddz1l" name="tips.png" path="/imgs/" scale="9grid" scale9grid="111,22,222,44"/>
     <component id="is91n" name="CompBtnCommon.xml" path="/comp/" exported="true"/>
     <component id="is91o" name="LoadingView.xml" path="/" exported="true"/>
     <image id="is91p" name="back.png" path="/imgs/" exported="true"/>
