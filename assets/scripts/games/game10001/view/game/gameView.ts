@@ -337,7 +337,7 @@ export class GameView extends FGUIGameView {
         console.log(data)
         // 展示好友房信息
         if(DataCenter.instance.shortRoomid){
-            const shortRoomid = `${DataCenter.instance.shortRoomid}`
+            const shortRoomid = `房间号:${DataCenter.instance.shortRoomid}`
             this.UI_TXT_ROOMID.text = shortRoomid.padStart(6, '0')
         }
     }
