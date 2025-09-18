@@ -5,7 +5,7 @@ import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '.
 import { DataCenter } from '../../datacenter/datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
-import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS} from '../../datacenter/interfaceConfig';
 import { TipsView } from '../common/tipsView';
 import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 import { Rank } from '../../modules/rank';
@@ -85,6 +85,18 @@ export class LobbyView extends FGUILobbyView {
 
     onUserStatus(data:any):void{
         console.log("userStatus",data)
+
+        if (data.status == ENUM_USER_STATUS.GAMEING){
+            const func2 =()=>{
+                DataCenter.instance.gameid = data.gameid;
+                DataCenter.instance.roomid = data.roomid;
+                DataCenter.instance.gameAddr = data.addr;
+                DataCenter.instance.shortRoomid = data.shortRoomid // 匹配房
+                console.log(LogColors.green('返回房间'));
+                this.connectToGame(data.addr, data.gameid, data.roomid);
+            }
+            PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
+        }
     }
 
     onUserRiches(data:any):void{
