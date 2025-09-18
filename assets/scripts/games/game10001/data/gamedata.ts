@@ -27,6 +27,8 @@ export class GameData {
         this.playerList = [];
         this.roomEnd = false;
         this.gameStart = false;
+        this.isPrivateRoom = false;
+        this.gameData = null;
     }
 
     get gameStep(): ENUM_GAME_STEP {
@@ -128,7 +130,7 @@ export class GameData {
         return this._isPrivateRoom;
     }
 
-    set gameData(data: GAME_DATA){
+    set gameData(data: GAME_DATA | null){
         this._gameData = data;
     }
 
