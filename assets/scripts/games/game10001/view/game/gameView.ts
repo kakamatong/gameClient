@@ -244,6 +244,8 @@ export class GameView extends FGUIGameView {
 
     onSvrPlayerInfos(data:any):void{
         console.log('onSvrPlayerInfos', data);
+        // 先存到playerInfos里面
+        // enter 的时候在从里面取出来，放到playerlist里面去
         GameData.instance.playerInfos = data.infos;
         for(let i = 0; i < data.infos.length; i++){
             const info = data.infos[i];
@@ -329,8 +331,16 @@ export class GameView extends FGUIGameView {
         this.UI_COMP_OFFLINE.visible = bshow;
     }
 
+    hideHead(localseat:number){
+        if (localseat == SEAT_2) {
+            this.UI_GROUP_PLAYER_2.visible = false
+        }
+    }
+
     onSvrPlayerLeave(data:any):void{
-        
+        const localSeat = GameData.instance.seat2local(data.seat);
+        GameData.instance.playerList.splice(localSeat, 1)
+        this.hideHead(localSeat)
     }
 
     onRoomInfo(data:any):void{
@@ -367,6 +377,16 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnBack(): void {
+        if (GameData.instance.isPrivateRoom) {
+            if (!GameData.instance.roomEnd) {
+                if (GameData.instance.gameStart) {
+                    console.log('游戏中无法退出');
+                }else{
+                    GameSocketManager.instance.sendToServer("leaveRoom", {flag:1});
+                }
+            }
+        }
+
         if (GameData.instance.gameStart) {
             PopMessageView.showView({
                 type:ENUM_POP_MESSAGE_TYPE.NUM1SURE,
