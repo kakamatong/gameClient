@@ -239,7 +239,53 @@ export class GameView extends FGUIGameView {
     }
 
     onRoomEnd(data:any):void{
-        
+        const msg = "房间销毁"
+        if(data.code == ROOM_END_FLAG.GAME_END){
+            console.log("游戏结束 " + msg)
+        }else if(data.code == ROOM_END_FLAG.OUT_TIME_WAITING){
+            console.log("等待超时 " + msg)
+            PopMessageView.instance.show({
+                content: "等待超时",
+                type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                sureBack: () => {
+                    this.changeToLobbyScene()
+                },
+                closeBack:() => {
+                    this.changeToLobbyScene()
+                }
+            })
+        }else if(data.code == ROOM_END_FLAG.OUT_TIME_PLAYING){
+            console.log("游戏超时 " + msg)
+            PopMessageView.instance.show({
+                content: "游戏超时",
+                type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                sureBack: () => {
+                    this.changeToLobbyScene()
+                },
+                closeBack:() => {
+                    this.changeToLobbyScene()
+                }
+            })
+        }else if(data.code == ROOM_END_FLAG.OWNER_DISBAND){
+            let endMsg = "房主已经解散房间"
+            if (GameData.instance.owner ==DataCenter.instance.userid) {
+                endMsg = "您已经解散房间"
+            }
+            PopMessageView.instance.show({
+                content: endMsg,
+                type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                sureBack: () => {
+                    this.changeToLobbyScene()
+                },
+                closeBack:() => {
+                    this.changeToLobbyScene()
+                }
+            })
+        }else if(data.code == ROOM_END_FLAG.VOTE_DISBAND){
+            console.log("投票解散 " + msg)
+            //this.onBtnClose()
+            
+        }
     }
 
     onSvrPlayerInfos(data:any):void{
