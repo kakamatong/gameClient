@@ -8,7 +8,7 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 	public ctrl_btn:fgui.Controller;
 	public UI_BTN_REFUSE:fgui.GButton;
 	public UI_BTN_AGREE:fgui.GButton;
-	public UI_LV_PLAYER:fgui.GList;
+	public UI_LV_VOTE_INFO:fgui.GList;
 	public UI_TXT_LEFT_TIME:fgui.GTextField;
 	public UI_TXT_MSG:fgui.GTextField;
 	public static URL:string = "ui://2md577f1r1yn0";
@@ -58,7 +58,7 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 		this.UI_BTN_REFUSE.onClick(this.onBtnRefuse, this);
 		this.UI_BTN_AGREE = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_AGREE.onClick(this.onBtnAgree, this);
-		this.UI_LV_PLAYER = <fgui.GList>(this.getChildAt(3));
+		this.UI_LV_VOTE_INFO = <fgui.GList>(this.getChildAt(3));
 		this.UI_TXT_LEFT_TIME = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_MSG = <fgui.GTextField>(this.getChildAt(6));
 	}

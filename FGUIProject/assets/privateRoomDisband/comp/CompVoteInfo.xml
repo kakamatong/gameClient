@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="128,200">
+  <controller name="ctrl_result" pages="0,等待确认,1,同意,2,拒绝,3,发起人" selected="3"/>
+  <displayList>
+    <component id="n0_r1yn" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="0,0" scale="0.8,0.8"/>
+    <text id="n1_r1yn" name="UI_TXT_NICKNAME" xy="7,132" size="113,32" fontSize="22" autoSize="ellipsis" singleLine="true" text=""/>
+    <text id="n2_r1yn" name="n2" xy="29,166" pivot="0.5,0.5" size="70,32" fontSize="22" color="#00ff00" align="center" vAlign="middle" text="发起人">
+      <gearColor controller="ctrl_result" pages="0,2" values="#999999,#000000|#ff0000,#000000" default="#00ff00,#000000"/>
+      <gearText controller="ctrl_result" pages="0,2,3" values="等待确认|拒绝|发起人" default="同意"/>
+    </text>
+  </displayList>
+</component>

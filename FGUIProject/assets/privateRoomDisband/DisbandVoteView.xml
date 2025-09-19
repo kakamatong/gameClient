@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688" opaque="false">
-  <controller name="ctrl_btn" pages="0,可以点击,1,不可点击" selected="0"/>
+  <controller name="ctrl_btn" pages="0,可以点击,1,不可点击" selected="1"/>
   <displayList>
     <image id="n0_r1yn" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="12,9" size="750,400" group="n7_r1yn"/>
-    <component id="n1_r1yn" name="UI_BTN_REFUSE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="143,299" size="230,98" group="n7_r1yn">
+    <component id="n1_r1yn" name="UI_BTN_REFUSE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="143,299" size="230,98" group="n7_r1yn" touchable="false" grayed="true">
       <gearLook controller="ctrl_btn" pages="1" values="1,0,1,0" default="1,0,0,1"/>
       <property target="title" propertyId="0" value="拒绝"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
-    <component id="n2_r1yn" name="UI_BTN_AGREE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="403,298" size="230,99" group="n7_r1yn">
+    <component id="n2_r1yn" name="UI_BTN_AGREE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="403,298" size="230,99" group="n7_r1yn" touchable="false" grayed="true">
       <gearLook controller="ctrl_btn" pages="1" values="1,0,1,0" default="1,0,0,1"/>
       <property target="title" propertyId="0" value="同意"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
     </component>
-    <list id="n3_r1yn" name="UI_LV_PLAYER" xy="38,27" size="700,200" group="n7_r1yn" overflow="scroll"/>
+    <list id="n3_r1yn" name="UI_LV_VOTE_INFO" xy="38,27" size="700,200" group="n7_r1yn" layout="row" overflow="scroll" scroll="horizontal" colGap="20" defaultItem="ui://2md577f1r1yn1" align="center" autoClearItems="true">
+      <item/>
+      <item/>
+      <item/>
+    </list>
     <text id="n4_r1yn" name="UI_TXT_LEFT_TIME" xy="49,332" size="50,54" group="n7_r1yn" fontSize="40" color="#ffffff" strokeColor="#000000" text="30"/>
     <text id="n5_r1yn" name="n1" xy="21,291" size="108,36" group="n7_r1yn" fontSize="26" color="#ffffff" strokeColor="#000000" text="剩余时间"/>
     <text id="n6_r1yn" name="UI_TXT_MSG" xy="306,237" size="164,54" group="n7_r1yn" fontSize="40" color="#ffff00" strokeColor="#000000" text="您已同意">
