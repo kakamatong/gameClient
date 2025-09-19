@@ -317,6 +317,10 @@ export class GameView extends FGUIGameView {
             this.UI_COMP_GAME_START.visible = false;
         })
         this.UI_COMP_GAME_START.visible = true;
+
+        for (let index = 0; index < GameData.instance.maxPlayer; index++) {
+            this.showSignReady(index + 1, false)
+        }
     }
 
     onSvrGameEnd(data:any):void{
@@ -370,6 +374,10 @@ export class GameView extends FGUIGameView {
                 this.showOffLine(true)
             }
             this.UI_GROUP_PLAYER_2.visible = true
+        }
+
+        if (player.status == PLAYER_STATUS.READY) {
+            this.showSignReady(localseat, true)
         }
     }
 
