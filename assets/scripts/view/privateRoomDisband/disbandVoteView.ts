@@ -13,11 +13,12 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
     private _voteId: number = 0; // 投票ID
     private _voteData: VoteDisbandStartData | null = null; // 投票开始数据
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
-    private _countdownTimer: number | null = null; // 倒计时定时器
     private _timeLeft: number = 0; // 剩余时间
-    private _hasVoted: boolean = false; // 是否已投票
     private _initiator = 0;
+    private _scheid:(()=>void) | null = null;
     show(data?:any){
+        
+        this._scheid = this.onTimer.bind(this)
         GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
         this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this)
@@ -71,7 +72,6 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
         this._voteId = data.voteId;
         this._voteData = data;
         this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
-        this._hasVoted = false;
         
         // 更新界面显示
         this.updateCountdown(this._timeLeft);
@@ -142,6 +142,34 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
                 content: '投票未通过，请继续游戏',
             });
         }
+
+        const comp = this.node.components[0]
+        comp.scheduleOnce(()=>{
+            DisbandVoteView.hideView()
+        },1)
+    }
+
+    onBtnAgree(): void {
+        this.sendVoteResponse(VOTE_STATUS.AGREE);
+    }
+
+    onBtnRefuse(): void {
+        this.sendVoteResponse(VOTE_STATUS.REFUSE);
+    }
+
+    private sendVoteResponse(vote: number) {
+        const data = {
+            voteId: this._voteId,
+            agree: vote
+        };
+
+        GameSocketManager.instance.sendToServer('voteDisbandResponse', data, (response: any) => {
+            if (response && response.code === 1) {
+                console.log('投票发送成功');
+            } else {
+                console.error('投票发送失败:', response?.msg || '未知错误');
+            }
+        });
     }
 
     /**
@@ -150,24 +178,25 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
     private startCountdown() {
         this.stopCountdown(); // 先停止之前的倒计时
         
-        this._countdownTimer = setInterval(() => {
-            this._timeLeft--;
-            this.updateCountdown(this._timeLeft);
-            
-            if (this._timeLeft <= 0) {
-                this.stopCountdown();
-            }
-        }, 1000) as any;
+        const comp = this.node.components[0]
+        comp.schedule(this._scheid, 1)
+    }
+
+    onTimer(){
+        this._timeLeft--;
+        this.updateCountdown(this._timeLeft);
+        
+        if (this._timeLeft <= 0) {
+            this.stopCountdown();
+        }
     }
 
     /**
      * 停止倒计时
      */
     private stopCountdown() {
-        if (this._countdownTimer) {
-            clearInterval(this._countdownTimer);
-            this._countdownTimer = null;
-        }
+        const comp = this.node.components[0]
+        comp.unschedule(this._scheid)
     }
 
     /**
