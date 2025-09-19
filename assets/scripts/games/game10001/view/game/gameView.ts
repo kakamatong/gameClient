@@ -319,10 +319,13 @@ export class GameView extends FGUIGameView {
 
     onSvrGameStart(data:any):void{
         GameData.instance.gameStart = true;
-        this.UI_COMP_GAME_START.act.play(()=>{
-            this.UI_COMP_GAME_START.visible = false;
-        })
-        this.UI_COMP_GAME_START.visible = true;
+
+        if (!data.brelink) {
+            this.UI_COMP_GAME_START.act.play(()=>{
+                this.UI_COMP_GAME_START.visible = false;
+            })
+            this.UI_COMP_GAME_START.visible = true;
+        }
 
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
             this.showSignReady(index + 1, false)
