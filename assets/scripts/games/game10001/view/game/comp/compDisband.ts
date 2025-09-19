@@ -30,6 +30,7 @@ export class CompDisband extends FGUICompDisband {
         super.onDestroy();
         GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
         GameSocketManager.instance.removeServerListen("voteDisbandResult");
+        GameSocketManager.instance.removeServerListen("voteDisbandStart");
     }
 
     listItemRenderer(index: number, item: fgui.GObject): void { 
@@ -58,10 +59,6 @@ export class CompDisband extends FGUICompDisband {
             default:
                 return 0;
         }
-    }
-
-    onBtnClose(): void {
-        DisbandVoteView.hideView()
     }
 
     /**

@@ -17,7 +17,6 @@ import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
-import { DisbandVoteView } from 'db://assets/scripts/games/game10001/view/game/comp/compDisband';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
