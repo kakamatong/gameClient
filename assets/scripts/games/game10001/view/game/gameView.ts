@@ -374,6 +374,8 @@ export class GameView extends FGUIGameView {
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
                 this.showOffLine(true)
+            }else{
+                this.showOffLine(false)
             }
             this.UI_GROUP_PLAYER_2.visible = true
         }
