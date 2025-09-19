@@ -1,28 +1,29 @@
-import FGUIDisbandVoteView from "../../fgui/privateRoomDisband/FGUIDisbandVoteView";
+import FGUICompDisband from "../../../../../fgui/game10001/FGUICompDisband";
 import * as fgui from "fairygui-cc";
-import { VOTE_STATUS, VoteDisbandResultData, VoteDisbandStartData, VoteDisbandUpdateData, VoteInfo } from "../../games/game10001/data/interfaceGameConfig";
-import { GameData } from "../../games/game10001/data/gamedata";
-import { GameSocketManager } from "../../frameworks/gameSocketManager";
-import { DataCenter } from "../../datacenter/datacenter";
-import { TipsView } from "../common/tipsView";
-import { PopMessageView } from "../common/popMessageView";
-import { ENUM_POP_MESSAGE_TYPE } from "../../datacenter/interfaceConfig";
+import { VOTE_STATUS, VoteDisbandResultData, VoteDisbandStartData, VoteDisbandUpdateData, VoteInfo } from "../../../data/interfaceGameConfig";
+import { GameData } from "../../../data/gamedata";
+import { GameSocketManager } from "../../../../../frameworks/gameSocketManager";
+import { DataCenter } from "../../../../../datacenter/datacenter";
+import { TipsView } from "../../../../../view/common/tipsView";
+import { PopMessageView } from "../../../../../view/common/popMessageView";
+import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/interfaceConfig";
 import { Color } from "cc";
 
-export class DisbandVoteView extends FGUIDisbandVoteView { 
+export class CompDisband extends FGUICompDisband { 
     private _voteId: number = 0; // 投票ID
     private _voteData: VoteDisbandStartData | null = null; // 投票开始数据
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
     private _timeLeft: number = 0; // 剩余时间
     private _initiator = 0;
     private _scheid:(()=>void) | null = null;
-    show(data?:any){
-        
+    onConstruct(){
+        // 一定要执行父类的接口
+        super.onConstruct();
         this._scheid = this.onTimer.bind(this)
+        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
         this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this)
-        this.onVoteDisbandStart(data)
     }
 
     protected onDestroy(): void {
@@ -145,7 +146,7 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
 
         const comp = this.node.components[0]
         comp.scheduleOnce(()=>{
-            DisbandVoteView.hideView()
+            this.visible = false
         },1)
     }
 
@@ -215,4 +216,4 @@ export class DisbandVoteView extends FGUIDisbandVoteView {
         }
     }
 }
-fgui.UIObjectFactory.setExtension(DisbandVoteView.URL, DisbandVoteView);
+fgui.UIObjectFactory.setExtension(CompDisband.URL, CompDisband);

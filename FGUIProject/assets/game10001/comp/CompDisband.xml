@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,400" opaque="false">
+  <controller name="ctrl_btn" pages="0,可以点击,1,不可点击" selected="0"/>
+  <displayList>
+    <image id="n0_r1yn" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="0,0" size="750,400"/>
+    <component id="n1_r1yn" name="UI_BTN_REFUSE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="131,290" size="230,98">
+      <gearLook controller="ctrl_btn" pages="1" values="1,0,1,0" default="1,0,0,1"/>
+      <property target="title" propertyId="0" value="拒绝"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <component id="n2_r1yn" name="UI_BTN_AGREE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="391,289" size="230,99">
+      <gearLook controller="ctrl_btn" pages="1" values="1,0,1,0" default="1,0,0,1"/>
+      <property target="title" propertyId="0" value="同意"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <list id="n3_r1yn" name="UI_LV_VOTE_INFO" xy="26,18" size="700,200" layout="row" overflow="scroll" scroll="horizontal" colGap="20" defaultItem="ui://2zsfe53xr1yn1" align="center" autoClearItems="true">
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <text id="n4_r1yn" name="UI_TXT_LEFT_TIME" xy="37,323" size="50,54" fontSize="40" color="#ffffff" strokeColor="#000000" text="30"/>
+    <text id="n5_r1yn" name="n1" xy="9,282" size="108,36" fontSize="26" color="#ffffff" strokeColor="#000000" text="剩余时间"/>
+    <text id="n6_r1yn" name="UI_TXT_MSG" xy="294,228" size="164,54" fontSize="40" color="#ffff00" strokeColor="#000000" text="您已同意">
+      <gearDisplay controller="ctrl_btn" pages="1"/>
+    </text>
+  </displayList>
+</component>

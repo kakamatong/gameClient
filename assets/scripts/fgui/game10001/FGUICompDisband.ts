@@ -3,7 +3,7 @@
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
-export default class FGUIDisbandVoteView extends fgui.GComponent {
+export default class FGUICompDisband extends fgui.GComponent {
 
 	public ctrl_btn:fgui.Controller;
 	public UI_BTN_REFUSE:fgui.GButton;
@@ -11,14 +11,14 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 	public UI_LV_VOTE_INFO:fgui.GList;
 	public UI_TXT_LEFT_TIME:fgui.GTextField;
 	public UI_TXT_MSG:fgui.GTextField;
-	public static URL:string = "ui://2md577f1r1yn0";
+	public static URL:string = "ui://2zsfe53xr1yn0";
 
-	public static packageName:string = "privateRoomDisband";
+	public static packageName:string = "game10001";
 
 	public static instance:any | null = null;
 
 	public static showView(params?:any, callBack?:(b:boolean)=>void):void {
-		if(FGUIDisbandVoteView.instance) {
+		if(FGUICompDisband.instance) {
 			console.log("allready show");
 			callBack&&callBack(false);
 			return;
@@ -27,10 +27,10 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
-			const view = fgui.UIPackage.createObject("privateRoomDisband", "DisbandVoteView") as FGUIDisbandVoteView;
+			const view = fgui.UIPackage.createObject("game10001", "CompDisband") as FGUICompDisband;
 
 			view.makeFullScreen();
-			FGUIDisbandVoteView.instance = view;
+			FGUICompDisband.instance = view;
 			fgui.GRoot.inst.addChild(view);
 			view.show && view.show(params);
 			callBack&&callBack(true);
@@ -40,16 +40,16 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 
 	protected onDestroy():void {
 		super.onDestroy();
-		FGUIDisbandVoteView.instance = null;
+		FGUICompDisband.instance = null;
 	}
 	public static hideView():void {
-		FGUIDisbandVoteView.instance && FGUIDisbandVoteView.instance.dispose();
+		FGUICompDisband.instance && FGUICompDisband.instance.dispose();
 	}
 
 	show(data?:any):void{};
 
-	public static createInstance():FGUIDisbandVoteView {
-		return <FGUIDisbandVoteView>(fgui.UIPackage.createObject("privateRoomDisband", "DisbandVoteView"));
+	public static createInstance():FGUICompDisband {
+		return <FGUICompDisband>(fgui.UIPackage.createObject("game10001", "CompDisband"));
 	}
 
 	protected onConstruct():void {
@@ -65,4 +65,4 @@ export default class FGUIDisbandVoteView extends fgui.GComponent {
 	onBtnRefuse():void{};
 	onBtnAgree():void{};
 }
-fgui.UIObjectFactory.setExtension(FGUIDisbandVoteView.URL, FGUIDisbandVoteView);
+fgui.UIObjectFactory.setExtension(FGUICompDisband.URL, FGUICompDisband);

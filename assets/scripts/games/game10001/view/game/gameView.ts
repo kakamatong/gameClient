@@ -17,7 +17,7 @@ import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
-import { DisbandVoteView } from 'db://assets/scripts/view/privateRoomDisband/disbandVoteView';
+import { DisbandVoteView } from 'db://assets/scripts/games/game10001/view/game/comp/compDisband';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -65,7 +65,6 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
         GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
-        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
     }
 
     removeListeners():void{ 
@@ -83,7 +82,6 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerLeave");
         GameSocketManager.instance.removeServerListen("gameClock");
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
-        GameSocketManager.instance.removeServerListen("voteDisbandStart");
 
     }
 
@@ -533,12 +531,6 @@ export class GameView extends FGUIGameView {
             }else{
                 this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.SURE
             }
-        }
-    }
-
-    onVoteDisbandStart(data:any):void{
-        if (GameData.instance.isPrivateRoom) {
-            DisbandVoteView.showView(data)
         }
     }
 }

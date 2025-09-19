@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="3"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
@@ -93,5 +93,6 @@
       <gearDisplay controller="ctrl_roomtype" pages="1"/>
       <relation target="" sidePair="left-left,top-top"/>
     </group>
+    <component id="n45_j9v1" name="n45" src="r1yn0" fileName="comp/CompDisband.xml" xy="13,11" visible="false"/>
   </displayList>
 </component>

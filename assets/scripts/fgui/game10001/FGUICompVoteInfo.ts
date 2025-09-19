@@ -8,9 +8,9 @@ export default class FGUICompVoteInfo extends fgui.GComponent {
 	public ctrl_result:fgui.Controller;
 	public UI_COMP_HEAD:fgui.GComponent;
 	public UI_TXT_NICKNAME:fgui.GTextField;
-	public static URL:string = "ui://2md577f1r1yn1";
+	public static URL:string = "ui://2zsfe53xr1yn1";
 
-	public static packageName:string = "privateRoomDisband";
+	public static packageName:string = "game10001";
 
 	public static instance:any | null = null;
 
@@ -24,7 +24,7 @@ export default class FGUICompVoteInfo extends fgui.GComponent {
 		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
 			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
-			const view = fgui.UIPackage.createObject("privateRoomDisband", "CompVoteInfo") as FGUICompVoteInfo;
+			const view = fgui.UIPackage.createObject("game10001", "CompVoteInfo") as FGUICompVoteInfo;
 
 			view.makeFullScreen();
 			FGUICompVoteInfo.instance = view;
@@ -46,7 +46,7 @@ export default class FGUICompVoteInfo extends fgui.GComponent {
 	show(data?:any):void{};
 
 	public static createInstance():FGUICompVoteInfo {
-		return <FGUICompVoteInfo>(fgui.UIPackage.createObject("privateRoomDisband", "CompVoteInfo"));
+		return <FGUICompVoteInfo>(fgui.UIPackage.createObject("game10001", "CompVoteInfo"));
 	}
 
 	protected onConstruct():void {

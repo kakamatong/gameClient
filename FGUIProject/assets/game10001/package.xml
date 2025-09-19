@@ -17,6 +17,8 @@
     <component id="qaf2f" name="BtnSelect.xml" path="/comp/"/>
     <image id="fnugg" name="gameStart.png" path="/imgs/"/>
     <component id="fnugh" name="CompGameStartAct.xml" path="/comp/"/>
+    <component id="r1yn1" name="CompVoteInfo.xml" path="/comp/"/>
+    <component id="r1yn0" name="CompDisband.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
