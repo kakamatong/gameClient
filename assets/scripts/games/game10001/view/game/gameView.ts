@@ -440,6 +440,10 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnBack(): void {
+        // 如果房间的socket已经断开，直接退出
+        if (!GameSocketManager.instance.isOpen()) {
+            return this.changeToLobbyScene()
+        }
         // 私人房退出 需要发送协议
         if (GameData.instance.isPrivateRoom) {
             if (!GameData.instance.roomEnd) {
@@ -498,6 +502,10 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnDisband(): void {
+        // 如果房间的socket已经断开，直接退出
+        if (!GameSocketManager.instance.isOpen()) {
+            return this.changeToLobbyScene()
+        }
         if (GameData.instance.owner == DataCenter.instance.userid) {
             if (GameData.instance.gameStart) {
                 this.startDisband()
