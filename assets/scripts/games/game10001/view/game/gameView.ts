@@ -183,7 +183,11 @@ export class GameView extends FGUIGameView {
         userStatus.req()
 
         // 显示继续游戏
-        this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.CONTINUE;
+        if (GameData.instance.isPrivateRoom) {
+            this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE;
+        }else{
+            this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.CONTINUE;
+        }
     }
 
     clear():void{

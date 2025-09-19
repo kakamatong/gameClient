@@ -1,5 +1,6 @@
 import FGUIResultView from '../../../../fgui/game10001Result/FGUIResultView';
 import * as fgui from "fairygui-cc";
+import { GameData } from '../../data/gamedata';
 
 export class ResultView extends FGUIResultView { 
     private _continueFunc:(()=>void) | null = null;
@@ -10,6 +11,10 @@ export class ResultView extends FGUIResultView {
         this.act.play(()=>{
             this.UI_COMP_ACT.ctrl_show.selectedIndex = 1
         })
+
+        if (GameData.instance.isPrivateRoom) {
+            this.ctrl_btn.selectedIndex = 1
+        }
 
         if (data.scores && data.scores.length > 0) {
             this._scoreData = data.scores

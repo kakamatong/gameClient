@@ -7,6 +7,7 @@ import FGUICompAct from "./FGUICompAct";
 export default class FGUIResultView extends fgui.GComponent {
 
 	public ctrl_flag:fgui.Controller;
+	public ctrl_btn:fgui.Controller;
 	public UI_BTN_CON:fgui.GButton;
 	public UI_BTN_BACK:fgui.GButton;
 	public UI_LV_GAME_INFO:fgui.GList;
@@ -56,6 +57,7 @@ export default class FGUIResultView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_flag = this.getControllerAt(0);
+		this.ctrl_btn = this.getControllerAt(1);
 		this.UI_BTN_CON = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_CON.onClick(this.onBtnCon, this);
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(3));
