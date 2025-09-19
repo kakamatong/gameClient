@@ -87,6 +87,9 @@ export class GameView extends FGUIGameView {
 
     showClock(bshow:boolean, clock?:number):void{
         if (bshow) {
+            if (clock && clock > 99) {
+                clock = 99;
+            }
             const compClock = this.UI_COMP_CLOCK as CompClock
             compClock.visible = true;
             compClock.start(clock || 10);
