@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/gameSocketManager';
 import { ChangeScene, LogColors } from '../../../../frameworks/framework';
 import { DataCenter } from '../../../../datacenter/datacenter'
 import { GameData } from '../../data/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE} from '../../data/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX} from '../../data/interfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
@@ -120,7 +120,7 @@ export class GameView extends FGUIGameView {
             this.showSignReady(local, false)
             if (local == SELF_LOCAL) {
                 // 隐藏按钮和选择
-                this.ctrl_btn.selectedIndex = 0
+                this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE
                 this.UI_GROUP_SELECT.visible = false
             }else{
                 this.showThinking(false)
@@ -181,14 +181,14 @@ export class GameView extends FGUIGameView {
         userStatus.req()
 
         // 显示继续游戏
-        this.ctrl_btn.selectedIndex = 3;
+        this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.CONTINUE;
     }
 
     clear():void{
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
             this.hideOutHand(index + 1)
         }
-        this.ctrl_btn.selectedIndex = 0
+        this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE
         this._selectOutHand = -1
     }
 
@@ -341,7 +341,7 @@ export class GameView extends FGUIGameView {
 
             if(GameData.instance.isPrivateRoom){
                 if(playerInfo.status == PLAYER_STATUS.ONLINE && selfid == userid){
-                    //this.UI_BTN_READY.visible = true;
+                    this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.READY;
                 }
             }
             this.showPlayerInfoBySeat(localSeat);
@@ -410,7 +410,7 @@ export class GameView extends FGUIGameView {
     onPlayerThinking(localSeat:number):void {
         if (localSeat == SELF_LOCAL) {
             this.UI_GROUP_SELECT.visible = true
-            this.ctrl_btn.selectedIndex = 1
+            this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.SURE
         }else{
             this.showThinking(true)
         }
@@ -506,9 +506,9 @@ export class GameView extends FGUIGameView {
     onChanged(event: any):void{
         if (event.selectedIndex != this._selectOutHand) {
             if (this._selectOutHand != -1) {
-                this.ctrl_btn.selectedIndex = 2
+                this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.CHANGE
             }else{
-                this.ctrl_btn.selectedIndex = 1
+                this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.SURE
             }
         }
     }

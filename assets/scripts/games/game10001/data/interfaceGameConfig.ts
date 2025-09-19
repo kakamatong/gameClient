@@ -94,6 +94,16 @@ export enum ROOM_END_FLAG {
     OWNER_DISBAND = 5,        // 房主解散
 }
 
+// 游戏区按钮控制器显示
+export enum CTRL_BTN_INDEX {
+    NONE = 0,           // 不显示按钮
+    SURE = 1,           // 确定按钮
+    CHANGE = 2,         // 更换按钮
+    CONTINUE = 3,       // 继续按钮
+    READY = 4,        // 准备按钮
+
+}
+
 export const SELF_LOCAL = 1;
 export const SEAT_1 = 1;
 export const SEAT_2 = 2;
