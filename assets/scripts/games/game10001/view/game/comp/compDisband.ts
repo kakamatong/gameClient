@@ -202,7 +202,7 @@ export class CompDisband extends FGUICompDisband {
      */
     private updateCountdown(timeLeft: number) {
         if (this.UI_TXT_LEFT_TIME) {
-            this.UI_TXT_LEFT_TIME.text = `剩余时间: ${timeLeft}秒`;
+            this.UI_TXT_LEFT_TIME.text = `${timeLeft}`;
             
             // 时间不足时变红色提醒
             if (timeLeft <= 10) {
