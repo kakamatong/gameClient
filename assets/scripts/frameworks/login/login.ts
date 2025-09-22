@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import { _decorator, log} from 'cc';
 import { Socket } from '../socket/socket';
 import { handleSocketMessage } from '../config/config';
-import { dhexchange, dhsecret, hmac64, customDESEncrypt } from '../utils/utils';
+import { dhexchange, dhsecret, hmac64, customDESEncrypt, stringToUint8Array } from '../utils/utils';
 import {LogColors} from '../framework';
 const { ccclass, property } = _decorator;
 
@@ -90,8 +90,12 @@ export class Login implements handleSocketMessage {
     }
 
     onMessage(message: Uint8Array) {
-        const textDecoder = new TextDecoder('utf-8');
-        const text = textDecoder.decode(message);
+        // const textDecoder = new TextDecoder('utf-8');
+        // const text = textDecoder.decode(message);
+        // 不使用TextDecoder，将message 转成string
+        let encodedString = String.fromCharCode.apply(null, Array.from(message));
+        let text = decodeURIComponent(escape(encodedString));
+
         //log('onMessage', text);
 
         if(text.includes(' ')){
@@ -154,7 +158,7 @@ export class Login implements handleSocketMessage {
         //console.log('clientPublicKeyB64:', clientPublicKeyB64);
 
         // 将base64字符串转换为字节数组
-        const messageBytes = new TextEncoder().encode(messageReq);
+        const messageBytes = stringToUint8Array(messageReq);
         const messageArray = Array.from(messageBytes);
         this.sendMessage(messageArray);
     }
@@ -186,7 +190,7 @@ export class Login implements handleSocketMessage {
         //console.log('hmacB64:', hmacB64);
         
         // 将base64字符串转换为字节数组
-        const hmacB64Bytes = new TextEncoder().encode(hmacB64);
+        const hmacB64Bytes = stringToUint8Array(hmacB64);
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);
     
