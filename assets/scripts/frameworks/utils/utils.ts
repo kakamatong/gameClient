@@ -750,8 +750,25 @@ export const isWeChatGame = () => {
     return sys.platform === sys.Platform.WECHAT_GAME;
 }
 
-export const httpRequest = (url: string, method: string, headers: any, body: any,callBack?: (success:boolean, data?:any)=>void ) => { 
-    if (sys.isBrowser) {
+export const httpRequest = (url: string, method: string, headers: any, body: any): Promise<any> => { 
+    if (isWeChatGame()) {
+        return new Promise((resolve, reject) => { 
+            wx && wx.request({
+                url: url,
+                method: method,
+                header: headers,
+                data: JSON.stringify(body),
+                success: (res:any) => { 
+                    resolve(res.data);
+                },
+                fail: (res:any) => { 
+                    reject(res);
+                }
+            })
+        });
+    }
+
+    return new Promise((resolve, reject) => { 
         fetch(url, {
             method: method,
             headers: headers,
@@ -762,25 +779,12 @@ export const httpRequest = (url: string, method: string, headers: any, body: any
             }
             return response.json();
         }).then(data => {
-            callBack && callBack(true, data);
+            resolve(data);
         })
         .catch(error => {
-            callBack && callBack(false, error);
+            reject(error);
         });
-    }else if (isWeChatGame()) {
-        wx && wx.request({
-            url: url,
-            method: method,
-            header: headers,
-            data: JSON.stringify(body),
-            success: (res:any) => { 
-                callBack && callBack(true, res.data);
-            },
-            fail: (res:any) => { 
-                callBack && callBack(false, res);
-            }
-        })
-    }
+    });
 }
 
 export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
@@ -797,25 +801,7 @@ export const httpPostOld = (userid: number, subid: number,logintoken: string, ur
         'Authorization': 'Bearer ' + token,
         'X-User-ID': `${userid}`,
     }
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            method: 'POST',
-            headers: defaultHeaders,
-            body: JSON.stringify(body),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            resolve(data);
-        })
-        .catch(error => {
-            reject(error);
-        });
-    });
+    return httpRequest(url, 'POST', defaultHeaders, body)
 }
 
 /**
@@ -987,25 +973,27 @@ export const httpPost = (url: string, body: any, payload: object, secretKey: str
         'Authorization': 'Bearer ' + token
     };
 
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            method: 'POST',
-            headers: defaultHeaders,
-            body: JSON.stringify(body),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            resolve(data);
-        })
-        .catch(error => {
-            reject(error);
-        });
-    });
+    // return new Promise((resolve, reject) => {
+    //     fetch(url, {
+    //         method: 'POST',
+    //         headers: defaultHeaders,
+    //         body: JSON.stringify(body),
+    //     })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         resolve(data);
+    //     })
+    //     .catch(error => {
+    //         reject(error);
+    //     });
+    // });
+
+    return httpRequest(url, 'POST', defaultHeaders, body)
 }
 
 // 为方便使用，提供一个使用默认SecretKey和过期时间的httpPost方法

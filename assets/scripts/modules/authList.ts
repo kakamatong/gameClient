@@ -1,6 +1,7 @@
 
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
+import {httpRequest} from '../frameworks/utils/utils';
 
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
@@ -57,21 +58,7 @@ export class AuthList {
 
         log(LogColors.blue(`Sending POST request to: ${url}`));
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // 无参数，所以body为空对象
-            body: JSON.stringify({})
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
+        httpRequest(url, 'POST', {'Content-Type': 'application/json',}, {}).then(data => {
             log(LogColors.green('authList request successful!'));
             // 将认证列表数据存储到DataCenter
             if (data && data.data) {
