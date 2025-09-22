@@ -1,3 +1,4 @@
+import { sys } from 'cc';
 import CryptoJS from 'crypto-js';   
 
 // DH参数配置
@@ -743,6 +744,43 @@ export const formatNumber = (num: number): string => {
 export const stringToWordArray = (str: string): CryptoJS.WordArray => {
     const bytes = new TextEncoder().encode(str);
     return bytesToWordArray(bytes);
+}
+
+export const isWeChatGame = () => { 
+    return sys.platform === sys.Platform.WECHAT_GAME;
+}
+
+export const httpRequest = (url: string, method: string, headers: any, body: any,callBack?: (success:boolean, data?:any)=>void ) => { 
+    if (sys.isBrowser) {
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(body),
+        }).then(response => { 
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            callBack && callBack(true, data);
+        })
+        .catch(error => {
+            callBack && callBack(false, error);
+        });
+    }else if (isWeChatGame()) {
+        wx && wx.request({
+            url: url,
+            method: method,
+            header: headers,
+            data: JSON.stringify(body),
+            success: (res:any) => { 
+                callBack && callBack(true, res.data);
+            },
+            fail: (res:any) => { 
+                callBack && callBack(false, res);
+            }
+        })
+    }
 }
 
 export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
