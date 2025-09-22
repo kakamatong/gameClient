@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import { _decorator, log} from 'cc';
 import { Socket } from '../socket/socket';
 import { handleSocketMessage } from '../config/config';
-import { dhexchange, dhsecret, hmac64, customDESEncrypt, stringToUint8Array } from '../utils/utils';
+import { dhexchange, dhsecret, hmac64, customDESEncrypt, stringToUint8Array, decodeBase64Node } from '../utils/utils';
 import {LogColors} from '../framework';
 const { ccclass, property } = _decorator;
 
@@ -102,13 +102,13 @@ export class Login implements handleSocketMessage {
             const infos = text.split(' ');
             const code = infos[0];
             if(code === '200'){
-                const msg = atob(infos[1]);
-                const msg2 = atob(infos[2]);
-                const svr = atob(infos[3]);
+                const msg = decodeBase64Node(infos[1]);
+                const msg2 = decodeBase64Node(infos[2]);
+                const svr = decodeBase64Node(infos[3]);
                 log(LogColors.green('登录成功'))
                 this._loginInfo.subid = Number(msg);
                 this._loginInfo.userid = Number(msg2);
-                this._loginInfo.server = svr
+                this._loginInfo.server = svr;
                 this._callBack(true,this._loginInfo);
             }else if(code === "403"){
                 log('登录失败code:', code);

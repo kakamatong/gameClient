@@ -1013,7 +1013,12 @@ export const httpPostWithDefaultJWT = (url: string, body: any, payload: object):
 }
 
 export const getRandomInt = (min: number, max: number): number => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const decodeBase64Node = (bufferStr: string): string=> {
+    const parsed = CryptoJS.enc.Base64.parse(bufferStr)
+    return parsed.toString(CryptoJS.enc.Utf8);
 }
