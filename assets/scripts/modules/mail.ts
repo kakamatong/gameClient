@@ -40,6 +40,11 @@ export class Mail {
      */
     private _url = "http://192.168.1.131:8080/api/mail/";
 
+    constructor() {
+        // 私有构造函数，防止实例化
+        this._url = DataCenter.instance.appConfig.webUrl + '/api/mail/'
+    }
+
     /**
      * @method list
      * @description 获取邮件列表
@@ -132,7 +137,7 @@ export class Mail {
             callBack && callBack(true, data.data);
         })
         .catch(error => {
-            log(LogColors.red(`authList request failed: ${error.message}`));
+            log(LogColors.red(`mail request failed: ${error.message}`));
             callBack && callBack(false, error);
         });
     }
