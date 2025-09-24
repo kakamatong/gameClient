@@ -17,6 +17,7 @@
     <image id="p4e4i" name="user_07.png" path="/imgs/"/>
     <image id="p4e4j" name="user_09.png" path="/imgs/"/>
     <component id="p4e4k" name="compUser.xml" path="/comp/"/>
+    <image id="p4e4l" name="user_08.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
