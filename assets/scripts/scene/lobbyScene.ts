@@ -2,6 +2,8 @@ import { _decorator, Component, log,sys,assetManager,resources,AssetManager, Jso
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
+import { LOCAL_KEY } from '../datacenter/interfaceConfig';
+import { LoginView } from '../view/login/loginView';
 const { ccclass } = _decorator;
 
 @ccclass('lobbyScreen')
@@ -34,7 +36,12 @@ export class lobbyScreen extends Component {
                 return;
             }
 
-            LobbyView.showView()
+            const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
+            if (agree) {
+                LobbyView.showView()
+            }else{
+                LoginView.showView()
+            }
         })
     }
 
