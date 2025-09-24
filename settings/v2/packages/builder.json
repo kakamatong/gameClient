@@ -76,5 +76,20 @@
         }
       }
     }
+  },
+  "splash-setting": {
+    "logo": {
+      "image": "project://settings/logo.png",
+      "type": "custom"
+    },
+    "background": {
+      "color": {
+        "x": 0.9921568627450981,
+        "y": 0.5490196078431373,
+        "z": 0,
+        "w": 1
+      },
+      "type": "color"
+    }
   }
 }
