@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
+    <graph id="n11_7ivz" name="n11" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
     <image id="n0_7ivz" name="n0" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n10_7ivz"/>
     <component id="n1_7ivz" name="UI_BTN_REFUSE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="132,1082" size="230,98" group="n10_7ivz">
       <property target="title" propertyId="0" value="拒绝"/>
@@ -10,14 +13,14 @@
       <property target="title" propertyId="0" value="同意"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
     </component>
-    <text id="n3_7ivz" name="n3" xy="119,671" size="539,82" group="n10_7ivz" fontSize="30" color="#ffffff" strokeColor="#000000" text="在您使用 猜拳-猜丁壳 服务之前，请仔细&#xA;阅读"/>
-    <text id="n4_7ivz" name="n4" xy="117,754" size="544,82" group="n10_7ivz" fontSize="30" color="#ffffff" strokeColor="#000000" text="如您同意该指引，请点击“同意”开始使&#xA;用。"/>
-    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="443,687" group="n10_7ivz">
+    <text id="n3_7ivz" name="n3" xy="119,671" size="539,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="在您使用 猜拳-猜丁壳 服务之前，请仔细&#xA;阅读"/>
+    <text id="n4_7ivz" name="n4" xy="117,747" size="544,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="如您同意该指引，请点击“同意”开始使&#xA;用。"/>
+    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="443,685" group="n10_7ivz">
       <Button titleColor="#ff0000" titleFontSize="30"/>
       <property target="title" propertyId="0" value="《隐私政策指引》"/>
       <property target="icon" propertyId="1" value=""/>
     </component>
-    <component id="n9_7ivz" name="UI_BTN_USER" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="224,686" group="n10_7ivz">
+    <component id="n9_7ivz" name="UI_BTN_USER" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="224,684" group="n10_7ivz">
       <Button titleColor="#ff0000" titleFontSize="30"/>
       <property target="title" propertyId="0" value="《用户协议》"/>
       <property target="icon" propertyId="1" value=""/>

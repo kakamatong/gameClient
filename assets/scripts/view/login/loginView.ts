@@ -3,10 +3,11 @@ import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import FGUILoginView from '../../fgui/login/FGUILoginView';
 import * as fgui from "fairygui-cc";
 import { LobbyView } from '../lobby/lobbyView';
+import { PrivacyView } from '../privacy/privacyView';
 
 export class LoginView extends FGUILoginView {
     show(data?: any):void{
-        
+        PrivacyView.showView()
     }
 
     onBtnStart(): void {
@@ -16,6 +17,7 @@ export class LoginView extends FGUILoginView {
             LoginView.hideView()
         }else{
             //显示隐私弹窗
+            PrivacyView.showView()
         }
     }
 }

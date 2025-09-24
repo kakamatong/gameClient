@@ -51,13 +51,13 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.UI_BTN_REFUSE = <fgui.GButton>(this.getChildAt(1));
+		this.UI_BTN_REFUSE = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_REFUSE.onClick(this.onBtnRefuse, this);
-		this.UI_BTN_AGREE = <fgui.GButton>(this.getChildAt(2));
+		this.UI_BTN_AGREE = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_AGREE.onClick(this.onBtnAgree, this);
-		this.UI_BTN_PRIVACY = <fgui.GButton>(this.getChildAt(5));
+		this.UI_BTN_PRIVACY = <fgui.GButton>(this.getChildAt(6));
 		this.UI_BTN_PRIVACY.onClick(this.onBtnPrivacy, this);
-		this.UI_BTN_USER = <fgui.GButton>(this.getChildAt(6));
+		this.UI_BTN_USER = <fgui.GButton>(this.getChildAt(7));
 		this.UI_BTN_USER.onClick(this.onBtnUser, this);
 	}
 	onBtnRefuse():void{};
