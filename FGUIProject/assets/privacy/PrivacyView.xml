@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
+  <controller name="ctrl_privacy" pages="0,隐私政策,1,用户协议" selected="0"/>
   <displayList>
     <graph id="n11_7ivz" name="n11" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -31,6 +32,11 @@
     <image id="n12_7ivz" name="n12" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n19_7ivz"/>
     <component id="n20_7ivz" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="637,450" group="n19_7ivz"/>
     <list id="n21_7ivz" name="n21" xy="107,524" size="567,688" group="n19_7ivz" overflow="scroll" defaultItem="ui://0b8bc4vt7ivz1">
+      <gearDisplay controller="ctrl_privacy" pages="0"/>
+      <item/>
+    </list>
+    <list id="n22_p4e4" name="n22" xy="107,524" size="567,688" group="n19_7ivz" overflow="scroll" defaultItem="ui://0b8bc4vtp4e4k">
+      <gearDisplay controller="ctrl_privacy" pages="1"/>
       <item/>
     </list>
     <group id="n19_7ivz" name="UI_GROUP_PRIVACY" xy="59,449" size="657,789" visible="false" advanced="true">

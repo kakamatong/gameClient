@@ -5,6 +5,7 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUIPrivacyView extends fgui.GComponent {
 
+	public ctrl_privacy:fgui.Controller;
 	public UI_BTN_REFUSE:fgui.GButton;
 	public UI_BTN_AGREE:fgui.GButton;
 	public UI_BTN_PRIVACY:fgui.GButton;
@@ -53,6 +54,7 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_privacy = this.getControllerAt(0);
 		this.UI_BTN_REFUSE = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_REFUSE.onClick(this.onBtnRefuse, this);
 		this.UI_BTN_AGREE = <fgui.GButton>(this.getChildAt(3));
@@ -63,7 +65,7 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 		this.UI_BTN_USER.onClick(this.onBtnUser, this);
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(10));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
-		this.UI_GROUP_PRIVACY = <fgui.GGroup>(this.getChildAt(12));
+		this.UI_GROUP_PRIVACY = <fgui.GGroup>(this.getChildAt(13));
 	}
 	onBtnRefuse():void{};
 	onBtnAgree():void{};
