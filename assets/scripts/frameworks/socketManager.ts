@@ -232,8 +232,12 @@ export class SocketManager implements handleSocketMessage {
             let result = response.result
             this._callBacks && this._callBacks[response.session] && this._callBacks[response.session](result);
         } else if (response.type == "REQUEST") {
-            // 回调
-            this.onSvrMsg(response.pname, response.result);
+            if (response.pname == "agentReady") {
+                this.agentReady(response.result)
+            }else{
+                // 回调
+                this.onSvrMsg(response.pname, response.result);
+            }
         }
     }
 
@@ -261,11 +265,15 @@ export class SocketManager implements handleSocketMessage {
         }
     }
 
+    // 连接成功
+    agentReady(data:any){
+        this._callBackLink &&  this._callBackLink(true)
+        this._callBackLink = null
+    }
+
     onOpen(event: any) {
         log(this._name + ' onOpen', event);
         this._isopen = true;
-        this._callBackLink &&  this._callBackLink(true)
-        this._callBackLink = null
     }
 
     onMessage(message: Uint8Array) {
