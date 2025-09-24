@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <image id="n0_7ivz" name="n0" src="7ivz1" fileName="imgs/lobbybg.jpg" xy="0,0" size="776,1688">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <component id="n48_7ivz" name="n48" src="7ivz4" fileName="comp/compbg1.xml" xy="0,0" alpha="0.3"/>
+    <image id="n4_7ivz" name="n4" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="60,288" size="118,95" group="n6_7ivz"/>
+    <image id="n3_7ivz" name="n3" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="676,529" size="78,71" group="n6_7ivz"/>
+    <image id="n1_7ivz" name="n1" src="7ivz2" fileName="imgs/logo1.png" xy="36,353" group="n6_7ivz"/>
+    <image id="n2_7ivz" name="n2" src="7ivz3" fileName="imgs/logo2.png" xy="224,573" group="n6_7ivz"/>
+    <image id="n5_7ivz" name="n5" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="121,631" size="79,79" group="n6_7ivz"/>
+    <group id="n6_7ivz" name="n6" xy="36,288" size="718,432" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+    <component id="n7_7ivz" name="UI_BTN_START" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="273,1185" size="230,99">
+      <relation target="" sidePair="center-center,middle-middle"/>
+      <property target="title" propertyId="0" value="开始游戏"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
+    </component>
+    <text id="n8_7ivz" name="n8" xy="22,1558" size="732,104" fontSize="26" color="#ffffff" align="center" strokeColor="#000000" text="健康游戏公告&#xA;抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。&#xA;适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。"/>
+  </displayList>
+</component>

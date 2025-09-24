@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <image id="n0_7ivz" name="n0" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="140,711" group="n12_7ivz"/>
+    <image id="n1_7ivz" name="n1" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="258,611" group="n12_7ivz"/>
+    <image id="n2_7ivz" name="n2" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="402,476" group="n12_7ivz"/>
+    <image id="n3_7ivz" name="n3" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="548,356" group="n12_7ivz"/>
+    <image id="n4_7ivz" name="n4" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="699,234" group="n12_7ivz"/>
+    <image id="n5_7ivz" name="n5" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="835,123" group="n12_7ivz"/>
+    <image id="n6_7ivz" name="n6" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="954,11" group="n12_7ivz"/>
+    <image id="n7_7ivz" name="n7" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1103,-99" group="n12_7ivz"/>
+    <image id="n8_7ivz" name="n8" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="6,825" group="n12_7ivz"/>
+    <image id="n9_7ivz" name="n9" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-117,918" group="n12_7ivz"/>
+    <image id="n10_7ivz" name="n10" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1214,-195" group="n12_7ivz"/>
+    <image id="n11_7ivz" name="n11" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-250,1025" group="n12_7ivz"/>
+    <group id="n12_7ivz" name="n12" xy="-250,-195" size="1613,1357"/>
+    <image id="n13_7ivz" name="n13" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="110,443" group="n25_7ivz"/>
+    <image id="n14_7ivz" name="n14" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="228,343" group="n25_7ivz"/>
+    <image id="n15_7ivz" name="n15" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="372,208" group="n25_7ivz"/>
+    <image id="n16_7ivz" name="n16" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="518,88" group="n25_7ivz"/>
+    <image id="n17_7ivz" name="n17" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="669,-34" group="n25_7ivz"/>
+    <image id="n18_7ivz" name="n18" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="805,-145" group="n25_7ivz"/>
+    <image id="n19_7ivz" name="n19" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="924,-257" group="n25_7ivz"/>
+    <image id="n20_7ivz" name="n20" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1073,-367" group="n25_7ivz"/>
+    <image id="n21_7ivz" name="n21" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-24,557" group="n25_7ivz"/>
+    <image id="n22_7ivz" name="n22" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-147,650" group="n25_7ivz"/>
+    <image id="n23_7ivz" name="n23" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-398,873" group="n25_7ivz"/>
+    <image id="n24_7ivz" name="n24" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-286,756" group="n25_7ivz"/>
+    <group id="n25_7ivz" name="n25" xy="-398,-367" size="1629,1387"/>
+    <image id="n26_7ivz" name="n26" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-292,513" group="n38_7ivz"/>
+    <image id="n27_7ivz" name="n27" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-174,413" group="n38_7ivz"/>
+    <image id="n28_7ivz" name="n28" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-30,278" group="n38_7ivz"/>
+    <image id="n29_7ivz" name="n29" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="116,158" group="n38_7ivz"/>
+    <image id="n30_7ivz" name="n30" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="267,36" group="n38_7ivz"/>
+    <image id="n31_7ivz" name="n31" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="403,-75" group="n38_7ivz"/>
+    <image id="n32_7ivz" name="n32" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="522,-187" group="n38_7ivz"/>
+    <image id="n33_7ivz" name="n33" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="671,-297" group="n38_7ivz"/>
+    <image id="n34_7ivz" name="n34" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-426,627" group="n38_7ivz"/>
+    <image id="n35_7ivz" name="n35" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-549,720" group="n38_7ivz"/>
+    <image id="n36_7ivz" name="n36" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="797,-412" group="n38_7ivz"/>
+    <image id="n37_7ivz" name="n37" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="905,-524" group="n38_7ivz"/>
+    <group id="n38_7ivz" name="n38" xy="-549,-524" size="1624,1402"/>
+    <image id="n39_7ivz" name="n39" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="188,1494" group="n51_7ivz"/>
+    <image id="n40_7ivz" name="n40" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="306,1394" group="n51_7ivz"/>
+    <image id="n41_7ivz" name="n41" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="450,1259" group="n51_7ivz"/>
+    <image id="n42_7ivz" name="n42" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="596,1139" group="n51_7ivz"/>
+    <image id="n43_7ivz" name="n43" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="747,1017" group="n51_7ivz"/>
+    <image id="n44_7ivz" name="n44" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="883,906" group="n51_7ivz"/>
+    <image id="n45_7ivz" name="n45" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1002,794" group="n51_7ivz"/>
+    <image id="n46_7ivz" name="n46" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1151,684" group="n51_7ivz"/>
+    <image id="n47_7ivz" name="n47" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="54,1608" group="n51_7ivz"/>
+    <image id="n48_7ivz" name="n48" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-69,1701" group="n51_7ivz"/>
+    <image id="n49_7ivz" name="n49" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1262,588" group="n51_7ivz"/>
+    <image id="n50_7ivz" name="n50" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-202,1808" group="n51_7ivz"/>
+    <group id="n51_7ivz" name="n51" xy="-202,588" size="1613,1357"/>
+    <image id="n52_7ivz" name="n52" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="158,1226" group="n64_7ivz"/>
+    <image id="n53_7ivz" name="n53" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="276,1126" group="n64_7ivz"/>
+    <image id="n54_7ivz" name="n54" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="420,991" group="n64_7ivz"/>
+    <image id="n55_7ivz" name="n55" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="566,871" group="n64_7ivz"/>
+    <image id="n56_7ivz" name="n56" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="717,749" group="n64_7ivz"/>
+    <image id="n57_7ivz" name="n57" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="853,638" group="n64_7ivz"/>
+    <image id="n58_7ivz" name="n58" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="972,526" group="n64_7ivz"/>
+    <image id="n59_7ivz" name="n59" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1121,416" group="n64_7ivz"/>
+    <image id="n60_7ivz" name="n60" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="24,1340" group="n64_7ivz"/>
+    <image id="n61_7ivz" name="n61" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-99,1433" group="n64_7ivz"/>
+    <image id="n62_7ivz" name="n62" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-350,1656" group="n64_7ivz"/>
+    <image id="n63_7ivz" name="n63" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-238,1539" group="n64_7ivz"/>
+    <group id="n64_7ivz" name="n64" xy="-350,416" size="1629,1387"/>
+    <image id="n65_7ivz" name="n65" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-244,1296" group="n77_7ivz"/>
+    <image id="n66_7ivz" name="n66" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-126,1196" group="n77_7ivz"/>
+    <image id="n67_7ivz" name="n67" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="18,1061" group="n77_7ivz"/>
+    <image id="n68_7ivz" name="n68" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="164,941" group="n77_7ivz"/>
+    <image id="n69_7ivz" name="n69" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="315,819" group="n77_7ivz"/>
+    <image id="n70_7ivz" name="n70" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="451,708" group="n77_7ivz"/>
+    <image id="n71_7ivz" name="n71" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="570,596" group="n77_7ivz"/>
+    <image id="n72_7ivz" name="n72" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="719,486" group="n77_7ivz"/>
+    <image id="n73_7ivz" name="n73" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-378,1410" group="n77_7ivz"/>
+    <image id="n74_7ivz" name="n74" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-501,1503" group="n77_7ivz"/>
+    <image id="n75_7ivz" name="n75" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="845,371" group="n77_7ivz"/>
+    <image id="n76_7ivz" name="n76" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="953,259" group="n77_7ivz"/>
+    <group id="n77_7ivz" name="n77" xy="-501,259" size="1624,1402"/>
+    <image id="n78_7ivz" name="n78" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="371,2125" group="n90_7ivz"/>
+    <image id="n79_7ivz" name="n79" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="489,2025" group="n90_7ivz"/>
+    <image id="n80_7ivz" name="n80" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="633,1890" group="n90_7ivz"/>
+    <image id="n81_7ivz" name="n81" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="779,1770" group="n90_7ivz"/>
+    <image id="n82_7ivz" name="n82" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="930,1648" group="n90_7ivz"/>
+    <image id="n83_7ivz" name="n83" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1066,1537" group="n90_7ivz"/>
+    <image id="n84_7ivz" name="n84" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1185,1425" group="n90_7ivz"/>
+    <image id="n85_7ivz" name="n85" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1334,1315" group="n90_7ivz"/>
+    <image id="n86_7ivz" name="n86" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="237,2239" group="n90_7ivz"/>
+    <image id="n87_7ivz" name="n87" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="114,2332" group="n90_7ivz"/>
+    <image id="n88_7ivz" name="n88" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1445,1219" group="n90_7ivz"/>
+    <image id="n89_7ivz" name="n89" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-19,2439" group="n90_7ivz"/>
+    <group id="n90_7ivz" name="n90" xy="-19,1219" size="1613,1357"/>
+    <image id="n91_7ivz" name="n91" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="341,1857" group="n103_7ivz"/>
+    <image id="n92_7ivz" name="n92" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="459,1757" group="n103_7ivz"/>
+    <image id="n93_7ivz" name="n93" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="603,1622" group="n103_7ivz"/>
+    <image id="n94_7ivz" name="n94" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="749,1502" group="n103_7ivz"/>
+    <image id="n95_7ivz" name="n95" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="900,1380" group="n103_7ivz"/>
+    <image id="n96_7ivz" name="n96" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1036,1269" group="n103_7ivz"/>
+    <image id="n97_7ivz" name="n97" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1155,1157" group="n103_7ivz"/>
+    <image id="n98_7ivz" name="n98" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1304,1047" group="n103_7ivz"/>
+    <image id="n99_7ivz" name="n99" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="207,1971" group="n103_7ivz"/>
+    <image id="n100_7ivz" name="n100" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="84,2064" group="n103_7ivz"/>
+    <image id="n101_7ivz" name="n101" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-167,2287" group="n103_7ivz"/>
+    <image id="n102_7ivz" name="n102" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-55,2170" group="n103_7ivz"/>
+    <group id="n103_7ivz" name="n103" xy="-167,1047" size="1629,1387"/>
+    <image id="n104_7ivz" name="n104" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-61,1927" group="n116_7ivz"/>
+    <image id="n105_7ivz" name="n105" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="57,1827" group="n116_7ivz"/>
+    <image id="n106_7ivz" name="n106" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="201,1692" group="n116_7ivz"/>
+    <image id="n107_7ivz" name="n107" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="347,1572" group="n116_7ivz"/>
+    <image id="n108_7ivz" name="n108" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="498,1450" group="n116_7ivz"/>
+    <image id="n109_7ivz" name="n109" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="634,1339" group="n116_7ivz"/>
+    <image id="n110_7ivz" name="n110" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="753,1227" group="n116_7ivz"/>
+    <image id="n111_7ivz" name="n111" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="902,1117" group="n116_7ivz"/>
+    <image id="n112_7ivz" name="n112" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-195,2041" group="n116_7ivz"/>
+    <image id="n113_7ivz" name="n113" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-318,2134" group="n116_7ivz"/>
+    <image id="n114_7ivz" name="n114" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1028,1002" group="n116_7ivz"/>
+    <image id="n115_7ivz" name="n115" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1136,890" group="n116_7ivz"/>
+    <group id="n116_7ivz" name="n116" xy="-318,890" size="1624,1402"/>
+    <image id="n117_7ivz" name="n117" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-551,502" group="n129_7ivz"/>
+    <image id="n118_7ivz" name="n118" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-433,402" group="n129_7ivz"/>
+    <image id="n119_7ivz" name="n119" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-289,267" group="n129_7ivz"/>
+    <image id="n120_7ivz" name="n120" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-143,147" group="n129_7ivz"/>
+    <image id="n121_7ivz" name="n121" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="8,25" group="n129_7ivz"/>
+    <image id="n122_7ivz" name="n122" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="144,-86" group="n129_7ivz"/>
+    <image id="n123_7ivz" name="n123" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="263,-198" group="n129_7ivz"/>
+    <image id="n124_7ivz" name="n124" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="412,-308" group="n129_7ivz"/>
+    <image id="n125_7ivz" name="n125" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-685,616" group="n129_7ivz"/>
+    <image id="n126_7ivz" name="n126" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-808,709" group="n129_7ivz"/>
+    <image id="n127_7ivz" name="n127" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="523,-404" group="n129_7ivz"/>
+    <image id="n128_7ivz" name="n128" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-941,816" group="n129_7ivz"/>
+    <group id="n129_7ivz" name="n129" xy="-941,-404" size="1613,1357"/>
+    <image id="n130_7ivz" name="n130" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-581,234" group="n142_7ivz"/>
+    <image id="n131_7ivz" name="n131" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-463,134" group="n142_7ivz"/>
+    <image id="n132_7ivz" name="n132" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-319,-1" group="n142_7ivz"/>
+    <image id="n133_7ivz" name="n133" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-173,-121" group="n142_7ivz"/>
+    <image id="n134_7ivz" name="n134" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-22,-243" group="n142_7ivz"/>
+    <image id="n135_7ivz" name="n135" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="114,-354" group="n142_7ivz"/>
+    <image id="n136_7ivz" name="n136" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="233,-466" group="n142_7ivz"/>
+    <image id="n137_7ivz" name="n137" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="382,-576" group="n142_7ivz"/>
+    <image id="n138_7ivz" name="n138" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-715,348" group="n142_7ivz"/>
+    <image id="n139_7ivz" name="n139" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-838,441" group="n142_7ivz"/>
+    <image id="n140_7ivz" name="n140" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-1089,664" group="n142_7ivz"/>
+    <image id="n141_7ivz" name="n141" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-977,547" group="n142_7ivz"/>
+    <group id="n142_7ivz" name="n142" xy="-1089,-576" size="1629,1387"/>
+    <image id="n143_7ivz" name="n143" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-983,304" group="n155_7ivz"/>
+    <image id="n144_7ivz" name="n144" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-865,204" group="n155_7ivz"/>
+    <image id="n145_7ivz" name="n145" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-721,69" group="n155_7ivz"/>
+    <image id="n146_7ivz" name="n146" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-575,-51" group="n155_7ivz"/>
+    <image id="n147_7ivz" name="n147" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-424,-173" group="n155_7ivz"/>
+    <image id="n148_7ivz" name="n148" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-288,-284" group="n155_7ivz"/>
+    <image id="n149_7ivz" name="n149" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-169,-396" group="n155_7ivz"/>
+    <image id="n150_7ivz" name="n150" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-20,-506" group="n155_7ivz"/>
+    <image id="n151_7ivz" name="n151" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="-1117,418" group="n155_7ivz"/>
+    <image id="n152_7ivz" name="n152" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-1240,511" group="n155_7ivz"/>
+    <image id="n153_7ivz" name="n153" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="106,-621" group="n155_7ivz"/>
+    <image id="n154_7ivz" name="n154" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="214,-733" group="n155_7ivz"/>
+    <group id="n155_7ivz" name="n155" xy="-1240,-733" size="1624,1402"/>
+  </displayList>
+</component>
