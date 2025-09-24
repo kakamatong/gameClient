@@ -38,6 +38,7 @@ export class GameSocketManager extends SocketManager {
 
     onOpen(event: any): void {
         super.onOpen(event);
+        // 游戏区链接没有agent，所以打开socket后，直接通过成功
         this.agentReady(null);
     }
 }
