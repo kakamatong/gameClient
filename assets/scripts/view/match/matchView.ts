@@ -20,8 +20,8 @@ export class MatchView extends FGUIMatchView {
         const bauto = sys.localStorage.getItem(LOCAL_KEY.MATCH_AUTO_JOIN);
         if (bauto == 'true') {
             this.UI_BTN_AUTO_CHECK.selected = true; 
-        }else{
-            this.UI_BTN_AUTO_CHECK.selected = false;
+        }else if (bauto == 'false') {
+            this.UI_BTN_AUTO_CHECK.selected = false; 
         }
     }
 

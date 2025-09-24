@@ -22,7 +22,9 @@
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
     <component id="n5_wfqx" name="UI_COMP_ACT" src="wfqx1" fileName="comp/CompMatchAct.xml" xy="113,757"/>
-    <component id="n6_fnug" name="UI_BTN_AUTO_CHECK" src="fnugx" fileName="comp/CompBtnCheck.xml" pkg="gj0r6g5i" xy="275,992" group="n8_fnug"/>
+    <component id="n6_fnug" name="UI_BTN_AUTO_CHECK" src="fnugx" fileName="comp/CompBtnCheck.xml" pkg="gj0r6g5i" xy="275,992" group="n8_fnug">
+      <Button checked="true"/>
+    </component>
     <text id="n7_fnug" name="n7" xy="336,994" size="148,49" group="n8_fnug" fontSize="36" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" text="自动加入"/>
     <group id="n8_fnug" name="UI_GROUP_AUTO" xy="275,992" size="209,56" advanced="true"/>
   </displayList>
