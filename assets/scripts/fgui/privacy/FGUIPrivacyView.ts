@@ -9,6 +9,8 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 	public UI_BTN_AGREE:fgui.GButton;
 	public UI_BTN_PRIVACY:fgui.GButton;
 	public UI_BTN_USER:fgui.GButton;
+	public UI_BTN_CLOSE:fgui.GButton;
+	public UI_GROUP_PRIVACY:fgui.GGroup;
 	public static URL:string = "ui://0b8bc4vt7ivz0";
 
 	public static packageName:string = "privacy";
@@ -59,10 +61,14 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 		this.UI_BTN_PRIVACY.onClick(this.onBtnPrivacy, this);
 		this.UI_BTN_USER = <fgui.GButton>(this.getChildAt(7));
 		this.UI_BTN_USER.onClick(this.onBtnUser, this);
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(10));
+		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
+		this.UI_GROUP_PRIVACY = <fgui.GGroup>(this.getChildAt(12));
 	}
 	onBtnRefuse():void{};
 	onBtnAgree():void{};
 	onBtnPrivacy():void{};
 	onBtnUser():void{};
+	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPrivacyView.URL, FGUIPrivacyView);

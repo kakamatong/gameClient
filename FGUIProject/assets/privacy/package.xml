@@ -2,6 +2,12 @@
 <packageDescription id="0b8bc4vt">
   <resources>
     <component id="7ivz0" name="PrivacyView.xml" path="/" exported="true"/>
+    <component id="7ivz1" name="compPrivacy.xml" path="/comp/"/>
+    <image id="p4e47" name="privacy_01.png" path="/imgs/"/>
+    <image id="p4e48" name="privacy_02.png" path="/imgs/"/>
+    <image id="p4e49" name="privacy_03.png" path="/imgs/"/>
+    <image id="p4e4a" name="privacy_04.png" path="/imgs/"/>
+    <image id="p4e4b" name="privacy_05.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

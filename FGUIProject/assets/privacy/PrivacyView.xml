@@ -28,5 +28,13 @@
     <group id="n10_7ivz" name="n10" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
+    <image id="n12_7ivz" name="n12" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n19_7ivz"/>
+    <component id="n20_7ivz" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="637,450" group="n19_7ivz"/>
+    <list id="n21_7ivz" name="n21" xy="107,524" size="567,688" group="n19_7ivz" overflow="scroll" defaultItem="ui://0b8bc4vt7ivz1">
+      <item/>
+    </list>
+    <group id="n19_7ivz" name="UI_GROUP_PRIVACY" xy="59,449" size="657,789" visible="false" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
   </displayList>
 </component>

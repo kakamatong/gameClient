@@ -18,6 +18,11 @@ export class PrivacyView extends FGUIPrivacyView {
 
     onBtnPrivacy(): void {
         // 跳转隐私协议
+        this.UI_GROUP_PRIVACY.visible = true
+    }
+
+    onBtnClose(): void {
+        this.UI_GROUP_PRIVACY.visible = false
     }
 
     onBtnUser(): void {
