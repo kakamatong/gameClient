@@ -35,4 +35,9 @@ export class GameSocketManager extends SocketManager {
         }
         this.sendToServer('send', data)
     }
+
+    onOpen(event: any): void {
+        super.onOpen(event);
+        this.agentReady(null);
+    }
 }
