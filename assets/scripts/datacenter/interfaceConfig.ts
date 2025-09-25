@@ -64,4 +64,12 @@ export enum ENUM_POP_MESSAGE_TYPE {
     NUM0 = 3, // 无按钮
 }
 
+export interface GAME_RECORD {
+    gameid: number;
+    win: number;
+    lose:number;
+    draw?: number;
+}
+
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
+export const MAIN_GAME_ID = 10001

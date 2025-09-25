@@ -1,4 +1,4 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD } from "./interfaceConfig";
 import { sys,resources } from "cc";
 
 /**
@@ -88,6 +88,8 @@ export class DataCenter {
         // 'game1':'ws://192.168.1.140:9003',
         // 'game2':'ws://192.168.1.140:9006',
     }
+
+    private _gameRecords:GAME_RECORD | null = null;
 
     /**
      * @property {DataCenter} _instance - 单例实例
@@ -244,5 +246,13 @@ export class DataCenter {
 
     set shortRoomid(id:number){
         this._shortRoomid = id;
+    }
+
+    set gameRecords(data:GAME_RECORD){
+        this._gameRecords = data;
+    }
+
+    get gameRecords():GAME_RECORD | null{
+        return this._gameRecords;
     }
 }
