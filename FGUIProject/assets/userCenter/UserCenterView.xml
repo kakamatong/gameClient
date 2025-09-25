@@ -25,6 +25,7 @@
     <text id="n14_klme" name="UI_TXT_LOSE" xy="279,835" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
     <text id="n15_klme" name="UI_TXT_DRAW" xy="279,902" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
     <text id="n16_klme" name="UI_TXT_RATE" xy="280,969" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
+    <component id="n18_klme" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,462" group="n17_klme"/>
     <group id="n17_klme" name="n17" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>

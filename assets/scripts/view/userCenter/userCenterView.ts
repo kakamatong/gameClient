@@ -24,5 +24,9 @@ export class UserCenterView extends FGUIUserCenterView {
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
     }
+
+    onBtnClose(): void {
+        UserCenterView.hideView()
+    }
 }
 fgui.UIObjectFactory.setExtension(UserCenterView.URL, UserCenterView);

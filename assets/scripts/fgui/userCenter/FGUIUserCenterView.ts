@@ -14,6 +14,7 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 	public UI_TXT_LOSE:fgui.GTextField;
 	public UI_TXT_DRAW:fgui.GTextField;
 	public UI_TXT_RATE:fgui.GTextField;
+	public UI_BTN_CLOSE:fgui.GButton;
 	public static URL:string = "ui://1zcuqn2bp4e40";
 
 	public static packageName:string = "userCenter";
@@ -67,8 +68,11 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 		this.UI_TXT_LOSE = <fgui.GTextField>(this.getChildAt(13));
 		this.UI_TXT_DRAW = <fgui.GTextField>(this.getChildAt(14));
 		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(15));
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(16));
+		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
 	onBtnWechat():void{};
 	onBtnDelAcc():void{};
+	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIUserCenterView.URL, FGUIUserCenterView);
