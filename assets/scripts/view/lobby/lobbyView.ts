@@ -18,6 +18,7 @@ import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { MailView } from '../mail/mailView';
 import { Mail } from '../../modules/mail';
 import { PrivateRoomView } from '../privateRoom/privateRoomView';
+import { UserCenterView } from '../userCenter/userCenterView';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -37,6 +38,7 @@ export class LobbyView extends FGUILobbyView {
         AddEventListener('userStatus',this.onUserStatus, this);
         AddEventListener('userRichs',this.onUserRiches, this);
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
+        this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
 
     onDestroy(){
@@ -45,6 +47,10 @@ export class LobbyView extends FGUILobbyView {
         RemoveEventListener('userStatus', this.onUserStatus);
         RemoveEventListener('userRichs', this.onUserRiches);
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
+    }
+
+    onBtnHead(){
+        UserCenterView.showView();
     }
 
     initUI(){ 
