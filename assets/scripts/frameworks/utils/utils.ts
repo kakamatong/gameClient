@@ -1,4 +1,3 @@
-import { sys } from 'cc';
 import CryptoJS from 'crypto-js';   
 import { MiniGameUtils } from './sdk/miniGameUtils';
 
@@ -755,9 +754,6 @@ export const stringToWordArray = (str: string): CryptoJS.WordArray => {
     return bytesToWordArray(bytes);
 }
 
-export const isWeChatGame = () => { 
-    return sys.platform === sys.Platform.WECHAT_GAME;
-}
 
 export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
     const data = {

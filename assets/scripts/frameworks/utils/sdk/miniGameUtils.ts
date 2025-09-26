@@ -61,4 +61,21 @@ export class MiniGameUtils {
             });
         });
     }
+
+    login(data?:any, callBack?:(success:boolean, data?:any)=>void){
+        if (this.isWeChatGame()) {
+            wx && wx.login({
+                timeout: 5000,
+                success: (code:string) => { 
+                    callBack && callBack(true,code)
+                },
+
+                fail: (errMsg:string, errno:number) => {
+                    callBack && callBack(false,{errMsg:errMsg, errno:errno})
+                }
+            })
+        }
+
+        callBack && callBack(true)
+    }
 }
