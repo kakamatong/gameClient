@@ -1,5 +1,6 @@
 import { sys } from 'cc';
 import CryptoJS from 'crypto-js';   
+import { MiniGameUtils } from './sdk/miniGameUtils';
 
 // DH参数配置
 const DH_GENERATOR = 5n;
@@ -758,43 +759,6 @@ export const isWeChatGame = () => {
     return sys.platform === sys.Platform.WECHAT_GAME;
 }
 
-export const httpRequest = (url: string, method: string, headers: any, body: any): Promise<any> => { 
-    if (isWeChatGame()) {
-        return new Promise((resolve, reject) => { 
-            wx && wx.request({
-                url: url,
-                method: method,
-                header: headers,
-                data: JSON.stringify(body),
-                success: (res:any) => { 
-                    resolve(res.data);
-                },
-                fail: (res:any) => { 
-                    reject(res);
-                }
-            })
-        });
-    }
-
-    return new Promise((resolve, reject) => { 
-        fetch(url, {
-            method: method,
-            headers: headers,
-            body: JSON.stringify(body),
-        }).then(response => { 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        }).then(data => {
-            resolve(data);
-        })
-        .catch(error => {
-            reject(error);
-        });
-    });
-}
-
 export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
     const data = {
         userid: userid,
@@ -809,7 +773,7 @@ export const httpPostOld = (userid: number, subid: number,logintoken: string, ur
         'Authorization': 'Bearer ' + token,
         'X-User-ID': `${userid}`,
     }
-    return httpRequest(url, 'POST', defaultHeaders, body)
+    return MiniGameUtils.instance.request(url, 'POST', defaultHeaders, body)
 }
 
 /**
@@ -1001,7 +965,7 @@ export const httpPost = (url: string, body: any, payload: object, secretKey: str
     //     });
     // });
 
-    return httpRequest(url, 'POST', defaultHeaders, body)
+    return MiniGameUtils.instance.request(url, 'POST', defaultHeaders, body)
 }
 
 // 为方便使用，提供一个使用默认SecretKey和过期时间的httpPost方法
