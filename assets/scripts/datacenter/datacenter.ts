@@ -89,6 +89,7 @@ export class DataCenter {
         // 'game2':'ws://192.168.1.140:9006',
     }
 
+    private _channelID:string = '';
     private _gameRecords:GAME_RECORD | null = null;
 
     /**
@@ -254,5 +255,13 @@ export class DataCenter {
 
     get gameRecords():GAME_RECORD | null{
         return this._gameRecords;
+    }
+
+    set channelID(id:string){
+        this._channelID = id;
+    }
+
+    get channelID():string{
+        return this._channelID;
     }
 }

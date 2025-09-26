@@ -2,17 +2,18 @@ import { _decorator, Component, log,sys,assetManager,resources,AssetManager, Jso
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
-import { LOCAL_KEY } from '../datacenter/interfaceConfig';
+import { ENUM_CHANNEL_ID, LOCAL_KEY } from '../datacenter/interfaceConfig';
 import { LoginView } from '../view/login/loginView';
 const { ccclass } = _decorator;
 
 @ccclass('lobbyScreen')
 export class lobbyScreen extends Component {
-
     start() {
+
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
             if(!err){
                 DataCenter.instance.appConfig = data?.json
+                DataCenter.instance.channelID = DataCenter.instance.appConfig.channelID ?? ENUM_CHANNEL_ID.ACCOUNT
             }
         })
 

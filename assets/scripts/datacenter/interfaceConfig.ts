@@ -64,6 +64,11 @@ export enum ENUM_POP_MESSAGE_TYPE {
     NUM0 = 3, // 无按钮
 }
 
+export enum ENUM_CHANNEL_ID {
+    MINIGAME_WECHAT = 'wechatMiniGame',
+    ACCOUNT = 'account',
+}
+
 export interface GAME_RECORD {
     gameid: number;
     win: number;

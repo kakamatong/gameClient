@@ -124,7 +124,7 @@ export class Mail {
 
         const payload = {
             'userid':DataCenter.instance.userid,
-            'channelid':"account"
+            'channelid':DataCenter.instance.channelID
         }
         
         httpPostWithDefaultJWT( url, body, payload)
