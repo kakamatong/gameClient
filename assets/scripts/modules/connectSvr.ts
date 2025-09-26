@@ -2,6 +2,7 @@ import { DataCenter } from "../datacenter/datacenter";
 import { LobbySocketManager } from "../frameworks/lobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
 import { MiniGameUtils } from "../frameworks/utils/sdk/miniGameUtils";
+import { httpPostWithDefaultJWT } from "../frameworks/utils/utils";
 import { Auth } from "./auth";
 import { AuthList } from "./authList";
 import { sys } from 'cc';
@@ -15,6 +16,24 @@ export class ConnectSvr {
         return this._instance;
     }
 
+    httpLogin(data:any, callBack?:(b:boolean, data:any)=>void){ 
+        const payload = {
+            'userid':0,
+            'channelid':DataCenter.instance.channelID
+        }
+        const req = {
+            loginType:"",
+            loginData:JSON.parse(data)
+        }
+        const url = DataCenter.instance.appConfig.webUrl + "login";
+        httpPostWithDefaultJWT(url, req, payload).then(data => {
+            callBack && callBack(true, data);
+        })
+        .catch(error => {
+            callBack && callBack(false, error);
+        });
+    }
+
     checkAutoLogin(callBack?:(b:boolean)=>void){
         this.autoLogin(false, callBack)
     }
@@ -24,6 +43,15 @@ export class ConnectSvr {
             const func = (success:boolean,data:any) => { 
                 if (success) {
                     // todo:weblogin
+                    const func2 = (b:boolean, data:any)=>{
+                        if (b) {
+                            // 将认证列表数据存储到DataCenter
+                            callBack && callBack(true)
+                        }else{
+                            callBack && callBack(false)
+                        }
+                    }
+                    this.httpLogin(data,func2)
                 }else{
                     callBack && callBack(false)
                 }
