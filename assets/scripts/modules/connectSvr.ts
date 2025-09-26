@@ -1,6 +1,7 @@
 import { DataCenter } from "../datacenter/datacenter";
 import { LobbySocketManager } from "../frameworks/lobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
+import { MiniGameUtils } from "../frameworks/utils/sdk/miniGameUtils";
 import { Auth } from "./auth";
 import { AuthList } from "./authList";
 import { sys } from 'cc';
@@ -16,6 +17,21 @@ export class ConnectSvr {
 
     checkAutoLogin(callBack?:(b:boolean)=>void){
         this.autoLogin(false, callBack)
+    }
+
+    checkPlatformLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void){
+        if (MiniGameUtils.instance.isThirdPlatform()) {
+            const func = (success:boolean,data:any) => { 
+                if (success) {
+                    // todo:weblogin
+                }else{
+                    callBack && callBack(false)
+                }
+            };
+            MiniGameUtils.instance.login(null, func)
+        }else{
+            this.autoLogin(needLogin, callBack)
+        }
     }
 
     autoLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{

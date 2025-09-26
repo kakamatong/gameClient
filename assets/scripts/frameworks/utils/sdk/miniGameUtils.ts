@@ -21,6 +21,10 @@ export class MiniGameUtils {
         return this._instance;
     }
 
+    isThirdPlatform():boolean { 
+        return this.isWeChatGame()
+    }
+
     isWeChatGame():boolean { 
         return sys.platform === sys.Platform.WECHAT_GAME;
     }
