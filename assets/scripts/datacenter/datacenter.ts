@@ -91,6 +91,7 @@ export class DataCenter {
 
     private _channelID:string = '';
     private _gameRecords:GAME_RECORD | null = null;
+    private _allreadyThirdLogin:boolean = false;
 
     /**
      * @property {DataCenter} _instance - 单例实例
@@ -263,5 +264,13 @@ export class DataCenter {
 
     get channelID():string{
         return this._channelID;
+    }
+
+    set allreadyThirdLogin(b:boolean){
+        this._allreadyThirdLogin = b;
+    }
+
+    get allreadyThirdLogin():boolean{
+        return this._allreadyThirdLogin;
     }
 }

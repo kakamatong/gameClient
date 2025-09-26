@@ -40,10 +40,11 @@ export class ConnectSvr {
     }
 
     checkPlatformLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void){
-        if (MiniGameUtils.instance.isThirdPlatform()) {
+        if (MiniGameUtils.instance.isThirdPlatform() && (!DataCenter.instance.allreadyThirdLogin || needLogin)) {
             const func = (success:boolean,data:any) => { 
                 if (success) {
                     // todo:weblogin
+                    DataCenter.instance.allreadyThirdLogin = true;
                     const func2 = (b:boolean, data:any)=>{
                         if (b) {
                             // 将认证列表数据存储到DataCenter
