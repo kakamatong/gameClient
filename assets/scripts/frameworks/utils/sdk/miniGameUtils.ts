@@ -70,8 +70,8 @@ export class MiniGameUtils {
         if (this.isWeChatGame()) {
             wx && wx.login({
                 timeout: 5000,
-                success: (code:string) => { 
-                    callBack && callBack(true,code)
+                success: (data:any) => { 
+                    callBack && callBack(true,data.code)
                 },
 
                 fail: (errMsg:string, errno:number) => {
@@ -79,7 +79,5 @@ export class MiniGameUtils {
                 }
             })
         }
-
-        callBack && callBack(true)
     }
 }

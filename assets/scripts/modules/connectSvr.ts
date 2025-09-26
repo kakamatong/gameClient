@@ -24,13 +24,17 @@ export class ConnectSvr {
 
         const req = {
             appid:1,
-            loginType:"",
+            loginType:"wechatMiniGame",
             loginData:data
         }
         const url = DataCenter.instance.appConfig.webUrl + "/api/game/thirdlogin";
         httpPostWithDefaultJWT(url, req, payload).then(data => {
             console.log(data)
-            callBack && callBack(true, data);
+            if (data.code == 200) {
+                callBack && callBack(true, data);
+            }else{
+                callBack && callBack(false, data);
+            }
         })
         .catch(error => {
             callBack && callBack(false, error);
@@ -46,6 +50,7 @@ export class ConnectSvr {
         if (MiniGameUtils.instance.isThirdPlatform() && (!DataCenter.instance.allreadyThirdLogin || needLogin)) {
             const func = (success:boolean,data:any) => { 
                 if (success) {
+                    console.log('third login success ', data)
                     // todo:weblogin
                     DataCenter.instance.allreadyThirdLogin = true;
                     const func2 = (b:boolean, data:any)=>{
