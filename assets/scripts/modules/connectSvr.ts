@@ -35,7 +35,8 @@ export class ConnectSvr {
     }
 
     checkAutoLogin(callBack?:(b:boolean)=>void){
-        this.autoLogin(false, callBack)
+        //this.autoLogin(false, callBack)
+        this.checkPlatformLogin(false, callBack)
     }
 
     checkPlatformLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void){
@@ -46,7 +47,8 @@ export class ConnectSvr {
                     const func2 = (b:boolean, data:any)=>{
                         if (b) {
                             // 将认证列表数据存储到DataCenter
-                            callBack && callBack(true)
+                            //callBack && callBack(true)
+                            this.thirdLogin(data.openid, data.token, callBack)
                         }else{
                             callBack && callBack(false)
                         }
@@ -60,6 +62,16 @@ export class ConnectSvr {
         }else{
             this.autoLogin(needLogin, callBack)
         }
+    }
+
+    thirdLogin(acc:string, pwd: string,callBack?:(b:boolean)=>void){ 
+        this.checkAuthList((success)=>{
+            if(success){
+                this.login(acc, pwd, callBack);
+            }else{
+                callBack && callBack(false)
+            }
+        })
     }
 
     autoLogin(needLogin:boolean = false, callBack?:(b:boolean)=>void):void{
