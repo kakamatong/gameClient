@@ -21,12 +21,15 @@ export class ConnectSvr {
             'userid':0,
             'channelid':DataCenter.instance.channelID
         }
+
         const req = {
+            appid:1,
             loginType:"",
-            loginData:JSON.parse(data)
+            loginData:data
         }
-        const url = DataCenter.instance.appConfig.webUrl + "login";
+        const url = DataCenter.instance.appConfig.webUrl + "/api/game/thirdlogin";
         httpPostWithDefaultJWT(url, req, payload).then(data => {
+            console.log(data)
             callBack && callBack(true, data);
         })
         .catch(error => {
