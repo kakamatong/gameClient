@@ -1,7 +1,7 @@
 
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
-import {httpRequest} from '../frameworks/utils/utils';
+import { MiniGameUtils } from '../frameworks/utils/sdk/miniGameUtils';
 
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
@@ -58,7 +58,7 @@ export class AuthList {
 
         log(LogColors.blue(`Sending POST request to: ${url}`));
 
-        httpRequest(url, 'POST', {'Content-Type': 'application/json',}, {}).then(data => {
+        MiniGameUtils.instance.request(url, 'POST', {'Content-Type': 'application/json',}, {}).then(data => {
             log(LogColors.green('authList request successful!'));
             // 将认证列表数据存储到DataCenter
             if (data && data.data) {
