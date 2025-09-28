@@ -65,7 +65,12 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onSocketDisconnect(){
-        this.startLogin()
+        const comp = this.node.components[0]
+        const func = ()=>{
+            this.startLogin()
+        }
+        comp.scheduleOnce(func, 0.2)
+        
     }
 
     startLogin(){
