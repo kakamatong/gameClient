@@ -25,4 +25,8 @@ export class UserData {
         DataCenter.instance.userData = data;
         DispatchEvent('userData',data)
     }
+
+    updateUserNameAndHeadurl(nickname:string, headurl:string){
+        LobbySocketManager.instance.sendToServer('updateUserNameAndHeadurl', { nickname: nickname, headurl: headurl })
+    }
 }

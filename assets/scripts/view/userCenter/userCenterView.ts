@@ -5,6 +5,7 @@ import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { DataCenter } from '../../datacenter/datacenter';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 import { TipsView } from '../common/tipsView';
+import { UserData } from '../../modules/userData';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -55,6 +56,8 @@ export class UserCenterView extends FGUIUserCenterView {
                         DataCenter.instance.userData.nickname = userInfo.nickName
                         DataCenter.instance.headurl = userInfo.avatarUrl
                         this.updateUserInfo()
+                        const userData = new UserData()
+                        userData.updateUserNameAndHeadurl(userInfo.nickName, userInfo.avatarUrl)
                     }
                 }else{
                     TipsView.showView({content:"用户信息获取失败"})
