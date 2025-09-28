@@ -95,4 +95,8 @@ export class MiniGameUtils {
             },
         })
     }
+
+    openPrivacyContract(data?:any){
+        wx && wx.openPrivacyContract(data)
+    }
 }

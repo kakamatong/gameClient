@@ -2,6 +2,7 @@ import { sys } from 'cc';
 import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import FGUIPrivacyView from '../../fgui/privacy/FGUIPrivacyView';
 import * as fgui from "fairygui-cc";
+import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 
 export class PrivacyView extends FGUIPrivacyView {
     private _resolve:any | null = null;
@@ -21,7 +22,7 @@ export class PrivacyView extends FGUIPrivacyView {
 
     onBtnPrivacy(): void {
         // 跳转隐私协议
-        
+        MiniGameUtils.instance.openPrivacyContract()
     }
 }
 fgui.UIObjectFactory.setExtension(PrivacyView.URL, PrivacyView);
