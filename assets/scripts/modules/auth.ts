@@ -47,6 +47,7 @@ export class Auth {
             //     s.start(url, undefined, this.resp.bind(this))
             // }
             this._time = Date.now()
+            console.log('auth url:', url)
             LobbySocketManager.instance.start(url, undefined, this.resp.bind(this))
         })
     }
