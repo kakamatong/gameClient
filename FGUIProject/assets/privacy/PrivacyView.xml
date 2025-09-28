@@ -16,30 +16,12 @@
     </component>
     <text id="n3_7ivz" name="n3" xy="119,671" size="539,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="在您使用 猜拳-猜丁壳 服务之前，请仔细&#xA;阅读"/>
     <text id="n4_7ivz" name="n4" xy="117,747" size="544,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="如您同意该指引，请点击“同意”开始使&#xA;用。"/>
-    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="443,685" group="n10_7ivz">
+    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="317,685" group="n10_7ivz">
       <Button titleColor="#ff0000" titleFontSize="30"/>
       <property target="title" propertyId="0" value="《隐私政策指引》"/>
       <property target="icon" propertyId="1" value=""/>
     </component>
-    <component id="n9_7ivz" name="UI_BTN_USER" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="224,684" group="n10_7ivz">
-      <Button titleColor="#ff0000" titleFontSize="30"/>
-      <property target="title" propertyId="0" value="《用户协议》"/>
-      <property target="icon" propertyId="1" value=""/>
-    </component>
     <group id="n10_7ivz" name="n10" xy="59,449" size="657,789" advanced="true">
-      <relation target="" sidePair="center-center,middle-middle"/>
-    </group>
-    <image id="n12_7ivz" name="n12" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n19_7ivz"/>
-    <component id="n20_7ivz" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="637,450" group="n19_7ivz"/>
-    <list id="n21_7ivz" name="n21" xy="107,524" size="567,688" group="n19_7ivz" overflow="scroll" defaultItem="ui://0b8bc4vt7ivz1">
-      <gearDisplay controller="ctrl_privacy" pages="0"/>
-      <item/>
-    </list>
-    <list id="n22_p4e4" name="n22" xy="107,524" size="567,688" group="n19_7ivz" overflow="scroll" defaultItem="ui://0b8bc4vtp4e4k">
-      <gearDisplay controller="ctrl_privacy" pages="1"/>
-      <item/>
-    </list>
-    <group id="n19_7ivz" name="UI_GROUP_PRIVACY" xy="59,449" size="657,789" visible="false" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
   </displayList>

@@ -80,4 +80,19 @@ export class MiniGameUtils {
             })
         }
     }
+
+    requirePrivacyAuthorize(callBack1:(success:boolean)=>void, callBack2:(resolve:any)=>void){
+        wx && wx.onNeedPrivacyAuthorization((resolve:any, eventInfo:any)=>{
+            callBack2 && callBack2(resolve)
+        })
+
+        wx && wx.requirePrivacyAuthorize({
+            success:()=>{
+                callBack1 && callBack1(true)
+            },
+            fail:()=>{
+                callBack1 && callBack1(false)
+            },
+        })
+    }
 }

@@ -18,19 +18,7 @@ export class PrivacyView extends FGUIPrivacyView {
 
     onBtnPrivacy(): void {
         // 跳转隐私协议
-        this.UI_GROUP_PRIVACY.visible = true
-        this.ctrl_privacy.selectedIndex = 0
+        
     }
-
-    onBtnClose(): void {
-        this.UI_GROUP_PRIVACY.visible = false
-    }
-
-    onBtnUser(): void {
-        // 跳转用户协议
-        this.UI_GROUP_PRIVACY.visible = true
-        this.ctrl_privacy.selectedIndex = 1
-    }
-    
 }
 fgui.UIObjectFactory.setExtension(PrivacyView.URL, PrivacyView);

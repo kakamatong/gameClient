@@ -2,22 +2,6 @@
 <packageDescription id="0b8bc4vt">
   <resources>
     <component id="7ivz0" name="PrivacyView.xml" path="/" exported="true"/>
-    <component id="7ivz1" name="compPrivacy.xml" path="/comp/"/>
-    <image id="p4e47" name="privacy_01.png" path="/imgs/"/>
-    <image id="p4e48" name="privacy_02.png" path="/imgs/"/>
-    <image id="p4e49" name="privacy_03.png" path="/imgs/"/>
-    <image id="p4e4a" name="privacy_04.png" path="/imgs/"/>
-    <image id="p4e4b" name="privacy_05.png" path="/imgs/"/>
-    <image id="p4e4c" name="user_01.png" path="/imgs/"/>
-    <image id="p4e4d" name="user_02.png" path="/imgs/"/>
-    <image id="p4e4e" name="user_03.png" path="/imgs/"/>
-    <image id="p4e4f" name="user_04.png" path="/imgs/"/>
-    <image id="p4e4g" name="user_05.png" path="/imgs/"/>
-    <image id="p4e4h" name="user_06.png" path="/imgs/"/>
-    <image id="p4e4i" name="user_07.png" path="/imgs/"/>
-    <image id="p4e4j" name="user_09.png" path="/imgs/"/>
-    <component id="p4e4k" name="compUser.xml" path="/comp/"/>
-    <image id="p4e4l" name="user_08.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
