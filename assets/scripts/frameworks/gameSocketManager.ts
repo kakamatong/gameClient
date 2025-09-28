@@ -1,4 +1,4 @@
-import { LogColors } from './framework';
+import { DispatchEvent, LogColors } from './framework';
 import { SocketManager } from './socketManager';
 
 export class GameSocketManager extends SocketManager {
@@ -40,5 +40,13 @@ export class GameSocketManager extends SocketManager {
         super.onOpen(event);
         // 游戏区链接没有agent，所以打开socket后，直接通过成功
         this.agentReady(null);
+    }
+
+    onClose(event: any) {
+        if (this.isOpen()) {
+            // 断线了
+            DispatchEvent('gameSocketDisconnect',{})
+        }
+        super.onClose(event);
     }
 }

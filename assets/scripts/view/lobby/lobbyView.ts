@@ -39,6 +39,7 @@ export class LobbyView extends FGUILobbyView {
         AddEventListener('userData',this.onUserInfo, this);
         AddEventListener('userStatus',this.onUserStatus, this);
         AddEventListener('userRichs',this.onUserRiches, this);
+        AddEventListener('socketDisconnect',this.onSocketDisconnect, this);
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
@@ -48,6 +49,7 @@ export class LobbyView extends FGUILobbyView {
         RemoveEventListener('userData', this.onUserInfo);
         RemoveEventListener('userStatus', this.onUserStatus);
         RemoveEventListener('userRichs', this.onUserRiches);
+        RemoveEventListener('socketDisconnect', this.onSocketDisconnect);
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
     }
 
@@ -60,6 +62,10 @@ export class LobbyView extends FGUILobbyView {
         this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
         this._node3 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_3
         this._node4 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_4
+    }
+
+    onSocketDisconnect(){
+        this.startLogin()
     }
 
     startLogin(){

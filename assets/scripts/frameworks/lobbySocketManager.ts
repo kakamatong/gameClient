@@ -1,3 +1,4 @@
+import { DispatchEvent } from './framework';
 import { SocketManager } from './socketManager';
 
 export class LobbySocketManager extends SocketManager {
@@ -13,5 +14,13 @@ export class LobbySocketManager extends SocketManager {
 
     constructor(){
         super();
+    }
+
+    onClose(event: any) {
+        if (this.isOpen()) {
+            // 断线了
+            DispatchEvent('socketDisconnect',{})
+        }
+        super.onClose(event);
     }
 }
