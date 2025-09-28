@@ -69,6 +69,11 @@ export enum ENUM_CHANNEL_ID {
     ACCOUNT = 'account',
 }
 
+export const LOGIN_TYPE = {
+    [ENUM_CHANNEL_ID.MINIGAME_WECHAT] : 'wechatMiniGame',
+    [ENUM_CHANNEL_ID.ACCOUNT] : 'account',
+}
+
 export interface GAME_RECORD {
     gameid: number;
     win: number;

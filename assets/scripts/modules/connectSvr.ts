@@ -1,4 +1,5 @@
 import { DataCenter } from "../datacenter/datacenter";
+import { ENUM_CHANNEL_ID, LOGIN_TYPE } from "../datacenter/interfaceConfig";
 import { LobbySocketManager } from "../frameworks/lobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
 import { MiniGameUtils } from "../frameworks/utils/sdk/miniGameUtils";
@@ -24,7 +25,7 @@ export class ConnectSvr {
 
         const req = {
             appid:1,
-            loginType:"wechatMiniGame",
+            loginType:DataCenter.instance.channelLoginType,
             loginData:data
         }
         const url = DataCenter.instance.appConfig.webUrl + "/api/game/thirdlogin";
@@ -76,7 +77,12 @@ export class ConnectSvr {
     thirdLogin(acc:string, pwd: string,callBack?:(b:boolean)=>void){ 
         this.checkAuthList((success)=>{
             if(success){
-                this.login(acc, pwd, callBack);
+                const data = {
+                    acc:acc,
+                    pwd:pwd,
+                    loginType:DataCenter.instance.channelLoginType
+                }
+                this.login(data, callBack);
             }else{
                 callBack && callBack(false)
             }
@@ -92,7 +98,12 @@ export class ConnectSvr {
                     const acc = urlParams.get('userid')
                     const pwd = urlParams.get('pwd')
                     if (acc && pwd) {
-                        this.login(acc, pwd, callBack);
+                        const data = {
+                            acc:acc,
+                            pwd:pwd,
+                            loginType:LOGIN_TYPE[ENUM_CHANNEL_ID.ACCOUNT]
+                        }
+                        this.login(data, callBack);
                         return
                     }
                 }
@@ -110,7 +121,12 @@ export class ConnectSvr {
                 }else{
                     // 随机注册账号
                     const acc = `tourist_${new Date().getTime()}`
-                    this.login(acc, 'tourist123', callBack);
+                    const data = {
+                        acc:acc,
+                        pwd:'tourist123',
+                        loginType:LOGIN_TYPE[ENUM_CHANNEL_ID.ACCOUNT]
+                    }
+                    this.login(data, callBack);
                 }
             }else{
                 callBack && callBack(false)
@@ -121,7 +137,12 @@ export class ConnectSvr {
     accLogin(acc:string, pwd: string,callBack?:(success:boolean)=>void){
         this.checkAuthList((success)=>{
             if(success){
-                this.login(acc, pwd, callBack)
+                const data = {
+                    acc:acc,
+                    pwd:pwd,
+                    loginType:LOGIN_TYPE[ENUM_CHANNEL_ID.ACCOUNT]
+                }
+                this.login(data, callBack)
             }else{
                 callBack && callBack(false)
             }
@@ -137,7 +158,7 @@ export class ConnectSvr {
         })
     }
 
-    login(acc:string, pwd: string, callBack?:(b:boolean)=>void){
+    login(data:any, callBack?:(b:boolean)=>void){
         const func = (b:boolean, data?:any)=>{
             console.log('login callback:', b);
             if(b){
@@ -150,9 +171,10 @@ export class ConnectSvr {
 
         const loginInfo = DataCenter.instance.getLoginInfo();
         const accInfo: ACCOUNT_INFO = {
-            username: acc,
-            password: pwd,
-            server: loginInfo?.server ?? (this.getAuthAddr() ?? "")
+            username: data.acc,
+            password: data.pwd,
+            server: loginInfo?.server ?? (this.getAuthAddr() ?? ""),
+            loginType:data.loginType
         };
         const login = new Login();
         login.start(accInfo, DataCenter.instance.loginList, func);

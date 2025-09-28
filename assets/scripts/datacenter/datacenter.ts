@@ -1,4 +1,4 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID } from "./interfaceConfig";
 import { sys,resources } from "cc";
 
 /**
@@ -89,7 +89,7 @@ export class DataCenter {
         // 'game2':'ws://192.168.1.140:9006',
     }
 
-    private _channelID:string = '';
+    private _channelID:ENUM_CHANNEL_ID = ENUM_CHANNEL_ID.ACCOUNT;
     private _gameRecords:GAME_RECORD | null = null;
     private _allreadyThirdLogin:boolean = false;
 
@@ -264,11 +264,11 @@ export class DataCenter {
         return this._gameRecords;
     }
 
-    set channelID(id:string){
+    set channelID(id:ENUM_CHANNEL_ID){
         this._channelID = id;
     }
 
-    get channelID():string{
+    get channelID():ENUM_CHANNEL_ID{
         return this._channelID;
     }
 
@@ -278,5 +278,9 @@ export class DataCenter {
 
     get allreadyThirdLogin():boolean{
         return this._allreadyThirdLogin;
+    }
+
+    get channelLoginType():string{
+        return LOGIN_TYPE[this._channelID];
     }
 }
