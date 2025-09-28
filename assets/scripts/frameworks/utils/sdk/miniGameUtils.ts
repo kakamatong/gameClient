@@ -98,6 +98,13 @@ export class MiniGameUtils {
     }
 
     openPrivacyContract(data?:any){
-        wx && wx.openPrivacyContract(data)
+        wx && wx.openPrivacyContract({
+            success: (res:any) => { 
+                console.log('隐私协议成功打开')
+            },
+            fail: (res:any) => { 
+                console.log('隐私协议打开失败')
+            }
+        })
     }
 }
