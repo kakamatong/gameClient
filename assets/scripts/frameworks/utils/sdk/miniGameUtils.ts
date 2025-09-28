@@ -110,8 +110,13 @@ export class MiniGameUtils {
         })
     }
 
+    getSystemInfoSync(){
+        return wx && wx.getSystemInfoSync()
+    }
+
     createUserInfoButton(data:any){
         if (!this._userInfoBtn) {
+            console.log("创建按钮")
             this._userInfoBtn = wx && wx.createUserInfoButton({
                 type: 'image',
                 image: '',
@@ -137,6 +142,7 @@ export class MiniGameUtils {
                 }
                 
             })
+            this._userInfoBtn.show()
         }
     }
 

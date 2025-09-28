@@ -32,14 +32,16 @@ export class UserCenterView extends FGUIUserCenterView {
     }
 
     createUserInfoBtn(){
+        const screenWidth = MiniGameUtils.instance.getSystemInfoSync().screenWidth
+        const screenHeight = MiniGameUtils.instance.getSystemInfoSync().screenHeight
         const x = this.UI_BTN_WECHAT.x
         const y = this.UI_BTN_WECHAT.y
         const width = this.UI_BTN_WECHAT.width
         const height = this.UI_BTN_WECHAT.height
-        const left = x / fgui.GRoot.inst.width
-        const top = y / fgui.GRoot.inst.height
-        const width2 = width / fgui.GRoot.inst.width
-        const height2 = height / fgui.GRoot.inst.height
+        const left = x / fgui.GRoot.inst.width * screenWidth
+        const top = y / fgui.GRoot.inst.height * screenHeight
+        const width2 = width / fgui.GRoot.inst.width * screenWidth
+        const height2 = height / fgui.GRoot.inst.height * screenHeight
         MiniGameUtils.instance.createUserInfoButton({
             left: left,
             top: top,
