@@ -4,6 +4,7 @@ import FGUILoginView from '../../fgui/login/FGUILoginView';
 import * as fgui from "fairygui-cc";
 import { LobbyView } from '../lobby/lobbyView';
 import { PrivacyView } from '../privacy/privacyView';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 
 export class LoginView extends FGUILoginView {
     show(data?: any):void{
@@ -13,12 +14,23 @@ export class LoginView extends FGUILoginView {
     onBtnStart(): void {
         const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
         if (agree) {
-            LobbyView.showView()
-            LoginView.hideView()
+            this.showLobby()
         }else{
             //显示隐私弹窗
-            PrivacyView.showView()
+            MiniGameUtils.instance.requirePrivacyAuthorize((b:boolean)=>{
+                if (b) {
+                    sys.localStorage.setItem(LOCAL_KEY.AGREE_PRIVACY, 1)
+                    this.showLobby()
+                }
+            }, (resolve)=>{
+                PrivacyView.showView({resolve: resolve})
+            })
         }
+    }
+
+    showLobby():void{
+        LobbyView.showView()
+        LoginView.hideView()
     }
 }
 fgui.UIObjectFactory.setExtension(LoginView.URL, LoginView);

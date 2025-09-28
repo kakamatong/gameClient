@@ -4,15 +4,18 @@ import FGUIPrivacyView from '../../fgui/privacy/FGUIPrivacyView';
 import * as fgui from "fairygui-cc";
 
 export class PrivacyView extends FGUIPrivacyView {
+    private _resolve:any | null = null;
     show(data?: any):void{
-        
+        this._resolve = data.resolve
+        this._resolve && this._resolve({event:'exposureAuthorization'})
     }
     onBtnAgree(): void {
-        sys.localStorage.setItem(LOCAL_KEY.AGREE_PRIVACY, 1)
+        this._resolve && this._resolve({event:'agree'})
         PrivacyView.hideView()
     }
 
     onBtnRefuse(): void {
+        this._resolve && this._resolve({event:'disagree'})
         PrivacyView.hideView()
     }
 
