@@ -6,6 +6,7 @@ import { DataCenter } from '../../datacenter/datacenter';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
+import { DispatchEvent } from '../../frameworks/framework';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -58,6 +59,7 @@ export class UserCenterView extends FGUIUserCenterView {
                         this.updateUserInfo()
                         const userData = new UserData()
                         userData.updateUserNameAndHeadurl(userInfo.nickName, userInfo.avatarUrl)
+                        DispatchEvent('userData',DataCenter.instance.userData)
                     }
                 }else{
                     TipsView.showView({content:"用户信息获取失败"})

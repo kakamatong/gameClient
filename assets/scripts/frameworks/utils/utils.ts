@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';   
 import { MiniGameUtils } from './sdk/miniGameUtils';
+import { Asset, assetManager, ImageAsset, SpriteFrame, Texture2D } from 'cc';
 
 // DH参数配置
 const DH_GENERATOR = 5n;
@@ -981,4 +982,18 @@ export const getRandomInt = (min: number, max: number): number => {
 export const decodeBase64Node = (bufferStr: string): string=> {
     const parsed = CryptoJS.enc.Base64.parse(bufferStr)
     return parsed.toString(CryptoJS.enc.Utf8);
+}
+
+export const loadRemoteImage = (url: string, callback: (img: SpriteFrame) => void): void => {
+    assetManager.loadRemote<ImageAsset>(url, { ext: '.png' }, (err, img:ImageAsset) => {
+        if (err) {
+            console.error(err.message);
+            return;
+        }
+        // const texture = new Texture2D();
+		// texture.image = img;
+        const sp = SpriteFrame.createWithImage(img);
+        
+        callback(sp);
+    })
 }
