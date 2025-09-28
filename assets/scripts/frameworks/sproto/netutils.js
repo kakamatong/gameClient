@@ -25,6 +25,25 @@ var netutils = (function() {
 
         for (var i = 0; i < str.length; i++) {
             var code = str.charCodeAt(i);
+            
+            // 检查是否是代理对的高位代理
+            if (0xD800 <= code && code <= 0xDBFF && i + 1 < str.length) {
+                var nextCode = str.charCodeAt(i + 1);
+                // 检查是否是代理对的低位代理
+                if (0xDC00 <= nextCode && nextCode <= 0xDFFF) {
+                    // 计算完整的Unicode码点
+                    var fullCode = (code - 0xD800) * 0x400 + (nextCode - 0xDC00) + 0x10000;
+                    // 4字节UTF-8编码
+                    byteSize += 4;
+                    back.push((240 | (7 & (fullCode >> 18))));
+                    back.push((128 | (63 & (fullCode >> 12))));
+                    back.push((128 | (63 & (fullCode >> 6))));
+                    back.push((128 | (63 & fullCode)));
+                    i++; // 跳过下一个代码单元
+                    continue;
+                }
+            }
+            
             if (0x00 <= code && code <= 0x7f) {
                 byteSize += 1;
                 back.push(code);
@@ -53,25 +72,61 @@ var netutils = (function() {
         }
 
         var UTF = '';
-        for (var i = 0; i < arr.length; i++) {
+        var i = 0;
+        while (i < arr.length) {
             if (arr[i] == null) {
                 break;
             }
 
-            var one = arr[i].toString(2);
-            var v = one.match(/^1+?(?=0)/);
-            if (v && one.length == 8) {
-                var bytesLength = v[0].length;
-                var store = arr[i].toString(2).slice(7 - bytesLength);
-
-                for (var st = 1; st < bytesLength; st++) {
-                    store += arr[st + i].toString(2).slice(2);
-                }
-                UTF += String.fromCharCode(parseInt(store, 2));
-                i += bytesLength - 1;
-            } else {
-                UTF += String.fromCharCode(arr[i]);
+            // 计算UTF-8字符的字节数
+            var byteValue = arr[i];
+            var bytesLength = 1;
+            
+            if ((byteValue & 0x80) === 0) {
+                // 1字节字符 (0xxxxxxx)
+                bytesLength = 1;
+            } else if ((byteValue & 0xE0) === 0xC0) {
+                // 2字节字符 (110xxxxx)
+                bytesLength = 2;
+            } else if ((byteValue & 0xF0) === 0xE0) {
+                // 3字节字符 (1110xxxx)
+                bytesLength = 3;
+            } else if ((byteValue & 0xF8) === 0xF0) {
+                // 4字节字符 (11110xxx)
+                bytesLength = 4;
             }
+
+            // 确保不会越界
+            if (i + bytesLength > arr.length) {
+                // 数据不完整，添加原始字节
+                UTF += String.fromCharCode(arr[i]);
+                i++;
+                continue;
+            }
+
+            var codePoint;
+            if (bytesLength === 1) {
+                codePoint = arr[i];
+            } else if (bytesLength === 2) {
+                codePoint = ((arr[i] & 0x1F) << 6) | (arr[i+1] & 0x3F);
+            } else if (bytesLength === 3) {
+                codePoint = ((arr[i] & 0x0F) << 12) | ((arr[i+1] & 0x3F) << 6) | (arr[i+2] & 0x3F);
+            } else if (bytesLength === 4) {
+                codePoint = ((arr[i] & 0x07) << 18) | ((arr[i+1] & 0x3F) << 12) | 
+                           ((arr[i+2] & 0x3F) << 6) | (arr[i+3] & 0x3F);
+            }
+
+            // 处理代理对
+            if (codePoint > 0xFFFF) {
+                // 转换为代理对
+                codePoint -= 0x10000;
+                UTF += String.fromCharCode(0xD800 + (codePoint >> 10));
+                UTF += String.fromCharCode(0xDC00 + (codePoint & 0x3FF));
+            } else {
+                UTF += String.fromCharCode(codePoint);
+            }
+
+            i += bytesLength;
         }
         return UTF;
     };
