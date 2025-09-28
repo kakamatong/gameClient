@@ -1,6 +1,8 @@
 import { sys } from "cc";
 
 export class MiniGameUtils {
+
+    private _userInfoBtn: any|null = null;
     /**
      * @property {MiniGameUtils} _instance - 单例实例
      * @private
@@ -106,5 +108,42 @@ export class MiniGameUtils {
                 console.log('隐私协议打开失败')
             }
         })
+    }
+
+    createUserInfoButton(data:any){
+        if (!this._userInfoBtn) {
+            this._userInfoBtn = wx && wx.createUserInfoButton({
+                type: 'image',
+                image: '',
+                style: {
+                    left: data.left,
+                    top: data.top,
+                    width: data.width,
+                    height: data.height,
+                    backgroundColor: '',
+                    color: '',
+                    textAlign: 'center',
+                    fontSize: 16,
+                    borderRadius: 4
+                }
+            })
+
+            this._userInfoBtn.onTap((res:any) => { 
+                console.log('用户点击了按钮')
+                if (res.userInfo) {
+                    data.callBack && data.callBack(res.userInfo)
+                }else{
+                    data.callBack && data.callBack(null)
+                }
+                
+            })
+        }
+    }
+
+    destroyUserInfoButton(){
+        if (this._userInfoBtn) {
+            this._userInfoBtn.destroy()
+            this._userInfoBtn = null
+        }
     }
 }
