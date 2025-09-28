@@ -57,7 +57,7 @@ export class ConnectSvr {
                         if (b) {
                             // 将认证列表数据存储到DataCenter
                             //callBack && callBack(true)
-                            this.thirdLogin(data.openid, data.token, callBack)
+                            this.thirdLogin(data.data.openid, data.data.token, callBack)
                         }else{
                             callBack && callBack(false)
                         }
