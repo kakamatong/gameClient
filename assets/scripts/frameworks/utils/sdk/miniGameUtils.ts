@@ -81,8 +81,9 @@ export class MiniGameUtils {
         }
     }
 
-    requirePrivacyAuthorize(callBack1:(success:boolean)=>void, callBack2:(resolve:any)=>void){
+    requirePrivacyAuthorize(callBack1:(success:boolean)=>void, callBack2:(resolve:Function)=>void){
         wx && wx.onNeedPrivacyAuthorization((resolve:any, eventInfo:any)=>{
+            console.log('触发本次事件的接口是：' + eventInfo.referrer)
             callBack2 && callBack2(resolve)
         })
 

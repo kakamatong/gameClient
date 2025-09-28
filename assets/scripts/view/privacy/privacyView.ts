@@ -5,9 +5,9 @@ import * as fgui from "fairygui-cc";
 import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 
 export class PrivacyView extends FGUIPrivacyView {
-    private _resolve:any | null = null;
+    private _resolve:Function | null = null;
     show(data?: any):void{
-        this._resolve = data.resolve
+        this._resolve = data.resolvefunc
         this._resolve && this._resolve({event:'exposureAuthorization'})
     }
     onBtnAgree(): void {
