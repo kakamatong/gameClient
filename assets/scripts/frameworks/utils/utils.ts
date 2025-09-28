@@ -984,7 +984,11 @@ export const decodeBase64Node = (bufferStr: string): string=> {
     return parsed.toString(CryptoJS.enc.Utf8);
 }
 
-export const loadRemoteImage = (url: string, callback: (img: SpriteFrame) => void): void => {
+export const loadRemoteImage = (url: string, callback: (img: SpriteFrame| null) => void): void => {
+    if (!MiniGameUtils.instance.isThirdPlatform()) {
+        callback(null)
+        return
+    }
     assetManager.loadRemote<ImageAsset>(url, { ext: '.png' }, (err, img:ImageAsset) => {
         if (err) {
             console.error(err.message);

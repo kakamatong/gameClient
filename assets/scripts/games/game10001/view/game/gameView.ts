@@ -15,8 +15,10 @@ import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
 import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
+import {loadRemoteImage} from '../../../../frameworks/utils/utils'
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
+import { SpriteFrame } from 'cc';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -377,7 +379,15 @@ export class GameView extends FGUIGameView {
         //const head = this.UI_COMP_HEAD_1
         nicknanme.text = player.nickname ?? "";
         id.text = player.userid.toString();
-        head.UI_LOADER_HEAD.url = GameData.instance.getHeadurl(localseat)
+        const headurl = GameData.instance.getHeadurl(localseat)
+        loadRemoteImage(headurl, (img:SpriteFrame | null) => {
+            if (img) {
+                head.UI_LOADER_HEAD.texture = img;
+            }else{
+                head.UI_LOADER_HEAD.url = headurl
+            }
+        })
+
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
                 this.showOffLine(true)

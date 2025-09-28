@@ -7,6 +7,8 @@ import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
+import { loadRemoteImage } from '../../frameworks/utils/utils';
+import { SpriteFrame } from 'cc';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -27,7 +29,14 @@ export class UserCenterView extends FGUIUserCenterView {
     updateUserInfo():void{
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
-        (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
+        //(this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
+        loadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
+            if (img) {
+                (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
+            }else{
+                (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
+            }
+        })
     }
 
     onBtnClose(): void {

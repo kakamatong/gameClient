@@ -84,8 +84,13 @@ export class LobbyView extends FGUILobbyView {
         this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         //(this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        loadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame) => {
-            (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
+        loadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
+            if (img) {
+                (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
+            }else{
+                (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
+            }
+            
         })
     }
 

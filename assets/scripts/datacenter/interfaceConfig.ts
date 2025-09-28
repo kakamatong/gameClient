@@ -76,6 +76,5 @@ export interface GAME_RECORD {
     draw?: number;
 }
 
-//export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
-export const DEFAULT_HEADURL = 'https://thirdwx.qlogo.cn/mmopen/vi_32/KBJO5q2JNib1loJIBjACvW7zsyw6Z1TQS91FMoPR6QbXDb89N8b5uD2gOO1FvmqY5bLS93SzImPUZbQez7F4nVUmcjKLbMMl5vlT0DBdMS88/132'
+export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
 export const MAIN_GAME_ID = 10001
