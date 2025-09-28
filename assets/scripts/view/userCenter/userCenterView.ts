@@ -4,6 +4,7 @@ import { UserGameRecord } from '../../modules/userGameRecord';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { DataCenter } from '../../datacenter/datacenter';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
+import { TipsView } from '../common/tipsView';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -49,12 +50,14 @@ export class UserCenterView extends FGUIUserCenterView {
             height: height2,
             callBack: (userInfo:any)=>{
                 if (userInfo) {
+                    TipsView.showView({content:"已更新"})
                     if (DataCenter.instance.userData) {
                         DataCenter.instance.userData.nickname = userInfo.nickName
                         DataCenter.instance.headurl = userInfo.avatarUrl
                         this.updateUserInfo()
                     }
                 }else{
+                    TipsView.showView({content:"用户信息获取失败"})
                     console.log("用户信息获取失败/拒绝授权")
                 }
             }
