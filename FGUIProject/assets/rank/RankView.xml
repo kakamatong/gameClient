@@ -6,7 +6,7 @@
     </graph>
     <image id="n1_is91" name="n1" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,371" group="n7_is91"/>
     <image id="n10_gd4t" name="n10" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="89,498" size="595,524" group="n7_is91" alpha="0.5"/>
-    <list id="n3_is91" name="UI_LV_RANK" xy="90,498" size="595,524" group="n7_is91" overflow="scroll" defaultItem="ui://2a32uf5yis911" align="center" autoClearItems="true">
+    <list id="n3_is91" name="UI_LV_RANK" xy="90,509" size="595,502" group="n7_is91" overflow="scroll" defaultItem="ui://2a32uf5yis911" align="center" autoClearItems="true">
       <item/>
       <item/>
       <item/>

@@ -84,65 +84,76 @@ export class MiniGameUtils {
     }
 
     requirePrivacyAuthorize(callBack1:(success:boolean)=>void, callBack2:(resolve:Function)=>void){
-        wx && wx.onNeedPrivacyAuthorization((resolve:any, eventInfo:any)=>{
-            console.log('触发本次事件的接口是：' + eventInfo.referrer)
-            callBack2 && callBack2(resolve)
-        })
+        if (this.isWeChatGame()) {
+            wx && wx.onNeedPrivacyAuthorization((resolve:any, eventInfo:any)=>{
+                console.log('触发本次事件的接口是：' + eventInfo.referrer)
+                callBack2 && callBack2(resolve)
+            })
 
-        wx && wx.requirePrivacyAuthorize({
-            success:()=>{
-                callBack1 && callBack1(true)
-            },
-            fail:()=>{
-                callBack1 && callBack1(false)
-            },
-        })
+            wx && wx.requirePrivacyAuthorize({
+                success:()=>{
+                    callBack1 && callBack1(true)
+                },
+                fail:()=>{
+                    callBack1 && callBack1(false)
+                },
+            })
+        }
     }
 
     openPrivacyContract(data?:any){
-        wx && wx.openPrivacyContract({
-            success: (res:any) => { 
-                console.log('隐私协议成功打开')
-            },
-            fail: (res:any) => { 
-                console.log('隐私协议打开失败')
-            }
-        })
+        if (this.isWeChatGame()) {
+            wx && wx.openPrivacyContract({
+                success: (res:any) => { 
+                    console.log('隐私协议成功打开')
+                },
+                fail: (res:any) => { 
+                    console.log('隐私协议打开失败')
+                }
+            })
+        }
     }
 
     getSystemInfoSync(){
-        return wx && wx.getSystemInfoSync()
+        if (this.isWeChatGame()) {
+            return wx && wx.getSystemInfoSync()
+        }else{
+            return {screenWidth: 0, screenHeight: 0}
+        }
+        
     }
 
     createUserInfoButton(data:any){
-        if (!this._userInfoBtn) {
-            console.log("创建按钮")
-            this._userInfoBtn = wx && wx.createUserInfoButton({
-                type: 'image',
-                image: '',
-                style: {
-                    left: data.left,
-                    top: data.top,
-                    width: data.width,
-                    height: data.height,
-                    backgroundColor: '',
-                    color: '',
-                    textAlign: 'center',
-                    fontSize: 16,
-                    borderRadius: 4
-                }
-            })
+        if (this.isWeChatGame()) {
+            if (!this._userInfoBtn) {
+                console.log("创建按钮")
+                this._userInfoBtn = wx && wx.createUserInfoButton({
+                    type: 'image',
+                    image: '',
+                    style: {
+                        left: data.left,
+                        top: data.top,
+                        width: data.width,
+                        height: data.height,
+                        backgroundColor: '',
+                        color: '',
+                        textAlign: 'center',
+                        fontSize: 16,
+                        borderRadius: 4
+                    }
+                })
 
-            this._userInfoBtn.onTap((res:any) => { 
-                console.log('用户点击了按钮')
-                if (res.userInfo) {
-                    data.callBack && data.callBack(res.userInfo)
-                }else{
-                    data.callBack && data.callBack(null)
-                }
-                
-            })
-            this._userInfoBtn.show()
+                this._userInfoBtn.onTap((res:any) => { 
+                    console.log('用户点击了按钮')
+                    if (res.userInfo) {
+                        data.callBack && data.callBack(res.userInfo)
+                    }else{
+                        data.callBack && data.callBack(null)
+                    }
+                    
+                })
+                this._userInfoBtn.show()
+            }
         }
     }
 
