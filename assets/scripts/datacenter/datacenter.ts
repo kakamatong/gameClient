@@ -160,6 +160,12 @@ export class DataCenter {
         return this._userData;
     }
 
+    set headurl(url:string) {
+        if (this._userData) {
+            this._userData.headurl = url;
+        }
+    }
+
     get headurl():string {
         if(!this._userData?.headurl){
             return DEFAULT_HEADURL

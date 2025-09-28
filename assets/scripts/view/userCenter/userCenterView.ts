@@ -3,6 +3,7 @@ import * as fgui from "fairygui-cc";
 import { UserGameRecord } from '../../modules/userGameRecord';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { DataCenter } from '../../datacenter/datacenter';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -17,6 +18,7 @@ export class UserCenterView extends FGUIUserCenterView {
         gameRecords.req(func)
 
         this.updateUserInfo()
+        this.createUserInfoBtn()
     }
 
     updateUserInfo():void{
@@ -27,6 +29,44 @@ export class UserCenterView extends FGUIUserCenterView {
 
     onBtnClose(): void {
         UserCenterView.hideView()
+    }
+
+    createUserInfoBtn(){
+        const x = this.UI_BTN_WECHAT.x
+        const y = this.UI_BTN_WECHAT.y
+        const width = this.UI_BTN_WECHAT.width
+        const height = this.UI_BTN_WECHAT.height
+        const left = x / fgui.GRoot.inst.width
+        const top = y / fgui.GRoot.inst.height
+        const width2 = width / fgui.GRoot.inst.width
+        const height2 = height / fgui.GRoot.inst.height
+        MiniGameUtils.instance.createUserInfoButton({
+            left: left,
+            top: top,
+            width: width2,
+            height: height2,
+            callBack: (userInfo:any)=>{
+                if (userInfo) {
+                    if (DataCenter.instance.userData) {
+                        DataCenter.instance.userData.nickname = userInfo.nickName
+                        DataCenter.instance.headurl = userInfo.avatarUrl
+                        this.updateUserInfo()
+                    }
+                }else{
+                    console.log("用户信息获取失败/拒绝授权")
+                }
+            }
+
+        })
+    }
+
+    onBtnWechat(): void {
+        
+    }
+
+    protected onDestroy(): void {
+        super.onDestroy()
+        MiniGameUtils.instance.destroyUserInfoButton()
     }
 }
 fgui.UIObjectFactory.setExtension(UserCenterView.URL, UserCenterView);
