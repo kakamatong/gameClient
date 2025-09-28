@@ -16,11 +16,15 @@ export class LoginView extends FGUILoginView {
         if (agree) {
             this.showLobby()
         }else{
-            
+            this.showPrivacy()
         }
     }
 
     showPrivacy():void{
+        if (!MiniGameUtils.instance.isThirdPlatform()) {
+            sys.localStorage.setItem(LOCAL_KEY.AGREE_PRIVACY, 1)
+            this.showLobby()
+        }
         //显示隐私弹窗
         MiniGameUtils.instance.requirePrivacyAuthorize((b:boolean)=>{
             if (b) {
