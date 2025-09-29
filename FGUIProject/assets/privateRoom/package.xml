@@ -4,6 +4,7 @@
     <component id="nomu0" name="PrivateRoomView.xml" path="/" exported="true"/>
     <component id="nomu1" name="CompPrivateCreate.xml" path="/comp/"/>
     <component id="nomu2" name="CompPrivateJoin.xml" path="/comp/"/>
+    <component id="q5lz4" name="CompBtnItem.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

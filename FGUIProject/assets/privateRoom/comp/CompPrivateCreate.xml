@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="600,550">
+  <controller name="ctrl_mode" pages="0,3局2胜,1,5局3胜,2,7局4胜" selected="0"/>
   <displayList>
+    <image id="n8_q5lz" name="n8" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="16,53" size="569,346"/>
     <component id="n0_nomu" name="UI_BTN_CREATE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="185,433" size="230,98">
       <property target="title" propertyId="0" value="创建"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <text id="n1_ba3d" name="n1" xy="64,79" size="94,42" fontSize="30" color="#cc9933" strokeColor="#000000" text="人数："/>
+    <text id="n2_ba3d" name="n2" xy="64,165" size="94,42" fontSize="30" color="#cc9933" strokeColor="#000000" text="模式："/>
+    <component id="n4_q5lz" name="n4" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="169,72" size="120,56" touchable="false">
+      <Button checked="true"/>
+      <property target="title" propertyId="0" value="2人"/>
+    </component>
+    <component id="n5_q5lz" name="n5" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,152" size="177,56">
+      <Button checked="true" controller="ctrl_mode" page="0"/>
+      <property target="title" propertyId="0" value="3局2胜"/>
+    </component>
+    <component id="n6_q5lz" name="n6" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,152" size="177,56">
+      <Button checked="true" controller="ctrl_mode" page="1"/>
+      <property target="title" propertyId="0" value="5局3胜"/>
+    </component>
+    <component id="n7_q5lz" name="n7" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,232" size="177,56">
+      <Button checked="true" controller="ctrl_mode" page="2"/>
+      <property target="title" propertyId="0" value="7局4胜"/>
     </component>
   </displayList>
 </component>
