@@ -231,6 +231,15 @@ export class GameView extends FGUIGameView {
         if (GameData.instance.gameStart) {
             return
         }
+        
+        if (GameData.instance.isPrivateRoom) {
+            this.onBtnReady()
+        }else{
+            this.startMatch()
+        }
+    }
+
+    startMatch(){
         const func = (b:boolean, data?:any)=>{
             if (b) {
                 // 显示匹配view

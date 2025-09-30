@@ -13,7 +13,7 @@ export class ResultView extends FGUIResultView {
         })
 
         if (GameData.instance.isPrivateRoom) {
-            this.ctrl_btn.selectedIndex = 1
+            //this.ctrl_btn.selectedIndex = 1
         }
 
         if (data.scores && data.scores.length > 0) {
