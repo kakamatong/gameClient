@@ -7,9 +7,7 @@ export class CompClock extends FGUICompClock {
     private _clock:number = 0;
     protected onConstruct(){
         super.onConstruct();
-        const comp = this.node.components[0]
         this._scheid = this.tick.bind(this)
-        comp.schedule(this._scheid, 1)
     }
 
     tick(dt: number){
@@ -30,7 +28,18 @@ export class CompClock extends FGUICompClock {
         this.act.stop()
         this._isRunAct = false;
         this.tick(0)
+    }
 
+    protected onEnable(): void {
+        super.onEnable();
+        const comp = this.node.components[0]
+        comp.schedule(this._scheid, 1)
+    }
+
+    protected onDisable(): void {
+        super.onDisable();
+        const comp = this.node.components[0]
+        comp.unschedule(this._scheid)
     }
 }
 fgui.UIObjectFactory.setExtension(CompClock.URL, CompClock);
