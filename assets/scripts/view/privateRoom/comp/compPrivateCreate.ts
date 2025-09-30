@@ -18,7 +18,8 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
 
     onBtnCreate(): void {
         const gameRule = {
-            playerCnt:2
+            playerCnt:2,
+            mode: this.ctrl_mode.selectedIndex
         }
         const func = (result:any)=>{
             if(result && result.code == 1){
