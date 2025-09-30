@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
-  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="4"/>
+  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="1"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
       <relation target="" sidePair="width-width,height-height"/>
@@ -87,9 +87,12 @@
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
     <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="132,619" visible="false"/>
-    <image id="n39_jsve" name="n39" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="21,124" size="221,100" group="n41_jsve"/>
-    <text id="n40_jsve" name="UI_TXT_ROOMID" xy="29,131" size="205,42" group="n41_jsve" fontSize="30" color="#ffffff" align="center" vAlign="middle" text="房间号:000000"/>
-    <group id="n41_jsve" name="n41" xy="21,124" size="221,100" advanced="true">
+    <image id="n39_jsve" name="n39" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="21,124" size="221,161" group="n41_jsve"/>
+    <text id="n40_jsve" name="UI_TXT_ROOMID" xy="29,131" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="房间号:000000"/>
+    <text id="n46_ncy2" name="UI_TXT_RULE" xy="30,180" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="3局2胜"/>
+    <text id="n47_ncy2" name="UI_TXT_PROGRESS" xy="28,229" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="第0轮 共5轮"/>
+    <group id="n49_ncy2" name="n49" xy="28,131" size="207,147" group="n41_jsve" advanced="true" layout="vt" excludeInvisibles="true"/>
+    <group id="n41_jsve" name="n41" xy="21,124" size="221,161" advanced="true">
       <gearDisplay controller="ctrl_roomtype" pages="1"/>
       <relation target="" sidePair="left-left,top-top"/>
     </group>
