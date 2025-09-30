@@ -13,16 +13,16 @@
       <Button checked="true"/>
       <property target="title" propertyId="0" value="2人"/>
     </component>
-    <component id="n5_q5lz" name="n5" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,152" size="177,56">
+    <component id="n5_q5lz" name="UI_BTN_JU3" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,152" size="177,56">
       <Button checked="true" controller="ctrl_mode" page="0"/>
       <property target="title" propertyId="0" value="3局2胜"/>
     </component>
-    <component id="n6_q5lz" name="n6" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,152" size="177,56">
-      <Button checked="true" controller="ctrl_mode" page="1"/>
+    <component id="n6_q5lz" name="UI_BTN_JU5" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,152" size="177,56">
+      <Button controller="ctrl_mode" page="1"/>
       <property target="title" propertyId="0" value="5局3胜"/>
     </component>
-    <component id="n7_q5lz" name="n7" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,232" size="177,56">
-      <Button checked="true" controller="ctrl_mode" page="2"/>
+    <component id="n7_q5lz" name="UI_BTN_JU7" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,232" size="177,56">
+      <Button controller="ctrl_mode" page="2"/>
       <property target="title" propertyId="0" value="7局4胜"/>
     </component>
   </displayList>
