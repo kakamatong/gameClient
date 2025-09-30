@@ -382,6 +382,9 @@ export class GameView extends FGUIGameView {
         if (player) {
             player.status = data.status;
             this.showPlayerInfoBySeat(GameData.instance.seat2local(player.svrSeat))
+            if (data.userid == DataCenter.instance.userid && data.status == PLAYER_STATUS.ONLINE) {
+                this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.READY;
+            }
         }
     }
 
@@ -496,10 +499,16 @@ export class GameView extends FGUIGameView {
         const func = (res:any)=>{
             if (res.code) {
                 console.log(res.msg)
-                this.UI_BTN_READY.visible = false;
+                //this.UI_BTN_READY.visible = false;
+                this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE;
             }
         }
         GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
+    }
+
+    onBtnChange():void{
+        this._selectOutHand = this.ctrl_select.selectedIndex
+        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this._selectOutHand] })
     }
 
     onBtnScissors(): void {
