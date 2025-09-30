@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/gameSocketManager';
 import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../../../frameworks/framework';
 import { DataCenter } from '../../../../datacenter/datacenter'
 import { GameData } from '../../data/gamedata';
-import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX} from '../../data/interfaceGameConfig';
+import { SELF_LOCAL ,ENUM_GAME_STEP, PLAYER_ATTITUDE,HAND_FLAG,PLAYER_STATUS,SEAT_2,SEAT_1,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT} from '../../data/interfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
@@ -65,6 +65,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
         GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
+        GameSocketManager.instance.addServerListen("privateInfo", this.onSvrPrivateInfo.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         AddEventListener('gameSocketDisconnect',this.onGameSocketDisconnect, this);
     }
@@ -83,8 +84,19 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerStatusUpdate");
         GameSocketManager.instance.removeServerListen("playerLeave");
         GameSocketManager.instance.removeServerListen("gameClock");
+        GameSocketManager.instance.removeServerListen("privateInfo");
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
+    }
+
+    onSvrPrivateInfo(data:any){
+        if (!data) {
+            return
+        }
+        if (GameData.instance.isPrivateRoom) {
+            this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 共${data.maxCnt ?? 0}轮`
+            //this.UI_TXT_RULE.text = `${GAME_MODE_TXT[data.mode]}`
+        }
     }
 
     onGameSocketDisconnect(): void { 
@@ -442,6 +454,14 @@ export class GameView extends FGUIGameView {
         if(data.shortRoomid){
             const shortRoomid = `${data.shortRoomid}`
             this.UI_TXT_ROOMID.text = '房间号:' + shortRoomid.padStart(6, '0')
+        }
+
+        if (GameData.instance.isPrivateRoom && data.gameData && data.gameData != '') {
+            const gameData = JSON.parse(data.gameData)
+            if (gameData && gameData.rule != '') {
+                const rule = JSON.parse(gameData.rule)
+                this.UI_TXT_RULE.text = `${GAME_MODE_TXT[rule.mode]}`
+            }
         }
     }
 

@@ -104,6 +104,8 @@ export enum CTRL_BTN_INDEX {
 
 }
 
+export const GAME_MODE_TXT = ['3局2胜','5局3胜','7局4胜']
+
 export const SELF_LOCAL = 1;
 export const SEAT_1 = 1;
 export const SEAT_2 = 2;
