@@ -504,6 +504,7 @@ export class GameView extends FGUIGameView {
             }
         }
         GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
+        this.clear()
     }
 
     onBtnChange():void{
