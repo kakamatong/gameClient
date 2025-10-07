@@ -162,6 +162,7 @@ export class ConnectSvr {
         const func = (b:boolean, data?:any)=>{
             console.log('login callback:', b);
             if(b){
+                data.password = ''
                 DataCenter.instance.setLoginInfo(data);
                 this.connect(callBack)
             }else{
