@@ -57,7 +57,7 @@ export class lobbyScreen extends Component {
                     log('loadBundle error', err);
                     return;
                 }
-                const bgMusicOpen = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN) ?? 1;
+                const bgMusicOpen = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN) || 1;
                 if (bgMusicOpen) { 
                     const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
                     if (!as) {
