@@ -1,6 +1,7 @@
-import { _decorator, Component} from 'cc';
+import { _decorator, assetManager, AudioClip, AudioSourceComponent, Component,log, sys} from 'cc';
 import * as fgui from "fairygui-cc";
 import { GameView } from '../games/game10001/view/game/gameView';
+import { LOCAL_KEY } from '../datacenter/interfaceConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('gameScreen')
@@ -13,6 +14,35 @@ export class gameScreen extends Component {
     initView(){
         fgui.GRoot.create()
         GameView.showView()
+
+        // 加载背景音乐
+        assetManager.loadBundle('sound', (err, bundle) => { 
+            if (err) {
+                log('loadBundle error', err);
+                return;
+            }
+
+            bundle.load<AudioClip>('game10001/gamebg', (err, asset: AudioClip) => { 
+                if (err) {
+                    log('loadBundle error', err);
+                    return;
+                }
+                const bgMusicOpen = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN) ?? 1;
+                if (bgMusicOpen) { 
+                    const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+                    if (!as) {
+                        const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
+                        newAs.clip = asset;
+                        newAs.loop = true;
+                        newAs.play();
+                    }else{
+                        as.clip = asset;
+                        as.loop = true;
+                        as.play();
+                    }
+                }
+            })
+        });
     }
 
 }
