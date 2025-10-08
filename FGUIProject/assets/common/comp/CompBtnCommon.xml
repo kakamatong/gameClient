@@ -7,7 +7,7 @@
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>
   </displayList>
-  <Button downEffect="scale" downEffectValue="0.9"/>
+  <Button sound="ui://gj0r6g5ifugr15" downEffect="scale" downEffectValue="0.9"/>
   <relation target="n3_is91" sidePair="width-width,height-height"/>
   <customProperty target="title" propertyId="0"/>
   <customProperty target="icon" propertyId="1"/>

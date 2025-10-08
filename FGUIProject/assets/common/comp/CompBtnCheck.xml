@@ -9,5 +9,5 @@
       <gearDisplay controller="button" pages="1,3"/>
     </image>
   </displayList>
-  <Button mode="Check"/>
+  <Button mode="Check" sound="ui://gj0r6g5ifugr15"/>
 </component>

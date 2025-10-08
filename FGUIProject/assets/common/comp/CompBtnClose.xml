@@ -4,5 +4,5 @@
   <displayList>
     <image id="n3_muz3" name="n3" src="muz3f" fileName="imgs/btnclose.png" xy="0,0"/>
   </displayList>
-  <Button downEffect="scale" downEffectValue="0.9"/>
+  <Button sound="ui://gj0r6g5ifugr15" downEffect="scale" downEffectValue="0.9"/>
 </component>
