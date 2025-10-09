@@ -11,6 +11,7 @@ import { loadRemoteImage } from '../../frameworks/utils/utils';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
 import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
+import { RevokeAccount } from '../../modules/revokeAccount';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -117,7 +118,29 @@ export class UserCenterView extends FGUIUserCenterView {
 
     onBtnDelAcc(): void {
         const func2 = ()=>{
-            
+            const func3 = (data:any)=>{
+                if (data.code === 1) {
+                    TipsView.showView({content:"申请注销成功"})
+                }else if (data.code === 2) {
+                    const func4 = ()=>{ 
+                        const func5 = (data:any)=>{
+                            if (data.code === 1) {
+                                TipsView.showView({content:"申请取消成功"})
+                            }else{
+                                TipsView.showView({content:"申请取消失败"})
+                            }
+                        }
+                        const revokeCancel = new RevokeAccount()
+                        revokeCancel.reqCancelRevokeAccount(func5)
+                    }
+                    PopMessageView.showView({title:'温馨提示', content:'已经在注销流程中，是否申请取消', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func4})
+                }else{
+                    TipsView.showView({content:"申请注销失败"})
+                }
+                
+            }
+            const revoke = new RevokeAccount()
+            revoke.reqRevokeAccount(func3)
         }
         PopMessageView.showView({title:'温馨提示', content:'注销账号将会清除所有游戏数据，且有15天冷静期，确实注销账号？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
     }
