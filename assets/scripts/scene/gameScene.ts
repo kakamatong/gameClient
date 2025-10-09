@@ -27,7 +27,13 @@ export class gameScreen extends Component {
                     log('loadBundle error', err);
                     return;
                 }
-                const bgMusicOpen = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN) || 1;
+                let bgMusicOpen = 1;
+                const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
+                if (!localKey || localKey == '') {
+                    bgMusicOpen = 1
+                }else{
+                    bgMusicOpen = parseInt(localKey)
+                }
                 if (bgMusicOpen) { 
                     const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
                     if (!as) {
