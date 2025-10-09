@@ -8,7 +8,8 @@ import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
 import { loadRemoteImage } from '../../frameworks/utils/utils';
-import { SpriteFrame } from 'cc';
+import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
+import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -24,7 +25,36 @@ export class UserCenterView extends FGUIUserCenterView {
 
         this.updateUserInfo()
         this.createUserInfoBtn()
+        this.updateSound()
     }
+
+    updateSound():void{ 
+        this.updateBgSound()
+        this.updateEffectSound()
+    }
+
+    updateBgSound():void{
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
+        if (!localKey || localKey == '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+        this.UI_BTN_BGMUSIC.ctrl_status.selectedIndex = open
+    }
+
+    updateEffectSound():void{ 
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
+        if (!localKey || localKey == '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+        this.UI_BTN_EFFECT.ctrl_status.selectedIndex = open
+    }
+
 
     updateUserInfo():void{
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
@@ -81,6 +111,47 @@ export class UserCenterView extends FGUIUserCenterView {
 
     onBtnWechat(): void {
         
+    }
+
+    onBtnBgmusic(): void {
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
+        if (!localKey || localKey == '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+
+        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+        if (open) {
+            as && (as.volume = 0)
+            sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 0)
+        }else{
+            as && (as.volume = 1)
+            sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 1)
+        }
+
+
+        this.updateBgSound()
+    }
+
+    onBtnEffect(): void {
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
+        if (!localKey || localKey == '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+
+        if (open) {
+            fgui.GRoot.inst.volumeScale = 0
+            sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 0)
+        }else{
+            fgui.GRoot.inst.volumeScale = 1
+            sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 1)
+        }
+        this.updateEffectSound()
     }
 
     protected onDestroy(): void {

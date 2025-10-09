@@ -34,18 +34,19 @@ export class gameScreen extends Component {
                 }else{
                     bgMusicOpen = parseInt(localKey)
                 }
-                if (bgMusicOpen) { 
-                    const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
-                    if (!as) {
-                        const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
-                        newAs.clip = asset;
-                        newAs.loop = true;
-                        newAs.play();
-                    }else{
-                        as.clip = asset;
-                        as.loop = true;
-                        as.play();
-                    }
+
+                const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+                if (!as) {
+                    const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
+                    newAs.clip = asset;
+                    newAs.loop = true;
+                    newAs.volume = bgMusicOpen;
+                    newAs.play();
+                }else{
+                    as.clip = asset;
+                    as.loop = true;
+                    as.volume = bgMusicOpen;
+                    as.play();
                 }
             })
         });

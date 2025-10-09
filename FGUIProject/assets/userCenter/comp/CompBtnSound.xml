@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="230,99" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <controller name="ctrl_status" exported="true" pages="0,已关闭,1,已打开" selected="1"/>
+  <displayList>
+    <loader id="n3_pr8n" name="icon" xy="0,0" size="230,99" url="ui://gj0r6g5imuz3c" autoSize="true">
+      <gearIcon controller="ctrl_status" pages="1" values="ui://gj0r6g5imuz3c" default="ui://gj0r6g5imuz3e"/>
+    </loader>
+    <text id="n4_pr8n" name="title" xy="44,18" pivot="0.5,0.5" size="142,62" fontSize="46" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" text="已打开">
+      <gearText controller="ctrl_status" pages="1" values="已打开" default="已关闭"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+  </displayList>
+  <Button sound="ui://gj0r6g5ifugr15"/>
+  <relation target="n3_pr8n" sidePair="width-width,height-height"/>
+</component>

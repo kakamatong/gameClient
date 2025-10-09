@@ -2,6 +2,7 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import FGUICompBtnSound from "./FGUICompBtnSound";
 
 export default class FGUIUserCenterView extends fgui.GComponent {
 
@@ -15,6 +16,8 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 	public UI_TXT_DRAW:fgui.GTextField;
 	public UI_TXT_RATE:fgui.GTextField;
 	public UI_BTN_CLOSE:fgui.GButton;
+	public UI_BTN_BGMUSIC:FGUICompBtnSound;
+	public UI_BTN_EFFECT:FGUICompBtnSound;
 	public static URL:string = "ui://1zcuqn2bp4e40";
 
 	public static packageName:string = "userCenter";
@@ -70,9 +73,15 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(15));
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(16));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
+		this.UI_BTN_BGMUSIC = <FGUICompBtnSound>(this.getChildAt(19));
+		this.UI_BTN_BGMUSIC.onClick(this.onBtnBgmusic, this);
+		this.UI_BTN_EFFECT = <FGUICompBtnSound>(this.getChildAt(20));
+		this.UI_BTN_EFFECT.onClick(this.onBtnEffect, this);
 	}
 	onBtnWechat():void{};
 	onBtnDelAcc():void{};
 	onBtnClose():void{};
+	onBtnBgmusic():void{};
+	onBtnEffect():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIUserCenterView.URL, FGUIUserCenterView);

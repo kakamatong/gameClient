@@ -57,6 +57,7 @@ export enum LOCAL_KEY {
     AGREE_PRIVACY = 'agreePrivacy',
 
     BG_MUSIC_OPEN = 'bgMusicOpen',
+    EFFECT_SOUND_OPEN = 'effectSoundOpen',
 }
 
 export enum ENUM_POP_MESSAGE_TYPE {

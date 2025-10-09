@@ -17,15 +17,19 @@
       <property target="title" propertyId="0" value="注销"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
-    <text id="n9_klme" name="n9" xy="191,768" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="赢："/>
-    <text id="n10_klme" name="n10" xy="191,902" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="平："/>
-    <text id="n11_klme" name="n11" xy="191,835" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="输："/>
-    <text id="n12_klme" name="n12" xy="155,969" size="112,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="胜率："/>
-    <text id="n13_klme" name="UI_TXT_WIN" xy="279,768" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
-    <text id="n14_klme" name="UI_TXT_LOSE" xy="279,835" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
-    <text id="n15_klme" name="UI_TXT_DRAW" xy="279,902" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
-    <text id="n16_klme" name="UI_TXT_RATE" xy="280,969" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
+    <text id="n9_klme" name="n9" xy="119,749" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="赢："/>
+    <text id="n10_klme" name="n10" xy="119,814" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="平："/>
+    <text id="n11_klme" name="n11" xy="420,749" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="输："/>
+    <text id="n12_klme" name="n12" xy="420,814" size="112,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="胜率："/>
+    <text id="n13_klme" name="UI_TXT_WIN" xy="207,749" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
+    <text id="n14_klme" name="UI_TXT_LOSE" xy="508,749" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
+    <text id="n15_klme" name="UI_TXT_DRAW" xy="207,814" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
+    <text id="n16_klme" name="UI_TXT_RATE" xy="545,814" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
     <component id="n18_klme" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,462" group="n17_klme"/>
+    <text id="n19_pr8n" name="n19" xy="119,913" size="184,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="背景音乐："/>
+    <text id="n20_pr8n" name="n20" xy="192,982" size="112,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="音效："/>
+    <component id="n23_pr8n" name="UI_BTN_BGMUSIC" src="pr8n1" fileName="comp/CompBtnSound.xml" xy="289,909" group="n17_klme" aspect="true" scale="0.6,0.6" controller="ctrl_status,0"/>
+    <component id="n24_pr8n" name="UI_BTN_EFFECT" src="pr8n1" fileName="comp/CompBtnSound.xml" xy="289,977" group="n17_klme" aspect="true" scale="0.6,0.6" controller="ctrl_status,0"/>
     <group id="n17_klme" name="n17" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
