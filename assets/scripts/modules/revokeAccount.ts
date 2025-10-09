@@ -17,14 +17,16 @@ export class RevokeAccount {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer('revokeAcc', { loginType: DataCenter.instance.channelLoginType }, this.respRevoke.bind(this))
+        const loginInfo = DataCenter.instance.getLoginInfo();
+        LobbySocketManager.instance.sendToServer('revokeAcc', { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
     }
 
     reqCancelRevokeAccount(callback?: (data:any)=>void) {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer('cancelRevokeAcc', { userid: DataCenter.instance.channelLoginType }, this.respCancelRevoke.bind(this))
+        const loginInfo = DataCenter.instance.getLoginInfo();
+        LobbySocketManager.instance.sendToServer('cancelRevokeAcc', { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
     }
 
     /**

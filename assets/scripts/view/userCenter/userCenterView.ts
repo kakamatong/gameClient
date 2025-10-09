@@ -12,6 +12,7 @@ import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
 import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
 import { RevokeAccount } from '../../modules/revokeAccount';
+import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -134,7 +135,11 @@ export class UserCenterView extends FGUIUserCenterView {
                         revokeCancel.reqCancelRevokeAccount(func5)
                     }
                     PopMessageView.showView({title:'温馨提示', content:'已经在注销流程中，是否申请取消', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func4})
-                }else{
+                }else if (data.code === 3) { 
+                    TipsView.showView({content:"注销成功, 请重新打开"})
+                    LobbySocketManager.instance.close()
+                }
+                else{
                     TipsView.showView({content:"申请注销失败"})
                 }
                 
@@ -142,7 +147,7 @@ export class UserCenterView extends FGUIUserCenterView {
             const revoke = new RevokeAccount()
             revoke.reqRevokeAccount(func3)
         }
-        PopMessageView.showView({title:'温馨提示', content:'注销账号将会清除所有游戏数据，且有15天冷静期，确实注销账号？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
+        PopMessageView.showView({title:'温馨提示', content:'注销账号将会清除所有游戏数据，且有15天冷静期，15天后点击此按钮可立马注销，确实注销账号？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
     }
 
     onBtnBgmusic(): void {
