@@ -18,6 +18,7 @@ export class TipsView extends FGUITipsView {
 
             view.makeFullScreen();
             FGUITipsView.instance = view;
+            view.sortingOrder = 9999
             fgui.GRoot.inst.addChild(view);
             view.createTip && view.createTip(params);
         }
