@@ -177,6 +177,10 @@ export class GameView extends FGUIGameView {
     }
 
     onGameRoundResult(data:any):void{
+        // 有下一回合，不展示结果
+        if (data.continue) {
+            return
+        }
         const selfSeat = GameData.instance.getSelfSeat()
         const scoreData:Array<{userid:number, score:number, nickname:string}> = []
         if (data.score) {
@@ -362,6 +366,8 @@ export class GameView extends FGUIGameView {
                 this.UI_COMP_GAME_START.visible = false;
             })
             this.UI_COMP_GAME_START.visible = true;
+
+            // 第几回合
         }
 
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
