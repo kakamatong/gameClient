@@ -1,4 +1,4 @@
-import { _decorator, assetManager, AudioClip, AudioSourceComponent, Component,log, sys} from 'cc';
+import { _decorator, assetManager, AudioClip, AudioSourceComponent, Component,isValid,log, sys} from 'cc';
 import * as fgui from "fairygui-cc";
 import { GameView } from '../games/game10001/view/game/gameView';
 import { LOCAL_KEY } from '../datacenter/interfaceConfig';
@@ -29,7 +29,7 @@ export class gameScreen extends Component {
                 }
                 let bgMusicOpen = 1;
                 const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-                if (!localKey || localKey == '') {
+                if (localKey === null || localKey === undefined || localKey === '') {
                     bgMusicOpen = 1
                 }else{
                     bgMusicOpen = parseInt(localKey)

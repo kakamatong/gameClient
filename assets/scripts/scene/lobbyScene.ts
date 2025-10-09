@@ -1,4 +1,4 @@
-import { _decorator, Component, log,sys,assetManager,resources,AssetManager, JsonAsset, AudioClip, AudioSourceComponent} from 'cc';
+import { _decorator, Component, log,sys,assetManager,resources,AssetManager, JsonAsset, AudioClip, AudioSourceComponent, isValid} from 'cc';
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
@@ -59,7 +59,7 @@ export class lobbyScreen extends Component {
                 }
                 let bgMusicOpen = 1;
                 const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-                if (!localKey || localKey == '') {
+                if (localKey === null || localKey === undefined || localKey === '') {
                     bgMusicOpen = 1
                 }else{
                     bgMusicOpen = parseInt(localKey)

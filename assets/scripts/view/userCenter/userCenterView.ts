@@ -36,18 +36,19 @@ export class UserCenterView extends FGUIUserCenterView {
     updateBgSound():void{
         let open = 1;
         const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-        if (!localKey || localKey == '') {
+        if (localKey === null || localKey === undefined || localKey === '') {
             open = 1
         }else{
             open = parseInt(localKey)
         }
+
         this.UI_BTN_BGMUSIC.ctrl_status.selectedIndex = open
     }
 
     updateEffectSound():void{ 
         let open = 1;
         const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
-        if (!localKey || localKey == '') {
+        if (localKey === null || localKey === undefined || localKey === '') {
             open = 1
         }else{
             open = parseInt(localKey)
@@ -116,7 +117,7 @@ export class UserCenterView extends FGUIUserCenterView {
     onBtnBgmusic(): void {
         let open = 1;
         const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-        if (!localKey || localKey == '') {
+        if (localKey === null || localKey === undefined || localKey === '') {
             open = 1
         }else{
             open = parseInt(localKey)
@@ -131,14 +132,13 @@ export class UserCenterView extends FGUIUserCenterView {
             sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 1)
         }
 
-
         this.updateBgSound()
     }
 
     onBtnEffect(): void {
         let open = 1;
         const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
-        if (!localKey || localKey == '') {
+        if (localKey === null || localKey === undefined || localKey === '') {
             open = 1
         }else{
             open = parseInt(localKey)
