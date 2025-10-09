@@ -9,7 +9,8 @@ import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
 import { loadRemoteImage } from '../../frameworks/utils/utils';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
-import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { PopMessageView } from '../common/popMessageView';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -112,6 +113,13 @@ export class UserCenterView extends FGUIUserCenterView {
 
     onBtnWechat(): void {
         
+    }
+
+    onBtnDelAcc(): void {
+        const func2 = ()=>{
+            
+        }
+        PopMessageView.showView({title:'温馨提示', content:'注销账号将会清除所有游戏数据，且有15天冷静期，确实注销账号？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
     }
 
     onBtnBgmusic(): void {
