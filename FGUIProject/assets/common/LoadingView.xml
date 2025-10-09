@@ -4,10 +4,18 @@
     <graph id="n0_is91" name="n0" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n1_is91" name="title" xy="102,835" pivot="0.5,0.5" size="572,217" fontSize="50" color="#ffffff" align="center" autoSize="none" text="加载中"/>
-    <image id="n2_is91" name="n2" src="xoqi5" fileName="imgs/paper.png" xy="313,651" visible="false"/>
-    <image id="n3_is91" name="n3" src="xoqi7" fileName="imgs/rock.png" xy="303,656" visible="false"/>
-    <image id="n4_is91" name="n4" src="xoqi6" fileName="imgs/scissors.png" xy="309,646" visible="false"/>
+    <text id="n1_is91" name="title" xy="102,835" pivot="0.5,0.5" size="572,217" fontSize="50" color="#ffffff" align="center" autoSize="none" text="加载中">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <image id="n2_is91" name="n2" src="xoqi5" fileName="imgs/paper.png" xy="313,651" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <image id="n3_is91" name="n3" src="xoqi7" fileName="imgs/rock.png" xy="303,656" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <image id="n4_is91" name="n4" src="xoqi6" fileName="imgs/scissors.png" xy="309,646" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
   </displayList>
   <transition name="act" autoPlay="true" autoPlayRepeat="-1">
     <item time="0" type="Visible" target="n2_is91" value="true"/>
