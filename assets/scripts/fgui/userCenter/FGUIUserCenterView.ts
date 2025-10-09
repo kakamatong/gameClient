@@ -61,21 +61,21 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.UI_COMP_HEAD = <fgui.GComponent>(this.getChildAt(3));
-		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(4));
-		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(5));
-		this.UI_BTN_WECHAT = <fgui.GButton>(this.getChildAt(6));
+		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(5));
+		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(6));
+		this.UI_BTN_WECHAT = <fgui.GButton>(this.getChildAt(7));
 		this.UI_BTN_WECHAT.onClick(this.onBtnWechat, this);
-		this.UI_BTN_DEL_ACC = <fgui.GButton>(this.getChildAt(7));
+		this.UI_BTN_DEL_ACC = <fgui.GButton>(this.getChildAt(8));
 		this.UI_BTN_DEL_ACC.onClick(this.onBtnDelAcc, this);
-		this.UI_TXT_WIN = <fgui.GTextField>(this.getChildAt(12));
-		this.UI_TXT_LOSE = <fgui.GTextField>(this.getChildAt(13));
-		this.UI_TXT_DRAW = <fgui.GTextField>(this.getChildAt(14));
-		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(15));
-		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(16));
+		this.UI_TXT_WIN = <fgui.GTextField>(this.getChildAt(13));
+		this.UI_TXT_LOSE = <fgui.GTextField>(this.getChildAt(14));
+		this.UI_TXT_DRAW = <fgui.GTextField>(this.getChildAt(15));
+		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(16));
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(17));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
-		this.UI_BTN_BGMUSIC = <FGUICompBtnSound>(this.getChildAt(19));
+		this.UI_BTN_BGMUSIC = <FGUICompBtnSound>(this.getChildAt(20));
 		this.UI_BTN_BGMUSIC.onClick(this.onBtnBgmusic, this);
-		this.UI_BTN_EFFECT = <FGUICompBtnSound>(this.getChildAt(20));
+		this.UI_BTN_EFFECT = <FGUICompBtnSound>(this.getChildAt(21));
 		this.UI_BTN_EFFECT.onClick(this.onBtnEffect, this);
 	}
 	onBtnWechat():void{};

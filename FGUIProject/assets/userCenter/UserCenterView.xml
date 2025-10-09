@@ -7,6 +7,7 @@
     <image id="n0_klme" name="n0" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n17_klme"/>
     <image id="n3_klme" name="n3" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="267,568" size="220,100" group="n17_klme"/>
     <component id="n2_klme" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="127,526" group="n17_klme"/>
+    <image id="n25_ti6v" name="n25" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="99,715" size="577,360" group="n17_klme"/>
     <text id="n4_klme" name="UI_TXT_NICKNAME" xy="296,575" size="64,42" group="n17_klme" fontSize="30" color="#ffffff" singleLine="true" text="昵称"/>
     <text id="n5_klme" name="UI_TXT_USERID" xy="296,625" size="34,42" group="n17_klme" fontSize="30" color="#ffffff" singleLine="true" text="ID"/>
     <component id="n6_klme" name="UI_BTN_WECHAT" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="446,1101" size="230,99" group="n17_klme">
