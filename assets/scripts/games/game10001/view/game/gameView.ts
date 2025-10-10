@@ -215,7 +215,7 @@ export class GameView extends FGUIGameView {
                     }
                     scheduleOnce(this.node.components[0],()=>{
                         ResultView.showView({flag: info.endResult, continueFunc:func, scores: scoreData})
-                    }, 0.5)
+                    }, 1)
                     break
                 }
             }
