@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="149,147">
-  <controller name="ctrl_head" exported="true" pages="0,剪刀,1,石头,2,布,3,无" selected="3"/>
+  <controller name="ctrl_head" exported="true" pages="0,剪刀,1,石头,2,布,3,无" selected="0"/>
   <displayList>
-    <image id="n0_folo" name="n0" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="0,0">
-      <gearDisplay controller="ctrl_head" pages="2"/>
-    </image>
-    <image id="n1_folo" name="n1" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-10,5">
-      <gearDisplay controller="ctrl_head" pages="1"/>
-    </image>
-    <image id="n2_folo" name="n2" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="-4,-5">
-      <gearDisplay controller="ctrl_head" pages="0"/>
-    </image>
+    <loader id="n4_kw9i" name="n4" xy="-4,-5" pivot="0.5,0.5" size="158,158" url="ui://gj0r6g5ixoqi6" autoSize="true">
+      <gearIcon controller="ctrl_head" pages="1,2,3" values="ui://gj0r6g5ixoqi7|ui://gj0r6g5ixoqi5|" default="ui://gj0r6g5ixoqi6"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </loader>
   </displayList>
+  <transition name="act">
+    <item time="0" type="Scale" target="n4_kw9i" tween="true" startValue="1,1" endValue="1.2,1.2" duration="3"/>
+    <item time="0" type="XY" target="n4_kw9i" tween="true" startValue="-4,-5" endValue="-4,-150" duration="10"/>
+    <item time="14" type="XY" target="n4_kw9i" tween="true" startValue="-4,-150" endValue="-4,-5" duration="10"/>
+    <item time="21" type="Scale" target="n4_kw9i" tween="true" startValue="1.2,1.2" endValue="1,1" duration="3"/>
+  </transition>
 </component>

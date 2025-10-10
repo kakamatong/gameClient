@@ -176,7 +176,15 @@ export class GameView extends FGUIGameView {
         this.showOutHand(local, index)
     }
 
+    playOutHandAct(){
+        for (let index = 0; index < GameData.instance.maxPlayer; index++) {
+            const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${index + 1}`)
+            outHand.act.play()
+        }
+    }
+
     onGameRoundResult(data:any):void{
+        this.playOutHandAct()
         // 有下一回合，不展示结果
         if (data.continue) {
             return
@@ -371,7 +379,7 @@ export class GameView extends FGUIGameView {
                 })
                 this.UI_COMP_GAME_START.visible = true;
             }else{
-                
+
             }
             
 

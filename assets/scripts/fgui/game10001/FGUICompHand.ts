@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUICompHand extends fgui.GComponent {
 
 	public ctrl_head:fgui.Controller;
+	public act:fgui.Transition;
 	public static URL:string = "ui://2zsfe53xfolo3";
 
 	public static packageName:string = "game10001";
@@ -49,6 +50,7 @@ export default class FGUICompHand extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_head = this.getControllerAt(0);
+		this.act = this.getTransitionAt(0);
 	}
 }
 fgui.UIObjectFactory.setExtension(FGUICompHand.URL, FGUICompHand);
