@@ -376,6 +376,7 @@ export class GameView extends FGUIGameView {
             if (data.roundNum == 1) {
                 this.UI_COMP_GAME_START.act.play(()=>{
                     this.UI_COMP_GAME_START.visible = false;
+                    this.UI_COMP_ROUND_ACT.title.text = `Round ${data.roundNum}`
                     this.UI_COMP_ROUND_ACT.visible = true;
                     this.UI_COMP_ROUND_ACT.act.play(()=>{
                         this.UI_COMP_ROUND_ACT.visible = false;
@@ -383,6 +384,7 @@ export class GameView extends FGUIGameView {
                 })
                 this.UI_COMP_GAME_START.visible = true;
             }else{
+                this.UI_COMP_ROUND_ACT.title.text = `Round ${data.roundNum}`
                 this.UI_COMP_ROUND_ACT.visible = true;
                 this.UI_COMP_ROUND_ACT.act2.play(()=>{
                     this.UI_COMP_ROUND_ACT.visible = false;
