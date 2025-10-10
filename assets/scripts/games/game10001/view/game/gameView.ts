@@ -15,7 +15,7 @@ import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
 import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
-import {loadRemoteImage} from '../../../../frameworks/utils/utils'
+import {loadRemoteImage, scheduleOnce} from '../../../../frameworks/utils/utils'
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
@@ -205,7 +205,9 @@ export class GameView extends FGUIGameView {
                     const func = ()=>{
                         this.onBtnContinue()
                     }
-                    ResultView.showView({flag: info.endResult, continueFunc:func, scores: scoreData})
+                    scheduleOnce(this.node.components[0],()=>{
+                        ResultView.showView({flag: info.endResult, continueFunc:func, scores: scoreData})
+                    }, 0.5)
                     break
                 }
             }

@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';   
 import { MiniGameUtils } from './sdk/miniGameUtils';
-import { Asset, assetManager, ImageAsset, SpriteFrame, Texture2D } from 'cc';
+import { Asset, assetManager, Component, ImageAsset, SpriteFrame, Texture2D } from 'cc';
 
 // DH参数配置
 const DH_GENERATOR = 5n;
@@ -1000,4 +1000,8 @@ export const loadRemoteImage = (url: string, callback: (img: SpriteFrame| null) 
         
         callback(sp);
     })
+}
+
+export const scheduleOnce = (node:Component, callback: () => void, delay: number) =>{
+    node.scheduleOnce(callback, delay)
 }
