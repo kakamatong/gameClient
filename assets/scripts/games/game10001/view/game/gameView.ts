@@ -363,13 +363,20 @@ export class GameView extends FGUIGameView {
     onSvrGameStart(data:any):void{
         GameData.instance.gameStart = true;
 
+        // 非重连情况
         if (!data.brelink) {
-            this.UI_COMP_GAME_START.act.play(()=>{
-                this.UI_COMP_GAME_START.visible = false;
-            })
-            this.UI_COMP_GAME_START.visible = true;
+            if (data.roundNum == 1) {
+                this.UI_COMP_GAME_START.act.play(()=>{
+                    this.UI_COMP_GAME_START.visible = false;
+                })
+                this.UI_COMP_GAME_START.visible = true;
+            }else{
+                
+            }
+            
 
             // 第几回合
+            this.clear()
         }
 
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
