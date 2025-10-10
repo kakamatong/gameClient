@@ -8,6 +8,7 @@ import FGUICompHand from "./FGUICompHand";
 import FGUIBtnSelect from "./FGUIBtnSelect";
 import FGUICompClock from "./FGUICompClock";
 import FGUICompGameStartAct from "./FGUICompGameStartAct";
+import FGUICompRoundAct from "./FGUICompRoundAct";
 
 export default class FGUIGameView extends fgui.GComponent {
 
@@ -43,6 +44,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_ROOMID:fgui.GTextField;
 	public UI_TXT_RULE:fgui.GTextField;
 	public UI_TXT_PROGRESS:fgui.GTextField;
+	public UI_COMP_ROUND_ACT:FGUICompRoundAct;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -126,6 +128,7 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_ROOMID = <fgui.GTextField>(this.getChildAt(31));
 		this.UI_TXT_RULE = <fgui.GTextField>(this.getChildAt(32));
 		this.UI_TXT_PROGRESS = <fgui.GTextField>(this.getChildAt(33));
+		this.UI_COMP_ROUND_ACT = <FGUICompRoundAct>(this.getChildAt(37));
 	}
 	onBtnDisband():void{};
 	onBtnBack():void{};

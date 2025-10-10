@@ -19,6 +19,7 @@
     <component id="fnugh" name="CompGameStartAct.xml" path="/comp/"/>
     <component id="r1yn1" name="CompVoteInfo.xml" path="/comp/"/>
     <component id="r1yn0" name="CompDisband.xml" path="/comp/"/>
+    <component id="kw9ii" name="CompRoundAct.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

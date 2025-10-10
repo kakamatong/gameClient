@@ -6,6 +6,6 @@
   <transition name="act">
     <item time="0" type="Scale" target="n0_fnug" tween="true" startValue="0.01,0.01" endValue="1.1,1.1" duration="5"/>
     <item time="5" type="Scale" target="n0_fnug" tween="true" startValue="1.1,1.1" endValue="1,1" duration="4"/>
-    <item time="21" type="Scale" target="n0_fnug" tween="true" startValue="1,1" endValue="0.01,0.01" duration="7"/>
+    <item time="14" type="Scale" target="n0_fnug" tween="true" startValue="1,1" endValue="0.01,0.01" duration="7"/>
   </transition>
 </component>

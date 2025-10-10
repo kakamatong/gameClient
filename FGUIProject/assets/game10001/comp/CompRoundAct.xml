@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="563,179">
+  <displayList>
+    <text id="n0_kw9i" name="title" xy="0,0" size="563,179" fontSize="140" color="#ffffff" bold="true" italic="true" strokeColor="#000000" strokeSize="2" shadowColor="#000000" shadowOffset="5,1" text="Round 1"/>
+  </displayList>
+  <transition name="act">
+    <item time="0" type="XY" target="n0_kw9i" tween="true" startValue="-800,0" endValue="0,0" duration="6"/>
+    <item time="24" type="XY" target="n0_kw9i" tween="true" startValue="0,0" endValue="800,0" duration="6"/>
+  </transition>
+  <transition name="act2">
+    <item time="0" type="XY" target="n0_kw9i" value="0,0"/>
+    <item time="0" type="XY" target="n0_kw9i" tween="true" startValue="-800,0" endValue="0,0" duration="6"/>
+    <item time="30" type="XY" target="n0_kw9i" tween="true" startValue="0,0" endValue="800,0" duration="6"/>
+  </transition>
+  <customProperty target="title" propertyId="0"/>
+</component>
