@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="574,200">
+  <displayList>
+    <image id="n0_kv65" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="0,0" size="574,200"/>
+    <component id="n1_kv65" name="n1" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="6,5" scale="0.7,0.7"/>
+    <text id="n2_kv65" name="UI_TXT_NICKNAME" xy="121,24" size="208,42" fontSize="30" color="#ffffff" singleLine="true" text="111111112222"/>
+    <text id="n3_kv65" name="UI_TXT_ID_2" xy="121,71" pivot="1,0" size="174,42" fontSize="30" color="#ffffff" align="right" singleLine="true" text="2222222222"/>
+  </displayList>
+</component>
