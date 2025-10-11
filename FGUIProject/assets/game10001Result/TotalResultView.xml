@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <graph id="n1_kv65" name="n1" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+  </displayList>
+</component>

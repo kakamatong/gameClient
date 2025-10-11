@@ -10,6 +10,7 @@
     <image id="dkp3l" name="iconLose.png" path="/imgs/"/>
     <image id="dkp3m" name="l.png" path="/imgs/"/>
     <image id="dkp3o" name="iconDraw.png" path="/imgs/"/>
+    <component id="kv65p" name="TotalResultView.xml" path="/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
