@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
 import { GameSocketManager } from '../frameworks/gameSocketManager';
-import { customDESEncryptStr } from '../frameworks/utils/utils';
+import { CustomDESEncryptStr } from '../frameworks/utils/utils';
 export class AuthGame {
     //Auth
     private static _instance: AuthGame;
@@ -29,7 +29,7 @@ export class AuthGame {
             }
             let str = JSON.stringify(loginData)
             const secret = CryptoJS.enc.Hex.parse(loginInfo?.token ?? "")
-            const token = customDESEncryptStr(str, secret)
+            const token = CustomDESEncryptStr(str, secret)
             const urlToken = encodeURIComponent(token)
 
             const params = `ver=1&userid=${loginInfo?.userid ?? ''}&gameid=${gameid}&roomid=${roomid}&token=${urlToken}`

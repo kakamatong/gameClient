@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import { _decorator, log} from 'cc';
 import { Socket } from '../socket/socket';
 import { handleSocketMessage } from '../config/config';
-import { dhexchange, dhsecret, hmac64, customDESEncrypt, stringToUint8Array, DecodeBase64Node } from '../utils/utils';
+import { dhexchange, dhsecret, hmac64, CustomDESEncrypt, StringToUint8Array, DecodeBase64Node } from '../utils/utils';
 import {LogColors} from '../framework';
 const { ccclass, property } = _decorator;
 
@@ -158,7 +158,7 @@ export class Login implements handleSocketMessage {
         //console.log('clientPublicKeyB64:', clientPublicKeyB64);
 
         // 将base64字符串转换为字节数组
-        const messageBytes = stringToUint8Array(messageReq);
+        const messageBytes = StringToUint8Array(messageReq);
         const messageArray = Array.from(messageBytes);
         this.sendMessage(messageArray);
     }
@@ -190,12 +190,12 @@ export class Login implements handleSocketMessage {
         //console.log('hmacB64:', hmacB64);
         
         // 将base64字符串转换为字节数组
-        const hmacB64Bytes = stringToUint8Array(hmacB64);
+        const hmacB64Bytes = StringToUint8Array(hmacB64);
         const hmacB64Array = Array.from(hmacB64Bytes);
         this.sendMessage(hmacB64Array);
     
         //secret = CryptoJS.lib.WordArray.create(new Uint8Array([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]));
-        const encryptedToken = customDESEncrypt(this._loginMsg, secret);
+        const encryptedToken = CustomDESEncrypt(this._loginMsg, secret);
         this.sendMessage(encryptedToken);
     }
 

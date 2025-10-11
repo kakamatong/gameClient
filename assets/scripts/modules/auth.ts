@@ -5,7 +5,7 @@ import { LobbySocketManager } from '../frameworks/lobbySocketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
-import { customDESEncryptStr } from '../frameworks/utils/utils';
+import { CustomDESEncryptStr } from '../frameworks/utils/utils';
 import { AwardNotices } from './awardNotices';
 export class Auth {
     //Auth
@@ -35,7 +35,7 @@ export class Auth {
             }
             let str = JSON.stringify(loginData)
             const secret = CryptoJS.enc.Hex.parse(loginInfo?.token ?? "")
-            const token = customDESEncryptStr(str, secret)
+            const token = CustomDESEncryptStr(str, secret)
             const urlToken = encodeURIComponent(token)
             const params = `ver=1&userid=${loginInfo?.userid ?? ''}&token=${urlToken}`
             const authList = DataCenter.instance.authList;

@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';   
 import { MiniGameUtils } from './sdk/miniGameUtils';
-import { Asset, assetManager, Component, ImageAsset, SpriteFrame, Texture2D } from 'cc';
+import {  assetManager, ImageAsset, SpriteFrame } from 'cc';
 
 // DH参数配置
 const DH_GENERATOR = 5n;
@@ -706,7 +706,12 @@ const mergeBlocks = (blocks: number[][]): CryptoJS.WordArray => {
     return bytesToWordArray(buffer);
 };
 
-export const  stringToUint8Array = (str: string): Uint8Array => {
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 以下是对外接口
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const  StringToUint8Array = (str: string): Uint8Array => {
     const arr = new Uint8Array(str.length);
     for (let i = 0; i < str.length; i++) {
         arr[i] = str.charCodeAt(i);
@@ -715,17 +720,17 @@ export const  stringToUint8Array = (str: string): Uint8Array => {
 }
 
 // 修改自定义加密方法
-export const customDESEncrypt = (data: string, key: CryptoJS.WordArray): number[] => {
+export const CustomDESEncrypt = (data: string, key: CryptoJS.WordArray): number[] => {
     const dataWA = CryptoJS.enc.Utf8.parse(data);
     const encrypted = desencode(dataWA, key);
     const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);
     //console.log('tokenB64:', tokenB64);
-    const tokenB64Bytes = stringToUint8Array(tokenB64);
+    const tokenB64Bytes = StringToUint8Array(tokenB64);
     const tokenB64Array = Array.from(tokenB64Bytes);
     return tokenB64Array;
 }
 
-export const customDESEncryptStr = (data: string, key: CryptoJS.WordArray): string => {
+export const CustomDESEncryptStr = (data: string, key: CryptoJS.WordArray): string => {
     const dataWA = CryptoJS.enc.Utf8.parse(data);
     const encrypted = desencode(dataWA, key);
     const tokenB64 = CryptoJS.enc.Base64.stringify(encrypted);
@@ -734,12 +739,12 @@ export const customDESEncryptStr = (data: string, key: CryptoJS.WordArray): stri
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // 去除字符串中的所有空格
-export const removeAllSpaces = (str: string): string => {
+export const RemoveAllSpaces = (str: string): string => {
     return str.replace(/\s/g, '');
 }
 
 // 数字格式化万和亿，保留两位小数
-export const formatNumber = (num: number): string => {
+export const FormatNumber = (num: number): string => {
     if (num >= 10000 && num < 100000000) {
         return (num / 10000).toFixed(2) + '万';
     } else if (num >= 100000000) {
@@ -750,8 +755,8 @@ export const formatNumber = (num: number): string => {
 }
 
 // string to wordArr
-export const stringToWordArray = (str: string): CryptoJS.WordArray => {
-    const bytes = stringToUint8Array(str);
+export const StringToWordArray = (str: string): CryptoJS.WordArray => {
+    const bytes = StringToUint8Array(str);
     return bytesToWordArray(bytes);
 }
 
@@ -764,7 +769,7 @@ export const HttpPostOld = (userid: number, subid: number,logintoken: string, ur
     }
     const strData = JSON.stringify(data);
     const secret = CryptoJS.enc.Hex.parse(logintoken)
-    const token = customDESEncryptStr(strData, secret)
+    const token = CustomDESEncryptStr(strData, secret)
     const defaultHeaders = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token,
