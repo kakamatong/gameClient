@@ -1,7 +1,7 @@
 
 import FGUICompMatchAct from '../../../fgui/match/FGUICompMatchAct';
 import * as fgui from "fairygui-cc";
-import {getRandomInt} from '../../../frameworks/utils/utils'
+import {GetRandomInt} from '../../../frameworks/utils/utils'
 export class CompMatchAct extends FGUICompMatchAct {
     private _ctrls:Array<fgui.Controller> = []
     private _nowIndex = 0;
@@ -30,7 +30,7 @@ export class CompMatchAct extends FGUICompMatchAct {
                 tmp.push(index)
             }
         }
-        const newn = getRandomInt(0, tmp.length - 1)
+        const newn = GetRandomInt(0, tmp.length - 1)
         return tmp[newn];
     }
 
@@ -40,7 +40,7 @@ export class CompMatchAct extends FGUICompMatchAct {
     }
 
     success():void{ 
-        const n = getRandomInt(0, this._ctrls.length - 1)
+        const n = GetRandomInt(0, this._ctrls.length - 1)
         this.ctrl_act_0.selectedIndex = n
         this.ctrl_act_1.selectedIndex = n
         this.ctrl_act_2.selectedIndex = n

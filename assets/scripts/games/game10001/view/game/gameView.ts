@@ -15,7 +15,7 @@ import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
 import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
-import {loadRemoteImage} from '../../../../frameworks/utils/utils'
+import {LoadRemoteImage} from '../../../../frameworks/utils/utils'
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
@@ -456,7 +456,7 @@ export class GameView extends FGUIGameView {
         nicknanme.text = player.nickname ?? "";
         id.text = player.userid.toString();
         const headurl = GameData.instance.getHeadurl(localseat)
-        loadRemoteImage(headurl, (img:SpriteFrame | null) => {
+        LoadRemoteImage(headurl, (img:SpriteFrame | null) => {
             if (img) {
                 head.UI_LOADER_HEAD.texture = img;
             }else{

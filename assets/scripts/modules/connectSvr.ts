@@ -3,7 +3,7 @@ import { ENUM_CHANNEL_ID, LOGIN_TYPE } from "../datacenter/interfaceConfig";
 import { LobbySocketManager } from "../frameworks/lobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
 import { MiniGameUtils } from "../frameworks/utils/sdk/miniGameUtils";
-import { httpPostWithDefaultJWT } from "../frameworks/utils/utils";
+import { HttpPostWithDefaultJWT } from "../frameworks/utils/utils";
 import { Auth } from "./auth";
 import { AuthList } from "./authList";
 import { sys } from 'cc';
@@ -29,7 +29,7 @@ export class ConnectSvr {
             loginData:data
         }
         const url = DataCenter.instance.appConfig.webUrl + "/api/game/thirdlogin";
-        httpPostWithDefaultJWT(url, req, payload).then(data => {
+        HttpPostWithDefaultJWT(url, req, payload).then(data => {
             console.log(data)
             if (data.code == 200) {
                 callBack && callBack(true, data);

@@ -1,6 +1,6 @@
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
-import { httpPostWithDefaultJWT } from '../frameworks/utils/utils';
+import { HttpPostWithDefaultJWT } from '../frameworks/utils/utils';
 
 /**
  * @description 添加console.log别名，方便使用日志颜色
@@ -127,7 +127,7 @@ export class Mail {
             'channelid':DataCenter.instance.channelID
         }
         
-        httpPostWithDefaultJWT( url, body, payload)
+        HttpPostWithDefaultJWT( url, body, payload)
         .then(data => {
             log(LogColors.green('mail request successful!'));
             // 将认证列表数据存储到DataCenter

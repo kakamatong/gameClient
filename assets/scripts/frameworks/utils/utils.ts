@@ -756,7 +756,7 @@ export const stringToWordArray = (str: string): CryptoJS.WordArray => {
 }
 
 
-export const httpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
+export const HttpPostOld = (userid: number, subid: number,logintoken: string, url: string, body: any): Promise<any> => {
     const data = {
         userid: userid,
         subid: subid,
@@ -932,7 +932,7 @@ export class JWTUtils {
  * @param expireTime JWT过期时间(秒)
  * @returns 响应数据
  */
-export const httpPost = (url: string, body: any, payload: object, secretKey: string, expireTime: number = 3600): Promise<any> => {
+export const HttpPost = (url: string, body: any, payload: object, secretKey: string, expireTime: number = 3600): Promise<any> => {
     // 生成JWT令牌
     const token = JWTUtils.generateToken(payload, secretKey, expireTime);
     console.log('JWT token:', token);
@@ -942,26 +942,6 @@ export const httpPost = (url: string, body: any, payload: object, secretKey: str
         'Authorization': 'Bearer ' + token
     };
 
-    // return new Promise((resolve, reject) => {
-    //     fetch(url, {
-    //         method: 'POST',
-    //         headers: defaultHeaders,
-    //         body: JSON.stringify(body),
-    //     })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         resolve(data);
-    //     })
-    //     .catch(error => {
-    //         reject(error);
-    //     });
-    // });
-
     return MiniGameUtils.instance.request(url, 'POST', defaultHeaders, body)
 }
 
@@ -969,22 +949,22 @@ export const httpPost = (url: string, body: any, payload: object, secretKey: str
 const DEFAULT_JWT_SECRET_KEY = 'GameWebJWTSecretKey1234567890ABCDEF';
 const DEFAULT_JWT_EXPIRE_TIME = 30; // 3600秒 = 1小时
 
-export const httpPostWithDefaultJWT = (url: string, body: any, payload: object): Promise<any> => {
-    return httpPost(url, body, payload, DEFAULT_JWT_SECRET_KEY, DEFAULT_JWT_EXPIRE_TIME);
+export const HttpPostWithDefaultJWT = (url: string, body: any, payload: object): Promise<any> => {
+    return HttpPost(url, body, payload, DEFAULT_JWT_SECRET_KEY, DEFAULT_JWT_EXPIRE_TIME);
 }
 
-export const getRandomInt = (min: number, max: number): number => {
+export const GetRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export const decodeBase64Node = (bufferStr: string): string=> {
+export const DecodeBase64Node = (bufferStr: string): string=> {
     const parsed = CryptoJS.enc.Base64.parse(bufferStr)
     return parsed.toString(CryptoJS.enc.Utf8);
 }
 
-export const loadRemoteImage = (url: string, callback: (img: SpriteFrame| null) => void): void => {
+export const LoadRemoteImage = (url: string, callback: (img: SpriteFrame| null) => void): void => {
     if (!MiniGameUtils.instance.isThirdPlatform()) {
         callback(null)
         return
@@ -994,10 +974,7 @@ export const loadRemoteImage = (url: string, callback: (img: SpriteFrame| null) 
             console.error(err.message);
             return;
         }
-        // const texture = new Texture2D();
-		// texture.image = img;
         const sp = SpriteFrame.createWithImage(img);
-        
         callback(sp);
     })
 }

@@ -7,7 +7,7 @@ import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
-import { loadRemoteImage } from '../../frameworks/utils/utils';
+import { LoadRemoteImage } from '../../frameworks/utils/utils';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
 import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
@@ -64,7 +64,7 @@ export class UserCenterView extends FGUIUserCenterView {
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         //(this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        loadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
+        LoadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
             if (img) {
                 (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
             }else{

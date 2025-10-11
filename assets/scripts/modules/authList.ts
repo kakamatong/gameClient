@@ -2,7 +2,7 @@
 import {DataCenter} from '../datacenter/datacenter';
 import { LogColors } from '../frameworks/framework';
 import { MiniGameUtils } from '../frameworks/utils/sdk/miniGameUtils';
-import { httpPostWithDefaultJWT } from '../frameworks/utils/utils';
+import { HttpPostWithDefaultJWT } from '../frameworks/utils/utils';
 
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
@@ -64,7 +64,7 @@ export class AuthList {
             'channelid':DataCenter.instance.channelID
         }
 
-        httpPostWithDefaultJWT(url, {}, payload).then(data => {
+        HttpPostWithDefaultJWT(url, {}, payload).then(data => {
             log(LogColors.green('authList request successful!'));
             // 将认证列表数据存储到DataCenter
             if (data && data.data) {
