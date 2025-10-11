@@ -19,6 +19,7 @@ import {LoadRemoteImage} from '../../../../frameworks/utils/utils'
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
+import { TotalResultView } from '../result/TotalResultView';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -92,7 +93,7 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrTotalResult(data:any){
-        
+        TotalResultView.showView(data)
     }
 
     onSvrPrivateInfo(data:any){
