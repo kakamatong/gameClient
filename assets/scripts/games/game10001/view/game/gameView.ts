@@ -66,6 +66,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
         GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
         GameSocketManager.instance.addServerListen("privateInfo", this.onSvrPrivateInfo.bind(this));
+        GameSocketManager.instance.addServerListen("totalResult", this.onSvrTotalResult.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         AddEventListener('gameSocketDisconnect',this.onGameSocketDisconnect, this);
     }
@@ -85,8 +86,13 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("playerLeave");
         GameSocketManager.instance.removeServerListen("gameClock");
         GameSocketManager.instance.removeServerListen("privateInfo");
+        GameSocketManager.instance.removeServerListen("totalResult");
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
+    }
+
+    onSvrTotalResult(data:any){
+        
     }
 
     onSvrPrivateInfo(data:any){
