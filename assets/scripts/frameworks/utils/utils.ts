@@ -1001,7 +1001,3 @@ export const loadRemoteImage = (url: string, callback: (img: SpriteFrame| null) 
         callback(sp);
     })
 }
-
-export const scheduleOnce = (node:Component, callback: () => void, delay: number) =>{
-    node.scheduleOnce(callback, delay)
-}

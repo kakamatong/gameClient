@@ -1,4 +1,4 @@
-import { Director, error, Scene } from 'cc';
+import { Component, Director, error, Scene } from 'cc';
 type eventFunc = (...args:any[]) =>void
 
 const events = new Map<string, eventFunc[]>()
@@ -59,4 +59,8 @@ export const ChangeScene = (name:string):void => {
     }
     //Director.instance.preloadScene(name)
     Director.instance.loadScene(name,func)
+}
+
+export const ScheduleOnce = (node:Component, callback: () => void, delay: number) =>{
+    node.scheduleOnce(callback, delay)
 }
