@@ -84,5 +84,11 @@ export interface GAME_RECORD {
     draw?: number;
 }
 
+export enum ENUM_ENV {
+    DEV = 'dev',
+    TEST = 'test',
+    PROD = 'prod',
+}
+
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
 export const MAIN_GAME_ID = 10001

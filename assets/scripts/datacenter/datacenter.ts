@@ -1,4 +1,4 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID } from "./interfaceConfig";
+import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV } from "./interfaceConfig";
 import { sys,resources } from "cc";
 
 /**
@@ -282,5 +282,13 @@ export class DataCenter {
 
     get channelLoginType():string{
         return LOGIN_TYPE[this._channelID];
+    }
+
+    isEnvDev():boolean{
+        return this.appConfig.env === ENUM_ENV.DEV;
+    }
+
+    isEnvProd():boolean{
+        return this.appConfig.env === ENUM_ENV.PROD;
     }
 }

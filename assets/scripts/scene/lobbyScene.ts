@@ -2,7 +2,7 @@ import { _decorator, Component, log,sys,assetManager,resources,AssetManager, Jso
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../datacenter/datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
-import { ENUM_CHANNEL_ID, LOCAL_KEY } from '../datacenter/interfaceConfig';
+import { ENUM_CHANNEL_ID, ENUM_ENV, LOCAL_KEY } from '../datacenter/interfaceConfig';
 import { LoginView } from '../view/login/loginView';
 const { ccclass } = _decorator;
 
@@ -13,6 +13,12 @@ export class lobbyScreen extends Component {
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
             if(!err){
                 DataCenter.instance.appConfig = data?.json
+                // 开发环境处理
+                if (DataCenter.instance.isEnvDev()) {
+                    DataCenter.instance.appConfig.authList = DataCenter.instance.appConfig.authList_dev
+                    DataCenter.instance.appConfig.webUrl = DataCenter.instance.appConfig.webUrl_dev
+                }
+
                 DataCenter.instance.channelID = DataCenter.instance.appConfig.channelID ?? ENUM_CHANNEL_ID.ACCOUNT
             }
         })
