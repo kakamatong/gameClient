@@ -25,5 +25,8 @@
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <property target="icon" propertyId="1" value="ui://gv22rev3ddz1c"/>
     </component>
+    <text id="n16_qj8g" name="UI_TXT_ENV" xy="29,1618" size="124,42" visible="false" alpha="0.7" fontSize="30" color="#ffffff" strokeColor="#000000" strokeSize="2" text="开发环境">
+      <relation target="" sidePair="left-left,bottom-bottom"/>
+    </text>
   </displayList>
 </component>

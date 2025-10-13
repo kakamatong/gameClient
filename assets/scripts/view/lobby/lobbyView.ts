@@ -62,6 +62,9 @@ export class LobbyView extends FGUILobbyView {
         this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
         this._node3 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_3
         this._node4 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_4
+        if (DataCenter.instance.isEnvDev()) {
+            this.UI_TXT_ENV.visible = true
+        }
     }
 
     onSocketDisconnect(){
