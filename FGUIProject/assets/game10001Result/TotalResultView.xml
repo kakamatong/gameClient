@@ -6,7 +6,10 @@
     </graph>
     <image id="n3_kv65" name="n3" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449"/>
     <image id="n4_kv65" name="n4" src="kv65q" fileName="imgs/gameEnd.png" xy="88,367"/>
-    <list id="n5_kv65" name="UI_LV_INFO" xy="101,527" size="574,660" overflow="scroll"/>
+    <list id="n5_kv65" name="UI_LV_INFO" xy="101,527" size="574,660" overflow="scroll" lineGap="10" defaultItem="ui://5x18e99vkv65r" autoClearItems="true">
+      <item/>
+      <item/>
+    </list>
     <component id="n6_kv65" name="UI_BTN_EXIT" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="434,1375" size="230,99" group="n8_kv65">
       <property target="title" propertyId="0" value="退出"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
