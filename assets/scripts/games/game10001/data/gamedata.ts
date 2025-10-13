@@ -68,6 +68,15 @@ export class GameData {
         return  this._playerList[localSeat].headurl
     }
 
+    getHeadurlByUserid(userid: number):string{
+        const player = this.getPlayerByUserid(userid);
+        if (!player) {
+            return DEFAULT_HEADURL
+        }
+        const localSeat = this.seat2local(player.svrSeat);
+        return this.getHeadurl(localSeat);
+    }
+
     seat2local(seat: number): number {
         const selfSeat = this.getSelfSeat();
         const selfLocal = SELF_LOCAL
