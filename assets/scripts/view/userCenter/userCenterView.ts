@@ -7,7 +7,6 @@ import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
 import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
-import { LoadRemoteImage } from '../../frameworks/utils/utils';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
 import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
@@ -63,14 +62,7 @@ export class UserCenterView extends FGUIUserCenterView {
     updateUserInfo():void{
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
-        //(this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        LoadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
-            if (img) {
-                (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
-            }else{
-                (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-            }
-        })
+        (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
     }
 
     onBtnClose(): void {
@@ -97,11 +89,13 @@ export class UserCenterView extends FGUIUserCenterView {
                 if (userInfo) {
                     TipsView.showView({content:"已更新"})
                     if (DataCenter.instance.userData) {
+                        const rou = `?type=${DataCenter.instance.userid}.jpg`
+                        const headUrl = userInfo.avatarUrl + rou
                         DataCenter.instance.userData.nickname = userInfo.nickName
-                        DataCenter.instance.headurl = userInfo.avatarUrl
+                        DataCenter.instance.headurl = headUrl
                         this.updateUserInfo()
                         const userData = new UserData()
-                        userData.updateUserNameAndHeadurl(userInfo.nickName, userInfo.avatarUrl)
+                        userData.updateUserNameAndHeadurl(userInfo.nickName, headUrl)
                         DispatchEvent('userData',DataCenter.instance.userData)
                     }
                 }else{

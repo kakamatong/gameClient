@@ -1,7 +1,6 @@
 import FGUITotalResultView from '../../../../fgui/game10001Result/FGUITotalResultView';
 import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/gamedata';
-import { LoadRemoteImage } from '../../../../../scripts/frameworks/utils/utils';
 import { SpriteFrame } from 'cc';
 import { GameSocketManager } from '../../../../../scripts/frameworks/gameSocketManager';
 import { ChangeScene } from '../../../../../scripts/frameworks/framework';
@@ -28,14 +27,7 @@ export class TotalResultView extends FGUITotalResultView {
             item.asCom.getChild("UI_TXT_LOSE").text = `${dataItem.lose}`
             const headurl = GameData.instance.getHeadurlByUserid(dataItem.userid);
             const headNode = item.asCom.getChild("UI_COMP_HEAD").asCom.getChild("UI_LOADER_HEAD") as fgui.GLoader;
-
-            LoadRemoteImage(headurl, (img:SpriteFrame | null) => {
-                if (img) {
-                    headNode.texture = img;
-                }else{
-                    headNode.url = headurl
-                }
-            })
+            headNode.url = headurl
         }
     }
 

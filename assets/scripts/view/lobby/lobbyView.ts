@@ -19,8 +19,6 @@ import { MailView } from '../mail/mailView';
 import { Mail } from '../../modules/mail';
 import { PrivateRoomView } from '../privateRoom/privateRoomView';
 import { UserCenterView } from '../userCenter/userCenterView';
-import { LoadRemoteImage } from '../../frameworks/utils/utils';
-import { SpriteFrame, Texture2D } from 'cc';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -98,14 +96,7 @@ export class LobbyView extends FGUILobbyView {
         this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         //(this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        LoadRemoteImage(DataCenter.instance.headurl, (img:SpriteFrame | null) => {
-            if (img) {
-                (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.texture = img;
-            }else{
-                (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-            }
-            
-        })
+        (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
     }
 
     onUserInfo(data:any):void{

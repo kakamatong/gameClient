@@ -968,18 +968,3 @@ export const DecodeBase64Node = (bufferStr: string): string=> {
     const parsed = CryptoJS.enc.Base64.parse(bufferStr)
     return parsed.toString(CryptoJS.enc.Utf8);
 }
-
-export const LoadRemoteImage = (url: string, callback: (img: SpriteFrame| null) => void): void => {
-    if (!MiniGameUtils.instance.isThirdPlatform()) {
-        callback(null)
-        return
-    }
-    assetManager.loadRemote<ImageAsset>(url, { ext: '.png' }, (err, img:ImageAsset) => {
-        if (err) {
-            console.error(err.message);
-            return;
-        }
-        const sp = SpriteFrame.createWithImage(img);
-        callback(sp);
-    })
-}

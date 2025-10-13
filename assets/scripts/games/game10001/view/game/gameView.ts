@@ -15,7 +15,6 @@ import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
 import { Match } from '../../../..//modules/match';
 import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
-import {LoadRemoteImage} from '../../../../frameworks/utils/utils'
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
@@ -459,13 +458,7 @@ export class GameView extends FGUIGameView {
         nicknanme.text = player.nickname ?? "";
         id.text = player.userid.toString();
         const headurl = GameData.instance.getHeadurl(localseat)
-        LoadRemoteImage(headurl, (img:SpriteFrame | null) => {
-            if (img) {
-                head.UI_LOADER_HEAD.texture = img;
-            }else{
-                head.UI_LOADER_HEAD.url = headurl
-            }
-        })
+        head.UI_LOADER_HEAD.url = headurl
 
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
