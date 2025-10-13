@@ -29,8 +29,8 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_ID_1:fgui.GTextField;
 	public UI_IMG_SIGN_READY_1:fgui.GImage;
 	public UI_GROUP_PLAYER_1:fgui.GGroup;
-	public UI_COMP_OUT_HEAD_1:FGUICompHand;
-	public UI_COMP_OUT_HEAD_2:FGUICompHand;
+	public UI_COMP_OUT_HEND_1:FGUICompHand;
+	public UI_COMP_OUT_HEND_2:FGUICompHand;
 	public UI_BTN_SURE:fgui.GButton;
 	public UI_BTN_CHANGE:fgui.GButton;
 	public UI_BTN_CONTINUE:fgui.GButton;
@@ -106,8 +106,8 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_ID_1 = <fgui.GTextField>(this.getChildAt(14));
 		this.UI_IMG_SIGN_READY_1 = <fgui.GImage>(this.getChildAt(15));
 		this.UI_GROUP_PLAYER_1 = <fgui.GGroup>(this.getChildAt(16));
-		this.UI_COMP_OUT_HEAD_1 = <FGUICompHand>(this.getChildAt(17));
-		this.UI_COMP_OUT_HEAD_2 = <FGUICompHand>(this.getChildAt(18));
+		this.UI_COMP_OUT_HEND_1 = <FGUICompHand>(this.getChildAt(17));
+		this.UI_COMP_OUT_HEND_2 = <FGUICompHand>(this.getChildAt(18));
 		this.UI_BTN_SURE = <fgui.GButton>(this.getChildAt(19));
 		this.UI_BTN_SURE.onClick(this.onBtnSure, this);
 		this.UI_BTN_CHANGE = <fgui.GButton>(this.getChildAt(20));

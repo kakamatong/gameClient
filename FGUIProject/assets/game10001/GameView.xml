@@ -40,10 +40,10 @@
     <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="57,1098" size="418,469" advanced="true">
       <relation target="" sidePair="left-left,bottom-bottom"/>
     </group>
-    <component id="n14_folo" name="UI_COMP_OUT_HEAD_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
+    <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n15_folo" name="UI_COMP_OUT_HEAD_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
+    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
     <component id="n21_folo" name="UI_BTN_SURE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="513,1451" group="n23_folo" controller="ctrl_color,0">

@@ -169,13 +169,13 @@ export class GameView extends FGUIGameView {
     }
 
     showOutHand(local:number, index:number){
-        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${local}`)
+        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${local}`)
         outHand.ctrl_head.selectedIndex = index
         outHand.visible = true
     }
 
     hideOutHand(local:number){
-        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${local}`)
+        const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${local}`)
         outHand.visible = false
     }
 
@@ -187,7 +187,7 @@ export class GameView extends FGUIGameView {
 
     playOutHandAct(){
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
-            const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEAD_${index + 1}`)
+            const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${index + 1}`)
             outHand.act.play()
         }
     }
