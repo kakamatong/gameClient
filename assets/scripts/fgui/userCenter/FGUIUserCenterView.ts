@@ -18,6 +18,7 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_BTN_BGMUSIC:FGUICompBtnSound;
 	public UI_BTN_EFFECT:FGUICompBtnSound;
+	public UI_TXT_CP:fgui.GTextField;
 	public static URL:string = "ui://1zcuqn2bp4e40";
 
 	public static packageName:string = "userCenter";
@@ -77,6 +78,7 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 		this.UI_BTN_BGMUSIC.onClick(this.onBtnBgmusic, this);
 		this.UI_BTN_EFFECT = <FGUICompBtnSound>(this.getChildAt(21));
 		this.UI_BTN_EFFECT.onClick(this.onBtnEffect, this);
+		this.UI_TXT_CP = <fgui.GTextField>(this.getChildAt(23));
 	}
 	onBtnWechat():void{};
 	onBtnDelAcc():void{};
