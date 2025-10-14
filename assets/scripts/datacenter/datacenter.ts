@@ -182,6 +182,10 @@ export class DataCenter {
         return this._userRiches;
     }
 
+    getRichByType(type:number):{richType:number, richNums:number} | undefined {
+        return this._userRiches.find(rich => rich.richType === type);
+    }
+
     set userStatus(data:USER_STATUS) {
         this._userStatus = data;
     }

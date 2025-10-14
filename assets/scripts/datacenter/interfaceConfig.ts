@@ -90,5 +90,12 @@ export enum ENUM_ENV {
     PROD = 'prod',
 }
 
+export enum RICH_TYPE  {
+    NONE = 0,
+    GOLD_COIN = 1, // 金币（一级货币）
+    SILVER_COIN = 2, // 银子（二级货币）
+    COMBAT_POWER = 100, // 战力
+}
+
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
 export const MAIN_GAME_ID = 10001

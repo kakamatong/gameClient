@@ -8,7 +8,7 @@ import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
 import { DispatchEvent } from '../../frameworks/framework';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
-import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY, RICH_TYPE } from '../../datacenter/interfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
 import { RevokeAccount } from '../../modules/revokeAccount';
 import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
@@ -63,6 +63,8 @@ export class UserCenterView extends FGUIUserCenterView {
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
+        const cp = DataCenter.instance.getRichByType(RICH_TYPE.COMBAT_POWER) ?? 0
+        this.UI_TXT_CP.text =`${cp}`
     }
 
     onBtnClose(): void {
