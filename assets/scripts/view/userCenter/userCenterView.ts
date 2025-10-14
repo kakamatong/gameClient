@@ -63,8 +63,8 @@ export class UserCenterView extends FGUIUserCenterView {
         this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        const cp = DataCenter.instance.getRichByType(RICH_TYPE.COMBAT_POWER) ?? 0
-        this.UI_TXT_CP.text =`${cp}`
+        const cp = DataCenter.instance.getRichByType(RICH_TYPE.COMBAT_POWER) ?? {richType:RICH_TYPE.COMBAT_POWER, richNums:0}
+        this.UI_TXT_CP.text =`${cp.richNums}`
     }
 
     onBtnClose(): void {
