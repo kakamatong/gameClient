@@ -2,7 +2,7 @@
 <component size="540,100">
   <displayList>
     <text id="n0_fnug" name="UI_TXT_NICKNAME" xy="1,24" size="271,49" fontSize="36" color="#ffffff" vAlign="middle" autoSize="ellipsis" strokeColor="#000000" strokeSize="2" singleLine="true" text="昵称"/>
-    <text id="n1_fnug" name="UI_TXT_SCORE" xy="389,24" size="149,49" fontSize="36" color="#ffffff" align="right" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text="日榜积分"/>
+    <text id="n1_fnug" name="UI_TXT_SCORE" xy="389,24" size="149,49" fontSize="36" color="#ffffff" align="right" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text="战力"/>
     <text id="n2_nomu" name="UI_TXT_ID" xy="217,24" size="162,49" visible="false" fontSize="36" color="#ffffff" vAlign="middle" autoSize="none" strokeColor="#000000" strokeSize="2" text="ID"/>
   </displayList>
 </component>

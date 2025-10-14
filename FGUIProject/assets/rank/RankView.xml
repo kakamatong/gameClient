@@ -13,9 +13,10 @@
       <item/>
     </list>
     <component id="n2_is91" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,376" group="n7_is91"/>
-    <text id="n5_is91" name="n5" xy="97,1046" size="254,66" group="n7_is91" fontSize="50" color="#ffffff" strokeColor="#000000" strokeSize="2" text="您的排名："/>
-    <text id="n6_is91" name="UI_TXT_SELF_RANK" xy="349,1047" size="178,66" group="n7_is91" fontSize="50" color="#ff0000" singleLine="true" text="000000"/>
+    <text id="n5_is91" name="n5" xy="97,1034" size="254,66" group="n7_is91" fontSize="50" color="#ffffff" strokeColor="#000000" strokeSize="2" text="您的排名："/>
+    <text id="n6_is91" name="UI_TXT_SELF_RANK" xy="349,1035" size="178,66" group="n7_is91" fontSize="50" color="#ff0000" singleLine="true" text="000000"/>
     <text id="n9_gd4t" name="n9" xy="311,416" size="154,66" group="n7_is91" fontSize="50" color="#ffffff" strokeColor="#000000" strokeSize="2" text="排行榜"/>
+    <text id="n11_sexy" name="n11" xy="102,1106" size="253,20" group="n7_is91" alpha="0.7" fontSize="13" color="#333333" text="匹配模式胜场+4分，输不加分，每日0点清0"/>
     <group id="n7_is91" name="n7" xy="59,371" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
