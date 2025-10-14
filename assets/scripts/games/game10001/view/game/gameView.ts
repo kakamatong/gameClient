@@ -9,7 +9,7 @@ import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_I
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
-import { ENUM_POP_MESSAGE_TYPE } from '../../../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../../../datacenter/interfaceConfig';
 import { ResultView } from '../result/ResultView';
 import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
@@ -211,6 +211,9 @@ export class GameView extends FGUIGameView {
                         nickname: player?.nickname ?? ''
                     })
                     
+                    if (player?.userid === DataCenter.instance.userid) {
+                        DataCenter.instance.addRichByType(RICH_TYPE.COMBAT_POWER, element.dcp)
+                    }
                 }
             }
         }

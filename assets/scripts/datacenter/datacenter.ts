@@ -182,6 +182,11 @@ export class DataCenter {
         return this._userRiches;
     }
 
+    addRichByType(type:number, nums:number) {
+        const item = this._userRiches.find(rich => rich.richType === type);
+        item && (item.richNums += nums)
+    }
+
     getRichByType(type:number):{richType:number, richNums:number} | undefined {
         return this._userRiches.find(rich => rich.richType === type);
     }
