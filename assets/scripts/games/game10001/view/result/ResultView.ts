@@ -4,7 +4,7 @@ import { GameData } from '../../data/gamedata';
 
 export class ResultView extends FGUIResultView { 
     private _continueFunc:(()=>void) | null = null;
-    private _scoreData:Array<{userid:number, score:number, nickname:string}> = []
+    private _scoreData:Array<{userid:number, cpData:any, nickname:string}> = []
     show(data?:any){
         this.ctrl_flag.selectedIndex = data?.flag ?? 0;
         this._continueFunc = data?.continueFunc
@@ -27,7 +27,7 @@ export class ResultView extends FGUIResultView {
         const itemData = this._scoreData[index];
         item.asCom.getChild('UI_TXT_NICKNAME').text = itemData.nickname;
         item.asCom.getChild('UI_TXT_ID').text = `${itemData.userid}`;
-        item.asCom.getChild('UI_TXT_SCORE').text = `${itemData.score > 0 ? '+' : ''}${itemData.score}`;
+        item.asCom.getChild('UI_TXT_SCORE').text = `${itemData.cpData.dcp > 0 ? '+' : ''}${itemData.cpData.dcp}`;
     }
 
     onBtnBack(): void {

@@ -198,7 +198,7 @@ export class GameView extends FGUIGameView {
             return
         }
         const selfSeat = GameData.instance.getSelfSeat()
-        const scoreData:Array<{userid:number, score:number, nickname:string}> = []
+        const scoreData:Array<{userid:number, cpData:any, nickname:string}> = []
         if (data.score) {
             const scores = JSON.parse(data.score)
             if (scores && scores.length > 0) {
@@ -207,7 +207,7 @@ export class GameView extends FGUIGameView {
                     const player = GameData.instance.getPlayerBySeat(index + 1)
                     scoreData.push({
                         userid: player?.userid ?? 0,
-                        score: element,
+                        cpData: element,
                         nickname: player?.nickname ?? ''
                     })
                     
