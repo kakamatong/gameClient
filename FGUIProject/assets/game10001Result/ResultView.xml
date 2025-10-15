@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
-  <controller name="ctrl_flag" pages="0,失败,1,胜利,2,平局" selected="0">
+  <controller name="ctrl_flag" pages="0,失败,1,胜利,2,平局" selected="2">
     <action type="change_page" fromPage="" toPage="0" objectId="n9_fnug" controller="ctrl_sign" targetPage="0"/>
     <action type="change_page" fromPage="" toPage="1" objectId="n9_fnug" controller="ctrl_sign" targetPage="1"/>
     <action type="change_page" fromPage="" toPage="2" objectId="n9_fnug" controller="ctrl_sign" targetPage="2"/>
   </controller>
-  <controller name="ctrl_btn" pages="0,返回继续,1,返回" selected="1"/>
+  <controller name="ctrl_btn" pages="0,返回继续,1,返回" selected="0"/>
+  <controller name="ctrl_roomType" pages="0,匹配房,1,私人房" selected="0"/>
   <displayList>
     <graph id="n10_mifd" name="n10" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -16,7 +17,7 @@
       <property target="title" propertyId="0" value="继续"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
-    <component id="n5_fnug" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="273,1093" size="230,99" group="n7_fnug">
+    <component id="n5_fnug" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="125,1093" size="230,99" group="n7_fnug">
       <gearDisplay controller="ctrl_btn" pages="0,1"/>
       <gearXY controller="ctrl_btn" pages="1" values="273,1093" default="125,1093"/>
       <property target="title" propertyId="0" value="返回"/>
@@ -28,7 +29,9 @@
       <item title="3" name="3"/>
       <item title="4" name="4"/>
     </list>
-    <component id="n11_nomu" name="n11" src="fnug1" fileName="comp/CompResultInfo.xml" xy="121,612" group="n7_fnug"/>
+    <component id="n11_nomu" name="n11" src="fnug1" fileName="comp/CompResultInfo.xml" xy="121,612" group="n7_fnug">
+      <gearDisplay controller="ctrl_roomType" pages="0"/>
+    </component>
     <group id="n7_fnug" name="UI_GROP_RESULT" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
