@@ -4,8 +4,8 @@ import { GameView } from '../games/game10001/view/game/GameView';
 import { LOCAL_KEY } from '../datacenter/InterfaceConfig';
 const { ccclass, property } = _decorator;
 
-@ccclass('gameScreen')
-export class gameScreen extends Component {
+@ccclass('GameScreen')
+export class GameScreen extends Component {
 
     start() {
         this.initView()

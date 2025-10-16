@@ -6,8 +6,8 @@ import { ENUM_CHANNEL_ID, ENUM_ENV, LOCAL_KEY } from '../datacenter/InterfaceCon
 import { LoginView } from '../view/login/LoginView';
 const { ccclass } = _decorator;
 
-@ccclass('lobbyScreen')
-export class lobbyScreen extends Component {
+@ccclass('LobbyScreen')
+export class LobbyScreen extends Component {
     start() {
 
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
