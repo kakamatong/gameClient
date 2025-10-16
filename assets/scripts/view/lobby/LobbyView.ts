@@ -179,7 +179,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     changeToGameScene():void{
-        ChangeScene('gameScene');
+        ChangeScene('GameScene');
     }
 
     connectToGame(addr:string, gameid:number, roomid:string){

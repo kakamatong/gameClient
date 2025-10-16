@@ -39,7 +39,7 @@ export class TotalResultView extends FGUITotalResultView {
         if (GameSocketManager.instance.isOpen()) {
             GameSocketManager.instance.close()
         }
-        ChangeScene('lobbyScene')
+        ChangeScene('LobbyScene')
     }
 
 }

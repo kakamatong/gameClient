@@ -532,7 +532,7 @@ export class GameView extends FGUIGameView {
         if (GameSocketManager.instance.isOpen()) {
             GameSocketManager.instance.close()
         }
-        ChangeScene('lobbyScene')
+        ChangeScene('LobbyScene')
     }
 
     onBtnBack(): void {
