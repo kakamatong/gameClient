@@ -7,14 +7,12 @@ export class ResultView extends FGUIResultView {
     private _scoreData:Array<{userid:number, cpData:any, nickname:string}> = []
     show(data?:any){
         this.ctrl_flag.selectedIndex = data?.flag ?? 0;
+        this.ctrl_roomType.selectedIndex = GameData.instance.isPrivateRoom ? 1 : 0
+        
         this._continueFunc = data?.continueFunc
         this.act.play(()=>{
             this.UI_COMP_ACT.ctrl_show.selectedIndex = 1
         })
-
-        if (GameData.instance.isPrivateRoom) {
-            //this.ctrl_btn.selectedIndex = 1
-        }
 
         if (data.scores && data.scores.length > 0) {
             this._scoreData = data.scores
