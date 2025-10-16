@@ -1,6 +1,6 @@
 import FGUIResultView from '../../../../fgui/game10001Result/FGUIResultView';
 import * as fgui from "fairygui-cc";
-import { GameData } from '../../data/gamedata';
+import { GameData } from '../../data/Gamedata';
 
 export class ResultView extends FGUIResultView { 
     private _continueFunc:(()=>void) | null = null;

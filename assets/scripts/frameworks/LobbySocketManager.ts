@@ -1,5 +1,5 @@
 import { DispatchEvent } from './Framework';
-import { SocketManager } from './socketManager';
+import { SocketManager } from './SocketManager';
 
 export class LobbySocketManager extends SocketManager {
     protected _name: string = 'LobbySocketManager'

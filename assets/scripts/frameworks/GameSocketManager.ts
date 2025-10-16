@@ -1,5 +1,5 @@
 import { DispatchEvent, LogColors } from './Framework';
-import { SocketManager } from './socketManager';
+import { SocketManager } from './SocketManager';
 
 export class GameSocketManager extends SocketManager {
     protected _name: string = 'GameSocketManager'

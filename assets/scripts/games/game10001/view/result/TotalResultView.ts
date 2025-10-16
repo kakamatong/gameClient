@@ -1,6 +1,6 @@
 import FGUITotalResultView from '../../../../fgui/game10001Result/FGUITotalResultView';
 import * as fgui from "fairygui-cc";
-import { GameData } from '../../data/gamedata';
+import { GameData } from '../../data/Gamedata';
 import { SpriteFrame } from 'cc';
 import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { ChangeScene } from '../../../../frameworks/Framework';
