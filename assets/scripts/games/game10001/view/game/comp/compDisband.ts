@@ -2,11 +2,11 @@ import FGUICompDisband from "../../../../../fgui/game10001/FGUICompDisband";
 import * as fgui from "fairygui-cc";
 import { VOTE_STATUS, VoteDisbandResultData, VoteDisbandStartData, VoteDisbandUpdateData, VoteInfo } from "../../../data/interfaceGameConfig";
 import { GameData } from "../../../data/gamedata";
-import { GameSocketManager } from "../../../../../frameworks/gameSocketManager";
-import { DataCenter } from "../../../../../datacenter/datacenter";
+import { GameSocketManager } from "../../../../../frameworks/GameSocketManager";
+import { DataCenter } from "../../../../../datacenter/Datacenter";
 import { TipsView } from "../../../../../view/common/tipsView";
 import { PopMessageView } from "../../../../../view/common/popMessageView";
-import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/interfaceConfig";
+import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/InterfaceConfig";
 import { Color } from "cc";
 
 export class CompDisband extends FGUICompDisband { 

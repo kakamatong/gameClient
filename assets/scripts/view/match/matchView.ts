@@ -2,11 +2,11 @@
 import FGUIMatchView from '../../fgui/match/FGUIMatchView';
 import * as fgui from "fairygui-cc";
 import { Match } from '../../modules/match';
-import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/InterfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
-import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
-import { DataCenter } from '../../datacenter/datacenter';
-import { LogColors } from '../../frameworks/framework';
+import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
+import { DataCenter } from '../../datacenter/Datacenter';
+import { LogColors } from '../../frameworks/Framework';
 import { TipsView } from '../common/tipsView';
 import {CompMatchAct} from './comp/compMatchAct';
 import { sys } from 'cc';

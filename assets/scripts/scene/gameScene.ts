@@ -1,7 +1,7 @@
 import { _decorator, assetManager, AudioClip, AudioSourceComponent, Component,isValid,log, sys} from 'cc';
 import * as fgui from "fairygui-cc";
 import { GameView } from '../games/game10001/view/game/gameView';
-import { LOCAL_KEY } from '../datacenter/interfaceConfig';
+import { LOCAL_KEY } from '../datacenter/InterfaceConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('gameScreen')

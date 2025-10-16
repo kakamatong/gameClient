@@ -1,9 +1,9 @@
-import { DataCenter } from "../../../datacenter/datacenter";
+import { DataCenter } from "../../../datacenter/Datacenter";
 import FGUICompPrivateJoin from "../../../fgui/privateRoom/FGUICompPrivateJoin";
 import * as fgui from "fairygui-cc";
-import { LobbySocketManager } from "../../../frameworks/lobbySocketManager";
+import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";
 import { PopMessageView } from "../../common/popMessageView";
-import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/interfaceConfig";
+import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/InterfaceConfig";
 import { TipsView } from "../../common/tipsView";
 
 export class CompPrivateJoin extends FGUICompPrivateJoin { 

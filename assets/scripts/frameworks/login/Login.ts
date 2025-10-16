@@ -1,9 +1,9 @@
 import CryptoJS from 'crypto-js';        
 import { _decorator, log} from 'cc';
-import { Socket } from '../socket/socket';
-import { handleSocketMessage } from '../config/config';
-import { dhexchange, dhsecret, hmac64, CustomDESEncrypt, StringToUint8Array, DecodeBase64Node } from '../utils/utils';
-import {LogColors} from '../framework';
+import { Socket } from '../socket/Socket';
+import { handleSocketMessage } from '../config/Config';
+import { dhexchange, dhsecret, hmac64, CustomDESEncrypt, StringToUint8Array, DecodeBase64Node } from '../utils/Utils';
+import {LogColors} from '../Framework';
 const { ccclass, property } = _decorator;
 
 export interface ACCOUNT_INFO {

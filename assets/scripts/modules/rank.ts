@@ -1,5 +1,5 @@
-import { LobbySocketManager } from '../frameworks/lobbySocketManager';
-import { LogColors } from '../frameworks/framework';
+import { LobbySocketManager } from '../frameworks/LobbySocketManager';
+import { LogColors } from '../frameworks/Framework';
 
 export class Rank {
     private _callBack:((b:boolean, data:any)=>void) | null = null; // 登入成功，但不一定已经拉到数据

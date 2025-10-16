@@ -1,8 +1,8 @@
 import { _decorator, Component, log,sys,assetManager,resources,AssetManager, JsonAsset, AudioClip, AudioSourceComponent, isValid} from 'cc';
 import * as fgui from "fairygui-cc";
-import { DataCenter } from '../datacenter/datacenter';
+import { DataCenter } from '../datacenter/Datacenter';
 import { LobbyView } from "../view/lobby/lobbyView";
-import { ENUM_CHANNEL_ID, ENUM_ENV, LOCAL_KEY } from '../datacenter/interfaceConfig';
+import { ENUM_CHANNEL_ID, ENUM_ENV, LOCAL_KEY } from '../datacenter/InterfaceConfig';
 import { LoginView } from '../view/login/loginView';
 const { ccclass } = _decorator;
 

@@ -1,8 +1,8 @@
 import CryptoJS from 'crypto-js';   
-import {DataCenter} from '../datacenter/datacenter';
-import { LogColors } from '../frameworks/framework';
-import { GameSocketManager } from '../frameworks/gameSocketManager';
-import { CustomDESEncryptStr } from '../frameworks/utils/utils';
+import {DataCenter} from '../datacenter/Datacenter';
+import { LogColors } from '../frameworks/Framework';
+import { GameSocketManager } from '../frameworks/GameSocketManager';
+import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 export class AuthGame {
     //Auth
     private static _instance: AuthGame;

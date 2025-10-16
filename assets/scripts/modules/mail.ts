@@ -1,6 +1,6 @@
-import {DataCenter} from '../datacenter/datacenter';
-import { LogColors } from '../frameworks/framework';
-import { HttpPostWithDefaultJWT } from '../frameworks/utils/utils';
+import {DataCenter} from '../datacenter/Datacenter';
+import { LogColors } from '../frameworks/Framework';
+import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
 
 /**
  * @description 添加console.log别名，方便使用日志颜色

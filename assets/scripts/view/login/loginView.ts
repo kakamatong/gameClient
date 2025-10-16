@@ -1,10 +1,10 @@
 import { sys } from 'cc';
-import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { LOCAL_KEY } from '../../datacenter/InterfaceConfig';
 import FGUILoginView from '../../fgui/login/FGUILoginView';
 import * as fgui from "fairygui-cc";
 import { LobbyView } from '../lobby/lobbyView';
 import { PrivacyView } from '../privacy/privacyView';
-import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 
 export class LoginView extends FGUILoginView {
     show(data?: any):void{

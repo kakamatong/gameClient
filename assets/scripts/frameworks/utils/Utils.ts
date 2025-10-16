@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';   
-import { MiniGameUtils } from './sdk/miniGameUtils';
+import { MiniGameUtils } from './sdk/MiniGameUtils';
 import {  assetManager, ImageAsset, SpriteFrame } from 'cc';
 
 // DH参数配置

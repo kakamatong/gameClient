@@ -1,6 +1,6 @@
-import { DataCenter } from '../datacenter/datacenter';
-import { DispatchEvent } from '../frameworks/framework';
-import { LobbySocketManager } from '../frameworks/lobbySocketManager';
+import { DataCenter } from '../datacenter/Datacenter';
+import { DispatchEvent } from '../frameworks/Framework';
+import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 export class UserRiches {
     req() {
         LobbySocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))

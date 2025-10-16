@@ -1,11 +1,11 @@
 import CryptoJS from 'crypto-js';   
-import {DataCenter} from '../datacenter/datacenter';
-import { LogColors } from '../frameworks/framework';
-import { LobbySocketManager } from '../frameworks/lobbySocketManager';
+import {DataCenter} from '../datacenter/Datacenter';
+import { LogColors } from '../frameworks/Framework';
+import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { UserData } from './userData';
 import { UserRiches } from './userRiches';
 import { UserStatus } from './userStatus';
-import { CustomDESEncryptStr } from '../frameworks/utils/utils';
+import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { AwardNotices } from './awardNotices';
 export class Auth {
     //Auth

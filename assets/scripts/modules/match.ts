@@ -1,5 +1,5 @@
-import { LobbySocketManager } from '../frameworks/lobbySocketManager';
-import { LogColors } from '../frameworks/framework';
+import { LobbySocketManager } from '../frameworks/LobbySocketManager';
+import { LogColors } from '../frameworks/Framework';
 import { UserStatus } from './userStatus';
 
 /**

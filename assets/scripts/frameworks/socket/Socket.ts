@@ -1,5 +1,5 @@
 import { _decorator, log } from 'cc';
-import { handleSocketMessage } from '../config/config';
+import { handleSocketMessage } from '../config/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass('Socket')

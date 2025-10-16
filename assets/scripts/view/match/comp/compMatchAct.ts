@@ -1,7 +1,7 @@
 
 import FGUICompMatchAct from '../../../fgui/match/FGUICompMatchAct';
 import * as fgui from "fairygui-cc";
-import {GetRandomInt} from '../../../frameworks/utils/utils'
+import {GetRandomInt} from '../../../frameworks/utils/Utils'
 export class CompMatchAct extends FGUICompMatchAct {
     private _ctrls:Array<fgui.Controller> = []
     private _nowIndex = 0;

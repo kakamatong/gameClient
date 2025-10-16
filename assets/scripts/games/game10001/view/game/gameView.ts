@@ -1,20 +1,20 @@
 
 import FGUIGameView from '../../../../fgui/game10001/FGUIGameView';
 import FGUICompHand from '../../../../fgui/game10001/FGUICompHand';
-import { GameSocketManager } from '../../../../frameworks/gameSocketManager';
-import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/framework';
-import { DataCenter } from '../../../../datacenter/datacenter'
+import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
+import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/Framework';
+import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/gamedata';
 import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT} from '../../data/interfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/compClock';
 import { PopMessageView } from '../../../../view/common/popMessageView';
-import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../../../datacenter/InterfaceConfig';
 import { ResultView } from '../result/ResultView';
 import { UserStatus } from '../../../../modules/userStatus';
 import { MatchView } from '../../../../view/match/matchView';
 import { Match } from '../../../..//modules/match';
-import { LobbySocketManager } from '../../../../frameworks/lobbySocketManager';
+import { LobbySocketManager } from '../../../../frameworks/LobbySocketManager';
 import { AuthGame } from '../../../../modules/authGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';

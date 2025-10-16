@@ -1,9 +1,9 @@
-import { DataCenter } from "../datacenter/datacenter";
-import { ENUM_CHANNEL_ID, LOGIN_TYPE } from "../datacenter/interfaceConfig";
-import { LobbySocketManager } from "../frameworks/lobbySocketManager";
-import { ACCOUNT_INFO, Login } from "../frameworks/login/login";
-import { MiniGameUtils } from "../frameworks/utils/sdk/miniGameUtils";
-import { HttpPostWithDefaultJWT } from "../frameworks/utils/utils";
+import { DataCenter } from "../datacenter/Datacenter";
+import { ENUM_CHANNEL_ID, LOGIN_TYPE } from "../datacenter/InterfaceConfig";
+import { LobbySocketManager } from "../frameworks/LobbySocketManager";
+import { ACCOUNT_INFO, Login } from "../frameworks/login/Login";
+import { MiniGameUtils } from "../frameworks/utils/sdk/MiniGameUtils";
+import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
 import { Auth } from "./auth";
 import { AuthList } from "./authList";
 import { sys } from 'cc';

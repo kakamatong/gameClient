@@ -1,4 +1,4 @@
-import { DispatchEvent } from './framework';
+import { DispatchEvent } from './Framework';
 import { SocketManager } from './socketManager';
 
 export class LobbySocketManager extends SocketManager {

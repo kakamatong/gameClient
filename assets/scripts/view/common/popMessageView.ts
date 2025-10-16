@@ -1,5 +1,5 @@
 import FGUIPopMessageView from "../../fgui/common/FGUIPopMessageView";
-import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/interfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE} from '../../datacenter/InterfaceConfig';
 import * as fgui from "fairygui-cc";
 
 export class PopMessageView extends FGUIPopMessageView { 

@@ -2,16 +2,16 @@ import FGUIUserCenterView from '../../fgui/userCenter/FGUIUserCenterView';
 import * as fgui from "fairygui-cc";
 import { UserGameRecord } from '../../modules/userGameRecord';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
-import { DataCenter } from '../../datacenter/datacenter';
-import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
+import { DataCenter } from '../../datacenter/Datacenter';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { TipsView } from '../common/tipsView';
 import { UserData } from '../../modules/userData';
-import { DispatchEvent } from '../../frameworks/framework';
+import { DispatchEvent } from '../../frameworks/Framework';
 import { AudioSourceComponent, SpriteFrame, sys } from 'cc';
-import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY, RICH_TYPE } from '../../datacenter/interfaceConfig';
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY, RICH_TYPE } from '../../datacenter/InterfaceConfig';
 import { PopMessageView } from '../common/popMessageView';
 import { RevokeAccount } from '../../modules/revokeAccount';
-import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
+import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{

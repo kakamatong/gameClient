@@ -1,13 +1,13 @@
 
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
-import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../frameworks/framework';
-import { DataCenter } from '../../datacenter/datacenter';
+import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../frameworks/Framework';
+import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/connectSvr';
 import { PopMessageView } from '../common/popMessageView';
-import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS} from '../../datacenter/interfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS} from '../../datacenter/InterfaceConfig';
 import { TipsView } from '../common/tipsView';
-import { LobbySocketManager } from '../../frameworks/lobbySocketManager';
+import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 import { Rank } from '../../modules/rank';
 import { RankView } from '../rank/rankView';
 import { LoadingView } from '../common/loadingView';

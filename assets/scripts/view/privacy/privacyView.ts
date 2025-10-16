@@ -1,8 +1,8 @@
 import { sys } from 'cc';
-import { LOCAL_KEY } from '../../datacenter/interfaceConfig';
+import { LOCAL_KEY } from '../../datacenter/InterfaceConfig';
 import FGUIPrivacyView from '../../fgui/privacy/FGUIPrivacyView';
 import * as fgui from "fairygui-cc";
-import { MiniGameUtils } from '../../frameworks/utils/sdk/miniGameUtils';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 
 export class PrivacyView extends FGUIPrivacyView {
     private _resolve:Function | null = null;

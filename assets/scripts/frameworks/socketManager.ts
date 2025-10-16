@@ -1,8 +1,8 @@
-import { Socket } from './socket/socket';
+import { Socket } from './socket/Socket';
 import { assetManager, BufferAsset, log } from 'cc';
 import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声明，ts会提示any类型警告，但不影响功能
-import { handleSocketMessage } from './config/config';
-import {LogColors} from './framework';
+import { handleSocketMessage } from './config/Config';
+import {LogColors} from './Framework';
 
 /**
  * @class SocketManager

@@ -1,4 +1,4 @@
-import { DEFAULT_HEADURL } from "../../../datacenter/interfaceConfig";
+import { DEFAULT_HEADURL } from "../../../datacenter/InterfaceConfig";
 import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP, GAME_DATA } from "./interfaceGameConfig";
 
 export class GameData {

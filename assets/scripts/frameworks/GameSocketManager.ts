@@ -1,4 +1,4 @@
-import { DispatchEvent, LogColors } from './framework';
+import { DispatchEvent, LogColors } from './Framework';
 import { SocketManager } from './socketManager';
 
 export class GameSocketManager extends SocketManager {

@@ -1,7 +1,7 @@
-import { DataCenter } from '../datacenter/datacenter';
-import { LobbySocketManager } from '../frameworks/lobbySocketManager';
-import { DispatchEvent } from '../frameworks/framework';
-import { MAIN_GAME_ID } from '../datacenter/interfaceConfig';
+import { DataCenter } from '../datacenter/Datacenter';
+import { LobbySocketManager } from '../frameworks/LobbySocketManager';
+import { DispatchEvent } from '../frameworks/Framework';
+import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
 
 /**
  * @class UserData

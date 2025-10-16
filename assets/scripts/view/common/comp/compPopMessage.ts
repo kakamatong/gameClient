@@ -1,5 +1,5 @@
 import FGUICompPopMessage from "../../../fgui/common/FGUICompPopMessage";
-import {ENUM_POP_MESSAGE_TYPE} from '../../../datacenter/interfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE} from '../../../datacenter/InterfaceConfig';
 import * as fgui from "fairygui-cc";
 
 export class CompMessage extends FGUICompPopMessage { 
