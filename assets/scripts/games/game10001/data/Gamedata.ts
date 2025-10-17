@@ -11,6 +11,7 @@ export class GameData {
     private _gameData: GAME_DATA | null = null;
     private _playerInfos: Array<GAME_PLAYER_INFO> = [];
     private _owner = 0;
+    private _record: Array<any> = [];
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -155,5 +156,13 @@ export class GameData {
 
     get owner(): number{
         return this._owner;
+    }
+
+    set record(record: Array<any>){
+        this._record = record;
+    }
+
+    get record(): Array<any>{
+        return this._record;
     }
 }
