@@ -109,7 +109,7 @@ export class GameView extends FGUIGameView {
         }
         if (GameData.instance.isPrivateRoom) {
             if (data.maxCnt === 9999) {
-                this.UI_TXT_PROGRESS.text = `无限对局`
+                this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 无限轮`
             }else{
                 this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 共${data.maxCnt ?? 0}轮`
             }
