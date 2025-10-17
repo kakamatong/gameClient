@@ -10,9 +10,9 @@ export class ResultView extends FGUIResultView {
         const flag = data?.flag ?? 0
         this.ctrl_flag.selectedIndex = flag;
         if (flag ===1) {
-            this.playWinSound()
+            this.playSound('win')
         }else if (flag === 0) {
-            this.playLoseSound()
+            this.playSound('lose')
         }
         this.ctrl_roomType.selectedIndex = GameData.instance.isPrivateRoom ? 1 : 0
         
@@ -28,14 +28,14 @@ export class ResultView extends FGUIResultView {
         }
     }
 
-    playWinSound(){
+    playSound(key:string){
         assetManager.loadBundle('sound', (err, bundle) => { 
             if (err) {
                 log('loadBundle error', err);
                 return;
             }
 
-            bundle.load<AudioClip>('game10001/win', (err, asset: AudioClip) => { 
+            bundle.load<AudioClip>('game10001/' + key, (err, asset: AudioClip) => { 
                 if (err) {
                     log('loadBundle error', err);
                     return;
@@ -45,22 +45,6 @@ export class ResultView extends FGUIResultView {
         });
     }
 
-    playLoseSound(){
-        assetManager.loadBundle('sound', (err, bundle) => { 
-            if (err) {
-                log('loadBundle error', err);
-                return;
-            }
-
-            bundle.load<AudioClip>('game10001/lose', (err, asset: AudioClip) => { 
-                if (err) {
-                    log('loadBundle error', err);
-                    return;
-                }
-                fgui.GRoot.inst.playOneShotSound(asset)
-            })
-        });
-    }
 
     itemRenderer(index:number, item:fgui.GObject){
         const itemData = this._scoreData[index];
