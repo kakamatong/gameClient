@@ -110,6 +110,17 @@ export class GameView extends FGUIGameView {
         if (GameData.instance.isPrivateRoom) {
             this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 共${data.maxCnt ?? 0}轮`
             //this.UI_TXT_RULE.text = `${GAME_MODE_TXT[data.mode]}`
+            this.showWinLost(JSON.parse(data.ext))
+        }
+    }
+
+    showWinLost(data:any){
+        if (data && data.length > 0) {
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                const localSeat = GameData.instance.seat2local(index + 1)
+                this.getChild<fgui.GLabel>(`UI_TXT_WINLOSE_${localSeat}`).text = `胜${element.win}`
+            }
         }
     }
 
@@ -206,6 +217,9 @@ export class GameView extends FGUIGameView {
         const scoreData:Array<{userid:number, cpData:any, nickname:string}> = []
         if (data.score) {
             const scores = JSON.parse(data.score)
+            if (GameData.instance.isPrivateRoom) {
+                this.showWinLost(scores)
+            }
             if (scores && scores.length > 0) {
                 for (let index = 0; index < scores.length; index++) {
                     const element = scores[index];
