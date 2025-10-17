@@ -216,7 +216,7 @@ export class GameView extends FGUIGameView {
                         nickname: player?.nickname ?? ''
                     })
                     
-                    if (player?.userid === DataCenter.instance.userid) {
+                    if (player?.userid === DataCenter.instance.userid && !GameData.instance.isPrivateRoom) {
                         DataCenter.instance.addRichByType(RICH_TYPE.COMBAT_POWER, element.dcp)
                     }
                 }
