@@ -203,7 +203,6 @@ export class GameView extends FGUIGameView {
         if (data.continue) {
             return
         }
-        const selfSeat = GameData.instance.getSelfSeat()
         const scoreData:Array<{userid:number, cpData:any, nickname:string}> = []
         if (data.score) {
             const scores = JSON.parse(data.score)
@@ -223,6 +222,8 @@ export class GameView extends FGUIGameView {
                 }
             }
         }
+
+        const selfSeat = GameData.instance.getSelfSeat()
         if (data.info && data.info.length > 0){
             for (let i = 0; i < data.info.length; i++){
                 const info = data.info[i];

@@ -25,7 +25,13 @@ export class ResultView extends FGUIResultView {
         const itemData = this._scoreData[index];
         item.asCom.getChild('UI_TXT_NICKNAME').text = itemData.nickname;
         item.asCom.getChild('UI_TXT_ID').text = `${itemData.userid}`;
-        item.asCom.getChild('UI_TXT_SCORE').text = `${itemData.cpData.dcp > 0 ? '+' : ''}${itemData.cpData.dcp}`;
+        if (GameData.instance.isPrivateRoom) {
+            const msg = `胜${itemData.cpData.win ?? 0}`
+            item.asCom.getChild('UI_TXT_SCORE').text = msg
+        }else{
+            item.asCom.getChild('UI_TXT_SCORE').text = `${itemData.cpData.dcp > 0 ? '+' : ''}${itemData.cpData.dcp}`;
+        }
+        
     }
 
     onBtnBack(): void {
