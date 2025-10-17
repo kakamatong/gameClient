@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="600,550">
-  <controller name="ctrl_mode" pages="0,3局2胜,1,5局3胜,2,7局4胜" selected="0"/>
+  <controller name="ctrl_mode" pages="0,3局2胜,1,5局3胜,2,7局4胜,3,无限对局" selected="0"/>
   <displayList>
     <image id="n8_q5lz" name="n8" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="16,53" size="569,346"/>
     <component id="n0_nomu" name="UI_BTN_CREATE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="185,433" size="230,98">
@@ -24,6 +24,10 @@
     <component id="n7_q5lz" name="UI_BTN_JU7" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="167,232" size="177,56">
       <Button controller="ctrl_mode" page="2"/>
       <property target="title" propertyId="0" value="7局4胜"/>
+    </component>
+    <component id="n9_idb1" name="UI_BTN_JU0" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,232" size="177,56">
+      <Button controller="ctrl_mode" page="3"/>
+      <property target="title" propertyId="0" value="无限对局"/>
     </component>
   </displayList>
 </component>
