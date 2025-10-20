@@ -25,7 +25,12 @@ export class SoundManager {
     }
 
     init(){
-
+        const open = this.getSoundEffectOpen()
+        if (open) {
+            this.openSoundEffect()
+        }else{
+            this.closeSoundEffect()
+        }
     }
 
     load(url: string, callBack?: (err: any, asset: any) => void) {
