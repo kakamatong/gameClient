@@ -4,6 +4,7 @@ import { DataCenter } from '../datacenter/Datacenter';
 import { LobbyView } from "../view/lobby/LobbyView";
 import { ENUM_CHANNEL_ID, ENUM_ENV, LOCAL_KEY } from '../datacenter/InterfaceConfig';
 import { LoginView } from '../view/login/LoginView';
+import { SoundManager } from '../frameworks/SoundManager';
 const { ccclass } = _decorator;
 
 @ccclass('LobbyScreen')
@@ -52,39 +53,7 @@ export class LobbyScreen extends Component {
         })
 
         // 加载背景音乐
-        assetManager.loadBundle('sound', (err, bundle) => { 
-            if (err) {
-                log('loadBundle error', err);
-                return;
-            }
-
-            bundle.load<AudioClip>('lobby/bg', (err, asset: AudioClip) => { 
-                if (err) {
-                    log('loadBundle error', err);
-                    return;
-                }
-                let bgMusicOpen = 1;
-                const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-                if (localKey === null || localKey === undefined || localKey === '') {
-                    bgMusicOpen = 1
-                }else{
-                    bgMusicOpen = parseInt(localKey)
-                }
-                const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
-                if (!as) {
-                    const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
-                    newAs.clip = asset;
-                    newAs.loop = true;
-                    newAs.volume = bgMusicOpen;
-                    newAs.play();
-                }else{
-                    as.clip = asset;
-                    as.loop = true;
-                    as.volume = bgMusicOpen;
-                    as.play();
-                }
-            })
-        });
+        SoundManager.instance.playSoundMusic('lobby/bg')
     }
 
 }

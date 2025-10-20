@@ -10,9 +10,9 @@ export class ResultView extends FGUIResultView {
         const flag = data?.flag ?? 0
         this.ctrl_flag.selectedIndex = flag;
         if (flag ===1) {
-            SoundManager.instance.playOneShotSound('game10001/win')
+            SoundManager.instance.playSoundEffect('game10001/win')
         }else if (flag === 0) {
-            SoundManager.instance.playOneShotSound('game10001/lose')
+            SoundManager.instance.playSoundEffect('game10001/lose')
         }
         this.ctrl_roomType.selectedIndex = GameData.instance.isPrivateRoom ? 1 : 0
         
