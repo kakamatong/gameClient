@@ -7,7 +7,6 @@
     },
     "configs": {
       "migrationsConfig": {
-        "name": "迁移生成的配置",
         "cache": {
           "base": {
             "_value": true
@@ -169,7 +168,7 @@
             }
           },
           "dragon-bones": {
-            "_value": true
+            "_value": false
           },
           "marionette": {
             "_value": false
@@ -194,7 +193,10 @@
             "_value": false
           }
         },
-        "flags": {},
+        "flags": {
+          "LOAD_SPINE_MANUALLY": false
+        },
+        "name": "迁移生成的配置",
         "includeModules": [
           "2d",
           "affine-transform",
@@ -202,7 +204,6 @@
           "audio",
           "base",
           "custom-pipeline",
-          "dragon-bones",
           "gfx-webgl",
           "gfx-webgl2",
           "graphics",
