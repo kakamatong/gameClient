@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
-import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT} from '../../data/InterfaceGameConfig';
+import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1} from '../../data/InterfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/CompClock';
 import { PopMessageView } from '../../../../view/common/PopMessageView';
@@ -19,6 +19,7 @@ import { AuthGame } from '../../../../modules/AuthGame';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
 import { TotalResultView } from '../result/TotalResultView';
+import { PlayerInfoView } from '../playerInfo/PlayerInfoView';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -49,6 +50,10 @@ export class GameView extends FGUIGameView {
         if (GameData.instance.isPrivateRoom) {
             this.ctrl_roomtype.selectedIndex = ROOM_TYPE.PRIVATE
         }
+
+        // 玩家头像点击
+        this.UI_COMP_HEAD_1.onClick(this.onHeadClick1, this)
+        this.UI_COMP_HEAD_2.onClick(this.onHeadClick2, this)
     }
 
     initListeners(){
@@ -91,6 +96,20 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameRecord");
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
+    }
+
+    onHeadClick1(): void {
+        const player = GameData.instance.getPlayerBySeat(SEAT_1)
+        if (player) {
+            PlayerInfoView.showView({userid:player.userid, cp: player.cp})
+        }
+    }
+
+    onHeadClick2(): void {
+        const player = GameData.instance.getPlayerBySeat(SEAT_2)
+        if (player) {
+            PlayerInfoView.showView({userid:player.userid, cp: player.cp})
+        }
     }
 
     onSvrGameRecord(data:any) {
@@ -399,6 +418,7 @@ export class GameView extends FGUIGameView {
                 player.ext = info.ext;
                 player.ip = info.ip;
                 player.status = info.status;
+                player.cp = info.cp ?? 0;
                 const localSeat = GameData.instance.local2seat(player.svrSeat)
                 this.showPlayerInfoBySeat(localSeat);
             }

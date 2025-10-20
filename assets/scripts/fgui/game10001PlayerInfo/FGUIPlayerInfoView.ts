@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUIPlayerInfoView extends fgui.GComponent {
 
 	public UI_BG_MASK:fgui.GGraph;
+	public UI_BTN_CLOSE:fgui.GButton;
 	public UI_COMP_HEAD:fgui.GComponent;
 	public UI_TXT_NICKNAME:fgui.GTextField;
 	public UI_TXT_USERID:fgui.GTextField;
@@ -57,6 +58,8 @@ export default class FGUIPlayerInfoView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.UI_BG_MASK = <fgui.GGraph>(this.getChildAt(0));
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(2));
+		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.UI_COMP_HEAD = <fgui.GComponent>(this.getChildAt(4));
 		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(5));
 		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(6));
@@ -66,5 +69,6 @@ export default class FGUIPlayerInfoView extends fgui.GComponent {
 		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(15));
 		this.UI_TXT_CP = <fgui.GTextField>(this.getChildAt(17));
 	}
+	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPlayerInfoView.URL, FGUIPlayerInfoView);

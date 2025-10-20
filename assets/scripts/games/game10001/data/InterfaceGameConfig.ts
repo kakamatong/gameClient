@@ -10,6 +10,10 @@ export interface GAME_PLAYER_INFO {
     province?: string;
     city?: string;
     ext?: string;
+    cp?:number
+    win?:number;
+    lose?:number;
+    draw?:number
 }
 
 // 投票解散相关接口定义
