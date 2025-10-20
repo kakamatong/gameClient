@@ -12,6 +12,7 @@ import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY, RICH_TYPE } from '../../datacenter/In
 import { PopMessageView } from '../common/PopMessageView';
 import { RevokeAccount } from '../../modules/RevokeAccount';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
+import { SoundManager } from '../../frameworks/SoundManager';
 
 export class UserCenterView extends FGUIUserCenterView {
     show(data?: any):void{
@@ -31,30 +32,17 @@ export class UserCenterView extends FGUIUserCenterView {
     }
 
     updateSound():void{ 
-        this.updateBgSound()
-        this.updateEffectSound()
+        const bOpenMusic = SoundManager.instance.getSoundMusicOpen();
+        const bOpenEffect = SoundManager.instance.getSoundEffectOpen();
+        this.updateBgSound(bOpenMusic)
+        this.updateEffectSound(bOpenEffect)
     }
 
-    updateBgSound():void{
-        let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
-        }
-
+    updateBgSound(open:number):void{
         this.UI_BTN_BGMUSIC.ctrl_status.selectedIndex = open
     }
 
-    updateEffectSound():void{ 
-        let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
-        }
+    updateEffectSound(open:number):void{ 
         this.UI_BTN_EFFECT.ctrl_status.selectedIndex = open
     }
 
@@ -147,43 +135,13 @@ export class UserCenterView extends FGUIUserCenterView {
     }
 
     onBtnBgmusic(): void {
-        let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
-        }
-
-        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
-        if (open) {
-            as && (as.volume = 0)
-            sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 0)
-        }else{
-            as && (as.volume = 1)
-            sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 1)
-        }
-
-        this.updateBgSound()
+        const bOpen = SoundManager.instance.changeSoundMusic()
+        this.updateBgSound(bOpen)
     }
 
     onBtnEffect(): void {
-        let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
-        }
-
-        if (open) {
-            fgui.GRoot.inst.volumeScale = 0
-            sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 0)
-        }else{
-            fgui.GRoot.inst.volumeScale = 1
-            sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 1)
-        }
-        this.updateEffectSound()
+        const bOpen = SoundManager.instance.changeSoundEffect()
+        this.updateEffectSound(bOpen)
     }
 
     protected onDestroy(): void {

@@ -85,4 +85,72 @@ export class SoundManager {
         }
         this.load(url, callBack)
     }
+
+    openSoundEffect():void{ 
+        fgui.GRoot.inst.volumeScale = 1
+        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 1)
+    }
+    closeSoundEffect():void{ 
+        fgui.GRoot.inst.volumeScale = 0
+        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, 0)
+    }
+
+    openSoundMusic():void{ 
+        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+        as && (as.volume = 1)
+        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 1)
+    }
+
+    closeSoundMusic():void{ 
+        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+        as && (as.volume = 0)
+        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, 0)
+    }
+
+    changeSoundEffect():number{ 
+        const open = this.getSoundEffectOpen();
+        const newOpen = open === 1 ? 0 : 1
+        if (newOpen) {
+            this.openSoundEffect()
+        }else{
+            this.closeSoundEffect()
+        }
+
+        return newOpen
+    }
+
+    changeSoundMusic():number{ 
+        const open = this.getSoundMusicOpen();
+        const newOpen = open === 1 ? 0 : 1
+
+        if (newOpen) {
+            this.openSoundMusic()
+        }else{
+            this.closeSoundMusic()
+        }
+
+        return newOpen
+    }
+
+    getSoundEffectOpen():number{ 
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
+        if (localKey === null || localKey === undefined || localKey === '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+        return open
+    }
+
+    getSoundMusicOpen():number{ 
+        let open = 1;
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
+        if (localKey === null || localKey === undefined || localKey === '') {
+            open = 1
+        }else{
+            open = parseInt(localKey)
+        }
+        return open
+    }
 }

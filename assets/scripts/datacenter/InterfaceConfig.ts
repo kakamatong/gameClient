@@ -55,9 +55,6 @@ export enum LOCAL_KEY {
     LOGIN_INFO = 'loginInfo',
     MATCH_AUTO_JOIN = 'matchAutoJoin',
     AGREE_PRIVACY = 'agreePrivacy',
-
-    BG_MUSIC_OPEN = 'bgMusicOpen',
-    EFFECT_SOUND_OPEN = 'effectSoundOpen',
 }
 
 export enum ENUM_POP_MESSAGE_TYPE {
