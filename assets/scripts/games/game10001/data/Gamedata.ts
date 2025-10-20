@@ -106,6 +106,10 @@ export class GameData {
         return null;
     }
 
+    getPlayerByLocal(local: number): GAME_PLAYER_INFO {
+        return this.playerList[local];
+    }
+
     set roomEnd(end: boolean){
         this._roomEnd = end;
     }

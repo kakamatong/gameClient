@@ -99,14 +99,14 @@ export class GameView extends FGUIGameView {
     }
 
     onHeadClick1(): void {
-        const player = GameData.instance.getPlayerBySeat(SEAT_1)
+        const player = GameData.instance.getPlayerByLocal(SEAT_1)
         if (player) {
             PlayerInfoView.showView({userid:player.userid, cp: player.cp})
         }
     }
 
     onHeadClick2(): void {
-        const player = GameData.instance.getPlayerBySeat(SEAT_2)
+        const player = GameData.instance.getPlayerByLocal(SEAT_2)
         if (player) {
             PlayerInfoView.showView({userid:player.userid, cp: player.cp})
         }
@@ -117,9 +117,11 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrTotalResult(data:any){
+        const time = 1.2
+
         ScheduleOnce(this.node.components[0],()=>{
             TotalResultView.showView(data)
-        }, 1.2)
+        }, time)
     }
 
     onSvrPrivateInfo(data:any){
