@@ -1,9 +1,16 @@
+import { UserGameRecord } from '../../../../modules/UserGameRecord';
 import FGUIPlayerInfoView from '../../../../fgui/game10001PlayerInfo/FGUIPlayerInfoView';
 import * as fgui from "fairygui-cc";
+import { GameData } from '../../data/Gamedata';
+import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 
 
 export class PlayerInfoView extends FGUIPlayerInfoView {
+    private _userid:number = 0;
+    private _cp:number = 0;
     show(data?: any):void{
+        this._userid = data.userid;
+        this._cp = data.cp ?? 0;
         const gameRecords = new UserGameRecord()
         const func = (data:any)=>{
             this.UI_TXT_WIN.text = data.win;
@@ -12,20 +19,19 @@ export class PlayerInfoView extends FGUIPlayerInfoView {
             const rate = data.win / (data.win + data.lose + data.draw) * 100;
             this.UI_TXT_RATE.text = `${rate.toFixed(2)}%`;
         }
-        gameRecords.req(func)
+        gameRecords.req(data.userid, func)
 
         this.updateUserInfo()
-        this.createUserInfoBtn()
     }
 
 
 
     updateUserInfo():void{
-        this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
-        this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
-        (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
-        const cp = DataCenter.instance.getRichByType(RICH_TYPE.COMBAT_POWER) ?? {richType:RICH_TYPE.COMBAT_POWER, richNums:0}
-        this.UI_TXT_CP.text =`${cp.richNums}`
+        const player = GameData.instance.getPlayerByUserid(this._userid)
+        this.UI_TXT_NICKNAME.text = player?.nickname ?? ''
+        this.UI_TXT_USERID.text = `${this._userid}`;
+        (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = GameData.instance.getHeadurlByUserid(this._userid)
+        this.UI_TXT_CP.text =`${this._cp}`
     }
 
     onBtnClose(): void {

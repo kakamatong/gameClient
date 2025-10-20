@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUIPlayerInfoView extends fgui.GComponent {
 
 	public UI_BG_MASK:fgui.GGraph;
+	public UI_COMP_HEAD:fgui.GComponent;
 	public UI_TXT_NICKNAME:fgui.GTextField;
 	public UI_TXT_USERID:fgui.GTextField;
 	public UI_TXT_WIN:fgui.GTextField;
@@ -56,6 +57,7 @@ export default class FGUIPlayerInfoView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.UI_BG_MASK = <fgui.GGraph>(this.getChildAt(0));
+		this.UI_COMP_HEAD = <fgui.GComponent>(this.getChildAt(4));
 		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(5));
 		this.UI_TXT_USERID = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_WIN = <fgui.GTextField>(this.getChildAt(12));
