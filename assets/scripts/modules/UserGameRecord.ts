@@ -15,11 +15,11 @@ export class UserGameRecord {
      * @method req
      * @description 请求用户数据，向服务器发送用户数据请求
      */
-    req(callback?: (data:any)=>void) {
+    req(userid?:number, callback?: (data:any)=>void) {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer('userGameRecord', { userid: DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer('userGameRecord', { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
     }
 
     /**

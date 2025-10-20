@@ -23,7 +23,7 @@ export class UserCenterView extends FGUIUserCenterView {
             const rate = data.win / (data.win + data.lose + data.draw) * 100;
             this.UI_TXT_RATE.text = `${rate.toFixed(2)}%`;
         }
-        gameRecords.req(func)
+        gameRecords.req(DataCenter.instance.userid, func)
 
         this.updateUserInfo()
         this.createUserInfoBtn()
