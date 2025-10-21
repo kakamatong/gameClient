@@ -4,9 +4,9 @@
     <graph id="n1_kv65" name="n1" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <image id="n3_kv65" name="n3" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449"/>
-    <image id="n4_kv65" name="n4" src="kv65q" fileName="imgs/gameEnd.png" xy="88,367"/>
-    <list id="n5_kv65" name="UI_LV_INFO" xy="101,527" size="574,660" overflow="scroll" lineGap="10" defaultItem="ui://5x18e99vkv65r" autoClearItems="true">
+    <image id="n3_kv65" name="n3" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n9_af5i"/>
+    <image id="n4_kv65" name="n4" src="kv65q" fileName="imgs/gameEnd.png" xy="88,367" group="n9_af5i"/>
+    <list id="n5_kv65" name="UI_LV_INFO" xy="101,527" size="574,660" group="n9_af5i" overflow="scroll" lineGap="10" defaultItem="ui://5x18e99vkv65r" autoClearItems="true">
       <item/>
       <item/>
     </list>
@@ -18,6 +18,9 @@
       <property target="title" propertyId="0" value="返回"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
-    <group id="n8_kv65" name="n8" xy="111,1375" size="553,99"/>
+    <group id="n8_kv65" name="n8" xy="111,1375" size="553,99" group="n9_af5i"/>
+    <group id="n9_af5i" name="n9" xy="59,367" size="657,1107" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
   </displayList>
 </component>

@@ -18,7 +18,6 @@
     </component>
     <image id="n7_folo" name="n7" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="363,173" size="220,100" group="n8_folo"/>
     <component id="n4_folo" name="UI_COMP_HEAD_2" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="565,127" group="n8_folo">
-      <relation target="" sidePair="right-right,top-top"/>
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
     <text id="n52_9rsr" name="UI_TXT_WINLOSE_2" xy="555,77" size="60,42" group="n8_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
