@@ -67,6 +67,7 @@ export class CompDisband extends FGUICompDisband {
     onVoteDisbandStart(data: VoteDisbandStartData) {
         console.log('收到投票解散开始消息:', data);
         this.visible = true
+        this.ctrl_btn.selectedIndex = 0 // 初始化
         this._voteId = data.voteId;
         this._voteData = data;
         this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
