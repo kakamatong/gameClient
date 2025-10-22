@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,185">
   <displayList>
-    <image id="n1_jin6" name="n1" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="184,72" size="220,100"/>
-    <component id="n0_cvev" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="38,25">
+    <image id="n1_jin6" name="n1" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="184,72" size="220,100" group="n5_vqz6"/>
+    <component id="n0_cvev" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="38,25" group="n5_vqz6">
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
-    <text id="n3_jin6" name="UI_TXT_NICKNAME" xy="205,78" size="64,42" fontSize="30" color="#ffffff" singleLine="true" text="昵称"/>
-    <text id="n4_jin6" name="UI_TXT_USERID" xy="205,129" size="34,42" fontSize="30" color="#ffffff" singleLine="true" text="ID"/>
+    <text id="n3_jin6" name="UI_TXT_NICKNAME" xy="205,78" size="64,42" group="n5_vqz6" fontSize="30" color="#ffffff" singleLine="true" text="昵称"/>
+    <text id="n4_jin6" name="UI_TXT_USERID" xy="205,129" size="34,42" group="n5_vqz6" fontSize="30" color="#ffffff" singleLine="true" text="ID"/>
+    <group id="n5_vqz6" name="n5" xy="38,25" size="366,160" advanced="true">
+      <relation target="" sidePair="left-left,top-top"/>
+    </group>
   </displayList>
 </component>
