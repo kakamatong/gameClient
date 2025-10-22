@@ -13,7 +13,11 @@
     <image id="n10_xoqi" name="n10" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="442,1446" group="n11_xoqi"/>
     <image id="n34_xoqi" name="n34" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1773,333" group="n11_xoqi"/>
     <image id="n35_xoqi" name="n35" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="309,1553" group="n11_xoqi"/>
-    <group id="n11_xoqi" name="n11" xy="309,333" size="1613,1357"/>
+    <image id="n40_vqz6" name="n40" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1885,209" group="n11_xoqi"/>
+    <image id="n41_vqz6" name="n41" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1998,104" group="n11_xoqi"/>
+    <image id="n42_vqz6" name="n42" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="2121,3" group="n11_xoqi"/>
+    <image id="n53_vqz6" name="n53" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="201,1655" group="n11_xoqi"/>
+    <group id="n11_xoqi" name="n11" xy="201,3" size="2090,1809"/>
     <image id="n12_xoqi" name="n12" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="669,971" group="n22_xoqi"/>
     <image id="n13_xoqi" name="n13" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="787,871" group="n22_xoqi"/>
     <image id="n14_xoqi" name="n14" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="931,736" group="n22_xoqi"/>
@@ -26,7 +30,11 @@
     <image id="n21_xoqi" name="n21" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="412,1178" group="n22_xoqi"/>
     <image id="n36_xoqi" name="n36" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="161,1401" group="n22_xoqi"/>
     <image id="n37_xoqi" name="n37" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="273,1284" group="n22_xoqi"/>
-    <group id="n22_xoqi" name="n22" xy="161,161" size="1629,1387"/>
+    <image id="n47_vqz6" name="n47" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1755,62" group="n22_xoqi"/>
+    <image id="n48_vqz6" name="n48" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1875,-40" group="n22_xoqi"/>
+    <image id="n49_vqz6" name="n49" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1996,-151" group="n22_xoqi"/>
+    <image id="n54_vqz6" name="n54" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="22,1526" group="n22_xoqi"/>
+    <group id="n22_xoqi" name="n22" xy="22,-151" size="2132,1814"/>
     <image id="n23_xoqi" name="n23" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="267,1041" group="n33_xoqi"/>
     <image id="n24_xoqi" name="n24" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="385,941" group="n33_xoqi"/>
     <image id="n25_xoqi" name="n25" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="529,806" group="n33_xoqi"/>
@@ -39,6 +47,10 @@
     <image id="n32_xoqi" name="n32" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="10,1248" group="n33_xoqi"/>
     <image id="n38_xoqi" name="n38" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1356,116" group="n33_xoqi"/>
     <image id="n39_xoqi" name="n39" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1464,4" group="n33_xoqi"/>
-    <group id="n33_xoqi" name="n33" xy="10,4" size="1624,1402"/>
+    <image id="n50_vqz6" name="n50" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="1611,-117" group="n33_xoqi"/>
+    <image id="n51_vqz6" name="n51" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="1736,-214" group="n33_xoqi"/>
+    <image id="n52_vqz6" name="n52" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="1848,-301" group="n33_xoqi"/>
+    <image id="n55_vqz6" name="n55" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="-127,1379" group="n33_xoqi"/>
+    <group id="n33_xoqi" name="n33" xy="-127,-301" size="2145,1817"/>
   </displayList>
 </component>
