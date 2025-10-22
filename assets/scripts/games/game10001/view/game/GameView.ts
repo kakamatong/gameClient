@@ -130,10 +130,12 @@ export class GameView extends FGUIGameView {
         }
         if (GameData.instance.isPrivateRoom) {
             if (data.maxCnt === 9999) {
-                this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 无限轮`
+                this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}局 无限局`
             }else{
-                this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}轮 共${data.maxCnt ?? 0}轮`
+                this.UI_TXT_PROGRESS.text = `第${data.nowCnt ?? 0}局 共${data.maxCnt ?? 0}局`
             }
+            GameData.instance.privateMaxCnt = data.maxCnt
+            GameData.instance.privateNowCnt = data.nowCnt
             
             //this.UI_TXT_RULE.text = `${GAME_MODE_TXT[data.mode]}`
             this.showWinLost(JSON.parse(data.ext))
@@ -658,7 +660,7 @@ export class GameView extends FGUIGameView {
             return this.changeToLobbyScene()
         }
         if (GameData.instance.owner == DataCenter.instance.userid) {
-            if (GameData.instance.gameStart) {
+            if (GameData.instance.gameStart || GameData.instance.privateNowCnt > 0) {
                 this.startDisband()
             }else{
                 PopMessageView.showView({
@@ -671,7 +673,7 @@ export class GameView extends FGUIGameView {
             }
             
         }else{
-            if (GameData.instance.gameStart) {
+            if (GameData.instance.gameStart || GameData.instance.privateNowCnt > 0) {
                 this.startDisband()
             }else{
                 PopMessageView.showView({

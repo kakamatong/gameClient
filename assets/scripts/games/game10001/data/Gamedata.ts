@@ -12,6 +12,8 @@ export class GameData {
     private _playerInfos: Array<GAME_PLAYER_INFO> = [];
     private _owner = 0;
     private _record: Array<any> = [];
+    private _privateNowCnt:number = 0; // 第几局
+    private _privateMaxCnt:number = 0; // 最大局数
     private static _instance: GameData;
     public static get instance(): GameData {
         if (!this._instance) {
@@ -168,5 +170,21 @@ export class GameData {
 
     get record(): Array<any>{
         return this._record;
+    }
+
+    set privateNowCnt(cnt: number){
+        this._privateNowCnt = cnt;
+    }
+
+    get privateNowCnt(): number{
+        return this._privateNowCnt;
+    }
+
+    set privateMaxCnt(cnt: number){
+        this._privateMaxCnt = cnt;
+    }
+
+    get privateMaxCnt(): number{
+        return this._privateMaxCnt;
     }
 }
