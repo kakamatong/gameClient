@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="1"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
@@ -16,38 +16,38 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
-    <image id="n7_folo" name="n7" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="363,173" size="220,100" group="n8_folo"/>
-    <component id="n4_folo" name="UI_COMP_HEAD_2" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="565,127" group="n8_folo">
+    <image id="n7_folo" name="n7" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="366,173" size="220,100" group="n8_folo"/>
+    <component id="n4_folo" name="UI_COMP_HEAD_2" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="568,127" group="n8_folo">
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
-    <text id="n52_9rsr" name="UI_TXT_WINLOSE_2" xy="555,77" size="60,42" group="n8_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
+    <text id="n52_9rsr" name="UI_TXT_WINLOSE_2" xy="558,77" size="60,42" group="n8_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
       <gearDisplay controller="ctrl_roomtype" pages="1"/>
     </text>
-    <text id="n10_folo" name="UI_TXT_NICKNAME_2" xy="554,178" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <text id="n11_folo" name="UI_TXT_ID_2" xy="554,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <component id="n31_qaf2" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="656,219" group="n8_folo" visible="false"/>
-    <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="548,119" group="n8_folo" visible="false"/>
-    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" group="n8_folo" visible="false"/>
-    <group id="n8_folo" name="UI_GROUP_PLAYER_2" xy="301,77" size="424,349" visible="false" advanced="true">
+    <text id="n10_folo" name="UI_TXT_NICKNAME_2" xy="557,178" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <text id="n11_folo" name="UI_TXT_ID_2" xy="557,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <component id="n31_qaf2" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="659,219" group="n8_folo" visible="false"/>
+    <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="551,119" group="n8_folo" visible="false"/>
+    <group id="n8_folo" name="UI_GROUP_PLAYER_2" xy="366,77" size="362,210" visible="false" advanced="true">
       <relation target="" sidePair="right-right,top-top"/>
     </group>
-    <image id="n6_folo" name="n6" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="206,1454" size="220,100" group="n9_folo"/>
-    <component id="n5_folo" name="UI_COMP_HEAD_1" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="57,1407" group="n9_folo">
+    <image id="n6_folo" name="n6" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="198,1447" size="220,100" group="n9_folo"/>
+    <component id="n5_folo" name="UI_COMP_HEAD_1" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="49,1400" group="n9_folo">
       <relation target="" sidePair="left-left,bottom-bottom"/>
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
-    <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="222,1459" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
-    <text id="n13_folo" name="UI_TXT_ID_1" xy="222,1509" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" group="n9_folo" visible="false"/>
-    <text id="n51_9rsr" name="UI_TXT_WINLOSE_1" xy="62,1367" size="60,42" group="n9_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
+    <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="214,1452" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
+    <text id="n13_folo" name="UI_TXT_ID_1" xy="214,1502" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
+    <text id="n51_9rsr" name="UI_TXT_WINLOSE_1" xy="54,1360" size="60,42" group="n9_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
       <gearDisplay controller="ctrl_roomtype" pages="1"/>
     </text>
-    <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="57,1098" size="418,469" advanced="true">
+    <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="49,1360" size="369,200" advanced="true">
       <relation target="" sidePair="left-left,bottom-bottom"/>
     </group>
     <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
+    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" visible="false"/>
+    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" visible="false"/>
     <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
@@ -91,7 +91,9 @@
     <component id="n36_xr4w" name="UI_COMP_CLOCK" src="qaf26" fileName="comp/CompClock.xml" xy="330,756" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="132,619" visible="false"/>
+    <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="132,619" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
     <image id="n39_jsve" name="n39" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="21,124" size="221,161" group="n41_jsve"/>
     <text id="n40_jsve" name="UI_TXT_ROOMID" xy="29,131" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="房间号:000000"/>
     <text id="n46_ncy2" name="UI_TXT_RULE" xy="30,180" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="3局2胜"/>
