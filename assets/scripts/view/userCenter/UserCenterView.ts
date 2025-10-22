@@ -21,8 +21,14 @@ export class UserCenterView extends FGUIUserCenterView {
             this.UI_TXT_WIN.text = data.win;
             this.UI_TXT_LOSE.text = data.lose;
             this.UI_TXT_DRAW.text = data.draw;
-            const rate = data.win / (data.win + data.lose + data.draw) * 100;
-            this.UI_TXT_RATE.text = `${rate.toFixed(2)}%`;
+            const total = data.win + data.lose + data.draw;
+            if (total) {
+                const rate = data.win / (total) * 100;
+                this.UI_TXT_RATE.text = `${rate.toFixed(1)}%`;
+            }else{
+                this.UI_TXT_RATE.text = `--`;
+            }
+            
         }
         gameRecords.req(DataCenter.instance.userid, func)
 
