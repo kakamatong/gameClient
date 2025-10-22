@@ -103,7 +103,9 @@
       <gearDisplay controller="ctrl_roomtype" pages="1"/>
       <relation target="" sidePair="left-left,top-top"/>
     </group>
-    <component id="n45_j9v1" name="n45" src="r1yn0" fileName="comp/CompDisband.xml" xy="13,11" visible="false"/>
+    <component id="n45_j9v1" name="n45" src="r1yn0" fileName="comp/CompDisband.xml" xy="13,11" visible="false">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
     <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="106,687" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
