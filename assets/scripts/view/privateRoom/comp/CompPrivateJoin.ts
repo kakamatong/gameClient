@@ -96,6 +96,9 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
         }
 
         this.UI_TXT_ROOMID.text = (this.UI_TXT_ROOMID.text ?? '') + `${n}`;
+        if (this.UI_TXT_ROOMID.text.length === 6) {
+            this.onBtnJoin()
+        }
     }
 
     onBtnJoinClear(): void {
