@@ -3,13 +3,22 @@ import FGUICompPrivateCreate from "../../../fgui/privateRoom/FGUICompPrivateCrea
 import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";
 import { PopMessageView } from "../../common/PopMessageView";
-import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/InterfaceConfig";
+import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from "../../../datacenter/InterfaceConfig";
 import { TipsView } from "../../common/TipsView";
+import { sys } from "cc";
 
 export class CompPrivateCreate extends FGUICompPrivateCreate { 
     private _data:any|null = null;
     show(data?:any){
         this._data = data;
+        const strRule = sys.localStorage.getItem(LOCAL_KEY.PRIVATE_RULE)
+        if (strRule && strRule !== '') {
+            this.initUI(JSON.parse(strRule))
+        }
+    }
+
+    initUI(rule:any):void{
+        this.ctrl_mode.selectedIndex = rule.mode;
     }
 
     onBtnClose(): void {
@@ -45,7 +54,10 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
                 TipsView.showView({content:msg})
             }
         }
-        const reqData = {gameid:10001, rule:JSON.stringify(gameRule)}
+
+        const strRule = JSON.stringify(gameRule)
+        sys.localStorage.setItem(LOCAL_KEY.PRIVATE_RULE, strRule)
+        const reqData = {gameid:10001, rule:strRule}
         LobbySocketManager.instance.sendToServer('createPrivateRoom',reqData, func)
     }
 }
