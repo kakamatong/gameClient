@@ -53,7 +53,7 @@ export class SoundManager {
      * @description 初始化声音管理器实例
      */
     constructor() {
-        this.init();
+        //this.init();
     }
 
     /**

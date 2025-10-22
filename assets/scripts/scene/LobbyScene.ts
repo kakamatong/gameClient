@@ -53,6 +53,7 @@ export class LobbyScreen extends Component {
         })
 
         // 加载背景音乐
+        SoundManager.instance.init() // 切场景必须init
         SoundManager.instance.playSoundMusic('lobby/bg')
     }
 

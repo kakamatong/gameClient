@@ -16,6 +16,7 @@ export class GameScreen extends Component {
         GameView.showView()
 
         // 加载背景音乐
+        SoundManager.instance.init() // 切场景必须init
         SoundManager.instance.playSoundMusic('game10001/gamebg')
     }
 
