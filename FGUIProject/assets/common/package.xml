@@ -31,7 +31,7 @@
     <image id="q5lz14" name="selectC2.png" path="/imgs/" exported="true"/>
     <sound id="fugr15" name="click.mp3" path="/sound/" exported="true"/>
     <image id="sexy16" name="zhanli.png" path="/imgs/" exported="true"/>
-    <image id="9rp117" name="shareBtn.png" path="/imgs/"/>
+    <image id="9rp117" name="shareBtn.png" path="/imgs/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -241,7 +241,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnShare(): void {
-        MiniGameUtils.instance.shareAppMessage({title:'约上好友来一句石头剪刀布', imageUrl: LOBBY_SHARE_PIC_URL, query:''})
+        MiniGameUtils.instance.shareAppMessage({title:'约上好友来一局石头剪刀布', imageUrl: LOBBY_SHARE_PIC_URL, query:''})
     }
 
 }
