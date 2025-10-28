@@ -5,7 +5,7 @@ import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '.
 import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/ConnectSvr';
 import { PopMessageView } from '../common/PopMessageView';
-import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS} from '../../datacenter/InterfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL} from '../../datacenter/InterfaceConfig';
 import { TipsView } from '../common/TipsView';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 import { Rank } from '../../modules/Rank';
@@ -19,6 +19,7 @@ import { MailView } from '../mail/MailView';
 import { Mail } from '../../modules/Mail';
 import { PrivateRoomView } from '../privateRoom/PrivateRoomView';
 import { UserCenterView } from '../userCenter/UserCenterView';
+import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -237,6 +238,10 @@ export class LobbyView extends FGUILobbyView {
             this._node4.x = 210
             this._node4.y = 902
         }
+    }
+
+    onBtnShare(): void {
+        MiniGameUtils.instance.shareAppMessage({title:'约上好友来一句石头剪刀布', imageUrl: LOBBY_SHARE_PIC_URL, query:''})
     }
 
 }

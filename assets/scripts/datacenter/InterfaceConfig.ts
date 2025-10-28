@@ -96,4 +96,5 @@ export enum RICH_TYPE  {
 }
 
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
+export const LOBBY_SHARE_PIC_URL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/share/10001/sharePic.jpg'
 export const MAIN_GAME_ID = 10001

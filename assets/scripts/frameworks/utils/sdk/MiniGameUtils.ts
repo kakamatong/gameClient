@@ -163,4 +163,14 @@ export class MiniGameUtils {
             this._userInfoBtn = null
         }
     }
+
+    shareAppMessage(data:{title:string, imageUrl:string, query:string}):void{
+        if (this.isWeChatGame()) {
+            wx && wx.shareAppMessage({
+                title: data.title,
+                imageUrl: data.imageUrl,
+                query: data.query
+            })
+        }
+    }
 }
