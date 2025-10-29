@@ -486,6 +486,8 @@ export class GameView extends FGUIGameView {
                 if(playerInfo.status == PLAYER_STATUS.ONLINE && selfid == userid){
                     this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.READY;
                 }
+
+                this.checkShowInviteBtn()
             }
             this.showPlayerInfoBySeat(localSeat);
         }
@@ -541,6 +543,7 @@ export class GameView extends FGUIGameView {
         const localSeat = GameData.instance.seat2local(data.seat);
         GameData.instance.playerList.splice(localSeat, 1)
         this.hideHead(localSeat)
+        this.checkShowInviteBtn()
     }
 
     onRoomInfo(data:any):void{
@@ -688,6 +691,46 @@ export class GameView extends FGUIGameView {
     onBtnSure(): void {
         this._selectOutHand = this.ctrl_select.selectedIndex
         GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this._selectOutHand] })
+    }
+
+    showInviteBtn(bshow:boolean):void{ 
+        this.UI_BTN_INVITE.visible = bshow
+    }
+
+    /**
+     * 检测是否显示邀请按钮
+     * @param bshow 
+     */
+    checkShowInviteBtn():void{
+        if (!GameData.instance.isPrivateRoom) {
+            this.showInviteBtn(false)
+            return
+        }
+
+        if (GameData.instance.gameStart) {
+            this.showInviteBtn(false)
+            return
+        }
+
+        if (GameData.instance.privateNowCnt > 0 ) {
+            this.showInviteBtn(false)
+            return
+        }
+
+        const playerCnt = GameData.instance.getPlayerCnt()
+        if (playerCnt >= GameData.instance.maxPlayer ) {
+            this.showInviteBtn(false)
+            return 
+        }
+        this.showInviteBtn(true)
+    }
+
+    /**
+     * 邀请好友
+     */
+    onBtnInvite(): void {
+        // 邀请好友
+        
     }
 
     onChanged(event: any):void{

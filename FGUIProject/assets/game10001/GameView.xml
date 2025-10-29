@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="1"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
@@ -108,6 +108,11 @@
     </component>
     <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="106,687" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n53_mwa6" name="UI_BTN_INVITE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="272,1252" size="230,98" visible="false">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <property target="title" propertyId="0" value="邀请好友"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
   </displayList>
 </component>

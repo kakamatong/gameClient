@@ -112,6 +112,10 @@ export class GameData {
         return this.playerList[local];
     }
 
+    getPlayerCnt(): number {
+        return this.playerList.filter(player => player != null && player != undefined).length;
+    }
+
     set roomEnd(end: boolean){
         this._roomEnd = end;
     }
