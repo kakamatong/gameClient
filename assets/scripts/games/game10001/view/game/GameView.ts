@@ -20,6 +20,7 @@ import FGUICompHead from '../../../../fgui/common/FGUICompHead';
 import { SpriteFrame } from 'cc';
 import { TotalResultView } from '../result/TotalResultView';
 import { PlayerInfoView } from '../playerInfo/PlayerInfoView';
+import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -726,11 +727,35 @@ export class GameView extends FGUIGameView {
         this.showInviteBtn(true)
     }
 
+    async drawInviteInfo():Promise<string>{
+        return new Promise<string>(async (resolve, reject) => {
+            // 邀请好友
+            const bgUrl = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/share/10001/invitebg.jpg'
+            const width = 776
+            const height = 621
+            const bg = await MiniGameUtils.instance.loadImage(bgUrl)
+            const canvas = MiniGameUtils.instance.getCanvas()
+            if (!canvas) {
+                reject()
+                return
+            }
+            canvas.width = width
+            canvas.height = height
+            const canvasContext = MiniGameUtils.instance.getCanvasContext()
+            if (!canvasContext) {
+                reject()
+                return
+            }
+            canvasContext.globalCompositeOperation = "source-over";
+            canvasContext.clearRect(0, 0, width, height);
+            canvasContext.drawImage(bg, 0, 0, width, height);
+        })
+    }
+
     /**
      * 邀请好友
      */
     onBtnInvite(): void {
-        // 邀请好友
         
     }
 
