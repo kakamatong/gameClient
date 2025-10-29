@@ -195,6 +195,8 @@ export class GameView extends FGUIGameView {
             if (local != SELF_LOCAL) {
                 this.showSignReady(local, true)
                 this.showThinking(false)
+            }else{
+                 this.UI_GROUP_SELECT.visible = true
             }
         }else if(data.att == PLAYER_ATTITUDE.OUT_HAND){
             // 隐藏时钟
@@ -226,6 +228,7 @@ export class GameView extends FGUIGameView {
     onGameOutHand(data:any):void{
         const local = GameData.instance.seat2local(data.seat);
         const index = HAND_INDEX.indexOf(data.flag)
+        this._selectOutHand = index
         this.showOutHand(local, index)
     }
 
