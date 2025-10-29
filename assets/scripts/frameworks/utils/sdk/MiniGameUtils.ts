@@ -3,6 +3,11 @@ import { sys } from "cc";
 export class MiniGameUtils {
 
     private _userInfoBtn: any|null = null;
+
+    private _canvas: HTMLCanvasElement | null = null;
+
+
+    private _canvasContext: CanvasRenderingContext2D | null = null;
     /**
      * @property {MiniGameUtils} _instance - 单例实例
      * @private
@@ -172,5 +177,50 @@ export class MiniGameUtils {
                 query: data.query
             })
         }
+    }
+
+    getCanvas(): HTMLCanvasElement | null{
+        if (this.isWeChatGame()) {
+            if (!this._canvas) {
+                this._canvas = wx && wx.createCanvas()
+            }
+        }else{
+            if (!this._canvas) {
+                this._canvas = document.createElement('canvas')
+            }
+        }
+
+        return this._canvas
+    }
+
+    getCanvasContext(): CanvasRenderingContext2D | null{
+        if (!this._canvasContext) {
+            const canvas = this.getCanvas()
+            this._canvasContext = (canvas && canvas.getContext('2d'))
+        }
+
+        return this._canvasContext
+    }
+
+    createImage(): HTMLImageElement{ 
+        if (this.isWeChatGame()) {
+            return wx && wx.createImage()
+        }else{
+            return new Image()
+        }
+    }
+
+    async loadImage(url:string): Promise<HTMLImageElement>{ 
+        return new Promise((resolve, reject) => { 
+            const image = this.createImage();
+            image.onload = () => { 
+                resolve(image);
+            };
+            image.onerror = (error) => { 
+                reject(error);
+            };
+            image.src = url;
+
+        });
     }
 }
