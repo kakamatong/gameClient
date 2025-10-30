@@ -750,6 +750,17 @@ export class GameView extends FGUIGameView {
             canvasContext.clearRect(0, 0, width, height);
             canvasContext.drawImage(bg, 0, 0, width, height);
 
+            const head = await MiniGameUtils.instance.loadImage(DataCenter.instance.headurl)
+            const headWidth = 160
+            const headHeight = 160
+            canvasContext.drawImage(head, width * 0.1, height * 0.7, headWidth, headHeight);
+
+            canvasContext.font = "bold 36px Arial";
+            canvasContext.fillStyle = '#993300';
+            canvasContext.textAlign = "left"
+            canvasContext.fillText(DataCenter.instance.userData?.nickname || "", width * 0.1 + headWidth + 10, height * 0.8 + 10);
+            canvasContext.fillText(`${DataCenter.instance.userid || 0}`, width * 0.1 + headWidth + 10, height * 0.8 + 50);
+
             MiniGameUtils.instance.makeCanvasImage({filename:"test"}).then((res:string) => { 
                 console.log(res)
                 resolve(res)

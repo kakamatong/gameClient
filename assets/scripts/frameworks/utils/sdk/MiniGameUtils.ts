@@ -28,6 +28,10 @@ export class MiniGameUtils {
         return this._instance;
     }
 
+    constructor() { 
+        
+    }
+
     isThirdPlatform():boolean { 
         return this.isWeChatGame()
     }
