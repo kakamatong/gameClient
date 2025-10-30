@@ -13,13 +13,13 @@ import { RankView } from '../rank/RankView';
 import { LoadingView } from '../common/LoadingView';
 import { Match } from '../../modules/Match';
 import { MatchView } from '../match/MatchView';
-import { AuthGame } from '../../modules/AuthGame';
 import FGUICompHead from '../../fgui/common/FGUICompHead';
 import { MailView } from '../mail/MailView';
 import { Mail } from '../../modules/Mail';
 import { PrivateRoomView } from '../privateRoom/PrivateRoomView';
 import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
+import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -103,7 +103,7 @@ export class LobbyView extends FGUILobbyView {
         const options = MiniGameUtils.instance.getLaunchOptionsSync()
         if (options.query && options.query.roomid) { 
             DataCenter.instance.launchRoomid = Number(options.query.roomid)
-            
+
         }
     }
 
@@ -121,15 +121,12 @@ export class LobbyView extends FGUILobbyView {
 
     onUserStatus(data:any):void{
         console.log("userStatus",data)
-
         if (data.status == ENUM_USER_STATUS.GAMEING){
             const func2 =()=>{
-                DataCenter.instance.gameid = data.gameid;
-                DataCenter.instance.roomid = data.roomid;
-                DataCenter.instance.gameAddr = data.addr;
-                DataCenter.instance.shortRoomid = data.shortRoomid // 匹配房
                 console.log(LogColors.green('返回房间'));
-                this.connectToGame(data.addr, data.gameid, data.roomid);
+                ConnectGameSvr.instance.connectGame(data,(b:boolean)=>{
+                    b && this.changeToGameScene()
+                })
             }
             PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
         }
@@ -148,12 +145,11 @@ export class LobbyView extends FGUILobbyView {
                 if (data && data.gameid && data.roomid) {
                     const func2 =()=>{
                         //返回房间
-                        DataCenter.instance.gameid = data.gameid;
-                        DataCenter.instance.roomid = data.roomid;
-                        DataCenter.instance.gameAddr = data.addr;
-                        DataCenter.instance.shortRoomid = data.shortRoomid // 匹配房
                         console.log(LogColors.green('返回房间'));
-                        this.connectToGame(data.addr, data.gameid, data.roomid);
+                        ConnectGameSvr.instance.connectGame(data,(b:boolean)=>{
+                            b && this.changeToGameScene()
+                        })
+
                     }
                     PopMessageView.showView({title:'温馨提示', content:'您已经在房间中，是否返回？', type:ENUM_POP_MESSAGE_TYPE.NUM2, sureBack: func2})
                 }
@@ -163,7 +159,7 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnPrivateRoom(): void {
-        PrivateRoomView.showView({connectToGame:this.connectToGame.bind(this)})
+        PrivateRoomView.showView({changeToGameScene:this.changeToGameScene.bind(this)})
     }
 
     onBtnMails(): void {
@@ -197,23 +193,15 @@ export class LobbyView extends FGUILobbyView {
         ChangeScene('GameScene');
     }
 
-    connectToGame(addr:string, gameid:number, roomid:string){
-        const callBack = (success:boolean)=>{
-            if(success){
-                this.changeToGameScene()
-            }
-        }
-        AuthGame.instance.req(addr,gameid, roomid, callBack);
-    }
-
     onSvrGameRoomReady(data:any):void{
         console.log("gameRoomReady",data)
-        DataCenter.instance.gameid = data.gameid;
-        DataCenter.instance.roomid = data.roomid;
-        DataCenter.instance.gameAddr = data.addr;
-        DataCenter.instance.shortRoomid = 0 // 匹配房
-        console.log(LogColors.green('游戏房间准备完成'));
-        this.connectToGame(data.addr, data.gameid, data.roomid);
+        ConnectGameSvr.instance.connectGame(data, (success:boolean, data?:any)=>{
+            if (success) {
+                this.changeToGameScene()
+            }else{
+                TipsView.showView({content:`游戏服务器连接失败`})
+            }
+        })
     }
 
     onUpdate():void{

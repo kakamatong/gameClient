@@ -5,6 +5,7 @@ import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";
 import { PopMessageView } from "../../common/PopMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/InterfaceConfig";
 import { TipsView } from "../../common/TipsView";
+import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
 
 export class CompPrivateJoin extends FGUICompPrivateJoin { 
     private _data:any|null = null;
@@ -24,21 +25,22 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
         const roomid = Number(this.UI_TXT_ROOMID.text);
         const func = (result:any)=>{
             if(result && result.code == 1){
-                DataCenter.instance.gameid = result.gameid;
-                DataCenter.instance.roomid = result.roomid;
-                DataCenter.instance.gameAddr = result.addr;
-                DataCenter.instance.shortRoomid = roomid;
-                this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
+                result.shortRoomid = roomid;
+                ConnectGameSvr.instance.connectGame(result,(b:boolean)=>{
+                    if (b) {
+                        this._data && (this._data.changeToGameScene && this._data.changeToGameScene())
+                    }
+                })
             }else if (result && result.code == 0 && result.gameid > 0) {
                 PopMessageView.showView({
                     content:'您已在游戏中,是否返回',
                     type:ENUM_POP_MESSAGE_TYPE.NUM2,
                     sureBack:()=>{
-                        DataCenter.instance.gameid = result.gameid;
-                        DataCenter.instance.roomid = result.roomid;
-                        DataCenter.instance.gameAddr = result.addr;
-                        DataCenter.instance.shortRoomid = result.shortRoomid;
-                        this._data && (this._data.connectToGame && this._data.connectToGame(result.addr, result.gameid, result.roomid))
+                        ConnectGameSvr.instance.connectGame(result,(b:boolean)=>{
+                            if (b) {
+                                this._data && (this._data.changeToGameScene && this._data.changeToGameScene())
+                            }
+                        })
                     }
                 })
             }else{
