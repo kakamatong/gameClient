@@ -774,7 +774,15 @@ export class GameView extends FGUIGameView {
      * 邀请好友
      */
     onBtnInvite(): void {
-        this.drawInviteInfo()
+        this.drawInviteInfo().then((res:string) => { 
+            MiniGameUtils.instance.shareAppMessage({
+                title: `房间号：${DataCenter.instance.shortRoomid} 点击加入 速来战`,
+                imageUrl: res,
+                query: `gameid=${10001}&roomid=${DataCenter.instance.shortRoomid}`
+            })
+        }).catch((err:any) => { 
+            console.log(err)
+        })
     }
 
     onChanged(event: any):void{
