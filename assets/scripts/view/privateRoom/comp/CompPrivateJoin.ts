@@ -23,15 +23,10 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
             return
         }
         const roomid = Number(this.UI_TXT_ROOMID.text);
-        const func = (result:any)=>{
-            if(result && result.code == 1){
-                result.shortRoomid = roomid;
-                ConnectGameSvr.instance.connectGame(result,(b:boolean)=>{
-                    if (b) {
-                        this._data && (this._data.changeToGameScene && this._data.changeToGameScene())
-                    }
-                })
-            }else if (result && result.code == 0 && result.gameid > 0) {
+        const func = (b:boolean, result:any)=>{
+            if (b) {
+                this._data && (this._data.changeToGameScene && this._data.changeToGameScene())
+            }else if (!b && result && result.code == 0 && result.gameid > 0) {
                 PopMessageView.showView({
                     content:'您已在游戏中,是否返回',
                     type:ENUM_POP_MESSAGE_TYPE.NUM2,
@@ -43,13 +38,13 @@ export class CompPrivateJoin extends FGUICompPrivateJoin {
                         })
                     }
                 })
-            }else{
+            }else if(!b){
                 const msg = result && result.msg ? result.msg : '未知错误';
                 TipsView.showView({content:msg})
             }
         }
 
-        LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
+        ConnectGameSvr.instance.joinPrivateRoom(roomid, func)
     }
 
     onBtnJoin0(): void {

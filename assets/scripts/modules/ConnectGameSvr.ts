@@ -30,4 +30,20 @@ export class ConnectGameSvr {
         }
         AuthGame.instance.req(data.addr, data.gameid, data.roomid, authCallBack);
     }
+
+    joinPrivateRoom(roomid:number, callBack?:(success:boolean, data?:any)=>void):void{
+        const func = (result:any)=>{
+            if(result && result.code == 1){
+                result.shortRoomid = roomid;
+                const func2 = (success:boolean) => { 
+                    callBack && callBack(success);
+                }
+                this.connectGame(result,func2)
+            }else{
+                callBack && callBack(false, result);
+            }
+        }
+
+        LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
+    }
 }
