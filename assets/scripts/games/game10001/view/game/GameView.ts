@@ -756,7 +756,7 @@ export class GameView extends FGUIGameView {
      * 邀请好友
      */
     onBtnInvite(): void {
-        
+        this.drawInviteInfo()
     }
 
     onChanged(event: any):void{

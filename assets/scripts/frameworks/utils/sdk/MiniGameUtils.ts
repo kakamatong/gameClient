@@ -213,6 +213,7 @@ export class MiniGameUtils {
     async loadImage(url:string): Promise<HTMLImageElement>{ 
         return new Promise((resolve, reject) => { 
             const image = this.createImage();
+            image.crossOrigin = 'anonymous';
             image.onload = () => { 
                 resolve(image);
             };
@@ -221,6 +222,15 @@ export class MiniGameUtils {
             };
             image.src = url;
 
+        });
+    }
+
+    async dataURLToImage(dataURL: string): Promise<HTMLImageElement> {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = dataURL;
         });
     }
 }
