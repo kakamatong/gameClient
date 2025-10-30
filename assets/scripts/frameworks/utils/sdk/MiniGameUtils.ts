@@ -183,6 +183,14 @@ export class MiniGameUtils {
         }
     }
 
+    getLaunchOptionsSync():any{
+        if (this.isWeChatGame()) {
+            return wx && wx.getLaunchOptionsSync()
+        }else{
+            return {}
+        }
+    }
+
     getCanvas(): HTMLCanvasElement | null{
         if (this.isWeChatGame()) {
             if (!this._canvas) {

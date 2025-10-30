@@ -88,9 +88,23 @@ export class LobbyView extends FGUILobbyView {
                     this.startLogin()
                 }
                 PopMessageView.showView({title:'温馨提示', content:'登入失败,是否重新登入？', type:ENUM_POP_MESSAGE_TYPE.NUM1SURE, sureBack: func1})
+            }else{
+                this.onLoginSuccess()
             }
         }
         ConnectSvr.instance.checkAutoLogin(func)
+    }
+
+    onLoginSuccess(){ 
+        this.checkPrivateRoomid()
+    }
+
+    checkPrivateRoomid(){
+        const options = MiniGameUtils.instance.getLaunchOptionsSync()
+        if (options.query && options.query.roomid) { 
+            DataCenter.instance.launchRoomid = Number(options.query.roomid)
+            
+        }
     }
 
     updateUserInfo():void{

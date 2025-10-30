@@ -39,6 +39,12 @@ export class DataCenter {
     private _appConfig: any = null;
 
     /**
+     * @property {string} _launchRoomid - 启动携带的roomid
+     * @private
+     */
+    private _launchRoomid:number = 0;
+
+    /**
      * @property {number} _gameid - 当前游戏ID
      * @private
      */
@@ -299,5 +305,13 @@ export class DataCenter {
 
     isEnvProd():boolean{
         return this.appConfig.env === ENUM_ENV.PROD;
+    }
+
+    get launchRoomid():number{ 
+        return this._launchRoomid;
+    }
+
+    set launchRoomid(id:number){ 
+        this._launchRoomid = id;
     }
 }
