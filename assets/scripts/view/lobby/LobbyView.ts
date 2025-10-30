@@ -102,8 +102,13 @@ export class LobbyView extends FGUILobbyView {
     checkPrivateRoomid(){
         const options = MiniGameUtils.instance.getLaunchOptionsSync()
         if (options.query && options.query.roomid) { 
-            DataCenter.instance.launchRoomid = Number(options.query.roomid)
-
+            const roomid = Number(options.query.roomid)
+            if (DataCenter.instance.launchRoomid != roomid) {
+                DataCenter.instance.launchRoomid = roomid
+                ConnectGameSvr.instance.joinPrivateRoom(roomid,(b:boolean)=>{
+                    b && this.changeToGameScene()
+                })
+            }
         }
     }
 
