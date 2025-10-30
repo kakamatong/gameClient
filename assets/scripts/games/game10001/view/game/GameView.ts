@@ -749,6 +749,13 @@ export class GameView extends FGUIGameView {
             canvasContext.globalCompositeOperation = "source-over";
             canvasContext.clearRect(0, 0, width, height);
             canvasContext.drawImage(bg, 0, 0, width, height);
+
+            MiniGameUtils.instance.makeCanvasImage({filename:"test"}).then((res:string) => { 
+                console.log(res)
+                resolve(res)
+            }).catch((err:any) => {
+                reject(err)
+            })
         })
     }
 

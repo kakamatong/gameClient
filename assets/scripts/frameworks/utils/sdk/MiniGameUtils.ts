@@ -225,12 +225,45 @@ export class MiniGameUtils {
         });
     }
 
-    async dataURLToImage(dataURL: string): Promise<HTMLImageElement> {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = reject;
-            img.src = dataURL;
-        });
-    }
+    async makeCanvasImage(options:{filename:string, format?:'png' | 'jpeg' | 'webp', quality?:number}): Promise<string>{ 
+        return new Promise((resolve, reject) => { 
+            if (this.isWeChatGame()) {
+                
+            }else{
+                this._canvas?.toBlob((blob) => {
+                    if (!blob) {
+                        reject(new Error('Canvas 转换 Blob 失败'));
+                        return;
+                    }
+
+                    try {
+                        // 创建对象 URL
+                        const objectURL = URL.createObjectURL(blob);
+                        
+                        // 创建下载链接
+                        const link = document.createElement('a');
+                        link.href = objectURL;
+                        link.download = `${options.filename}.${options.format ?? 'jpeg'}`;
+                        link.style.display = 'none';
+                        
+                        // 添加到文档并触发下载
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // 返回对象 URL（可以当作临时本地地址使用）
+                        resolve(objectURL);
+                    } catch (error) {
+                        reject(error);
+                    }
+                    },
+                    `image/jpeg`,
+                    options.quality ?? 1
+                );
+                /////
+            }
+        })
+     }
+
+    
 }
