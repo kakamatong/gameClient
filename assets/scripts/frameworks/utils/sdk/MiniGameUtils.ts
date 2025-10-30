@@ -228,7 +228,11 @@ export class MiniGameUtils {
     async makeCanvasImage(options:{filename:string, format?:'png' | 'jpeg' | 'webp', quality?:number}): Promise<string>{ 
         return new Promise((resolve, reject) => { 
             if (this.isWeChatGame()) {
-                
+                (this._canvas as any).toTempFilePathSync({
+                    success: (res:any) => {
+                        resolve(res.tempFilePath);
+                    }
+                })
             }else{
                 this._canvas?.toBlob((blob) => {
                     if (!blob) {
@@ -257,7 +261,7 @@ export class MiniGameUtils {
                         reject(error);
                     }
                     },
-                    `image/jpeg`,
+                    `image/${options.format ?? 'jpeg'}`,
                     options.quality ?? 1
                 );
                 /////
