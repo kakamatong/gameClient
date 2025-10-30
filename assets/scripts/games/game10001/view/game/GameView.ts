@@ -118,7 +118,7 @@ export class GameView extends FGUIGameView {
     }
 
     onSvrTotalResult(data:any){
-        const time = 1.2
+        const time = 1
 
         ScheduleOnce(this.node.components[0],()=>{
             TotalResultView.showView(data)
