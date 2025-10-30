@@ -1,4 +1,3 @@
-import { DataCenter } from "../../../datacenter/Datacenter";
 import FGUICompPrivateCreate from "../../../fgui/privateRoom/FGUICompPrivateCreate";
 import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";

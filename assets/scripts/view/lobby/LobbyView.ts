@@ -20,7 +20,6 @@ import { PrivateRoomView } from '../privateRoom/PrivateRoomView';
 import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
-import {EventTarget} from 'cc'
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
