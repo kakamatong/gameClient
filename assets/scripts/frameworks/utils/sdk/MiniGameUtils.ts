@@ -1,4 +1,5 @@
 import { sys } from "cc";
+import { DispatchEvent } from "../../Framework";
 
 export class MiniGameUtils {
 
@@ -29,7 +30,16 @@ export class MiniGameUtils {
     }
 
     constructor() { 
-        
+        this.init()
+    }
+
+    init(){
+        if (this.isWeChatGame()) {
+            wx && wx.onShow((res:any) => { 
+                console.log('App Show', res)
+                DispatchEvent('onShow',res)
+            })
+        }
     }
 
     isThirdPlatform():boolean { 

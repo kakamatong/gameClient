@@ -20,6 +20,7 @@ import { PrivateRoomView } from '../privateRoom/PrivateRoomView';
 import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
+import {EventTarget} from 'cc'
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -39,6 +40,7 @@ export class LobbyView extends FGUILobbyView {
         AddEventListener('userStatus',this.onUserStatus, this);
         AddEventListener('userRichs',this.onUserRiches, this);
         AddEventListener('socketDisconnect',this.onSocketDisconnect, this);
+        AddEventListener('onShow', this.onAppShow, this)
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
@@ -49,11 +51,16 @@ export class LobbyView extends FGUILobbyView {
         RemoveEventListener('userStatus', this.onUserStatus);
         RemoveEventListener('userRichs', this.onUserRiches);
         RemoveEventListener('socketDisconnect', this.onSocketDisconnect);
+        RemoveEventListener('onShow', this.onAppShow);
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
     }
 
     onBtnHead(){
         UserCenterView.showView();
+    }
+
+    onAppShow(res:any){
+        this.checkPrivateRoomid(res)
     }
 
     initUI(){ 
@@ -96,11 +103,12 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onLoginSuccess(){ 
-        this.checkPrivateRoomid()
+        console.log('onLoginSuccess')
+        const options = MiniGameUtils.instance.getLaunchOptionsSync()
+        this.checkPrivateRoomid(options)
     }
 
-    checkPrivateRoomid(){
-        const options = MiniGameUtils.instance.getLaunchOptionsSync()
+    checkPrivateRoomid(options:any){
         if (options.query && options.query.roomid) { 
             const roomid = Number(options.query.roomid)
             if (DataCenter.instance.launchRoomid != roomid) {
