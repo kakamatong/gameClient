@@ -232,7 +232,7 @@ export class MiniGameUtils {
     async makeCanvasImage(options:{filename:string, format?:'png' | 'jpeg' | 'webp', quality?:number}): Promise<string>{ 
         return new Promise((resolve, reject) => { 
             if (this.isWeChatGame()) {
-                (this._canvas as any).toTempFilePathSync({
+                (this._canvas as any).toTempFilePath({
                     success: (res:any) => {
                         resolve(res.tempFilePath);
                     }

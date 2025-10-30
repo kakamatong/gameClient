@@ -746,6 +746,7 @@ export class GameView extends FGUIGameView {
                 reject()
                 return
             }
+
             canvasContext.globalCompositeOperation = "source-over";
             canvasContext.clearRect(0, 0, width, height);
             canvasContext.drawImage(bg, 0, 0, width, height);
@@ -760,8 +761,7 @@ export class GameView extends FGUIGameView {
             canvasContext.textAlign = "left"
             canvasContext.fillText(DataCenter.instance.userData?.nickname || "", width * 0.1 + headWidth + 10, height * 0.8 + 10);
             canvasContext.fillText(`${DataCenter.instance.userid || 0}`, width * 0.1 + headWidth + 10, height * 0.8 + 50);
-
-            MiniGameUtils.instance.makeCanvasImage({filename:"test"}).then((res:string) => { 
+            MiniGameUtils.instance.makeCanvasImage({filename:"invite"}).then((res:string) => { 
                 console.log(res)
                 resolve(res)
             }).catch((err:any) => {
