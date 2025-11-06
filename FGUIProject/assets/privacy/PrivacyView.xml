@@ -14,9 +14,9 @@
       <property target="title" propertyId="0" value="同意"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
     </component>
-    <text id="n3_7ivz" name="n3" xy="119,671" size="539,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="在您使用 猜拳-猜丁壳 服务之前，请仔细&#xA;阅读"/>
+    <text id="n3_7ivz" name="n3" xy="119,671" size="528,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="在您使用 石头剪刀布来猜拳 服务之前，&#xA;请仔细阅读"/>
     <text id="n4_7ivz" name="n4" xy="117,747" size="544,82" group="n10_7ivz" fontSize="30" color="#ffffff" vAlign="middle" strokeColor="#000000" text="如您同意该指引，请点击“同意”开始使&#xA;用。"/>
-    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="317,685" group="n10_7ivz">
+    <component id="n8_7ivz" name="UI_BTN_PRIVACY" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="362,685" group="n10_7ivz">
       <Button titleColor="#ff0000" titleFontSize="30"/>
       <property target="title" propertyId="0" value="《隐私政策指引》"/>
       <property target="icon" propertyId="1" value=""/>
