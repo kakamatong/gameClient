@@ -3,9 +3,8 @@
   <resources>
     <component id="7ivz0" name="LoginView.xml" path="/" exported="true"/>
     <image id="7ivz1" name="lobbybg.jpg" path="/imgs/" scale="9grid" scale9grid="7,16,14,32"/>
-    <image id="7ivz2" name="logo1.png" path="/imgs/"/>
-    <image id="7ivz3" name="logo2.png" path="/imgs/"/>
     <component id="7ivz4" name="compbg1.xml" path="/comp/"/>
+    <image id="ol3i5" name="logoNew.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -5,12 +5,12 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <component id="n48_7ivz" name="n48" src="7ivz4" fileName="comp/compbg1.xml" xy="0,0" alpha="0.3"/>
-    <image id="n4_7ivz" name="n4" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="60,288" size="118,95" group="n6_7ivz"/>
-    <image id="n3_7ivz" name="n3" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="676,529" size="78,71" group="n6_7ivz"/>
-    <image id="n1_7ivz" name="n1" src="7ivz2" fileName="imgs/logo1.png" xy="36,353" group="n6_7ivz"/>
-    <image id="n2_7ivz" name="n2" src="7ivz3" fileName="imgs/logo2.png" xy="224,573" group="n6_7ivz"/>
-    <image id="n5_7ivz" name="n5" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="121,631" size="79,79" group="n6_7ivz"/>
-    <group id="n6_7ivz" name="n6" xy="36,288" size="718,432" advanced="true">
+    <image id="n4_7ivz" name="n4" src="xoqi7" fileName="imgs/rock.png" pkg="gj0r6g5i" xy="78,391" size="118,95" group="n6_7ivz"/>
+    <image id="n3_7ivz" name="n3" src="xoqi5" fileName="imgs/paper.png" pkg="gj0r6g5i" xy="547,408" size="78,71" group="n6_7ivz"/>
+    <image id="n5_7ivz" name="n5" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="631,607" size="79,79" group="n6_7ivz"/>
+    <image id="n49_ol3i" name="n49" src="ol3i5" fileName="imgs/logoNew.png" xy="42,461" group="n6_7ivz"/>
+    <image id="n50_ol3i" name="n50" src="xoqi6" fileName="imgs/scissors.png" pkg="gj0r6g5i" xy="164,606" size="79,79" group="n6_7ivz" skew="0,-180"/>
+    <group id="n6_7ivz" name="n6" xy="42,391" size="705,316" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
     <component id="n7_7ivz" name="UI_BTN_START" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="273,1185" size="230,99">
