@@ -1,6 +1,5 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
-import { DispatchEvent } from '../frameworks/Framework';
 export class AwardNotices {
     req() {
         LobbySocketManager.instance.sendToServer('getAwardNotice', { userid:DataCenter.instance.userid}, this.resp.bind(this))

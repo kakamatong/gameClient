@@ -1,6 +1,5 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
-import { DispatchEvent } from '../frameworks/Framework';
 
 /**
  * @class UserData

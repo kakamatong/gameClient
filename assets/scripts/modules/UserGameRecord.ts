@@ -1,6 +1,5 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
-import { DispatchEvent } from '../frameworks/Framework';
 import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
 
 /**

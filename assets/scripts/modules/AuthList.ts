@@ -1,7 +1,6 @@
 
 import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
-import { MiniGameUtils } from '../frameworks/utils/sdk/MiniGameUtils';
 import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
 
 // 添加console.log别名，方便使用日志颜色
