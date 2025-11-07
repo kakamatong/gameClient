@@ -1,5 +1,3 @@
-import { sys } from 'cc';
-import { LOCAL_KEY } from '../../datacenter/InterfaceConfig';
 import FGUIPrivacyView from '../../fgui/privacy/FGUIPrivacyView';
 import * as fgui from "fairygui-cc";
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';

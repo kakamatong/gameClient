@@ -1,8 +1,8 @@
-import { _decorator, assetManager, AudioClip, AudioSourceComponent, Component,log, sys} from 'cc';
+import { _decorator, Component} from 'cc';
 import * as fgui from "fairygui-cc";
 import { GameView } from '../games/game10001/view/game/GameView';
 import { SoundManager } from '../frameworks/SoundManager';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('GameScreen')
 export class GameScreen extends Component {
