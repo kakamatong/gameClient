@@ -7,7 +7,7 @@
       <relation target="" sidePair="center-center,middle-middle"/>
     </loader>
   </displayList>
-  <transition name="act">
+  <transition name="act" options="4">
     <item time="0" type="Scale" target="n4_kw9i" tween="true" startValue="1,1" endValue="1.2,1.2" duration="3"/>
     <item time="0" type="XY" target="n4_kw9i" tween="true" startValue="-4,-5" endValue="-4,-150" duration="10"/>
     <item time="14" type="XY" target="n4_kw9i" tween="true" startValue="-4,-150" endValue="-4,-5" duration="10"/>

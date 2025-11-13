@@ -3,6 +3,7 @@
   <resources>
     <component id="p4e40" name="UserCenterView.xml" path="/" exported="true"/>
     <component id="pr8n1" name="CompBtnSound.xml" path="/comp/"/>
+    <component id="lvao2" name="BtnRevoke.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

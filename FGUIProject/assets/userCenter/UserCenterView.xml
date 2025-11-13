@@ -6,17 +6,13 @@
     </graph>
     <image id="n0_klme" name="n0" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="59,449" group="n17_klme"/>
     <image id="n3_klme" name="n3" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="267,568" size="220,100" group="n17_klme"/>
-    <component id="n2_klme" name="UI_COMP_HEAD" src="cvev9" fileName="imgs/comp/CompHead.xml" pkg="gj0r6g5i" xy="127,526" group="n17_klme"/>
+    <component id="n2_klme" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="127,526" group="n17_klme"/>
     <image id="n25_ti6v" name="n25" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="99,715" size="577,360" group="n17_klme"/>
     <text id="n4_klme" name="UI_TXT_NICKNAME" xy="296,575" size="64,42" group="n17_klme" fontSize="30" color="#ffffff" singleLine="true" text="昵称"/>
     <text id="n5_klme" name="UI_TXT_USERID" xy="296,625" size="34,42" group="n17_klme" fontSize="30" color="#ffffff" singleLine="true" text="ID"/>
-    <component id="n6_klme" name="UI_BTN_WECHAT" src="is91n" fileName="imgs/comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="446,1101" size="230,99" group="n17_klme">
+    <component id="n6_klme" name="UI_BTN_WECHAT" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="273,1101" size="230,99" group="n17_klme">
       <property target="title" propertyId="0" value="同步微信"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3c"/>
-    </component>
-    <component id="n7_klme" name="UI_BTN_DEL_ACC" src="is91n" fileName="imgs/comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="190,1102" size="230,98" group="n17_klme">
-      <property target="title" propertyId="0" value="注销"/>
-      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
     <text id="n9_klme" name="n9" xy="119,749" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="赢："/>
     <text id="n10_klme" name="n10" xy="119,814" size="76,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="平："/>
@@ -26,13 +22,14 @@
     <text id="n14_klme" name="UI_TXT_LOSE" xy="508,749" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
     <text id="n15_klme" name="UI_TXT_DRAW" xy="207,814" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
     <text id="n16_klme" name="UI_TXT_RATE" xy="508,814" size="140,49" group="n17_klme" fontSize="36" color="#ffffff" autoSize="none" strokeColor="#000000" text="0"/>
-    <component id="n18_klme" name="UI_BTN_CLOSE" src="muz3h" fileName="imgs/comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,462" group="n17_klme"/>
+    <component id="n18_klme" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="631,462" group="n17_klme"/>
     <text id="n19_pr8n" name="n19" xy="119,913" size="184,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="背景音乐："/>
     <text id="n20_pr8n" name="n20" xy="192,982" size="112,49" group="n17_klme" fontSize="36" color="#ffffff" align="right" strokeColor="#000000" text="音效："/>
     <component id="n23_pr8n" name="UI_BTN_BGMUSIC" src="pr8n1" fileName="comp/CompBtnSound.xml" xy="289,909" group="n17_klme" aspect="true" scale="0.6,0.6" controller="ctrl_status,0"/>
     <component id="n24_pr8n" name="UI_BTN_EFFECT" src="pr8n1" fileName="comp/CompBtnSound.xml" xy="289,977" group="n17_klme" aspect="true" scale="0.6,0.6" controller="ctrl_status,0"/>
     <image id="n26_sexy" name="n26" src="sexy16" fileName="imgs/zhanli.png" pkg="gj0r6g5i" xy="506,906" group="n17_klme"/>
     <text id="n27_sexy" name="UI_TXT_CP" xy="491,974" size="140,49" group="n17_klme" fontSize="36" color="#ff0000" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="999"/>
+    <component id="n28_lvao" name="UI_BTN_DEL_ACC" src="lvao2" fileName="comp/BtnRevoke.xml" xy="589,1163" group="n17_klme"/>
     <group id="n17_klme" name="n17" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
