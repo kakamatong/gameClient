@@ -2,7 +2,7 @@
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
   <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
-  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="1"/>
+  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="1">
     <remark page="0" value="2人"/>
     <remark page="1" value="3人"/>
@@ -21,7 +21,7 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
-    <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="9,272" controller="ctrl_pos,0,ctrl_localSeat,2">
+    <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="9,272" controller="ctrl_pos,0,ctrl_localSeat,3">
       <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
       <gearXY controller="ctrl_playerCnt" pages="1" values="9,272" default="368,74"/>
       <relation target="" sidePair="right-right,top-top"/>
