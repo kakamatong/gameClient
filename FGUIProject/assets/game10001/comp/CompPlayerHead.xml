@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="362,210">
-  <controller name="ctrl_pos" exported="true" pages="0,,1," selected="0">
+  <controller name="ctrl_pos" exported="true" pages="0,,1,,5," selected="2">
     <remark page="0" value="左边"/>
     <remark page="1" value="右边"/>
+    <remark page="2" value="中间"/>
   </controller>
   <controller name="ctrl_localSeat" exported="true" pages="0,,1,,2,,3,,4," selected="0">
     <remark page="0" value="没有座位"/>
@@ -12,27 +13,27 @@
     <remark page="4" value="座位4"/>
   </controller>
   <displayList>
-    <image id="n0_gk14" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="142,96" size="220,100">
-      <gearXY controller="ctrl_pos" pages="0" values="142,96" default="0,96"/>
+    <image id="n0_gk14" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="68,163" size="220,100">
+      <gearXY controller="ctrl_pos" pages="0,5" values="142,96|68,163" default="0,96"/>
     </image>
-    <component id="n1_gk14" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="0,50">
-      <gearXY controller="ctrl_pos" pages="0" values="0,50" default="202,50"/>
+    <component id="n1_gk14" name="UI_COMP_HEAD" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="101,1">
+      <gearXY controller="ctrl_pos" pages="0,5" values="0,50|101,1" default="202,50"/>
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
-    <text id="n2_gk14" name="UI_TXT_WINLOSE" xy="2,9" size="60,42" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
-      <gearXY controller="ctrl_pos" pages="0,1" values="2,9|301,12"/>
+    <text id="n2_gk14" name="UI_TXT_WINLOSE" xy="264,121" size="60,42" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
+      <gearXY controller="ctrl_pos" pages="0,1,5" values="2,9|301,12|264,121"/>
     </text>
-    <text id="n3_gk14" name="UI_TXT_NICKNAME" xy="161,101" pivot="1,0" size="10,42" fontSize="30" color="#ffffff" align="right" singleLine="true" text="">
-      <gearXY controller="ctrl_pos" pages="0" values="161,101" default="191,101"/>
+    <text id="n3_gk14" name="UI_TXT_NICKNAME" xy="175,168" pivot="1,0" size="10,42" fontSize="30" color="#ffffff" align="right" singleLine="true" text="">
+      <gearXY controller="ctrl_pos" pages="0,5" values="161,101|175,168" default="191,101"/>
     </text>
-    <text id="n4_gk14" name="UI_TXT_ID" xy="161,149" pivot="1,0" size="10,42" fontSize="30" color="#ffffff" singleLine="true" text="">
-      <gearXY controller="ctrl_pos" pages="0,1" values="161,149|191,149"/>
+    <text id="n4_gk14" name="UI_TXT_ID" xy="175,216" pivot="1,0" size="10,42" fontSize="30" color="#ffffff" singleLine="true" text="">
+      <gearXY controller="ctrl_pos" pages="0,1,5" values="161,149|191,149|175,216"/>
     </text>
-    <component id="n5_gk14" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="92,141" visible="false">
-      <gearXY controller="ctrl_pos" pages="0" values="92,141" default="293,142"/>
+    <component id="n5_gk14" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="193,93" visible="false">
+      <gearXY controller="ctrl_pos" pages="0,5" values="92,141|193,93" default="293,142"/>
     </component>
-    <component id="n6_gk14" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="93,42" visible="false">
-      <gearXY controller="ctrl_pos" pages="0" values="93,42" default="185,42"/>
+    <component id="n6_gk14" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="190,-9" visible="false">
+      <gearXY controller="ctrl_pos" pages="0,5" values="93,42|190,-9" default="185,42"/>
     </component>
   </displayList>
 </component>
