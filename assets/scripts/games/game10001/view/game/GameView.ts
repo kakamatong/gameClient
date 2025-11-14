@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
-import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1} from '../../data/InterfaceGameConfig';
+import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX} from '../../data/InterfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/CompClock';
 import { PopMessageView } from '../../../../view/common/PopMessageView';
@@ -544,8 +544,14 @@ export class GameView extends FGUIGameView {
             if (gameData && gameData.rule != '') {
                 const rule = JSON.parse(gameData.rule)
                 this.UI_TXT_RULE.text = `${GAME_MODE_TXT[rule.mode]}`
+                // 重新赋值房间人数
+                GameData.instance.maxPlayer = rule.playerCnt
+                
             }
+        }else{
+            GameData.instance.maxPlayer = data.playerids.length ?? 2
         }
+        this.ctrl_playerCnt.selectedIndex = ROOM_PLAYER_INDEX[GameData.instance.maxPlayer] || 0
     }
 
     showSignReady(localSeat:number, bshow:boolean):void{

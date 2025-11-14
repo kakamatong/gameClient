@@ -13,7 +13,7 @@
     </component>
     <text id="n1_ba3d" name="n1" xy="64,79" size="94,42" fontSize="30" color="#cc9933" strokeColor="#000000" text="人数："/>
     <text id="n2_ba3d" name="n2" xy="64,165" size="94,42" fontSize="30" color="#cc9933" strokeColor="#000000" text="模式："/>
-    <component id="n4_q5lz" name="n4" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="169,72" size="120,56" touchable="false">
+    <component id="n4_q5lz" name="n4" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="169,72" size="120,56">
       <Button checked="true" controller="ctrl_cnt" page="0"/>
       <property target="title" propertyId="0" value="2人"/>
     </component>
@@ -33,8 +33,8 @@
       <Button controller="ctrl_mode" page="3"/>
       <property target="title" propertyId="0" value="无限对局"/>
     </component>
-    <component id="n10_gk14" name="n10" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,72" size="120,56" touchable="false">
-      <Button checked="true" controller="ctrl_cnt" page="1"/>
+    <component id="n10_gk14" name="n10" src="q5lz4" fileName="comp/CompBtnItem.xml" xy="368,72" size="120,56">
+      <Button controller="ctrl_cnt" page="1"/>
       <property target="title" propertyId="0" value="3人"/>
     </component>
   </displayList>

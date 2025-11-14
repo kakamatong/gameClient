@@ -6,6 +6,7 @@ import * as fgui from "fairygui-cc";
 export default class FGUICompPrivateCreate extends fgui.GComponent {
 
 	public ctrl_mode:fgui.Controller;
+	public ctrl_cnt:fgui.Controller;
 	public UI_BTN_CREATE:fgui.GButton;
 	public UI_BTN_JU3:fgui.GButton;
 	public UI_BTN_JU5:fgui.GButton;
@@ -54,6 +55,7 @@ export default class FGUICompPrivateCreate extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_mode = this.getControllerAt(0);
+		this.ctrl_cnt = this.getControllerAt(1);
 		this.UI_BTN_CREATE = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_CREATE.onClick(this.onBtnCreate, this);
 		this.UI_BTN_JU3 = <fgui.GButton>(this.getChildAt(5));

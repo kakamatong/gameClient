@@ -119,4 +119,10 @@ export interface GAME_DATA {
     rule?: string;
 }
 
+export const ROOM_PLAYER_INDEX: { [key: number]: number } = {
+    2:0,
+    3:1,
+    4:2
+}
+
 export const HAND_INDEX = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
