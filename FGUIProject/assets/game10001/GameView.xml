@@ -46,13 +46,14 @@
       <relation target="" sidePair="right-right,top-top"/>
     </image>
     <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" visible="false"/>
-    <component id="n66_gk14" name="UI_COMP_OUT_HEND_3" src="folo3" fileName="comp/CompHand.xml" xy="32,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
+    <component id="n66_gk14" name="UI_COMP_OUT_HEND_3" src="folo3" fileName="comp/CompHand.xml" xy="32,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="150" controller="ctrl_head,0">
       <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
       <gearXY controller="ctrl_playerCnt" pages="1" values="32,625" default="313,523"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="588,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
+    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="588,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="210" controller="ctrl_head,0">
       <gearXY controller="ctrl_playerCnt" pages="1" values="588,625" default="313,523"/>
+      <gearLook controller="ctrl_playerCnt" pages="1" values="1,210,0,1" default="1,180,0,1"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
     <component id="n21_folo" name="UI_BTN_SURE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="513,1451" group="n23_folo" controller="ctrl_color,0">
