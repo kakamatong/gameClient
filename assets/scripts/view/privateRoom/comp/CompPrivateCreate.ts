@@ -2,7 +2,7 @@ import FGUICompPrivateCreate from "../../../fgui/privateRoom/FGUICompPrivateCrea
 import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";
 import { PopMessageView } from "../../common/PopMessageView";
-import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from "../../../datacenter/InterfaceConfig";
+import { CREATE_ROOM_PLAYER_CNT, ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from "../../../datacenter/InterfaceConfig";
 import { TipsView } from "../../common/TipsView";
 import { sys } from "cc";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
@@ -19,6 +19,7 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
 
     initUI(rule:any):void{
         this.ctrl_mode.selectedIndex = rule.mode;
+        this.ctrl_cnt.selectedIndex = CREATE_ROOM_PLAYER_CNT.indexOf(rule.playerCnt);
     }
 
     onBtnClose(): void {
@@ -27,7 +28,7 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
 
     onBtnCreate(): void {
         const gameRule = {
-            playerCnt:2,
+            playerCnt:CREATE_ROOM_PLAYER_CNT[this.ctrl_cnt.selectedIndex],
             mode: this.ctrl_mode.selectedIndex
         }
         const func = (result:any)=>{

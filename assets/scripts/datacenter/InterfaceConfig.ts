@@ -95,6 +95,8 @@ export enum RICH_TYPE  {
     COMBAT_POWER = 100, // 战力
 }
 
+export const CREATE_ROOM_PLAYER_CNT = [2, 3, 4]
+
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
 export const LOBBY_SHARE_PIC_URL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/share/10001/sharePic.jpg'
 export const MAIN_GAME_ID = 10001
