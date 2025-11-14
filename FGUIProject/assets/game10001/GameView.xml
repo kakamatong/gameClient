@@ -3,6 +3,11 @@
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
   <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
+  <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="0">
+    <remark page="0" value="2人"/>
+    <remark page="1" value="3人"/>
+    <remark page="2" value="4人"/>
+  </controller>
   <displayList>
     <image id="n1_is91" name="n1" src="is912" fileName="imgs/game.jpg" xy="0,0">
       <relation target="" sidePair="width-width,height-height"/>
@@ -16,33 +21,12 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
-    <image id="n7_folo" name="n7" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="366,173" size="220,100" group="n8_folo"/>
-    <component id="n4_folo" name="UI_COMP_HEAD_2" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="568,127" group="n8_folo">
-      <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
-    </component>
-    <text id="n52_9rsr" name="UI_TXT_WINLOSE_2" xy="558,77" size="60,42" group="n8_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
-      <gearDisplay controller="ctrl_roomtype" pages="1"/>
-    </text>
-    <text id="n10_folo" name="UI_TXT_NICKNAME_2" xy="557,178" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <text id="n11_folo" name="UI_TXT_ID_2" xy="557,226" pivot="1,0" size="10,42" group="n8_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <component id="n31_qaf2" name="UI_COMP_OFFLINE" src="qaf2a" fileName="comp/CompOffline.xml" xy="659,219" group="n8_folo" visible="false"/>
-    <component id="n28_qaf2" name="UI_COMP_THINKING" src="qaf28" fileName="comp/CompThinkAct.xml" xy="551,119" group="n8_folo" visible="false"/>
-    <group id="n8_folo" name="UI_GROUP_PLAYER_2" xy="366,77" size="362,210" visible="false" advanced="true">
+    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,1">
       <relation target="" sidePair="right-right,top-top"/>
-    </group>
-    <image id="n6_folo" name="n6" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="198,1447" size="220,100" group="n9_folo"/>
-    <component id="n5_folo" name="UI_COMP_HEAD_1" src="cvev9" fileName="comp/CompHead.xml" pkg="gj0r6g5i" xy="49,1400" group="n9_folo">
-      <relation target="" sidePair="left-left,bottom-bottom"/>
-      <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
-    <text id="n12_folo" name="UI_TXT_NICKNAME_1" xy="214,1452" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" singleLine="true" text=""/>
-    <text id="n13_folo" name="UI_TXT_ID_1" xy="214,1502" size="10,42" group="n9_folo" fontSize="30" color="#ffffff" align="right" singleLine="true" text=""/>
-    <text id="n51_9rsr" name="UI_TXT_WINLOSE_1" xy="54,1360" size="60,42" group="n9_folo" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
-      <gearDisplay controller="ctrl_roomtype" pages="1"/>
-    </text>
-    <group id="n9_folo" name="UI_GROUP_PLAYER_1" xy="49,1360" size="369,200" advanced="true">
+    <component id="n62_gk14" name="UI_COMP_PLAYER_1" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="51,1349" controller="ctrl_pos,0">
       <relation target="" sidePair="left-left,bottom-bottom"/>
-    </group>
+    </component>
     <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
