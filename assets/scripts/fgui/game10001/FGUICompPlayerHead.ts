@@ -8,6 +8,7 @@ import FGUICompThinkAct from "./FGUICompThinkAct";
 export default class FGUICompPlayerHead extends fgui.GComponent {
 
 	public ctrl_pos:fgui.Controller;
+	public ctrl_localSeat:fgui.Controller;
 	public UI_COMP_HEAD:fgui.GComponent;
 	public UI_TXT_WINLOSE:fgui.GTextField;
 	public UI_TXT_NICKNAME:fgui.GTextField;
@@ -57,6 +58,7 @@ export default class FGUICompPlayerHead extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.ctrl_pos = this.getControllerAt(0);
+		this.ctrl_localSeat = this.getControllerAt(1);
 		this.UI_COMP_HEAD = <fgui.GComponent>(this.getChildAt(1));
 		this.UI_TXT_WINLOSE = <fgui.GTextField>(this.getChildAt(2));
 		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(3));

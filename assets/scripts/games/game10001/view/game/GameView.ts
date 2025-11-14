@@ -21,6 +21,7 @@ import { SpriteFrame } from 'cc';
 import { TotalResultView } from '../result/TotalResultView';
 import { PlayerInfoView } from '../playerInfo/PlayerInfoView';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
+import { CompPlayerHead } from './comp/CompPlayerHead';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -51,10 +52,6 @@ export class GameView extends FGUIGameView {
         if (GameData.instance.isPrivateRoom) {
             this.ctrl_roomtype.selectedIndex = ROOM_TYPE.PRIVATE
         }
-
-        // 玩家头像点击
-        this.UI_COMP_HEAD_1.onClick(this.onHeadClick1, this)
-        this.UI_COMP_HEAD_2.onClick(this.onHeadClick2, this)
     }
 
     initListeners(){
@@ -97,20 +94,6 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen("gameRecord");
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
-    }
-
-    onHeadClick1(): void {
-        const player = GameData.instance.getPlayerByLocal(SEAT_1)
-        if (player) {
-            PlayerInfoView.showView({userid:player.userid, cp: player.cp})
-        }
-    }
-
-    onHeadClick2(): void {
-        const player = GameData.instance.getPlayerByLocal(SEAT_2)
-        if (player) {
-            PlayerInfoView.showView({userid:player.userid, cp: player.cp})
-        }
     }
 
     onSvrGameRecord(data:any) {
@@ -195,7 +178,7 @@ export class GameView extends FGUIGameView {
         }else if(data.att == PLAYER_ATTITUDE.READY){
             if (local != SELF_LOCAL) {
                 this.showSignReady(local, true)
-                this.showThinking(false)
+                this.showThinking(local, false)
             }else{
                  this.UI_GROUP_SELECT.visible = true
             }
@@ -209,7 +192,7 @@ export class GameView extends FGUIGameView {
                 this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE
                 this.UI_GROUP_SELECT.visible = false
             }else{
-                this.showThinking(false)
+                this.showThinking(local, false)
             }
             
         }
@@ -509,11 +492,11 @@ export class GameView extends FGUIGameView {
     }
 
     showPlayerInfoBySeat(localseat:number):void{
+        const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localseat}`);
         const player = GameData.instance.playerList[localseat];
-        const nicknanme = this.getChild<fgui.GTextField>(`UI_TXT_NICKNAME_${localseat}`);
-        const id = this.getChild<fgui.GTextField>(`UI_TXT_ID_${localseat}`)
-        const head = this.getChild<FGUICompHead>(`UI_COMP_HEAD_${localseat}`)
-        //const head = this.UI_COMP_HEAD_1
+        const nicknanme = playerNode.UI_TXT_NICKNAME
+        const id = playerNode.UI_TXT_ID
+        const head = playerNode.UI_COMP_HEAD as FGUICompHead
         nicknanme.text = player.nickname ?? "";
         id.text = player.userid.toString();
         const headurl = GameData.instance.getHeadurl(localseat)
@@ -521,11 +504,11 @@ export class GameView extends FGUIGameView {
 
         if (localseat != SELF_LOCAL) {
             if (player.status == PLAYER_STATUS.OFFLINE) {
-                this.showOffLine(true)
+                playerNode.UI_COMP_OFFLINE.visible = true
             }else{
-                this.showOffLine(false)
+                playerNode.UI_COMP_OFFLINE.visible = false
             }
-            this.UI_GROUP_PLAYER_2.visible = true
+            playerNode.visible = true
         }
 
         if (player.status == PLAYER_STATUS.READY) {
@@ -533,13 +516,10 @@ export class GameView extends FGUIGameView {
         }
     }
 
-    showOffLine(bshow:boolean):void{ 
-        this.UI_COMP_OFFLINE.visible = bshow;
-    }
-
     hideHead(localseat:number){
-        if (localseat == SEAT_2) {
-            this.UI_GROUP_PLAYER_2.visible = false
+        const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localseat}`);
+        if (localseat != SEAT_1) {
+            playerNode.visible = false
         }
     }
 
@@ -572,8 +552,10 @@ export class GameView extends FGUIGameView {
         this.getChild<fgui.GImage>(`UI_IMG_SIGN_READY_${localSeat}`).visible = bshow
     }
 
-    showThinking(bshow:boolean):void{
-        this.UI_COMP_THINKING.visible = bshow;
+    showThinking(localSeat:number, bshow:boolean):void{
+        const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localSeat}`)
+        playerNode.UI_COMP_THINKING.visible = bshow
+
     }
 
     onPlayerThinking(localSeat:number):void {
@@ -581,7 +563,7 @@ export class GameView extends FGUIGameView {
             this.UI_GROUP_SELECT.visible = true
             this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.SURE
         }else{
-            this.showThinking(true)
+            this.showThinking(localSeat, true)
         }
     }
 

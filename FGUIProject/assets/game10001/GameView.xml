@@ -21,10 +21,10 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
-    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,1">
+    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,1,ctrl_localSeat,2">
       <relation target="" sidePair="right-right,top-top"/>
     </component>
-    <component id="n62_gk14" name="UI_COMP_PLAYER_1" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="51,1349" controller="ctrl_pos,0">
+    <component id="n62_gk14" name="UI_COMP_PLAYER_1" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="51,1349" controller="ctrl_pos,0,ctrl_localSeat,1">
       <relation target="" sidePair="left-left,bottom-bottom"/>
     </component>
     <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
