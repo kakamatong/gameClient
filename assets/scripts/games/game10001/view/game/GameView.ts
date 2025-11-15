@@ -131,7 +131,8 @@ export class GameView extends FGUIGameView {
             for (let index = 0; index < data.length; index++) {
                 const element = data[index];
                 const localSeat = GameData.instance.seat2local(index + 1)
-                this.getChild<fgui.GLabel>(`UI_TXT_WINLOSE_${localSeat}`).text = `胜:${element.win ?? 0}`
+                const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localSeat}`)
+                playerNode.UI_TXT_WINLOSE.text = `胜:${element.win ?? 0}`
             }
         }
     }

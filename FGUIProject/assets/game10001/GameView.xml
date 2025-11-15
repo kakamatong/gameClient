@@ -3,7 +3,7 @@
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
   <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
-  <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="1">
+  <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="0">
     <remark page="0" value="2人"/>
     <remark page="1" value="3人"/>
     <remark page="2" value="4人"/>
@@ -21,12 +21,12 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
-    <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="9,272" controller="ctrl_pos,0,ctrl_localSeat,3">
+    <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,0,ctrl_localSeat,3">
       <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
       <gearXY controller="ctrl_playerCnt" pages="1" values="9,272" default="368,74"/>
       <relation target="" sidePair="left-left,top-top"/>
     </component>
-    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="410,272" controller="ctrl_pos,1,ctrl_localSeat,2">
+    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,1,ctrl_localSeat,2">
       <gearXY controller="ctrl_playerCnt" pages="1" values="410,272" default="368,74"/>
       <relation target="" sidePair="right-right,top-top"/>
     </component>
@@ -37,21 +37,23 @@
     <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="313,892" scale="1.2,1.2" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <image id="n65_gk14" name="UI_IMG_SIGN_READY_3" src="qaf24" fileName="imgs/ready.png" xy="9,493" visible="false">
+    <image id="n65_gk14" name="UI_IMG_SIGN_READY_3" src="qaf24" fileName="imgs/ready.png" xy="301,324" visible="false">
       <gearXY controller="ctrl_playerCnt" pages="1" values="9,493" default="301,324"/>
-      <relation target="" sidePair="left-left,top-top"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
     </image>
-    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="586,493" visible="false">
+    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" visible="false">
       <gearXY controller="ctrl_playerCnt" pages="1" values="586,493" default="301,324"/>
-      <relation target="" sidePair="right-right,top-top"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
     </image>
-    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" visible="false"/>
-    <component id="n66_gk14" name="UI_COMP_OUT_HEND_3" src="folo3" fileName="comp/CompHand.xml" xy="32,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="150" controller="ctrl_head,0">
+    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="301,1098" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <component id="n66_gk14" name="UI_COMP_OUT_HEND_3" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="150" controller="ctrl_head,0">
       <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
       <gearXY controller="ctrl_playerCnt" pages="1" values="32,625" default="313,523"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="588,625" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="210" controller="ctrl_head,0">
+    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
       <gearXY controller="ctrl_playerCnt" pages="1" values="588,625" default="313,523"/>
       <gearLook controller="ctrl_playerCnt" pages="1" values="1,210,0,1" default="1,180,0,1"/>
       <relation target="" sidePair="center-center,middle-middle"/>

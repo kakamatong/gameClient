@@ -82,13 +82,17 @@ export class GameData {
 
     seat2local(seat: number): number {
         const selfSeat = this.getSelfSeat();
-        const selfLocal = SELF_LOCAL
-        const d = (seat - selfSeat) % this._maxPlayer;
-        if(d > 0){
-            return selfLocal + d;
-        }else{
-            return selfLocal - d;
+        if (selfSeat == seat) {
+            return SELF_LOCAL;
         }
+        const selfLocal = SELF_LOCAL
+        const d = (seat - selfSeat);
+        if (d > 0) {
+            return selfLocal + d
+        }else{
+            return this._maxPlayer + (selfLocal + d)
+        }
+        
     }
 
     local2seat(local: number): number {
