@@ -2,6 +2,7 @@ import FGUIResultView from '../../../../fgui/game10001Result/FGUIResultView';
 import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/Gamedata';
 import { SoundManager } from '../../../../frameworks/SoundManager';
+import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 
 export class ResultView extends FGUIResultView { 
     private _continueFunc:(()=>void) | null = null;
@@ -19,6 +20,7 @@ export class ResultView extends FGUIResultView {
         this._continueFunc = data?.continueFunc
         this.act.play(()=>{
             this.UI_COMP_ACT.ctrl_show.selectedIndex = 1
+            MiniGameUtils.instance.showInterstitialAd('adunit-5189637d1c76ffbc')
         })
 
         if (data.scores && data.scores.length > 0) {

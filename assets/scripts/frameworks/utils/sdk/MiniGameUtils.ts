@@ -7,6 +7,8 @@ export class MiniGameUtils {
 
     private _canvas: HTMLCanvasElement | null = null;
 
+    private _interstitialAdList: Record<string,any> = {};
+
 
     private _canvasContext: CanvasRenderingContext2D | null = null;
     /**
@@ -290,6 +292,40 @@ export class MiniGameUtils {
             }
         })
      }
+
+     /**
+     * 创建插屏广告
+     * @param key 
+     * @returns 
+     */
+     createInterstitialAd(key:string):any{ 
+        if (this.isWeChatGame()) { 
+            return (wx && wx.createInterstitialAd({
+                adUnitId: key
+            }))
+        }
+     }
+
+     /**
+     * 显示插屏广告
+     * @param key 
+     */
+     showInterstitialAd(key:string){
+        if(this.isWeChatGame()){
+            if (this._interstitialAdList[key]) {
+                this._interstitialAdList[key].show().catch((error:any) => { 
+                    // 失败重试
+                    console.error("插屏广告显示失败", error)
+                })
+            }else{
+                this._interstitialAdList[key] = this.createInterstitialAd(key)
+                this._interstitialAdList[key].show().catch((error:any) => { 
+                    // 失败重试
+                    console.error("插屏广告显示失败", error)
+                })
+            }
+        }
+    }
 
     
 }
