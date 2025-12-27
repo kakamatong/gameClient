@@ -1,8 +1,9 @@
 import { Socket } from './socket/Socket';
-import { assetManager, BufferAsset, log } from 'cc';
-import sproto from './sproto/sproto.js'; // 注意：sproto.js 没有类型声明，ts会提示any类型警告，但不影响功能
+import { Asset, assetManager, BufferAsset, log, TextAsset } from 'cc';
 import { handleSocketMessage } from './config/Config';
 import {LogColors} from './Framework';
+import * as protoParse from './sproto/sproto-parser';
+import { Sproto } from './sproto/sproto';
 
 /**
  * @class SocketManager
@@ -142,19 +143,21 @@ export class SocketManager implements handleSocketMessage {
             }
             const protocolPath = path + "/"
             // 必须先读取服务端协议
-            bundle.load(protocolPath + 's2c', (err, asset: BufferAsset) => {
+            bundle.load(protocolPath + 's2c', (err, asset: TextAsset) => {
                 log('loadAsset error', err);
 
-                const buffer = new Uint8Array(asset.buffer());
-                const serverSproto = sproto.createNew(buffer);
+                const txt = asset.nativeAsset
+                const buffer = protoParse.parse(txt, {})
+                const serverSproto = new Sproto(buffer)
                 this._client = serverSproto?.host('package');
 
                 // 然后读取客户端协议
-                bundle.load(protocolPath + 'c2s', (err, asset: BufferAsset) => {
+                bundle.load(protocolPath + 'c2s', (err, asset: TextAsset) => {
                     log('loadAsset error', err);
 
-                    const buffer = new Uint8Array(asset.buffer());
-                    const clientSproto = sproto.createNew(buffer);
+                    const txt = asset.nativeAsset
+                    const buffer = protoParse.parse(txt, {})
+                    const clientSproto = new Sproto(buffer)
                     this._request = this._client.attach(clientSproto);
                     this._bloaded = true;
                     callBack && callBack();
@@ -227,16 +230,16 @@ export class SocketManager implements handleSocketMessage {
     // type
     // _session
     // result
-    dispatchMessage(response: any) {
-        if (response.type == "RESPONSE") {
-            let result = response.result
-            this._callBacks && this._callBacks[response.session] && this._callBacks[response.session](result);
-        } else if (response.type == "REQUEST") {
-            if (response.pname == "agentReady") {
-                this.agentReady(response.result)
+    dispatchMessage(data: any) {
+        if (data.type == "RESPONSE") {
+            const result = data.response
+            this._callBacks && this._callBacks[data.session] && this._callBacks[data.session](result);
+        } else if (data.type == "REQUEST") {
+            if (data.name == "agentReady") {
+                this.agentReady(data.response)
             }else{
                 // 回调
-                this.onSvrMsg(response.pname, response.result);
+                this.onSvrMsg(data.name, data.response);
             }
         }
     }

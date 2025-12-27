@@ -1,0 +1,242 @@
+# 登录服务协议(0-9999)
+.package {
+    type 0 : integer
+    session 1 : integer
+}
+
+# 调用接口
+call 1 {
+    request {
+        serverName 0 : string
+        moduleName 1 : string
+        funcName 2 : string
+        args 3 : string
+    }
+    response {
+        code 0 : integer
+        result 1 : string
+    }
+}
+
+# 用户数据
+userData 2 {
+    request {
+        userid 0 : integer
+    }
+    response {
+        nickname 0 : string
+        headurl 1 : string
+        sex 2 : integer
+        province 3 : string
+        city 4 : string
+        ip 5 : string
+        ext 6 : string
+    }
+}
+
+# 用户财富
+userRiches 3 {
+    request {
+        
+    }
+    response {
+        richType 0 : *integer
+        richNums 1 : *integer
+    }
+}
+
+# 用户状态
+userStatus 4 {
+    request {
+        userid 0 : integer
+    }
+    response {
+        status 0 : integer
+        gameid 1 : integer
+        shortRoomid 2 : integer
+        roomid 3 : string
+        addr 4 : string
+    }
+}
+
+# 加入匹配
+matchJoin 5 {
+    request {
+        gameid 0 : integer
+        queueid 1 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+        gameid 2 : integer
+        shortRoomid 3 : integer
+        roomid 4 : string
+        addr 5 : string
+    }
+}
+
+# 退出匹配  
+matchLeave 6 {
+    request {
+        gameid 0 : integer
+        queueid 1 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 匹配确认
+matchOnSure 7 {
+    request {
+        id 0 : integer
+        sure 1 : boolean
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 调用活动接口
+callActivityFunc 8 {
+    request {
+        moduleName 0 : string
+        funcName 1 : string
+        args 2 : string
+    }
+    response {
+        code 0 : integer
+        result 1 : string
+    }
+}
+
+# 开启测试模式
+matchTestStart 9 {
+    request {
+        code 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 关闭测试模式
+matchTestStop 10 {
+    request {
+        code 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 奖励通知
+.AwardNotice {
+    id 0 : integer
+    userid 1 : integer
+    status 2 : integer
+    awardMessage 3 : string
+    create_at 4 : string
+}
+
+# 获取奖励通知
+getAwardNotice 11 {
+    request {
+        userid 0 : integer
+    }
+    response {
+        list 0 : *AwardNotice
+    }
+}
+
+# 设置奖励通知已读
+setAwardNoticeRead 12 {
+    request {
+        id 0 : integer
+    }
+}
+
+# 加入私有房间
+joinPrivateRoom 13 {
+    request {
+        shortRoomid 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+        gameid 2 : integer
+        roomid 3 : string
+        addr 4 : string
+        rule 5 : string
+    }
+}
+
+# 创建私有房间
+createPrivateRoom 14 {
+    request {
+        gameid 0 : integer
+        rule 1 : string
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+        gameid 2 : integer
+        shortRoomid 3 : integer
+        roomid 4 : string
+        addr 5 : string
+        rule 6 : string
+    }
+}
+
+# 获取用户游戏记录
+userGameRecord 15 {
+    request {
+        userid 0 : integer
+        gameid 1 : integer
+    }
+    response {
+        gameid 0 : integer
+        win 1 : integer
+        lose 2 : integer
+        draw 3 : integer
+    }
+}
+
+# 更新昵称和头像
+updateUserNameAndHeadurl 16 {
+    request {
+        nickname 0 : string
+        headurl 1 : string
+    }
+    response {
+        code 0 : integer
+    }
+}
+
+# 注销
+revokeAcc 17 {
+    request {
+        loginType 0 : string
+    }
+
+    response {
+        code 0 : integer # 1:成功，0：失败，2：已经在注销
+        msg 1 : string
+    }
+}
+
+# 取消注销
+cancelRevokeAcc 18 {
+    request {
+        loginType 0 : string
+    }
+
+    response {
+        code 0 : integer # 1:成功，0：失败
+        msg 1 : string
+    }
+}

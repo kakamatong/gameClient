@@ -9,7 +9,6 @@ export class MiniGameUtils {
 
     private _interstitialAdList: Record<string,any> = {};
 
-
     private _canvasContext: CanvasRenderingContext2D | null = null;
     /**
      * @property {MiniGameUtils} _instance - 单例实例

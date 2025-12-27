@@ -1,0 +1,97 @@
+# 登录服务协议(0-9999)
+.package {
+    type 0 : integer
+    session 1 : integer
+}
+
+# 调用接口
+call 2 {
+    request {
+        moduleName 0 : string
+        funcName 1 : string
+        args 2 : string
+    }
+    response {
+        code 0 : integer
+        result 1 : string
+    }
+}
+
+# 调用接口
+send 3 {
+    request {
+        moduleName 0 : string
+        funcName 1 : string
+        args 2 : string
+    }
+}
+
+# 客户端准备
+clientReady 4 {
+    request {
+        ready 0 : integer
+    }
+}
+
+# 游戏协议出手
+outHand 5 {
+    request {
+        flag 0 : integer
+    }
+}
+
+# 游戏准备
+gameReady 6 {
+    request {
+        ready 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 离开房间
+leaveRoom 7 {
+    request {
+        flag 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 解散房间
+disbandRoom 8 {
+    request {
+        flag 0 : integer
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 发起投票解散
+voteDisbandRoom 9 {
+    request {
+        reason 0 : string  # 解散原因(可选)
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 投票解散响应
+voteDisbandResponse 10 {
+    request {
+        voteId 0 : integer  # 投票ID
+        agree 1 : integer   # 1:同意, 0:拒绝
+    }
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}

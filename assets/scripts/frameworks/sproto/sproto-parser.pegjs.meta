@@ -1,0 +1,12 @@
+{
+  "ver": "1.0.0",
+  "importer": "*",
+  "imported": true,
+  "uuid": "3a81b1a8-7c79-4721-adaa-1cb7c48f61a2",
+  "files": [
+    ".json",
+    ".pegjs"
+  ],
+  "subMetas": {},
+  "userData": {}
+}

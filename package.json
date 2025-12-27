@@ -2,11 +2,10 @@
   "name": "gameClient",
   "uuid": "ae12f9cf-1c84-4130-b8d1-b98dd20fbb73",
   "creator": {
-    "version": "3.8.7"
+    "version": "3.8.8"
   },
   "dependencies": {
     "crypto-js": "^3.3.0",
-    "fairygui-cc": "^1.2.2",
-    "sproto-js": "git+https://github.com/zhangshiqian1214/sproto-js.git"
+    "fairygui-cc": "^1.2.2"
   }
 }

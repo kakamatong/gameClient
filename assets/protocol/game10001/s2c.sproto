@@ -1,0 +1,232 @@
+.package {
+    type 0 : integer
+    session 1 : integer
+}
+
+svrMsg 1 {
+    request {
+        type 0 : string
+        data 1 : string
+    }
+}
+
+# 房间信息
+roomInfo 2 {
+    request {
+        gameid 0 : integer
+        roomid 1 : integer
+        playerids 2 : *integer
+        gameData 3 : string
+        shortRoomid 4 : integer
+        owner 5 : integer
+    }
+}
+
+# 步骤id
+stepId 3 {
+    request {
+        step 0 : integer
+    }
+}
+
+# 玩家姿态
+playerAtt 4 {
+    request {
+        seat 0 : integer
+        att 1 : integer
+    }
+}
+
+# 玩家出招信息
+outHandInfo 5 {
+    request {
+        seat 0 : integer
+        flag 1 : integer
+    }
+}
+
+.ResultInfo {
+    seat 0 : integer
+    outHand 1 : integer
+    endResult 2 : integer
+}
+
+# 一轮游戏结果
+roundResult 6 {
+    request {
+        roundNum 0 : integer
+        outHandNum 1 : integer
+        continue 2 : integer
+        info 3 : *ResultInfo
+        score 4 : string
+    }
+}
+
+# 房间结束
+roomEnd 7 {
+    request {
+        code 0 : integer
+    }
+}
+
+.PlayerInfo {
+    userid 0 : integer
+    nickname 1 : string
+    headurl 2 : string
+    sex 3 : integer
+    province 4 : string
+    city 5 : string
+    ip 6 : string
+    status 7 : integer
+    cp 8 : integer
+    ext 9 : string
+}
+
+# 玩家信息 
+playerInfos 8 {
+    request {
+        infos 0 : *PlayerInfo
+    }
+}
+
+# 游戏开始
+gameStart 9 {
+    request {
+        roundNum 0 : integer
+        startTime 1 : integer
+        brelink 2 : integer
+        roundData 3 : string
+    }
+}
+
+# 游戏结束
+gameEnd 10 {
+    request {
+        roundNum 0 : integer
+        endTime 1 : integer
+        roundData 3 : string
+    }
+}
+
+# 玩家加入
+playerEnter 11 {
+    request {
+        userid 0 : integer
+        seat 1 : integer
+    }
+}
+
+# 更新玩家状态
+playerStatusUpdate 12 {
+    request {
+        userid 0 : integer
+        status 1 : integer
+    }
+}
+
+# 玩家离开
+playerLeave 13 {
+    request {
+        userid 0 : integer
+        seat 1 : integer
+    }
+}
+
+.VoteInfo {
+    userid 0 : integer
+    vote 1 : integer     # 1:同意, 0:拒绝, -1:未投票
+}
+
+# 投票解散开始通知
+voteDisbandStart 14 {
+    request {
+        voteId 0 : integer       # 投票ID
+        initiator 1 : integer    # 发起人 userid
+        reason 2 : string        # 解散原因
+        timeLeft 3 : integer     # 剩余时间(秒)
+        playerCount 4 : integer  # 房间总人数
+        needAgreeCount 5 : integer # 需要同意人数(60%)
+    }
+}
+
+# 投票状态更新
+voteDisbandUpdate 15 {
+    request {
+        voteId 0 : integer       # 投票ID
+        votes 1 : *VoteInfo      # 投票状态列表
+        agreeCount 2 : integer   # 当前同意人数
+        refuseCount 3 : integer  # 当前拒绝人数
+        timeLeft 4 : integer     # 剩余时间(秒)
+    }
+}
+
+# 投票解散结果
+voteDisbandResult 16 {
+    request {
+        voteId 0 : integer       # 投票ID
+        result 1 : integer       # 结果: 1:解散成功, 0:解散失败
+        reason 2 : string        # 结果原因
+        agreeCount 3 : integer   # 最终同意人数
+        refuseCount 4 : integer  # 最终拒绝人数
+        votes 5 : *VoteInfo      # 最终投票状态
+    }
+}
+
+# 游戏时钟
+gameClock 17 {
+    request {
+        time 0 : integer
+        seat 1 : integer # 0表示所有玩家
+    }
+}
+
+# 私人房信息
+privateInfo 18 {
+    request {
+        nowCnt 0 :integer
+        maxCnt 1 :integer
+        ext 2 :string
+    }
+}
+
+.TotalResultInfo {
+    # 私人房总结算信息
+    seat 0 : integer
+    userid 1 : integer
+    score 2 : integer
+    win 3 : integer
+    lose 4 : integer
+    draw 5 : integer
+    ext 6 : string
+}
+
+# 私人房总结算
+totalResult 19 {
+    request {
+        startTime 0 : integer
+        endTime 1 : integer
+        shortRoomid 2 : integer
+        roomid 3 : integer
+        owner 4 : integer
+        rule 5 : string
+        playCnt 6 : integer
+        maxCnt 7 : integer
+        totalResultInfo 8 : *TotalResultInfo
+    }
+}
+
+.Record {
+    index 0 : integer
+    outhand 1 : *integer
+    win 2 : integer
+    startTime 3 : integer
+    endTime 4 : integer
+    round 5 : integer
+}
+
+# 私人房对战记录
+gameRecord 20 {
+    request {
+        record 0 : *Record
+    }
+}

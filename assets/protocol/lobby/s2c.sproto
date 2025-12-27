@@ -1,0 +1,58 @@
+.package {
+    type 0 : integer
+    session 1 : integer
+}
+
+svrMsg 1 {
+    request {
+        type 0 : string
+        data 1 : string
+    }
+}
+
+# 匹配失败
+matchOnSureFail 2 {
+    request {
+        code 0 : integer
+        msg 1 : string
+    }
+}
+
+# 匹配确认
+matchOnSure 3 {
+    request {
+        gameid 0 : integer
+        queueid 1 : integer
+        playerids 2 : *integer
+        readys 3 : *integer
+        cancels 4 : *integer
+        createTime 5 : integer
+        endTime 6 : integer
+        id 7 : integer
+    }
+}
+
+# 游戏房间准备完成
+gameRoomReady 4 {
+    request {
+        gameid 0 : integer
+        roomid 1 : string
+        addr 2 : string
+    }
+}
+
+# 更新用户财富
+updateRich 5 {
+    request {
+        richTypes 0 : *integer
+        richNums 1 : *integer
+        allRichNums 2 : *integer
+    }
+}
+
+# agent准备完成
+agentReady 6 {
+    request {
+        time 0 : integer
+    }
+}
