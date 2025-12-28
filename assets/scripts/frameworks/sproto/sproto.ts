@@ -638,6 +638,14 @@ class Sproto {
         return 0;
     }
 
+    _stringToUint8Array(str) { 
+        const arr = new Uint8Array(str.length);
+        for (let i = 0; i < str.length; i++) {
+            arr[i] = str.charCodeAt(i);
+        }
+        return arr;
+    }
+
     _encodeOne(args, self) {
         if (self.target == null){
             throw new Error(`${self.target} is nil`)
@@ -680,7 +688,7 @@ class Sproto {
             case SPROTO_TSTRING: {
                 let strBytes = null;
                 if (typeof value == 'string'){
-                    strBytes = new TextEncoder().encode(value);
+                    strBytes = this._stringToUint8Array(value);
                 } else if(this._isUint8Array(value)){
                     strBytes = value;
                 } else if (this._isArrayBuffer(value)){
@@ -1442,8 +1450,8 @@ class Sproto {
                 if (args.extra > 0){
                     value = args.value.subarray(0, args.length);
                 } else {
-                    const decoder = new TextDecoder('utf-8');
-                    const text = decoder.decode(args.value.subarray(0, args.length));
+                    let encodedString = String.fromCharCode.apply(null, args.value.subarray(0, args.length));
+                    const text = decodeURIComponent(escape(encodedString));
                     value = text;
                 }
                 break;

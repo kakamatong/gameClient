@@ -719,6 +719,12 @@ export const  StringToUint8Array = (str: string): Uint8Array => {
     return arr;
 }
 
+export const  Uint8ArrayToString = (arr: Uint8Array): string => {
+    let encodedString = String.fromCharCode.apply(null, Array.from(arr));
+    const text = decodeURIComponent(escape(encodedString));
+    return text;
+}
+
 // 修改自定义加密方法
 export const CustomDESEncrypt = (data: string, key: CryptoJS.WordArray): number[] => {
     const dataWA = CryptoJS.enc.Utf8.parse(data);
