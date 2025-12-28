@@ -109,6 +109,35 @@ export class SoundManager {
     }
 
     /**
+     * @method playSoundEffect
+     * @description 播放音效
+     * @param {string} url - 音效资源路径
+     */
+    playSoundEffect2(obj:fgui.GObject, url:string){
+        const callBack = (err:any, asset:AudioClip)=>{
+            if (err) {
+                return
+            }
+            const node = obj.node;
+            const as = node.getComponent(AudioSourceComponent)
+            if (!as) {
+                const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
+                newAs.clip = asset;
+                newAs.loop = false;
+                newAs.volume = fgui.GRoot.inst.volumeScale;
+                newAs.play();
+            }else{
+                as.clip = asset;
+                as.loop = false;
+                as.volume = fgui.GRoot.inst.volumeScale;
+                as.play();
+            }
+
+        }
+        this.load(url, callBack)
+    }
+
+    /**
      * @method playSoundMusic
      * @description 播放背景音乐
      * @param {string} url - 背景音乐资源路径

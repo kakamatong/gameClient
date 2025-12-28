@@ -232,8 +232,12 @@ export class GameView extends FGUIGameView {
         }
         for (let index = 0; index < len; index++) {
             const element = info[index];
+            const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${element.seat}`)
+            if (!outHand) {
+                continue
+            }
             const sound = this.getSoundName(element.outHand)
-            SoundManager.instance.playSoundEffect(sound)
+            SoundManager.instance.playSoundEffect2(outHand, sound)
         }
     }
 
