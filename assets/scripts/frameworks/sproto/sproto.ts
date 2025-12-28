@@ -194,9 +194,9 @@ class Host {
                 throw new Error(`attach sproto not found`);
             }
             if (this.headerTmp.session != null){
-                let proto = this.sessions.get(this.headerTmp.session);
+                let proto = this.sessions.get(BigInt(this.headerTmp.session));
                 if (proto != null){
-                    this.sessions.delete(this.headerTmp.session);
+                    this.sessions.delete(BigInt(this.headerTmp.session));
                     if (proto.response){
                         return {
                             type: "RESPONSE",
@@ -1422,6 +1422,10 @@ class Sproto {
                     v = args.value;
                 }
                 value = BigInt.asIntN(64, v);
+                // 不是bigint 转成number
+                if (value < Number.MAX_SAFE_INTEGER) {
+                    value = Number(value);
+                }
                 break;
             }
             case SPROTO_TDOUBLE:{

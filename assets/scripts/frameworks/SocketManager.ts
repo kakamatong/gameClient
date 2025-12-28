@@ -236,10 +236,10 @@ export class SocketManager implements handleSocketMessage {
             this._callBacks && this._callBacks[data.session] && this._callBacks[data.session](result);
         } else if (data.type == "REQUEST") {
             if (data.name == "agentReady") {
-                this.agentReady(data.response)
+                this.agentReady(data.request)
             }else{
                 // 回调
-                this.onSvrMsg(data.name, data.response);
+                this.onSvrMsg(data.name, data.request);
             }
         }
     }
