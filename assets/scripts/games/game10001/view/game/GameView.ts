@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
-import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX} from '../../data/InterfaceGameConfig';
+import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX, HAND_SOUND_NAME} from '../../data/InterfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/CompClock';
 import { PopMessageView } from '../../../../view/common/PopMessageView';
@@ -22,6 +22,7 @@ import { TotalResultView } from '../result/TotalResultView';
 import { PlayerInfoView } from '../playerInfo/PlayerInfoView';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 import { CompPlayerHead } from './comp/CompPlayerHead';
+import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -224,8 +225,25 @@ export class GameView extends FGUIGameView {
         }
     }
 
+    playSound(info:any){
+        const len = info?.length ?? 0
+        if (len == 0) {
+            return
+        }
+        for (let index = 0; index < len; index++) {
+            const element = info[index];
+            const sound = this.getSoundName(element.outHand)
+            SoundManager.instance.playSoundEffect(sound)
+        }
+    }
+
+    getSoundName(index:number):string{
+        return HAND_SOUND_NAME[index]
+    }
+
     onGameRoundResult(data:any):void{
         this.playOutHandAct()
+        this.playSound(data.info)
         // 有下一回合，不展示结果
         if (data.continue) {
             return

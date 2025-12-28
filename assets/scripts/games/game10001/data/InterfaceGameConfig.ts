@@ -125,4 +125,10 @@ export const ROOM_PLAYER_INDEX: { [key: number]: number } = {
     4:2
 }
 
+export const HAND_SOUND_NAME: { [key: number]: string } = {
+    [HAND_FLAG.SCISSORS]: "game10001/scissors",
+    [HAND_FLAG.ROCK]: "game10001/rock",
+    [HAND_FLAG.PAPER]: "game10001/paper"
+}
+
 export const HAND_INDEX = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
