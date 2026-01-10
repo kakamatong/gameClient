@@ -7,9 +7,9 @@
 ## 功能特性
 
 - 解析sproto协议文件（包括请求和响应结构）
+- 每个sproto文件对应生成一个ts文件，保留原有的目录结构
 - 生成对应的TypeScript接口定义
 - 支持基本类型（integer, string, boolean）和数组类型
-- 生成协议映射接口用于类型安全的协议调用
 - 正确处理嵌套结构体
 
 ## 使用方法
@@ -17,18 +17,22 @@
 ### 命令行使用
 
 ```bash
-python sproto_to_ts.py <输入目录> <输出文件>
+python sproto_to_ts.py <输入目录或文件> <输出目录>
 ```
 
 示例：
 ```bash
-python sproto_to_ts.py ./assets/protocol ./types/sproto-types.ts
+# 转换整个目录
+python sproto_to_ts.py ./assets/protocol ./types/
+
+# 转换单个文件
+python sproto_to_ts.py ./assets/protocol/lobby/c2s.sproto ./types/
 ```
 
 ### 参数说明
 
-- `<输入目录>`: 包含.sproto文件的目录路径
-- `<输出文件>`: 生成的TypeScript类型定义文件路径
+- `<输入目录或文件>`: 包含.sproto文件的目录路径或单个.sproto文件路径
+- `<输出目录>`: 生成的TypeScript类型定义文件的输出目录
 
 ## 生成的类型定义
 
@@ -37,7 +41,11 @@ python sproto_to_ts.py ./assets/protocol ./types/sproto-types.ts
 1. **结构体类型**：如 `.AwardNotice` 会生成 `AwardNotice` 接口
 2. **协议请求类型**：如 `call` 协议会生成 `CallRequest` 接口
 3. **协议响应类型**：如 `call` 协议会生成 `CallResponse` 接口
-4. **协议映射类型**：`ProtocolMap` 接口，用于类型安全的协议调用
+
+## 输出结构
+
+- 如果输入是目录，将在输出目录中保持相同的子目录结构
+- 如果输入是单个文件，将在输出目录中生成对应的ts文件
 
 ## 示例输出
 
@@ -70,9 +78,6 @@ export interface CallResponse {
     code: number;
     result: string;
 }
-
-// 在 ProtocolMap 中
-"call": { request: CallRequest, response: CallResponse };
 ```
 
 ## 使用场景
