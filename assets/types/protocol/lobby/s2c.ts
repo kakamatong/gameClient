@@ -44,37 +44,38 @@ export interface AgentreadyRequest {
     time: number;
 }
 
-// Protocol Map 定义
-/** 协议映射表，键为协议名，值为包含请求和响应类型的对象 */
-export interface ProtocolMap {
-    /** svrMsg 协议映射 */
-    "svrMsg": {
-        request: SvrmsgRequest;
-        response: undefined;  // svrMsg 协议没有响应参数
-    };
-    /** 匹配失败 */
-    "matchOnSureFail": {
-        request: MatchonsurefailRequest;
-        response: undefined;  // matchOnSureFail 协议没有响应参数
-    };
-    /** 匹配确认 */
-    "matchOnSure": {
-        request: MatchonsureRequest;
-        response: undefined;  // matchOnSure 协议没有响应参数
-    };
-    /** 游戏房间准备完成 */
-    "gameRoomReady": {
-        request: GameroomreadyRequest;
-        response: undefined;  // gameRoomReady 协议没有响应参数
-    };
-    /** 更新用户财富 */
-    "updateRich": {
-        request: UpdaterichRequest;
-        response: undefined;  // updateRich 协议没有响应参数
-    };
-    /** agent准备完成 */
-    "agentReady": {
-        request: AgentreadyRequest;
-        response: undefined;  // agentReady 协议没有响应参数
-    };
+export namespace SvrMsg {
+    export const Name = "svrMsg";
+    export type Request = SvrmsgRequest;
+    export type Response = undefined;  // svrMsg 协议没有响应参数
+}
+
+export namespace MatchOnSureFail {
+    export const Name = "matchOnSureFail";
+    export type Request = MatchonsurefailRequest;
+    export type Response = undefined;  // matchOnSureFail 协议没有响应参数
+}
+
+export namespace MatchOnSure {
+    export const Name = "matchOnSure";
+    export type Request = MatchonsureRequest;
+    export type Response = undefined;  // matchOnSure 协议没有响应参数
+}
+
+export namespace GameRoomReady {
+    export const Name = "gameRoomReady";
+    export type Request = GameroomreadyRequest;
+    export type Response = undefined;  // gameRoomReady 协议没有响应参数
+}
+
+export namespace UpdateRich {
+    export const Name = "updateRich";
+    export type Request = UpdaterichRequest;
+    export type Response = undefined;  // updateRich 协议没有响应参数
+}
+
+export namespace AgentReady {
+    export const Name = "agentReady";
+    export type Request = AgentreadyRequest;
+    export type Response = undefined;  // agentReady 协议没有响应参数
 }

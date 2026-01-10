@@ -273,40 +273,37 @@ class TsGenerator:
         
         return '\n'.join(lines)
 
-    def generate_protocol_map(self) -> str:
-        """生成ProtocolMap接口，映射协议名到其request和response类型"""
+    def generate_protocol_namespaces(self) -> str:
+        """生成协议相关的命名空间，每个协议一个命名空间"""
         if not self.sproto_protocols:
             return ''  # 如果没有协议，返回空字符串
         
         lines = []
-        lines.append('// Protocol Map 定义')
-        lines.append('/** 协议映射表，键为协议名，值为包含请求和响应类型的对象 */')
-        lines.append('export interface ProtocolMap {')
         
         for proto_name, proto_def in self.sproto_protocols.items():
-            # 获取协议的注释
-            comment = self.element_comments.get(proto_name, f'{proto_name} 协议映射')
-            lines.append(f'    /** {comment} */')
-            lines.append(f'    "{proto_name}": {{')
+            # 生成协议命名空间
+            namespace_name = proto_name[0].upper() + proto_name[1:]  # 首字母大写
+            lines.append(f'export namespace {namespace_name} {{')
             
-            # 添加请求类型（如果存在）
+            # 导出协议名称常量
+            lines.append(f'    export const Name = "{proto_name}";')
+            
+            # 导出Request类型（如果存在）
             if 'request' in proto_def and proto_def['request']:
                 request_interface = f'{proto_name.capitalize()}Request'
-                lines.append(f'        request: {request_interface};')
+                lines.append(f'    export type Request = {request_interface};')
             else:
-                lines.append(f'        request: undefined;  // {proto_name} 协议没有请求参数')
+                lines.append(f'    export type Request = undefined;  // {proto_name} 协议没有请求参数')
             
-            # 添加响应类型（如果存在）
+            # 导出Response类型（如果存在）
             if 'response' in proto_def and proto_def['response']:
                 response_interface = f'{proto_name.capitalize()}Response'
-                lines.append(f'        response: {response_interface};')
+                lines.append(f'    export type Response = {response_interface};')
             else:
-                lines.append(f'        response: undefined;  // {proto_name} 协议没有响应参数')
+                lines.append(f'    export type Response = undefined;  // {proto_name} 协议没有响应参数')
             
-            lines.append(f'    }};')
-        
-        lines.append('}')
-        lines.append('')
+            lines.append('}')
+            lines.append('')  # 空行分隔不同的命名空间
         
         return '\n'.join(lines)
     
@@ -332,8 +329,8 @@ class TsGenerator:
         # 生成协议相关接口
         lines.append(self.generate_protocol_interfaces())
         
-        # 生成ProtocolMap
-        lines.append(self.generate_protocol_map())
+        # 生成协议相关的命名空间
+        lines.append(self.generate_protocol_namespaces())
         
         return '\n'.join(lines)
 

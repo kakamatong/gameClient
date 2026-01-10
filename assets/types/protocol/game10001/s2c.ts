@@ -194,107 +194,122 @@ export interface GamerecordRequest {
     record: Record[];
 }
 
-// Protocol Map 定义
-/** 协议映射表，键为协议名，值为包含请求和响应类型的对象 */
-export interface ProtocolMap {
-    /** svrMsg 协议映射 */
-    "svrMsg": {
-        request: SvrmsgRequest;
-        response: undefined;  // svrMsg 协议没有响应参数
-    };
-    /** 房间信息 */
-    "roomInfo": {
-        request: RoominfoRequest;
-        response: undefined;  // roomInfo 协议没有响应参数
-    };
-    /** 步骤id */
-    "stepId": {
-        request: StepidRequest;
-        response: undefined;  // stepId 协议没有响应参数
-    };
-    /** 玩家姿态 */
-    "playerAtt": {
-        request: PlayerattRequest;
-        response: undefined;  // playerAtt 协议没有响应参数
-    };
-    /** 玩家出招信息 */
-    "outHandInfo": {
-        request: OuthandinfoRequest;
-        response: undefined;  // outHandInfo 协议没有响应参数
-    };
-    /** 一轮游戏结果 */
-    "roundResult": {
-        request: RoundresultRequest;
-        response: undefined;  // roundResult 协议没有响应参数
-    };
-    /** 房间结束 */
-    "roomEnd": {
-        request: RoomendRequest;
-        response: undefined;  // roomEnd 协议没有响应参数
-    };
-    /** 玩家信息 */
-    "playerInfos": {
-        request: PlayerinfosRequest;
-        response: undefined;  // playerInfos 协议没有响应参数
-    };
-    /** 游戏开始 */
-    "gameStart": {
-        request: GamestartRequest;
-        response: undefined;  // gameStart 协议没有响应参数
-    };
-    /** 游戏结束 */
-    "gameEnd": {
-        request: GameendRequest;
-        response: undefined;  // gameEnd 协议没有响应参数
-    };
-    /** 玩家加入 */
-    "playerEnter": {
-        request: PlayerenterRequest;
-        response: undefined;  // playerEnter 协议没有响应参数
-    };
-    /** 更新玩家状态 */
-    "playerStatusUpdate": {
-        request: PlayerstatusupdateRequest;
-        response: undefined;  // playerStatusUpdate 协议没有响应参数
-    };
-    /** 玩家离开 */
-    "playerLeave": {
-        request: PlayerleaveRequest;
-        response: undefined;  // playerLeave 协议没有响应参数
-    };
-    /** 投票解散开始通知 */
-    "voteDisbandStart": {
-        request: VotedisbandstartRequest;
-        response: undefined;  // voteDisbandStart 协议没有响应参数
-    };
-    /** 投票状态更新 */
-    "voteDisbandUpdate": {
-        request: VotedisbandupdateRequest;
-        response: undefined;  // voteDisbandUpdate 协议没有响应参数
-    };
-    /** 投票解散结果 */
-    "voteDisbandResult": {
-        request: VotedisbandresultRequest;
-        response: undefined;  // voteDisbandResult 协议没有响应参数
-    };
-    /** 游戏时钟 */
-    "gameClock": {
-        request: GameclockRequest;
-        response: undefined;  // gameClock 协议没有响应参数
-    };
-    /** 私人房信息 */
-    "privateInfo": {
-        request: PrivateinfoRequest;
-        response: undefined;  // privateInfo 协议没有响应参数
-    };
-    /** 私人房总结算 */
-    "totalResult": {
-        request: TotalresultRequest;
-        response: undefined;  // totalResult 协议没有响应参数
-    };
-    /** 私人房对战记录 */
-    "gameRecord": {
-        request: GamerecordRequest;
-        response: undefined;  // gameRecord 协议没有响应参数
-    };
+export namespace SvrMsg {
+    export const Name = "svrMsg";
+    export type Request = SvrmsgRequest;
+    export type Response = undefined;  // svrMsg 协议没有响应参数
+}
+
+export namespace RoomInfo {
+    export const Name = "roomInfo";
+    export type Request = RoominfoRequest;
+    export type Response = undefined;  // roomInfo 协议没有响应参数
+}
+
+export namespace StepId {
+    export const Name = "stepId";
+    export type Request = StepidRequest;
+    export type Response = undefined;  // stepId 协议没有响应参数
+}
+
+export namespace PlayerAtt {
+    export const Name = "playerAtt";
+    export type Request = PlayerattRequest;
+    export type Response = undefined;  // playerAtt 协议没有响应参数
+}
+
+export namespace OutHandInfo {
+    export const Name = "outHandInfo";
+    export type Request = OuthandinfoRequest;
+    export type Response = undefined;  // outHandInfo 协议没有响应参数
+}
+
+export namespace RoundResult {
+    export const Name = "roundResult";
+    export type Request = RoundresultRequest;
+    export type Response = undefined;  // roundResult 协议没有响应参数
+}
+
+export namespace RoomEnd {
+    export const Name = "roomEnd";
+    export type Request = RoomendRequest;
+    export type Response = undefined;  // roomEnd 协议没有响应参数
+}
+
+export namespace PlayerInfos {
+    export const Name = "playerInfos";
+    export type Request = PlayerinfosRequest;
+    export type Response = undefined;  // playerInfos 协议没有响应参数
+}
+
+export namespace GameStart {
+    export const Name = "gameStart";
+    export type Request = GamestartRequest;
+    export type Response = undefined;  // gameStart 协议没有响应参数
+}
+
+export namespace GameEnd {
+    export const Name = "gameEnd";
+    export type Request = GameendRequest;
+    export type Response = undefined;  // gameEnd 协议没有响应参数
+}
+
+export namespace PlayerEnter {
+    export const Name = "playerEnter";
+    export type Request = PlayerenterRequest;
+    export type Response = undefined;  // playerEnter 协议没有响应参数
+}
+
+export namespace PlayerStatusUpdate {
+    export const Name = "playerStatusUpdate";
+    export type Request = PlayerstatusupdateRequest;
+    export type Response = undefined;  // playerStatusUpdate 协议没有响应参数
+}
+
+export namespace PlayerLeave {
+    export const Name = "playerLeave";
+    export type Request = PlayerleaveRequest;
+    export type Response = undefined;  // playerLeave 协议没有响应参数
+}
+
+export namespace VoteDisbandStart {
+    export const Name = "voteDisbandStart";
+    export type Request = VotedisbandstartRequest;
+    export type Response = undefined;  // voteDisbandStart 协议没有响应参数
+}
+
+export namespace VoteDisbandUpdate {
+    export const Name = "voteDisbandUpdate";
+    export type Request = VotedisbandupdateRequest;
+    export type Response = undefined;  // voteDisbandUpdate 协议没有响应参数
+}
+
+export namespace VoteDisbandResult {
+    export const Name = "voteDisbandResult";
+    export type Request = VotedisbandresultRequest;
+    export type Response = undefined;  // voteDisbandResult 协议没有响应参数
+}
+
+export namespace GameClock {
+    export const Name = "gameClock";
+    export type Request = GameclockRequest;
+    export type Response = undefined;  // gameClock 协议没有响应参数
+}
+
+export namespace PrivateInfo {
+    export const Name = "privateInfo";
+    export type Request = PrivateinfoRequest;
+    export type Response = undefined;  // privateInfo 协议没有响应参数
+}
+
+export namespace TotalResult {
+    export const Name = "totalResult";
+    export type Request = TotalresultRequest;
+    export type Response = undefined;  // totalResult 协议没有响应参数
+}
+
+export namespace GameRecord {
+    export const Name = "gameRecord";
+    export type Request = GamerecordRequest;
+    export type Response = undefined;  // gameRecord 协议没有响应参数
 }

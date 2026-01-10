@@ -87,52 +87,56 @@ export interface VotedisbandresponseResponse {
     msg: string;
 }
 
-// Protocol Map 定义
-/** 协议映射表，键为协议名，值为包含请求和响应类型的对象 */
-export interface ProtocolMap {
-    /** 调用接口 */
-    "call": {
-        request: CallRequest;
-        response: CallResponse;
-    };
-    /** 调用接口 */
-    "send": {
-        request: SendRequest;
-        response: undefined;  // send 协议没有响应参数
-    };
-    /** 客户端准备 */
-    "clientReady": {
-        request: ClientreadyRequest;
-        response: undefined;  // clientReady 协议没有响应参数
-    };
-    /** 游戏协议出手 */
-    "outHand": {
-        request: OuthandRequest;
-        response: undefined;  // outHand 协议没有响应参数
-    };
-    /** 游戏准备 */
-    "gameReady": {
-        request: GamereadyRequest;
-        response: GamereadyResponse;
-    };
-    /** 离开房间 */
-    "leaveRoom": {
-        request: LeaveroomRequest;
-        response: LeaveroomResponse;
-    };
-    /** 解散房间 */
-    "disbandRoom": {
-        request: DisbandroomRequest;
-        response: DisbandroomResponse;
-    };
-    /** 发起投票解散 */
-    "voteDisbandRoom": {
-        request: VotedisbandroomRequest;
-        response: VotedisbandroomResponse;
-    };
-    /** 投票解散响应 */
-    "voteDisbandResponse": {
-        request: VotedisbandresponseRequest;
-        response: VotedisbandresponseResponse;
-    };
+export namespace Call {
+    export const Name = "call";
+    export type Request = CallRequest;
+    export type Response = CallResponse;
+}
+
+export namespace Send {
+    export const Name = "send";
+    export type Request = SendRequest;
+    export type Response = undefined;  // send 协议没有响应参数
+}
+
+export namespace ClientReady {
+    export const Name = "clientReady";
+    export type Request = ClientreadyRequest;
+    export type Response = undefined;  // clientReady 协议没有响应参数
+}
+
+export namespace OutHand {
+    export const Name = "outHand";
+    export type Request = OuthandRequest;
+    export type Response = undefined;  // outHand 协议没有响应参数
+}
+
+export namespace GameReady {
+    export const Name = "gameReady";
+    export type Request = GamereadyRequest;
+    export type Response = GamereadyResponse;
+}
+
+export namespace LeaveRoom {
+    export const Name = "leaveRoom";
+    export type Request = LeaveroomRequest;
+    export type Response = LeaveroomResponse;
+}
+
+export namespace DisbandRoom {
+    export const Name = "disbandRoom";
+    export type Request = DisbandroomRequest;
+    export type Response = DisbandroomResponse;
+}
+
+export namespace VoteDisbandRoom {
+    export const Name = "voteDisbandRoom";
+    export type Request = VotedisbandroomRequest;
+    export type Response = VotedisbandroomResponse;
+}
+
+export namespace VoteDisbandResponse {
+    export const Name = "voteDisbandResponse";
+    export type Request = VotedisbandresponseRequest;
+    export type Response = VotedisbandresponseResponse;
 }
