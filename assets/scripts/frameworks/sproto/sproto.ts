@@ -639,11 +639,43 @@ class Sproto {
     }
 
     _stringToUint8Array(str) { 
-        const arr = new Uint8Array(str.length);
+        // 预先分配足够大的数组，避免频繁 push
+        const estimatedSize = str.length * 4; // 最坏情况：每个字符4字节
+        const bytes = new Uint8Array(estimatedSize);
+        let pos = 0;
+        
         for (let i = 0; i < str.length; i++) {
-            arr[i] = str.charCodeAt(i);
+            let code = str.charCodeAt(i);
+            
+            // 处理代理对
+            if (code >= 0xD800 && code < 0xDC00 && i + 1 < str.length) {
+                const nextCode = str.charCodeAt(i + 1);
+                if (nextCode >= 0xDC00 && nextCode < 0xE000) {
+                    code = ((code - 0xD800) << 10) + (nextCode - 0xDC00) + 0x10000;
+                    i++;
+                }
+            }
+            
+            // UTF-8 编码
+            if (code < 0x80) {
+                bytes[pos++] = code;
+            } else if (code < 0x800) {
+                bytes[pos++] = 0xC0 | (code >> 6);
+                bytes[pos++] = 0x80 | (code & 0x3F);
+            } else if (code < 0x10000) {
+                bytes[pos++] = 0xE0 | (code >> 12);
+                bytes[pos++] = 0x80 | ((code >> 6) & 0x3F);
+                bytes[pos++] = 0x80 | (code & 0x3F);
+            } else {
+                bytes[pos++] = 0xF0 | (code >> 18);
+                bytes[pos++] = 0x80 | ((code >> 12) & 0x3F);
+                bytes[pos++] = 0x80 | ((code >> 6) & 0x3F);
+                bytes[pos++] = 0x80 | (code & 0x3F);
+            }
         }
-        return arr;
+        
+        // 返回实际大小的数组
+        return bytes.subarray(0, pos);
     }
 
     _encodeOne(args, self) {
@@ -688,6 +720,7 @@ class Sproto {
             case SPROTO_TSTRING: {
                 let strBytes = null;
                 if (typeof value == 'string'){
+                    //const newValue = encodeURIComponent(value);
                     strBytes = this._stringToUint8Array(value);
                 } else if(this._isUint8Array(value)){
                     strBytes = value;
