@@ -1,6 +1,8 @@
 import { CancelrevokeaccResponse, RevokeaccResponse } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
+import { SprotoRevokeAcc, SprotoCancelRevokeAcc } from '../../types/protocol/lobby/c2s';
+
 
 /**
  * @class UserData
@@ -18,7 +20,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer('revokeAcc', { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoRevokeAcc.Name, { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
     }
 
     reqCancelRevokeAccount(callback?: (data:any)=>void) {
@@ -26,7 +28,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer('cancelRevokeAcc', { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCancelRevokeAcc.Name, { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
     }
 
     /**
@@ -34,11 +36,11 @@ export class RevokeAccount {
      * @description 处理用户数据响应，更新本地数据并发送事件通知
      * @param {any} data - 服务器返回的用户数据
      */
-    respRevoke(data: RevokeaccResponse) {
+    respRevoke(data: SprotoRevokeAcc.Response) {
         this._callback && this._callback(data);
     }
 
-    respCancelRevoke(data: CancelrevokeaccResponse) {
+    respCancelRevoke(data: SprotoCancelRevokeAcc.Response) {
         this._callback && this._callback(data);
     }
 }

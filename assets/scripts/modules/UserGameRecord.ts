@@ -1,7 +1,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
-import { UsergamerecordResponse } from '../../types/protocol/lobby/c2s';
+import { SprotoUserGameRecord } from '../../types/protocol/lobby/c2s';
 
 /**
  * @class UserData
@@ -19,15 +19,15 @@ export class UserGameRecord {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer('userGameRecord', { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserGameRecord.Name, { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
     }
 
     /**
      * @method resp
      * @description 处理用户数据响应，更新本地数据并发送事件通知
-     * @param {UsergamerecordResponse} data - 服务器返回的用户数据
+     * @param {SprotoUserGameRecord} data - 服务器返回的用户数据
      */
-    resp(data: UsergamerecordResponse) {
+    resp(data: SprotoUserGameRecord.Response) {
         DataCenter.instance.gameRecords = data;
         this._callback && this._callback(data);
     }

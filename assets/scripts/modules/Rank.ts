@@ -1,5 +1,6 @@
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
+import { SprotoCallActivityFunc } from '../../types/protocol/lobby/c2s';
 
 export class Rank {
     private _callBack:((b:boolean, data:any)=>void) | null = null; // 登入成功，但不一定已经拉到数据
@@ -8,7 +9,7 @@ export class Rank {
         if (callBack) {
             this._callBack = callBack;
         }
-        LobbySocketManager.instance.sendToServer('callActivityFunc',{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc.Name,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
     }
 
     /**
@@ -16,7 +17,7 @@ export class Rank {
      * @description 处理返回
      * @param {any} result - 服务器返回的匹配结果
      */
-    resp(result: any) {
+    resp(result: SprotoCallActivityFunc.Response) {
         if(result && result.code == 1){
             const res = JSON.parse(result.result);
             if(res.error){

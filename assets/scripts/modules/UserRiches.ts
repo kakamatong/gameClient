@@ -1,13 +1,13 @@
-import { UserrichesResponse } from '../../types/protocol/lobby/c2s';
+import { SprotoUserRiches } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { DispatchEvent } from '../frameworks/Framework';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 export class UserRiches {
     req() {
-        LobbySocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserRiches.Name, {}, this.resp.bind(this))
     }
 
-    resp(data: UserrichesResponse) {
+    resp(data: SprotoUserRiches.Response) {
         //DataCenter.instance.userData = data;
         if (data  && data.richType && data.richNums && data.richType.length > 0 && data.richNums.length > 0) {
             const riches: Array<{richType:number, richNums:number}> = []

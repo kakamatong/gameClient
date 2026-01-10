@@ -1,7 +1,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
-import { UserdataResponse } from '../../types/protocol/lobby/c2s';
+import { SprotoUserData } from '../../types/protocol/lobby/c2s';
 
 /**
  * @class UserData
@@ -14,7 +14,7 @@ export class UserData {
      * @description 请求用户数据，向服务器发送用户数据请求
      */
     req() {
-        LobbySocketManager.instance.sendToServer('userData', { userid: DataCenter.instance.userid }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserData.Name, { userid: DataCenter.instance.userid }, this.resp.bind(this))
     }
 
     /**
@@ -22,7 +22,7 @@ export class UserData {
      * @description 处理用户数据响应，更新本地数据并发送事件通知
      * @param {any} data - 服务器返回的用户数据
      */
-    resp(data: UserdataResponse) {
+    resp(data: SprotoUserData.Response) {
         DataCenter.instance.userData = data;
         DispatchEvent('userData',data)
     }

@@ -281,8 +281,8 @@ class TsGenerator:
         lines = []
         
         for proto_name, proto_def in self.sproto_protocols.items():
-            # 生成协议命名空间
-            namespace_name = proto_name[0].upper() + proto_name[1:]  # 首字母大写
+            # 生成协议命名空间，添加Sproto前缀
+            namespace_name = 'Sproto' + proto_name[0].upper() + proto_name[1:]  # 首字母大写并添加Sproto前缀
             lines.append(f'export namespace {namespace_name} {{')
             
             # 导出协议名称常量

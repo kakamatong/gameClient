@@ -229,109 +229,109 @@ export interface CancelrevokeaccResponse {
     msg: string;
 }
 
-export namespace Call {
+export namespace SprotoCall {
     export const Name = "call";
     export type Request = CallRequest;
     export type Response = CallResponse;
 }
 
-export namespace UserData {
+export namespace SprotoUserData {
     export const Name = "userData";
     export type Request = UserdataRequest;
     export type Response = UserdataResponse;
 }
 
-export namespace UserRiches {
+export namespace SprotoUserRiches {
     export const Name = "userRiches";
     export type Request = undefined;  // userRiches 协议没有请求参数
     export type Response = UserrichesResponse;
 }
 
-export namespace UserStatus {
+export namespace SprotoUserStatus {
     export const Name = "userStatus";
     export type Request = UserstatusRequest;
     export type Response = UserstatusResponse;
 }
 
-export namespace MatchJoin {
+export namespace SprotoMatchJoin {
     export const Name = "matchJoin";
     export type Request = MatchjoinRequest;
     export type Response = MatchjoinResponse;
 }
 
-export namespace MatchLeave {
+export namespace SprotoMatchLeave {
     export const Name = "matchLeave";
     export type Request = MatchleaveRequest;
     export type Response = MatchleaveResponse;
 }
 
-export namespace MatchOnSure {
+export namespace SprotoMatchOnSure {
     export const Name = "matchOnSure";
     export type Request = MatchonsureRequest;
     export type Response = MatchonsureResponse;
 }
 
-export namespace CallActivityFunc {
+export namespace SprotoCallActivityFunc {
     export const Name = "callActivityFunc";
     export type Request = CallactivityfuncRequest;
     export type Response = CallactivityfuncResponse;
 }
 
-export namespace MatchTestStart {
+export namespace SprotoMatchTestStart {
     export const Name = "matchTestStart";
     export type Request = MatchteststartRequest;
     export type Response = MatchteststartResponse;
 }
 
-export namespace MatchTestStop {
+export namespace SprotoMatchTestStop {
     export const Name = "matchTestStop";
     export type Request = MatchteststopRequest;
     export type Response = MatchteststopResponse;
 }
 
-export namespace GetAwardNotice {
+export namespace SprotoGetAwardNotice {
     export const Name = "getAwardNotice";
     export type Request = GetawardnoticeRequest;
     export type Response = GetawardnoticeResponse;
 }
 
-export namespace SetAwardNoticeRead {
+export namespace SprotoSetAwardNoticeRead {
     export const Name = "setAwardNoticeRead";
     export type Request = SetawardnoticereadRequest;
     export type Response = undefined;  // setAwardNoticeRead 协议没有响应参数
 }
 
-export namespace JoinPrivateRoom {
+export namespace SprotoJoinPrivateRoom {
     export const Name = "joinPrivateRoom";
     export type Request = JoinprivateroomRequest;
     export type Response = JoinprivateroomResponse;
 }
 
-export namespace CreatePrivateRoom {
+export namespace SprotoCreatePrivateRoom {
     export const Name = "createPrivateRoom";
     export type Request = CreateprivateroomRequest;
     export type Response = CreateprivateroomResponse;
 }
 
-export namespace UserGameRecord {
+export namespace SprotoUserGameRecord {
     export const Name = "userGameRecord";
     export type Request = UsergamerecordRequest;
     export type Response = UsergamerecordResponse;
 }
 
-export namespace UpdateUserNameAndHeadurl {
+export namespace SprotoUpdateUserNameAndHeadurl {
     export const Name = "updateUserNameAndHeadurl";
     export type Request = UpdateusernameandheadurlRequest;
     export type Response = UpdateusernameandheadurlResponse;
 }
 
-export namespace RevokeAcc {
+export namespace SprotoRevokeAcc {
     export const Name = "revokeAcc";
     export type Request = RevokeaccRequest;
     export type Response = RevokeaccResponse;
 }
 
-export namespace CancelRevokeAcc {
+export namespace SprotoCancelRevokeAcc {
     export const Name = "cancelRevokeAcc";
     export type Request = CancelrevokeaccRequest;
     export type Response = CancelrevokeaccResponse;

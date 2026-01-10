@@ -44,37 +44,37 @@ export interface AgentreadyRequest {
     time: number;
 }
 
-export namespace SvrMsg {
+export namespace SprotoSvrMsg {
     export const Name = "svrMsg";
     export type Request = SvrmsgRequest;
     export type Response = undefined;  // svrMsg 协议没有响应参数
 }
 
-export namespace MatchOnSureFail {
+export namespace SprotoMatchOnSureFail {
     export const Name = "matchOnSureFail";
     export type Request = MatchonsurefailRequest;
     export type Response = undefined;  // matchOnSureFail 协议没有响应参数
 }
 
-export namespace MatchOnSure {
+export namespace SprotoMatchOnSure {
     export const Name = "matchOnSure";
     export type Request = MatchonsureRequest;
     export type Response = undefined;  // matchOnSure 协议没有响应参数
 }
 
-export namespace GameRoomReady {
+export namespace SprotoGameRoomReady {
     export const Name = "gameRoomReady";
     export type Request = GameroomreadyRequest;
     export type Response = undefined;  // gameRoomReady 协议没有响应参数
 }
 
-export namespace UpdateRich {
+export namespace SprotoUpdateRich {
     export const Name = "updateRich";
     export type Request = UpdaterichRequest;
     export type Response = undefined;  // updateRich 协议没有响应参数
 }
 
-export namespace AgentReady {
+export namespace SprotoAgentReady {
     export const Name = "agentReady";
     export type Request = AgentreadyRequest;
     export type Response = undefined;  // agentReady 协议没有响应参数

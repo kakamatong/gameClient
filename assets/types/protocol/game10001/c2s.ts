@@ -87,55 +87,55 @@ export interface VotedisbandresponseResponse {
     msg: string;
 }
 
-export namespace Call {
+export namespace SprotoCall {
     export const Name = "call";
     export type Request = CallRequest;
     export type Response = CallResponse;
 }
 
-export namespace Send {
+export namespace SprotoSend {
     export const Name = "send";
     export type Request = SendRequest;
     export type Response = undefined;  // send 协议没有响应参数
 }
 
-export namespace ClientReady {
+export namespace SprotoClientReady {
     export const Name = "clientReady";
     export type Request = ClientreadyRequest;
     export type Response = undefined;  // clientReady 协议没有响应参数
 }
 
-export namespace OutHand {
+export namespace SprotoOutHand {
     export const Name = "outHand";
     export type Request = OuthandRequest;
     export type Response = undefined;  // outHand 协议没有响应参数
 }
 
-export namespace GameReady {
+export namespace SprotoGameReady {
     export const Name = "gameReady";
     export type Request = GamereadyRequest;
     export type Response = GamereadyResponse;
 }
 
-export namespace LeaveRoom {
+export namespace SprotoLeaveRoom {
     export const Name = "leaveRoom";
     export type Request = LeaveroomRequest;
     export type Response = LeaveroomResponse;
 }
 
-export namespace DisbandRoom {
+export namespace SprotoDisbandRoom {
     export const Name = "disbandRoom";
     export type Request = DisbandroomRequest;
     export type Response = DisbandroomResponse;
 }
 
-export namespace VoteDisbandRoom {
+export namespace SprotoVoteDisbandRoom {
     export const Name = "voteDisbandRoom";
     export type Request = VotedisbandroomRequest;
     export type Response = VotedisbandroomResponse;
 }
 
-export namespace VoteDisbandResponse {
+export namespace SprotoVoteDisbandResponse {
     export const Name = "voteDisbandResponse";
     export type Request = VotedisbandresponseRequest;
     export type Response = VotedisbandresponseResponse;

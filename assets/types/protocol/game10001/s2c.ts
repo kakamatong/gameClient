@@ -194,121 +194,121 @@ export interface GamerecordRequest {
     record: Record[];
 }
 
-export namespace SvrMsg {
+export namespace SprotoSvrMsg {
     export const Name = "svrMsg";
     export type Request = SvrmsgRequest;
     export type Response = undefined;  // svrMsg 协议没有响应参数
 }
 
-export namespace RoomInfo {
+export namespace SprotoRoomInfo {
     export const Name = "roomInfo";
     export type Request = RoominfoRequest;
     export type Response = undefined;  // roomInfo 协议没有响应参数
 }
 
-export namespace StepId {
+export namespace SprotoStepId {
     export const Name = "stepId";
     export type Request = StepidRequest;
     export type Response = undefined;  // stepId 协议没有响应参数
 }
 
-export namespace PlayerAtt {
+export namespace SprotoPlayerAtt {
     export const Name = "playerAtt";
     export type Request = PlayerattRequest;
     export type Response = undefined;  // playerAtt 协议没有响应参数
 }
 
-export namespace OutHandInfo {
+export namespace SprotoOutHandInfo {
     export const Name = "outHandInfo";
     export type Request = OuthandinfoRequest;
     export type Response = undefined;  // outHandInfo 协议没有响应参数
 }
 
-export namespace RoundResult {
+export namespace SprotoRoundResult {
     export const Name = "roundResult";
     export type Request = RoundresultRequest;
     export type Response = undefined;  // roundResult 协议没有响应参数
 }
 
-export namespace RoomEnd {
+export namespace SprotoRoomEnd {
     export const Name = "roomEnd";
     export type Request = RoomendRequest;
     export type Response = undefined;  // roomEnd 协议没有响应参数
 }
 
-export namespace PlayerInfos {
+export namespace SprotoPlayerInfos {
     export const Name = "playerInfos";
     export type Request = PlayerinfosRequest;
     export type Response = undefined;  // playerInfos 协议没有响应参数
 }
 
-export namespace GameStart {
+export namespace SprotoGameStart {
     export const Name = "gameStart";
     export type Request = GamestartRequest;
     export type Response = undefined;  // gameStart 协议没有响应参数
 }
 
-export namespace GameEnd {
+export namespace SprotoGameEnd {
     export const Name = "gameEnd";
     export type Request = GameendRequest;
     export type Response = undefined;  // gameEnd 协议没有响应参数
 }
 
-export namespace PlayerEnter {
+export namespace SprotoPlayerEnter {
     export const Name = "playerEnter";
     export type Request = PlayerenterRequest;
     export type Response = undefined;  // playerEnter 协议没有响应参数
 }
 
-export namespace PlayerStatusUpdate {
+export namespace SprotoPlayerStatusUpdate {
     export const Name = "playerStatusUpdate";
     export type Request = PlayerstatusupdateRequest;
     export type Response = undefined;  // playerStatusUpdate 协议没有响应参数
 }
 
-export namespace PlayerLeave {
+export namespace SprotoPlayerLeave {
     export const Name = "playerLeave";
     export type Request = PlayerleaveRequest;
     export type Response = undefined;  // playerLeave 协议没有响应参数
 }
 
-export namespace VoteDisbandStart {
+export namespace SprotoVoteDisbandStart {
     export const Name = "voteDisbandStart";
     export type Request = VotedisbandstartRequest;
     export type Response = undefined;  // voteDisbandStart 协议没有响应参数
 }
 
-export namespace VoteDisbandUpdate {
+export namespace SprotoVoteDisbandUpdate {
     export const Name = "voteDisbandUpdate";
     export type Request = VotedisbandupdateRequest;
     export type Response = undefined;  // voteDisbandUpdate 协议没有响应参数
 }
 
-export namespace VoteDisbandResult {
+export namespace SprotoVoteDisbandResult {
     export const Name = "voteDisbandResult";
     export type Request = VotedisbandresultRequest;
     export type Response = undefined;  // voteDisbandResult 协议没有响应参数
 }
 
-export namespace GameClock {
+export namespace SprotoGameClock {
     export const Name = "gameClock";
     export type Request = GameclockRequest;
     export type Response = undefined;  // gameClock 协议没有响应参数
 }
 
-export namespace PrivateInfo {
+export namespace SprotoPrivateInfo {
     export const Name = "privateInfo";
     export type Request = PrivateinfoRequest;
     export type Response = undefined;  // privateInfo 协议没有响应参数
 }
 
-export namespace TotalResult {
+export namespace SprotoTotalResult {
     export const Name = "totalResult";
     export type Request = TotalresultRequest;
     export type Response = undefined;  // totalResult 协议没有响应参数
 }
 
-export namespace GameRecord {
+export namespace SprotoGameRecord {
     export const Name = "gameRecord";
     export type Request = GamerecordRequest;
     export type Response = undefined;  // gameRecord 协议没有响应参数
