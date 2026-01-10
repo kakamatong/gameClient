@@ -20,6 +20,7 @@ import { PrivateRoomView } from '../privateRoom/PrivateRoomView';
 import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
+import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -40,7 +41,7 @@ export class LobbyView extends FGUILobbyView {
         AddEventListener('userRichs',this.onUserRiches, this);
         AddEventListener('socketDisconnect',this.onSocketDisconnect, this);
         AddEventListener('onShow', this.onAppShow, this)
-        LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
+        LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
 
@@ -51,7 +52,7 @@ export class LobbyView extends FGUILobbyView {
         RemoveEventListener('userRichs', this.onUserRiches);
         RemoveEventListener('socketDisconnect', this.onSocketDisconnect);
         RemoveEventListener('onShow', this.onAppShow);
-        LobbySocketManager.instance.removeServerListen("gameRoomReady");
+        LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
     }
 
     onBtnHead(){

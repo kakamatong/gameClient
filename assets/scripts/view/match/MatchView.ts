@@ -10,13 +10,14 @@ import { LogColors } from '../../frameworks/Framework';
 import { TipsView } from '../common/TipsView';
 import {CompMatchAct} from './comp/CompMatchAct';
 import { sys } from 'cc';
+import { SprotoMatchOnSure, SprotoMatchOnSureFail } from '../../../types/protocol/lobby/s2c';
 export class MatchView extends FGUIMatchView {
     private _checkID:number = 0;
     private _beCheck:boolean = false;
     show(data:any){
         this.ctrl_btn_join.selectedIndex = 0;
-        LobbySocketManager.instance.addServerListen("matchOnSure", this.onSvrMatchOnSure.bind(this));
-        LobbySocketManager.instance.addServerListen("matchOnSureFail", this.onSvrMatchOnSureFail.bind(this));
+        LobbySocketManager.instance.addServerListen(SprotoMatchOnSure, this.onSvrMatchOnSure.bind(this));
+        LobbySocketManager.instance.addServerListen(SprotoMatchOnSureFail, this.onSvrMatchOnSureFail.bind(this));
         const bauto = sys.localStorage.getItem(LOCAL_KEY.MATCH_AUTO_JOIN);
         if (bauto == 'true') {
             this.UI_BTN_AUTO_CHECK.selected = true; 
@@ -27,8 +28,8 @@ export class MatchView extends FGUIMatchView {
 
     protected onDestroy(): void {
         super.onDestroy();
-        LobbySocketManager.instance.removeServerListen("matchOnSure");
-        LobbySocketManager.instance.removeServerListen("matchOnSureFail");
+        LobbySocketManager.instance.removeServerListen(SprotoMatchOnSure);
+        LobbySocketManager.instance.removeServerListen(SprotoMatchOnSureFail);
     }
 
     onBtnCancel(): void {

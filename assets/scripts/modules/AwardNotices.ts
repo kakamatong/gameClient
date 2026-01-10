@@ -1,6 +1,6 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
-import { SprotoGetAwardNotice } from '../../types/protocol/lobby/c2s';
+import { SprotoGetAwardNotice,SprotoSetAwardNoticeRead } from '../../types/protocol/lobby/c2s';
 export class AwardNotices {
     req() {
         LobbySocketManager.instance.sendToServer(SprotoGetAwardNotice.Name, { userid:DataCenter.instance.userid}, this.resp.bind(this))
@@ -13,7 +13,7 @@ export class AwardNotices {
     }
 
     reqRead(id:number){
-        LobbySocketManager.instance.sendToServer('setAwardNoticeRead', { id:id})
+        LobbySocketManager.instance.sendToServer(SprotoSetAwardNoticeRead.Name, { id:id})
     }
 
 }

@@ -8,6 +8,7 @@ import { TipsView } from "../../../../../view/common/TipsView";
 import { PopMessageView } from "../../../../../view/common/PopMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/InterfaceConfig";
 import { Color } from "cc";
+import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
 
 export class CompDisband extends FGUICompDisband { 
     private _voteId: number = 0; // 投票ID
@@ -20,17 +21,17 @@ export class CompDisband extends FGUICompDisband {
         // 一定要执行父类的接口
         super.onConstruct();
         this._scheid = this.onTimer.bind(this)
-        GameSocketManager.instance.addServerListen("voteDisbandStart", this.onVoteDisbandStart.bind(this));
-        GameSocketManager.instance.addServerListen("voteDisbandUpdate", this.onVoteDisbandUpdate.bind(this));
-        GameSocketManager.instance.addServerListen("voteDisbandResult", this.onVoteDisbandResult.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoVoteDisbandStart, this.onVoteDisbandStart.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoVoteDisbandUpdate, this.onVoteDisbandUpdate.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoVoteDisbandResult, this.onVoteDisbandResult.bind(this));
         this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this)
     }
 
     protected onDestroy(): void {
         super.onDestroy();
-        GameSocketManager.instance.removeServerListen("voteDisbandUpdate");
-        GameSocketManager.instance.removeServerListen("voteDisbandResult");
-        GameSocketManager.instance.removeServerListen("voteDisbandStart");
+        GameSocketManager.instance.removeServerListen(SprotoVoteDisbandStart);
+        GameSocketManager.instance.removeServerListen(SprotoVoteDisbandUpdate);
+        GameSocketManager.instance.removeServerListen(SprotoVoteDisbandResult);
     }
 
     listItemRenderer(index: number, item: fgui.GObject): void { 
