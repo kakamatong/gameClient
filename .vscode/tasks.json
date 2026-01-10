@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Cocos Creator compile",
+            "command": "curl",
+            "args": [
+                "http://localhost:7456/asset-db/refresh"
+            ],
+            "type": "shell",
+            "isBackground": true,
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "sproto2ts",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "tools/sproto2ts/sproto_to_ts.py",
+                "./assets/protocol",
+                "./assets/types/protocol"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "将sproto协议文件转换为TypeScript类型定义"
+        }
+    ]
+}
