@@ -252,7 +252,13 @@ export class SocketManager implements handleSocketMessage {
     }
 
     // 增加服务器广播监听
-    addServerListen(name: string, callBack: (data: any) => void) {
+    addServerListen(proto:any, callBack: (data: any) => void) {
+        let name = "";
+        if (typeof proto == 'string') {
+            name = proto;
+        }
+
+        name = proto.Name;
 
         if (!this._onServerListen) {
             this._onServerListen = new Map<string, (data: any) => void>();
@@ -262,7 +268,13 @@ export class SocketManager implements handleSocketMessage {
     }
 
     // 移除服务器广播监听
-    removeServerListen(name: string) {
+    removeServerListen(proto:any) {
+        let name = "";
+        if (typeof proto == 'string') {
+            name = proto;
+        }
+
+        name = proto.Name;
         if (this._onServerListen) {
             this._onServerListen.delete(name);
         }

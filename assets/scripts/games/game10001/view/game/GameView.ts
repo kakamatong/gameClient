@@ -21,6 +21,7 @@ import { TotalResultView } from '../result/TotalResultView';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 import { CompPlayerHead } from './comp/CompPlayerHead';
 import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
+import { SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     
@@ -54,43 +55,43 @@ export class GameView extends FGUIGameView {
     }
 
     initListeners(){
-        GameSocketManager.instance.addServerListen("roomInfo", this.onRoomInfo.bind(this));
-        GameSocketManager.instance.addServerListen("stepId", this.onGameStep.bind(this));
-        GameSocketManager.instance.addServerListen("playerAtt", this.onGamePlayerAttitude.bind(this));
-        GameSocketManager.instance.addServerListen("outHandInfo", this.onGameOutHand.bind(this));
-        GameSocketManager.instance.addServerListen("roundResult", this.onGameRoundResult.bind(this));
-        GameSocketManager.instance.addServerListen("roomEnd", this.onRoomEnd.bind(this));
-        GameSocketManager.instance.addServerListen("playerInfos", this.onSvrPlayerInfos.bind(this));
-        GameSocketManager.instance.addServerListen("gameStart", this.onSvrGameStart.bind(this));
-        GameSocketManager.instance.addServerListen("gameEnd", this.onSvrGameEnd.bind(this));
-        GameSocketManager.instance.addServerListen("playerEnter", this.onSvrPlayerEnter.bind(this));
-        GameSocketManager.instance.addServerListen("playerStatusUpdate", this.onSvrPlayerStatusUpdate.bind(this));
-        GameSocketManager.instance.addServerListen("playerLeave", this.onSvrPlayerLeave.bind(this));
-        GameSocketManager.instance.addServerListen("gameClock", this.onSvrGameClock.bind(this));
-        GameSocketManager.instance.addServerListen("privateInfo", this.onSvrPrivateInfo.bind(this));
-        GameSocketManager.instance.addServerListen("totalResult", this.onSvrTotalResult.bind(this));
-        GameSocketManager.instance.addServerListen("gameRecord", this.onSvrGameRecord.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoRoomInfo, this.onRoomInfo.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoStepId, this.onGameStep.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPlayerAtt, this.onGamePlayerAttitude.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoOutHandInfo, this.onGameOutHand.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoRoundResult, this.onGameRoundResult.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoRoomEnd, this.onRoomEnd.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPlayerInfos, this.onSvrPlayerInfos.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoGameStart, this.onSvrGameStart.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoGameEnd, this.onSvrGameEnd.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPlayerEnter, this.onSvrPlayerEnter.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPlayerStatusUpdate, this.onSvrPlayerStatusUpdate.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPlayerLeave, this.onSvrPlayerLeave.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoGameClock, this.onSvrGameClock.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoPrivateInfo, this.onSvrPrivateInfo.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoTotalResult, this.onSvrTotalResult.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoGameRecord, this.onSvrGameRecord.bind(this));
         LobbySocketManager.instance.addServerListen("gameRoomReady", this.onSvrGameRoomReady.bind(this));
         AddEventListener('gameSocketDisconnect',this.onGameSocketDisconnect, this);
     }
 
     removeListeners():void{ 
-        GameSocketManager.instance.removeServerListen("roomInfo");
-        GameSocketManager.instance.removeServerListen("stepId");
-        GameSocketManager.instance.removeServerListen("playerAtt");
-        GameSocketManager.instance.removeServerListen("outHandInfo");
-        GameSocketManager.instance.removeServerListen("roundResult");
-        GameSocketManager.instance.removeServerListen("roomEnd");
-        GameSocketManager.instance.removeServerListen("playerInfos");
-        GameSocketManager.instance.removeServerListen("gameStart");
-        GameSocketManager.instance.removeServerListen("gameEnd");
-        GameSocketManager.instance.removeServerListen("playerEnter");
-        GameSocketManager.instance.removeServerListen("playerStatusUpdate");
-        GameSocketManager.instance.removeServerListen("playerLeave");
-        GameSocketManager.instance.removeServerListen("gameClock");
-        GameSocketManager.instance.removeServerListen("privateInfo");
-        GameSocketManager.instance.removeServerListen("totalResult");
-        GameSocketManager.instance.removeServerListen("gameRecord");
+        GameSocketManager.instance.removeServerListen(SprotoRoomInfo);
+        GameSocketManager.instance.removeServerListen(SprotoStepId);
+        GameSocketManager.instance.removeServerListen(SprotoPlayerAtt);
+        GameSocketManager.instance.removeServerListen(SprotoOutHandInfo);
+        GameSocketManager.instance.removeServerListen(SprotoRoundResult);
+        GameSocketManager.instance.removeServerListen(SprotoRoomEnd);
+        GameSocketManager.instance.removeServerListen(SprotoPlayerInfos);
+        GameSocketManager.instance.removeServerListen(SprotoGameStart);
+        GameSocketManager.instance.removeServerListen(SprotoGameEnd);
+        GameSocketManager.instance.removeServerListen(SprotoPlayerEnter);
+        GameSocketManager.instance.removeServerListen(SprotoPlayerStatusUpdate);
+        GameSocketManager.instance.removeServerListen(SprotoPlayerLeave);
+        GameSocketManager.instance.removeServerListen(SprotoGameClock);
+        GameSocketManager.instance.removeServerListen(SprotoPrivateInfo);
+        GameSocketManager.instance.removeServerListen(SprotoTotalResult);
+        GameSocketManager.instance.removeServerListen(SprotoGameRecord);
         LobbySocketManager.instance.removeServerListen("gameRoomReady");
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
     }
