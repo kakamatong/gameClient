@@ -1,12 +1,6 @@
 // Auto-generated from sproto files
 // Do not edit manually
 
-/** 登录服务协议(0-9999) */
-export interface package {
-    type: number;
-    session: number;
-}
-
 /** 调用接口 - 请求参数 */
 export interface CallRequest {
     moduleName: string;

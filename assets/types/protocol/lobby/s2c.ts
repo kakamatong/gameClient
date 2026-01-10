@@ -1,12 +1,6 @@
 // Auto-generated from sproto files
 // Do not edit manually
 
-/** package 结构体定义 */
-export interface package {
-    type: number;
-    session: number;
-}
-
 /** svrMsg 协议请求参数 - 请求参数 */
 export interface SvrmsgRequest {
     type: string;

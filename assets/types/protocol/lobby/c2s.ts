@@ -1,12 +1,6 @@
 // Auto-generated from sproto files
 // Do not edit manually
 
-/** 登录服务协议(0-9999) */
-export interface package {
-    type: number;
-    session: number;
-}
-
 /** 奖励通知 */
 export interface AwardNotice {
     id: number;

@@ -321,11 +321,13 @@ class TsGenerator:
         
         # 生成基础类型
         for type_name, fields in self.sproto_types.items():
-            lines.append(self.generate_ts_interface(
-                type_name, 
-                fields, 
-                f"{type_name} 结构体定义"
-            ))
+            # 过滤掉.package类型
+            if type_name != 'package':
+                lines.append(self.generate_ts_interface(
+                    type_name, 
+                    fields, 
+                    f"{type_name} 结构体定义"
+                ))
         
         # 生成协议相关接口
         lines.append(self.generate_protocol_interfaces())

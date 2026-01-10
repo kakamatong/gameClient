@@ -1,12 +1,6 @@
 // Auto-generated from sproto files
 // Do not edit manually
 
-/** package 结构体定义 */
-export interface package {
-    type: number;
-    session: number;
-}
-
 /** ResultInfo 结构体定义 */
 export interface ResultInfo {
     seat: number;
