@@ -42,7 +42,7 @@
   <transition name="act">
     <item time="0" type="Alpha" target="n7_fnug" value="0"/>
     <item time="0" type="XY" target="n9_fnug" value="-,667,0.072,0.395"/>
-    <item time="36" type="Alpha" target="n7_fnug" tween="true" startValue="0" endValue="1" duration="12"/>
-    <item time="36" type="XY" target="n9_fnug" tween="true" startValue="-,667,0.072,0.395" endValue="-,287,0.072,0.17" duration="12" yoyo="true"/>
+    <item time="18" type="Alpha" target="n7_fnug" tween="true" startValue="0" endValue="1" duration="13"/>
+    <item time="18" type="XY" target="n9_fnug" tween="true" startValue="-,667,0.072,0.395" endValue="-,287,0.072,0.17" duration="13" yoyo="true"/>
   </transition>
 </component>
