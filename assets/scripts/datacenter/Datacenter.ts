@@ -1,5 +1,6 @@
-import { LOGIN_INFO,USER_DATA, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV } from "./InterfaceConfig";
-import { sys,resources } from "cc";
+import { UserdataResponse, UserstatusResponse } from "../../types/protocol/lobby/c2s";
+import { LOGIN_INFO, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV } from "./InterfaceConfig";
+import { sys } from "cc";
 
 /**
  * @class DataCenter
@@ -15,10 +16,10 @@ export class DataCenter {
     private _loginInfo: LOGIN_INFO | null = null;
 
     /**
-     * @property {USER_DATA | null} _userData - 用户数据
+     * @property {UserdataResponse | null} _userData - 用户数据
      * @private
      */
-    private _userData: USER_DATA | null = null;
+    private _userData: UserdataResponse | null = null;
 
     /**
      * @property {Array<{richType:number, richNums:number}>} _userRiches - 用户财富数据
@@ -27,10 +28,10 @@ export class DataCenter {
     private _userRiches: Array<{richType:number, richNums:number}> = []
 
     /**
-     * @property {USER_STATUS | null} _userStatus - 用户状态信息
+     * @property {UserstatusResponse | null} _userStatus - 用户状态信息
      * @private
      */
-    private _userStatus: USER_STATUS | null = null;
+    private _userStatus: UserstatusResponse | null = null;
 
     /**
      * @property {any} _appConfig - 应用配置信息
@@ -158,11 +159,11 @@ export class DataCenter {
         return this._loginInfo?.userid ?? 0;
     }
 
-    set userData(data:USER_DATA){
+    set userData(data:UserdataResponse){
         this._userData = data;
     }
 
-    get userData():USER_DATA | null{
+    get userData():UserdataResponse | null{
         return this._userData;
     }
 
@@ -197,11 +198,11 @@ export class DataCenter {
         return this._userRiches.find(rich => rich.richType === type);
     }
 
-    set userStatus(data:USER_STATUS) {
+    set userStatus(data:UserstatusResponse) {
         this._userStatus = data;
     }
 
-    get userStatus(): USER_STATUS | null  {
+    get userStatus(): UserstatusResponse | null  {
         return this._userStatus;
     }
 

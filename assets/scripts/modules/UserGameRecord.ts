@@ -1,6 +1,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
+import { UsergamerecordResponse } from '../../types/protocol/lobby/c2s';
 
 /**
  * @class UserData
@@ -24,9 +25,9 @@ export class UserGameRecord {
     /**
      * @method resp
      * @description 处理用户数据响应，更新本地数据并发送事件通知
-     * @param {any} data - 服务器返回的用户数据
+     * @param {UsergamerecordResponse} data - 服务器返回的用户数据
      */
-    resp(data: any) {
+    resp(data: UsergamerecordResponse) {
         DataCenter.instance.gameRecords = data;
         this._callback && this._callback(data);
     }

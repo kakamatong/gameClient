@@ -1,6 +1,7 @@
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
 import { UserStatus } from './UserStatus';
+import { MatchjoinResponse, MatchleaveResponse } from '../../types/protocol/lobby/c2s';
 
 /**
  * @class Match
@@ -48,7 +49,7 @@ export class Match {
      * @description 处理匹配响应，更新用户状态并处理匹配结果
      * @param {any} result - 服务器返回的匹配结果
      */
-    resp(result: any) {
+    resp(result: MatchjoinResponse) {
         const userStatus = new UserStatus()
         userStatus.req()
         if (result && result.code == 1) {
@@ -67,7 +68,7 @@ export class Match {
         LobbySocketManager.instance.sendToServer('matchLeave',{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
     }
 
-    respLeave(result:any): void { 
+    respLeave(result:MatchleaveResponse): void { 
         const userStatus = new UserStatus()
         userStatus.req()
         if (result && result.code == 1) {

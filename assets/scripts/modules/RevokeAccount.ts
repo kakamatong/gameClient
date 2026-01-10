@@ -1,3 +1,4 @@
+import { CancelrevokeaccResponse, RevokeaccResponse } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 
@@ -33,11 +34,11 @@ export class RevokeAccount {
      * @description 处理用户数据响应，更新本地数据并发送事件通知
      * @param {any} data - 服务器返回的用户数据
      */
-    respRevoke(data: any) {
+    respRevoke(data: RevokeaccResponse) {
         this._callback && this._callback(data);
     }
 
-    respCancelRevoke(data: any) {
+    respCancelRevoke(data: CancelrevokeaccResponse) {
         this._callback && this._callback(data);
     }
 }

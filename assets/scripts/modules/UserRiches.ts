@@ -1,3 +1,4 @@
+import { UserrichesResponse } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { DispatchEvent } from '../frameworks/Framework';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
@@ -6,7 +7,7 @@ export class UserRiches {
         LobbySocketManager.instance.sendToServer('userRiches', {}, this.resp.bind(this))
     }
 
-    resp(data: any) {
+    resp(data: UserrichesResponse) {
         //DataCenter.instance.userData = data;
         if (data  && data.richType && data.richNums && data.richType.length > 0 && data.richNums.length > 0) {
             const riches: Array<{richType:number, richNums:number}> = []
