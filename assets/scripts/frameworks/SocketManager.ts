@@ -1,5 +1,5 @@
 import { Socket } from './socket/Socket';
-import { Asset, assetManager, BufferAsset, log, TextAsset } from 'cc';
+import { Asset, assetManager, BufferAsset, log, Sorting, TextAsset } from 'cc';
 import { handleSocketMessage } from './config/Config';
 import {LogColors} from './Framework';
 import * as protoParse from './sproto/sproto-parser';
@@ -209,7 +209,8 @@ export class SocketManager implements handleSocketMessage {
         this.sendToServer('send', data)
     }
 
-    sendToServer(xyname: string, data: any, callBack?: (data: any) => void) {
+    sendToServer(xy: string | {Name:string}, data: any, callBack?: (data: any) => void) {
+        const xyname = typeof xy === 'string' ? xy : xy.Name;
         this._session++;
         if (callBack) {
             this._callBacks[this._session] = callBack;
