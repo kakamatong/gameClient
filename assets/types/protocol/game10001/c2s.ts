@@ -87,6 +87,19 @@ export interface VotedisbandresponseResponse {
     msg: string;
 }
 
+/** 消息转发协议，服务会下发同名协议 - 请求参数 */
+export interface ForwardmessageRequest {
+    type: number;
+    to: number[];
+    msg: string;
+}
+
+/** 消息转发协议，服务会下发同名协议 - 响应参数 */
+export interface ForwardmessageResponse {
+    code: number;
+    msg: string;
+}
+
 export namespace SprotoCall {
     export const Name = "call";
     export type Request = CallRequest;
@@ -139,4 +152,10 @@ export namespace SprotoVoteDisbandResponse {
     export const Name = "voteDisbandResponse";
     export type Request = VotedisbandresponseRequest;
     export type Response = VotedisbandresponseResponse;
+}
+
+export namespace SprotoForwardMessage {
+    export const Name = "forwardMessage";
+    export type Request = ForwardmessageRequest;
+    export type Response = ForwardmessageResponse;
 }

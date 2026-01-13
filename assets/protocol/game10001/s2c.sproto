@@ -230,3 +230,12 @@ gameRecord 20 {
         record 0 : *Record
     }
 }
+
+# 消息转发协议，服务会下发同名协议
+forwardMessage 21 {
+    request {
+        type 0 : integer # 类型
+        from 1 : integer # 源玩家id，0 为系统
+        msg 2 : string # 消息，一般为json，服务不解析，原样转发
+    }
+}

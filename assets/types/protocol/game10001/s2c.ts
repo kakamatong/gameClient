@@ -194,6 +194,13 @@ export interface GamerecordRequest {
     record: Record[];
 }
 
+/** 消息转发协议，服务会下发同名协议 - 请求参数 */
+export interface ForwardmessageRequest {
+    type: number;
+    from: number;
+    msg: string;
+}
+
 export namespace SprotoSvrMsg {
     export const Name = "svrMsg";
     export type Request = SvrmsgRequest;
@@ -312,4 +319,10 @@ export namespace SprotoGameRecord {
     export const Name = "gameRecord";
     export type Request = GamerecordRequest;
     export type Response = undefined;  // gameRecord 协议没有响应参数
+}
+
+export namespace SprotoForwardMessage {
+    export const Name = "forwardMessage";
+    export type Request = ForwardmessageRequest;
+    export type Response = undefined;  // forwardMessage 协议没有响应参数
 }

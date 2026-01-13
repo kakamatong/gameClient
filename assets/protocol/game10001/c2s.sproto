@@ -95,3 +95,17 @@ voteDisbandResponse 10 {
         msg 1 : string
     }
 }
+
+# 消息转发协议，服务会下发同名协议
+forwardMessage 11 {
+    request {
+        type 0 : integer # 类型
+        to 1 : *integer # 数组目标玩家id，不传则全部转发
+        msg 2 : string # 消息，一般为json，服务不解析，原样转发
+    }
+
+    response {
+        code 0 : integer
+        msg 1 : string
+    }
+}
