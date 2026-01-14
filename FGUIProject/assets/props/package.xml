@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="fwundh2c">
   <resources>
-    <image id="pxa518" name="gold40x40.png" path="/imgs/40x40/" exported="true"/>
-    <image id="pxa519" name="gold80x80.png" path="/imgs/80x80/"/>
+    <image id="pxa518" name="prop_40x40_2.png" path="/imgs/40x40/" exported="true"/>
+    <image id="pxa519" name="prop_80x80_2.png" path="/imgs/80x80/"/>
   </resources>
   <publish name=""/>
 </packageDescription>

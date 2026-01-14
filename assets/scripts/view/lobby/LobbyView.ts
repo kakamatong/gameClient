@@ -5,7 +5,7 @@ import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '.
 import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/ConnectSvr';
 import { PopMessageView } from '../common/PopMessageView';
-import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL} from '../../datacenter/InterfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL, RICH_TYPE} from '../../datacenter/InterfaceConfig';
 import { TipsView } from '../common/TipsView';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 import { Rank } from '../../modules/Rank';
@@ -32,6 +32,7 @@ export class LobbyView extends FGUILobbyView {
         super.onConstruct();
         this.initListeners();
         this.initUI();
+        this.initRichs();
         this.startLogin();
     }
 
@@ -71,6 +72,11 @@ export class LobbyView extends FGUILobbyView {
         if (DataCenter.instance.isEnvDev()) {
             this.UI_TXT_ENV.visible = true
         }
+    }
+
+    initRichs():void{
+        const rich = DataCenter.instance.getRichByType(RICH_TYPE.SILVER_COIN); // 银子
+        this.UI_COMP_TOP.UI_COMP_SILVER.text = `${rich?.richNums ?? 0}`;
     }
 
     onSocketDisconnect(){
