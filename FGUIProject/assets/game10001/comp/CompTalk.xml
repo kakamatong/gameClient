@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="250,83">
+  <controller name="C_pos" exported="true" pages="0,,1,,2," selected="2">
+    <remark page="0" value="左下"/>
+    <remark page="1" value="左上"/>
+    <remark page="2" value="右上"/>
+  </controller>
+  <displayList>
+    <image id="n9_pxa5" name="n9" src="pxa5m" fileName="imgs/talkbg.png" xy="0,0" pivot="0,1" size="67,83" flip="hz">
+      <gearDisplay controller="C_pos" pages="0"/>
+      <relation target="n12_pxa5" sidePair="width-width"/>
+    </image>
+    <image id="n10_pxa5" name="n10" src="pxa5m" fileName="imgs/talkbg.png" xy="0,0" pivot="0,1" size="71,83" flip="both">
+      <gearDisplay controller="C_pos" pages="1"/>
+      <relation target="n13_pxa5" sidePair="width-width"/>
+    </image>
+    <image id="n11_pxa5" name="n11" src="pxa5m" fileName="imgs/talkbg.png" xy="173,0" pivot="1,1" size="77,83" flip="vt">
+      <gearDisplay controller="C_pos" pages="2"/>
+      <relation target="n14_pxa5" sidePair="width-width"/>
+    </image>
+    <text id="n12_pxa5" name="UI_TXT_0" xy="6,12" size="56,36" fontSize="26" text="你好">
+      <gearDisplay controller="C_pos" pages="0"/>
+    </text>
+    <text id="n13_pxa5" name="UI_TXT_1" xy="8,33" size="56,36" fontSize="26" text="你好">
+      <gearDisplay controller="C_pos" pages="1"/>
+    </text>
+    <text id="n14_pxa5" name="UI_TXT_2" xy="180,34" pivot="1,1" size="64,36" fontSize="26" text="1111">
+      <gearDisplay controller="C_pos" pages="2"/>
+    </text>
+  </displayList>
+</component>

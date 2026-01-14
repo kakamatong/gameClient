@@ -4,6 +4,7 @@ import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUICompOffline from "./FGUICompOffline";
 import FGUICompThinkAct from "./FGUICompThinkAct";
+import FGUICompTalk from "./FGUICompTalk";
 
 export default class FGUICompPlayerHead extends fgui.GComponent {
 
@@ -15,6 +16,7 @@ export default class FGUICompPlayerHead extends fgui.GComponent {
 	public UI_TXT_ID:fgui.GTextField;
 	public UI_COMP_OFFLINE:FGUICompOffline;
 	public UI_COMP_THINKING:FGUICompThinkAct;
+	public UI_COMP_TALK:FGUICompTalk;
 	public static URL:string = "ui://2zsfe53xgk14j";
 
 	public static packageName:string = "game10001";
@@ -65,6 +67,7 @@ export default class FGUICompPlayerHead extends fgui.GComponent {
 		this.UI_TXT_ID = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_COMP_OFFLINE = <FGUICompOffline>(this.getChildAt(5));
 		this.UI_COMP_THINKING = <FGUICompThinkAct>(this.getChildAt(6));
+		this.UI_COMP_TALK = <FGUICompTalk>(this.getChildAt(7));
 	}
 }
 fgui.UIObjectFactory.setExtension(FGUICompPlayerHead.URL, FGUICompPlayerHead);

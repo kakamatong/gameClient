@@ -21,6 +21,8 @@
     <component id="r1yn0" name="CompDisband.xml" path="/comp/"/>
     <component id="kw9ii" name="CompRoundAct.xml" path="/comp/"/>
     <component id="gk14j" name="CompPlayerHead.xml" path="/comp/"/>
+    <image id="pxa5m" name="talkbg.png" path="/imgs/" scale="9grid" scale9grid="32,22,50,25"/>
+    <component id="pxa5n" name="CompTalk.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
