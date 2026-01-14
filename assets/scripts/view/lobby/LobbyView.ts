@@ -32,7 +32,6 @@ export class LobbyView extends FGUILobbyView {
         super.onConstruct();
         this.initListeners();
         this.initUI();
-        this.initRichs();
         this.startLogin();
     }
 
@@ -76,7 +75,7 @@ export class LobbyView extends FGUILobbyView {
 
     initRichs():void{
         const rich = DataCenter.instance.getRichByType(RICH_TYPE.SILVER_COIN); // 银子
-        this.UI_COMP_TOP.UI_COMP_SILVER.text = `${rich?.richNums ?? 0}`;
+        this.UI_COMP_TOP.UI_COMP_SILVER.UI_TXT_NUM.text = `${rich?.richNums ?? 0}`;
     }
 
     onSocketDisconnect(){
@@ -91,6 +90,7 @@ export class LobbyView extends FGUILobbyView {
     startLogin(){
         if (LobbySocketManager.instance.isOpen()) {
             this.updateUserInfo()
+            this.initRichs()
             return
         }
         LoadingView.showView({content:"登入中...", time:12});
@@ -153,6 +153,7 @@ export class LobbyView extends FGUILobbyView {
 
     onUserRiches(data:any):void{
         console.log("userRiches",data)
+        this.initRichs()
     }
 
     onBtnMatchRoom(): void {
