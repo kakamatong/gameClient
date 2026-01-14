@@ -23,6 +23,7 @@
     <component id="gk14j" name="CompPlayerHead.xml" path="/comp/"/>
     <image id="pxa5m" name="talkbg.png" path="/imgs/" scale="9grid" scale9grid="32,22,50,25"/>
     <component id="pxa5n" name="CompTalk.xml" path="/comp/"/>
+    <image id="pxa5o" name="talk.png" path="/imgs/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -32,6 +32,8 @@
     <sound id="fugr15" name="click.mp3" path="/sound/" exported="true"/>
     <image id="sexy16" name="zhanli.png" path="/imgs/" exported="true"/>
     <image id="9rp117" name="shareBtn.png" path="/imgs/" exported="true"/>
+    <image id="pxa518" name="gold40x40.png" path="/imgs/prop/40x40/"/>
+    <image id="pxa519" name="gold80x80.png" path="/imgs/prop/80x80/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

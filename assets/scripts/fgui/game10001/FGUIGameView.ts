@@ -41,6 +41,7 @@ export default class FGUIGameView extends fgui.GComponent {
 	public UI_TXT_RULE:fgui.GTextField;
 	public UI_TXT_PROGRESS:fgui.GTextField;
 	public UI_COMP_ROUND_ACT:FGUICompRoundAct;
+	public UI_BTN_TALK:fgui.GButton;
 	public static URL:string = "ui://2zsfe53xis911";
 
 	public static packageName:string = "game10001";
@@ -123,6 +124,8 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_TXT_RULE = <fgui.GTextField>(this.getChildAt(26));
 		this.UI_TXT_PROGRESS = <fgui.GTextField>(this.getChildAt(27));
 		this.UI_COMP_ROUND_ACT = <FGUICompRoundAct>(this.getChildAt(31));
+		this.UI_BTN_TALK = <fgui.GButton>(this.getChildAt(32));
+		this.UI_BTN_TALK.onClick(this.onBtnTalk, this);
 	}
 	onBtnDisband():void{};
 	onBtnBack():void{};
@@ -134,5 +137,6 @@ export default class FGUIGameView extends fgui.GComponent {
 	onBtnChange():void{};
 	onBtnContinue():void{};
 	onBtnReady():void{};
+	onBtnTalk():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIGameView.URL, FGUIGameView);

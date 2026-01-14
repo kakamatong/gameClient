@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="fznom2fx">
+  <resources>
+    <component id="pxa50" name="TalkView.xml" path="/"/>
+    <component id="pxa51" name="CompMainTalk.xml" path="/comp/"/>
+    <component id="pxa52" name="CompItem.xml" path="/comp/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

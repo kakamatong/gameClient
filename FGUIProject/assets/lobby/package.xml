@@ -11,6 +11,7 @@
     <image id="ddz1b" name="mail.png" path="/imgs/"/>
     <image id="ddz1c" name="rank.png" path="/imgs/"/>
     <image id="g8w0d" name="lobbybg.jpg" path="/imgs/" scale="9grid" scale9grid="7,16,14,32"/>
+    <component id="ok17e" name="CompRich.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
