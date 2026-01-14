@@ -61,6 +61,31 @@ export const ChangeScene = (name:string):void => {
     Director.instance.loadScene(name,func)
 }
 
+/**
+ * 延迟执行
+ * @param node 
+ * @param callback 
+ * @param delay 
+ */
 export const ScheduleOnce = (node:Component, callback: () => void, delay: number) =>{
     node.scheduleOnce(callback, delay)
+}
+
+/**
+ * 定时执行
+ * @param node 
+ * @param callback 
+ * @param interval 
+ */
+export const Schedule = (node:Component, callback: () => void, interval: number) =>{
+    node.schedule(callback, interval)
+}
+
+/**
+ * 取消定时执行
+ * @param node 
+ * @param callback 
+ */
+export const Unschedule = (node:Component, callback: () => void) =>{
+    node.unschedule(callback)
 }
