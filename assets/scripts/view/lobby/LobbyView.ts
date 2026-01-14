@@ -87,10 +87,17 @@ export class LobbyView extends FGUILobbyView {
         
     }
 
+    /**
+     * 已经登入
+     */
+    allreadyLogin():void{
+        this.updateUserInfo()
+        this.initRichs()
+    }
+
     startLogin(){
         if (LobbySocketManager.instance.isOpen()) {
-            this.updateUserInfo()
-            this.initRichs()
+            this.allreadyLogin()
             return
         }
         LoadingView.showView({content:"登入中...", time:12});
