@@ -44,12 +44,22 @@ export class LobbyScreen extends Component {
                 return;
             }
 
-            const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
-            if (agree) {
-                LobbyView.showView()
-            }else{
-                LoginView.showView()
-            }
+            // 临时处理一下，后面写个包管理器
+            fgui.UIPackage.loadPackage(bundle, 'props', (error, pkg)=>{
+                if(error){
+                    console.log('loadPackage error', error);
+                    return;
+                }
+
+                const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
+                if (agree) {
+                    LobbyView.showView()
+                }else{
+                    LoginView.showView()
+                }
+            })
+
+            
         })
 
         // 加载背景音乐
