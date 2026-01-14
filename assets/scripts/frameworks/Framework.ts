@@ -89,3 +89,11 @@ export const Schedule = (node:Component, callback: () => void, interval: number)
 export const Unschedule = (node:Component, callback: () => void) =>{
     node.unschedule(callback)
 }
+
+/**
+ * 取消所有定时执行
+ * @param node 
+ */
+export const UnscheduleAllCallbacks = (node:Component) =>{
+    node.unscheduleAllCallbacks()
+}
