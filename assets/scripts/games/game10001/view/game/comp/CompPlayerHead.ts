@@ -8,7 +8,6 @@ import { CompTalk } from './CompTalk';
 import { GameSocketManager } from 'db://assets/scripts/frameworks/GameSocketManager';
 import { SprotoForwardMessage } from 'db://assets/types/protocol/game10001/s2c';
 export class CompPlayerHead extends FGUICompPlayerHead {
-    private _textMsg:string = "adfasdf啊啊啊"
     public localSeat:number = 0;
     protected onConstruct(){
         super.onConstruct();
@@ -53,9 +52,6 @@ export class CompPlayerHead extends FGUICompPlayerHead {
         if (player) {
             PlayerInfoView.showView({userid:player.userid, cp: player.cp})
         }
-
-        this._textMsg += "哈"
-        GameSocketManager.instance.sendToServer(SprotoForwardMessage, {type:1, msg:this._textMsg})
     }
 
     showMsg(msg:string):void{
