@@ -103,6 +103,11 @@ export class GameView extends FGUIGameView {
     // 服务消息转发
     onSvrForwardMessage(data:SprotoForwardMessage.Request) {
         console.log(data)
+        
+        for (let index = 0; index < GameData.instance.maxPlayer; index++) {
+            const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${index + 1}`);
+            playerNode.showMsg(data.msg)
+        }
     }
 
     onSvrGameRecord(data:any) {

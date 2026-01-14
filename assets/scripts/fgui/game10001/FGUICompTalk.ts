@@ -5,7 +5,10 @@ import * as fgui from "fairygui-cc";
 
 export default class FGUICompTalk extends fgui.GComponent {
 
-	public C_pos:fgui.Controller;
+	public ctrl_pos:fgui.Controller;
+	public UI_BG_0:fgui.GImage;
+	public UI_BG_1:fgui.GImage;
+	public UI_BG_2:fgui.GImage;
 	public UI_TXT_0:fgui.GTextField;
 	public UI_TXT_1:fgui.GTextField;
 	public UI_TXT_2:fgui.GTextField;
@@ -51,7 +54,10 @@ export default class FGUICompTalk extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.C_pos = this.getControllerAt(0);
+		this.ctrl_pos = this.getControllerAt(0);
+		this.UI_BG_0 = <fgui.GImage>(this.getChildAt(0));
+		this.UI_BG_1 = <fgui.GImage>(this.getChildAt(1));
+		this.UI_BG_2 = <fgui.GImage>(this.getChildAt(2));
 		this.UI_TXT_0 = <fgui.GTextField>(this.getChildAt(3));
 		this.UI_TXT_1 = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_2 = <fgui.GTextField>(this.getChildAt(5));

@@ -8,30 +8,42 @@ export class CompTalk extends FGUICompTalk {
 
     public set talkMsg(value:string){
         this._talkMsg = value;
-        this._txtNode && (this._txtNode.text = value);
         this.visible = true;
+        
         UnscheduleAllCallbacks(this.node.components[0]);
         ScheduleOnce(this.node.components[0], ()=>{
             this._talkMsg = ""
             this.visible = false;
         }, 2);
+
+        ScheduleOnce(this.node.components[0], ()=>{
+            this._txtNode && (this._txtNode.text = value);
+        }, 0);
     }
 
     public get talkMsg():string{
         return this._talkMsg;
     }
 
-    protected onConstruct(){
-        super.onConstruct();
-    }
-
     public set localSeat(value:number){
+        if(!value) return;
         this._localSeat = value;
-        this._txtNode = this.getChild(`UI_TXT_${value}`) as fgui.GTextField;
+        const index = this.localSeatToIndex(value);
+        this.ctrl_pos.selectedIndex = index;
+        this._txtNode = this.getChild(`UI_TXT_${index}`) as fgui.GTextField;
     }
 
     public get localSeat():number{
         return this._localSeat;
+    }
+
+    localSeatToIndex(value:number):number{
+        switch(value){
+            case 1: return 0;
+            case 2: return 2;
+            case 3: return 1;
+            default: return 0;
+        }
     }
 }
 fgui.UIObjectFactory.setExtension(CompTalk.URL, CompTalk);

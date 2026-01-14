@@ -21,6 +21,29 @@
     <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="13,11" size="143,94">
       <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
     </component>
+    <component id="n32_qaf2" name="UI_BTN_PAPER" src="qaf2f" fileName="comp/BtnSelect.xml" xy="551,1210" group="n35_qaf2">
+      <Button controller="ctrl_select" page="2"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2b"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi5"/>
+    </component>
+    <component id="n33_qaf2" name="UI_BTN_ROCK" src="qaf2f" fileName="comp/BtnSelect.xml" xy="317,1210" group="n35_qaf2">
+      <Button controller="ctrl_select" page="1"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2c"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi7"/>
+    </component>
+    <component id="n34_qaf2" name="UI_BTN_SCISSORS" src="qaf2f" fileName="comp/BtnSelect.xml" xy="83,1210" group="n35_qaf2">
+      <Button checked="true" controller="ctrl_select" page="0"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2d"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi6"/>
+    </component>
+    <group id="n35_qaf2" name="UI_GROUP_SELECT" xy="83,1210" size="631,161" visible="false" advanced="true">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </group>
+    <component id="n53_mwa6" name="UI_BTN_INVITE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="272,1252" size="230,98" visible="false">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <property target="title" propertyId="0" value="邀请好友"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
     <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,0,ctrl_localSeat,3">
       <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
       <gearXY controller="ctrl_playerCnt" pages="1" values="9,272" default="368,74"/>
@@ -77,24 +100,6 @@
     <group id="n23_folo" name="n23" xy="513,1451" size="231,100" advanced="true">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </group>
-    <component id="n32_qaf2" name="UI_BTN_PAPER" src="qaf2f" fileName="comp/BtnSelect.xml" xy="551,1210" group="n35_qaf2">
-      <Button controller="ctrl_select" page="2"/>
-      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2b"/>
-      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi5"/>
-    </component>
-    <component id="n33_qaf2" name="UI_BTN_ROCK" src="qaf2f" fileName="comp/BtnSelect.xml" xy="317,1210" group="n35_qaf2">
-      <Button controller="ctrl_select" page="1"/>
-      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2c"/>
-      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi7"/>
-    </component>
-    <component id="n34_qaf2" name="UI_BTN_SCISSORS" src="qaf2f" fileName="comp/BtnSelect.xml" xy="83,1210" group="n35_qaf2">
-      <Button checked="true" controller="ctrl_select" page="0"/>
-      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2d"/>
-      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi6"/>
-    </component>
-    <group id="n35_qaf2" name="UI_GROUP_SELECT" xy="83,1210" size="631,161" visible="false" advanced="true">
-      <relation target="" sidePair="center-center,bottom-bottom"/>
-    </group>
     <component id="n36_xr4w" name="UI_COMP_CLOCK" src="qaf26" fileName="comp/CompClock.xml" xy="330,756" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
@@ -115,11 +120,6 @@
     </component>
     <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="106,687" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
-    </component>
-    <component id="n53_mwa6" name="UI_BTN_INVITE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="272,1252" size="230,98" visible="false">
-      <relation target="" sidePair="center-center,bottom-bottom"/>
-      <property target="title" propertyId="0" value="邀请好友"/>
-      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
     </component>
   </displayList>
 </component>
