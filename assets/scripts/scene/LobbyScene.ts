@@ -23,14 +23,7 @@ export class LobbyScreen extends Component {
                 DataCenter.instance.channelID = DataCenter.instance.appConfig.channelID ?? ENUM_CHANNEL_ID.ACCOUNT
             }
         })
-
-        assetManager.loadBundle('fgui', (err, bundle) => {
-            if (err) {
-                log('loadBundle error', err);
-                return;
-            }
-            this.initView();
-        });
+        this.initView();
         log('LobbyScreen');
     }
 
