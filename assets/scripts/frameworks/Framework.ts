@@ -1,4 +1,5 @@
 import { Component, Director, error, Scene } from 'cc';
+import { PackageManager } from './PackageManager';
 type eventFunc = (...args:any[]) =>void
 
 const events = new Map<string, eventFunc[]>()
@@ -96,4 +97,17 @@ export const Unschedule = (node:Component, callback: () => void) =>{
  */
 export const UnscheduleAllCallbacks = (node:Component) =>{
     node.unscheduleAllCallbacks()
+}
+
+export const PackageLoad = (packages:string[]) =>{
+    return function <T extends new (...args: any[]) => any>(constructor: T) {
+        // 保存原方法引用
+        const oldFunc = constructor['showView']
+        constructor['showView'] = function (params?:any, callBack?:(b:boolean)=>void) {
+            PackageManager.instance.loadPackages('fgui', packages).then(()=>{
+                // 调用原方法
+                oldFunc.apply(this, [params, callBack])
+            })
+        }
+    }
 }

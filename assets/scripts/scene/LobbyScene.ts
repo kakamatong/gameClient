@@ -37,30 +37,12 @@ export class LobbyScreen extends Component {
     initView(){
         fgui.GRoot.create()
         // 加载common包
-        const bundle = assetManager.getBundle('fgui') as AssetManager.Bundle;
-        fgui.UIPackage.loadPackage(bundle, 'common', (error, pkg)=>{
-            if(error){
-                console.log('loadPackage error', error);
-                return;
-            }
-
-            // 临时处理一下，后面写个包管理器
-            fgui.UIPackage.loadPackage(bundle, 'props', (error, pkg)=>{
-                if(error){
-                    console.log('loadPackage error', error);
-                    return;
-                }
-
-                const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
-                if (agree) {
-                    LobbyView.showView()
-                }else{
-                    LoginView.showView()
-                }
-            })
-
-            
-        })
+        const agree = sys.localStorage.getItem(LOCAL_KEY.AGREE_PRIVACY) ?? 0;
+        if (agree) {
+            LobbyView.showView()
+        }else{
+            LoginView.showView()
+        }
 
         // 加载背景音乐
         SoundManager.instance.init() // 切场景必须init

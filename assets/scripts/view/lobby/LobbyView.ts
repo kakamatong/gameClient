@@ -1,7 +1,7 @@
 
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
-import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../frameworks/Framework';
+import { AddEventListener, ChangeScene, LogColors, PackageLoad, RemoveEventListener } from '../../frameworks/Framework';
 import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/ConnectSvr';
 import { PopMessageView } from '../common/PopMessageView';
@@ -21,6 +21,7 @@ import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
+@PackageLoad(['common','props'])
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;

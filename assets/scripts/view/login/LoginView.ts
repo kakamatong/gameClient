@@ -5,7 +5,9 @@ import * as fgui from "fairygui-cc";
 import { LobbyView } from '../lobby/LobbyView';
 import { PrivacyView } from '../privacy/PrivacyView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
+import { PackageLoad } from '../../frameworks/Framework';
 
+@PackageLoad(['common'])
 export class LoginView extends FGUILoginView {
     show(data?: any):void{
         this.showPrivacy()
