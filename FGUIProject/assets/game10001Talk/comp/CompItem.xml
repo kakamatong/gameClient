@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="250,83"/>
+<component size="464,100">
+  <displayList>
+    <text id="n0_q8u6" name="UI_TXT_TALK" xy="7,7" size="449,44" fontSize="32" color="#ffffff" autoSize="shrink" strokeColor="#000000" text="迪迦奥特曼"/>
+    <image id="n1_q8u6" name="n1" src="pxa518" fileName="imgs/40x40/prop_40x40_2.png" pkg="fwundh2c" xy="57,62" size="30,30"/>
+    <text id="n2_q8u6" name="UI_TXT_SPEED" xy="92,64" size="25,26" fontSize="18" color="#666666" vAlign="middle" text="X1"/>
+    <text id="n3_q8u6" name="n3" xy="11,64" size="40,26" fontSize="18" color="#666666" vAlign="middle" text="消耗"/>
+    <graph id="n4_q8u6" name="n4" xy="8,95" size="450,2" type="rect" lineSize="0" fillColor="#ff8ec5cd"/>
+  </displayList>
+</component>
