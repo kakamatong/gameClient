@@ -3,6 +3,8 @@
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
+import { PackageManager } from "../../frameworks/PackageManager";
+
 export default class FGUICompBtnScale extends fgui.GButton {
 
 	public ctrl_color:fgui.Controller;
@@ -19,10 +21,8 @@ export default class FGUICompBtnScale extends fgui.GButton {
 			callBack&&callBack(false);
 			return;
 		}
-		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
-		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+		PackageManager.instance.loadPackage("fgui", this.packageName).then(()=> {
 
-			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
 			const view = fgui.UIPackage.createObject("common", "CompBtnScale") as FGUICompBtnScale;
 
 			view.makeFullScreen();
@@ -31,7 +31,7 @@ export default class FGUICompBtnScale extends fgui.GButton {
 			view.show && view.show(params);
 			callBack&&callBack(true);
 		}
-		);
+		).catch(error=>{console.log("showView error", error);callBack&&callBack(false);return;});
 	}
 
 	protected onDestroy():void {

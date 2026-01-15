@@ -5,6 +5,8 @@ import * as fgui from "fairygui-cc";
 import FGUICompPrivateCreate from "./FGUICompPrivateCreate";
 import FGUICompPrivateJoin from "./FGUICompPrivateJoin";
 
+import { PackageManager } from "../../frameworks/PackageManager";
+
 export default class FGUIPrivateRoomView extends fgui.GComponent {
 
 	public ctrl_private:fgui.Controller;
@@ -23,10 +25,8 @@ export default class FGUIPrivateRoomView extends fgui.GComponent {
 			callBack&&callBack(false);
 			return;
 		}
-		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
-		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+		PackageManager.instance.loadPackage("fgui", this.packageName).then(()=> {
 
-			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
 			const view = fgui.UIPackage.createObject("privateRoom", "PrivateRoomView") as FGUIPrivateRoomView;
 
 			view.makeFullScreen();
@@ -35,7 +35,7 @@ export default class FGUIPrivateRoomView extends fgui.GComponent {
 			view.show && view.show(params);
 			callBack&&callBack(true);
 		}
-		);
+		).catch(error=>{console.log("showView error", error);callBack&&callBack(false);return;});
 	}
 
 	protected onDestroy():void {

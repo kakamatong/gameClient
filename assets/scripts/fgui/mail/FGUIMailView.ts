@@ -4,6 +4,8 @@ import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUICompMailContent from "./FGUICompMailContent";
 
+import { PackageManager } from "../../frameworks/PackageManager";
+
 export default class FGUIMailView extends fgui.GComponent {
 
 	public ctrl_have:fgui.Controller;
@@ -22,10 +24,8 @@ export default class FGUIMailView extends fgui.GComponent {
 			callBack&&callBack(false);
 			return;
 		}
-		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
-		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+		PackageManager.instance.loadPackage("fgui", this.packageName).then(()=> {
 
-			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
 			const view = fgui.UIPackage.createObject("mail", "MailView") as FGUIMailView;
 
 			view.makeFullScreen();
@@ -34,7 +34,7 @@ export default class FGUIMailView extends fgui.GComponent {
 			view.show && view.show(params);
 			callBack&&callBack(true);
 		}
-		);
+		).catch(error=>{console.log("showView error", error);callBack&&callBack(false);return;});
 	}
 
 	protected onDestroy():void {

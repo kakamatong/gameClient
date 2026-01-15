@@ -3,6 +3,8 @@
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
+import { PackageManager } from "../../frameworks/PackageManager";
+
 export default class FGUICompDisband extends fgui.GComponent {
 
 	public ctrl_btn:fgui.Controller;
@@ -23,10 +25,8 @@ export default class FGUICompDisband extends fgui.GComponent {
 			callBack&&callBack(false);
 			return;
 		}
-		const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
-		fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
+		PackageManager.instance.loadPackage("fgui", this.packageName).then(()=> {
 
-			if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}
 			const view = fgui.UIPackage.createObject("game10001", "CompDisband") as FGUICompDisband;
 
 			view.makeFullScreen();
@@ -35,7 +35,7 @@ export default class FGUICompDisband extends fgui.GComponent {
 			view.show && view.show(params);
 			callBack&&callBack(true);
 		}
-		);
+		).catch(error=>{console.log("showView error", error);callBack&&callBack(false);return;});
 	}
 
 	protected onDestroy():void {

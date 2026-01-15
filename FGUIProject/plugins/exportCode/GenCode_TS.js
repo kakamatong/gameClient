@@ -40,6 +40,8 @@ function genCode(handler) {
             }
             writer.writeln();
         }
+        writer.writeln('import { PackageManager } from "../../frameworks/PackageManager";');
+        writer.writeln();
         
         writer.writeln('export default class %s extends %s', classInfo.className, classInfo.superClassName);
         writer.startBlock();
@@ -67,11 +69,9 @@ function genCode(handler) {
         writer.writeln('callBack&&callBack(false);');
         writer.writeln('return;');
         writer.endBlock();
-        writer.writeln('const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;');
-        writer.writeln('fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=>');
+        writer.writeln('PackageManager.instance.loadPackage("fgui", this.packageName).then(()=>');
         writer.startBlock();
         writer.writeln();
-        writer.writeln('if(error){console.log("loadPackage error", error);callBack&&callBack(false);return;}');
         writer.writeln('const view = %s.UIPackage.createObject("%s", "%s") as %s;', ns, handler.pkg.name, classInfo.resName, classInfo.className);
         writer.writeln();
         writer.writeln('view.makeFullScreen();');
@@ -80,7 +80,7 @@ function genCode(handler) {
         writer.writeln('view.show && view.show(params);');
         writer.writeln('callBack&&callBack(true);');
         writer.endBlock();
-        writer.writeln(');');
+        writer.writeln(').catch(error=>{console.log("showView error", error);callBack&&callBack(false);return;});');
         writer.endBlock();
         writer.writeln();
 

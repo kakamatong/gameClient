@@ -99,10 +99,18 @@ export const UnscheduleAllCallbacks = (node:Component) =>{
     node.unscheduleAllCallbacks()
 }
 
+/**
+ * 包加载
+ * @param packages 
+ */
 export const PackageLoad = (packages:string[]) =>{
     return function <T extends new (...args: any[]) => any>(constructor: T) {
         // 保存原方法引用
         const oldFunc = constructor['showView']
+        if (!oldFunc){
+            console.log('showView not exists')
+            return
+        }
         constructor['showView'] = function (params?:any, callBack?:(b:boolean)=>void) {
             PackageManager.instance.loadPackages('fgui', packages).then(()=>{
                 // 调用原方法
