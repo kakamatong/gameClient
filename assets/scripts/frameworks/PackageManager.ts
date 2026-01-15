@@ -99,4 +99,19 @@ export class PackageManager {
 
         });
     }
+
+    /**
+     * @method loadPackages
+     * @description 加载多个包
+     * @param {string} bundleName - bundle包名
+     * @param {string[]} packageNames - 包含的包名
+     * @returns {Promise<void>} 
+     */
+    async loadPackages(bundleName: string, packageNames: string[]): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            Promise.all(packageNames.map(packageName => this.loadPackage(bundleName, packageName)))
+                .then(() => resolve())
+                .catch(reject);
+        });
+    }
 }
