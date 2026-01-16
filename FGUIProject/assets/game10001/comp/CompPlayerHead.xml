@@ -15,6 +15,10 @@
     <action type="change_page" fromPage="" toPage="2" objectId="n9_pxa5" controller="C_pos" targetPage="2"/>
     <action type="change_page" fromPage="" toPage="3" objectId="n9_pxa5" controller="C_pos" targetPage="1"/>
   </controller>
+  <controller name="ctrl_roomtype" exported="true" pages="0,,1," selected="1">
+    <remark page="0" value="普通房"/>
+    <remark page="1" value="私人房"/>
+  </controller>
   <displayList>
     <image id="n0_gk14" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="142,96" size="220,100">
       <gearXY controller="ctrl_pos" pages="0,5" values="142,96|68,163" default="0,96"/>
@@ -24,6 +28,7 @@
       <property target="UI_LOADER_HEAD" propertyId="1" value=""/>
     </component>
     <text id="n2_gk14" name="UI_TXT_WINLOSE" xy="2,9" size="60,42" fontSize="30" color="#ff0000" strokeColor="#000000" text="胜:0">
+      <gearDisplay controller="ctrl_roomtype" pages="1"/>
       <gearXY controller="ctrl_pos" pages="0,1,5" values="2,9|301,12|264,121"/>
     </text>
     <text id="n3_gk14" name="UI_TXT_NICKNAME" xy="161,101" pivot="1,0" size="10,42" fontSize="30" color="#ffffff" align="right" singleLine="true" text="">

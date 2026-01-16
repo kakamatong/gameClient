@@ -2,7 +2,14 @@
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
   <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
-  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
+  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0">
+    <action type="change_page" fromPage="" toPage="1" objectId="n62_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n62_gk14" controller="ctrl_roomtype" targetPage="0"/>
+    <action type="change_page" fromPage="" toPage="1" objectId="n63_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n63_gk14" controller="ctrl_roomtype" targetPage="0"/>
+    <action type="change_page" fromPage="" toPage="1" objectId="n64_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n64_gk14" controller="ctrl_roomtype" targetPage="0"/>
+  </controller>
   <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="0">
     <remark page="0" value="2人"/>
     <remark page="1" value="3人"/>
