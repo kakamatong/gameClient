@@ -34,6 +34,7 @@ export class GameData {
         this.isPrivateRoom = false;
         this.gameData = null;
         this._owner = 0;
+        this._privateNowCnt = 0;
     }
 
     get gameStep(): ENUM_GAME_STEP {

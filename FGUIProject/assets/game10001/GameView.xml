@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="0"/>
-  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="1"/>
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="0"/>
   <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0"/>
   <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="0">
     <remark page="0" value="2人"/>
@@ -121,7 +121,7 @@
     <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="106,687" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n68_pxa5" name="UI_BTN_TALK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="627,1570">
+    <component id="n68_pxa5" name="UI_BTN_TALK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="651,1570" size="95,95" visible="false">
       <relation target="" sidePair="left-right,bottom-bottom"/>
       <property target="icon" propertyId="1" value="ui://2zsfe53xpxa5o"/>
     </component>
