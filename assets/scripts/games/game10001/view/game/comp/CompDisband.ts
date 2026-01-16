@@ -9,7 +9,9 @@ import { PopMessageView } from "../../../../../view/common/PopMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/InterfaceConfig";
 import { Color } from "cc";
 import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
+import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 
+@ViewClass()
 export class CompDisband extends FGUICompDisband { 
     private _voteId: number = 0; // 投票ID
     private _voteData: VoteDisbandStartData | null = null; // 投票开始数据

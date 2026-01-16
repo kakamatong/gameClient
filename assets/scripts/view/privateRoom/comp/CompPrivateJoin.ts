@@ -4,7 +4,9 @@ import { PopMessageView } from "../../common/PopMessageView";
 import { ENUM_POP_MESSAGE_TYPE } from "../../../datacenter/InterfaceConfig";
 import { TipsView } from "../../common/TipsView";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
+import { ViewClass } from "../../../frameworks/Framework";
 
+@ViewClass()
 export class CompPrivateJoin extends FGUICompPrivateJoin { 
     private _data:any|null = null;
     show(data?:any){

@@ -2,15 +2,17 @@
 import FGUICompMatchAct from '../../../fgui/match/FGUICompMatchAct';
 import * as fgui from "fairygui-cc";
 import {GetRandomInt} from '../../../frameworks/utils/Utils'
+import { ViewClass } from '../../../frameworks/Framework';
+
+@ViewClass()
 export class CompMatchAct extends FGUICompMatchAct {
     private _ctrls:Array<fgui.Controller> = []
     private _nowIndex = 0;
     private _scheid:(()=>void) | null = null;
     protected onConstruct(){
         super.onConstruct();
-        const comp = this.node.components[0]
         this._scheid = this.change.bind(this)
-        comp.schedule(this._scheid, 0.2)
+        this.schedule(this._scheid, 0.2)
         this._ctrls.push(this.ctrl_act_0)
         this._ctrls.push(this.ctrl_act_1)
         this._ctrls.push(this.ctrl_act_2)
@@ -35,8 +37,7 @@ export class CompMatchAct extends FGUICompMatchAct {
     }
 
     stopSche():void{ 
-        const comp = this.node.components[0]
-        comp.unschedule(this._scheid)
+        this._scheid && this.unschedule(this._scheid)
     }
 
     success():void{ 

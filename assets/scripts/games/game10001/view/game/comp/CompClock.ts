@@ -1,6 +1,9 @@
 
+import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
 import FGUICompClock from '../../../../../fgui/game10001/FGUICompClock';
 import * as fgui from "fairygui-cc";
+
+@ViewClass()
 export class CompClock extends FGUICompClock {
     private _scheid:((dt:number)=>void) | null = null;
     private _isRunAct:boolean = false;

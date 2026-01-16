@@ -1,7 +1,9 @@
 import FGUICompPopMessage from "../../../fgui/common/FGUICompPopMessage";
 import {ENUM_POP_MESSAGE_TYPE} from '../../../datacenter/InterfaceConfig';
 import * as fgui from "fairygui-cc";
+import { ViewClass } from "../../../frameworks/Framework";
 
+@ViewClass()
 export class CompMessage extends FGUICompPopMessage { 
     private _data:any | null = null;
     show(data?:any){

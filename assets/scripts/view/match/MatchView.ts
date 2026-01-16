@@ -6,11 +6,13 @@ import { ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from '../../datacenter/InterfaceConf
 import { PopMessageView } from '../common/PopMessageView';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 import { DataCenter } from '../../datacenter/Datacenter';
-import { LogColors } from '../../frameworks/Framework';
+import { LogColors, ViewClass } from '../../frameworks/Framework';
 import { TipsView } from '../common/TipsView';
 import {CompMatchAct} from './comp/CompMatchAct';
 import { sys } from 'cc';
 import { SprotoMatchOnSure, SprotoMatchOnSureFail } from '../../../types/protocol/lobby/s2c';
+
+@ViewClass()
 export class MatchView extends FGUIMatchView {
     private _checkID:number = 0;
     private _beCheck:boolean = false;

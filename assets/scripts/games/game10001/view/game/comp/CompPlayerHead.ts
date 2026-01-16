@@ -5,8 +5,9 @@ import { HorizontalTextAlignment } from 'cc';
 import { GameData } from '../../../data/Gamedata';
 import { PlayerInfoView } from '../../playerInfo/PlayerInfoView';
 import { CompTalk } from './CompTalk';
-import { GameSocketManager } from 'db://assets/scripts/frameworks/GameSocketManager';
-import { SprotoForwardMessage } from 'db://assets/types/protocol/game10001/s2c';
+import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
+
+@ViewClass()
 export class CompPlayerHead extends FGUICompPlayerHead {
     public localSeat:number = 0;
     protected onConstruct(){

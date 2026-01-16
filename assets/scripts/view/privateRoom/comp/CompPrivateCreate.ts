@@ -6,7 +6,9 @@ import { CREATE_ROOM_PLAYER_CNT, ENUM_POP_MESSAGE_TYPE, LOCAL_KEY } from "../../
 import { TipsView } from "../../common/TipsView";
 import { sys } from "cc";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
+import { ViewClass } from "../../../frameworks/Framework";
 
+@ViewClass()
 export class CompPrivateCreate extends FGUICompPrivateCreate { 
     private _data:any|null = null;
     show(data?:any){

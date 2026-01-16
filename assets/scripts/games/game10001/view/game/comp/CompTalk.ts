@@ -1,5 +1,8 @@
+import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
 import FGUICompTalk from '../../../../../fgui/game10001/FGUICompTalk';
 import * as fgui from "fairygui-cc";
+
+@ViewClass()
 export class CompTalk extends FGUICompTalk {
     private _localSeat:number = 0;
     private _talkMsg:string = "";

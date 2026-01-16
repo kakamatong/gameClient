@@ -6,7 +6,7 @@ import { DataCenter } from '../../datacenter/Datacenter';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { TipsView } from '../common/TipsView';
 import { UserData } from '../../modules/UserData';
-import { DispatchEvent } from '../../frameworks/Framework';
+import { DispatchEvent, ViewClass } from '../../frameworks/Framework';
 import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../datacenter/InterfaceConfig';
 import { PopMessageView } from '../common/PopMessageView';
 import { RevokeAccount } from '../../modules/RevokeAccount';
@@ -18,6 +18,7 @@ import { SoundManager } from '../../frameworks/SoundManager';
  * @description 用户中心界面视图类，继承自FGUI生成的FGUIUserCenterView类
  * @extends FGUIUserCenterView
  */
+@ViewClass()
 export class UserCenterView extends FGUIUserCenterView {
     /**
      * @method show

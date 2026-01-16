@@ -2,8 +2,9 @@ import FGUITotalResultView from '../../../../fgui/game10001Result/FGUITotalResul
 import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/Gamedata';
 import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
-import { ChangeScene } from '../../../../frameworks/Framework';
+import { ChangeScene, ViewClass } from '../../../../frameworks/Framework';
 
+@ViewClass()
 export class TotalResultView extends FGUITotalResultView { 
     private _data:any | null = null;
     show(data?:any){

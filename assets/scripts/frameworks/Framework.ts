@@ -1,4 +1,4 @@
-import { Component, Director, error, Scene } from 'cc';
+import { Director, Scene } from 'cc';
 import { PackageManager } from './PackageManager';
 type eventFunc = (...args:any[]) =>void
 

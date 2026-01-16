@@ -1,6 +1,8 @@
 import FGUIPrivateRoomView from "../../fgui/privateRoom/FGUIPrivateRoomView";
 import * as fgui from "fairygui-cc";
+import { ViewClass } from "../../frameworks/Framework";
 
+@ViewClass()
 export class PrivateRoomView extends FGUIPrivateRoomView { 
     show(data?:any){
         this.UI_COMP_CREATE.show(data)

@@ -1,7 +1,9 @@
 import FGUIPrivacyView from '../../fgui/privacy/FGUIPrivacyView';
 import * as fgui from "fairygui-cc";
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
+import { ViewClass } from '../../frameworks/Framework';
 
+@ViewClass()
 export class PrivacyView extends FGUIPrivacyView {
     private _resolve:Function | null = null;
     show(data?: any):void{

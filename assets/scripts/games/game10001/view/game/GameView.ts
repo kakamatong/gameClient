@@ -2,7 +2,7 @@
 import FGUIGameView from '../../../../fgui/game10001/FGUIGameView';
 import FGUICompHand from '../../../../fgui/game10001/FGUICompHand';
 import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
-import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../../../frameworks/Framework';
+import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ViewClass } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
 import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX, HAND_SOUND_NAME} from '../../data/InterfaceGameConfig';
@@ -24,6 +24,8 @@ import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
 import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
 import { SprotoClientReady } from 'db://assets/types/protocol/game10001/c2s';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
+
+@ViewClass()
 export class GameView extends FGUIGameView {
     private _selectOutHand:number = -1;
     

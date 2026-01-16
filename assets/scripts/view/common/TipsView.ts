@@ -2,7 +2,9 @@ import { _decorator, AssetManager, assetManager} from 'cc';
 import FGUITipsView from "../../fgui/common/FGUITipsView";
 import FGUICompTips from "../../fgui/common/FGUICompTips";
 import * as fgui from "fairygui-cc";
+import { ViewClass } from '../../frameworks/Framework';
 
+@ViewClass()
 export class TipsView extends FGUITipsView { 
 
     public static showView(params?:any):void {

@@ -3,8 +3,9 @@ import FGUIPlayerInfoView from '../../../../fgui/game10001PlayerInfo/FGUIPlayerI
 import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/Gamedata';
 import FGUICompHead from '../../../../fgui/common/FGUICompHead';
+import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
 
-
+@ViewClass()
 export class PlayerInfoView extends FGUIPlayerInfoView {
     private _userid:number = 0;
     private _cp:number = 0;

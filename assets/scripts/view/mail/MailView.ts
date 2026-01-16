@@ -2,7 +2,9 @@ import FGUIMatchView from '../../fgui/mail/FGUIMailView';
 import * as fgui from "fairygui-cc";
 import { Mail } from '../../modules/Mail';
 import { LoadingView } from '../common/LoadingView';
+import { ViewClass } from '../../frameworks/Framework';
 
+@ViewClass()
 export class MailView extends FGUIMatchView {
     private _list:any[] = [];
             

@@ -1,6 +1,8 @@
 import FGUILoadingView from "../../fgui/common/FGUILoadingView";
 import * as fgui from "fairygui-cc";
+import { ViewClass } from "../../frameworks/Framework";
 
+@ViewClass()
 export class LoadingView extends FGUILoadingView { 
     private _scheid:(()=>void) | null = null;
     show(data?:any){

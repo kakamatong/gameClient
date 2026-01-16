@@ -3,7 +3,9 @@ import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/Gamedata';
 import { SoundManager } from '../../../../frameworks/SoundManager';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
+import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
 
+@ViewClass()
 export class ResultView extends FGUIResultView { 
     private _continueFunc:(()=>void) | null = null;
     private _scoreData:Array<{userid:number, cpData:any, nickname:string}> = []

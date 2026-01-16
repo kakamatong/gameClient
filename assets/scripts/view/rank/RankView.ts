@@ -2,7 +2,9 @@ import { _decorator} from 'cc';
 import FGUIRankView from "../../fgui/rank/FGUIRankView";
 import { CompRankInfo } from "./comp/CompRankInfo";
 import * as fgui from "fairygui-cc";
+import { ViewClass } from '../../frameworks/Framework';
 
+@ViewClass()
 export class RankView extends FGUIRankView { 
     private _data:any | null = null;
     private _selfRank:number = 0;
