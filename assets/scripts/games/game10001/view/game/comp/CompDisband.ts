@@ -179,8 +179,7 @@ export class CompDisband extends FGUICompDisband {
     private startCountdown() {
         this.stopCountdown(); // 先停止之前的倒计时
         
-        const comp = this.node.components[0]
-        comp.schedule(this._scheid, 1)
+        this._scheid && this.schedule(this._scheid, 1)
     }
 
     onTimer(){
@@ -196,8 +195,7 @@ export class CompDisband extends FGUICompDisband {
      * 停止倒计时
      */
     private stopCountdown() {
-        const comp = this.node.components[0]
-        comp.unschedule(this._scheid)
+        this._scheid && this.unschedule(this._scheid)
     }
 
     /**

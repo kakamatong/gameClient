@@ -83,7 +83,7 @@ export class MatchView extends FGUIMatchView {
             this.ctrl_enter.selectedIndex = 2;
             this.stopAct()
             this.showLeftTime(data.endTime ?? 0)
-            this.node.components[0].schedule(()=>{
+            this.schedule(()=>{
                 this.showLeftTime(data.endTime ?? 0)
             },1)
 
