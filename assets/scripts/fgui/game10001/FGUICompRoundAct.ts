@@ -54,5 +54,9 @@ export default class FGUICompRoundAct extends fgui.GComponent {
 		this.act = this.getTransitionAt(0);
 		this.act2 = this.getTransitionAt(1);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompRoundAct.URL, FGUICompRoundAct);

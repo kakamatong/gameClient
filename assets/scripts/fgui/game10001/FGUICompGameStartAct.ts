@@ -50,5 +50,9 @@ export default class FGUICompGameStartAct extends fgui.GComponent {
 	protected onConstruct():void {
 		this.act = this.getTransitionAt(0);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompGameStartAct.URL, FGUICompGameStartAct);

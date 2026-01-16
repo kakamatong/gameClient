@@ -56,6 +56,10 @@ export default class FGUITotalResultView extends fgui.GComponent {
 		this.UI_BTN_BACK = <fgui.GButton>(this.getChildAt(5));
 		this.UI_BTN_BACK.onClick(this.onBtnBack, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnExit():void{};
 	onBtnBack():void{};
 }

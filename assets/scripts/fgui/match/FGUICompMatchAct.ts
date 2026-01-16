@@ -54,5 +54,9 @@ export default class FGUICompMatchAct extends fgui.GComponent {
 		this.ctrl_act_1 = this.getControllerAt(1);
 		this.ctrl_act_2 = this.getControllerAt(2);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompMatchAct.URL, FGUICompMatchAct);

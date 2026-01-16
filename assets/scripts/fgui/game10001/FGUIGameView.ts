@@ -127,6 +127,10 @@ export default class FGUIGameView extends fgui.GComponent {
 		this.UI_BTN_TALK = <fgui.GButton>(this.getChildAt(32));
 		this.UI_BTN_TALK.onClick(this.onBtnTalk, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnDisband():void{};
 	onBtnBack():void{};
 	onBtnPaper():void{};

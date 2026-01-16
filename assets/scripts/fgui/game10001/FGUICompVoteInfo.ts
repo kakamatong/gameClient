@@ -54,5 +54,9 @@ export default class FGUICompVoteInfo extends fgui.GComponent {
 		this.UI_COMP_HEAD = <fgui.GComponent>(this.getChildAt(0));
 		this.UI_TXT_NICKNAME = <fgui.GTextField>(this.getChildAt(1));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompVoteInfo.URL, FGUICompVoteInfo);

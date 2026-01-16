@@ -1,7 +1,7 @@
 
 import FGUILobbyView from '../../fgui/lobby/FGUILobbyView';
 import * as fgui from "fairygui-cc";
-import { AddEventListener, ChangeScene, LogColors, PackageLoad, RemoveEventListener } from '../../frameworks/Framework';
+import { AddEventListener, ChangeScene, LogColors, PackageLoad, RemoveEventListener, ViewClass } from '../../frameworks/Framework';
 import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/ConnectSvr';
 import { PopMessageView } from '../common/PopMessageView';
@@ -22,6 +22,7 @@ import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 @PackageLoad(['common','props'])
+@ViewClass()
 export class LobbyView extends FGUILobbyView {
 
     private _node1: fgui.GObject | null = null;
@@ -80,11 +81,11 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onSocketDisconnect(){
-        const comp = this.node.components[0]
         const func = ()=>{
             this.startLogin()
         }
-        comp.scheduleOnce(func, 0.2)
+
+        this.scheduleOnce(func, 0.2)
         
     }
 

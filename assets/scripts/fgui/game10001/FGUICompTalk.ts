@@ -62,5 +62,9 @@ export default class FGUICompTalk extends fgui.GComponent {
 		this.UI_TXT_1 = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_2 = <fgui.GTextField>(this.getChildAt(5));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompTalk.URL, FGUICompTalk);

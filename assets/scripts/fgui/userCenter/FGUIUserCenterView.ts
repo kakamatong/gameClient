@@ -80,6 +80,10 @@ export default class FGUIUserCenterView extends fgui.GComponent {
 		this.UI_BTN_DEL_ACC = <fgui.GButton>(this.getChildAt(23));
 		this.UI_BTN_DEL_ACC.onClick(this.onBtnDelAcc, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnWechat():void{};
 	onBtnClose():void{};
 	onBtnBgmusic():void{};

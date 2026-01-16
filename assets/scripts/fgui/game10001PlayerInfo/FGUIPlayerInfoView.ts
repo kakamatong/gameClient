@@ -69,6 +69,10 @@ export default class FGUIPlayerInfoView extends fgui.GComponent {
 		this.UI_TXT_RATE = <fgui.GTextField>(this.getChildAt(15));
 		this.UI_TXT_CP = <fgui.GTextField>(this.getChildAt(17));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPlayerInfoView.URL, FGUIPlayerInfoView);

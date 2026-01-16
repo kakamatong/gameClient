@@ -51,5 +51,9 @@ export default class FGUIPopMessageView extends fgui.GComponent {
 	protected onConstruct():void {
 		this.UI_COMP_MAIN = <FGUICompPopMessage>(this.getChildAt(1));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPopMessageView.URL, FGUIPopMessageView);

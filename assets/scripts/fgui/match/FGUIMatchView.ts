@@ -66,6 +66,10 @@ export default class FGUIMatchView extends fgui.GComponent {
 		this.UI_BTN_AUTO_CHECK.onClick(this.onBtnAutoCheck, this);
 		this.UI_GROUP_AUTO = <fgui.GGroup>(this.getChildAt(8));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnJoin():void{};
 	onBtnCancel():void{};
 	onBtnAutoCheck():void{};

@@ -64,6 +64,10 @@ export default class FGUICompPopMessage extends fgui.GComponent {
 		this.UI_TXT_TITLE = <fgui.GTextField>(this.getChildAt(4));
 		this.UI_TXT_CONTENT = <fgui.GTextField>(this.getChildAt(5));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 	onBtnSure():void{};
 	onBtnCancel():void{};

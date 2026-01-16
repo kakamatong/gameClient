@@ -58,5 +58,9 @@ export default class FGUICompTotalResultInfo extends fgui.GComponent {
 		this.UI_TXT_WIN = <fgui.GTextField>(this.getChildAt(6));
 		this.UI_TXT_LOSE = <fgui.GTextField>(this.getChildAt(7));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompTotalResultInfo.URL, FGUICompTotalResultInfo);

@@ -69,6 +69,10 @@ export default class FGUIResultView extends fgui.GComponent {
 		this.UI_COMP_ACT = <FGUICompAct>(this.getChildAt(7));
 		this.act = this.getTransitionAt(0);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnCon():void{};
 	onBtnBack():void{};
 }

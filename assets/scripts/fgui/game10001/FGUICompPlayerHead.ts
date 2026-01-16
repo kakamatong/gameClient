@@ -69,5 +69,9 @@ export default class FGUICompPlayerHead extends fgui.GComponent {
 		this.UI_COMP_THINKING = <FGUICompThinkAct>(this.getChildAt(6));
 		this.UI_COMP_TALK = <FGUICompTalk>(this.getChildAt(7));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompPlayerHead.URL, FGUICompPlayerHead);

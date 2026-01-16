@@ -73,6 +73,10 @@ export default class FGUILobbyView extends fgui.GComponent {
 		this.UI_BTN_SHARE = <fgui.GButton>(this.getChildAt(8));
 		this.UI_BTN_SHARE.onClick(this.onBtnShare, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnMatchRoom():void{};
 	onBtnPrivateRoom():void{};
 	onBtnMails():void{};

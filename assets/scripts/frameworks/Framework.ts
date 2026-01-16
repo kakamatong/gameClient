@@ -63,43 +63,6 @@ export const ChangeScene = (name:string):void => {
 }
 
 /**
- * 延迟执行
- * @param node 
- * @param callback 
- * @param delay 
- */
-export const ScheduleOnce = (node:Component, callback: () => void, delay: number) =>{
-    node.scheduleOnce(callback, delay)
-}
-
-/**
- * 定时执行
- * @param node 
- * @param callback 
- * @param interval 
- */
-export const Schedule = (node:Component, callback: () => void, interval: number) =>{
-    node.schedule(callback, interval)
-}
-
-/**
- * 取消定时执行
- * @param node 
- * @param callback 
- */
-export const Unschedule = (node:Component, callback: () => void) =>{
-    node.unschedule(callback)
-}
-
-/**
- * 取消所有定时执行
- * @param node 
- */
-export const UnscheduleAllCallbacks = (node:Component) =>{
-    node.unscheduleAllCallbacks()
-}
-
-/**
  * 包加载
  * @param packages 
  */
@@ -116,6 +79,29 @@ export const PackageLoad = (packages:string[]) =>{
                 // 调用原方法
                 oldFunc.apply(this, [params, callBack])
             })
+        }
+    }
+}
+
+/**
+ * 视图类
+ */
+export const ViewClass = (data?:any) =>{
+    return function <T extends new (...args: any[]) => any>(constructor: T) {
+        constructor.prototype.scheduleOnce = function (callback: () => void, delay: number) {
+            this.node.components[0].scheduleOnce(callback, delay)
+        }
+
+        constructor.prototype.schedule = function (callback: () => void, interval: number) {
+            this.node.components[0].schedule(callback, interval)
+        }
+
+        constructor.prototype.unschedule = function (callback: () => void) {
+            this.node.components[0].unschedule(callback)
+        }
+
+        constructor.prototype.unscheduleAllCallbacks = function () {
+            this.node.components[0].unscheduleAllCallbacks()
         }
     }
 }

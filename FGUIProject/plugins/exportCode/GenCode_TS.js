@@ -140,6 +140,10 @@ function genCode(handler) {
         }
 
         writer.endBlock();
+        writer.writeln('scheduleOnce(callback: () => void, delay: number):void{};');
+        writer.writeln('unscheduleAllCallbacks():void{};');
+        writer.writeln('unschedule(callback: () => void):void{};');
+        writer.writeln('schedule(callback: () => void, interval: number):void{};');
 
         for (let j = 0; j < memberCnt; j++) {
             let memberInfo = members.get_Item(j);

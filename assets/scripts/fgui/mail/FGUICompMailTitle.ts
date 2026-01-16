@@ -54,5 +54,9 @@ export default class FGUICompMailTitle extends fgui.GComponent {
 		this.UI_TXT_TITLE = <fgui.GTextField>(this.getChildAt(1));
 		this.UI_TXT_TIME = <fgui.GTextField>(this.getChildAt(3));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompMailTitle.URL, FGUICompMailTitle);

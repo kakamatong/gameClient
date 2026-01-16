@@ -50,5 +50,9 @@ export default class FGUICompHead extends fgui.GComponent {
 	protected onConstruct():void {
 		this.UI_LOADER_HEAD = <fgui.GLoader>(this.getChildAt(1));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompHead.URL, FGUICompHead);

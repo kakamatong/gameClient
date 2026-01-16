@@ -67,6 +67,10 @@ export default class FGUICompPrivateCreate extends fgui.GComponent {
 		this.UI_BTN_JU0 = <fgui.GButton>(this.getChildAt(8));
 		this.UI_BTN_JU0.onClick(this.onBtnJu0, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnCreate():void{};
 	onBtnJu3():void{};
 	onBtnJu5():void{};

@@ -54,5 +54,9 @@ export default class FGUICompAct extends fgui.GComponent {
 		this.ctrl_sign = this.getControllerAt(1);
 		this.act = this.getTransitionAt(0);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompAct.URL, FGUICompAct);

@@ -59,6 +59,10 @@ export default class FGUIPrivacyView extends fgui.GComponent {
 		this.UI_BTN_PRIVACY = <fgui.GButton>(this.getChildAt(6));
 		this.UI_BTN_PRIVACY.onClick(this.onBtnPrivacy, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnRefuse():void{};
 	onBtnAgree():void{};
 	onBtnPrivacy():void{};

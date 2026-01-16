@@ -55,6 +55,10 @@ export default class FGUIRankView extends fgui.GComponent {
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.UI_TXT_SELF_RANK = <fgui.GTextField>(this.getChildAt(6));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIRankView.URL, FGUIRankView);

@@ -50,5 +50,9 @@ export default class FGUITipsView extends fgui.GComponent {
 	protected onConstruct():void {
 		this.UI_LV_TIPS = <fgui.GList>(this.getChildAt(0));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUITipsView.URL, FGUITipsView);

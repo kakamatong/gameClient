@@ -54,5 +54,9 @@ export default class FGUICompResultInfo extends fgui.GComponent {
 		this.UI_TXT_SCORE = <fgui.GTextField>(this.getChildAt(1));
 		this.UI_TXT_ID = <fgui.GTextField>(this.getChildAt(2));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompResultInfo.URL, FGUICompResultInfo);

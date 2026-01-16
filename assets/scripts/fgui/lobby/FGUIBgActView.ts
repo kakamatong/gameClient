@@ -56,5 +56,9 @@ export default class FGUIBgActView extends fgui.GComponent {
 		this.UI_COMP_BG_ACT_3 = <fgui.GComponent>(this.getChildAt(2));
 		this.UI_COMP_BG_ACT_4 = <fgui.GComponent>(this.getChildAt(3));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIBgActView.URL, FGUIBgActView);

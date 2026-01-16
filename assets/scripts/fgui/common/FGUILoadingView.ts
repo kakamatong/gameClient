@@ -52,5 +52,9 @@ export default class FGUILoadingView extends fgui.GComponent {
 		this.title = <fgui.GTextField>(this.getChildAt(1));
 		this.act = this.getTransitionAt(0);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUILoadingView.URL, FGUILoadingView);

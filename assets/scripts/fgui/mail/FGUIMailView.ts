@@ -58,6 +58,10 @@ export default class FGUIMailView extends fgui.GComponent {
 		this.UI_LV_LIST = <fgui.GList>(this.getChildAt(5));
 		this.UI_COMP_CONTENT = <FGUICompMailContent>(this.getChildAt(8));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIMailView.URL, FGUIMailView);

@@ -51,6 +51,10 @@ export default class FGUILoginView extends fgui.GComponent {
 		this.UI_BTN_START = <fgui.GButton>(this.getChildAt(8));
 		this.UI_BTN_START.onClick(this.onBtnStart, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnStart():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUILoginView.URL, FGUILoginView);

@@ -143,8 +143,7 @@ export class CompDisband extends FGUICompDisband {
             });
         }
 
-        const comp = this.node.components[0]
-        comp.scheduleOnce(()=>{
+        this.scheduleOnce(()=>{
             this.visible = false
         },1)
     }

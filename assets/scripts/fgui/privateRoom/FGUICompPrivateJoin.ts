@@ -86,6 +86,10 @@ export default class FGUICompPrivateJoin extends fgui.GComponent {
 		this.UI_BTN_JOIN.onClick(this.onBtnJoin, this);
 		this.UI_TXT_ROOMID = <fgui.GTextField>(this.getChildAt(13));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnJoin1():void{};
 	onBtnJoin2():void{};
 	onBtnJoin3():void{};

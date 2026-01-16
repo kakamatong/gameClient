@@ -50,5 +50,9 @@ export default class FGUICompBtnSound extends fgui.GButton {
 	protected onConstruct():void {
 		this.ctrl_status = this.getControllerAt(1);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompBtnSound.URL, FGUICompBtnSound);

@@ -53,6 +53,10 @@ export default class FGUICompMailContent extends fgui.GComponent {
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 		this.title = <fgui.GTextField>(this.getChildAt(3));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompMailContent.URL, FGUICompMailContent);

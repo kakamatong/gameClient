@@ -50,5 +50,9 @@ export default class FGUICompTips extends fgui.GComponent {
 	protected onConstruct():void {
 		this.title = <fgui.GTextField>(this.getChildAt(1));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompTips.URL, FGUICompTips);

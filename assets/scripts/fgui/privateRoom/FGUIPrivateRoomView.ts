@@ -59,6 +59,10 @@ export default class FGUIPrivateRoomView extends fgui.GComponent {
 		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(6));
 		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIPrivateRoomView.URL, FGUIPrivateRoomView);

@@ -2,7 +2,7 @@
 import FGUIGameView from '../../../../fgui/game10001/FGUIGameView';
 import FGUICompHand from '../../../../fgui/game10001/FGUICompHand';
 import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
-import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ScheduleOnce } from '../../../../frameworks/Framework';
+import { AddEventListener, ChangeScene, LogColors, RemoveEventListener } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
 import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX, HAND_SOUND_NAME} from '../../data/InterfaceGameConfig';
@@ -116,8 +116,7 @@ export class GameView extends FGUIGameView {
 
     onSvrTotalResult(data:any){
         const time = 1.2
-
-        ScheduleOnce(this.node.components[0],()=>{
+        this.scheduleOnce(()=>{
             TotalResultView.showView(data)
         }, time)
     }
@@ -296,7 +295,7 @@ export class GameView extends FGUIGameView {
                     const func = ()=>{
                         this.onBtnContinue()
                     }
-                    ScheduleOnce(this.node.components[0],()=>{
+                    this.scheduleOnce(()=>{
                         ResultView.showView({flag: info.endResult, continueFunc:func, scores: scoreData})
                     }, 1)
                     break

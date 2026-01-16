@@ -50,5 +50,9 @@ export default class FGUIBtnSelect extends fgui.GButton {
 	protected onConstruct():void {
 		this.mask = <fgui.GLoader>(this.getChildAt(0));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUIBtnSelect.URL, FGUIBtnSelect);

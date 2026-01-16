@@ -6,9 +6,8 @@ export class LoadingView extends FGUILoadingView {
     show(data?:any){
         this.title.text = data.content ?? "加载中";
         if (data.time && data.time > 0) {
-            const comp = this.node.components[0]
             this._scheid = this.onTimeEnd.bind(this)
-            comp.scheduleOnce(this._scheid, data.time)
+            this.schedule(this._scheid, data.time)
         }
     }
 

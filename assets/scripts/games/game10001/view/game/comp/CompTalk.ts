@@ -1,4 +1,3 @@
-import { ScheduleOnce, UnscheduleAllCallbacks } from 'db://assets/scripts/frameworks/Framework';
 import FGUICompTalk from '../../../../../fgui/game10001/FGUICompTalk';
 import * as fgui from "fairygui-cc";
 export class CompTalk extends FGUICompTalk {
@@ -10,14 +9,14 @@ export class CompTalk extends FGUICompTalk {
         this._talkMsg = value;
         this.visible = true;
         
-        UnscheduleAllCallbacks(this.node.components[0]);
-        ScheduleOnce(this.node.components[0], ()=>{
-            this._talkMsg = ""
-            this.visible = false;
+        this.unscheduleAllCallbacks();
+        this.scheduleOnce(()=>{
+            this._txtNode && (this._txtNode.text = value);
         }, 2);
 
-        ScheduleOnce(this.node.components[0], ()=>{
-            this._txtNode && (this._txtNode.text = value);
+        this.scheduleOnce(()=>{
+            this._talkMsg = ""
+            this.visible = false;
         }, 0);
     }
 

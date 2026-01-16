@@ -52,5 +52,9 @@ export default class FGUICompRich extends fgui.GComponent {
 		this.UI_TXT_NUM = <fgui.GTextField>(this.getChildAt(1));
 		this.UI_LOADER_ICON = <fgui.GLoader>(this.getChildAt(2));
 	}
+	scheduleOnce(callback: () => void, delay: number):void{};
+	unscheduleAllCallbacks():void{};
+	unschedule(callback: () => void):void{};
+	schedule(callback: () => void, interval: number):void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompRich.URL, FGUICompRich);
