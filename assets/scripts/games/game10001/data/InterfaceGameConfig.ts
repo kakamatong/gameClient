@@ -132,3 +132,8 @@ export const HAND_SOUND_NAME: { [key: number]: string } = {
 }
 
 export const HAND_INDEX = [HAND_FLAG.SCISSORS, HAND_FLAG.ROCK, HAND_FLAG.PAPER]
+
+// 消息转发类型
+export enum FORWARD_MESSAGE_TYPE {
+    TALK = 1, // 聊天
+}

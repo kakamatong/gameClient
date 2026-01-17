@@ -2,7 +2,7 @@
 <component size="657,789">
   <displayList>
     <image id="n0_pxa5" name="n0" src="muz3d" fileName="imgs/popbg.png" pkg="gj0r6g5i" xy="0,0"/>
-    <list id="n1_pxa5" name="n1" xy="41,57" size="464,696" overflow="scroll" defaultItem="ui://fznom2fxpxa52">
+    <list id="n1_pxa5" name="UI_LIST_TALK" xy="41,57" size="464,696" overflow="scroll" defaultItem="ui://fznom2fxpxa52">
       <item/>
       <item/>
       <item/>
