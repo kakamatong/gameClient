@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
-  <displayList/>
+  <displayList>
+    <component id="n0_10mrt" name="UI_COMP_MAIN" src="pxa51" fileName="comp/CompMainTalk.xml" xy="785,887"/>
+  </displayList>
+  <transition name="in">
+    <item time="0" type="XY" target="n0_10mrt" tween="true" startValue="785.5,887.5" endValue="250.5,887.5" duration="12" ease="Back.InOut"/>
+  </transition>
+  <transition name="out">
+    <item time="0" type="XY" target="n0_10mrt" tween="true" startValue="250,887.5" endValue="785,887.5" duration="12" ease="Back.InOut"/>
+  </transition>
 </component>
