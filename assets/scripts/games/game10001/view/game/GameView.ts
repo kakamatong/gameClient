@@ -25,6 +25,7 @@ import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord,
 import { SprotoClientReady } from 'db://assets/types/protocol/game10001/c2s';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { TALK_LIST } from '../talk/TalkConfig';
+import { TalkView } from '../talk/TalkView';
 
 @ViewClass()
 export class GameView extends FGUIGameView {
@@ -833,6 +834,13 @@ export class GameView extends FGUIGameView {
         }).catch((err:any) => { 
             console.log(err)
         })
+    }
+
+    /**
+     * 聊天
+     */
+    onBtnTalk(): void {
+        TalkView.showView()
     }
 
     onChanged(event: any):void{

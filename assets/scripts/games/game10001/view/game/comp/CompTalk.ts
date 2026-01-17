@@ -15,12 +15,12 @@ export class CompTalk extends FGUICompTalk {
         this.unscheduleAllCallbacks();
         this.scheduleOnce(()=>{
             this._txtNode && (this._txtNode.text = value);
-        }, 2);
+        }, 0);
 
         this.scheduleOnce(()=>{
             this._talkMsg = ""
             this.visible = false;
-        }, 0);
+        }, 3);
     }
 
     public get talkMsg():string{

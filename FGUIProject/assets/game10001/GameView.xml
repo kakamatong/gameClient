@@ -128,7 +128,7 @@
     <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="106,687" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <component id="n68_pxa5" name="UI_BTN_TALK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="651,1570" size="95,95" visible="false">
+    <component id="n68_pxa5" name="UI_BTN_TALK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="651,1570" size="95,95">
       <relation target="" sidePair="left-right,bottom-bottom"/>
       <property target="icon" propertyId="1" value="ui://2zsfe53xpxa5o"/>
     </component>

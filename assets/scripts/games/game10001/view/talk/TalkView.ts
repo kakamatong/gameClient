@@ -16,6 +16,8 @@ export class TalkView extends FGUITalkView {
 
     initUI(){
         this.UI_COMP_MAIN.UI_LIST_TALK.itemRenderer = this.itemRenderer.bind(this);
+        this.UI_COMP_MAIN.UI_LIST_TALK.numItems = TALK_LIST.length;
+        this.onClick(this.onBtnClose, this);
     }
 
     itemRenderer(index:number, obj:fgui.GObject){
@@ -34,6 +36,24 @@ export class TalkView extends FGUITalkView {
             id: id
         }
         GameSocketManager.instance.sendToServer(SprotoForwardMessage, {type:FORWARD_MESSAGE_TYPE.TALK, msg:JSON.stringify(data)});
+    }
+
+    /**
+     * 关闭聊天
+     * @returns void
+     */
+    onBtnClose(){
+        if(this.in.playing){
+            return
+        }
+
+        if(this.out.playing){
+            return
+        }
+
+        this.out.play(() => {
+            TalkView.hideView();
+        });
     }
 }
 
