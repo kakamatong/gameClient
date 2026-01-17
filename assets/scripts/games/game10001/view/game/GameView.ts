@@ -5,7 +5,7 @@ import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { AddEventListener, ChangeScene, LogColors, RemoveEventListener, ViewClass } from '../../../../frameworks/Framework';
 import { DataCenter } from '../../../../datacenter/Datacenter'
 import { GameData } from '../../data/Gamedata';
-import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX, HAND_SOUND_NAME} from '../../data/InterfaceGameConfig';
+import { SELF_LOCAL , PLAYER_ATTITUDE,PLAYER_STATUS,SEAT_2,ROOM_END_FLAG, HAND_INDEX, ROOM_TYPE, CTRL_BTN_INDEX, GAME_MODE_TXT, SEAT_1, ROOM_PLAYER_INDEX, HAND_SOUND_NAME, FORWARD_MESSAGE_TYPE} from '../../data/InterfaceGameConfig';
 import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/CompClock';
 import { PopMessageView } from '../../../../view/common/PopMessageView';
@@ -24,6 +24,7 @@ import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
 import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
 import { SprotoClientReady } from 'db://assets/types/protocol/game10001/c2s';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
+import { TALK_LIST } from '../talk/TalkConfig';
 
 @ViewClass()
 export class GameView extends FGUIGameView {
@@ -105,11 +106,7 @@ export class GameView extends FGUIGameView {
     // 服务消息转发
     onSvrForwardMessage(data:SprotoForwardMessage.Request) {
         console.log(data)
-        
-        for (let index = 0; index < GameData.instance.maxPlayer; index++) {
-            const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${index + 1}`);
-            playerNode.showMsg(data.msg)
-        }
+        this.forwardMessage(data)
     }
 
     onSvrGameRecord(data:any) {
@@ -177,6 +174,34 @@ export class GameView extends FGUIGameView {
             const compClock = this.UI_COMP_CLOCK as CompClock
             compClock.visible = false;
         }
+    }
+
+    // 处理转发协议
+    forwardMessage(data:SprotoForwardMessage.Request){
+        const type = data.type
+        switch (type) {
+            case FORWARD_MESSAGE_TYPE.TALK:
+                {
+                    this.showTalk(data)
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    // 显示聊天
+    showTalk(data:SprotoForwardMessage.Request):void{
+        const msg = JSON.parse(data.msg)
+        const id = msg.id ?? 1
+        const userid = data.from
+        const player = GameData.instance.getPlayerByUserid(userid);
+        if(!player) return
+        const localSeat = GameData.instance.seat2local(player.svrSeat)
+        const talkData = TALK_LIST.find((item) => item.id == id)
+        if(!talkData) return
+        const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localSeat}`);
+        playerNode.showMsg(talkData.msg)
     }
 
     onSvrGameClock(data:any):void{
@@ -447,7 +472,7 @@ export class GameView extends FGUIGameView {
                 player.ip = info.ip;
                 player.status = info.status;
                 player.cp = info.cp ?? 0;
-                const localSeat = GameData.instance.local2seat(player.svrSeat)
+                const localSeat = GameData.instance.seat2local(player.svrSeat)
                 this.showPlayerInfoBySeat(localSeat);
             }
         }
