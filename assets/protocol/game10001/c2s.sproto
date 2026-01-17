@@ -109,3 +109,17 @@ forwardMessage 11 {
         msg 1 : string
     }
 }
+
+# 聊天
+talkUse 12 {
+    request {
+        id 0 : integer #聊天id
+        ext 1 : string #扩展
+    }
+
+    response {
+        code 0 : integer
+        richNum 1 : integer #剩余道具数量
+        msg 2 : string
+    }
+}

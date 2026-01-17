@@ -189,11 +189,31 @@ export class DataCenter {
         return this._userRiches;
     }
 
+    /**
+     * @description 添加财富
+     * @param type 财富类型
+     * @param nums 财富数量
+     */
     addRichByType(type:number, nums:number) {
         const item = this._userRiches.find(rich => rich.richType === type);
         item && (item.richNums += nums)
     }
 
+    /**
+     * @description 更新财富
+     * @param type 财富类型
+     * @param nums 财富数量
+     */
+    updateRichByType(type:number, nums:number) {
+        const item = this._userRiches.find(rich => rich.richType === type);
+        item && (item.richNums = nums)
+    }
+
+    /**
+     * @description 获取财富
+     * @param type 财富类型
+     * @returns {richType:number, richNums:number} | undefined
+     */
     getRichByType(type:number):{richType:number, richNums:number} | undefined {
         return this._userRiches.find(rich => rich.richType === type);
     }

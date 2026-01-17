@@ -201,6 +201,12 @@ export interface ForwardmessageRequest {
     msg: string;
 }
 
+/** 聊天消息 - 请求参数 */
+export interface TalkRequest {
+    from: number;
+    id: number;
+}
+
 export namespace SprotoSvrMsg {
     export const Name = "svrMsg";
     export type Request = SvrmsgRequest;
@@ -325,4 +331,10 @@ export namespace SprotoForwardMessage {
     export const Name = "forwardMessage";
     export type Request = ForwardmessageRequest;
     export type Response = undefined;  // forwardMessage 协议没有响应参数
+}
+
+export namespace SprotoTalk {
+    export const Name = "talk";
+    export type Request = TalkRequest;
+    export type Response = undefined;  // talk 协议没有响应参数
 }

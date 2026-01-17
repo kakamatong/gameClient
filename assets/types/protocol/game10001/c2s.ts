@@ -100,6 +100,19 @@ export interface ForwardmessageResponse {
     msg: string;
 }
 
+/** 聊天 - 请求参数 */
+export interface TalkuseRequest {
+    id: number;
+    ext: string;
+}
+
+/** 聊天 - 响应参数 */
+export interface TalkuseResponse {
+    code: number;
+    richNum: number;
+    msg: string;
+}
+
 export namespace SprotoCall {
     export const Name = "call";
     export type Request = CallRequest;
@@ -158,4 +171,10 @@ export namespace SprotoForwardMessage {
     export const Name = "forwardMessage";
     export type Request = ForwardmessageRequest;
     export type Response = ForwardmessageResponse;
+}
+
+export namespace SprotoTalkUse {
+    export const Name = "talkUse";
+    export type Request = TalkuseRequest;
+    export type Response = TalkuseResponse;
 }

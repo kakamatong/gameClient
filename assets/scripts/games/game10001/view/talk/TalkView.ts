@@ -3,9 +3,11 @@ import FGUITalkView from "db://assets/scripts/fgui/game10001Talk/FGUITalkView";
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { GameSocketManager } from "db://assets/scripts/frameworks/GameSocketManager";
 import { TALK_LIST } from "db://assets/scripts/games/game10001/view/talk/TalkConfig";
-import { SprotoForwardMessage } from "db://assets/types/protocol/game10001/c2s";
+import {  SprotoTalkUse } from "db://assets/types/protocol/game10001/c2s";
 import * as fgui from "fairygui-cc";
-import { FORWARD_MESSAGE_TYPE } from "../../data/InterfaceGameConfig";
+import { DataCenter } from "db://assets/scripts/datacenter/Datacenter";
+import { RICH_TYPE } from "db://assets/scripts/datacenter/InterfaceConfig";
+import { TipsView } from "db://assets/scripts/view/common/TipsView";
 
 @ViewClass()
 export class TalkView extends FGUITalkView { 
@@ -27,15 +29,26 @@ export class TalkView extends FGUITalkView {
         node.UI_TXT_SPEED.text = `x${data.speed}`;
 
         node.onClick(()=>{
+            const rich = DataCenter.instance.getRichByType(RICH_TYPE.SILVER_COIN)
+            if (!rich || rich.richNums < data.speed) {
+                TipsView.showView({content:`银子不足(每日签到可补充银子)`})
+                return 
+            }
             this.sendTalk(data.id);
         }, this);
     }
 
+    /**
+     * 发送聊天
+     * @param id 聊天id
+     * @returns void
+     */
     sendTalk(id:number){
-        const data = {
-            id: id
-        }
-        GameSocketManager.instance.sendToServer(SprotoForwardMessage, {type:FORWARD_MESSAGE_TYPE.TALK, msg:JSON.stringify(data)});
+        GameSocketManager.instance.sendToServer(SprotoTalkUse, { id: id }, (data :SprotoTalkUse.Response) => {
+            if (data.code) {
+                DataCenter.instance.updateRichByType(RICH_TYPE.SILVER_COIN, data.richNum)
+            }
+        });
     }
 
     /**

@@ -239,3 +239,11 @@ forwardMessage 21 {
         msg 2 : string # 消息，一般为json，服务不解析，原样转发
     }
 }
+
+# 聊天消息
+talk 22 {
+    request {
+        from 0 : integer # 源玩家id，0 为系统
+        id 1 :integer # 聊天id
+    }
+}

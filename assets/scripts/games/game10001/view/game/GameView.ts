@@ -21,7 +21,7 @@ import { TotalResultView } from '../result/TotalResultView';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 import { CompPlayerHead } from './comp/CompPlayerHead';
 import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
-import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
+import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTalk, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
 import { SprotoClientReady } from 'db://assets/types/protocol/game10001/c2s';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { TALK_LIST } from '../talk/TalkConfig';
@@ -78,6 +78,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen(SprotoTotalResult, this.onSvrTotalResult.bind(this));
         GameSocketManager.instance.addServerListen(SprotoGameRecord, this.onSvrGameRecord.bind(this));
         GameSocketManager.instance.addServerListen(SprotoForwardMessage, this.onSvrForwardMessage.bind(this));
+        GameSocketManager.instance.addServerListen(SprotoTalk, this.onSvrTalk.bind(this));
         LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
         AddEventListener('gameSocketDisconnect',this.onGameSocketDisconnect, this);
     }
@@ -101,6 +102,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.removeServerListen(SprotoGameRecord);
         LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
         GameSocketManager.instance.removeServerListen(SprotoForwardMessage);
+        GameSocketManager.instance.removeServerListen(SprotoTalk);
         RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
     }
 
@@ -180,21 +182,19 @@ export class GameView extends FGUIGameView {
     // 处理转发协议
     forwardMessage(data:SprotoForwardMessage.Request){
         const type = data.type
-        switch (type) {
-            case FORWARD_MESSAGE_TYPE.TALK:
-                {
-                    this.showTalk(data)
-                }
-                break;
-            default:
-                break;
-        }
+    }
+
+    /**
+     * 服务聊天数据
+     * @param data 聊天数据
+     */
+    onSvrTalk(data:SprotoTalk.Request):void{
+        this.showTalk(data)
     }
 
     // 显示聊天
-    showTalk(data:SprotoForwardMessage.Request):void{
-        const msg = JSON.parse(data.msg)
-        const id = msg.id ?? 1
+    showTalk(data:SprotoTalk.Request):void{
+        const id = data.id
         const userid = data.from
         const player = GameData.instance.getPlayerByUserid(userid);
         if(!player) return
