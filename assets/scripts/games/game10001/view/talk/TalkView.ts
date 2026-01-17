@@ -1,6 +1,6 @@
 import FGUICompItem from "db://assets/scripts/fgui/game10001Talk/FGUICompItem";
 import FGUITalkView from "db://assets/scripts/fgui/game10001Talk/FGUITalkView";
-import { ViewClass } from "db://assets/scripts/frameworks/Framework";
+import { PackageLoad, ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { GameSocketManager } from "db://assets/scripts/frameworks/GameSocketManager";
 import { TALK_LIST } from "db://assets/scripts/games/game10001/view/talk/TalkConfig";
 import {  SprotoTalkUse } from "db://assets/types/protocol/game10001/c2s";
@@ -9,6 +9,7 @@ import { DataCenter } from "db://assets/scripts/datacenter/Datacenter";
 import { RICH_TYPE } from "db://assets/scripts/datacenter/InterfaceConfig";
 import { TipsView } from "db://assets/scripts/view/common/TipsView";
 
+@PackageLoad(['props'])
 @ViewClass()
 export class TalkView extends FGUITalkView { 
 
