@@ -38,6 +38,10 @@ export class CompSignInMain extends FGUICompSignInMain {
 
         this.UI_LIST_SIGN.numItems = this._signInConfig.length;
         this.UI_LIST_SIGN.scrollToView(this._nowIndex - 1, true)
+
+        if(this._signInStatus[this._nowIndex - 1] > 0){
+            this.ctrl_geted.selectedIndex = 1;
+        }
     }
 
     /**

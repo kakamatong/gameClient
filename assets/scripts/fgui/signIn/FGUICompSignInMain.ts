@@ -7,6 +7,7 @@ import { PackageManager } from "../../frameworks/PackageManager";
 
 export default class FGUICompSignInMain extends fgui.GComponent {
 
+	public ctrl_geted:fgui.Controller;
 	public UI_LIST_SIGN:fgui.GList;
 	public UI_BTN_GET:fgui.GButton;
 	public UI_BTN_MULT:fgui.GButton;
@@ -51,6 +52,7 @@ export default class FGUICompSignInMain extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.ctrl_geted = this.getControllerAt(0);
 		this.UI_LIST_SIGN = <fgui.GList>(this.getChildAt(2));
 		this.UI_BTN_GET = <fgui.GButton>(this.getChildAt(3));
 		this.UI_BTN_GET.onClick(this.onBtnGet, this);
