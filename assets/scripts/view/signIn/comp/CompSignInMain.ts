@@ -57,13 +57,17 @@ export class CompSignInMain extends FGUICompSignInMain {
     itemRenderer(index: number, obj: fgui.GObject):void{
         const config = this._signInConfig[index];
         const item = obj as FGUICompSignItem;
-        item.UI_TXT_NUM.text = config.richNums[0].toString();
+        item.UI_TXT_NUM.text = `x${config.richNums[0]}`
         item.UI_TXT_DAY.text = `第${index + 1}天`
         item.ctrl_icon.selectedIndex = this.getIconIndex(index);
         item.ctrl_geted.selectedIndex = this._signInStatus[index] ? 1 : 0;
         item.ctrl_today.selectedIndex = index == this._nowIndex - 1 ? 1 : 0;
     }
 
+    /**
+     * 获取图标索引
+     * @param day 
+     */
     getIconIndex(day:number):number{
         if(day < 3) return 0;
         if(day < 5) return 1;
