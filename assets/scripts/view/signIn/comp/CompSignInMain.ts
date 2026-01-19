@@ -5,6 +5,7 @@ import { SignIn } from "../../../modules/SignIn";
 import { SignInConfig } from "../data/SignInconfig";
 import { TipsView } from "../../common/TipsView";
 import FGUICompSignItem from "../../../fgui/signIn/FGUICompSignItem";
+import { SignInView } from "../SignInView";
 
 /**
  * 签到视图
@@ -32,6 +33,7 @@ export class CompSignInMain extends FGUICompSignInMain {
         }
 
         this.UI_LIST_SIGN.numItems = this._signInConfig.length;
+        this.UI_LIST_SIGN.scrollToView(6, true)
     }
 
     /**
@@ -99,7 +101,7 @@ export class CompSignInMain extends FGUICompSignInMain {
      * 关闭按钮点击
      */
     onBtnClose(): void {
-        CompSignInMain.hideView()
+        SignInView.hideView()
     }
 }
 fgui.UIObjectFactory.setExtension(CompSignInMain.URL, CompSignInMain);

@@ -18,5 +18,6 @@
     <component id="n6_pz9v" name="UI_BTN_MULT" src="pz9v1d" fileName="comp/CompBtnAdScale.xml" pkg="gj0r6g5i" xy="339,655" size="258,99" controller="ctrl_color,1">
       <Button title="双倍签到" titleFontSize="38"/>
     </component>
+    <component id="n7_pz9v" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="575,13"/>
   </displayList>
 </component>

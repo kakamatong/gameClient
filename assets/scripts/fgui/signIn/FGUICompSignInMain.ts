@@ -10,6 +10,7 @@ export default class FGUICompSignInMain extends fgui.GComponent {
 	public UI_LIST_SIGN:fgui.GList;
 	public UI_BTN_GET:fgui.GButton;
 	public UI_BTN_MULT:fgui.GButton;
+	public UI_BTN_CLOSE:fgui.GButton;
 	public static URL:string = "ui://cytsuqelbbyt4";
 
 	public static packageName:string = "signIn";
@@ -55,6 +56,8 @@ export default class FGUICompSignInMain extends fgui.GComponent {
 		this.UI_BTN_GET.onClick(this.onBtnGet, this);
 		this.UI_BTN_MULT = <fgui.GButton>(this.getChildAt(4));
 		this.UI_BTN_MULT.onClick(this.onBtnMult, this);
+		this.UI_BTN_CLOSE = <fgui.GButton>(this.getChildAt(5));
+		this.UI_BTN_CLOSE.onClick(this.onBtnClose, this);
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};
 	unscheduleAllCallbacks():void{};
@@ -62,5 +65,6 @@ export default class FGUICompSignInMain extends fgui.GComponent {
 	schedule(callback: () => void, interval: number):void{};
 	onBtnGet():void{};
 	onBtnMult():void{};
+	onBtnClose():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompSignInMain.URL, FGUICompSignInMain);
