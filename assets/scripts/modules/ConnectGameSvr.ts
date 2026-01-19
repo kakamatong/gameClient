@@ -1,3 +1,4 @@
+import { SprotoJoinPrivateRoom } from "../../types/protocol/lobby/c2s";
 import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
@@ -38,6 +39,6 @@ export class ConnectGameSvr {
             }
         }
 
-        LobbySocketManager.instance.sendToServer('joinPrivateRoom',{shortRoomid:roomid}, func)
+        LobbySocketManager.instance.sendToServer(SprotoJoinPrivateRoom,{shortRoomid:roomid}, func)
     }
 }

@@ -20,7 +20,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer(SprotoRevokeAcc.Name, { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoRevokeAcc, { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
     }
 
     reqCancelRevokeAccount(callback?: (data:any)=>void) {
@@ -28,7 +28,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer(SprotoCancelRevokeAcc.Name, { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCancelRevokeAcc, { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
     }
 
     /**

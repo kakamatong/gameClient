@@ -1,7 +1,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
-import { SprotoUserData } from '../../types/protocol/lobby/c2s';
+import { SprotoUpdateUserNameAndHeadurl, SprotoUserData } from '../../types/protocol/lobby/c2s';
 
 /**
  * @class UserData
@@ -14,7 +14,7 @@ export class UserData {
      * @description 请求用户数据，向服务器发送用户数据请求
      */
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoUserData.Name, { userid: DataCenter.instance.userid }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserData, { userid: DataCenter.instance.userid }, this.resp.bind(this))
     }
 
     /**
@@ -28,6 +28,6 @@ export class UserData {
     }
 
     updateUserNameAndHeadurl(nickname:string, headurl:string){
-        LobbySocketManager.instance.sendToServer('updateUserNameAndHeadurl', { nickname: nickname, headurl: headurl })
+        LobbySocketManager.instance.sendToServer(SprotoUpdateUserNameAndHeadurl, { nickname: nickname, headurl: headurl })
     }
 }

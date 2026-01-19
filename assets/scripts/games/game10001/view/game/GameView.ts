@@ -22,7 +22,7 @@ import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGame
 import { CompPlayerHead } from './comp/CompPlayerHead';
 import { SoundManager } from 'db://assets/scripts/frameworks/SoundManager';
 import { SprotoForwardMessage, SprotoGameClock, SprotoGameEnd, SprotoGameRecord, SprotoGameStart, SprotoOutHandInfo, SprotoPlayerAtt, SprotoPlayerEnter, SprotoPlayerInfos, SprotoPlayerLeave, SprotoPlayerStatusUpdate, SprotoPrivateInfo, SprotoRoomEnd, SprotoRoomInfo, SprotoRoundResult, SprotoStepId, SprotoTalk, SprotoTotalResult } from 'db://assets/types/protocol/game10001/s2c';
-import { SprotoClientReady } from 'db://assets/types/protocol/game10001/c2s';
+import { SprotoClientReady, SprotoGameReady, SprotoLeaveRoom, SprotoOutHand, SprotoVoteDisbandRoom } from 'db://assets/types/protocol/game10001/c2s';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { TALK_LIST } from '../talk/TalkConfig';
 import { TalkView } from '../talk/TalkView';
@@ -387,7 +387,7 @@ export class GameView extends FGUIGameView {
                 //this.changeToGameScene()
                 this.clear()
                 this.init()
-                GameSocketManager.instance.sendToServer("clientReady",{})
+                GameSocketManager.instance.sendToServer(SprotoClientReady,{})
             }
         }
         AuthGame.instance.req(addr,gameid, roomid, callBack);
@@ -654,7 +654,7 @@ export class GameView extends FGUIGameView {
                 if (GameData.instance.gameStart) {
                     console.log('游戏中无法退出');
                 }else{
-                    GameSocketManager.instance.sendToServer("leaveRoom", {flag:1});
+                    GameSocketManager.instance.sendToServer(SprotoLeaveRoom, {flag:1});
                 }
             }
         }
@@ -677,12 +677,12 @@ export class GameView extends FGUIGameView {
                 this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE;
             }
         }
-        GameSocketManager.instance.sendToServer('gameReady',{ready:1}, func)
+        GameSocketManager.instance.sendToServer(SprotoGameReady,{ready:1}, func)
         this.clear()
     }
 
     onBtnChange():void{
-        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this.ctrl_select.selectedIndex] })
+        GameSocketManager.instance.sendToServer(SprotoOutHand, { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this.ctrl_select.selectedIndex] })
     }
 
     onBtnScissors(): void {
@@ -702,7 +702,7 @@ export class GameView extends FGUIGameView {
             reason: "玩家发起解散" // 解散原因（可选）
         };
 
-        GameSocketManager.instance.sendToServer('voteDisbandRoom', data, (response: any) => {
+        GameSocketManager.instance.sendToServer(SprotoVoteDisbandRoom, data, (response: any) => {
             if (response && response.code === 1) {
                 console.log('发起解散投票成功');
             } else {
@@ -743,7 +743,7 @@ export class GameView extends FGUIGameView {
     }
 
     onBtnSure(): void {
-        GameSocketManager.instance.sendToServer('outHand', { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this.ctrl_select.selectedIndex] })
+        GameSocketManager.instance.sendToServer(SprotoOutHand, { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag:HAND_INDEX[this.ctrl_select.selectedIndex] })
     }
 
     showInviteBtn(bshow:boolean):void{ 

@@ -7,6 +7,7 @@ import { TipsView } from "../../common/TipsView";
 import { sys } from "cc";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
 import { ViewClass } from "../../../frameworks/Framework";
+import { SprotoCreatePrivateRoom } from "db://assets/types/protocol/lobby/c2s";
 
 @ViewClass()
 export class CompPrivateCreate extends FGUICompPrivateCreate { 
@@ -61,7 +62,7 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
         const strRule = JSON.stringify(gameRule)
         sys.localStorage.setItem(LOCAL_KEY.PRIVATE_RULE, strRule)
         const reqData = {gameid:10001, rule:strRule}
-        LobbySocketManager.instance.sendToServer('createPrivateRoom',reqData, func)
+        LobbySocketManager.instance.sendToServer(SprotoCreatePrivateRoom,reqData, func)
     }
 }
 fgui.UIObjectFactory.setExtension(CompPrivateCreate.URL, CompPrivateCreate);

@@ -44,7 +44,7 @@ export class MatchView extends FGUIMatchView {
                     MatchView.hideView()
                 }
             }
-            LobbySocketManager.instance.sendToServer('matchOnSure', {
+            LobbySocketManager.instance.sendToServer(SprotoMatchOnSure, {
                 id: this._checkID,
                 sure: false
             },callBack)
@@ -130,7 +130,7 @@ export class MatchView extends FGUIMatchView {
                 this.ctrl_enter.selectedIndex = 1;
             }
         }
-        LobbySocketManager.instance.sendToServer('matchOnSure', {
+        LobbySocketManager.instance.sendToServer(SprotoMatchOnSure, {
             id: this._checkID,
             sure: true
         },callBack)

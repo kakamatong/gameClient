@@ -21,6 +21,7 @@ import { UserCenterView } from '../userCenter/UserCenterView';
 import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
+import { SignInView } from '../signIn/SignInView';
 @PackageLoad(['common','props'])
 @ViewClass()
 export class LobbyView extends FGUILobbyView {
@@ -205,17 +206,19 @@ export class LobbyView extends FGUILobbyView {
     }
 
     onBtnRank(): void {
-        const func = (b:boolean, data:any) => { 
-            LoadingView.hideView();
-            if (b) {
-                RankView.showView(data)
-            }else{
-                TipsView.showView({content:`拉取排行榜数据失败`})
-            }
-        }
-        const rank = new Rank()
-        rank.req(func)
-        LoadingView.showView({content:"拉取数据中...", time:12});
+        // const func = (b:boolean, data:any) => { 
+        //     LoadingView.hideView();
+        //     if (b) {
+        //         RankView.showView(data)
+        //     }else{
+        //         TipsView.showView({content:`拉取排行榜数据失败`})
+        //     }
+        // }
+        // const rank = new Rank()
+        // rank.req(func)
+        // LoadingView.showView({content:"拉取数据中...", time:12});
+
+        SignInView.showView()
     }
 
     changeToGameScene():void{

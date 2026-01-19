@@ -168,13 +168,10 @@ export class SocketManager implements handleSocketMessage {
 
     isOpen(){
         return this._isopen;
-
     }
 
     sendHeartBeat() {
-        this.callServer('agent','', 'heartbeat', { timestamp: Date.now() / 1000 }, (data: any) => {
-            //log("心跳 ", data.timestamp)
-        });
+        
     }
 
     startHeartBeat() {
@@ -187,30 +184,8 @@ export class SocketManager implements handleSocketMessage {
         }, 10000);
     }
 
-    callServer(serverName: string, moduleName: string, funcName: string, args:any, callBack?: (data: any) => void){
-        const strArgs = JSON.stringify(args)
-        const data = {
-            serverName: serverName,
-            moduleName: moduleName,
-            funcName:funcName,
-            args: strArgs
-        }
-        this.sendToServer('call', data, callBack)
-    }
-
-    sendServer(serverName: string, moduleName: string, funcName: string, args:any){
-        const strArgs = JSON.stringify(args)
-        const data = {
-            serverName: serverName,
-            moduleName: moduleName,
-            funcName:funcName,
-            args: strArgs
-        }
-        this.sendToServer('send', data)
-    }
-
-    sendToServer(xy: string | {Name:string}, data: any, callBack?: (data: any) => void) {
-        const xyname = typeof xy === 'string' ? xy : xy.Name;
+    sendToServer(xy: {Name:string}, data: any, callBack?: (data: any) => void) {
+        const xyname = xy.Name;
         this._session++;
         if (callBack) {
             this._callBacks[this._session] = callBack;

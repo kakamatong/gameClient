@@ -41,7 +41,7 @@ export class Match {
         if (callBack) {
             this._callBack = callBack
         }
-        LobbySocketManager.instance.sendToServer(SprotoMatchJoin.Name,{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoMatchJoin,{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
     }
 
     /**
@@ -65,7 +65,7 @@ export class Match {
         if (callBack) {
             this._callBack = callBack
         }
-        LobbySocketManager.instance.sendToServer(SprotoMatchLeave.Name,{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoMatchLeave,{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
     }
 
     respLeave(result:SprotoMatchLeave.Response): void { 

@@ -9,7 +9,7 @@ export class Rank {
         if (callBack) {
             this._callBack = callBack;
         }
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc.Name,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
     }
 
     /**

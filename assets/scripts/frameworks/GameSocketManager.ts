@@ -16,26 +16,6 @@ export class GameSocketManager extends SocketManager {
         super();
     }
 
-    callServer(moduleName: string, funcName: string, args:any, callBack?: (data: any) => void){
-        const strArgs = JSON.stringify(args)
-        const data = {
-            moduleName: moduleName,
-            funcName:funcName,
-            args: strArgs
-        }
-        this.sendToServer('call', data, callBack)
-    }
-
-    sendServer(moduleName: string, funcName: string, args:any){
-        const strArgs = JSON.stringify(args)
-        const data = {
-            moduleName: moduleName,
-            funcName:funcName,
-            args: strArgs
-        }
-        this.sendToServer('send', data)
-    }
-
     onOpen(event: any): void {
         super.onOpen(event);
         // 游戏区链接没有agent，所以打开socket后，直接通过成功

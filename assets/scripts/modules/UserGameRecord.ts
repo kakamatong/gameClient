@@ -19,7 +19,7 @@ export class UserGameRecord {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer(SprotoUserGameRecord.Name, { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserGameRecord, { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
     }
 
     /**

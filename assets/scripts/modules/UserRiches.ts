@@ -4,7 +4,7 @@ import { DispatchEvent } from '../frameworks/Framework';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 export class UserRiches {
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoUserRiches.Name, {}, this.resp.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoUserRiches, {}, this.resp.bind(this))
     }
 
     resp(data: SprotoUserRiches.Response) {

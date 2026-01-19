@@ -10,6 +10,7 @@ import { ENUM_POP_MESSAGE_TYPE } from "../../../../../datacenter/InterfaceConfig
 import { Color } from "cc";
 import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
+import { SprotoVoteDisbandResponse } from "db://assets/types/protocol/game10001/c2s";
 
 @ViewClass()
 export class CompDisband extends FGUICompDisband { 
@@ -164,7 +165,7 @@ export class CompDisband extends FGUICompDisband {
             agree: vote
         };
 
-        GameSocketManager.instance.sendToServer('voteDisbandResponse', data, (response: any) => {
+        GameSocketManager.instance.sendToServer(SprotoVoteDisbandResponse, data, (response: any) => {
             if (response && response.code === 1) {
                 console.log('投票发送成功');
             } else {
