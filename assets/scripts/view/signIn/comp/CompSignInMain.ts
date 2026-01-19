@@ -6,6 +6,7 @@ import { SignInConfig } from "../data/SignInconfig";
 import { TipsView } from "../../common/TipsView";
 import FGUICompSignItem from "../../../fgui/signIn/FGUICompSignItem";
 import { SignInView } from "../SignInView";
+import { UserRiches } from "../../../modules/UserRiches";
 
 /**
  * 签到视图
@@ -95,6 +96,9 @@ export class CompSignInMain extends FGUICompSignInMain {
             // todo: 更新签到数据
             this._signInStatus = data.status;
             this.initUI();
+            // 用户财富
+            const userRiches = new UserRiches()
+            userRiches.req()
         }
         this._reqSign && this._reqSign.reqFillSignIn(func)
     }
@@ -129,6 +133,9 @@ export class CompSignInMain extends FGUICompSignInMain {
             // todo: 更新签到数据
             this._signInStatus = data.status;
             this.initUI();
+            // 用户财富
+            const userRiches = new UserRiches()
+            userRiches.req()
         }
         this._reqSign && this._reqSign.reqSignIn(mult,func)
     }

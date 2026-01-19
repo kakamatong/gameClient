@@ -161,6 +161,9 @@ export class LobbyView extends FGUILobbyView {
         }
     }
 
+    /**
+     * 更新用户财富
+     */
     onUserRiches(data:any):void{
         console.log("userRiches",data)
         this.initRichs()
