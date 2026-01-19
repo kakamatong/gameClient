@@ -205,26 +205,40 @@ export class LobbyView extends FGUILobbyView {
         LoadingView.showView({content:"拉取数据中...", time:12});
     }
 
-    onBtnRank(): void {
-        // const func = (b:boolean, data:any) => { 
-        //     LoadingView.hideView();
-        //     if (b) {
-        //         RankView.showView(data)
-        //     }else{
-        //         TipsView.showView({content:`拉取排行榜数据失败`})
-        //     }
-        // }
-        // const rank = new Rank()
-        // rank.req(func)
-        // LoadingView.showView({content:"拉取数据中...", time:12});
-
+    /**
+     * 点击签到
+     */
+    onBtnSignIn(): void {
         SignInView.showView()
     }
 
+    /**
+     * 点击排行榜
+     */
+    onBtnRank(): void {
+        const func = (b:boolean, data:any) => { 
+            LoadingView.hideView();
+            if (b) {
+                RankView.showView(data)
+            }else{
+                TipsView.showView({content:`拉取排行榜数据失败`})
+            }
+        }
+        const rank = new Rank()
+        rank.req(func)
+        LoadingView.showView({content:"拉取数据中...", time:12});
+    }
+
+    /**
+     * 切换到游戏场景
+     */
     changeToGameScene():void{
         ChangeScene('GameScene');
     }
 
+    /**
+     * 游戏服务器准备就绪
+     */
     onSvrGameRoomReady(data:any):void{
         console.log("gameRoomReady",data)
         ConnectGameSvr.instance.connectGame(data, (success:boolean, data?:any)=>{

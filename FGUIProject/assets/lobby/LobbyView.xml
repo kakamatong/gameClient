@@ -32,5 +32,9 @@
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5i9rp117"/>
     </component>
+    <component id="n18_pz9v" name="UI_BTN_SIGN_IN" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="599,1461" size="162,108">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <property target="icon" propertyId="1" value="ui://gv22rev3ddz1b"/>
+    </component>
   </displayList>
 </component>
