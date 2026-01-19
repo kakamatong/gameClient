@@ -1,5 +1,5 @@
 import * as fgui from "fairygui-cc";
-import { ViewClass } from '../../../frameworks/Framework';
+import { LogColors, ViewClass } from '../../../frameworks/Framework';
 import FGUICompSignInMain from "../../../fgui/signIn/FGUICompSignInMain";
 import { SignIn } from "../../../modules/SignIn";
 import { SignInConfig } from "../data/SignInconfig";
@@ -18,6 +18,9 @@ export class CompSignInMain extends FGUICompSignInMain {
     private _signInStatus: Array<number> = [];
     // 当前签到日志
     private _nowIndex: number = 0;
+    // 签到模块
+    private _reqSign: SignIn | null = null
+
     show(args:any) {
         this.UI_LIST_SIGN.itemRenderer = this.itemRenderer.bind(this);
         this.initData();
@@ -33,7 +36,7 @@ export class CompSignInMain extends FGUICompSignInMain {
         }
 
         this.UI_LIST_SIGN.numItems = this._signInConfig.length;
-        this.UI_LIST_SIGN.scrollToView(6, true)
+        this.UI_LIST_SIGN.scrollToView(this._nowIndex - 1, true)
     }
 
     /**
@@ -47,8 +50,9 @@ export class CompSignInMain extends FGUICompSignInMain {
             this._nowIndex = data.signInIndex;
             this.initUI();
         }
-        const req = new SignIn();
-        req.reqSignData(funcSignData);
+
+        this._reqSign = new SignIn();
+        this._reqSign.reqSignData(funcSignData);
     }
 
     /**
@@ -81,6 +85,16 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnAdd():void{
         console.log("补签");
+        const func = (b:boolean, data:any) =>{
+            console.log(b, data);
+            if(!b){
+                TipsView.showView({content:`签到失败`})
+                return;
+            }
+            console.log(LogColors.green("补签成功"))
+            // todo: 更新签到数据
+        }
+        this._reqSign && this._reqSign.reqFillSignIn(func)
     }
 
     /**
@@ -88,6 +102,16 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnGet():void{
         console.log("签到");
+        const func = (b:boolean, data:any) =>{
+            console.log(b, data);
+            if(!b){
+                TipsView.showView({content:`签到失败`})
+                return;
+            }
+            console.log(LogColors.green("签到成功"))
+            // todo: 更新签到数据
+        }
+        this._reqSign && this._reqSign.reqSignIn(0,func)
     }
 
     /**
@@ -95,6 +119,16 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnMult():void{
         console.log("多倍签到");
+        const func = (b:boolean, data:any) =>{
+            console.log(b, data);
+            if(!b){
+                TipsView.showView({content:`签到失败`})
+                return;
+            }
+            console.log(LogColors.green("签到成功"))
+            // todo: 更新签到数据
+        }
+        this._reqSign && this._reqSign.reqSignIn(1,func)
     }
 
     /**
