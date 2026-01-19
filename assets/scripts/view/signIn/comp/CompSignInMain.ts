@@ -83,7 +83,7 @@ export class CompSignInMain extends FGUICompSignInMain {
     /**
      * 补签按钮点击
      */
-    onBtnAdd():void{
+    onBtnFill():void{
         console.log("补签");
         const func = (b:boolean, data:any) =>{
             console.log(b, data);
@@ -93,6 +93,8 @@ export class CompSignInMain extends FGUICompSignInMain {
             }
             console.log(LogColors.green("补签成功"))
             // todo: 更新签到数据
+            this._signInStatus = data.status;
+            this.initUI();
         }
         this._reqSign && this._reqSign.reqFillSignIn(func)
     }
@@ -101,17 +103,7 @@ export class CompSignInMain extends FGUICompSignInMain {
      * 签到按钮点击
      */
     onBtnGet():void{
-        console.log("签到");
-        const func = (b:boolean, data:any) =>{
-            console.log(b, data);
-            if(!b){
-                TipsView.showView({content:`签到失败`})
-                return;
-            }
-            console.log(LogColors.green("签到成功"))
-            // todo: 更新签到数据
-        }
-        this._reqSign && this._reqSign.reqSignIn(0,func)
+        this.signIn(0)
     }
 
     /**
@@ -119,6 +111,14 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnMult():void{
         console.log("多倍签到");
+        this.signIn(1)
+    }
+
+    /**
+     * 签到
+     * @param mult 签到倍数，0为普通签到，1为多倍签到
+     */
+    signIn(mult:number):void{
         const func = (b:boolean, data:any) =>{
             console.log(b, data);
             if(!b){
@@ -127,8 +127,10 @@ export class CompSignInMain extends FGUICompSignInMain {
             }
             console.log(LogColors.green("签到成功"))
             // todo: 更新签到数据
+            this._signInStatus = data.status;
+            this.initUI();
         }
-        this._reqSign && this._reqSign.reqSignIn(1,func)
+        this._reqSign && this._reqSign.reqSignIn(mult,func)
     }
 
     /**

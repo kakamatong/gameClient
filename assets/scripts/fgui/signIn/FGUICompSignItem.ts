@@ -13,7 +13,7 @@ export default class FGUICompSignItem extends fgui.GComponent {
 	public UI_LOADER_ICON:fgui.GLoader;
 	public UI_TXT_DAY:fgui.GTextField;
 	public UI_TXT_NUM:fgui.GTextField;
-	public UI_BTN_ADD:fgui.GButton;
+	public UI_BTN_FILL:fgui.GButton;
 	public static URL:string = "ui://cytsuqelbbyt5";
 
 	public static packageName:string = "signIn";
@@ -60,13 +60,13 @@ export default class FGUICompSignItem extends fgui.GComponent {
 		this.UI_LOADER_ICON = <fgui.GLoader>(this.getChildAt(1));
 		this.UI_TXT_DAY = <fgui.GTextField>(this.getChildAt(2));
 		this.UI_TXT_NUM = <fgui.GTextField>(this.getChildAt(3));
-		this.UI_BTN_ADD = <fgui.GButton>(this.getChildAt(5));
-		this.UI_BTN_ADD.onClick(this.onBtnAdd, this);
+		this.UI_BTN_FILL = <fgui.GButton>(this.getChildAt(5));
+		this.UI_BTN_FILL.onClick(this.onBtnFill, this);
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};
 	unscheduleAllCallbacks():void{};
 	unschedule(callback: () => void):void{};
 	schedule(callback: () => void, interval: number):void{};
-	onBtnAdd():void{};
+	onBtnFill():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompSignItem.URL, FGUICompSignItem);

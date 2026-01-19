@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="548,113">
-  <controller name="ctrl_geted" pages="0,,1,,2," selected="2">
+  <controller name="ctrl_geted" pages="0,,1,,2," selected="0">
     <remark page="0" value="未领取"/>
     <remark page="1" value="已经领取"/>
     <remark page="2" value="补签"/>
@@ -20,7 +20,7 @@
     <image id="n5_bbyt" name="n5" src="bbyt6" fileName="imgs/gou.png" xy="416,-5">
       <gearDisplay controller="ctrl_geted" pages="1"/>
     </image>
-    <component id="n6_pz9v" name="UI_BTN_ADD" src="pz9v1d" fileName="comp/CompBtnAdScale.xml" pkg="gj0r6g5i" xy="341,8" aspect="true" scale="0.6,0.6">
+    <component id="n6_pz9v" name="UI_BTN_FILL" src="pz9v1d" fileName="comp/CompBtnAdScale.xml" pkg="gj0r6g5i" xy="341,8" aspect="true" scale="0.6,0.6">
       <gearDisplay controller="ctrl_geted" pages="2"/>
       <Button title="补签"/>
     </component>
