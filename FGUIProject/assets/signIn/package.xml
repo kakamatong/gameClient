@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="cytsuqel">
+  <resources>
+    <image id="bbyt0" name="2.png" path="/imgs/"/>
+    <image id="bbyt1" name="3.png" path="/imgs/"/>
+    <image id="bbyt2" name="4.png" path="/imgs/"/>
+    <component id="bbyt3" name="SignInView.xml" path="/" exported="true"/>
+    <component id="bbyt4" name="CompMain.xml" path="/comp/"/>
+    <component id="bbyt5" name="CompSignItem.xml" path="/comp/"/>
+    <image id="bbyt6" name="gou.png" path="/imgs/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

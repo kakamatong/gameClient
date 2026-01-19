@@ -34,6 +34,9 @@
     <image id="9rp117" name="shareBtn.png" path="/imgs/" exported="true"/>
     <image id="pxa518" name="gold40x40.png" path="/imgs/prop/40x40/"/>
     <image id="pxa519" name="gold80x80.png" path="/imgs/prop/80x80/"/>
+    <image id="bbyt1c" name="ad.png" path="/imgs/" exported="true"/>
+    <component id="pz9v1d" name="CompBtnAdScale.xml" path="/comp/" exported="true"/>
+    <image id="pz9v1e" name="矩形 1.png" path="/imgs/" exported="true" scale="9grid" scale9grid="32,35,27,16"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
