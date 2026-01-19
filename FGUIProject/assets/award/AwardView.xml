@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="776,1688">
+  <displayList>
+    <graph id="n2_pz9v" name="n2" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <image id="n4_pz9v" name="n4" src="pz9v2" fileName="imgs/award.png" xy="35,367" group="n3_pz9v"/>
+    <text id="n1_pz9v" name="n1" xy="265,466" size="244,79" group="n3_pz9v" fontSize="60" color="#f7fba9" strokeColor="#95580a" text="恭喜获得"/>
+    <group id="n3_pz9v" name="n3" xy="35,367" size="705,325"/>
+  </displayList>
+</component>

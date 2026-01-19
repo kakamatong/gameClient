@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="vb2pxowo">
+  <resources>
+    <component id="pz9v0" name="AwardView.xml" path="/" exported="true"/>
+    <image id="pz9v2" name="award.png" path="/imgs/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

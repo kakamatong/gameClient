@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="120,120">
+  <controller name="ctrl_num" pages="0,,1," selected="1">
+    <remark page="0" value="不显示"/>
+    <remark page="1" value="显示"/>
+  </controller>
+  <displayList>
+    <image id="n0_pz9v" name="n0" src="pz9v1c" fileName="imgs/propBg.png" xy="0,0" size="120,120"/>
+    <loader id="n1_pz9v" name="UI_LOADER_ICON" xy="5,5" size="110,110" url="ui://fwundh2cbbyt1" fill="scaleFree" clearOnPublish="true"/>
+    <text id="n2_pz9v" name="UI_TXT_NUM" xy="86,87" pivot="1,1" size="26,29" fontSize="20" color="#0099cc" align="right" vAlign="middle" strokeColor="#000000" text="x0">
+      <gearDisplay controller="ctrl_num" pages="1"/>
+    </text>
+  </displayList>
+  <customProperty target="UI_LOADER_ICON" propertyId="1"/>
+  <customProperty target="UI_TXT_NUM" propertyId="0"/>
+</component>

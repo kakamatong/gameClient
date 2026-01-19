@@ -13,7 +13,7 @@
   <displayList>
     <image id="n0_bbyt" name="n0" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="0,0" size="548,113"/>
     <loader id="n1_bbyt" name="UI_LOADER_ICON" xy="0,-1" size="120,120" url="ui://cytsuqelbbyt0" fill="scaleFree" autoSize="true">
-      <gearIcon controller="ctrl_icon" pages="1,2" values="ui://cytsuqelbbyt1|ui://cytsuqelbbyt2" default="ui://cytsuqelbbyt0"/>
+      <gearIcon controller="ctrl_icon" pages="1,2" values="ui://fwundh2cbbyt1|ui://cytsuqelbbyt2" default="ui://cytsuqelbbyt0"/>
     </loader>
     <text id="n2_bbyt" name="UI_TXT_DAY" xy="248,35" size="112,49" fontSize="36" color="#ffffff" strokeColor="#000000" text="第一天"/>
     <text id="n3_bbyt" name="UI_TXT_NUM" xy="132,33" size="65,49" fontSize="36" color="#006699" text="x20"/>

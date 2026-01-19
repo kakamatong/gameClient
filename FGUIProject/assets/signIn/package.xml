@@ -2,7 +2,6 @@
 <packageDescription id="cytsuqel">
   <resources>
     <image id="bbyt0" name="2.png" path="/imgs/"/>
-    <image id="bbyt1" name="3.png" path="/imgs/"/>
     <image id="bbyt2" name="4.png" path="/imgs/"/>
     <component id="bbyt3" name="SignInView.xml" path="/" exported="true"/>
     <component id="bbyt4" name="CompSignInMain.xml" path="/comp/"/>
