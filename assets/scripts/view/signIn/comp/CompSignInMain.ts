@@ -10,6 +10,7 @@ import { UserRiches } from "../../../modules/UserRiches";
 import { AwardView } from "../../award/AwardView";
 import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
+import { LoadingView } from "../../common/LoadingView";
 
 /**
  * 签到视图
@@ -98,15 +99,8 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnFill(index:number):void{
         console.log("补签");
-        MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code:number)=>{
-            console.log(code);
-            if(code == REWORD_VIDEOAD_CODE.SUCCESS){
-                this.fillSignIn(index)
-            }else if(code == REWORD_VIDEOAD_CODE.NOT_OVER){
-                TipsView.showView({content:`看完视频才能获取奖励哦`})
-            }else{
-                TipsView.showView({content:`视频广告播放失败`})
-            }
+        this.playAdVideo(()=>{
+            this.fillSignIn(index)
         })
     }
 
@@ -136,10 +130,22 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnMult():void{
         console.log("多倍签到");
+        this.playAdVideo(()=>{
+            this.signIn(1)
+        })
+    }
+
+    /**
+     * 播放广告视频
+     * @param successCallBack 
+     */
+    playAdVideo(successCallBack:()=>void):void{
+        LoadingView.showView({content:"载入中...", time:12});
         MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code:number)=>{
+            LoadingView.hideView();
             console.log(code);
             if(code == REWORD_VIDEOAD_CODE.SUCCESS){
-                this.signIn(1)
+                successCallBack()
             }else if(code == REWORD_VIDEOAD_CODE.NOT_OVER){
                 TipsView.showView({content:`看完视频才能获取奖励哦`})
             }else{
