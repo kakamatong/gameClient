@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="124,128" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n3_pizs" name="n3" src="pizsf" fileName="imgs/signin.png" xy="0,0"/>
+    <image id="n5_pizs" name="n5" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="2,93" size="119,43"/>
+    <text id="n4_pizs" name="n4" xy="24,94" size="75,44" fontSize="32" color="#ffffff" text="签 到"/>
+  </displayList>
+  <Button downEffect="scale" downEffectValue="0.9"/>
+</component>
