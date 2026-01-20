@@ -357,6 +357,11 @@ export class MiniGameUtils {
                 console.log('激励视频 广告加载成功')
             })
 
+            ad.onError(err => {
+                console.log(err)
+                console.log('激励视频 广告加载错误')
+            })
+
             this._rewardedVideoAdList[key] = ad
         }
     }
@@ -399,12 +404,6 @@ export class MiniGameUtils {
                 // 播放中途退出，不下发游戏奖励
                 callBack(REWORD_VIDEOAD_CODE.NOT_OVER)
             }
-        })
-
-        ad.onError(err => {
-            console.log(err)
-            console.log('激励视频 广告错误')
-            callBack(REWORD_VIDEOAD_CODE.FAIL)
         })
     }
 }
