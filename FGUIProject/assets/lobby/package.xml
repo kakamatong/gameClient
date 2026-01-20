@@ -14,6 +14,7 @@
     <component id="ok17e" name="CompRich.xml" path="/comp/"/>
     <image id="pizsf" name="signin.png" path="/imgs/"/>
     <component id="pizsg" name="BtnLobbyMenu.xml" path="/comp/"/>
+    <component id="wgijh" name="CompBg.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

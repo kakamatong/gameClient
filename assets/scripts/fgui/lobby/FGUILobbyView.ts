@@ -2,15 +2,14 @@
 
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
-import FGUIBgActView from "./FGUIBgActView";
+import FGUICompBg from "./FGUICompBg";
 import FGUICompTop from "./FGUICompTop";
 
 import { PackageManager } from "../../frameworks/PackageManager";
 
 export default class FGUILobbyView extends fgui.GComponent {
 
-	public UI_IMG_BG:fgui.GImage;
-	public UI_COMP_BG_ACT:FGUIBgActView;
+	public bg:FGUICompBg;
 	public UI_BTN_MATCH_ROOM:fgui.GButton;
 	public UI_BTN_PRIVATE_ROOM:fgui.GButton;
 	public UI_COMP_TOP:FGUICompTop;
@@ -59,21 +58,20 @@ export default class FGUILobbyView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.UI_IMG_BG = <fgui.GImage>(this.getChildAt(0));
-		this.UI_COMP_BG_ACT = <FGUIBgActView>(this.getChildAt(1));
-		this.UI_BTN_MATCH_ROOM = <fgui.GButton>(this.getChildAt(2));
+		this.bg = <FGUICompBg>(this.getChildAt(0));
+		this.UI_BTN_MATCH_ROOM = <fgui.GButton>(this.getChildAt(1));
 		this.UI_BTN_MATCH_ROOM.onClick(this.onBtnMatchRoom, this);
-		this.UI_BTN_PRIVATE_ROOM = <fgui.GButton>(this.getChildAt(3));
+		this.UI_BTN_PRIVATE_ROOM = <fgui.GButton>(this.getChildAt(2));
 		this.UI_BTN_PRIVATE_ROOM.onClick(this.onBtnPrivateRoom, this);
-		this.UI_COMP_TOP = <FGUICompTop>(this.getChildAt(4));
-		this.UI_BTN_MAILS = <fgui.GButton>(this.getChildAt(5));
+		this.UI_COMP_TOP = <FGUICompTop>(this.getChildAt(3));
+		this.UI_BTN_MAILS = <fgui.GButton>(this.getChildAt(4));
 		this.UI_BTN_MAILS.onClick(this.onBtnMails, this);
-		this.UI_BTN_RANK = <fgui.GButton>(this.getChildAt(6));
+		this.UI_BTN_RANK = <fgui.GButton>(this.getChildAt(5));
 		this.UI_BTN_RANK.onClick(this.onBtnRank, this);
-		this.UI_TXT_ENV = <fgui.GTextField>(this.getChildAt(7));
-		this.UI_BTN_SHARE = <fgui.GButton>(this.getChildAt(8));
+		this.UI_TXT_ENV = <fgui.GTextField>(this.getChildAt(6));
+		this.UI_BTN_SHARE = <fgui.GButton>(this.getChildAt(7));
 		this.UI_BTN_SHARE.onClick(this.onBtnShare, this);
-		this.UI_BTN_SIGN_IN = <fgui.GButton>(this.getChildAt(9));
+		this.UI_BTN_SIGN_IN = <fgui.GButton>(this.getChildAt(8));
 		this.UI_BTN_SIGN_IN.onClick(this.onBtnSignIn, this);
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};

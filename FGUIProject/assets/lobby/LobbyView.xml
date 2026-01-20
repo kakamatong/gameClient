@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <image id="n15_g8w0" name="UI_IMG_BG" src="g8w0d" fileName="imgs/lobbybg.jpg" xy="0,0" size="776,1688">
-      <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <component id="n5_xoqi" name="UI_COMP_BG_ACT" src="xoqi5" fileName="BgActView.xml" xy="0,0" size="776,1688" alpha="0.328">
-      <relation target="" sidePair="width-width,height-height"/>
-    </component>
+    <component id="n15_g8w0" name="bg" src="wgijh" fileName="comp/CompBg.xml" xy="0,0"/>
     <component id="n7_gtlg" name="UI_BTN_MATCH_ROOM" src="gtlg9" fileName="comp/CompLobbyBtn.xml" xy="92,593">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
