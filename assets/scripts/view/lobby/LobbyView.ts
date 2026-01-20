@@ -5,7 +5,7 @@ import { AddEventListener, ChangeScene, LogColors, PackageLoad, RemoveEventListe
 import { DataCenter } from '../../datacenter/Datacenter';
 import {ConnectSvr} from '../../modules/ConnectSvr';
 import { PopMessageView } from '../common/PopMessageView';
-import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL, RICH_TYPE} from '../../datacenter/InterfaceConfig';
+import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL, LOCAL_KEY, RICH_TYPE} from '../../datacenter/InterfaceConfig';
 import { TipsView } from '../common/TipsView';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
 import { Rank } from '../../modules/Rank';
@@ -22,6 +22,7 @@ import { MiniGameUtils } from '../../frameworks/utils/sdk/MiniGameUtils';
 import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { SignInView } from '../signIn/SignInView';
+import { sys } from 'cc';
 @PackageLoad(['common','props'])
 @ViewClass()
 export class LobbyView extends FGUILobbyView {
@@ -122,6 +123,22 @@ export class LobbyView extends FGUILobbyView {
         console.log('onLoginSuccess')
         const options = MiniGameUtils.instance.getLaunchOptionsSync()
         this.checkPrivateRoomid(options)
+        this.autoShowSignIn()
+    }
+
+    /**
+     * 每天自动显示签到
+     */
+    autoShowSignIn(){
+        const day = sys.localStorage.getItem(LOCAL_KEY.AUTO_SHOW_SIGNIN)
+
+        // 格式：'20250120'
+        const nowDay = new Date()
+        const nowDayStr = `${nowDay.getFullYear()}${nowDay.getMonth() + 1}${nowDay.getDate()}`
+        if (day !== nowDayStr) {
+            sys.localStorage.setItem(LOCAL_KEY.AUTO_SHOW_SIGNIN, nowDayStr)
+            SignInView.showView()
+        }
     }
 
     checkPrivateRoomid(options:any){

@@ -56,6 +56,7 @@ export enum LOCAL_KEY {
     MATCH_AUTO_JOIN = 'matchAutoJoin',
     AGREE_PRIVACY = 'agreePrivacy',
     PRIVATE_RULE = 'privateRule',
+    AUTO_SHOW_SIGNIN = 'autoShowSignIn',
 }
 
 export enum ENUM_POP_MESSAGE_TYPE {
