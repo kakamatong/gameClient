@@ -23,6 +23,10 @@ import { ConnectGameSvr } from '../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { SignInView } from '../signIn/SignInView';
 import { sys } from 'cc';
+
+/**
+ * 大厅视图
+ */
 @PackageLoad(['common','props'])
 @ViewClass()
 export class LobbyView extends FGUILobbyView {
@@ -39,6 +43,9 @@ export class LobbyView extends FGUILobbyView {
         this.startLogin();
     }
 
+    /**
+     * 初始化监听
+     */
     initListeners(){
         AddEventListener('userData',this.onUserInfo, this);
         AddEventListener('userStatus',this.onUserStatus, this);
@@ -49,6 +56,9 @@ export class LobbyView extends FGUILobbyView {
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
 
+    /**
+     * 销毁
+     */
     onDestroy(){
         super.onDestroy();
         RemoveEventListener('userData', this.onUserInfo);
@@ -59,14 +69,24 @@ export class LobbyView extends FGUILobbyView {
         LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
     }
 
+    /**
+     * 头像点击
+     */
     onBtnHead(){
         UserCenterView.showView();
     }
 
+    /**
+     * app事件，应用显示
+     * @param res 热启动数据 
+     */
     onAppShow(res:any){
         this.checkPrivateRoomid(res)
     }
 
+    /**
+     * 初始化UI
+     */
     initUI(){ 
         this._node1 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_1
         this._node2 = this.UI_COMP_BG_ACT.UI_COMP_BG_ACT_2
@@ -77,11 +97,17 @@ export class LobbyView extends FGUILobbyView {
         }
     }
 
+    /**
+     * 初始化财富
+     */
     initRichs():void{
         const rich = DataCenter.instance.getRichByType(RICH_TYPE.SILVER_COIN); // 银子
         this.UI_COMP_TOP.UI_COMP_SILVER.UI_TXT_NUM.text = `${rich?.richNums ?? 0}`;
     }
 
+    /**
+     * 事件: socket断开
+     */
     onSocketDisconnect(){
         const func = ()=>{
             this.startLogin()
@@ -99,6 +125,9 @@ export class LobbyView extends FGUILobbyView {
         this.initRichs()
     }
 
+    /**
+     * 开始登入
+     */
     startLogin(){
         if (LobbySocketManager.instance.isOpen()) {
             this.allreadyLogin()
@@ -119,6 +148,9 @@ export class LobbyView extends FGUILobbyView {
         ConnectSvr.instance.checkAutoLogin(func)
     }
 
+    /**
+     * 登入成功回调
+     */
     onLoginSuccess(){ 
         console.log('onLoginSuccess')
         const options = MiniGameUtils.instance.getLaunchOptionsSync()
@@ -141,6 +173,10 @@ export class LobbyView extends FGUILobbyView {
         }
     }
 
+    /**
+     * 检查私人房间，是否可以自动进入
+     * @param options 热启动参数
+     */
     checkPrivateRoomid(options:any){
         if (options.query && options.query.roomid) { 
             const roomid = Number(options.query.roomid)
@@ -153,6 +189,9 @@ export class LobbyView extends FGUILobbyView {
         }
     }
 
+    /**
+     * 更新用户信息
+     */
     updateUserInfo():void{
         this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? ''
         this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
@@ -160,11 +199,19 @@ export class LobbyView extends FGUILobbyView {
         (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
     }
 
+    /**
+     * 事件: 用户信息
+     * @param data 
+     */
     onUserInfo(data:any):void{
         console.log("userData",data)
         this.updateUserInfo()
     }
 
+    /**
+     * 事件: 用户状态
+     * @param data 
+     */
     onUserStatus(data:any):void{
         console.log("userStatus",data)
         if (data.status == ENUM_USER_STATUS.GAMEING){
@@ -186,6 +233,9 @@ export class LobbyView extends FGUILobbyView {
         this.initRichs()
     }
 
+    /**
+     * 点击匹配房间
+     */
     onBtnMatchRoom(): void {
         const func = (b:boolean, data?:any)=>{
             if (b) {
@@ -208,10 +258,16 @@ export class LobbyView extends FGUILobbyView {
         Match.instance.req(0,func);
     }
 
+    /**
+     * 点击私人房间
+     */
     onBtnPrivateRoom(): void {
         PrivateRoomView.showView({changeToGameScene:this.changeToGameScene.bind(this)})
     }
 
+    /**
+     * 点击邮件
+     */
     onBtnMails(): void {
         Mail.instance.list((success:boolean, data?:any)=>{
             LoadingView.hideView();
@@ -270,6 +326,10 @@ export class LobbyView extends FGUILobbyView {
         })
     }
 
+    /**
+     * 计时器回调
+     * @returns 
+     */
     onUpdate():void{
         if (!this._node1 || !this._node2 || !this._node3 || !this._node4) {
             return
@@ -308,6 +368,9 @@ export class LobbyView extends FGUILobbyView {
         }
     }
 
+    /**
+     * 点击分享
+     */
     onBtnShare(): void {
         MiniGameUtils.instance.shareAppMessage({title:'约上好友来一局石头剪刀布', imageUrl: LOBBY_SHARE_PIC_URL, query:''})
     }
