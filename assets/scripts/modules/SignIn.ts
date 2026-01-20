@@ -70,10 +70,11 @@ export class SignIn {
     /**
      * 补签
      * @param callBack 签到回调
+     * @param index 补签天数
      */
-    reqFillSignIn(callBack: (success: boolean, data: any) => void):void{
+    reqFillSignIn(index:number, callBack: (success: boolean, data: any) => void):void{
         this._fillSignInCallBack = callBack
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({})} , this.respFillSignIn.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({index})} , this.respFillSignIn.bind(this))
     }
 
     /**

@@ -72,8 +72,13 @@ export class CompSignInMain extends FGUICompSignInMain {
         item.UI_TXT_NUM.text = `x${config.richNums[0]}`
         item.UI_TXT_DAY.text = `第${index + 1}天`
         item.ctrl_icon.selectedIndex = this.getIconIndex(index);
-        item.ctrl_geted.selectedIndex = this._signInStatus[index] ? 1 : 0;
+        item.ctrl_geted.selectedIndex = this._signInStatus[index] ? 1 : (index >= this._nowIndex - 1 ? 0 : 2);
         item.ctrl_today.selectedIndex = index == this._nowIndex - 1 ? 1 : 0;
+
+        item.clearClick()
+        item.UI_BTN_FILL.onClick(()=>{
+            this.onBtnFill(index + 1)
+        });
     }
 
     /**
@@ -89,7 +94,7 @@ export class CompSignInMain extends FGUICompSignInMain {
     /**
      * 补签按钮点击
      */
-    onBtnFill():void{
+    onBtnFill(index:number):void{
         console.log("补签");
         const func = (b:boolean, data:any) =>{
             console.log(b, data);
@@ -106,7 +111,7 @@ export class CompSignInMain extends FGUICompSignInMain {
             userRiches.req()
             this.showAward({awards:data.awards, noticeid:data.noticeid})
         }
-        this._reqSign && this._reqSign.reqFillSignIn(func)
+        this._reqSign && this._reqSign.reqFillSignIn(index,func)
     }
 
     /**
