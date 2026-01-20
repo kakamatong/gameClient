@@ -53,6 +53,9 @@ export class MiniGameUtils {
                 console.log('App Show', res)
                 DispatchEvent('onShow',res)
             })
+
+            const key = 'adunit-21e58350c401d5b6'
+            this.createRewardedVideoAd(key)
         }
     }
 
@@ -344,11 +347,17 @@ export class MiniGameUtils {
      * @param key 
      * @returns 
      */
-    createRewardedVideoAd(key:string):any{ 
+    createRewardedVideoAd(key:string):void{ 
         if (this.isWeChatGame()) { 
-            return (wx && wx.createRewardedVideoAd({
+            const ad = wx && wx.createRewardedVideoAd({
                 adUnitId: key
-            }))
+            })
+
+            ad.onLoad(() => {
+                console.log('激励视频 广告加载成功')
+            })
+
+            this._rewardedVideoAdList[key] = ad
         }
     }
 
@@ -359,12 +368,7 @@ export class MiniGameUtils {
      showRewardedVideoAd(key:string, callBack:(code:number)=>void){
         if(this.isWeChatGame()){
             const ad = this._rewardedVideoAdList[key]
-            if (ad) {
-                this.playRewardedVideoAd(ad, callBack)
-            }else{
-                this._rewardedVideoAdList[key] = this.createRewardedVideoAd(key)
-                this.playRewardedVideoAd(this._rewardedVideoAdList[key], callBack)
-            }
+            this.playRewardedVideoAd(ad, callBack)
         }else{
             callBack(REWORD_VIDEOAD_CODE.SUCCESS)
         }
@@ -376,10 +380,12 @@ export class MiniGameUtils {
      * @param callBack 
      */
     playRewardedVideoAd(ad:any, callBack:(code:number)=>void){
-        ad.load().then(() => ad.show().catch((error:any) => { 
-            callBack(REWORD_VIDEOAD_CODE.FAIL) // 0 表示失败
-        }))
-
+        ad.show().catch((error:any) => { 
+            ad.load().then(() => ad.show().catch((error:any) => { 
+                callBack(REWORD_VIDEOAD_CODE.FAIL) // 0 表示失败
+            }))
+        })
+        
         ad.onClose(res => { 
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
@@ -389,6 +395,12 @@ export class MiniGameUtils {
                 // 播放中途退出，不下发游戏奖励
                 callBack(REWORD_VIDEOAD_CODE.NOT_OVER)
             }
+        })
+
+        ad.onError(err => {
+            console.log(err)
+            console.log('激励视频 广告错误')
+            callBack(REWORD_VIDEOAD_CODE.FAIL)
         })
     }
 }
