@@ -32,6 +32,8 @@
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <property target="icon" propertyId="1" value="ui://gj0r6g5i9rp117"/>
     </component>
-    <component id="n19_pizs" name="UI_BTN_SIGN_IN" src="pizsg" fileName="comp/BtnLobbyMenu.xml" xy="621,1415"/>
+    <component id="n19_pizs" name="UI_BTN_SIGN_IN" src="pizsg" fileName="comp/BtnLobbyMenu.xml" xy="621,1415">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </component>
   </displayList>
 </component>
