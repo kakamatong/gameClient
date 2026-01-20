@@ -368,6 +368,10 @@ export class MiniGameUtils {
      showRewardedVideoAd(key:string, callBack:(code:number)=>void){
         if(this.isWeChatGame()){
             const ad = this._rewardedVideoAdList[key]
+            if(!ad){
+                callBack(REWORD_VIDEOAD_CODE.NOT_KEY)
+                return
+            }
             this.playRewardedVideoAd(ad, callBack)
         }else{
             callBack(REWORD_VIDEOAD_CODE.SUCCESS)

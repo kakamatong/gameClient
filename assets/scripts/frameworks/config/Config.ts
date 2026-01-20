@@ -20,5 +20,6 @@ export const AUTH_TYPE = {
 export enum REWORD_VIDEOAD_CODE {
     FAIL = 0, // 失败
     SUCCESS = 1, // 成功
-    NOT_OVER = 0, // 没看完
+    NOT_OVER = 2, // 没看完
+    NOT_KEY = 3 // 这个key
 }
