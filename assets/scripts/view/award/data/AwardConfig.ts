@@ -1,4 +1,5 @@
 export type AwardConfig = {
     ids: number[],
-    nums: number[]
+    nums: number[],
+    noticeid?: number
 }

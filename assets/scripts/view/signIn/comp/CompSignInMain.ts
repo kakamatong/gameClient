@@ -7,6 +7,7 @@ import { TipsView } from "../../common/TipsView";
 import FGUICompSignItem from "../../../fgui/signIn/FGUICompSignItem";
 import { SignInView } from "../SignInView";
 import { UserRiches } from "../../../modules/UserRiches";
+import { AwardView } from "../../award/AwardView";
 
 /**
  * 签到视图
@@ -103,8 +104,22 @@ export class CompSignInMain extends FGUICompSignInMain {
             // 用户财富
             const userRiches = new UserRiches()
             userRiches.req()
+            this.showAward({awards:data.awards, noticeid:data.noticeid})
         }
         this._reqSign && this._reqSign.reqFillSignIn(func)
+    }
+
+    /**
+     * 显示奖励
+     * @param data 签到奖励数据
+     */
+    showAward(data:{awards:{richTypes:number[], richNums:number[]}, noticeid:number}):void{
+        const newData = {
+            ids: data.awards.richTypes,
+            nums: data.awards.richNums,
+            noticeid: data.noticeid
+        }
+        AwardView.showView(newData)
     }
 
     /**
@@ -140,6 +155,7 @@ export class CompSignInMain extends FGUICompSignInMain {
             // 用户财富
             const userRiches = new UserRiches()
             userRiches.req()
+            this.showAward({awards:data.awards, noticeid:data.noticeid})
         }
         this._reqSign && this._reqSign.reqSignIn(mult,func)
     }

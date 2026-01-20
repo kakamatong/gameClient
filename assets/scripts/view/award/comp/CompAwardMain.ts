@@ -3,12 +3,19 @@ import { ViewClass } from "../../../frameworks/Framework";
 import * as fgui from "fairygui-cc";
 import { AwardConfig } from "../data/AwardConfig";
 import { ComProp } from "../../props/comp/ComProp";
+import { AwardNotices } from "../../../modules/AwardNotices";
 
 @ViewClass()
 export class CompAwardMain extends FGUICompAwardMain { 
     private _data:AwardConfig | null = null;
     show(args:AwardConfig):void{
         this._data = args;
+        
+        // 通知服务消费通知
+        if (this._data.noticeid && this._data.noticeid >= 0) {
+            const notice = new AwardNotices();
+            notice.reqRead(this._data?.noticeid || 0)
+        }
         this.initUI();
     }
 

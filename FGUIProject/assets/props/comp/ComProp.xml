@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="120,120">
-  <controller name="ctrl_num" pages="0,,1," selected="0">
+  <controller name="ctrl_num" homePageType="specific" homePage="1" pages="0,,1," selected="0">
     <remark page="0" value="不显示"/>
     <remark page="1" value="显示"/>
   </controller>
