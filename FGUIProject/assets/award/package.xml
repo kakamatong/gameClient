@@ -3,6 +3,7 @@
   <resources>
     <component id="pz9v0" name="AwardView.xml" path="/" exported="true"/>
     <image id="pz9v2" name="award.png" path="/imgs/"/>
+    <component id="pizs3" name="CompAwardMain.xml" path="/comp/"/>
   </resources>
   <publish name=""/>
 </packageDescription>

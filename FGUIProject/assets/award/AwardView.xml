@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <graph id="n2_pz9v" name="n2" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
+    <graph id="n2_pz9v" name="UI_BG" xy="0,0" size="776,1688" type="rect" lineSize="0" lineColor="#00000000" fillColor="#b2000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <image id="n4_pz9v" name="n4" src="pz9v2" fileName="imgs/award.png" xy="35,367" group="n3_pz9v"/>
-    <text id="n1_pz9v" name="n1" xy="265,466" size="244,79" group="n3_pz9v" fontSize="60" color="#f7fba9" strokeColor="#95580a" text="恭喜获得"/>
-    <group id="n3_pz9v" name="n3" xy="35,367" size="705,325"/>
+    <component id="n4_pz9v" name="UI_COMP_MAIN" src="pizs3" fileName="comp/CompAwardMain.xml" xy="35,367" pivot="0.5,0.5">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <text id="n6_pizs" name="n6" xy="282,1225" size="212,36" alpha="0.5" fontSize="26" color="#ffffff" text="点击任意位置继续">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
   </displayList>
+  <transition name="enter" autoPlay="true">
+    <item time="0" type="Alpha" target="n4_pz9v" tween="true" startValue="0" endValue="1" duration="9"/>
+    <item time="0" type="Scale" target="n4_pz9v" tween="true" startValue="0,0" endValue="1,1" duration="9" ease="Back.InOut"/>
+  </transition>
 </component>
