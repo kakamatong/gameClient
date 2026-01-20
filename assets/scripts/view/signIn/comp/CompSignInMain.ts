@@ -114,10 +114,11 @@ export class CompSignInMain extends FGUICompSignInMain {
      * 显示奖励
      * @param data 签到奖励数据
      */
-    showAward(data:{awards:{richTypes:number[], richNums:number[]}, noticeid:number}):void{
+    showAward(data:{awards:{richTypes:number[], richNums:number[], richNums2:number[]}, noticeid:number}, mult:number):void{
+        const nums = mult == 1 ? data.awards.richNums2 : data.awards.richNums;
         const newData = {
             ids: data.awards.richTypes,
-            nums: data.awards.richNums,
+            nums: nums,
             noticeid: data.noticeid
         }
         AwardView.showView(newData)
@@ -165,7 +166,7 @@ export class CompSignInMain extends FGUICompSignInMain {
             // 用户财富
             const userRiches = new UserRiches()
             userRiches.req()
-            this.showAward({awards:data.awards, noticeid:data.noticeid})
+            this.showAward({awards:data.awards, noticeid:data.noticeid}, mult)
         }
         this._reqSign && this._reqSign.reqSignIn(mult,func)
     }
@@ -188,7 +189,7 @@ export class CompSignInMain extends FGUICompSignInMain {
             // 用户财富
             const userRiches = new UserRiches()
             userRiches.req()
-            this.showAward({awards:data.awards, noticeid:data.noticeid})
+            this.showAward({awards:data.awards, noticeid:data.noticeid}, 0)
         }
         this._reqSign && this._reqSign.reqFillSignIn(index,func)
     }
