@@ -15,3 +15,10 @@ export const AUTH_TYPE = {
     SUCCESS: 1,
     ERROR: 0,
 }
+
+// 视频广告码
+export enum REWORD_VIDEOAD_CODE {
+    FAIL = 0, // 失败
+    SUCCESS = 1, // 成功
+    NOT_OVER = 0, // 没看完
+}

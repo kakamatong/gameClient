@@ -1,5 +1,6 @@
 import { sys } from "cc";
 import { DispatchEvent } from "../../Framework";
+import { REWORD_VIDEOAD_CODE } from "../../config/Config";
 
 export class MiniGameUtils {
 
@@ -7,8 +8,20 @@ export class MiniGameUtils {
 
     private _canvas: HTMLCanvasElement | null = null;
 
+    /**
+     * 视频广告list
+     */
+    private _rewardedVideoAdList: Record<string,any> = {};
+
+    /**
+     * 插屏广告list
+     */
     private _interstitialAdList: Record<string,any> = {};
 
+    /**
+     * @property {HTMLCanvasElement} _canvas - 画布
+     * @private
+     */
     private _canvasContext: CanvasRenderingContext2D | null = null;
     /**
      * @property {MiniGameUtils} _instance - 单例实例
@@ -326,5 +339,69 @@ export class MiniGameUtils {
         }
     }
 
-    
+    /**
+     * 创建激励视频广告
+     * @param key 
+     * @returns 
+     */
+    createRewardedVideoAd(key:string):any{ 
+        if (this.isWeChatGame()) { 
+            return (wx && wx.createRewardedVideoAd({
+                adUnitId: key
+            }))
+        }
+    }
+
+    /**
+     * 显示插屏广告
+     * @param key 
+     */
+     showRewardedVideoAd(key:string, callBack:(code:number)=>void){
+        if(this.isWeChatGame()){
+            const ad = this._rewardedVideoAdList[key]
+            if (ad) {
+                ad.show().catch((error:any) => { 
+                    // 失败重试
+                    console.error("视频广告显示失败 尝试重新拉取", error)
+                    ad.load().then(() => ad.show().catch((error:any) => { 
+                        callBack(REWORD_VIDEOAD_CODE.FAIL) // 0 表示失败
+                    }))
+                })
+
+                ad.onClose(res => {
+                    // 用户点击了【关闭广告】按钮
+                    // 小于 2.1.0 的基础库版本，res 是一个 undefined
+                    if (res && res.isEnded || res === undefined) {
+                        // 正常播放结束，可以下发游戏奖励
+                        callBack(REWORD_VIDEOAD_CODE.SUCCESS)
+                    }
+                    else {
+                        // 播放中途退出，不下发游戏奖励
+                        callBack(REWORD_VIDEOAD_CODE.NOT_OVER)
+                    }
+                })
+            }else{
+                this._rewardedVideoAdList[key] = this.createRewardedVideoAd(key)
+                this._rewardedVideoAdList[key].show().catch((error:any) => { 
+                    // 失败重试
+                    console.error("视频广告显示失败 尝试重新拉取", error)
+                    this._rewardedVideoAdList[key].load().then(() => ad.show().catch((error:any) => { 
+                        callBack(REWORD_VIDEOAD_CODE.FAIL) // 0 表示失败
+                    }))
+                    this._rewardedVideoAdList[key].onClose(res => { 
+                        if (res && res.isEnded || res === undefined) {
+                            // 正常播放结束，可以下发游戏奖励
+                            callBack(REWORD_VIDEOAD_CODE.SUCCESS)
+                        }
+                        else {
+                            // 播放中途退出，不下发游戏奖励
+                            callBack(REWORD_VIDEOAD_CODE.NOT_OVER)
+                        }
+                    })
+                })
+            }
+        }else{
+            callBack(REWORD_VIDEOAD_CODE.SUCCESS)
+        }
+    }
 }

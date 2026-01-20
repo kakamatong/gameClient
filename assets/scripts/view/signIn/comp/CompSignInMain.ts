@@ -8,6 +8,8 @@ import FGUICompSignItem from "../../../fgui/signIn/FGUICompSignItem";
 import { SignInView } from "../SignInView";
 import { UserRiches } from "../../../modules/UserRiches";
 import { AwardView } from "../../award/AwardView";
+import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
+import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
 
 /**
  * 签到视图
@@ -96,22 +98,16 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnFill(index:number):void{
         console.log("补签");
-        const func = (b:boolean, data:any) =>{
-            console.log(b, data);
-            if(!b){
-                TipsView.showView({content:`签到失败`})
-                return;
+        MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code:number)=>{
+            console.log(code);
+            if(code == REWORD_VIDEOAD_CODE.SUCCESS){
+                this.fillSignIn(index)
+            }else if(code == REWORD_VIDEOAD_CODE.NOT_OVER){
+                TipsView.showView({content:`看完视频才能获取奖励哦`})
+            }else{
+                TipsView.showView({content:`视频广告播放失败`})
             }
-            console.log(LogColors.green("补签成功"))
-            // todo: 更新签到数据
-            this._signInStatus = data.status;
-            this.initUI();
-            // 用户财富
-            const userRiches = new UserRiches()
-            userRiches.req()
-            this.showAward({awards:data.awards, noticeid:data.noticeid})
-        }
-        this._reqSign && this._reqSign.reqFillSignIn(index,func)
+        })
     }
 
     /**
@@ -139,7 +135,16 @@ export class CompSignInMain extends FGUICompSignInMain {
      */
     onBtnMult():void{
         console.log("多倍签到");
-        this.signIn(1)
+        MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code:number)=>{
+            console.log(code);
+            if(code == REWORD_VIDEOAD_CODE.SUCCESS){
+                this.signIn(1)
+            }else if(code == REWORD_VIDEOAD_CODE.NOT_OVER){
+                TipsView.showView({content:`看完视频才能获取奖励哦`})
+            }else{
+                TipsView.showView({content:`视频广告播放失败`})
+            }
+        })
     }
 
     /**
@@ -163,6 +168,29 @@ export class CompSignInMain extends FGUICompSignInMain {
             this.showAward({awards:data.awards, noticeid:data.noticeid})
         }
         this._reqSign && this._reqSign.reqSignIn(mult,func)
+    }
+
+    /**
+     * 补签
+     * @param index 天数标识
+     */
+    fillSignIn(index:number):void{
+        const func = (b:boolean, data:any) =>{
+            console.log(b, data);
+            if(!b){
+                TipsView.showView({content:`签到失败`})
+                return;
+            }
+            console.log(LogColors.green("补签成功"))
+            // todo: 更新签到数据
+            this._signInStatus = data.status;
+            this.initUI();
+            // 用户财富
+            const userRiches = new UserRiches()
+            userRiches.req()
+            this.showAward({awards:data.awards, noticeid:data.noticeid})
+        }
+        this._reqSign && this._reqSign.reqFillSignIn(index,func)
     }
 
     /**
