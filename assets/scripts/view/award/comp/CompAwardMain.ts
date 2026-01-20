@@ -1,15 +1,27 @@
 import FGUICompAwardMain from "../../../fgui/award/FGUICompAwardMain";
 import { ViewClass } from "../../../frameworks/Framework";
 import * as fgui from "fairygui-cc";
+import { AwardConfig } from "../data/AwardConfig";
+import { ComProp } from "../../props/comp/ComProp";
 
 @ViewClass()
 export class CompAwardMain extends FGUICompAwardMain { 
-    show(args:any):void{
+    private _data:AwardConfig | null = null;
+    show(args:AwardConfig):void{
+        this._data = args;
         this.initUI();
     }
 
     initUI():void{
-        
+        this.UI_LIST_AWARD.itemRenderer = this.itemRenderer.bind(this);
+        this.UI_LIST_AWARD.numItems = this._data?.ids.length || 0;
+    }
+
+    itemRenderer(index:number, obj:fgui.GObject):void{
+        const id = this._data?.ids[index] ?? 0
+        const num = this._data?.nums[index] ??0
+        const node = obj as ComProp
+        node.show({id, num})
     }
 }
 fgui.UIObjectFactory.setExtension(CompAwardMain.URL, CompAwardMain);
