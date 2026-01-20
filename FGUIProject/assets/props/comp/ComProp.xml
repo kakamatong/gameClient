@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="120,120">
-  <controller name="ctrl_num" homePageType="specific" homePage="1" pages="0,,1," selected="0">
+  <controller name="ctrl_num" homePageType="specific" homePage="1" pages="0,,1," selected="1">
     <remark page="0" value="不显示"/>
     <remark page="1" value="显示"/>
   </controller>
   <displayList>
     <image id="n0_pz9v" name="n0" src="pz9v1c" fileName="imgs/propBg.png" xy="0,0" size="120,120"/>
     <loader id="n1_pz9v" name="UI_LOADER_ICON" xy="5,5" size="110,110" fill="scaleFree" clearOnPublish="true"/>
-    <text id="n2_pz9v" name="UI_TXT_NUM" xy="86,87" pivot="1,1" size="26,29" fontSize="20" color="#0099cc" align="right" vAlign="middle" strokeColor="#000000" text="x0">
+    <image id="n3_pizs" name="n3" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="5,82" size="108,32">
+      <gearDisplay controller="ctrl_num" pages="1"/>
+    </image>
+    <text id="n2_pz9v" name="UI_TXT_NUM" xy="44,81" pivot="0.5,0.5" size="31,34" fontSize="24" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" text="x0">
       <gearDisplay controller="ctrl_num" pages="1"/>
     </text>
   </displayList>

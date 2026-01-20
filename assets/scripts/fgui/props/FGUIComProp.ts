@@ -52,7 +52,7 @@ export default class FGUIComProp extends fgui.GComponent {
 	protected onConstruct():void {
 		this.ctrl_num = this.getControllerAt(0);
 		this.UI_LOADER_ICON = <fgui.GLoader>(this.getChildAt(1));
-		this.UI_TXT_NUM = <fgui.GTextField>(this.getChildAt(2));
+		this.UI_TXT_NUM = <fgui.GTextField>(this.getChildAt(3));
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};
 	unscheduleAllCallbacks():void{};

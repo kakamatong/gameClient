@@ -2,7 +2,7 @@
 <component size="149,40">
   <displayList>
     <image id="n1_ok17" name="n1" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="17,1" size="132,38"/>
-    <text id="n2_ok17" name="UI_TXT_NUM" xy="42,4" size="82,32" fontSize="22" color="#ffffff" vAlign="middle" text="000000"/>
+    <text id="n2_ok17" name="UI_TXT_NUM" xy="42,4" size="17,32" fontSize="22" color="#ffffff" vAlign="middle" text="0"/>
     <loader id="n3_ok17" name="UI_LOADER_ICON" xy="1,0" size="40,40" url="ui://fwundh2cpxa518"/>
   </displayList>
   <customProperty target="UI_LOADER_ICON" propertyId="1"/>
