@@ -22,7 +22,7 @@ import { ConnectGameSvr } from '../../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { SignInView } from '../../signIn/SignInView';
 import { sys } from 'cc';
-@ViewClass()
+@ViewClass({ curveScreenAdapt: true })
 export class CompLabbyMain extends FGUICompLabbyMain {
     onConstruct(){
         super.onConstruct();

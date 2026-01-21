@@ -1,5 +1,6 @@
 import { Director, Scene } from 'cc';
 import { PackageManager } from './PackageManager';
+import { SAFE_AREA_TOP } from './config/Config';
 type eventFunc = (...args:any[]) =>void
 
 const events = new Map<string, eventFunc[]>()
@@ -108,20 +109,73 @@ export const PackageLoad = (packages:string[]) =>{
  */
 export const ViewClass = (data?:any) =>{
     return function <T extends new (...args: any[]) => any>(constructor: T) {
-        constructor.prototype.scheduleOnce = function (callback: () => void, delay: number) {
+        const newConstructor = class extends constructor {
+            private _curveScreenApplied = false;
+
+            constructor(...args: any[]) {
+                super(...args);
+                // 如果配置了曲面屏适配，则标记需要适配
+                if (data && data.curveScreenAdapt) {
+                    this._curveScreenApplied = true;
+                }
+            }
+
+            /**
+             * 重写onConstruct方法，在FairyGUI组件构造完成后执行适配
+             */
+            protected onConstruct(): void {
+                // 先调用父类的onConstruct
+                if (super.onConstruct) {
+                    super.onConstruct();
+                }
+
+                // 如果需要曲面屏适配，则延迟执行适配（确保在makeFullScreen之后）
+                if (this._curveScreenApplied) {
+                    this.scheduleOnce(() => {
+                        this.adaptForCurveScreen();
+                    }, 0);
+                }
+            }
+
+            /**
+             * 适配曲面屏
+             */
+            private adaptForCurveScreen() {
+                if (this && this.height !== undefined && this.height > 0) {
+                    const originalHeight = this.height;
+                    const originalY = this.y;
+
+                    console.log(`[ViewClass] Before adaptation - ${constructor.name}: height: ${originalHeight}, y: ${originalY}, x: ${this.x}, parent: ${this.parent ? 'yes' : 'no'}`);
+
+                    // 调整高度
+                    this.height -= SAFE_AREA_TOP;
+                    // 调整y坐标，向下偏移
+                    this.y += SAFE_AREA_TOP;
+
+                    console.log(`[ViewClass] After adaptation - ${constructor.name}: height: ${this.height}, y: ${this.y}, x: ${this.x} (reduced by ${SAFE_AREA_TOP}px)`);
+                } else {
+                    console.warn(`[ViewClass] Cannot apply curve screen adaptation to ${constructor.name}: height is ${this.height}, y: ${this.y}, x: ${this.x}`);
+                }
+            }
+        }
+
+        // 继承原构造函数的方法和属性
+        newConstructor.prototype.scheduleOnce = function (callback: () => void, delay: number) {
             this.node.components[0].scheduleOnce(callback, delay)
         }
 
-        constructor.prototype.schedule = function (callback: () => void, interval: number) {
+        newConstructor.prototype.schedule = function (callback: () => void, interval: number) {
             this.node.components[0].schedule(callback, interval)
         }
 
-        constructor.prototype.unschedule = function (callback: () => void) {
+        newConstructor.prototype.unschedule = function (callback: () => void) {
             this.node.components[0].unschedule(callback)
         }
 
-        constructor.prototype.unscheduleAllCallbacks = function () {
+        newConstructor.prototype.unscheduleAllCallbacks = function () {
             this.node.components[0].unscheduleAllCallbacks()
         }
+
+        return newConstructor;
     }
 }
