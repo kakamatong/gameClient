@@ -13,6 +13,12 @@ export class LogColors {
     static yellow = (text: string) => `\x1b[33m${text}\x1b[0m`;
 }
 
+/**
+ * 添加事件监听
+ * @param eventName 事件名称
+ * @param func 监听函数
+ * @param target 监听函数所属对象
+ */
 export function AddEventListener(eventName:string, func: eventFunc, target:any) {
     if (!events.has(eventName)) {
         events.set(eventName, [func])
@@ -25,6 +31,11 @@ export function AddEventListener(eventName:string, func: eventFunc, target:any) 
     eventTargets.set(func, target)
 }
 
+/**
+ * 移除事件监听
+ * @param eventName 事件名称
+ * @param func 监听函数
+ */
 export function RemoveEventListener(eventName:string, func: eventFunc) {
     if (!events.has(eventName)) {
         return
@@ -38,6 +49,11 @@ export function RemoveEventListener(eventName:string, func: eventFunc) {
     }
 }
 
+/**
+ * 分发事件
+ * @param eventName 事件名称
+ * @param args 参数
+ */
 export function DispatchEvent(eventName:string, ...args:any[]) {
     if (!events.has(eventName)) {
         return
@@ -52,6 +68,10 @@ export function DispatchEvent(eventName:string, ...args:any[]) {
     }
 }
 
+/**
+ * 场景切换
+ * @param name 场景名称
+ */
 export const ChangeScene = (name:string):void => {
     const func = (error:Error|null, scene?:Scene)=>{
         if (!error && scene) {

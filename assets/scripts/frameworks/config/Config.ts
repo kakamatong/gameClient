@@ -23,3 +23,5 @@ export enum REWORD_VIDEOAD_CODE {
     NOT_OVER = 2, // 没看完
     NOT_KEY = 3 // 这个key
 }
+
+export const SAFE_AREA_TOP = 44
