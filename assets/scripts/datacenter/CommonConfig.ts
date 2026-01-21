@@ -10,3 +10,18 @@ export type PropData = {
 export const PropConfig:Record<number, PropData> = {
     2: { id: 2, name: "银子", desc:"用于聊天消耗等" },
 }
+
+// 事件名称常量
+export const EVENT_NAMES = {
+    // 用户相关事件
+    USER_DATA: 'userData',
+    USER_STATUS: 'userStatus',
+    USER_RICHES: 'userRichs',
+    
+    // Socket连接事件
+    SOCKET_DISCONNECT: 'socketDisconnect',
+    GAME_SOCKET_DISCONNECT: 'gameSocketDisconnect',
+    
+    // 应用生命周期事件
+    ON_SHOW: 'onShow',
+} as const;

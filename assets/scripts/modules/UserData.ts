@@ -2,6 +2,7 @@ import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
 import { SprotoUpdateUserNameAndHeadurl, SprotoUserData } from '../../types/protocol/lobby/c2s';
+import { EVENT_NAMES } from '../datacenter/CommonConfig';
 
 /**
  * @class UserData
@@ -24,7 +25,7 @@ export class UserData {
      */
     resp(data: SprotoUserData.Response) {
         DataCenter.instance.userData = data;
-        DispatchEvent('userData',data)
+        DispatchEvent(EVENT_NAMES.USER_DATA,data)
     }
 
     updateUserNameAndHeadurl(nickname:string, headurl:string){

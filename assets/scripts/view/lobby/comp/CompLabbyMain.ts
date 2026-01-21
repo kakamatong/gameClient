@@ -5,6 +5,7 @@ import { DataCenter } from '../../../datacenter/Datacenter';
 import {ConnectSvr} from '../../../modules/ConnectSvr';
 import { PopMessageView } from '../../common/PopMessageView';
 import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL, LOCAL_KEY, RICH_TYPE} from '../../../datacenter/InterfaceConfig';
+import { EVENT_NAMES } from '../../../datacenter/CommonConfig';
 import { TipsView } from '../../common/TipsView';
 import { LobbySocketManager } from '../../../frameworks/LobbySocketManager';
 import { Rank } from '../../../modules/Rank';
@@ -35,11 +36,11 @@ export class CompLabbyMain extends FGUICompLabbyMain {
      * 初始化监听
      */
     initListeners(){
-        AddEventListener('userData',this.onUserInfo, this);
-        AddEventListener('userStatus',this.onUserStatus, this);
-        AddEventListener('userRichs',this.onUserRiches, this);
-        AddEventListener('socketDisconnect',this.onSocketDisconnect, this);
-        AddEventListener('onShow', this.onAppShow, this)
+        AddEventListener(EVENT_NAMES.USER_DATA,this.onUserInfo, this);
+        AddEventListener(EVENT_NAMES.USER_STATUS,this.onUserStatus, this);
+        AddEventListener(EVENT_NAMES.USER_RICHES,this.onUserRiches, this);
+        AddEventListener(EVENT_NAMES.SOCKET_DISCONNECT,this.onSocketDisconnect, this);
+        AddEventListener(EVENT_NAMES.ON_SHOW, this.onAppShow, this)
         LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
@@ -49,11 +50,11 @@ export class CompLabbyMain extends FGUICompLabbyMain {
      */
     onDestroy(){
         super.onDestroy();
-        RemoveEventListener('userData', this.onUserInfo);
-        RemoveEventListener('userStatus', this.onUserStatus);
-        RemoveEventListener('userRichs', this.onUserRiches);
-        RemoveEventListener('socketDisconnect', this.onSocketDisconnect);
-        RemoveEventListener('onShow', this.onAppShow);
+        RemoveEventListener(EVENT_NAMES.USER_DATA, this.onUserInfo);
+        RemoveEventListener(EVENT_NAMES.USER_STATUS, this.onUserStatus);
+        RemoveEventListener(EVENT_NAMES.USER_RICHES, this.onUserRiches);
+        RemoveEventListener(EVENT_NAMES.SOCKET_DISCONNECT, this.onSocketDisconnect);
+        RemoveEventListener(EVENT_NAMES.ON_SHOW, this.onAppShow);
         LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
     }
 

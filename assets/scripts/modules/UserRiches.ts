@@ -2,6 +2,7 @@ import { SprotoUserRiches } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { DispatchEvent } from '../frameworks/Framework';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
+import { EVENT_NAMES } from '../datacenter/CommonConfig';
 export class UserRiches {
     req() {
         LobbySocketManager.instance.sendToServer(SprotoUserRiches, {}, this.resp.bind(this))
@@ -19,7 +20,7 @@ export class UserRiches {
                 riches.push(tmp)
             }
             DataCenter.instance.userRiches = riches
-            DispatchEvent('userRichs',data)
+            DispatchEvent(EVENT_NAMES.USER_RICHES,data)
         }
     }
 }

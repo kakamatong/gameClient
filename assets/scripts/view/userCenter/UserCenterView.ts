@@ -8,6 +8,7 @@ import { TipsView } from '../common/TipsView';
 import { UserData } from '../../modules/UserData';
 import { DispatchEvent, ViewClass } from '../../frameworks/Framework';
 import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../datacenter/InterfaceConfig';
+import { EVENT_NAMES } from '../../datacenter/CommonConfig';
 import { PopMessageView } from '../common/PopMessageView';
 import { RevokeAccount } from '../../modules/RevokeAccount';
 import { LobbySocketManager } from '../../frameworks/LobbySocketManager';
@@ -145,7 +146,7 @@ export class UserCenterView extends FGUIUserCenterView {
                         const userData = new UserData()
                         userData.updateUserNameAndHeadurl(userInfo.nickName, headUrl)
                         // 派发用户数据更新事件
-                        DispatchEvent('userData',DataCenter.instance.userData)
+                        DispatchEvent(EVENT_NAMES.USER_DATA,DataCenter.instance.userData)
                     }
                 }else{
                     // 用户拒绝授权或获取失败

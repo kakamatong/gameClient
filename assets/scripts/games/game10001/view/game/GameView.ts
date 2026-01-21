@@ -10,6 +10,7 @@ import * as fgui from "fairygui-cc";
 import { CompClock } from './comp/CompClock';
 import { PopMessageView } from '../../../../view/common/PopMessageView';
 import { ENUM_POP_MESSAGE_TYPE, RICH_TYPE } from '../../../../datacenter/InterfaceConfig';
+import { EVENT_NAMES } from '../../../../datacenter/CommonConfig';
 import { ResultView } from '../result/ResultView';
 import { UserStatus } from '../../../../modules/UserStatus';
 import { MatchView } from '../../../../view/match/MatchView';
@@ -80,7 +81,7 @@ export class GameView extends FGUIGameView {
         GameSocketManager.instance.addServerListen(SprotoForwardMessage, this.onSvrForwardMessage.bind(this));
         GameSocketManager.instance.addServerListen(SprotoTalk, this.onSvrTalk.bind(this));
         LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
-        AddEventListener('gameSocketDisconnect',this.onGameSocketDisconnect, this);
+        AddEventListener(EVENT_NAMES.GAME_SOCKET_DISCONNECT,this.onGameSocketDisconnect, this);
     }
 
     removeListeners():void{ 
@@ -103,7 +104,7 @@ export class GameView extends FGUIGameView {
         LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
         GameSocketManager.instance.removeServerListen(SprotoForwardMessage);
         GameSocketManager.instance.removeServerListen(SprotoTalk);
-        RemoveEventListener('gameSocketDisconnect', this.onGameSocketDisconnect);
+        RemoveEventListener(EVENT_NAMES.GAME_SOCKET_DISCONNECT, this.onGameSocketDisconnect);
     }
 
     // 服务消息转发
