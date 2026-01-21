@@ -2,6 +2,9 @@ import FGUICompBg from "../../../fgui/lobby/FGUICompBg";
 import { ViewClass } from "../../../frameworks/Framework";
 import * as fgui from "fairygui-cc";
 
+/**
+ * 背景动画组件
+ */
 @ViewClass()
 export class CompBg extends FGUICompBg {
     private _node1: fgui.GObject | null = null;

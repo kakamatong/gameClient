@@ -15,6 +15,7 @@
     <image id="pizsf" name="signin.png" path="/imgs/"/>
     <component id="pizsg" name="BtnLobbyMenu.xml" path="/comp/"/>
     <component id="wgijh" name="CompBg.xml" path="/comp/"/>
+    <component id="ln74i" name="CompLabbyMain.xml" path="/comp/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
