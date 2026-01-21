@@ -25,3 +25,13 @@ export enum REWORD_VIDEOAD_CODE {
 }
 
 export const SAFE_AREA_TOP = 44
+
+// 框架事件名称常量
+export const FW_EVENT_NAMES = {
+    // Socket连接事件
+    SOCKET_DISCONNECT: 'socketDisconnect',
+    GAME_SOCKET_DISCONNECT: 'gameSocketDisconnect',
+    
+    // 应用生命周期事件
+    ON_SHOW: 'onShow',
+} as const;

@@ -1,6 +1,6 @@
 import { DispatchEvent } from './Framework';
 import { SocketManager } from './SocketManager';
-import { EVENT_NAMES } from '../datacenter/CommonConfig';
+import { FW_EVENT_NAMES } from './config/Config';
 
 export class LobbySocketManager extends SocketManager {
     protected _name: string = 'LobbySocketManager'
@@ -20,7 +20,7 @@ export class LobbySocketManager extends SocketManager {
     onClose(event: any) {
         if (this.isOpen()) {
             // 断线了
-            DispatchEvent(EVENT_NAMES.SOCKET_DISCONNECT,{})
+            DispatchEvent(FW_EVENT_NAMES.SOCKET_DISCONNECT,{})
         }
         super.onClose(event);
     }

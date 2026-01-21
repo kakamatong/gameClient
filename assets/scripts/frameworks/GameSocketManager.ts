@@ -1,6 +1,6 @@
 import { DispatchEvent, LogColors } from './Framework';
 import { SocketManager } from './SocketManager';
-import { EVENT_NAMES } from '../datacenter/CommonConfig';
+import { FW_EVENT_NAMES } from './config/Config';
 
 export class GameSocketManager extends SocketManager {
     protected _name: string = 'GameSocketManager'
@@ -26,7 +26,7 @@ export class GameSocketManager extends SocketManager {
     onClose(event: any) {
         if (this.isOpen()) {
             // 断线了
-            DispatchEvent(EVENT_NAMES.GAME_SOCKET_DISCONNECT,{})
+            DispatchEvent(FW_EVENT_NAMES.GAME_SOCKET_DISCONNECT,{})
         }
         super.onClose(event);
     }

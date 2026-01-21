@@ -1,7 +1,7 @@
 import { sys } from "cc";
 import { DispatchEvent } from "../../Framework";
 import { REWORD_VIDEOAD_CODE } from "../../config/Config";
-import { EVENT_NAMES } from "../../../datacenter/CommonConfig";
+import { FW_EVENT_NAMES } from "../../config/Config";
 
 export class MiniGameUtils {
 
@@ -52,7 +52,7 @@ export class MiniGameUtils {
         if (this.isWeChatGame()) {
             wx && wx.onShow((res:any) => { 
                 console.log('App Show', res)
-                DispatchEvent(EVENT_NAMES.ON_SHOW,res)
+                DispatchEvent(FW_EVENT_NAMES.ON_SHOW,res)
             })
 
             const key = 'adunit-21e58350c401d5b6'

@@ -17,11 +17,4 @@ export const EVENT_NAMES = {
     USER_DATA: 'userData',
     USER_STATUS: 'userStatus',
     USER_RICHES: 'userRichs',
-    
-    // Socket连接事件
-    SOCKET_DISCONNECT: 'socketDisconnect',
-    GAME_SOCKET_DISCONNECT: 'gameSocketDisconnect',
-    
-    // 应用生命周期事件
-    ON_SHOW: 'onShow',
 } as const;

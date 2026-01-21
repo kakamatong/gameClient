@@ -6,6 +6,7 @@ import {ConnectSvr} from '../../../modules/ConnectSvr';
 import { PopMessageView } from '../../common/PopMessageView';
 import {ENUM_POP_MESSAGE_TYPE, ENUM_USER_STATUS, LOBBY_SHARE_PIC_URL, LOCAL_KEY, RICH_TYPE} from '../../../datacenter/InterfaceConfig';
 import { EVENT_NAMES } from '../../../datacenter/CommonConfig';
+import { FW_EVENT_NAMES } from '../../../frameworks/config/Config';
 import { TipsView } from '../../common/TipsView';
 import { LobbySocketManager } from '../../../frameworks/LobbySocketManager';
 import { Rank } from '../../../modules/Rank';
@@ -39,8 +40,8 @@ export class CompLabbyMain extends FGUICompLabbyMain {
         AddEventListener(EVENT_NAMES.USER_DATA,this.onUserInfo, this);
         AddEventListener(EVENT_NAMES.USER_STATUS,this.onUserStatus, this);
         AddEventListener(EVENT_NAMES.USER_RICHES,this.onUserRiches, this);
-        AddEventListener(EVENT_NAMES.SOCKET_DISCONNECT,this.onSocketDisconnect, this);
-        AddEventListener(EVENT_NAMES.ON_SHOW, this.onAppShow, this)
+        AddEventListener(FW_EVENT_NAMES.SOCKET_DISCONNECT,this.onSocketDisconnect, this);
+        AddEventListener(FW_EVENT_NAMES.ON_SHOW, this.onAppShow, this)
         LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
     }
@@ -53,8 +54,8 @@ export class CompLabbyMain extends FGUICompLabbyMain {
         RemoveEventListener(EVENT_NAMES.USER_DATA, this.onUserInfo);
         RemoveEventListener(EVENT_NAMES.USER_STATUS, this.onUserStatus);
         RemoveEventListener(EVENT_NAMES.USER_RICHES, this.onUserRiches);
-        RemoveEventListener(EVENT_NAMES.SOCKET_DISCONNECT, this.onSocketDisconnect);
-        RemoveEventListener(EVENT_NAMES.ON_SHOW, this.onAppShow);
+        RemoveEventListener(FW_EVENT_NAMES.SOCKET_DISCONNECT, this.onSocketDisconnect);
+        RemoveEventListener(FW_EVENT_NAMES.ON_SHOW, this.onAppShow);
         LobbySocketManager.instance.removeServerListen(SprotoGameRoomReady);
     }
 
