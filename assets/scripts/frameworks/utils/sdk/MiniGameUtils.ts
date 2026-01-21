@@ -151,13 +151,56 @@ export class MiniGameUtils {
         }
     }
 
-    getSystemInfoSync(){
+getSystemInfoSync(){
         if (this.isWeChatGame()) {
             return wx && wx.getSystemInfoSync()
         }else{
             return {screenWidth: 0, screenHeight: 0}
         }
         
+    }
+
+    /**
+     * 获取窗口信息
+     * @returns {any} 窗口信息对象
+     */
+    getWindowInfo(): any {
+        if (this.isWeChatGame()) {
+            return wx && wx.getWindowInfo();
+        } else {
+            // 非微信小游戏环境，返回默认值
+            return {
+                windowWidth: window.innerWidth || 0,
+                windowHeight: window.innerHeight || 0,
+                pixelRatio: 1,
+                screenWidth: window.screen?.width || 0,
+                screenHeight: window.screen?.height || 0,
+                statusBarHeight: 0,
+                safeArea: {
+                    left: 0,
+                    right: window.innerWidth || 0,
+                    top: 0,
+                    bottom: window.innerHeight || 0,
+                    width: window.innerWidth || 0,
+                    height: window.innerHeight || 0
+                }
+            };
+        }
+    }
+
+    /**
+     * 获取顶部安全区域高度（状态栏高度）
+     * @returns {number} 顶部安全区域高度，如果没有安全区域则返回0
+     */
+    getSafeAreaTopHeight(): number {
+        const windowInfo = this.getWindowInfo();
+        
+        if (windowInfo.safeArea) {
+            // 计算顶部安全区域高度 = safeArea.top
+            return windowInfo.safeArea.top || 0;
+        }
+        
+        return 0;
     }
 
     createUserInfoButton(data:any){

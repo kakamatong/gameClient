@@ -1,6 +1,6 @@
 import { Director, Scene } from 'cc';
 import { PackageManager } from './PackageManager';
-import { SAFE_AREA_TOP } from './config/Config';
+import { MiniGameUtils } from './utils/sdk/MiniGameUtils';
 type eventFunc = (...args:any[]) =>void
 
 const events = new Map<string, eventFunc[]>()
@@ -137,22 +137,25 @@ export const ViewClass = (data?:any) =>{
                 }
             }
 
-            /**
+/**
              * 适配曲面屏
              */
             private adaptForCurveScreen() {
                 if (this && this.height !== undefined && this.height > 0) {
                     const originalHeight = this.height;
                     const originalY = this.y;
-
+                    
+                    // 获取动态安全区域高度
+                    const safeAreaTop = MiniGameUtils.instance.getSafeAreaTopHeight();
+                    
                     console.log(`[ViewClass] Before adaptation - ${constructor.name}: height: ${originalHeight}, y: ${originalY}, x: ${this.x}, parent: ${this.parent ? 'yes' : 'no'}`);
-
+                    
                     // 调整高度
-                    this.height -= SAFE_AREA_TOP;
+                    this.height -= safeAreaTop;
                     // 调整y坐标，向下偏移
-                    this.y += SAFE_AREA_TOP;
-
-                    console.log(`[ViewClass] After adaptation - ${constructor.name}: height: ${this.height}, y: ${this.y}, x: ${this.x} (reduced by ${SAFE_AREA_TOP}px)`);
+                    this.y += safeAreaTop;
+                    
+                    console.log(`[ViewClass] After adaptation - ${constructor.name}: height: ${this.height}, y: ${this.y}, x: ${this.x} (reduced by ${safeAreaTop}px)`);
                 } else {
                     console.warn(`[ViewClass] Cannot apply curve screen adaptation to ${constructor.name}: height is ${this.height}, y: ${this.y}, x: ${this.x}`);
                 }

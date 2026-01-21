@@ -24,7 +24,7 @@ export enum REWORD_VIDEOAD_CODE {
     NOT_KEY = 3 // 这个key
 }
 
-export const SAFE_AREA_TOP = 44
+export const SAFE_AREA_TOP = 44 // 默认值，实际使用时从 MiniGameUtils 获取
 
 // 框架事件名称常量
 export const FW_EVENT_NAMES = {
