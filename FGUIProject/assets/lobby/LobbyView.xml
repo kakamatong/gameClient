@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="776,1688">
   <displayList>
-    <component id="n15_g8w0" name="bg" src="wgijh" fileName="comp/CompBg.xml" xy="0,0"/>
-    <component id="n7_gtlg" name="UI_COMP_MAIN" src="ln74i" fileName="CompLabbyMain.xml" xy="0,0"/>
+    <component id="n15_g8w0" name="bg" src="wgijh" fileName="comp/CompBg.xml" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <component id="n7_gtlg" name="UI_COMP_MAIN" src="ln74i" fileName="comp/CompLabbyMain.xml" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
   </displayList>
 </component>
