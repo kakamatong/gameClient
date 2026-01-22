@@ -20,6 +20,11 @@ export class MiniGameUtils {
     private _interstitialAdList: Record<string,any> = {};
 
     /**
+     * 视频广告回调函数
+     */
+    private _rewardedVideoAdCallBack: ((code:number)=>void) | null = null;
+
+    /**
      * @property {HTMLCanvasElement} _canvas - 画布
      * @private
      */
@@ -388,11 +393,11 @@ getSystemInfoSync(){
 
     /**
      * 创建激励视频广告
-     * @param key 
-     * @returns 
+     * @param key
+     * @returns
      */
-    createRewardedVideoAd(key:string):void{ 
-        if (this.isWeChatGame()) { 
+    createRewardedVideoAd(key:string):void{
+        if (this.isWeChatGame()) {
             const ad = wx && wx.createRewardedVideoAd({
                 adUnitId: key
             })
@@ -404,6 +409,20 @@ getSystemInfoSync(){
             ad.onError(err => {
                 console.log(err)
                 console.log('激励视频 广告加载错误')
+                this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL)
+                this._rewardedVideoAdCallBack = null;
+            })
+
+            ad.onClose(res => {
+                if (this._rewardedVideoAdCallBack) {
+                    if (res && res.isEnded || res === undefined) {
+                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.SUCCESS)
+                    }
+                    else {
+                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.NOT_OVER)
+                    }
+                    this._rewardedVideoAdCallBack = null;
+                }
             })
 
             this._rewardedVideoAdList[key] = ad
@@ -429,25 +448,14 @@ getSystemInfoSync(){
 
     /**
      * 播放激励视频广告
-     * @param ad 
-     * @param callBack 
+     * @param ad
+     * @param callBack
      */
     playRewardedVideoAd(ad:any, callBack:(code:number)=>void){
-        ad.show().catch((error:any) => { 
-            ad.load().then(() => ad.show().catch((error:any) => { 
-                callBack(REWORD_VIDEOAD_CODE.FAIL) // 0 表示失败
-            }))
-        })
-        
-        ad.onClose(res => { 
-            if (res && res.isEnded || res === undefined) {
-                // 正常播放结束，可以下发游戏奖励
-                callBack(REWORD_VIDEOAD_CODE.SUCCESS)
-            }
-            else {
-                // 播放中途退出，不下发游戏奖励
-                callBack(REWORD_VIDEOAD_CODE.NOT_OVER)
-            }
+        this._rewardedVideoAdCallBack = callBack;
+        ad.show().catch((error:any) => {
+            this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
+            this._rewardedVideoAdCallBack = null;
         })
     }
 }
