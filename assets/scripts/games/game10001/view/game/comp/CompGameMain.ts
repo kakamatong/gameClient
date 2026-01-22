@@ -34,6 +34,9 @@ import { TalkView } from '../../talk/TalkView';
 export class CompGameMain extends FGUICompGameMain {
     private _selectOutHand: number = -1;
 
+    /**
+     * 组件构造完成时的初始化
+     */
     onConstruct() {
         super.onConstruct();
         this.init();
@@ -47,6 +50,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 初始化游戏数据
+     */
     init() {
         GameData.instance.init();
         GameData.instance.maxPlayer = 2;
@@ -56,6 +62,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 初始化所有服务器消息监听器
+     */
     initListeners() {
         GameSocketManager.instance.addServerListen(SprotoRoomInfo, this.onRoomInfo.bind(this));
         GameSocketManager.instance.addServerListen(SprotoStepId, this.onGameStep.bind(this));
@@ -79,11 +88,17 @@ export class CompGameMain extends FGUICompGameMain {
         AddEventListener(FW_EVENT_NAMES.GAME_SOCKET_DISCONNECT, this.onGameSocketDisconnect, this);
     }
 
+    /**
+     * 组件销毁时的清理
+     */
     onDestroy() {
         super.onDestroy();
         this.removeListeners();
     }
 
+    /**
+     * 移除所有服务器消息监听器
+     */
     removeListeners(): void {
         GameSocketManager.instance.removeServerListen(SprotoRoomInfo);
         GameSocketManager.instance.removeServerListen(SprotoStepId);
@@ -107,16 +122,27 @@ export class CompGameMain extends FGUICompGameMain {
         RemoveEventListener(FW_EVENT_NAMES.GAME_SOCKET_DISCONNECT, this.onGameSocketDisconnect);
     }
 
-    // 服务消息转发
+    /**
+     * 服务器消息转发处理
+     * @param data 转发消息数据
+     */
     onSvrForwardMessage(data: SprotoForwardMessage.Request) {
         console.log(data)
         this.forwardMessage(data)
     }
 
+    /**
+     * 游戏记录处理
+     * @param data 游戏记录数据
+     */
     onSvrGameRecord(data: any) {
         GameData.instance.record = data
     }
 
+    /**
+     * 总结果处理
+     * @param data 总结果数据
+     */
     onSvrTotalResult(data: any) {
         const time = 1.2
         this.scheduleOnce(() => {
@@ -124,6 +150,10 @@ export class CompGameMain extends FGUICompGameMain {
         }, time)
     }
 
+    /**
+     * 私人房信息处理
+     * @param data 私人房数据
+     */
     onSvrPrivateInfo(data: any) {
         if (!data) {
             return
@@ -142,6 +172,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 显示胜负战绩
+     * @param data 胜负数据
+     */
     showWinLost(data: any) {
         if (data && data.length > 0) {
             for (let index = 0; index < data.length; index++) {
@@ -153,6 +187,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 游戏断开连接处理
+     */
     onGameSocketDisconnect(): void {
         if (!GameData.instance.gameStart) {
             return
@@ -166,6 +203,11 @@ export class CompGameMain extends FGUICompGameMain {
         })
     }
 
+    /**
+     * 显示或隐藏倒计时
+     * @param bshow 是否显示
+     * @param clock 倒计时时间
+     */
     showClock(bshow: boolean, clock?: number): void {
         if (bshow) {
             if (clock && clock > 99) {
@@ -186,14 +228,17 @@ export class CompGameMain extends FGUICompGameMain {
     }
 
     /**
-     * 服务聊天数据
+     * 服务器聊天消息处理
      * @param data 聊天数据
      */
     onSvrTalk(data: SprotoTalk.Request): void {
         this.showTalk(data)
     }
 
-    // 显示聊天
+    /**
+     * 显示聊天消息
+     * @param data 聊天数据
+     */
     showTalk(data: SprotoTalk.Request): void {
         const id = data.id
         const userid = data.from
@@ -206,14 +251,26 @@ export class CompGameMain extends FGUICompGameMain {
         playerNode.showMsg(talkData.msg)
     }
 
+    /**
+     * 游戏时钟处理
+     * @param data 时钟数据
+     */
     onSvrGameClock(data: any): void {
         this.showClock(true, data.time)
     }
 
+    /**
+     * 游戏步骤处理
+     * @param data 步骤数据
+     */
     onGameStep(data: any): void {
         GameData.instance.gameStep = data.stepid;
     }
 
+    /**
+     * 玩家姿态处理
+     * @param data 姿态数据
+     */
     onGamePlayerAttitude(data: any): void {
         const local = GameData.instance.seat2local(data.seat);
         if (data.att == PLAYER_ATTITUDE.THINKING) {
@@ -241,17 +298,30 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 显示玩家出牌手势
+     * @param local 本地座位号
+     * @param index 手势索引
+     */
     showOutHand(local: number, index: number) {
         const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${local}`)
         outHand.ctrl_head.selectedIndex = index
         outHand.visible = true
     }
 
+    /**
+     * 隐藏玩家出牌手势
+     * @param local 本地座位号
+     */
     hideOutHand(local: number) {
         const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${local}`)
         outHand.visible = false
     }
 
+    /**
+     * 游戏出牌处理
+     * @param data 出牌数据
+     */
     onGameOutHand(data: any): void {
         const local = GameData.instance.seat2local(data.seat);
         const index = HAND_INDEX.indexOf(data.flag)
@@ -259,6 +329,9 @@ export class CompGameMain extends FGUICompGameMain {
         this.showOutHand(local, index)
     }
 
+    /**
+     * 播放出牌动画
+     */
     playOutHandAct() {
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
             const outHand = this.getChild<FGUICompHand>(`UI_COMP_OUT_HEND_${index + 1}`)
@@ -266,6 +339,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 播放音效
+     * @param info 音效信息
+     */
     playSound(info: any) {
         const len = info?.length ?? 0
         if (len == 0) {
@@ -282,10 +359,19 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 获取音效名称
+     * @param index 手势索引
+     * @returns 音效名称
+     */
     getSoundName(index: number): string {
         return HAND_SOUND_NAME[index]
     }
 
+    /**
+     * 游戏回合结果处理
+     * @param data 回合结果数据
+     */
     onGameRoundResult(data: any): void {
         this.playOutHandAct()
         this.playSound(data.info)
@@ -343,6 +429,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 清除游戏状态
+     */
     clear(): void {
         for (let index = 0; index < GameData.instance.maxPlayer; index++) {
             this.hideOutHand(index + 1)
@@ -351,7 +440,9 @@ export class CompGameMain extends FGUICompGameMain {
         this._selectOutHand = -1
     }
 
-    // 继续游戏
+    /**
+     * 继续游戏按钮处理
+     */
     onBtnContinue(): void {
         if (GameData.instance.gameStart) {
             return
@@ -364,6 +455,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 开始匹配
+     */
     startMatch() {
         const func = (b: boolean, data?: any) => {
             if (b) {
@@ -381,7 +475,12 @@ export class CompGameMain extends FGUICompGameMain {
         Match.instance.req(0, func);
     }
 
-    // 游戏区匹配：连接游戏服务
+    /**
+     * 连接到游戏服务器
+     * @param addr 游戏服务器地址
+     * @param gameid 游戏ID
+     * @param roomid 房间ID
+     */
     connectToGame(addr: string, gameid: number, roomid: string) {
         const callBack = (success: boolean) => {
             if (success) {
@@ -394,7 +493,10 @@ export class CompGameMain extends FGUICompGameMain {
         AuthGame.instance.req(addr, gameid, roomid, callBack);
     }
 
-    // 游戏区匹配：收到房间准备就绪
+    /**
+     * 游戏房间准备就绪处理
+     * @param data 房间数据
+     */
     onSvrGameRoomReady(data: any): void {
         console.log("gameRoomReady", data)
         MatchView.hideView();
@@ -406,6 +508,10 @@ export class CompGameMain extends FGUICompGameMain {
         this.connectToGame(data.addr, data.gameid, data.roomid);
     }
 
+    /**
+     * 房间结束处理
+     * @param data 结束数据
+     */
     onRoomEnd(data: any): void {
         const msg = "房间销毁"
         if (data.code == ROOM_END_FLAG.GAME_END) {
@@ -456,6 +562,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 玩家信息处理
+     * @param data 玩家信息数据
+     */
     onSvrPlayerInfos(data: any): void {
         console.log('onSvrPlayerInfos', data);
         // 先存到playerInfos里面
@@ -480,6 +590,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 游戏开始处理
+     * @param data 游戏开始数据
+     */
     onSvrGameStart(data: any): void {
         GameData.instance.gameStart = true;
 
@@ -513,10 +627,18 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 游戏结束处理
+     * @param data 游戏结束数据
+     */
     onSvrGameEnd(data: any): void {
         GameData.instance.gameStart = false;
     }
 
+    /**
+     * 玩家进入处理
+     * @param data 进入数据
+     */
     onSvrPlayerEnter(data: any): void {
         const selfid = DataCenter.instance.userid;
         const svrSeat = data.seat;
@@ -544,6 +666,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 玩家状态更新处理
+     * @param data 状态数据
+     */
     onSvrPlayerStatusUpdate(data: any): void {
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
@@ -555,6 +681,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 根据座位显示玩家信息
+     * @param localseat 本地座位号
+     */
     showPlayerInfoBySeat(localseat: number): void {
         const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localseat}`);
         const player = GameData.instance.playerList[localseat];
@@ -580,6 +710,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 隐藏玩家头像
+     * @param localseat 本地座位号
+     */
     hideHead(localseat: number) {
         const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localseat}`);
         if (localseat != SEAT_1) {
@@ -587,6 +721,10 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 玩家离开处理
+     * @param data 离开数据
+     */
     onSvrPlayerLeave(data: any): void {
         const localSeat = GameData.instance.seat2local(data.seat);
         GameData.instance.playerList.splice(localSeat, 1)
@@ -594,6 +732,10 @@ export class CompGameMain extends FGUICompGameMain {
         this.checkShowInviteBtn()
     }
 
+    /**
+     * 房间信息处理
+     * @param data 房间数据
+     */
     onRoomInfo(data: any): void {
         console.log(data)
         GameData.instance.owner = data.owner;
@@ -618,16 +760,30 @@ export class CompGameMain extends FGUICompGameMain {
         this.ctrl_playerCnt.selectedIndex = ROOM_PLAYER_INDEX[GameData.instance.maxPlayer] || 0
     }
 
+    /**
+     * 显示准备标识
+     * @param localSeat 本地座位号
+     * @param bshow 是否显示
+     */
     showSignReady(localSeat: number, bshow: boolean): void {
         this.getChild<fgui.GImage>(`UI_IMG_SIGN_READY_${localSeat}`).visible = bshow
     }
 
+    /**
+     * 显示思考状态
+     * @param localSeat 本地座位号
+     * @param bshow 是否显示
+     */
     showThinking(localSeat: number, bshow: boolean): void {
         const playerNode = this.getChild<CompPlayerHead>(`UI_COMP_PLAYER_${localSeat}`)
         playerNode.UI_COMP_THINKING.visible = bshow
 
     }
 
+    /**
+     * 玩家思考处理
+     * @param localSeat 本地座位号
+     */
     onPlayerThinking(localSeat: number): void {
         if (localSeat == SELF_LOCAL) {
             this.UI_GROUP_SELECT.visible = true
@@ -637,6 +793,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 切换到大厅场景
+     */
     changeToLobbyScene(): void {
         if (GameSocketManager.instance.isOpen()) {
             GameSocketManager.instance.close()
@@ -644,6 +803,9 @@ export class CompGameMain extends FGUICompGameMain {
         ChangeScene('LobbyScene')
     }
 
+    /**
+     * 返回按钮处理
+     */
     onBtnBack(): void {
         // 如果房间的socket已经断开，直接退出
         if (!GameSocketManager.instance.isOpen()) {
@@ -670,6 +832,9 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 准备按钮处理
+     */
     onBtnReady(): void {
         const func = (res: any) => {
             if (res.code) {
@@ -682,21 +847,36 @@ export class CompGameMain extends FGUICompGameMain {
         this.clear()
     }
 
+    /**
+     * 更改出牌按钮处理
+     */
     onBtnChange(): void {
         GameSocketManager.instance.sendToServer(SprotoOutHand, { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag: HAND_INDEX[this.ctrl_select.selectedIndex] })
     }
 
+    /**
+     * 剪刀按钮处理
+     */
     onBtnScissors(): void {
 
     }
 
+    /**
+     * 石头按钮处理
+     */
     onBtnRock(): void {
 
     }
 
+    /**
+     * 布按钮处理
+     */
     onBtnPaper(): void {
     }
 
+    /**
+     * 开始解散房间投票
+     */
     startDisband(): void {
         // 发起解散房间投票请求
         const data = {
@@ -712,6 +892,9 @@ export class CompGameMain extends FGUICompGameMain {
         });
     }
 
+    /**
+     * 解散房间按钮处理
+     */
     onBtnDisband(): void {
         // 如果房间的socket已经断开，直接退出
         if (!GameSocketManager.instance.isOpen()) {
@@ -743,10 +926,17 @@ export class CompGameMain extends FGUICompGameMain {
         }
     }
 
+    /**
+     * 确定按钮处理
+     */
     onBtnSure(): void {
         GameSocketManager.instance.sendToServer(SprotoOutHand, { gameid: DataCenter.instance.gameid, roomid: DataCenter.instance.roomid, flag: HAND_INDEX[this.ctrl_select.selectedIndex] })
     }
 
+    /**
+     * 显示邀请按钮
+     * @param bshow 是否显示
+     */
     showInviteBtn(bshow: boolean): void {
         this.UI_BTN_INVITE.visible = bshow
     }
@@ -779,6 +969,10 @@ export class CompGameMain extends FGUICompGameMain {
         this.showInviteBtn(true)
     }
 
+    /**
+     * 绘制邀请图片
+     * @returns 图片路径
+     */
     async drawInviteInfo(): Promise<string> {
         return new Promise<string>(async (resolve, reject) => {
             // 邀请好友
@@ -844,6 +1038,10 @@ export class CompGameMain extends FGUICompGameMain {
         TalkView.showView()
     }
 
+    /**
+     * 选择器变化处理
+     * @param event 变化事件
+     */
     onChanged(event: any): void {
         if (event.selectedIndex != this._selectOutHand) {
             if (this._selectOutHand != -1) {
