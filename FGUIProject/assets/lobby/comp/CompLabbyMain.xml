@@ -28,6 +28,11 @@
     </component>
     <component id="n19_pizs" name="UI_BTN_SIGN_IN" src="pizsg" fileName="comp/BtnLobbyMenu.xml" xy="621,1415">
       <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="签 到" icon="ui://gv22rev3pizsf"/>
+    </component>
+    <component id="n20_ln74" name="UI_BTN_AD" src="pizsg" fileName="comp/BtnLobbyMenu.xml" xy="472,1415">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="免费银子" icon="ui://gv22rev3ln74j"/>
     </component>
   </displayList>
 </component>

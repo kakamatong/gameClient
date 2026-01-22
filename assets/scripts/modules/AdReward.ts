@@ -1,0 +1,64 @@
+import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
+import { LogColors } from "../frameworks/Framework";
+import { LobbySocketManager } from "../frameworks/LobbySocketManager";
+
+
+export class AdReward {
+
+    private _getAdInfoCallBack: ((success: boolean, data: any) => void) | null = null;
+    private _receiveAdRewardCallBack: ((success: boolean, data: any) => void) | null = null;
+
+    /**
+     * 请求每日看广告领奖信息
+     * @param callBack 回调函数
+     */
+    reqGetAdInfo(callBack: (success: boolean, data: any) => void){
+        this._getAdInfoCallBack = callBack;
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'adReward', funcName : 'getAdInfo', args:JSON.stringify({})}, this.respGetAdInfo.bind(this))
+    }
+
+    /**
+     * 获取广告信息回调
+     * @param result 获取结果
+     */
+    respGetAdInfo(result: SprotoCallActivityFunc.Response): void { 
+        if(result && result.code == 1){
+            const res = JSON.parse(result.result);
+            if(res.error){
+                console.log(LogColors.red(res.error));
+                this._getAdInfoCallBack && this._getAdInfoCallBack(false, res)
+            }else{
+                this._getAdInfoCallBack && this._getAdInfoCallBack(true, res)
+            }
+        }else{
+            this._getAdInfoCallBack && this._getAdInfoCallBack(false, null)
+        }
+    }
+
+    /**
+     * 领取看广告奖励
+     * @param callBack 回调函数
+     */
+    reqReceiveAdReward(callBack: (success: boolean, data: any) => void){
+        this._receiveAdRewardCallBack = callBack;
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'adReward', funcName : 'receiveAdReward', args:JSON.stringify({})}, this.respReceiveAdReward.bind(this))
+    }
+
+    /**
+     * 领取奖励回调
+     * @param result 领取结果
+     */
+    respReceiveAdReward(result: SprotoCallActivityFunc.Response): void { 
+        if(result && result.code == 1){
+            const res = JSON.parse(result.result);
+            if(res.error){
+                console.log(LogColors.red(res.error));
+                this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(false, res)
+            }else{
+                this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(true, res)
+            }
+        }else{
+            this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(false, null)
+        }
+    }
+}

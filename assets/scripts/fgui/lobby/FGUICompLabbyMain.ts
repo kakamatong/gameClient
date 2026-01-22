@@ -16,6 +16,7 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 	public UI_TXT_ENV:fgui.GTextField;
 	public UI_BTN_SHARE:fgui.GButton;
 	public UI_BTN_SIGN_IN:fgui.GButton;
+	public UI_BTN_AD:fgui.GButton;
 	public static URL:string = "ui://gv22rev3ln74i";
 
 	public static packageName:string = "lobby";
@@ -70,6 +71,8 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 		this.UI_BTN_SHARE.onClick(this.onBtnShare, this);
 		this.UI_BTN_SIGN_IN = <fgui.GButton>(this.getChildAt(7));
 		this.UI_BTN_SIGN_IN.onClick(this.onBtnSignIn, this);
+		this.UI_BTN_AD = <fgui.GButton>(this.getChildAt(8));
+		this.UI_BTN_AD.onClick(this.onBtnAd, this);
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};
 	unscheduleAllCallbacks():void{};
@@ -81,5 +84,6 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 	onBtnRank():void{};
 	onBtnShare():void{};
 	onBtnSignIn():void{};
+	onBtnAd():void{};
 }
 fgui.UIObjectFactory.setExtension(FGUICompLabbyMain.URL, FGUICompLabbyMain);
