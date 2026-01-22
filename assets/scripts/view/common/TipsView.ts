@@ -6,6 +6,7 @@ import { ViewClass } from '../../frameworks/Framework';
 
 @ViewClass()
 export class TipsView extends FGUITipsView { 
+    private _tipList: FGUICompTips[] = [];
 
     public static showView(params?:any):void {
         if(FGUITipsView.instance) {
@@ -29,11 +30,20 @@ export class TipsView extends FGUITipsView {
     
     createTip(data:any){
         const tip = fgui.UIPackage.createObject("common", "CompTips") as FGUICompTips;
+        this._tipList.push(tip);
         tip.title.text = data.content;
         fgui.GTween.to(1,0,1).setDelay(2).setTarget(tip, 'alpha').onComplete(()=>{
-            tip.dispose();
+            tip && tip.dispose();
+            this._tipList = this._tipList.filter(t=>t!==tip);
         })
         this.UI_LV_TIPS.addChild(tip);
+    }
+
+    protected onDestroy(): void {
+        for (let tip of this._tipList) {
+            fgui.GTween.kill(tip);
+        }
+        FGUITipsView.instance = null;
     }
 }
 fgui.UIObjectFactory.setExtension(TipsView.URL, TipsView);

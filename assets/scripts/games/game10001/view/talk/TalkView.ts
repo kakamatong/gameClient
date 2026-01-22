@@ -45,6 +45,10 @@ export class TalkView extends FGUITalkView {
      * @returns void
      */
     sendTalk(id:number){
+        if(!GameSocketManager.instance.isOpen()){
+            TipsView.showView({content:'房间已解散'});
+            return;
+        }
         GameSocketManager.instance.sendToServer(SprotoTalkUse, { id: id }, (data :SprotoTalkUse.Response) => {
             if (data.code) {
                 DataCenter.instance.updateRichByType(RICH_TYPE.SILVER_COIN, data.richNum)
