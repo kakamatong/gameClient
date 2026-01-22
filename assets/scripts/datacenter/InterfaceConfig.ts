@@ -57,6 +57,7 @@ export enum LOCAL_KEY {
     AGREE_PRIVACY = 'agreePrivacy',
     PRIVATE_RULE = 'privateRule',
     AUTO_SHOW_SIGNIN = 'autoShowSignIn',
+    AD_NOTICE_DATE = 'adNoticeDate',
 }
 
 export enum ENUM_POP_MESSAGE_TYPE {

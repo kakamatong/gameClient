@@ -24,8 +24,13 @@ import { ConnectGameSvr } from '../../../modules/ConnectGameSvr';
 import { SprotoGameRoomReady } from 'db://assets/types/protocol/lobby/s2c';
 import { SignInView } from '../../signIn/SignInView';
 import { sys } from 'cc';
+import { AdReward } from '../../../modules/AdReward';
+import { AwardView } from '../../award/AwardView';
+import { UserRiches } from '../../../modules/UserRiches';
+import { REWORD_VIDEOAD_CODE } from '../../../frameworks/config/Config';
 @ViewClass({ curveScreenAdapt: true })
 export class CompLabbyMain extends FGUICompLabbyMain {
+
     onConstruct(){
         super.onConstruct();
         this.initListeners();
@@ -137,11 +142,24 @@ export class CompLabbyMain extends FGUICompLabbyMain {
     /**
      * 登入成功回调
      */
-    onLoginSuccess(){ 
+    onLoginSuccess(){
         console.log('onLoginSuccess')
         const options = MiniGameUtils.instance.getLaunchOptionsSync()
         this.checkPrivateRoomid(options)
         this.autoShowSignIn()
+        this.reqAdInfo()
+    }
+
+    /**
+     * 请求广告奖励信息
+     */
+    reqAdInfo(){
+        const adReward = new AdReward();
+        adReward.reqGetAdInfo((success:boolean, data:any)=>{
+            if(!success){
+                console.log(LogColors.red('获取广告奖励信息失败'))
+            }
+        })
     }
 
     /**
@@ -317,6 +335,75 @@ export class CompLabbyMain extends FGUICompLabbyMain {
      */
     onBtnShare(): void {
         MiniGameUtils.instance.shareAppMessage({title:'约上好友来一局石头剪刀布', imageUrl: LOBBY_SHARE_PIC_URL, query:''})
+    }
+
+    /**
+     * 点击广告奖励
+     */
+    onBtnAd(): void {
+        const adRewardInfo = DataCenter.instance.adRewardInfo;
+        if(!adRewardInfo){
+            TipsView.showView({content:'广告奖励信息未加载'})
+            return;
+        }
+
+        if(!adRewardInfo.canReward){
+            TipsView.showView({content:'今日已经领取完，明日再来'})
+            return;
+        }
+
+        const noticeDate = sys.localStorage.getItem(LOCAL_KEY.AD_NOTICE_DATE);
+        const nowDay = new Date();
+        const nowDayStr = `${nowDay.getFullYear()}${nowDay.getMonth() + 1}${nowDay.getDate()}`;
+
+        if(noticeDate !== nowDayStr){
+            const reward = adRewardInfo.rewards[0];
+            const rewardAmount = reward?.richNums[0] ?? 0;
+            const content = `看完视频每天可以领取${adRewardInfo.maxDailyRewardCount}次，每次${rewardAmount}银子奖励`;
+            const func = ()=>{
+                sys.localStorage.setItem(LOCAL_KEY.AD_NOTICE_DATE, nowDayStr);
+                this.playAdAndReceiveReward();
+            }
+            PopMessageView.showView({
+                title:'温馨提示',
+                content: content,
+                type:ENUM_POP_MESSAGE_TYPE.NUM1SURE,
+                sureBack: func
+            })
+        }else{
+            this.playAdAndReceiveReward();
+        }
+    }
+
+    /**
+     * 播放广告并领取奖励
+     */
+    playAdAndReceiveReward(){
+        LoadingView.showView({content:"载入中...", time:12});
+        MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code:number)=>{
+            LoadingView.hideView();
+            console.log(code);
+            if(code == REWORD_VIDEOAD_CODE.SUCCESS){
+                const adReward = new AdReward();
+                adReward.reqReceiveAdReward((success:boolean, data:any)=>{
+                    if(!success){
+                        TipsView.showView({content:'领取奖励失败'});
+                        return;
+                    }
+                    this.initRichs();
+                    const newData = {
+                        ids: data.reward.richTypes,
+                        nums: data.reward.richNums,
+                        noticeid: data.noticeid
+                    }
+                    AwardView.showView(newData)
+                })
+            }else if(code == REWORD_VIDEOAD_CODE.NOT_OVER){
+                TipsView.showView({content:'看完视频才能获取奖励哦'})
+            }else{
+                TipsView.showView({content:'视频广告播放失败'})
+            }
+        })
     }
 }
 
