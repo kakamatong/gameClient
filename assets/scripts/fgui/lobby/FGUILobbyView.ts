@@ -3,14 +3,14 @@
 import { assetManager, AssetManager } from "cc";
 import * as fgui from "fairygui-cc";
 import FGUICompBg from "./FGUICompBg";
-import FGUICompLabbyMain from "./FGUICompLabbyMain";
+import FGUICompLobbyMain from "./FGUICompLobbyMain";
 
 import { PackageManager } from "../../frameworks/PackageManager";
 
 export default class FGUILobbyView extends fgui.GComponent {
 
 	public bg:FGUICompBg;
-	public UI_COMP_MAIN:FGUICompLabbyMain;
+	public UI_COMP_MAIN:FGUICompLobbyMain;
 	public static URL:string = "ui://gv22rev3sc722";
 
 	public static packageName:string = "lobby";
@@ -52,7 +52,7 @@ export default class FGUILobbyView extends fgui.GComponent {
 
 	protected onConstruct():void {
 		this.bg = <FGUICompBg>(this.getChildAt(0));
-		this.UI_COMP_MAIN = <FGUICompLabbyMain>(this.getChildAt(1));
+		this.UI_COMP_MAIN = <FGUICompLobbyMain>(this.getChildAt(1));
 	}
 	scheduleOnce(callback: () => void, delay: number):void{};
 	unscheduleAllCallbacks():void{};

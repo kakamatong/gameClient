@@ -6,7 +6,7 @@ import FGUICompTop from "./FGUICompTop";
 
 import { PackageManager } from "../../frameworks/PackageManager";
 
-export default class FGUICompLabbyMain extends fgui.GComponent {
+export default class FGUICompLobbyMain extends fgui.GComponent {
 
 	public UI_BTN_MATCH_ROOM:fgui.GButton;
 	public UI_BTN_PRIVATE_ROOM:fgui.GButton;
@@ -24,17 +24,17 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 	public static instance:any | null = null;
 
 	public static showView(params?:any, callBack?:(b:boolean)=>void):void {
-		if(FGUICompLabbyMain.instance) {
+		if(FGUICompLobbyMain.instance) {
 			console.log("allready show");
 			callBack&&callBack(false);
 			return;
 		}
 		PackageManager.instance.loadPackage("fgui", this.packageName).then(()=> {
 
-			const view = fgui.UIPackage.createObject("lobby", "CompLabbyMain") as FGUICompLabbyMain;
+			const view = fgui.UIPackage.createObject("lobby", "CompLobbyMain") as FGUICompLobbyMain;
 
 			view.makeFullScreen();
-			FGUICompLabbyMain.instance = view;
+			FGUICompLobbyMain.instance = view;
 			fgui.GRoot.inst.addChild(view);
 			view.show && view.show(params);
 			callBack&&callBack(true);
@@ -44,16 +44,16 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 
 	protected onDestroy():void {
 		super.onDestroy();
-		FGUICompLabbyMain.instance = null;
+		FGUICompLobbyMain.instance = null;
 	}
 	public static hideView():void {
-		FGUICompLabbyMain.instance && FGUICompLabbyMain.instance.dispose();
+		FGUICompLobbyMain.instance && FGUICompLobbyMain.instance.dispose();
 	}
 
 	show(data?:any):void{};
 
-	public static createInstance():FGUICompLabbyMain {
-		return <FGUICompLabbyMain>(fgui.UIPackage.createObject("lobby", "CompLabbyMain"));
+	public static createInstance():FGUICompLobbyMain {
+		return <FGUICompLobbyMain>(fgui.UIPackage.createObject("lobby", "CompLobbyMain"));
 	}
 
 	protected onConstruct():void {
@@ -86,4 +86,4 @@ export default class FGUICompLabbyMain extends fgui.GComponent {
 	onBtnSignIn():void{};
 	onBtnAd():void{};
 }
-fgui.UIObjectFactory.setExtension(FGUICompLabbyMain.URL, FGUICompLabbyMain);
+fgui.UIObjectFactory.setExtension(FGUICompLobbyMain.URL, FGUICompLobbyMain);

@@ -1,4 +1,4 @@
-import FGUICompLabbyMain from "../../../fgui/lobby/FGUICompLabbyMain";
+import FGUICompLobbyMain from "../../../fgui/lobby/FGUICompLobbyMain";
 import { ViewClass, AddEventListener, ChangeScene, LogColors,RemoveEventListener } from "../../../frameworks/Framework";
 import * as fgui from "fairygui-cc";
 import { DataCenter } from '../../../datacenter/Datacenter';
@@ -29,7 +29,7 @@ import { AwardView } from '../../award/AwardView';
 import { UserRiches } from '../../../modules/UserRiches';
 import { REWORD_VIDEOAD_CODE } from '../../../frameworks/config/Config';
 @ViewClass({ curveScreenAdapt: true })
-export class CompLabbyMain extends FGUICompLabbyMain {
+export class CompLobbyMain extends FGUICompLobbyMain {
 
     onConstruct(){
         super.onConstruct();
@@ -407,4 +407,4 @@ export class CompLabbyMain extends FGUICompLabbyMain {
     }
 }
 
-fgui.UIObjectFactory.setExtension(CompLabbyMain.URL, CompLabbyMain);
+fgui.UIObjectFactory.setExtension(CompLobbyMain.URL, CompLobbyMain);
