@@ -390,7 +390,8 @@ export class CompLobbyMain extends FGUICompLobbyMain {
                         TipsView.showView({content:'领取奖励失败'});
                         return;
                     }
-                    this.initRichs();
+                    const userRiches = new UserRiches();
+                    userRiches.req();
                     const newData = {
                         ids: data.reward.richTypes,
                         nums: data.reward.richNums,
