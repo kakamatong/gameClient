@@ -137,7 +137,7 @@ export const ViewClass = (data?:any) =>{
                 }
             }
 
-/**
+            /**
              * 适配曲面屏
              */
             private adaptForCurveScreen() {

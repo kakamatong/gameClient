@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1654">
+  <controller name="ctrl_btn" pages="0,都不显示,1,确定,2,更换,3,继续游戏,4,准备" selected="4"/>
+  <controller name="ctrl_roomtype" pages="0,普通房,1,私人房" selected="0">
+    <action type="change_page" fromPage="" toPage="1" objectId="n62_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n62_gk14" controller="ctrl_roomtype" targetPage="0"/>
+    <action type="change_page" fromPage="" toPage="1" objectId="n63_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n63_gk14" controller="ctrl_roomtype" targetPage="0"/>
+    <action type="change_page" fromPage="" toPage="1" objectId="n64_gk14" controller="ctrl_roomtype" targetPage="1"/>
+    <action type="change_page" fromPage="" toPage="0" objectId="n64_gk14" controller="ctrl_roomtype" targetPage="0"/>
+  </controller>
+  <controller name="ctrl_playerCnt" pages="0,,1,,2," selected="0">
+    <remark page="0" value="2人"/>
+    <remark page="1" value="3人"/>
+    <remark page="2" value="4人"/>
+  </controller>
+  <controller name="ctrl_select" pages="0,剪刀,1,石头,2,布" selected="2"/>
+  <displayList>
+    <component id="n42_jsve" name="UI_BTN_DISBAND" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="157,0" size="143,95">
+      <gearDisplay controller="ctrl_roomtype" pages="1"/>
+      <relation target="" sidePair="left-left,top-top"/>
+      <property target="title" propertyId="0" value="解散"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ijsve10"/>
+    </component>
+    <component id="n3_is91" name="UI_BTN_BACK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="0,0" size="143,94">
+      <property target="icon" propertyId="1" value="ui://gj0r6g5iis91p"/>
+    </component>
+    <component id="n32_qaf2" name="UI_BTN_PAPER" src="qaf2f" fileName="comp/BtnSelect.xml" xy="538,1199" group="n35_qaf2">
+      <Button checked="true" controller="ctrl_select" page="2"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2b"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi5"/>
+    </component>
+    <component id="n33_qaf2" name="UI_BTN_ROCK" src="qaf2f" fileName="comp/BtnSelect.xml" xy="304,1199" group="n35_qaf2">
+      <Button controller="ctrl_select" page="1"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2c"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi7"/>
+    </component>
+    <component id="n34_qaf2" name="UI_BTN_SCISSORS" src="qaf2f" fileName="comp/BtnSelect.xml" xy="70,1199" group="n35_qaf2">
+      <Button controller="ctrl_select" page="0"/>
+      <property target="mask" propertyId="1" value="ui://2zsfe53xqaf2d"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5ixoqi6"/>
+    </component>
+    <group id="n35_qaf2" name="UI_GROUP_SELECT" xy="70,1199" size="631,161" visible="false" advanced="true">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </group>
+    <component id="n53_mwa6" name="UI_BTN_INVITE" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="259,1241" size="230,98" visible="false">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <property target="title" propertyId="0" value="邀请好友"/>
+      <property target="icon" propertyId="1" value="ui://gj0r6g5imuz3e"/>
+    </component>
+    <component id="n64_gk14" name="UI_COMP_PLAYER_3" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,0,ctrl_localSeat,3">
+      <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
+      <gearXY controller="ctrl_playerCnt" pages="1" values="9,272" default="368,74"/>
+      <relation target="" sidePair="left-left,top-top"/>
+    </component>
+    <component id="n63_gk14" name="UI_COMP_PLAYER_2" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="368,74" controller="ctrl_pos,1,ctrl_localSeat,2">
+      <gearXY controller="ctrl_playerCnt" pages="1" values="410,272" default="368,74"/>
+      <relation target="" sidePair="right-right,top-top"/>
+    </component>
+    <component id="n62_gk14" name="UI_COMP_PLAYER_1" src="gk14j" fileName="comp/CompPlayerHead.xml" xy="51,1349" controller="ctrl_pos,0,ctrl_localSeat,1">
+      <gearXY controller="ctrl_playerCnt" default="51,1349"/>
+      <relation target="" sidePair="left-left,bottom-bottom"/>
+    </component>
+    <component id="n14_folo" name="UI_COMP_OUT_HEND_1" src="folo3" fileName="comp/CompHand.xml" xy="300,881" scale="1.2,1.2" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <image id="n65_gk14" name="UI_IMG_SIGN_READY_3" src="qaf24" fileName="imgs/ready.png" xy="301,324" visible="false">
+      <gearXY controller="ctrl_playerCnt" pages="1" values="9,493" default="301,324"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <image id="n25_qaf2" name="UI_IMG_SIGN_READY_2" src="qaf24" fileName="imgs/ready.png" xy="301,324" visible="false">
+      <gearXY controller="ctrl_playerCnt" pages="1" values="586,493" default="301,324"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <image id="n26_qaf2" name="UI_IMG_SIGN_READY_1" src="qaf24" fileName="imgs/ready.png" xy="288,1087" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <component id="n66_gk14" name="UI_COMP_OUT_HEND_3" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="150" controller="ctrl_head,0">
+      <gearDisplay controller="ctrl_playerCnt" pages="1,2"/>
+      <gearXY controller="ctrl_playerCnt" pages="1" values="32,625" default="313,523"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n15_folo" name="UI_COMP_OUT_HEND_2" src="folo3" fileName="comp/CompHand.xml" xy="313,523" pivot="0.5,0.5" scale="1.2,1.2" visible="false" rotation="180" controller="ctrl_head,0">
+      <gearXY controller="ctrl_playerCnt" pages="1" values="588,625" default="313,523"/>
+      <gearLook controller="ctrl_playerCnt" pages="1" values="1,210,0,1" default="1,180,0,1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n21_folo" name="UI_BTN_SURE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="500,1440" group="n23_folo" controller="ctrl_color,0">
+      <gearDisplay controller="ctrl_btn" pages="1"/>
+      <property target="title" propertyId="0" value="确定"/>
+    </component>
+    <component id="n22_folo" name="UI_BTN_CHANGE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="501,1441" group="n23_folo" controller="ctrl_color,1">
+      <gearDisplay controller="ctrl_btn" pages="2"/>
+      <property target="title" propertyId="0" value="更换"/>
+    </component>
+    <component id="n38_dkp3" name="UI_BTN_CONTINUE" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="500,1440" group="n23_folo" controller="ctrl_color,0">
+      <gearDisplay controller="ctrl_btn" pages="3"/>
+      <property target="title" propertyId="0" value="继续游戏"/>
+    </component>
+    <component id="n43_r1yn" name="UI_BTN_READY" src="cmlt4" fileName="comp/CompBtnScale.xml" pkg="gj0r6g5i" xy="500,1440" group="n23_folo" controller="ctrl_color,0">
+      <gearDisplay controller="ctrl_btn" pages="4"/>
+      <property target="title" propertyId="0" value="准备"/>
+    </component>
+    <group id="n23_folo" name="n23" xy="500,1440" size="231,100" advanced="true">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </group>
+    <component id="n36_xr4w" name="UI_COMP_CLOCK" src="qaf26" fileName="comp/CompClock.xml" xy="317,745" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n37_fnug" name="UI_COMP_GAME_START" src="fnugh" fileName="comp/CompGameStartAct.xml" xy="119,608" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <image id="n39_jsve" name="n39" src="jin6a" fileName="imgs/mask.png" pkg="gj0r6g5i" xy="8,113" size="221,161" group="n41_jsve"/>
+    <text id="n40_jsve" name="UI_TXT_ROOMID" xy="16,120" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="房间号:000000"/>
+    <text id="n46_ncy2" name="UI_TXT_RULE" xy="17,169" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="3局2胜"/>
+    <text id="n47_ncy2" name="UI_TXT_PROGRESS" xy="15,218" size="205,49" group="n49_ncy2" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="第0轮 共5轮"/>
+    <group id="n49_ncy2" name="n49" xy="15,120" size="207,147" group="n41_jsve" advanced="true" layout="vt" excludeInvisibles="true"/>
+    <group id="n41_jsve" name="n41" xy="8,113" size="221,161" advanced="true">
+      <gearDisplay controller="ctrl_roomtype" pages="1"/>
+      <relation target="" sidePair="left-left,top-top"/>
+    </group>
+    <component id="n45_j9v1" name="n45" src="r1yn0" fileName="comp/CompDisband.xml" xy="0,0" visible="false">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+    <component id="n50_kw9i" name="UI_COMP_ROUND_ACT" src="kw9ii" fileName="comp/CompRoundAct.xml" xy="93,676" visible="false">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n68_pxa5" name="UI_BTN_TALK" src="is91n" fileName="comp/CompBtnCommon.xml" pkg="gj0r6g5i" xy="638,1559" size="95,95">
+      <relation target="" sidePair="left-right,bottom-bottom"/>
+      <property target="icon" propertyId="1" value="ui://2zsfe53xpxa5o"/>
+    </component>
+  </displayList>
+</component>
