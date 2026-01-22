@@ -1,6 +1,8 @@
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
+import { DataCenter } from "../datacenter/Datacenter";
+import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/InterfaceConfig";
 
 
 export class AdReward {
@@ -21,13 +23,14 @@ export class AdReward {
      * 获取广告信息回调
      * @param result 获取结果
      */
-    respGetAdInfo(result: SprotoCallActivityFunc.Response): void { 
+    respGetAdInfo(result: SprotoCallActivityFunc.Response): void {
         if(result && result.code == 1){
             const res = JSON.parse(result.result);
             if(res.error){
                 console.log(LogColors.red(res.error));
                 this._getAdInfoCallBack && this._getAdInfoCallBack(false, res)
             }else{
+                DataCenter.instance.adRewardInfo = res;
                 this._getAdInfoCallBack && this._getAdInfoCallBack(true, res)
             }
         }else{
@@ -48,13 +51,19 @@ export class AdReward {
      * 领取奖励回调
      * @param result 领取结果
      */
-    respReceiveAdReward(result: SprotoCallActivityFunc.Response): void { 
+    respReceiveAdReward(result: SprotoCallActivityFunc.Response): void {
         if(result && result.code == 1){
             const res = JSON.parse(result.result);
             if(res.error){
                 console.log(LogColors.red(res.error));
                 this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(false, res)
             }else{
+                const rewardRes = res as AD_RECEIVE_REWARD_RESULT;
+                const adRewardInfo = DataCenter.instance.adRewardInfo;
+                if(adRewardInfo){
+                    adRewardInfo.currentRewardCount = rewardRes.currentRewardCount;
+                    adRewardInfo.canReward = rewardRes.currentRewardCount < rewardRes.maxDailyRewardCount;
+                }
                 this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(true, res)
             }
         }else{

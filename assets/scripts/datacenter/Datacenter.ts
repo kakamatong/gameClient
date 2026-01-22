@@ -1,5 +1,5 @@
 import { UserdataResponse, UserstatusResponse } from "../../types/protocol/lobby/c2s";
-import { LOGIN_INFO, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV } from "./InterfaceConfig";
+import { LOGIN_INFO, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV, AD_REWARD_INFO } from "./InterfaceConfig";
 import { sys } from "cc";
 
 /**
@@ -99,6 +99,12 @@ export class DataCenter {
     private _channelID:ENUM_CHANNEL_ID = ENUM_CHANNEL_ID.ACCOUNT;
     private _gameRecords:GAME_RECORD | null = null;
     private _allreadyThirdLogin:boolean = false;
+
+    /**
+     * @property {AD_REWARD_INFO | null} _adRewardInfo - 广告奖励信息
+     * @private
+     */
+    private _adRewardInfo: AD_REWARD_INFO | null = null;
 
     /**
      * @property {DataCenter} _instance - 单例实例
@@ -332,7 +338,15 @@ export class DataCenter {
         return this._launchRoomid;
     }
 
-    set launchRoomid(id:number){ 
+    set launchRoomid(id:number){
         this._launchRoomid = id;
+    }
+
+    set adRewardInfo(data:AD_REWARD_INFO | null){
+        this._adRewardInfo = data;
+    }
+
+    get adRewardInfo():AD_REWARD_INFO | null{
+        return this._adRewardInfo;
     }
 }

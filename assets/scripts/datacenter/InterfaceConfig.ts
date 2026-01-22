@@ -96,6 +96,34 @@ export enum RICH_TYPE  {
     COMBAT_POWER = 100, // 战力
 }
 
+/**
+ * 广告奖励数据结构
+ */
+export interface AD_REWARD {
+    richTypes: number[];
+    richNums: number[];
+}
+
+/**
+ * 广告奖励信息结构
+ */
+export interface AD_REWARD_INFO {
+    maxDailyRewardCount: number;
+    currentRewardCount: number;
+    rewards: AD_REWARD[];
+    canReward: boolean;
+}
+
+/**
+ * 领取广告奖励返回结果结构
+ */
+export interface AD_RECEIVE_REWARD_RESULT {
+    noticeid: number;
+    reward: AD_REWARD;
+    currentRewardCount: number;
+    maxDailyRewardCount: number;
+}
+
 export const CREATE_ROOM_PLAYER_CNT = [2, 3, 4]
 
 export const DEFAULT_HEADURL = 'https://qiudaoyu-miniapp.oss-cn-hangzhou.aliyuncs.com/head/ji.png'
