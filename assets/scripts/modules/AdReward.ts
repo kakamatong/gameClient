@@ -16,7 +16,7 @@ export class AdReward {
      */
     reqGetAdInfo(callBack: (success: boolean, data: any) => void){
         this._getAdInfoCallBack = callBack;
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'adReward', funcName : 'getAdInfo', args:JSON.stringify({})}, this.respGetAdInfo.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdInfo', args:JSON.stringify({})}, this.respGetAdInfo.bind(this))
     }
 
     /**
@@ -44,7 +44,7 @@ export class AdReward {
      */
     reqReceiveAdReward(callBack: (success: boolean, data: any) => void){
         this._receiveAdRewardCallBack = callBack;
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'adReward', funcName : 'receiveAdReward', args:JSON.stringify({})}, this.respReceiveAdReward.bind(this))
+        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdReward', args:JSON.stringify({})}, this.respReceiveAdReward.bind(this))
     }
 
     /**
