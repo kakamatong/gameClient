@@ -43,6 +43,7 @@ export class TipsView extends FGUITipsView {
         for (let tip of this._tipList) {
             fgui.GTween.kill(tip);
         }
+        this._tipList = [];
         FGUITipsView.instance = null;
     }
 }
