@@ -12,14 +12,23 @@ import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdat
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { SprotoVoteDisbandResponse } from "db://assets/types/protocol/game10001/c2s";
 
+/**
+ * 解散房间投票组件
+ * 用于处理房间解散投票的UI显示和交互，包括发起投票、显示投票状态、处理投票结果等功能
+ */
 @ViewClass()
-export class CompDisband extends FGUICompDisband { 
+export class CompDisband extends FGUICompDisband {
     private _voteId: number = 0; // 投票ID
     private _voteData: VoteDisbandStartData | null = null; // 投票开始数据
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
     private _timeLeft: number = 0; // 剩余时间
-    private _initiator = 0;
-    private _scheid:(()=>void) | null = null;
+    private _initiator = 0; // 投票发起者用户ID
+    private _scheid:(()=>void) | null = null; // 倒计时调度回调函数
+
+    /**
+     * 组件初始化
+     * 设置监听器、绑定列表渲染器、初始化定时器回调
+     */
     onConstruct(){
         // 一定要执行父类的接口
         super.onConstruct();
@@ -30,6 +39,10 @@ export class CompDisband extends FGUICompDisband {
         this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this)
     }
 
+    /**
+     * 组件销毁
+     * 移除服务器消息监听器
+     */
     protected onDestroy(): void {
         super.onDestroy();
         GameSocketManager.instance.removeServerListen(SprotoVoteDisbandStart);
@@ -37,7 +50,12 @@ export class CompDisband extends FGUICompDisband {
         GameSocketManager.instance.removeServerListen(SprotoVoteDisbandResult);
     }
 
-    listItemRenderer(index: number, item: fgui.GObject): void { 
+    /**
+     * 投票列表项渲染器
+     * @param index 列表项索引
+     * @param item 列表项对象
+     */
+    listItemRenderer(index: number, item: fgui.GObject): void {
         const data = this._currentVotes[index];
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
@@ -53,6 +71,11 @@ export class CompDisband extends FGUICompDisband {
         }
     }
 
+    /**
+     * 获取投票状态对应的控制器索引
+     * @param voteStatus 投票状态枚举值
+     * @returns 控制器selectedIndex值：0-未投票，1-同意，2-拒绝
+     */
     private getVoteStatusText(voteStatus: number): number {
         switch (voteStatus) {
             case VOTE_STATUS.AGREE:
@@ -151,14 +174,26 @@ export class CompDisband extends FGUICompDisband {
         },1)
     }
 
+    /**
+     * 同意解散按钮点击事件
+     * 发送同意投票请求到服务器
+     */
     onBtnAgree(): void {
         this.sendVoteResponse(VOTE_STATUS.AGREE);
     }
 
+    /**
+     * 拒绝解散按钮点击事件
+     * 发送拒绝投票请求到服务器
+     */
     onBtnRefuse(): void {
         this.sendVoteResponse(VOTE_STATUS.REFUSE);
     }
 
+    /**
+     * 发送投票响应到服务器
+     * @param vote 投票状态：同意或拒绝
+     */
     private sendVoteResponse(vote: number) {
         const data = {
             voteId: this._voteId,
@@ -183,10 +218,14 @@ export class CompDisband extends FGUICompDisband {
         this._scheid && this.schedule(this._scheid, 1)
     }
 
+    /**
+     * 倒计时定时器回调
+     * 每秒执行一次，更新剩余时间并检查是否超时
+     */
     onTimer(){
         this._timeLeft--;
         this.updateCountdown(this._timeLeft);
-        
+
         if (this._timeLeft <= 0) {
             this.stopCountdown();
         }
