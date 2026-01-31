@@ -1,3 +1,13 @@
+/**
+ * @file InterfaceConfig.ts
+ * @description 接口配置：定义数据类型、接口和枚举
+ * @category 数据中心
+ */
+
+/**
+ * @interface LOGIN_INFO
+ * @description 用户登录信息
+ */
 export interface LOGIN_INFO {
     username: string;
     userid: number;
@@ -15,6 +25,11 @@ export interface LOGIN_INFO {
 // city 4 : string
 // ip 5 : string
 // ext 6 : string
+
+/**
+ * @interface USER_DATA
+ * @description 用户数据
+ */
 export interface USER_DATA {
     userid: number;
     nickname: string;
@@ -34,6 +49,11 @@ export interface USER_DATA {
 // 5 观战中
 // 6 组队中
 // 7 断线
+
+/**
+ * @enum ENUM_USER_STATUS
+ * @description 用户状态枚举
+ */
 export enum ENUM_USER_STATUS {
     OFFLINE = 0, 
     ONLINE = 1,
@@ -45,12 +65,20 @@ export enum ENUM_USER_STATUS {
     DISCONNECT = 7,
 }
 
+/**
+ * @interface USER_STATUS
+ * @description 用户状态
+ */
 export interface USER_STATUS {
     roomid?: number;
     gameid?: number;
     status: ENUM_USER_STATUS;
 }
 
+/**
+ * @enum LOCAL_KEY
+ * @description 本地存储键值枚举
+ */
 export enum LOCAL_KEY {
     LOGIN_INFO = 'loginInfo',
     MATCH_AUTO_JOIN = 'matchAutoJoin',
@@ -60,6 +88,10 @@ export enum LOCAL_KEY {
     AD_NOTICE_DATE = 'adNoticeDate',
 }
 
+/**
+ * @enum ENUM_POP_MESSAGE_TYPE
+ * @description 弹窗消息类型枚举
+ */
 export enum ENUM_POP_MESSAGE_TYPE {
     NUM2 = 0, // 2个按钮
     NUM1SURE = 1, // 1个按钮 确定
@@ -67,6 +99,10 @@ export enum ENUM_POP_MESSAGE_TYPE {
     NUM0 = 3, // 无按钮
 }
 
+/**
+ * @enum ENUM_CHANNEL_ID
+ * @description 渠道 ID 枚举
+ */
 export enum ENUM_CHANNEL_ID {
     MINIGAME_WECHAT = 'wechatMiniGame',
     ACCOUNT = 'account',
@@ -77,6 +113,10 @@ export const LOGIN_TYPE = {
     [ENUM_CHANNEL_ID.ACCOUNT] : 'account',
 }
 
+/**
+ * @interface GAME_RECORD
+ * @description 游戏战绩
+ */
 export interface GAME_RECORD {
     gameid: number;
     win: number;
@@ -84,12 +124,20 @@ export interface GAME_RECORD {
     draw?: number;
 }
 
+/**
+ * @enum ENUM_ENV
+ * @description 环境类型枚举
+ */
 export enum ENUM_ENV {
     DEV = 'dev',
     TEST = 'test',
     PROD = 'prod',
 }
 
+/**
+ * @enum RICH_TYPE
+ * @description 财富类型枚举
+ */
 export enum RICH_TYPE  {
     NONE = 0,
     GOLD_COIN = 1, // 金币（一级货币）

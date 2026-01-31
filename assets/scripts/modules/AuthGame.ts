@@ -1,13 +1,31 @@
-import CryptoJS from 'crypto-js';   
+/**
+ * @file AuthGame.ts
+ * @description 游戏认证模块：处理游戏服务器连接认证
+ * @category 网络请求模块
+ */
+
+import CryptoJS from 'crypto-js';
 import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
 import { GameSocketManager } from '../frameworks/GameSocketManager';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
+
+/**
+ * @class AuthGame
+ * @description 游戏服务器认证管理类，负责连接游戏服务器并完成认证，使用单例模式
+ * @category 网络请求模块
+ * @singleton 单例模式
+ */
 export class AuthGame {
-    //Auth
+    /** 单例实例 */
     private static _instance: AuthGame;
+    /** 认证回调函数 */
     private _callBack:((success:boolean)=>void) | null = null;
 
+    /**
+     * @description 获取 AuthGame 单例实例
+     * @returns AuthGame 单例实例
+     */
     public static get instance(): AuthGame {
         if (!this._instance) {
             this._instance = new AuthGame();
@@ -15,6 +33,13 @@ export class AuthGame {
         return this._instance;
     }
 
+    /**
+     * @description 请求游戏服务器认证
+     * @param addr 服务器地址
+     * @param gameid 游戏ID
+     * @param roomid 房间ID
+     * @param callBack 回调函数
+     */
     req(addr:string,gameid:number,roomid:string,callBack:(success:boolean)=>void){
         this._callBack = callBack;
         GameSocketManager.instance.loadProtocol("game10001",()=>{
@@ -40,6 +65,10 @@ export class AuthGame {
         })
     }
 
+    /**
+     * @description 处理游戏认证响应
+     * @param success 认证是否成功
+     */
     resp(success:boolean){
         if(success){
             DataCenter.instance.addSubid();

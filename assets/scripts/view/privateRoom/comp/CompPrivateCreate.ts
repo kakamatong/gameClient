@@ -1,3 +1,9 @@
+/**
+ * @file CompPrivateCreate.ts
+ * @description 创建私密房间组件：处理私密房间的创建
+ * @category 私密房间视图
+ */
+
 import FGUICompPrivateCreate from "../../../fgui/privateRoom/FGUICompPrivateCreate";
 import * as fgui from "fairygui-cc";
 import { LobbySocketManager } from "../../../frameworks/LobbySocketManager";
@@ -9,9 +15,20 @@ import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
 import { ViewClass } from "../../../frameworks/Framework";
 import { SprotoCreatePrivateRoom } from "db://assets/types/protocol/lobby/c2s";
 
+/**
+ * @class CompPrivateCreate
+ * @description 创建私密房间组件，处理私密房间的创建
+ * @category 私密房间视图
+ */
 @ViewClass()
-export class CompPrivateCreate extends FGUICompPrivateCreate { 
+export class CompPrivateCreate extends FGUICompPrivateCreate {
+    /** 视图数据 */
     private _data:any|null = null;
+
+    /**
+     * @description 显示创建私密房间界面
+     * @param data 视图数据
+     */
     show(data?:any){
         this._data = data;
         const strRule = sys.localStorage.getItem(LOCAL_KEY.PRIVATE_RULE)
@@ -20,15 +37,25 @@ export class CompPrivateCreate extends FGUICompPrivateCreate {
         }
     }
 
+    /**
+     * @description 初始化UI
+     * @param rule 房间规则
+     */
     initUI(rule:any):void{
         this.ctrl_mode.selectedIndex = rule.mode;
         this.ctrl_cnt.selectedIndex = CREATE_ROOM_PLAYER_CNT.indexOf(rule.playerCnt);
     }
 
+    /**
+     * @description 关闭按钮点击事件
+     */
     onBtnClose(): void {
         CompPrivateCreate.hideView()
     }
 
+    /**
+     * @description 创建房间按钮点击事件
+     */
     onBtnCreate(): void {
         const gameRule = {
             playerCnt:CREATE_ROOM_PLAYER_CNT[this.ctrl_cnt.selectedIndex],

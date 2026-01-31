@@ -1,3 +1,9 @@
+/**
+ * @file Datacenter.ts
+ * @description 数据中心：使用单例模式管理全局数据
+ * @category 数据中心
+ */
+
 import { UserdataResponse, UserstatusResponse } from "../../types/protocol/lobby/c2s";
 import { LOGIN_INFO, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV, AD_REWARD_INFO } from "./InterfaceConfig";
 import { sys } from "cc";
@@ -5,7 +11,7 @@ import { sys } from "cc";
 /**
  * @class DataCenter
  * @description 数据中心，使用单例模式管理全局数据，包括用户信息、游戏数据、服务器地址等
- * @category 数据管理
+ * @category 数据中心
  * @singleton 单例模式
  */
 export class DataCenter {

@@ -1,8 +1,19 @@
+/**
+ * @file SignIn.ts
+ * @description 签到模块：处理签到数据请求、签到和补签操作
+ * @category 网络请求模块
+ */
+
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
 
 
+/**
+ * @class SignIn
+ * @description 签到管理类，负责请求签到数据、执行签到和补签操作
+ * @category 网络请求模块
+ */
 export class SignIn {
 
     // 签到数据回调

@@ -1,13 +1,25 @@
+/**
+ * @file PackageManager.ts
+ * @description 包管理器：管理 FGUI 包的加载
+ * @category 核心框架
+ */
+
 import { AssetManager, assetManager } from "cc";
 import * as fgui from "fairygui-cc";
 
+/**
+ * @class PackageManager
+ * @description 包管理器，管理 FGUI 包的加载，使用单例模式
+ * @category 核心框架
+ * @singleton 单例模式
+ */
 export class PackageManager {
 
      /**
-     * @property {PackageManager} _instance - PackageManager单例实例
-     * @private
-     * @static
-     */
+      * @property {PackageManager} _instance - PackageManager单例实例
+      * @private
+      * @static
+      */
     private static _instance: PackageManager;
 
     /**

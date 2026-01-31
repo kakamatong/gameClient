@@ -1,3 +1,9 @@
+/**
+ * @file SoundManager.ts
+ * @description 声音管理器：管理游戏背景音乐和音效
+ * @category 核心框架
+ */
+
 import { assetManager, AudioClip, AudioSourceComponent, log, sys } from "cc";
 import * as fgui from "fairygui-cc";
 

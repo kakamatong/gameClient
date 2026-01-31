@@ -1,4 +1,10 @@
-import CryptoJS from 'crypto-js';   
+/**
+ * @file Auth.ts
+ * @description 认证模块：处理用户登录认证
+ * @category 网络请求模块
+ */
+
+import CryptoJS from 'crypto-js';
 import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
@@ -7,11 +13,25 @@ import { UserRiches } from './UserRiches';
 import { UserStatus } from './UserStatus';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { AwardNotices } from './AwardNotices';
+
+/**
+ * @class Auth
+ * @description 用户认证管理类，负责处理用户登录认证，使用单例模式
+ * @category 网络请求模块
+ * @singleton 单例模式
+ */
 export class Auth {
-    //Auth
+    /** 认证请求时间戳 */
     private _time :number = 0
+    /** 单例实例 */
     private static _instance: Auth;
-    private _callBack:((b:boolean)=>void) | null = null // 登入成功，但不一定已经拉到数据
+    /** 认证回调函数 */
+    private _callBack:((b:boolean)=>void) | null = null
+
+    /**
+     * @description 获取 Auth 单例实例
+     * @returns Auth 单例实例
+     */
     public static get instance(): Auth {
         if (!this._instance) {
             this._instance = new Auth();
@@ -19,6 +39,10 @@ export class Auth {
         return this._instance;
     }
 
+    /**
+     * @description 请求用户认证
+     * @param callBack 回调函数
+     */
     req(callBack?:(b:boolean)=>void){
         if (callBack) {
             this._callBack = callBack;
@@ -52,6 +76,10 @@ export class Auth {
         })
     }
 
+    /**
+     * @description 处理认证响应
+     * @param success 认证是否成功
+     */
     resp(success:boolean){
         const dt = Date.now() - this._time
         console.log('auth time:', dt / 1000)

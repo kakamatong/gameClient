@@ -1,3 +1,9 @@
+/**
+ * @file AdReward.ts
+ * @description 广告奖励模块：处理每日看广告领奖的相关请求
+ * @category 网络请求模块
+ */
+
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
@@ -5,9 +11,16 @@ import { DataCenter } from "../datacenter/Datacenter";
 import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/InterfaceConfig";
 
 
+/**
+ * @class AdReward
+ * @description 广告奖励管理类，负责请求广告信息、领取广告奖励
+ * @category 网络请求模块
+ */
 export class AdReward {
 
+    /** 获取广告信息的回调函数 */
     private _getAdInfoCallBack: ((success: boolean, data: any) => void) | null = null;
+    /** 领取广告奖励的回调函数 */
     private _receiveAdRewardCallBack: ((success: boolean, data: any) => void) | null = null;
 
     /**
@@ -20,8 +33,8 @@ export class AdReward {
     }
 
     /**
-     * 获取广告信息回调
-     * @param result 获取结果
+     * @description 处理获取广告信息的响应回调
+     * @param result 服务器返回的广告信息
      */
     respGetAdInfo(result: SprotoCallActivityFunc.Response): void {
         if(result && result.code == 1){
@@ -48,8 +61,8 @@ export class AdReward {
     }
 
     /**
-     * 领取奖励回调
-     * @param result 领取结果
+     * @description 处理领取广告奖励的响应回调
+     * @param result 服务器返回的领取结果
      */
     respReceiveAdReward(result: SprotoCallActivityFunc.Response): void {
         if(result && result.code == 1){

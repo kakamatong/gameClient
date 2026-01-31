@@ -1,4 +1,10 @@
-import CryptoJS from 'crypto-js';        
+/**
+ * @file Login.ts
+ * @description 登录处理：处理用户登录认证流程
+ * @category 核心框架
+ */
+
+import CryptoJS from 'crypto-js';
 import { _decorator, log} from 'cc';
 import { Socket } from '../socket/Socket';
 import { handleSocketMessage } from '../config/Config';
@@ -6,19 +12,36 @@ import { dhexchange, dhsecret, hmac64, CustomDESEncrypt, StringToUint8Array, Dec
 import {LogColors} from '../Framework';
 const { ccclass, property } = _decorator;
 
+/**
+ * @interface ACCOUNT_INFO
+ * @description 账号信息接口
+ */
 export interface ACCOUNT_INFO {
     username: string;
     password: string;
     server: string;
     loginType?: string;
 }
+
+/**
+ * @class Login
+ * @description 登录处理类，处理用户登录认证流程
+ * @category 核心框架
+ * @implements handleSocketMessage
+ */
 @ccclass('Login')
 export class Login implements handleSocketMessage {
+    /** Socket 实例 */
     private _socket: Socket | null = null;
+    /** 登录消息 */
     private _loginMsg:string = '';
+    /** 当前步骤 ID */
     private _stepid = 0
+    /** 客户端私钥 */
     private _clientPrivateKey: CryptoJS.WordArray | null = null;
+    /** 服务器挑战 */
     private _challenge: CryptoJS.WordArray | null = null;
+    /** 登录信息 */
     private _loginInfo:any = {
         username:'',
         userid:0,
@@ -28,11 +51,19 @@ export class Login implements handleSocketMessage {
         token:'',
         subid:0
     };
+    /** 登录回调 */
     private _callBack:(b:boolean,data?:any)=>void = (b:boolean,data?:any)=>{};
+    /** 账号信息 */
     private _accountInfo: ACCOUNT_INFO | null = null;
+    /** 登录 URL 列表 */
     private _loginUrls:{[key:string]:string} = {};
 
-
+    /**
+     * @description 开始登录流程
+     * @param acc 账号信息
+     * @param urls 登录服务器地址列表
+     * @param func 登录结果回调
+     */
     start(acc: ACCOUNT_INFO, urls:{[key:string]:string}, func:(b:boolean,data?:any)=>void) {
         this._accountInfo = acc;
         this._loginUrls = urls;
@@ -42,8 +73,9 @@ export class Login implements handleSocketMessage {
         this.initSocket();
     }
 
-    // test001
-    // wlj123456
+    /**
+     * @description 编码登录 token
+     */
     encode_token(){
         if(!this._accountInfo){
             this._callBack && this._callBack(false);
@@ -62,11 +94,15 @@ export class Login implements handleSocketMessage {
         const server = CryptoJS.enc.Utf8.parse(strServer).toString(CryptoJS.enc.Base64);
         const logtinType = CryptoJS.enc.Utf8.parse(strLogintype).toString(CryptoJS.enc.Base64);
         const token = user + '@' + server + ':' + password + '#' + logtinType;
-        
+
         //console.log('token:', token);
         this._loginMsg = token;
     }
 
+    /**
+     * @description 获取登录服务器 URL
+     * @returns 登录服务器 URL
+     */
     getLoginUrl(){
         const loginList = this._loginUrls;
         const keys = Object.keys(loginList);
@@ -75,20 +111,35 @@ export class Login implements handleSocketMessage {
         return loginList[randomKey];
     }
 
+    /**
+     * @description 初始化 Socket 连接
+     */
     initSocket() {
         this._socket = new Socket();
         this._socket.init(this.getLoginUrl() ?? "");
         this._socket.setHandleMessage(this);
     }
 
+    /**
+     * @description 发送消息
+     * @param message 消息内容
+     */
     sendMessage(message: any) {
         this._socket && this._socket.sendMessage(message);
     }
 
+    /**
+     * @description 处理连接打开事件
+     * @param event 打开事件
+     */
     onOpen(event: any) {
         log('onOpen', event);
     }
 
+    /**
+     * @description 处理接收消息事件
+     * @param message 消息字节数组
+     */
     onMessage(message: Uint8Array) {
         // const textDecoder = new TextDecoder('utf-8');
         // const text = textDecoder.decode(message);
@@ -129,15 +180,26 @@ export class Login implements handleSocketMessage {
         }
     }
 
+    /**
+     * @description 处理连接关闭事件
+     * @param event 关闭事件
+     */
     onClose(event: any) {
         log('onClose', event);
     }
 
+    /**
+     * @description 处理错误事件
+     * @param error 错误信息
+     */
     onError(error: any) {
         log('onError', error);
     }
-  
-    // 认证流程主函数
+
+    /**
+     * @description 认证流程第一步：发送客户端公钥
+     * @param message 服务器发送的 challenge
+     */
     performAuthentication1(message: string) {
         // 1. 接收服务端发送的challenge（伪代码示例）
         const challengeB64 = message; // 接收base64字符串
@@ -163,7 +225,10 @@ export class Login implements handleSocketMessage {
         this.sendMessage(messageArray);
     }
 
-    // 认证流程主函数
+    /**
+     * @description 认证流程第二步：计算共享密钥并发送认证信息
+     * @param message 服务器发送的公钥
+     */
     performAuthentication2(message: string) {
         // 3. 接收服务端公钥
         const serverPublicKeyB64 = message;

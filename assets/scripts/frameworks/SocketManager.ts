@@ -1,3 +1,9 @@
+/**
+ * @file SocketManager.ts
+ * @description Socket 管理器基类：提供 Socket 连接和消息处理的基础功能
+ * @category 核心框架
+ */
+
 import { Socket } from './socket/Socket';
 import { Asset, assetManager, BufferAsset, log, Sorting, TextAsset } from 'cc';
 import { handleSocketMessage } from './config/Config';
@@ -9,7 +15,7 @@ import { Sproto } from './sproto/sproto';
  * @class SocketManager
  * @implements {handleSocketMessage}
  * @description Socket管理器基类，负责Socket的初始化、协议加载、消息处理等功能
- * @category 框架组件
+ * @category 核心框架
  */
 export class SocketManager implements handleSocketMessage {
     /**

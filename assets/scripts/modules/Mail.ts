@@ -1,3 +1,9 @@
+/**
+ * @file Mail.ts
+ * @description 邮件模块：处理邮件列表、详情、标记已读和领取奖励
+ * @category 网络请求模块
+ */
+
 import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
 import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
@@ -10,7 +16,7 @@ const log = console.log;
 /**
  * @class Mail
  * @description 邮件系统管理类，负责处理邮件相关操作，使用单例模式
- * @category 业务模块
+ * @category 网络请求模块
  * @singleton 单例模式
  */
 export class Mail {

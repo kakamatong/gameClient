@@ -1,3 +1,9 @@
+/**
+ * @file UserData.ts
+ * @description 用户数据模块：处理用户数据的请求、更新和响应
+ * @category 网络请求模块
+ */
+
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
@@ -7,7 +13,7 @@ import { EVENT_NAMES } from '../datacenter/CommonConfig';
 /**
  * @class UserData
  * @description 用户数据管理类，负责用户数据的请求和响应处理
- * @category 业务模块
+ * @category 网络请求模块
  */
 export class UserData {
     /**
@@ -28,6 +34,11 @@ export class UserData {
         DispatchEvent(EVENT_NAMES.USER_DATA,data)
     }
 
+    /**
+     * @description 更新用户昵称和头像
+     * @param nickname 用户昵称
+     * @param headurl 头像地址
+     */
     updateUserNameAndHeadurl(nickname:string, headurl:string){
         LobbySocketManager.instance.sendToServer(SprotoUpdateUserNameAndHeadurl, { nickname: nickname, headurl: headurl })
     }

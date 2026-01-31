@@ -1,15 +1,22 @@
+/**
+ * @file UserGameRecord.ts
+ * @description 用户游戏记录模块：处理用户游戏战绩的请求
+ * @category 网络请求模块
+ */
+
 import { DataCenter } from '../datacenter/Datacenter';
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
 import { SprotoUserGameRecord } from '../../types/protocol/lobby/c2s';
 
 /**
- * @class UserData
- * @description 用户数据管理类，负责用户数据的请求和响应处理
- * @category 业务模块
+ * @class UserGameRecord
+ * @description 用户游戏记录管理类，负责用户游戏战绩的请求和响应处理
+ * @category 网络请求模块
  */
 export class UserGameRecord {
 
+    /** 回调函数 */
     private _callback: ((data:any)=>void) | null = null;
     /**
      * @method req

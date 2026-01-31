@@ -1,10 +1,26 @@
+/**
+ * @file Rank.ts
+ * @description 排行榜模块：处理排行榜数据的请求
+ * @category 网络请求模块
+ */
+
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
 import { SprotoCallActivityFunc } from '../../types/protocol/lobby/c2s';
 
+/**
+ * @class Rank
+ * @description 排行榜管理类，负责请求排行榜数据
+ * @category 网络请求模块
+ */
 export class Rank {
-    private _callBack:((b:boolean, data:any)=>void) | null = null; // 登入成功，但不一定已经拉到数据
+    /** 回调函数 */
+    private _callBack:((b:boolean, data:any)=>void) | null = null;
 
+    /**
+     * @description 请求排行榜数据
+     * @param callBack 回调函数
+     */
     req(callBack?:(b:boolean,data:any)=>void) {
         if (callBack) {
             this._callBack = callBack;
@@ -13,9 +29,8 @@ export class Rank {
     }
 
     /**
-     * @method resp
-     * @description 处理返回
-     * @param {any} result - 服务器返回的匹配结果
+     * @description 处理排行榜数据响应
+     * @param result 服务器返回的排行榜数据
      */
     resp(result: SprotoCallActivityFunc.Response) {
         if(result && result.code == 1){

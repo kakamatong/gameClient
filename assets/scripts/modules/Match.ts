@@ -1,3 +1,9 @@
+/**
+ * @file Match.ts
+ * @description 游戏匹配模块：处理游戏匹配和匹配退出操作
+ * @category 网络请求模块
+ */
+
 import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
 import { UserStatus } from './UserStatus';
@@ -6,7 +12,7 @@ import { SprotoMatchJoin, SprotoMatchLeave } from '../../types/protocol/lobby/c2
 /**
  * @class Match
  * @description 游戏匹配管理类，负责处理游戏匹配逻辑，使用单例模式
- * @category 业务模块
+ * @category 网络请求模块
  * @singleton 单例模式
  */
 export class Match {
@@ -61,6 +67,10 @@ export class Match {
         }
     }
 
+    /**
+     * @description 请求退出匹配
+     * @param callBack 回调函数
+     */
     reqLeave(callBack?:(b:boolean, data?:any)=>void): void {
         if (callBack) {
             this._callBack = callBack
@@ -68,7 +78,11 @@ export class Match {
         LobbySocketManager.instance.sendToServer(SprotoMatchLeave,{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
     }
 
-    respLeave(result:SprotoMatchLeave.Response): void { 
+    /**
+     * @description 处理退出匹配的响应
+     * @param result 服务器返回的退出匹配结果
+     */
+    respLeave(result:SprotoMatchLeave.Response): void {
         const userStatus = new UserStatus()
         userStatus.req()
         if (result && result.code == 1) {

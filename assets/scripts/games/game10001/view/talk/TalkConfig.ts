@@ -1,4 +1,15 @@
+/**
+ * @file TalkConfig.ts
+ * @description 聊天配置：定义游戏中的快捷聊天内容
+ * @category 游戏 10001
+ */
 
+/**
+ * @description 聊天列表配置
+ * @property {number} id 聊天内容 ID
+ * @property {string} msg 聊天内容
+ * @property {number} speed 显示速度
+ */
 export const TALK_LIST = [
     {id:1,msg:"我出剪刀，你信吗？", speed:1},
     {id:2,msg:"我出石头，你信吗？", speed:1},

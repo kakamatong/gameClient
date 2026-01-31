@@ -1,12 +1,29 @@
+/**
+ * @file ConnectGameSvr.ts
+ * @description 游戏服务器连接模块：处理连接到游戏服务器和加入私密房间
+ * @category 网络请求模块
+ */
+
 import { SprotoJoinPrivateRoom } from "../../types/protocol/lobby/c2s";
 import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
 import { AuthGame } from "./AuthGame";
 
-export class ConnectGameSvr { 
+/**
+ * @class ConnectGameSvr
+ * @description 游戏服务器连接管理类，负责连接游戏服务器和加入私密房间，使用单例模式
+ * @category 网络请求模块
+ * @singleton 单例模式
+ */
+export class ConnectGameSvr {
+    /** 单例实例 */
     private static _instance: ConnectGameSvr;
 
+    /**
+     * @description 获取 ConnectGameSvr 单例实例
+     * @returns ConnectGameSvr 单例实例
+     */
     public static get instance(): ConnectGameSvr {
         if (!this._instance) {
             this._instance = new ConnectGameSvr();
@@ -14,6 +31,11 @@ export class ConnectGameSvr {
         return this._instance;
     }
 
+    /**
+     * @description 连接到游戏服务器
+     * @param data 连接数据（游戏ID、房间ID、服务器地址等）
+     * @param callBack 回调函数
+     */
     connectGame(data:{gameid:number, roomid:string, shortRoomid?:number, addr:string}, callBack?:(success:boolean, data?:any)=>void){
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
@@ -26,11 +48,16 @@ export class ConnectGameSvr {
         AuthGame.instance.req(data.addr, data.gameid, data.roomid, authCallBack);
     }
 
+    /**
+     * @description 加入私密房间
+     * @param roomid 短房间ID
+     * @param callBack 回调函数
+     */
     joinPrivateRoom(roomid:number, callBack?:(success:boolean, data?:any)=>void):void{
         const func = (result:any)=>{
             if(result && result.code == 1){
                 result.shortRoomid = roomid;
-                const func2 = (success:boolean) => { 
+                const func2 = (success:boolean) => {
                     callBack && callBack(success);
                 }
                 this.connectGame(result,func2)

@@ -1,3 +1,13 @@
+/**
+ * @file Config.ts
+ * @description 框架配置：定义接口、常量和事件名称
+ * @category 核心框架
+ */
+
+/**
+ * @interface handleSocketMessage
+ * @description Socket 消息处理接口
+ */
 export interface handleSocketMessage {
     onOpen(event: any): void;
     onMessage(message: Uint8Array): void;
@@ -5,18 +15,28 @@ export interface handleSocketMessage {
     onError(error: any): void;
 }
 
+/**
+ * @interface RESPONSE
+ * @description 服务器响应数据结构
+ */
 export interface RESPONSE {
     type:string;
     session:number;
     result:any;
 }
 
+/**
+ * @description 认证类型常量
+ */
 export const AUTH_TYPE = {
     SUCCESS: 1,
     ERROR: 0,
 }
 
-// 视频广告码
+/**
+ * @enum REWORD_VIDEOAD_CODE
+ * @description 视频广告返回码枚举
+ */
 export enum REWORD_VIDEOAD_CODE {
     FAIL = 0, // 失败
     SUCCESS = 1, // 成功

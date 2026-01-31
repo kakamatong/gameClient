@@ -1,6 +1,18 @@
+/**
+ * @file Gamedata.ts
+ * @description 游戏数据：管理游戏 10001 的游戏数据
+ * @category 游戏 10001
+ */
+
 import { DEFAULT_HEADURL } from "../../../datacenter/InterfaceConfig";
 import { GAME_PLAYER_INFO,SELF_LOCAL, ENUM_GAME_STEP, GAME_DATA } from "./InterfaceGameConfig";
 
+/**
+ * @class GameData
+ * @description 游戏数据类，管理游戏 10001 的游戏数据，使用单例模式
+ * @category 游戏 10001
+ * @singleton 单例模式
+ */
 export class GameData {
     private _playerList: Array<GAME_PLAYER_INFO> = [];
     private _maxPlayer = 2;
@@ -14,7 +26,13 @@ export class GameData {
     private _record: Array<any> = [];
     private _privateNowCnt:number = 0; // 第几局
     private _privateMaxCnt:number = 0; // 最大局数
+    /** 单例实例 */
     private static _instance: GameData;
+
+    /**
+     * @description 获取 GameData 单例实例
+     * @returns GameData 单例实例
+     */
     public static get instance(): GameData {
         if (!this._instance) {
             this._instance = new GameData();
@@ -23,9 +41,12 @@ export class GameData {
     }
 
     private constructor(){
-        
+
     }
 
+    /**
+     * @description 初始化游戏数据
+     */
     init(){
         this.gameStep = ENUM_GAME_STEP.NONE;
         this.playerList = [];
@@ -57,14 +78,27 @@ export class GameData {
         return this._playerList[SELF_LOCAL].svrSeat;
     }
 
+    /**
+     * @description 设置玩家列表
+     * @param list 玩家列表
+     */
     set playerList(list: Array<GAME_PLAYER_INFO>){
         this._playerList = list;
     }
 
+    /**
+     * @description 获取玩家列表
+     * @returns 玩家列表
+     */
     get playerList(): Array<GAME_PLAYER_INFO>{
         return this._playerList;
     }
 
+    /**
+     * @description 获取指定本地位置的玩家头像
+     * @param localSeat 本地位置
+     * @returns 头像 URL
+     */
     getHeadurl(localSeat:number):string{
         if (!this._playerList[localSeat].headurl) {
             return DEFAULT_HEADURL
