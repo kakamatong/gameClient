@@ -48,6 +48,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
         AddEventListener(FW_EVENT_NAMES.ON_SHOW, this.onAppShow, this);
         LobbySocketManager.instance.addServerListen(SprotoGameRoomReady, this.onSvrGameRoomReady.bind(this));
         this.UI_COMP_TOP.UI_COMP_HEAD.onClick(this.onBtnHead, this);
+        this.UI_COMP_TOP.UI_COMP_SILVER.onClick(this.onBtnSignIn, this);
     }
 
     /**
