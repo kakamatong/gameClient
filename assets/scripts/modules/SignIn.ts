@@ -15,6 +15,9 @@ import { BaseModule } from "../frameworks/base/BaseModule";
  * @category 网络请求模块
  */
 export class SignIn extends BaseModule {
+    static get instance(): SignIn {
+        return this._getInstance<SignIn>(SignIn);
+    }
 
     // 签到数据回调
     private _signDataCallBack: ((success: boolean, data: any) => void) | null = null;

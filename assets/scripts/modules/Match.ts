@@ -16,27 +16,11 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @singleton 单例模式
  */
 export class Match extends BaseModule {
-    /**
-     * @property {Match} _instance - 单例实例
-     * @private
-     * @static
-     */
-    private static _instance: Match;
+    static get instance(): Match {
+        return this._getInstance<Match>(Match);
+    }
 
     private _callBack: ((b:boolean, data?:any) => void) | null = null;
-    
-    /**
-     * @method instance
-     * @description 获取Match的单例实例
-     * @static
-     * @returns {Match} Match单例实例
-     */
-    public static get instance(): Match {
-        if (!this._instance) {
-            this._instance = new Match();
-        }
-        return this._instance;
-    }
 
     /**
      * @method req
@@ -56,8 +40,7 @@ export class Match extends BaseModule {
      * @param {any} result - 服务器返回的匹配结果
      */
     resp(result: SprotoMatchJoin.Response) {
-        const userStatus = new UserStatus()
-        userStatus.req()
+        UserStatus.instance.req()
         if (result && result.code == 1) {
             console.log(LogColors.green(result.msg))
             this._callBack && this._callBack(true)
@@ -83,8 +66,7 @@ export class Match extends BaseModule {
      * @param result 服务器返回的退出匹配结果
      */
     respLeave(result:SprotoMatchLeave.Response): void {
-        const userStatus = new UserStatus()
-        userStatus.req()
+        UserStatus.instance.req()
         if (result && result.code == 1) {
             this._callBack && this._callBack(true)
         } else {

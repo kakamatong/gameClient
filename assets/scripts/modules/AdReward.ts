@@ -16,7 +16,7 @@ import { BaseModule } from "../frameworks/base/BaseModule";
  * @category 网络请求模块
  */
 export class AdReward extends BaseModule {
-    get instance(): AdReward {
+    static get instance(): AdReward {
         return this._getInstance<AdReward>(AdReward);
     }
 

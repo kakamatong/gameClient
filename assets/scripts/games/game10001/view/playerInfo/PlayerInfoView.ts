@@ -35,7 +35,6 @@ export class PlayerInfoView extends FGUIPlayerInfoView {
             const rate = player.win / (player.win + player.lose + player.draw) * 100;
             this.UI_TXT_RATE.text = `${rate.toFixed(1)}%`;
         }else{
-            const gameRecords = new UserGameRecord()
             const func = (data:any)=>{
                 player.win = data.win
                 player.lose = data.lose
@@ -52,7 +51,7 @@ export class PlayerInfoView extends FGUIPlayerInfoView {
                     this.UI_TXT_RATE.text = `--`;
                 }
             }
-            gameRecords.req(this._userid, func)
+            UserGameRecord.instance.req(this._userid, func)
         }
     }
 

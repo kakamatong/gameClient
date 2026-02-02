@@ -7,6 +7,7 @@
 import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
+import { BaseModule } from "../frameworks/base/BaseModule";
 
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
@@ -17,19 +18,9 @@ const log = console.log;
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class AuthList {
-    /** 单例实例 */
-    private static _instance: AuthList;
-
-    /**
-     * @description 获取 AuthList 单例实例
-     * @returns AuthList 单例实例
-     */
-    public static get instance(): AuthList {
-        if (!this._instance) {
-            this._instance = new AuthList();
-        }
-        return this._instance;
+export class AuthList extends BaseModule {
+    static get instance(): AuthList {
+        return this._getInstance<AuthList>(AuthList);
     }
 
     /**

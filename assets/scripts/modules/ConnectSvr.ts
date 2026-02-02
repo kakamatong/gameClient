@@ -13,6 +13,7 @@ import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
 import { Auth } from "./Auth";
 import { AuthList } from "./AuthList";
 import { sys } from 'cc';
+import { BaseModule } from "../frameworks/base/BaseModule";
 
 /**
  * @class ConnectSvr
@@ -20,19 +21,9 @@ import { sys } from 'cc';
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class ConnectSvr {
-    /** 单例实例 */
-    private static _instance: ConnectSvr;
-
-    /**
-     * @description 获取 ConnectSvr 单例实例
-     * @returns ConnectSvr 单例实例
-     */
-    public static get instance(): ConnectSvr {
-        if (!this._instance) {
-            this._instance = new ConnectSvr();
-        }
-        return this._instance;
+export class ConnectSvr extends BaseModule {
+    static get instance(): ConnectSvr {
+        return this._getInstance<ConnectSvr>(ConnectSvr);
     }
 
     /**

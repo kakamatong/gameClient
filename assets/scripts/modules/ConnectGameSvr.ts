@@ -17,18 +17,8 @@ import { BaseModule } from "../frameworks/base/BaseModule";
  * @singleton 单例模式
  */
 export class ConnectGameSvr extends BaseModule {
-    /** 单例实例 */
-    private static _instance: ConnectGameSvr;
-
-    /**
-     * @description 获取 ConnectGameSvr 单例实例
-     * @returns ConnectGameSvr 单例实例
-     */
-    public static get instance(): ConnectGameSvr {
-        if (!this._instance) {
-            this._instance = new ConnectGameSvr();
-        }
-        return this._instance;
+    static get instance(): ConnectGameSvr {
+        return this._getInstance<ConnectGameSvr>(ConnectGameSvr);
     }
 
     /**

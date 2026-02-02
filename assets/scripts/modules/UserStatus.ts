@@ -16,6 +16,9 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class UserStatus extends BaseModule {
+    static get instance(): UserStatus {
+        return this._getInstance<UserStatus>(UserStatus);
+    }
     /**
      * @description 请求用户状态数据
      */

@@ -14,6 +14,9 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class AwardNotices extends BaseModule {
+    static get instance(): AwardNotices {
+        return this._getInstance<AwardNotices>(AwardNotices);
+    }
     /**
      * @description 请求获取奖励通知
      */

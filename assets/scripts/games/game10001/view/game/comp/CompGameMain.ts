@@ -418,8 +418,7 @@ export class CompGameMain extends FGUICompGameMain {
             }
         }
 
-        const userStatus = new UserStatus()
-        userStatus.req()
+        UserStatus.instance.req()
 
         // 显示继续游戏
         if (GameData.instance.isPrivateRoom) {

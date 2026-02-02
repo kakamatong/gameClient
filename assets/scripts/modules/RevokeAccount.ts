@@ -16,6 +16,10 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class RevokeAccount extends BaseModule {
+    static get instance(): RevokeAccount {
+        return this._getInstance<RevokeAccount>(RevokeAccount);
+    }
+
     /** 回调函数 */
     private _callback: ((data:any)=>void) | null = null;
     /**

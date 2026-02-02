@@ -16,6 +16,9 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class UserRiches extends BaseModule {
+    static get instance(): UserRiches {
+        return this._getInstance<UserRiches>(UserRiches);
+    }
     /**
      * @description 请求用户财富数据
      */

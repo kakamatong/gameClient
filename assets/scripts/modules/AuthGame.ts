@@ -18,21 +18,12 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @singleton 单例模式
  */
 export class AuthGame extends BaseModule {
-    /** 单例实例 */
-    private static _instance: AuthGame;
+    static get instance(): AuthGame {
+        return this._getInstance<AuthGame>(AuthGame);
+    }
+
     /** 认证回调函数 */
     private _callBack:((success:boolean)=>void) | null = null;
-
-    /**
-     * @description 获取 AuthGame 单例实例
-     * @returns AuthGame 单例实例
-     */
-    public static get instance(): AuthGame {
-        if (!this._instance) {
-            this._instance = new AuthGame();
-        }
-        return this._instance;
-    }
 
     /**
      * @description 请求游戏服务器认证

@@ -7,6 +7,7 @@
 import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
 import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @description 添加console.log别名，方便使用日志颜色
@@ -19,25 +20,9 @@ const log = console.log;
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class Mail {
-    /**
-     * @property {Mail} _instance - 单例实例
-     * @private
-     * @static
-     */
-    private static _instance: Mail;
-    
-    /**
-     * @method instance
-     * @description 获取Mail的单例实例
-     * @static
-     * @returns {Mail} Mail单例实例
-     */
-    public static get instance(): Mail {
-        if (!this._instance) {
-            this._instance = new Mail();
-        }
-        return this._instance;
+export class Mail extends BaseModule {
+    static get instance(): Mail {
+        return this._getInstance<Mail>(Mail);
     }
 
     /**
@@ -47,6 +32,7 @@ export class Mail {
     private _url = "http://192.168.1.131:8080/api/mail/";
 
     constructor() {
+        super();
         // 私有构造函数，防止实例化
         this._url = DataCenter.instance.appConfig.webUrl + '/api/mail/'
     }

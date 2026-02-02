@@ -17,8 +17,7 @@ export class CompAwardMain extends FGUICompAwardMain {
         
         // 通知服务消费通知
         if (this._data.noticeid && this._data.noticeid >= 0) {
-            const notice = new AwardNotices();
-            notice.reqRead(this._data?.noticeid || 0)
+            AwardNotices.instance.reqRead(this._data?.noticeid || 0)
         }
         this.initUI();
     }

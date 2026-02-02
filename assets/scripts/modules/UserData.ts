@@ -16,6 +16,9 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class UserData extends BaseModule {
+    static get instance(): UserData {
+        return this._getInstance<UserData>(UserData);
+    }
     /**
      * @method req
      * @description 请求用户数据，向服务器发送用户数据请求

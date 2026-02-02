@@ -60,8 +60,7 @@ export class CompSignInMain extends FGUICompSignInMain {
             this.initUI();
         }
 
-        this._reqSign = new SignIn();
-        this._reqSign.reqSignData(funcSignData);
+        SignIn.instance.reqSignData(funcSignData);
     }
 
     /**
@@ -170,11 +169,10 @@ export class CompSignInMain extends FGUICompSignInMain {
             this._signInStatus = data.status;
             this.initUI();
             // 用户财富
-            const userRiches = new UserRiches()
-            userRiches.req()
+            UserRiches.instance.req()
             this.showAward({awards:data.awards, noticeid:data.noticeid}, mult)
         }
-        this._reqSign && this._reqSign.reqSignIn(mult,func)
+        SignIn.instance.reqSignIn(mult,func)
     }
 
     /**
@@ -193,11 +191,10 @@ export class CompSignInMain extends FGUICompSignInMain {
             this._signInStatus = data.status;
             this.initUI();
             // 用户财富
-            const userRiches = new UserRiches()
-            userRiches.req()
+            UserRiches.instance.req()
             this.showAward({awards:data.awards, noticeid:data.noticeid}, 0)
         }
-        this._reqSign && this._reqSign.reqFillSignIn(index,func)
+        SignIn.instance.reqFillSignIn(index,func)
     }
 
     /**

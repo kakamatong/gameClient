@@ -15,6 +15,9 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class UserGameRecord extends BaseModule {
+    static get instance(): UserGameRecord {
+        return this._getInstance<UserGameRecord>(UserGameRecord);
+    }
 
     /** 回调函数 */
     private _callback: ((data:any)=>void) | null = null;

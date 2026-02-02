@@ -13,6 +13,7 @@ import { UserRiches } from './UserRiches';
 import { UserStatus } from './UserStatus';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { AwardNotices } from './AwardNotices';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class Auth
@@ -20,24 +21,15 @@ import { AwardNotices } from './AwardNotices';
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class Auth {
-    /** 认证请求时间戳 */
-    private _time :number = 0
-    /** 单例实例 */
-    private static _instance: Auth;
-    /** 认证回调函数 */
-    private _callBack:((b:boolean)=>void) | null = null
-
-    /**
-     * @description 获取 Auth 单例实例
-     * @returns Auth 单例实例
-     */
-    public static get instance(): Auth {
-        if (!this._instance) {
-            this._instance = new Auth();
-        }
-        return this._instance;
+export class Auth extends BaseModule {
+    static get instance(): Auth {
+        return this._getInstance<Auth>(Auth);
     }
+
+    /** 认证请求时间戳 */
+    private _time :number = 0;
+    /** 认证回调函数 */
+    private _callBack:((b:boolean)=>void) | null = null;
 
     /**
      * @description 请求用户认证
@@ -87,20 +79,16 @@ export class Auth {
             DataCenter.instance.addSubid();
             console.log(LogColors.green("认证成功"))
             // 用户信息
-            const userData = new UserData()
-            userData.req()
+            UserData.instance.req()
 
             // 用户财富
-            const userRiches = new UserRiches()
-            userRiches.req()
+            UserRiches.instance.req()
 
             // 用户状态
-            const userStatus = new UserStatus()
-            userStatus.req()
+            UserStatus.instance.req()
 
             // 奖励通知
-            const awardNotices = new AwardNotices()
-            awardNotices.req()
+            AwardNotices.instance.req()
 
             this._callBack && this._callBack(true)
         }else{

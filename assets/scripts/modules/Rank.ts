@@ -14,6 +14,10 @@ import { BaseModule } from '../frameworks/base/BaseModule';
  * @category 网络请求模块
  */
 export class Rank extends BaseModule {
+    static get instance(): Rank {
+        return this._getInstance<Rank>(Rank);
+    }
+
     /** 回调函数 */
     private _callBack:((b:boolean, data:any)=>void) | null = null;
 
