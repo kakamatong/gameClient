@@ -4,9 +4,9 @@
  * @category 网络请求模块
  */
 
-import {DataCenter} from '../datacenter/Datacenter';
-import { LogColors } from '../frameworks/Framework';
-import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
+import { DataCenter } from "../datacenter/Datacenter";
+import { LogColors } from "../frameworks/Framework";
+import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
 
 // 添加console.log别名，方便使用日志颜色
 const log = console.log;
@@ -42,7 +42,7 @@ export class AuthList {
             return data;
         }
 
-        if (typeof data === 'string') {
+        if (typeof data === "string") {
             try {
                 return decodeURIComponent(data);
             } catch (e) {
@@ -52,10 +52,10 @@ export class AuthList {
         }
 
         if (Array.isArray(data)) {
-            return data.map(item => this.decodeURLRecursive(item));
+            return data.map((item) => this.decodeURLRecursive(item));
         }
 
-        if (typeof data === 'object') {
+        if (typeof data === "object") {
             const decodedObj: any = {};
             for (const key in data) {
                 if (Object.prototype.hasOwnProperty.call(data, key)) {
@@ -72,10 +72,10 @@ export class AuthList {
      * @description 请求认证服务器地址列表
      * @param callBack 回调函数
      */
-    req(callBack:(success:boolean, data?:any)=>void){
+    req(callBack: (success: boolean, data?: any) => void) {
         const url = DataCenter.instance.appConfig.authList;
         if (!url) {
-            log(LogColors.red('authList URL not configured!'));
+            log(LogColors.red("authList URL not configured!"));
             callBack(false);
             return;
         }
@@ -83,28 +83,29 @@ export class AuthList {
         log(LogColors.blue(`Sending POST request to: ${url}`));
 
         const payload = {
-            'userid':0,
-            'channelid':DataCenter.instance.channelID
-        }
+            "userid": 0,
+            "channelid": DataCenter.instance.channelID,
+        };
 
-        HttpPostWithDefaultJWT(url, {}, payload).then(data => {
-            log(LogColors.green('authList request successful!'));
-            // 将认证列表数据存储到DataCenter
-            if (data && data.data) {
-                // 对data.data进行URL解码
-                const decodedData = AuthList.decodeURLRecursive(data.data);
-                DataCenter.instance.authList = decodedData.gate;
-                DataCenter.instance.gameAuthList = decodedData.game;
-                DataCenter.instance.loginList = decodedData.login;
+        HttpPostWithDefaultJWT(url, {}, payload)
+            .then((data) => {
+                log(LogColors.green("authList request successful!"));
+                // 将认证列表数据存储到DataCenter
+                if (data && data.data) {
+                    // 对data.data进行URL解码
+                    const decodedData = AuthList.decodeURLRecursive(data.data);
+                    DataCenter.instance.authList = decodedData.gate;
+                    DataCenter.instance.gameAuthList = decodedData.game;
+                    DataCenter.instance.loginList = decodedData.login;
 
-                // 同时更新原始data对象中的data字段
-                data.data = decodedData;
-            }
-            callBack(true, data);
-        })
-        .catch(error => {
-            log(LogColors.red(`authList request failed: ${error.message}`));
-            callBack(false, error);
-        });
+                    // 同时更新原始data对象中的data字段
+                    data.data = decodedData;
+                }
+                callBack(true, data);
+            })
+            .catch((error) => {
+                log(LogColors.red(`authList request failed: ${error.message}`));
+                callBack(false, error);
+            });
     }
 }
