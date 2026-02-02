@@ -7,8 +7,8 @@
 import { SprotoJoinPrivateRoom } from "../../types/protocol/lobby/c2s";
 import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
-import { LobbySocketManager } from "../frameworks/LobbySocketManager";
 import { AuthGame } from "./AuthGame";
+import { BaseModule } from "../frameworks/base/BaseModule";
 
 /**
  * @class ConnectGameSvr
@@ -16,7 +16,7 @@ import { AuthGame } from "./AuthGame";
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class ConnectGameSvr {
+export class ConnectGameSvr extends BaseModule {
     /** 单例实例 */
     private static _instance: ConnectGameSvr;
 
@@ -66,6 +66,6 @@ export class ConnectGameSvr {
             }
         }
 
-        LobbySocketManager.instance.sendToServer(SprotoJoinPrivateRoom,{shortRoomid:roomid}, func)
+        this.reqLobby(SprotoJoinPrivateRoom,{shortRoomid:roomid}, func)
     }
 }

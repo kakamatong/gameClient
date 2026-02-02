@@ -6,8 +6,8 @@
 
 import { CancelrevokeaccResponse, RevokeaccResponse } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { SprotoRevokeAcc, SprotoCancelRevokeAcc } from '../../types/protocol/lobby/c2s';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 
 /**
@@ -15,7 +15,7 @@ import { SprotoRevokeAcc, SprotoCancelRevokeAcc } from '../../types/protocol/lob
  * @description 账号注销管理类，负责账号注销和取消注销操作
  * @category 网络请求模块
  */
-export class RevokeAccount {
+export class RevokeAccount extends BaseModule {
     /** 回调函数 */
     private _callback: ((data:any)=>void) | null = null;
     /**
@@ -27,7 +27,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer(SprotoRevokeAcc, { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
+        this.reqLobby(SprotoRevokeAcc, { loginType: loginInfo?.loginType }, this.respRevoke.bind(this))
     }
 
     /**
@@ -39,7 +39,7 @@ export class RevokeAccount {
             this._callback = callback
         }
         const loginInfo = DataCenter.instance.getLoginInfo();
-        LobbySocketManager.instance.sendToServer(SprotoCancelRevokeAcc, { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
+        this.reqLobby(SprotoCancelRevokeAcc, { userid: loginInfo?.loginType }, this.respCancelRevoke.bind(this))
     }
 
     /**

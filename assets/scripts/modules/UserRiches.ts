@@ -7,20 +7,20 @@
 import { SprotoUserRiches } from '../../types/protocol/lobby/c2s';
 import { DataCenter } from '../datacenter/Datacenter';
 import { DispatchEvent } from '../frameworks/Framework';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { EVENT_NAMES } from '../datacenter/CommonConfig';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class UserRiches
  * @description 用户财富管理类，负责请求和更新用户财富数据
  * @category 网络请求模块
  */
-export class UserRiches {
+export class UserRiches extends BaseModule {
     /**
      * @description 请求用户财富数据
      */
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoUserRiches, {}, this.resp.bind(this))
+        this.reqLobby(SprotoUserRiches, {}, this.resp.bind(this))
     }
 
     /**

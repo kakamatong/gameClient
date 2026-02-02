@@ -9,6 +9,7 @@ import {DataCenter} from '../datacenter/Datacenter';
 import { LogColors } from '../frameworks/Framework';
 import { GameSocketManager } from '../frameworks/GameSocketManager';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class AuthGame
@@ -16,7 +17,7 @@ import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class AuthGame {
+export class AuthGame extends BaseModule {
     /** 单例实例 */
     private static _instance: AuthGame;
     /** 认证回调函数 */

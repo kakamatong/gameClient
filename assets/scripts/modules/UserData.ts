@@ -5,23 +5,23 @@
  */
 
 import { DataCenter } from '../datacenter/Datacenter';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
 import { SprotoUpdateUserNameAndHeadurl, SprotoUserData } from '../../types/protocol/lobby/c2s';
 import { EVENT_NAMES } from '../datacenter/CommonConfig';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class UserData
  * @description 用户数据管理类，负责用户数据的请求和响应处理
  * @category 网络请求模块
  */
-export class UserData {
+export class UserData extends BaseModule {
     /**
      * @method req
      * @description 请求用户数据，向服务器发送用户数据请求
      */
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoUserData, { userid: DataCenter.instance.userid }, this.resp.bind(this))
+        this.reqLobby(SprotoUserData, { userid: DataCenter.instance.userid }, this.resp.bind(this))
     }
 
     /**
@@ -40,6 +40,6 @@ export class UserData {
      * @param headurl 头像地址
      */
     updateUserNameAndHeadurl(nickname:string, headurl:string){
-        LobbySocketManager.instance.sendToServer(SprotoUpdateUserNameAndHeadurl, { nickname: nickname, headurl: headurl })
+        this.reqLobby(SprotoUpdateUserNameAndHeadurl, { nickname: nickname, headurl: headurl })
     }
 }

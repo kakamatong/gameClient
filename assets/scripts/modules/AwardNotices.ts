@@ -5,20 +5,20 @@
  */
 
 import { DataCenter } from '../datacenter/Datacenter';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { SprotoGetAwardNotice,SprotoSetAwardNoticeRead } from '../../types/protocol/lobby/c2s';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class AwardNotices
  * @description 奖励通知管理类，负责获取奖励通知和标记已读
  * @category 网络请求模块
  */
-export class AwardNotices {
+export class AwardNotices extends BaseModule {
     /**
      * @description 请求获取奖励通知
      */
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoGetAwardNotice, { userid:DataCenter.instance.userid}, this.resp.bind(this))
+        this.reqLobby(SprotoGetAwardNotice, { userid:DataCenter.instance.userid}, this.resp.bind(this))
 
     }
 
@@ -36,7 +36,7 @@ export class AwardNotices {
      * @param id 奖励通知ID
      */
     reqRead(id:number){
-        LobbySocketManager.instance.sendToServer(SprotoSetAwardNoticeRead, { id:id})
+        this.reqLobby(SprotoSetAwardNoticeRead, { id:id})
     }
 
 }

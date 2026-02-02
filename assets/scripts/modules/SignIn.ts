@@ -6,7 +6,7 @@
 
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
-import { LobbySocketManager } from "../frameworks/LobbySocketManager";
+import { BaseModule } from "../frameworks/base/BaseModule";
 
 
 /**
@@ -14,7 +14,7 @@ import { LobbySocketManager } from "../frameworks/LobbySocketManager";
  * @description 签到管理类，负责请求签到数据、执行签到和补签操作
  * @category 网络请求模块
  */
-export class SignIn {
+export class SignIn extends BaseModule {
 
     // 签到数据回调
     private _signDataCallBack: ((success: boolean, data: any) => void) | null = null;
@@ -29,7 +29,7 @@ export class SignIn {
      */
     reqSignData(callBack: (success: boolean, data: any) => void){
         this._signDataCallBack = callBack;
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'getSignInInfo', args:JSON.stringify({})} , this.respSignData.bind(this))
+        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'getSignInInfo', args:JSON.stringify({})} , this.respSignData.bind(this))
     }
 
     /**
@@ -57,7 +57,7 @@ export class SignIn {
      */
     reqSignIn(mult:number, callBack: (success: boolean, data: any) => void):void{
         this._signInCallBack = callBack
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'signIn', args:JSON.stringify({mult})} , this.respSignIn.bind(this))
+        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'signIn', args:JSON.stringify({mult})} , this.respSignIn.bind(this))
     }
 
     /**
@@ -85,7 +85,7 @@ export class SignIn {
      */
     reqFillSignIn(index:number, callBack: (success: boolean, data: any) => void):void{
         this._fillSignInCallBack = callBack
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({index})} , this.respFillSignIn.bind(this))
+        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({index})} , this.respFillSignIn.bind(this))
     }
 
     /**

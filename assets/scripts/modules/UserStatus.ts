@@ -5,22 +5,22 @@
  */
 
 import { DataCenter } from '../datacenter/Datacenter';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { DispatchEvent } from '../frameworks/Framework';
 import { SprotoUserStatus } from '../../types/protocol/lobby/c2s';
 import { EVENT_NAMES } from '../datacenter/CommonConfig';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class UserStatus
  * @description 用户状态管理类，负责请求和更新用户状态数据
  * @category 网络请求模块
  */
-export class UserStatus {
+export class UserStatus extends BaseModule {
     /**
      * @description 请求用户状态数据
      */
     req() {
-        LobbySocketManager.instance.sendToServer(SprotoUserStatus, { userid: DataCenter.instance.userid }, this.resp.bind(this))
+        this.reqLobby(SprotoUserStatus, { userid: DataCenter.instance.userid }, this.resp.bind(this))
     }
 
     /**

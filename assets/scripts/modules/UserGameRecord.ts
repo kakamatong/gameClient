@@ -5,16 +5,16 @@
  */
 
 import { DataCenter } from '../datacenter/Datacenter';
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { MAIN_GAME_ID } from '../datacenter/InterfaceConfig';
 import { SprotoUserGameRecord } from '../../types/protocol/lobby/c2s';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class UserGameRecord
  * @description 用户游戏记录管理类，负责用户游戏战绩的请求和响应处理
  * @category 网络请求模块
  */
-export class UserGameRecord {
+export class UserGameRecord extends BaseModule {
 
     /** 回调函数 */
     private _callback: ((data:any)=>void) | null = null;
@@ -26,7 +26,7 @@ export class UserGameRecord {
         if (callback) {
             this._callback = callback
         }
-        LobbySocketManager.instance.sendToServer(SprotoUserGameRecord, { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
+        this.reqLobby(SprotoUserGameRecord, { userid: userid  || DataCenter.instance.userid, gameid: MAIN_GAME_ID }, this.resp.bind(this))
     }
 
     /**

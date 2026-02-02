@@ -4,16 +4,16 @@
  * @category 网络请求模块
  */
 
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
 import { SprotoCallActivityFunc } from '../../types/protocol/lobby/c2s';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class Rank
  * @description 排行榜管理类，负责请求排行榜数据
  * @category 网络请求模块
  */
-export class Rank {
+export class Rank extends BaseModule {
     /** 回调函数 */
     private _callBack:((b:boolean, data:any)=>void) | null = null;
 
@@ -25,7 +25,7 @@ export class Rank {
         if (callBack) {
             this._callBack = callBack;
         }
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
+        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
     }
 
     /**

@@ -4,10 +4,10 @@
  * @category 网络请求模块
  */
 
-import { LobbySocketManager } from '../frameworks/LobbySocketManager';
 import { LogColors } from '../frameworks/Framework';
 import { UserStatus } from './UserStatus';
 import { SprotoMatchJoin, SprotoMatchLeave } from '../../types/protocol/lobby/c2s';
+import { BaseModule } from '../frameworks/base/BaseModule';
 
 /**
  * @class Match
@@ -15,7 +15,7 @@ import { SprotoMatchJoin, SprotoMatchLeave } from '../../types/protocol/lobby/c2
  * @category 网络请求模块
  * @singleton 单例模式
  */
-export class Match {
+export class Match extends BaseModule {
     /**
      * @property {Match} _instance - 单例实例
      * @private
@@ -47,7 +47,7 @@ export class Match {
         if (callBack) {
             this._callBack = callBack
         }
-        LobbySocketManager.instance.sendToServer(SprotoMatchJoin,{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
+        this.reqLobby(SprotoMatchJoin,{ gameid: 10001, queueid: 1 }, this.resp.bind(this))
     }
 
     /**
@@ -75,7 +75,7 @@ export class Match {
         if (callBack) {
             this._callBack = callBack
         }
-        LobbySocketManager.instance.sendToServer(SprotoMatchLeave,{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
+        this.reqLobby(SprotoMatchLeave,{ gameid: 10001, queueid: 1 }, this.respLeave.bind(this))
     }
 
     /**

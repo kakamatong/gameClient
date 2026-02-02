@@ -6,9 +6,9 @@
 
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
-import { LobbySocketManager } from "../frameworks/LobbySocketManager";
 import { DataCenter } from "../datacenter/Datacenter";
 import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/InterfaceConfig";
+import { BaseModule } from "../frameworks/base/BaseModule";
 
 
 /**
@@ -16,7 +16,7 @@ import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/Interfac
  * @description 广告奖励管理类，负责请求广告信息、领取广告奖励
  * @category 网络请求模块
  */
-export class AdReward {
+export class AdReward extends BaseModule {
 
     /** 获取广告信息的回调函数 */
     private _getAdInfoCallBack: ((success: boolean, data: any) => void) | null = null;
@@ -29,7 +29,7 @@ export class AdReward {
      */
     reqGetAdInfo(callBack: (success: boolean, data: any) => void){
         this._getAdInfoCallBack = callBack;
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdInfo', args:JSON.stringify({})}, this.respGetAdInfo.bind(this))
+        this.reqLobby(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdInfo', args:JSON.stringify({})}, this.respGetAdInfo.bind(this))
     }
 
     /**
@@ -57,7 +57,7 @@ export class AdReward {
      */
     reqReceiveAdReward(callBack: (success: boolean, data: any) => void){
         this._receiveAdRewardCallBack = callBack;
-        LobbySocketManager.instance.sendToServer(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdReward', args:JSON.stringify({})}, this.respReceiveAdReward.bind(this))
+        this.reqLobby(SprotoCallActivityFunc, {moduleName : 'ad', funcName : 'getAdReward', args:JSON.stringify({})}, this.respReceiveAdReward.bind(this))
     }
 
     /**
