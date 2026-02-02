@@ -28,6 +28,11 @@ import { AdReward } from "../../../modules/AdReward";
 import { AwardView } from "../../award/AwardView";
 import { UserRiches } from "../../../modules/UserRiches";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
+/**
+ * 大厅主界面组件
+ * 负责大厅界面的初始化、用户登录管理、用户信息展示、功能入口处理等
+ * 包括：登录流程、用户信息/财富显示、房间匹配、排行榜、邮件、签到、广告奖励等功能
+ */
 @ViewClass({ curveScreenAdapt: true })
 export class CompLobbyMain extends FGUICompLobbyMain {
     onConstruct() {
