@@ -6,7 +6,7 @@
 
 import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
-import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
+import { HttpPostWithDefaultJWT, DecodeURLRecursive } from "../frameworks/utils/Utils";
 import { BaseModule } from "../frameworks/base/BaseModule";
 
 // 添加console.log别名，方便使用日志颜色
@@ -21,42 +21,6 @@ const log = console.log;
 export class AuthList extends BaseModule {
     static get instance(): AuthList {
         return this._getInstance<AuthList>(AuthList);
-    }
-
-    /**
-     * @description 递归解码对象中的所有URL编码字符串
-     * @param data 需要解码的数据
-     * @returns 解码后的数据
-     */
-    private static decodeURLRecursive(data: any): any {
-        if (data === null || data === undefined) {
-            return data;
-        }
-
-        if (typeof data === "string") {
-            try {
-                return decodeURIComponent(data);
-            } catch (e) {
-                log(LogColors.yellow(`Failed to decode URL: ${data}, error: ${e.message}`));
-                return data; // 解码失败时返回原始字符串
-            }
-        }
-
-        if (Array.isArray(data)) {
-            return data.map((item) => this.decodeURLRecursive(item));
-        }
-
-        if (typeof data === "object") {
-            const decodedObj: any = {};
-            for (const key in data) {
-                if (Object.prototype.hasOwnProperty.call(data, key)) {
-                    decodedObj[key] = this.decodeURLRecursive(data[key]);
-                }
-            }
-            return decodedObj;
-        }
-
-        return data;
     }
 
     /**
@@ -84,7 +48,7 @@ export class AuthList extends BaseModule {
                 // 将认证列表数据存储到DataCenter
                 if (data && data.data) {
                     // 对data.data进行URL解码
-                    const decodedData = AuthList.decodeURLRecursive(data.data);
+                    const decodedData = DecodeURLRecursive(data.data);
                     DataCenter.instance.authList = decodedData.gate;
                     DataCenter.instance.gameAuthList = decodedData.game;
                     DataCenter.instance.loginList = decodedData.login;

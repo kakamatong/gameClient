@@ -1,6 +1,7 @@
-import CryptoJS from 'crypto-js';   
+import CryptoJS from 'crypto-js';
 import { MiniGameUtils } from './sdk/MiniGameUtils';
 import {  assetManager, ImageAsset, SpriteFrame } from 'cc';
+import { LogColors } from '../Framework';
 
 // DH参数配置
 const DH_GENERATOR = 5n;
@@ -9,7 +10,7 @@ const DH_PRIME = 0xFFFFFFFFFFFFFFC5n;
 // 字节转换工具
 const toUint64LE = (wa: CryptoJS.WordArray): bigint => {
     const bytes = wa.toString(CryptoJS.enc.Hex).match(/.{8}/g) || [];
-    const [low, high] = bytes.map(b => 
+    const [low, high] = bytes.map(b =>
         parseInt(b.split(/(?=(?:..)*$)/).reverse().join(''), 16)
     );
     return (BigInt(high) << 32n) | BigInt(low);
@@ -32,8 +33,8 @@ const mul_mod_p = (a: bigint, b: bigint): bigint => {
             m = (m >= t) ? m - t : m + a;
             if (m >= DH_PRIME) m -= DH_PRIME;
         }
-        a = (a >= DH_PRIME - a) ? 
-            (a * 2n - DH_PRIME) : 
+        a = (a >= DH_PRIME - a) ?
+            (a * 2n - DH_PRIME) :
             (a * 2n);
         b >>= 1n;
     }
@@ -58,16 +59,16 @@ export const dhexchange = (clientKey: CryptoJS.WordArray): CryptoJS.WordArray =>
         // 返回缓存值的克隆
         return DH_CACHE.get(cacheKey)!.clone();
     }
-    
+
     const x = toUint64LE(clientKey);
     if (x === 0n) throw new Error("Invalid DH key");
-    
+
     // 生成结果并转换为WordArray
     const result = fromUint64LE(pow_mod_p(DH_GENERATOR, x));
-    
+
     // 存储克隆到缓存
     DH_CACHE.set(cacheKey, result.clone());
-    
+
     // 返回结果克隆
     return result.clone();
 };
@@ -84,7 +85,7 @@ export const dhsecret = (serverKey: CryptoJS.WordArray, clientKey: CryptoJS.Word
 const toUint64PairLE = (wa: CryptoJS.WordArray): [number, number] => {
     // 将WordArray转换为8字节的十六进制字符串
     const hex = wa.toString(CryptoJS.enc.Hex).padStart(16, '0');
-    
+
     // 分割为高低各4字节（小端序）
     const lowBytes = hex.substr(0, 8).match(/.{2}/g)?.reverse().join('') || '00000000';
     const highBytes = hex.substr(8, 8).match(/.{2}/g)?.reverse().join('') || '00000000';
@@ -121,7 +122,7 @@ const digestMD5 = (w: number[]): number[] => {
         0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039 ,
         0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1 ,
         0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1 ,
-        0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 
+        0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
     ];
     const r = [
         7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,
@@ -149,7 +150,7 @@ const digestMD5 = (w: number[]): number[] => {
         const temp = d;
         d = c;
         c = b;
-        
+
         // 强制无符号运算
         const sum = (a + f + k[i] + w[g]) >>> 0;
         const rotated = ((sum << r[i]) | (sum >>> (32 - r[i]))) >>> 0;
@@ -192,7 +193,7 @@ export const hmac64 = (key: CryptoJS.WordArray, message: CryptoJS.WordArray): Cr
     const view = new DataView(buffer);
     view.setUint32(0, result[0], true);
     view.setUint32(4, result[1], true);
-    
+
     return CryptoJS.lib.WordArray.create(new Uint8Array(buffer));
 };
 
@@ -201,10 +202,10 @@ const paddingAddISO7816_4 = (buffer: Uint8Array, offset: number): void => {
     if (offset < 0 || offset >= 8) {
         throw new Error("Invalid padding offset");
     }
-    
+
     // 设置填充起始位
     buffer[offset] = 0x80;
-    
+
     // 填充剩余字节为0x00
     for (let i = offset + 1; i < 8; i++) {
         buffer[i] = 0x00;
@@ -216,10 +217,10 @@ const addPaddingSingleBlock = (data: Uint8Array): Uint8Array => {
     const block = new Uint8Array(8);
     block.set(data);
     const padOffset = data.length;
-    
+
     // 调用标准填充函数
     paddingAddISO7816_4(block, padOffset);
-    
+
     return block;
 };
 
@@ -228,7 +229,7 @@ export const desencode = (data: CryptoJS.WordArray, key: CryptoJS.WordArray): Cr
     const subkeys = generateSubkeys(key);
     const bytes = wordArrayToBytes(data);
     const blocks: number[][] = [];
-    
+
     // 分块处理完整块
     let i = 0;
     for (; i < bytes.length - 7; i += 8) {
@@ -273,7 +274,7 @@ export const desencode = (data: CryptoJS.WordArray, key: CryptoJS.WordArray): Cr
         //console.log("encryptedBlocks3:",X, Y);
         [Y, X] = DES_FP(Y, X);
         //console.log("encryptedBlocks4:",X, Y);
-        
+
         return [Y, X];
     });
 
@@ -310,26 +311,26 @@ const DES_IP = (X: number, Y: number): [number, number] => {
     let T = ((X >>> 4) ^ Y) & 0x0F0F0F0F;
     Y = (Y ^ T) >>> 0;
     X = (X ^ (T << 4)) >>> 0;
-    
+
     T = ((X >>> 16) ^ Y) & 0x0000FFFF;
     Y = (Y ^ T) >>> 0;
     X = (X ^ (T << 16)) >>> 0;
-    
+
     T = ((Y >>> 2) ^ X) & 0x33333333;
     X = (X ^ T) >>> 0;
     Y = (Y ^ (T << 2)) >>> 0;
-    
+
     T = ((Y >>> 8) ^ X) & 0x00FF00FF;
     X = (X ^ T) >>> 0;
     Y = (Y ^ (T << 8)) >>> 0;
-    
+
     // 循环移位使用无符号操作
     Y = ((Y << 1) | (Y >>> 31)) & 0xFFFFFFFF;
     T = (X ^ Y) & 0xAAAAAAAA;
     Y = (Y ^ T) >>> 0;
     X = (X ^ T) >>> 0;
     X = ((X << 1) | (X >>> 31)) & 0xFFFFFFFF;
-    
+
     return [X >>> 0, Y >>> 0];  // 确保无符号
 };
 
@@ -339,25 +340,25 @@ const DES_FP = (X: number, Y: number): [number, number] => {
     let T = (X ^ Y) & 0xAAAAAAAA;
     X = (X ^ T) >>> 0;
     Y = (Y ^ T) >>> 0;
-    
+
     Y = ((Y << 31) | (Y >>> 1)) & 0xFFFFFFFF;
-    
+
     T = ((Y >>> 8) ^ X) & 0x00FF00FF;
     X = (X ^ T) >>> 0;
     Y = (Y ^ (T << 8)) >>> 0;
-    
+
     T = ((Y >>> 2) ^ X) & 0x33333333;
     X = (X ^ T) >>> 0;
     Y = (Y ^ (T << 2)) >>> 0;
-    
+
     T = ((X >>> 16) ^ Y) & 0x0000FFFF;
     Y = (Y ^ T) >>> 0;
     X = (X ^ (T << 16)) >>> 0;
-    
+
     T = ((X >>> 4) ^ Y) & 0x0F0F0F0F;
     Y = (Y ^ T) >>> 0;
     X = (X ^ (T << 4)) >>> 0;
-    
+
     return [X >>> 0, Y >>> 0];  // 最终强制无符号
 };
 
@@ -365,20 +366,20 @@ const DES_ROUND = (X: number, Y: number, sk1: number, sk2: number): [number, num
     // 确保所有中间结果无符号
     let T = (sk1 ^ X) >>> 0;
     Y = (Y ^ (
-        SB8[(T & 0x3F)] ^ 
+        SB8[(T & 0x3F)] ^
         SB6[((T >>> 8) & 0x3F)] ^  // 使用无符号右移
-        SB4[((T >>> 16) & 0x3F)] ^ 
+        SB4[((T >>> 16) & 0x3F)] ^
         SB2[((T >>> 24) & 0x3F)]
     )) >>> 0;
-    
+
     T = (sk2 ^ ((X << 28) | (X >>> 4))) >>> 0;  // 循环移位修正
     Y = (Y ^ (
-        SB7[(T & 0x3F)] ^ 
-        SB5[((T >>> 8) & 0x3F)] ^ 
-        SB3[((T >>> 16) & 0x3F)] ^ 
+        SB7[(T & 0x3F)] ^
+        SB5[((T >>> 8) & 0x3F)] ^
+        SB3[((T >>> 16) & 0x3F)] ^
         SB1[((T >>> 24) & 0x3F)]
     )) >>> 0;
-    
+
     return [X, Y];  // 输出强制无符号
 };
 
@@ -553,7 +554,7 @@ const SB8: number[] = [
 // 修正子密钥生成函数
 const generateSubkeys = (key: CryptoJS.WordArray): number[] => {
     const keyBytes = wordArrayToBytes(key);
-    
+
     // 确保32位无符号整型
     let X = ((keyBytes[0] << 24) | (keyBytes[1] << 16) | (keyBytes[2] << 8) | keyBytes[3]) >>> 0;
     let Y = ((keyBytes[4] << 24) | (keyBytes[5] << 16) | (keyBytes[6] << 8) | keyBytes[7]) >>> 0;
@@ -562,10 +563,10 @@ const generateSubkeys = (key: CryptoJS.WordArray): number[] => {
 
     // PC1置换（添加调试日志）
     let T = ((Y >>> 4) ^ X) & 0x0F0F0F0F;
-    X ^= T; 
+    X ^= T;
     Y ^= (T << 4);
     T = ((Y) ^ X) & 0x10101010;
-    X ^= T; 
+    X ^= T;
     Y ^= (T);
     //console.log('PC1后 X:', X.toString(16), 'Y:', Y.toString(16));
 
@@ -974,3 +975,39 @@ export const DecodeBase64Node = (bufferStr: string): string=> {
     const parsed = CryptoJS.enc.Base64.parse(bufferStr)
     return parsed.toString(CryptoJS.enc.Utf8);
 }
+
+/**
+ * 递归解码对象中的所有URL编码字符串
+ * @param data 需要解码的数据
+ * @returns 解码后的数据
+ */
+export const DecodeURLRecursive = (data: any): any => {
+    if (data === null || data === undefined) {
+        return data;
+    }
+
+    if (typeof data === "string") {
+        try {
+            return decodeURIComponent(data);
+        } catch (e) {
+            console.log(LogColors.yellow(`Failed to decode URL: ${data}, error: ${(e as Error).message}`));
+            return data; // 解码失败时返回原始字符串
+        }
+    }
+
+    if (Array.isArray(data)) {
+        return data.map((item) => DecodeURLRecursive(item));
+    }
+
+    if (typeof data === "object") {
+        const decodedObj: any = {};
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                decodedObj[key] = DecodeURLRecursive(data[key]);
+            }
+        }
+        return decodedObj;
+    }
+
+    return data;
+};
