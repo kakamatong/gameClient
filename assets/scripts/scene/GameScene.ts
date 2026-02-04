@@ -4,8 +4,8 @@ import { GameView } from '../games/game10001/view/game/GameView';
 import { SoundManager } from '../frameworks/SoundManager';
 const { ccclass } = _decorator;
 
-@ccclass('GameScreen')
-export class GameScreen extends Component {
+@ccclass('GameScene')
+export class GameScene extends Component {
 
     start() {
         this.initView()
