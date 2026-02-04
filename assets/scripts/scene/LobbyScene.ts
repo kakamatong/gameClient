@@ -7,8 +7,8 @@ import { LoginView } from '../view/login/LoginView';
 import { SoundManager } from '../frameworks/SoundManager';
 const { ccclass } = _decorator;
 
-@ccclass('LobbyScreen')
-export class LobbyScreen extends Component {
+@ccclass('LobbyScene')
+export class LobbyScene extends Component {
     start() {
 
         resources.load('appConfig/appConfig',(err,data:JsonAsset)=>{
@@ -24,7 +24,7 @@ export class LobbyScreen extends Component {
             }
         })
         this.initView();
-        log('LobbyScreen');
+        log('LobbyScene');
     }
 
     initView(){
