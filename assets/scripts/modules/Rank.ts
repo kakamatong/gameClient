@@ -4,9 +4,10 @@
  * @category 网络请求模块
  */
 
-import { LogColors } from '../frameworks/Framework';
-import { SprotoCallActivityFunc } from '../../types/protocol/lobby/c2s';
-import { BaseModule } from '../frameworks/base/BaseModule';
+import { LogColors } from "../frameworks/Framework";
+import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
+import { BaseModule } from "../frameworks/base/BaseModule";
+import { MAIN_GAME_ID } from "../datacenter/InterfaceConfig";
 
 /**
  * @class Rank
@@ -19,17 +20,21 @@ export class Rank extends BaseModule {
     }
 
     /** 回调函数 */
-    private _callBack:((b:boolean, data:any)=>void) | null = null;
+    private _callBack: ((b: boolean, data: any) => void) | null = null;
 
     /**
      * @description 请求排行榜数据
      * @param callBack 回调函数
      */
-    req(callBack?:(b:boolean,data:any)=>void) {
+    req(callBack?: (b: boolean, data: any) => void) {
         if (callBack) {
             this._callBack = callBack;
         }
-        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'gameRank', funcName : 'getRankList', args:JSON.stringify({})} , this.resp.bind(this))
+        this.reqLobby(
+            SprotoCallActivityFunc,
+            { moduleName: "gameRank", funcName: "getRankList", args: JSON.stringify({ gameid: MAIN_GAME_ID }) },
+            this.resp.bind(this)
+        );
     }
 
     /**
@@ -37,16 +42,16 @@ export class Rank extends BaseModule {
      * @param result 服务器返回的排行榜数据
      */
     resp(result: SprotoCallActivityFunc.Response) {
-        if(result && result.code == 1){
+        if (result && result.code == 1) {
             const res = JSON.parse(result.result);
-            if(res.error){
+            if (res.error) {
                 console.log(LogColors.red(res.error));
-                this._callBack && this._callBack(false, res)
-            }else{
-                this._callBack && this._callBack(true, res)
+                this._callBack && this._callBack(false, res);
+            } else {
+                this._callBack && this._callBack(true, res);
             }
-        }else{
-            this._callBack && this._callBack(false, null)
+        } else {
+            this._callBack && this._callBack(false, null);
         }
     }
 }
