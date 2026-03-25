@@ -4,25 +4,24 @@ import { REWORD_VIDEOAD_CODE } from "../../config/Config";
 import { FW_EVENT_NAMES } from "../../config/Config";
 
 export class MiniGameUtils {
-
-    private _userInfoBtn: any|null = null;
+    private _userInfoBtn: any | null = null;
 
     private _canvas: HTMLCanvasElement | null = null;
 
     /**
      * 视频广告list
      */
-    private _rewardedVideoAdList: Record<string,any> = {};
+    private _rewardedVideoAdList: Record<string, any> = {};
 
     /**
      * 插屏广告list
      */
-    private _interstitialAdList: Record<string,any> = {};
+    private _interstitialAdList: Record<string, any> = {};
 
     /**
      * 视频广告回调函数
      */
-    private _rewardedVideoAdCallBack: ((code:number)=>void) | null = null;
+    private _rewardedVideoAdCallBack: ((code: number) => void) | null = null;
 
     /**
      * @property {HTMLCanvasElement} _canvas - 画布
@@ -35,7 +34,7 @@ export class MiniGameUtils {
      * @static
      */
     private static _instance: MiniGameUtils;
-    
+
     /**
      * @method instance
      * @description 获取MiniGameUtils的单例实例
@@ -49,120 +48,127 @@ export class MiniGameUtils {
         return this._instance;
     }
 
-    constructor() { 
-        this.init()
+    constructor() {
+        this.init();
     }
 
-    init(){
+    init() {
         if (this.isWeChatGame()) {
-            wx && wx.onShow((res:any) => { 
-                console.log('App Show', res)
-                DispatchEvent(FW_EVENT_NAMES.ON_SHOW,res)
-            })
+            wx &&
+                wx.onShow((res: any) => {
+                    console.log("App Show", res);
+                    DispatchEvent(FW_EVENT_NAMES.ON_SHOW, res);
+                });
 
-            const key = 'adunit-21e58350c401d5b6'
-            this.createRewardedVideoAd(key)
+            const key = "adunit-21e58350c401d5b6";
+            this.createRewardedVideoAd(key);
         }
     }
 
-    isThirdPlatform():boolean { 
-        return this.isWeChatGame()
+    isThirdPlatform(): boolean {
+        return this.isWeChatGame();
     }
 
-    isWeChatGame():boolean { 
+    isWeChatGame(): boolean {
         return sys.platform === sys.Platform.WECHAT_GAME;
     }
 
     request(url: string, method: string, headers: any, body: any): Promise<any> {
         if (this.isWeChatGame()) {
-            return new Promise((resolve, reject) => { 
-                wx && wx.request({
-                    url: url,
-                    method: method,
-                    header: headers,
-                    data: JSON.stringify(body),
-                    success: (res:any) => { 
-                        resolve(res.data);
-                    },
-                    fail: (res:any) => { 
-                        reject(res);
-                    }
-                })
+            return new Promise((resolve, reject) => {
+                wx &&
+                    wx.request({
+                        url: url,
+                        method: method,
+                        header: headers,
+                        data: JSON.stringify(body),
+                        success: (res: any) => {
+                            resolve(res.data);
+                        },
+                        fail: (res: any) => {
+                            reject(res);
+                        },
+                    });
             });
         }
-    
-        return new Promise((resolve, reject) => { 
+
+        return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: headers,
                 body: JSON.stringify(body),
-            }).then(response => { 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            }).then(data => {
-                resolve(data);
             })
-            .catch(error => {
-                reject(error);
-            });
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    resolve(data);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
         });
     }
 
-    login(data?:any, callBack?:(success:boolean, data?:any)=>void){
+    login(data?: any, callBack?: (success: boolean, data?: any) => void) {
         if (this.isWeChatGame()) {
-            wx && wx.login({
-                timeout: 5000,
-                success: (data:any) => { 
-                    callBack && callBack(true,data.code)
-                },
+            wx &&
+                wx.login({
+                    timeout: 5000,
+                    success: (data: any) => {
+                        callBack && callBack(true, data.code);
+                    },
 
-                fail: (errMsg:string, errno:number) => {
-                    callBack && callBack(false,{errMsg:errMsg, errno:errno})
-                }
-            })
+                    fail: (errMsg: string, errno: number) => {
+                        callBack && callBack(false, { errMsg: errMsg, errno: errno });
+                    },
+                });
         }
     }
 
-    requirePrivacyAuthorize(callBack1:(success:boolean)=>void, callBack2:(resolve:Function)=>void){
+    requirePrivacyAuthorize(callBack1: (success: boolean) => void, callBack2: (resolve: Function) => void) {
         if (this.isWeChatGame()) {
-            wx && wx.onNeedPrivacyAuthorization((resolve:any, eventInfo:any)=>{
-                console.log('触发本次事件的接口是：' + eventInfo.referrer)
-                callBack2 && callBack2(resolve)
-            })
+            wx &&
+                wx.onNeedPrivacyAuthorization((resolve: any, eventInfo: any) => {
+                    console.log("触发本次事件的接口是：" + eventInfo.referrer);
+                    callBack2 && callBack2(resolve);
+                });
 
-            wx && wx.requirePrivacyAuthorize({
-                success:()=>{
-                    callBack1 && callBack1(true)
-                },
-                fail:()=>{
-                    callBack1 && callBack1(false)
-                },
-            })
+            wx &&
+                wx.requirePrivacyAuthorize({
+                    success: () => {
+                        callBack1 && callBack1(true);
+                    },
+                    fail: () => {
+                        callBack1 && callBack1(false);
+                    },
+                });
         }
     }
 
-    openPrivacyContract(data?:any){
+    openPrivacyContract(data?: any) {
         if (this.isWeChatGame()) {
-            wx && wx.openPrivacyContract({
-                success: (res:any) => { 
-                    console.log('隐私协议成功打开')
-                },
-                fail: (res:any) => { 
-                    console.log('隐私协议打开失败')
-                }
-            })
+            wx &&
+                wx.openPrivacyContract({
+                    success: (res: any) => {
+                        console.log("隐私协议成功打开");
+                    },
+                    fail: (res: any) => {
+                        console.log("隐私协议打开失败");
+                    },
+                });
         }
     }
 
-getSystemInfoSync(){
+    getSystemInfoSync() {
         if (this.isWeChatGame()) {
-            return wx && wx.getSystemInfoSync()
-        }else{
-            return {screenWidth: 0, screenHeight: 0}
+            return wx && wx.getSystemInfoSync();
+        } else {
+            return { screenWidth: 0, screenHeight: 0 };
         }
-        
     }
 
     /**
@@ -187,8 +193,8 @@ getSystemInfoSync(){
                     top: 0,
                     bottom: window.innerHeight || 0,
                     width: window.innerWidth || 0,
-                    height: window.innerHeight || 0
-                }
+                    height: window.innerHeight || 0,
+                },
             };
         }
     }
@@ -199,194 +205,199 @@ getSystemInfoSync(){
      */
     getSafeAreaTopHeight(): number {
         const windowInfo = this.getWindowInfo();
-        
+
         if (windowInfo.safeArea) {
             // 计算顶部安全区域高度 = safeArea.top
             return windowInfo.safeArea.top || 0;
         }
-        
+
         return 0;
     }
 
-    createUserInfoButton(data:any){
+    createUserInfoButton(data: any) {
         if (this.isWeChatGame()) {
             if (!this._userInfoBtn) {
-                console.log("创建按钮")
-                this._userInfoBtn = wx && wx.createUserInfoButton({
-                    type: 'image',
-                    image: '',
-                    style: {
-                        left: data.left,
-                        top: data.top,
-                        width: data.width,
-                        height: data.height,
-                        backgroundColor: '',
-                        color: '',
-                        textAlign: 'center',
-                        fontSize: 16,
-                        borderRadius: 4
-                    }
-                })
+                console.log("创建按钮");
+                this._userInfoBtn =
+                    wx &&
+                    wx.createUserInfoButton({
+                        type: "image",
+                        image: "",
+                        style: {
+                            left: data.left,
+                            top: data.top,
+                            width: data.width,
+                            height: data.height,
+                            backgroundColor: "",
+                            color: "",
+                            textAlign: "center",
+                            fontSize: 16,
+                            borderRadius: 4,
+                        },
+                    });
 
-                this._userInfoBtn.onTap((res:any) => { 
-                    console.log('用户点击了按钮')
+                this._userInfoBtn.onTap((res: any) => {
+                    console.log("用户点击了按钮");
                     if (res.userInfo) {
-                        data.callBack && data.callBack(res.userInfo)
-                    }else{
-                        data.callBack && data.callBack(null)
+                        data.callBack && data.callBack(res.userInfo);
+                    } else {
+                        data.callBack && data.callBack(null);
                     }
-                    
-                })
-                this._userInfoBtn.show()
+                });
+                this._userInfoBtn.show();
             }
         }
     }
 
-    destroyUserInfoButton(){
+    destroyUserInfoButton() {
         if (this._userInfoBtn) {
-            this._userInfoBtn.destroy()
-            this._userInfoBtn = null
+            this._userInfoBtn.destroy();
+            this._userInfoBtn = null;
         }
     }
 
-    shareAppMessage(data:{title:string, imageUrl:string, query:string}):void{
+    shareAppMessage(data: { title: string; imageUrl: string; query: string }): void {
         if (this.isWeChatGame()) {
-            wx && wx.shareAppMessage({
-                title: data.title,
-                imageUrl: data.imageUrl,
-                query: data.query
-            })
+            wx &&
+                wx.shareAppMessage({
+                    title: data.title,
+                    imageUrl: data.imageUrl,
+                    query: data.query,
+                });
         }
     }
 
-    getLaunchOptionsSync():any{
+    getLaunchOptionsSync(): any {
         if (this.isWeChatGame()) {
-            return wx && wx.getLaunchOptionsSync()
-        }else{
-            return {}
+            return wx && wx.getLaunchOptionsSync();
+        } else {
+            return {};
         }
     }
 
-    getCanvas(): HTMLCanvasElement | null{
+    getCanvas(): HTMLCanvasElement | null {
         if (this.isWeChatGame()) {
             if (!this._canvas) {
-                this._canvas = wx && wx.createCanvas()
+                this._canvas = wx && wx.createCanvas();
             }
-        }else{
+        } else {
             if (!this._canvas) {
-                this._canvas = document.createElement('canvas')
+                this._canvas = document.createElement("canvas");
             }
         }
 
-        return this._canvas
+        return this._canvas;
     }
 
-    getCanvasContext(): CanvasRenderingContext2D | null{
+    getCanvasContext(): CanvasRenderingContext2D | null {
         if (!this._canvasContext) {
-            const canvas = this.getCanvas()
-            this._canvasContext = (canvas && canvas.getContext('2d'))
+            const canvas = this.getCanvas();
+            this._canvasContext = canvas && canvas.getContext("2d");
         }
 
-        return this._canvasContext
+        return this._canvasContext;
     }
 
-    createImage(): HTMLImageElement{ 
+    createImage(): HTMLImageElement {
         if (this.isWeChatGame()) {
-            return wx && wx.createImage()
-        }else{
-            return new Image()
+            return wx && wx.createImage();
+        } else {
+            return new Image();
         }
     }
 
-    async loadImage(url:string): Promise<HTMLImageElement>{ 
-        return new Promise((resolve, reject) => { 
+    async loadImage(url: string): Promise<HTMLImageElement> {
+        return new Promise((resolve, reject) => {
             const image = this.createImage();
-            image.crossOrigin = 'anonymous';
-            image.onload = () => { 
+            image.crossOrigin = "anonymous";
+            image.onload = () => {
                 resolve(image);
             };
-            image.onerror = (error) => { 
+            image.onerror = (error) => {
                 reject(error);
             };
             image.src = url;
-
         });
     }
 
-    async makeCanvasImage(options:{filename:string, format?:'png' | 'jpeg' | 'webp', quality?:number}): Promise<string>{ 
-        return new Promise((resolve, reject) => { 
+    async makeCanvasImage(options: { filename: string; format?: "png" | "jpeg" | "webp"; quality?: number }): Promise<string> {
+        return new Promise((resolve, reject) => {
             if (this.isWeChatGame()) {
                 (this._canvas as any).toTempFilePath({
-                    success: (res:any) => {
+                    success: (res: any) => {
                         resolve(res.tempFilePath);
-                    }
-                })
-            }else{
-                this._canvas?.toBlob((blob) => {
-                    if (!blob) {
-                        reject(new Error('Canvas 转换 Blob 失败'));
-                        return;
-                    }
-
-                    try {
-                        // 创建对象 URL
-                        const objectURL = URL.createObjectURL(blob);
-                        
-                        // 创建下载链接
-                        const link = document.createElement('a');
-                        link.href = objectURL;
-                        link.download = `${options.filename}.${options.format ?? 'jpeg'}`;
-                        link.style.display = 'none';
-                        
-                        // 添加到文档并触发下载
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        
-                        // 返回对象 URL（可以当作临时本地地址使用）
-                        resolve(objectURL);
-                    } catch (error) {
-                        reject(error);
-                    }
                     },
-                    `image/${options.format ?? 'jpeg'}`,
+                });
+            } else {
+                this._canvas?.toBlob(
+                    (blob) => {
+                        if (!blob) {
+                            reject(new Error("Canvas 转换 Blob 失败"));
+                            return;
+                        }
+
+                        try {
+                            // 创建对象 URL
+                            const objectURL = URL.createObjectURL(blob);
+
+                            // 创建下载链接
+                            const link = document.createElement("a");
+                            link.href = objectURL;
+                            link.download = `${options.filename}.${options.format ?? "jpeg"}`;
+                            link.style.display = "none";
+
+                            // 添加到文档并触发下载
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+
+                            // 返回对象 URL（可以当作临时本地地址使用）
+                            resolve(objectURL);
+                        } catch (error) {
+                            reject(error);
+                        }
+                    },
+                    `image/${options.format ?? "jpeg"}`,
                     options.quality ?? 1
                 );
                 /////
             }
-        })
-     }
+        });
+    }
 
-     /**
+    /**
      * 创建插屏广告
-     * @param key 
-     * @returns 
+     * @param key
+     * @returns
      */
-     createInterstitialAd(key:string):any{ 
-        if (this.isWeChatGame()) { 
-            return (wx && wx.createInterstitialAd({
-                adUnitId: key
-            }))
+    createInterstitialAd(key: string): any {
+        if (this.isWeChatGame()) {
+            return (
+                wx &&
+                wx.createInterstitialAd({
+                    adUnitId: key,
+                })
+            );
         }
-     }
+    }
 
-     /**
+    /**
      * 显示插屏广告
-     * @param key 
+     * @param key
      */
-     showInterstitialAd(key:string){
-        if(this.isWeChatGame()){
+    showInterstitialAd(key: string) {
+        if (this.isWeChatGame()) {
             if (this._interstitialAdList[key]) {
-                this._interstitialAdList[key].show().catch((error:any) => { 
+                this._interstitialAdList[key].show().catch((error: any) => {
                     // 失败重试
-                    console.error("插屏广告显示失败", error)
-                })
-            }else{
-                this._interstitialAdList[key] = this.createInterstitialAd(key)
-                this._interstitialAdList[key].show().catch((error:any) => { 
+                    console.error("插屏广告显示失败", error);
+                });
+            } else {
+                this._interstitialAdList[key] = this.createInterstitialAd(key);
+                this._interstitialAdList[key].show().catch((error: any) => {
                     // 失败重试
-                    console.error("插屏广告显示失败", error)
-                })
+                    console.error("插屏广告显示失败", error);
+                });
             }
         }
     }
@@ -396,53 +407,57 @@ getSystemInfoSync(){
      * @param key
      * @returns
      */
-    createRewardedVideoAd(key:string):void{
+    createRewardedVideoAd(key: string): void {
         if (this.isWeChatGame()) {
-            const ad = wx && wx.createRewardedVideoAd({
-                adUnitId: key
-            })
+            const ad =
+                wx &&
+                wx.createRewardedVideoAd({
+                    adUnitId: key,
+                });
 
             ad.onLoad(() => {
-                console.log('激励视频 广告加载成功')
-            })
+                console.log("激励视频 广告加载成功");
+            });
 
-            ad.onError(err => {
-                console.log(err)
-                console.log('激励视频 广告加载错误')
-                this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL)
+            ad.onError((err) => {
+                console.error("激励视频 广告加载错误", err);
+                this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
                 this._rewardedVideoAdCallBack = null;
-            })
+            });
 
-            ad.onClose(res => {
+            ad.onClose((res) => {
                 if (this._rewardedVideoAdCallBack) {
-                    if (res && res.isEnded || res === undefined) {
-                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.SUCCESS)
-                    }
-                    else {
-                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.NOT_OVER)
+                    if ((res && res.isEnded) || res === undefined) {
+                        console.log("激励视频 广告播放结束");
+                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.SUCCESS);
+                    } else {
+                        console.log("激励视频 广告播放未结束");
+                        this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.NOT_OVER);
                     }
                     this._rewardedVideoAdCallBack = null;
                 }
-            })
+            });
 
-            this._rewardedVideoAdList[key] = ad
+            this._rewardedVideoAdList[key] = ad;
         }
     }
 
     /**
-     * 显示插屏广告
-     * @param key 
+     * 显示激励视频广告
+     * @param key
      */
-     showRewardedVideoAd(key:string, callBack:(code:number)=>void){
-        if(this.isWeChatGame()){
-            const ad = this._rewardedVideoAdList[key]
-            if(!ad){
-                callBack(REWORD_VIDEOAD_CODE.NOT_KEY)
-                return
+    showRewardedVideoAd(key: string, callBack: (code: number) => void) {
+        if (this.isWeChatGame()) {
+            const ad = this._rewardedVideoAdList[key];
+            if (!ad) {
+                callBack(REWORD_VIDEOAD_CODE.NOT_KEY);
+                return;
             }
-            this.playRewardedVideoAd(ad, callBack)
-        }else{
-            callBack(REWORD_VIDEOAD_CODE.SUCCESS)
+            this.playRewardedVideoAd(ad, callBack);
+        } else {
+            setTimeout(() => {
+                callBack(REWORD_VIDEOAD_CODE.SUCCESS);
+            }, 3000);
         }
     }
 
@@ -451,11 +466,12 @@ getSystemInfoSync(){
      * @param ad
      * @param callBack
      */
-    playRewardedVideoAd(ad:any, callBack:(code:number)=>void){
+    playRewardedVideoAd(ad: any, callBack: (code: number) => void) {
         this._rewardedVideoAdCallBack = callBack;
-        ad.show().catch((error:any) => {
-            this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
-            this._rewardedVideoAdCallBack = null;
-        })
+        ad.show().catch((error: any) => {
+            console.error("激励视频 广告show错误", error);
+            // this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
+            // this._rewardedVideoAdCallBack = null;
+        });
     }
 }
