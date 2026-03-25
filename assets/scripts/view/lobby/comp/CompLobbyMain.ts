@@ -28,6 +28,7 @@ import { AdReward } from "../../../modules/AdReward";
 import { AwardView } from "../../award/AwardView";
 import { UserRiches } from "../../../modules/UserRiches";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
+import { TruncateString } from "../../../frameworks/utils/Utils";
 /**
  * 大厅主界面组件
  * 负责大厅界面的初始化、用户登录管理、用户信息展示、功能入口处理等
@@ -205,7 +206,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * 更新用户信息
      */
     updateUserInfo(): void {
-        this.UI_COMP_TOP.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? "";
+        this.UI_COMP_TOP.UI_TXT_NICKNAME.text = TruncateString(DataCenter.instance.userData?.nickname ?? "", 8);
         this.UI_COMP_TOP.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         //(this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl
         (this.UI_COMP_TOP.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl;

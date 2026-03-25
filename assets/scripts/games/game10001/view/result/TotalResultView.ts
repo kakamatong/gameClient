@@ -3,6 +3,7 @@ import * as fgui from "fairygui-cc";
 import { GameData } from '../../data/Gamedata';
 import { GameSocketManager } from '../../../../frameworks/GameSocketManager';
 import { ChangeScene, ViewClass } from '../../../../frameworks/Framework';
+import { TruncateString } from '../../../../frameworks/utils/Utils';
 
 @ViewClass()
 export class TotalResultView extends FGUITotalResultView { 
@@ -21,7 +22,7 @@ export class TotalResultView extends FGUITotalResultView {
         const dataItem = this._data?.totalResultInfo[index]
         if (dataItem) {
             const player = GameData.instance.getPlayerByUserid(dataItem.userid);
-            item.asCom.getChild("UI_TXT_NICKNAME").text = player?.nickname ?? ''
+            item.asCom.getChild("UI_TXT_NICKNAME").text = TruncateString(player?.nickname ?? '', 8)
             item.asCom.getChild("UI_TXT_ID").text = `${dataItem.userid}`
             item.asCom.getChild("UI_TXT_WIN").text = `${dataItem.win}`
             item.asCom.getChild("UI_TXT_LOSE").text = `${dataItem.lose}`

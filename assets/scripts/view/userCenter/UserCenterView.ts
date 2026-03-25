@@ -13,6 +13,7 @@ import { PopMessageView } from "../common/PopMessageView";
 import { RevokeAccount } from "../../modules/RevokeAccount";
 import { LobbySocketManager } from "../../frameworks/LobbySocketManager";
 import { SoundManager } from "../../frameworks/SoundManager";
+import { TruncateString } from "../../frameworks/utils/Utils";
 
 /**
  * @class UserCenterView
@@ -86,7 +87,7 @@ export class UserCenterView extends FGUIUserCenterView {
      */
     updateUserInfo(): void {
         // 显示用户昵称和ID
-        this.UI_TXT_NICKNAME.text = DataCenter.instance.userData?.nickname ?? "";
+        this.UI_TXT_NICKNAME.text = TruncateString(DataCenter.instance.userData?.nickname ?? "", 8);
         this.UI_TXT_USERID.text = `${DataCenter.instance.userid ?? 0}`;
         // 显示用户头像
         (this.UI_COMP_HEAD as FGUICompHead).UI_LOADER_HEAD.url = DataCenter.instance.headurl;

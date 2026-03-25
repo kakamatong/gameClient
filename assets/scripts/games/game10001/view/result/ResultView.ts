@@ -4,6 +4,7 @@ import { GameData } from '../../data/Gamedata';
 import { SoundManager } from '../../../../frameworks/SoundManager';
 import { MiniGameUtils } from 'db://assets/scripts/frameworks/utils/sdk/MiniGameUtils';
 import { ViewClass } from 'db://assets/scripts/frameworks/Framework';
+import { TruncateString } from '../../../../frameworks/utils/Utils';
 
 @ViewClass()
 export class ResultView extends FGUIResultView { 
@@ -35,7 +36,7 @@ export class ResultView extends FGUIResultView {
 
     itemRenderer(index:number, item:fgui.GObject){
         const itemData = this._scoreData[index];
-        item.asCom.getChild('UI_TXT_NICKNAME').text = itemData.nickname;
+        item.asCom.getChild('UI_TXT_NICKNAME').text = TruncateString(itemData.nickname, 8);
         item.asCom.getChild('UI_TXT_ID').text = `${itemData.userid}`;
         if (GameData.instance.isPrivateRoom) {
             const msg = `胜${itemData.cpData.win ?? 0}`

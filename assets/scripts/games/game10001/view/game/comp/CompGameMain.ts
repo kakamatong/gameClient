@@ -26,6 +26,7 @@ import { SprotoClientReady, SprotoGameReady, SprotoLeaveRoom, SprotoOutHand, Spr
 import { SprotoGameRoomReady } from '../../../../../../types/protocol/lobby/s2c';
 import { TALK_LIST } from '../../talk/TalkConfig';
 import { TalkView } from '../../talk/TalkView';
+import { TruncateString } from '../../../../../frameworks/utils/Utils';
 
 /**
  * 游戏主体组件
@@ -690,7 +691,7 @@ export class CompGameMain extends FGUICompGameMain {
         const nicknanme = playerNode.UI_TXT_NICKNAME
         const id = playerNode.UI_TXT_ID
         const head = playerNode.UI_COMP_HEAD as FGUICompHead
-        nicknanme.text = player.nickname ?? "";
+        nicknanme.text = TruncateString(player.nickname ?? "", 8);
         id.text = player.userid.toString();
         const headurl = GameData.instance.getHeadurl(localseat)
         head.UI_LOADER_HEAD.url = headurl
@@ -1004,7 +1005,7 @@ export class CompGameMain extends FGUICompGameMain {
             canvasContext.font = "bold 36px Arial";
             canvasContext.fillStyle = '#993300';
             canvasContext.textAlign = "left"
-            canvasContext.fillText(DataCenter.instance.userData?.nickname || "", width * 0.1 + headWidth + 10, height * 0.8 + 10);
+            canvasContext.fillText(TruncateString(DataCenter.instance.userData?.nickname || "", 8), width * 0.1 + headWidth + 10, height * 0.8 + 10);
             canvasContext.fillText(`${DataCenter.instance.userid || 0}`, width * 0.1 + headWidth + 10, height * 0.8 + 50);
             MiniGameUtils.instance.makeCanvasImage({ filename: "invite" }).then((res: string) => {
                 console.log(res)

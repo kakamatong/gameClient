@@ -1,6 +1,12 @@
 import FGUICompDisband from "../../../../../fgui/game10001/FGUICompDisband";
 import * as fgui from "fairygui-cc";
-import { VOTE_STATUS, VoteDisbandResultData, VoteDisbandStartData, VoteDisbandUpdateData, VoteInfo } from "../../../data/InterfaceGameConfig";
+import {
+    VOTE_STATUS,
+    VoteDisbandResultData,
+    VoteDisbandStartData,
+    VoteDisbandUpdateData,
+    VoteInfo,
+} from "../../../data/InterfaceGameConfig";
 import { GameData } from "../../../data/Gamedata";
 import { GameSocketManager } from "../../../../../frameworks/GameSocketManager";
 import { DataCenter } from "../../../../../datacenter/Datacenter";
@@ -11,6 +17,7 @@ import { Color } from "cc";
 import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { SprotoVoteDisbandResponse } from "db://assets/types/protocol/game10001/c2s";
+import { TruncateString } from "../../../../../frameworks/utils/Utils";
 
 /**
  * 解散房间投票组件
@@ -23,20 +30,20 @@ export class CompDisband extends FGUICompDisband {
     private _currentVotes: VoteInfo[] = []; // 当前投票状态
     private _timeLeft: number = 0; // 剩余时间
     private _initiator = 0; // 投票发起者用户ID
-    private _scheid:(()=>void) | null = null; // 倒计时调度回调函数
+    private _scheid: (() => void) | null = null; // 倒计时调度回调函数
 
     /**
      * 组件初始化
      * 设置监听器、绑定列表渲染器、初始化定时器回调
      */
-    onConstruct(){
+    onConstruct() {
         // 一定要执行父类的接口
         super.onConstruct();
-        this._scheid = this.onTimer.bind(this)
+        this._scheid = this.onTimer.bind(this);
         GameSocketManager.instance.addServerListen(SprotoVoteDisbandStart, this.onVoteDisbandStart.bind(this));
         GameSocketManager.instance.addServerListen(SprotoVoteDisbandUpdate, this.onVoteDisbandUpdate.bind(this));
         GameSocketManager.instance.addServerListen(SprotoVoteDisbandResult, this.onVoteDisbandResult.bind(this));
-        this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this)
+        this.UI_LV_VOTE_INFO.itemRenderer = this.listItemRenderer.bind(this);
     }
 
     /**
@@ -59,14 +66,14 @@ export class CompDisband extends FGUICompDisband {
         const data = this._currentVotes[index];
         const player = GameData.instance.getPlayerByUserid(data.userid);
         if (player) {
-            item.asCom.getChild('UI_TXT_NICKNAME').text = player.nickname || `玩家${player.userid}`;
-            const headNode = item.asCom.getChild('UI_COMP_HEAD');
-            const head = headNode.asCom.getChild('UI_LOADER_HEAD') as fgui.GLoader;
+            item.asCom.getChild("UI_TXT_NICKNAME").text = TruncateString(player.nickname ?? "", 8) || `玩家${player.userid}`;
+            const headNode = item.asCom.getChild("UI_COMP_HEAD");
+            const head = headNode.asCom.getChild("UI_LOADER_HEAD") as fgui.GLoader;
             head.url = GameData.instance.getHeadurl(GameData.instance.local2seat(player.svrSeat));
             if (this._initiator == data.userid) {
-                item.asCom.getController('ctrl_result').selectedIndex = 3;
-            }else{
-                item.asCom.getController('ctrl_result').selectedIndex = this.getVoteStatusText(data.vote);
+                item.asCom.getController("ctrl_result").selectedIndex = 3;
+            } else {
+                item.asCom.getController("ctrl_result").selectedIndex = this.getVoteStatusText(data.vote);
             }
         }
     }
@@ -92,19 +99,19 @@ export class CompDisband extends FGUICompDisband {
      * 处理服务器发送的投票解散开始消息
      */
     onVoteDisbandStart(data: VoteDisbandStartData) {
-        console.log('收到投票解散开始消息:', data);
-        this.visible = true
-        this.ctrl_btn.selectedIndex = 0 // 初始化
+        console.log("收到投票解散开始消息:", data);
+        this.visible = true;
+        this.ctrl_btn.selectedIndex = 0; // 初始化
         this._voteId = data.voteId;
         this._voteData = data;
         this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
-        
+
         // 更新界面显示
         this.updateCountdown(this._timeLeft);
-        
+
         // 启动倒计时
         this.startCountdown();
-        
+
         // 显示投票发起信息
         if (data.initiator) {
             this._initiator = data.initiator;
@@ -115,18 +122,18 @@ export class CompDisband extends FGUICompDisband {
      * 处理投票状态更新
      */
     private onVoteDisbandUpdate(data: VoteDisbandUpdateData) {
-        console.log('投票状态更新:', data);
-        
-        const votes = data.votes 
-        this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);;
+        console.log("投票状态更新:", data);
+
+        const votes = data.votes;
+        this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
         this.updateVoteList(votes);
         this.updateCountdown(this._timeLeft);
 
         // 自己已经同意，隐藏按钮
         for (let index = 0; index < votes.length; index++) {
             const element = votes[index];
-            if(element.userid === DataCenter.instance.userid && element.vote == VOTE_STATUS.AGREE){
-                this.ctrl_btn.selectedIndex = 1
+            if (element.userid === DataCenter.instance.userid && element.vote == VOTE_STATUS.AGREE) {
+                this.ctrl_btn.selectedIndex = 1;
             }
         }
     }
@@ -139,39 +146,39 @@ export class CompDisband extends FGUICompDisband {
 
         // 更新当前投票数据
         this._currentVotes = votes;
-        this.UI_LV_VOTE_INFO.numItems = this._currentVotes.length
+        this.UI_LV_VOTE_INFO.numItems = this._currentVotes.length;
     }
 
     /**
      * 处理投票解散结果
      */
     private onVoteDisbandResult(data: VoteDisbandResultData) {
-        console.log('投票解散结果:', data);
-        
+        console.log("投票解散结果:", data);
+
         // 停止倒计时
         this.stopCountdown();
-        
+
         // 更新最终投票状态
         this.updateVoteList(data.votes);
-        
+
         if (data.result === 1) {
             // 投票通过，房间将被解散
-            console.log('投票通过，房间即将解散');
+            console.log("投票通过，房间即将解散");
             PopMessageView.showView({
-                content: '投票通过，房间已解散',
-                type:ENUM_POP_MESSAGE_TYPE.NUM1SURE
+                content: "投票通过，房间已解散",
+                type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
             });
         } else {
             // 投票未通过
-            console.log('投票未通过，继续游戏');
+            console.log("投票未通过，继续游戏");
             TipsView.showView({
-                content: '投票未通过，请继续游戏',
+                content: "投票未通过，请继续游戏",
             });
         }
 
-        this.scheduleOnce(()=>{
-            this.visible = false
-        },1)
+        this.scheduleOnce(() => {
+            this.visible = false;
+        }, 1);
     }
 
     /**
@@ -197,14 +204,14 @@ export class CompDisband extends FGUICompDisband {
     private sendVoteResponse(vote: number) {
         const data = {
             voteId: this._voteId,
-            agree: vote
+            agree: vote,
         };
 
         GameSocketManager.instance.sendToServer(SprotoVoteDisbandResponse, data, (response: any) => {
             if (response && response.code === 1) {
-                console.log('投票发送成功');
+                console.log("投票发送成功");
             } else {
-                console.error('投票发送失败:', response?.msg || '未知错误');
+                console.error("投票发送失败:", response?.msg || "未知错误");
             }
         });
     }
@@ -214,15 +221,15 @@ export class CompDisband extends FGUICompDisband {
      */
     private startCountdown() {
         this.stopCountdown(); // 先停止之前的倒计时
-        
-        this._scheid && this.schedule(this._scheid, 1)
+
+        this._scheid && this.schedule(this._scheid, 1);
     }
 
     /**
      * 倒计时定时器回调
      * 每秒执行一次，更新剩余时间并检查是否超时
      */
-    onTimer(){
+    onTimer() {
         this._timeLeft--;
         this.updateCountdown(this._timeLeft);
 
@@ -235,7 +242,7 @@ export class CompDisband extends FGUICompDisband {
      * 停止倒计时
      */
     private stopCountdown() {
-        this._scheid && this.unschedule(this._scheid)
+        this._scheid && this.unschedule(this._scheid);
     }
 
     /**
@@ -244,7 +251,7 @@ export class CompDisband extends FGUICompDisband {
     private updateCountdown(timeLeft: number) {
         if (this.UI_TXT_LEFT_TIME) {
             this.UI_TXT_LEFT_TIME.text = `${timeLeft}`;
-            
+
             // 时间不足时变红色提醒
             if (timeLeft <= 10) {
                 this.UI_TXT_LEFT_TIME.color = new Color(255, 0, 0, 255);
