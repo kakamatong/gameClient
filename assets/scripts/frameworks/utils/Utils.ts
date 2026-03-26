@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 import { MiniGameUtils } from "./sdk/MiniGameUtils";
-import { sp } from "cc";
+import { sp, log, debug, error, warn } from "cc";
 import { LogColors } from "../Framework";
 import * as fgui from "fairygui-cc";
 // DH参数配置
@@ -1015,3 +1015,18 @@ export const SpinePlay = (
     skeleton.setAnimation(0, animation, loop);
     complete && skeleton.setCompleteListener(complete);
 };
+
+export class Logger {
+    static log(...args: any[]): void {
+        log(...args);
+    }
+    static debug(...args: any[]): void {
+        debug(...args);
+    }
+    static error(...args: any[]): void {
+        error(...args);
+    }
+    static warn(...args: any[]): void {
+        warn(...args);
+    }
+}
