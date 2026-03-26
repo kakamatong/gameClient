@@ -30,6 +30,7 @@ import { AwardView } from "../../award/AwardView";
 import { UserRiches } from "../../../modules/UserRiches";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
 import { TruncateString } from "../../../frameworks/utils/Utils";
+import { SoundManager } from "../../../frameworks/SoundManager";
 /**
  * 大厅主界面组件
  * 负责大厅界面的初始化、用户登录管理、用户信息展示、功能入口处理等
@@ -400,6 +401,8 @@ export class CompLobbyMain extends FGUICompLobbyMain {
         LoadingView.showView({ content: "载入中...", time: 12 });
         MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code: number) => {
             LoadingView.hideView();
+            // 广告关闭时恢复播放背景音乐
+            SoundManager.instance.adCloseMusicPlay();
             Logger.log(code);
             if (code == REWORD_VIDEOAD_CODE.SUCCESS) {
                 AdReward.instance.reqReceiveAdReward((success: boolean, data: any) => {

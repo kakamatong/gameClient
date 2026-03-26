@@ -15,11 +15,11 @@ export enum LOCAL_KEY {
     /**
      * @property {string} BG_MUSIC_OPEN - 背景音乐开启状态存储键
      */
-    BG_MUSIC_OPEN = 'bgMusicOpen',
+    BG_MUSIC_OPEN = "bgMusicOpen",
     /**
      * @property {string} EFFECT_SOUND_OPEN - 音效开启状态存储键
      */
-    EFFECT_SOUND_OPEN = 'effectSoundOpen',
+    EFFECT_SOUND_OPEN = "effectSoundOpen",
 }
 
 /**
@@ -32,7 +32,7 @@ export class SoundManager {
      * @property {string} _name - 管理器名称
      * @protected
      */
-    protected _name: string = 'SoundManager'
+    protected _name: string = "SoundManager";
 
     /**
      * @property {SoundManager} _instance - SoundManager单例实例
@@ -66,12 +66,12 @@ export class SoundManager {
      * @method init
      * @description 初始化声音设置，根据本地存储设置音效开关状态
      */
-    init(){
-        const open = this.getSoundEffectOpen()
+    init() {
+        const open = this.getSoundEffectOpen();
         if (open) {
-            this.openSoundEffect()
-        }else{
-            this.closeSoundEffect()
+            this.openSoundEffect();
+        } else {
+            this.closeSoundEffect();
         }
     }
 
@@ -82,20 +82,20 @@ export class SoundManager {
      * @param {(err: any, asset: any) => void} [callBack] - 加载完成回调函数
      */
     load(url: string, callBack?: (err: any, asset: any) => void) {
-        assetManager.loadBundle('sound', (err, bundle) => { 
+        assetManager.loadBundle("sound", (err, bundle) => {
             if (err) {
-                log('loadBundle error', err);
+                log("loadBundle error", err);
                 return;
             }
 
-            bundle.load<AudioClip>(url, (err, asset: AudioClip) => { 
+            bundle.load<AudioClip>(url, (err, asset: AudioClip) => {
                 if (err) {
-                    log('loadBundle error', err);
+                    log("loadBundle error", err);
                     return;
                 }
-                
+
                 callBack && callBack(err, asset);
-            })
+            });
         });
     }
 
@@ -104,14 +104,14 @@ export class SoundManager {
      * @description 播放音效
      * @param {string} url - 音效资源路径
      */
-    playSoundEffect(url:string){
-        const callBack = (err:any, asset:AudioClip)=>{
+    playSoundEffect(url: string) {
+        const callBack = (err: any, asset: AudioClip) => {
             if (err) {
-                return
+                return;
             }
-            fgui.GRoot.inst.playOneShotSound(asset)
-        }
-        this.load(url, callBack)
+            fgui.GRoot.inst.playOneShotSound(asset);
+        };
+        this.load(url, callBack);
     }
 
     /**
@@ -119,28 +119,27 @@ export class SoundManager {
      * @description 播放音效
      * @param {string} url - 音效资源路径
      */
-    playSoundEffect2(obj:fgui.GObject, url:string){
-        const callBack = (err:any, asset:AudioClip)=>{
+    playSoundEffect2(obj: fgui.GObject, url: string) {
+        const callBack = (err: any, asset: AudioClip) => {
             if (err) {
-                return
+                return;
             }
             const node = obj.node;
-            const as = node.getComponent(AudioSourceComponent)
+            const as = node.getComponent(AudioSourceComponent);
             if (!as) {
-                const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
+                const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent);
                 newAs.clip = asset;
                 newAs.loop = false;
                 newAs.volume = fgui.GRoot.inst.volumeScale;
                 newAs.play();
-            }else{
+            } else {
                 as.clip = asset;
                 as.loop = false;
                 as.volume = fgui.GRoot.inst.volumeScale;
                 as.play();
             }
-
-        }
-        this.load(url, callBack)
+        };
+        this.load(url, callBack);
     }
 
     /**
@@ -148,72 +147,85 @@ export class SoundManager {
      * @description 播放背景音乐
      * @param {string} url - 背景音乐资源路径
      */
-    playSoundMusic(url:string){
-        const callBack = (err:any, asset:AudioClip)=>{
+    playSoundMusic(url: string) {
+        const callBack = (err: any, asset: AudioClip) => {
             if (err) {
-                return
+                return;
             }
             let bgMusicOpen = 1;
-            const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-            if (localKey === null || localKey === undefined || localKey === '') {
-                bgMusicOpen = 1
-            }else{
-                bgMusicOpen = parseInt(localKey)
+            const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN);
+            if (localKey === null || localKey === undefined || localKey === "") {
+                bgMusicOpen = 1;
+            } else {
+                bgMusicOpen = parseInt(localKey);
             }
-            const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
+            const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent);
             if (!as) {
-                const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent)
+                const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent);
                 newAs.clip = asset;
                 newAs.loop = true;
                 newAs.volume = bgMusicOpen;
                 newAs.play();
-            }else{
+            } else {
                 as.clip = asset;
                 as.loop = true;
                 as.volume = bgMusicOpen;
                 as.play();
             }
-            
+        };
+        this.load(url, callBack);
+    }
+
+    /**
+     * @method adCloseMusicPlay
+     * @description 广告关闭时恢复播放背景音乐
+     */
+    adCloseMusicPlay() {
+        const isOpen = this.getSoundMusicOpen();
+        if (isOpen) {
+            const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent);
+            if (!newAs) return;
+            newAs.pause();
+            newAs.play();
         }
-        this.load(url, callBack)
     }
 
     /**
      * @method openSoundEffect
      * @description 开启音效
      */
-    openSoundEffect():void{ 
-        fgui.GRoot.inst.volumeScale = 1
-        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, "1")
+    openSoundEffect(): void {
+        fgui.GRoot.inst.volumeScale = 1;
+        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, "1");
     }
 
     /**
      * @method closeSoundEffect
      * @description 关闭音效
      */
-    closeSoundEffect():void{ 
-        fgui.GRoot.inst.volumeScale = 0
-        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, "0")
+    closeSoundEffect(): void {
+        fgui.GRoot.inst.volumeScale = 0;
+        sys.localStorage.setItem(LOCAL_KEY.EFFECT_SOUND_OPEN, "0");
     }
 
     /**
      * @method openSoundMusic
      * @description 开启背景音乐
      */
-    openSoundMusic():void{ 
-        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
-        as && (as.volume = 1)
-        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, "1")
+    openSoundMusic(): void {
+        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent);
+        as && (as.volume = 1);
+        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, "1");
     }
 
     /**
      * @method closeSoundMusic
      * @description 关闭背景音乐
      */
-    closeSoundMusic():void{ 
-        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent)
-        as && (as.volume = 0)
-        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, "0")
+    closeSoundMusic(): void {
+        const as = fgui.GRoot.inst.node.getComponent(AudioSourceComponent);
+        as && (as.volume = 0);
+        sys.localStorage.setItem(LOCAL_KEY.BG_MUSIC_OPEN, "0");
     }
 
     /**
@@ -221,16 +233,16 @@ export class SoundManager {
      * @description 切换音效开关状态
      * @returns {number} 切换后的音效开关状态，1为开启，0为关闭
      */
-    changeSoundEffect():number{ 
+    changeSoundEffect(): number {
         const open = this.getSoundEffectOpen();
-        const newOpen = open === 1 ? 0 : 1
+        const newOpen = open === 1 ? 0 : 1;
         if (newOpen) {
-            this.openSoundEffect()
-        }else{
-            this.closeSoundEffect()
+            this.openSoundEffect();
+        } else {
+            this.closeSoundEffect();
         }
 
-        return newOpen
+        return newOpen;
     }
 
     /**
@@ -238,17 +250,17 @@ export class SoundManager {
      * @description 切换背景音乐开关状态
      * @returns {number} 切换后的背景音乐开关状态，1为开启，0为关闭
      */
-    changeSoundMusic():number{ 
+    changeSoundMusic(): number {
         const open = this.getSoundMusicOpen();
-        const newOpen = open === 1 ? 0 : 1
+        const newOpen = open === 1 ? 0 : 1;
 
         if (newOpen) {
-            this.openSoundMusic()
-        }else{
-            this.closeSoundMusic()
+            this.openSoundMusic();
+        } else {
+            this.closeSoundMusic();
         }
 
-        return newOpen
+        return newOpen;
     }
 
     /**
@@ -256,15 +268,15 @@ export class SoundManager {
      * @description 获取音效开关状态
      * @returns {number} 音效开关状态，1为开启，0为关闭
      */
-    getSoundEffectOpen():number{ 
+    getSoundEffectOpen(): number {
         let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.EFFECT_SOUND_OPEN);
+        if (localKey === null || localKey === undefined || localKey === "") {
+            open = 1;
+        } else {
+            open = parseInt(localKey);
         }
-        return open
+        return open;
     }
 
     /**
@@ -272,14 +284,14 @@ export class SoundManager {
      * @description 获取背景音乐开关状态
      * @returns {number} 背景音乐开关状态，1为开启，0为关闭
      */
-    getSoundMusicOpen():number{ 
+    getSoundMusicOpen(): number {
         let open = 1;
-        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN)
-        if (localKey === null || localKey === undefined || localKey === '') {
-            open = 1
-        }else{
-            open = parseInt(localKey)
+        const localKey = sys.localStorage.getItem(LOCAL_KEY.BG_MUSIC_OPEN);
+        if (localKey === null || localKey === undefined || localKey === "") {
+            open = 1;
+        } else {
+            open = parseInt(localKey);
         }
-        return open
+        return open;
     }
 }

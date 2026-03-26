@@ -12,6 +12,7 @@ import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
 import { LoadingView } from "../../common/LoadingView";
 import { Logger } from "@utils/Utils";
+import { SoundManager } from "../../../frameworks/SoundManager";
 
 /**
  * 签到视图
@@ -143,6 +144,8 @@ export class CompSignInMain extends FGUICompSignInMain {
         LoadingView.showView({ content: "载入中...", time: 12 });
         MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code: number) => {
             LoadingView.hideView();
+            // 广告关闭时恢复播放背景音乐
+            SoundManager.instance.adCloseMusicPlay();
             Logger.log(code);
             if (code == REWORD_VIDEOAD_CODE.SUCCESS) {
                 successCallBack();
