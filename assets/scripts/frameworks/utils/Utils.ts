@@ -877,7 +877,7 @@ export class JWTUtils {
 export const HttpPost = (url: string, body: any, payload: object, secretKey: string, expireTime: number = 3600): Promise<any> => {
     // 生成JWT令牌
     const token = JWTUtils.generateToken(payload, secretKey, expireTime);
-    console.log("JWT token:", token);
+    Logger.log("JWT token:", token);
 
     const defaultHeaders = {
         "Content-Type": "application/json",
@@ -920,7 +920,7 @@ export const DecodeURLRecursive = (data: any): any => {
         try {
             return decodeURIComponent(data);
         } catch (e) {
-            console.log(LogColors.yellow(`Failed to decode URL: ${data}, error: ${(e as Error).message}`));
+            Logger.log(LogColors.yellow(`Failed to decode URL: ${data}, error: ${(e as Error).message}`));
             return data; // 解码失败时返回原始字符串
         }
     }

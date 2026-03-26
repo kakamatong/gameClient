@@ -7,6 +7,7 @@
 import FGUILoadingView from "../../fgui/common/FGUILoadingView";
 import * as fgui from "fairygui-cc";
 import { ViewClass } from "../../frameworks/Framework";
+import { Logger } from "../../frameworks/utils/Utils";
 
 /**
  * @class LoadingView
@@ -33,7 +34,7 @@ export class LoadingView extends FGUILoadingView {
      * @description 定时结束处理
      */
     onTimeEnd(): void {
-        console.log("LoadingView onTimeEnd");
+        Logger.log("LoadingView onTimeEnd");
         LoadingView.hideView();
     }
 }

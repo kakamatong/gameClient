@@ -1,0 +1,5 @@
+{
+    "imports": {
+        "@utils/": "./assets/scripts/frameworks/utils/"
+    }
+}

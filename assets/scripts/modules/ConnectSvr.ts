@@ -9,7 +9,7 @@ import { ENUM_CHANNEL_ID, LOGIN_TYPE } from "../datacenter/InterfaceConfig";
 import { LobbySocketManager } from "../frameworks/LobbySocketManager";
 import { ACCOUNT_INFO, Login } from "../frameworks/login/Login";
 import { MiniGameUtils } from "../frameworks/utils/sdk/MiniGameUtils";
-import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
+import { HttpPostWithDefaultJWT, Logger } from "../frameworks/utils/Utils";
 import { Auth } from "./Auth";
 import { AuthList } from "./AuthList";
 import { sys } from 'cc';
@@ -44,7 +44,7 @@ export class ConnectSvr extends BaseModule {
         }
         const url = DataCenter.instance.appConfig.webUrl + "/api/game/thirdlogin";
         HttpPostWithDefaultJWT(url, req, payload).then(data => {
-            console.log(data)
+            Logger.log(data)
             if (data.code == 200) {
                 callBack && callBack(true, data);
             }else{
@@ -74,7 +74,7 @@ export class ConnectSvr extends BaseModule {
         if (MiniGameUtils.instance.isThirdPlatform() && (!DataCenter.instance.allreadyThirdLogin || needLogin)) {
             const func = (success:boolean,data:any) => { 
                 if (success) {
-                    console.log('third login success ', data)
+                    Logger.log('third login success ', data)
                     // todo:weblogin
                     DataCenter.instance.allreadyThirdLogin = true;
                     const func2 = (b:boolean, data:any)=>{
@@ -196,7 +196,7 @@ export class ConnectSvr extends BaseModule {
     checkAuthList(callBack?:(success:boolean)=>void){
         AuthList.instance.req((success:boolean, data?:any)=>{
             if(success){
-                console.log('authList:', data);
+                Logger.log('authList:', data);
             }
             callBack?.(success);
         })
@@ -209,7 +209,7 @@ export class ConnectSvr extends BaseModule {
      */
     login(data:any, callBack?:(b:boolean)=>void){
         const func = (b:boolean, data?:any)=>{
-            console.log('login callback:', b);
+            Logger.log('login callback:', b);
             if(b){
                 data.password = ''
                 DataCenter.instance.setLoginInfo(data);

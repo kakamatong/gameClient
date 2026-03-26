@@ -9,6 +9,7 @@ import { LogColors } from "../frameworks/Framework";
 import { DataCenter } from "../datacenter/Datacenter";
 import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/InterfaceConfig";
 import { BaseModule } from "../frameworks/base/BaseModule";
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class AdReward
@@ -46,7 +47,7 @@ export class AdReward extends BaseModule {
         if (result && result.code == 1) {
             const res = JSON.parse(result.result);
             if (res.error) {
-                console.log(LogColors.red(res.error));
+                Logger.log(LogColors.red(res.error));
                 this._getAdInfoCallBack && this._getAdInfoCallBack(false, res);
             } else {
                 DataCenter.instance.adRewardInfo = res;
@@ -78,7 +79,7 @@ export class AdReward extends BaseModule {
         if (result && result.code == 1) {
             const res = JSON.parse(result.result);
             if (res.error) {
-                console.log(LogColors.red(res.error));
+                Logger.log(LogColors.red(res.error));
                 this._receiveAdRewardCallBack && this._receiveAdRewardCallBack(false, res);
             } else {
                 const rewardRes = res as AD_RECEIVE_REWARD_RESULT;

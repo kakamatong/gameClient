@@ -9,6 +9,7 @@ import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { AuthGame } from "./AuthGame";
 import { BaseModule } from "../frameworks/base/BaseModule";
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class ConnectGameSvr
@@ -31,7 +32,7 @@ export class ConnectGameSvr extends BaseModule {
         DataCenter.instance.roomid = data.roomid;
         DataCenter.instance.gameAddr = data.addr;
         DataCenter.instance.shortRoomid = data.shortRoomid ?? 0 // 匹配房
-        console.log(LogColors.green('游戏房间准备完成'));
+        Logger.log(LogColors.green('游戏房间准备完成'));
         const authCallBack = (success:boolean) => { 
             callBack && callBack(success);
         }

@@ -9,6 +9,7 @@ import * as fgui from "fairygui-cc";
 import { Mail } from '../../modules/Mail';
 import { LoadingView } from '../common/LoadingView';
 import { ViewClass } from '../../frameworks/Framework';
+import { Logger } from '../../frameworks/utils/Utils';
 
 /**
  * @class MailView
@@ -63,7 +64,7 @@ export class MailView extends FGUIMatchView {
         Mail.instance.detail(itemData.id, (success, data)=>{
             LoadingView.hideView();
             if (success) {
-                console.log('detail success', data);
+                Logger.log('detail success', data);
                 this.UI_COMP_CONTENT.visible = true
                 this.UI_COMP_CONTENT.title.text = data.content
             }
@@ -71,7 +72,7 @@ export class MailView extends FGUIMatchView {
 
         Mail.instance.read(itemData.id, (success, data)=>{
             if (success) {
-                console.log('read success', data);
+                Logger.log('read success', data);
                 if (!itemData.status){
                     itemData.status = 1;
                     item.asCom.getController('ctrl_read').selectedIndex = itemData.status;

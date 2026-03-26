@@ -4,7 +4,8 @@ import { HorizontalTextAlignment } from "cc";
 import { GameData } from "../../../data/Gamedata";
 import { PlayerInfoView } from "../../playerInfo/PlayerInfoView";
 import { CompTalk } from "./CompTalk";
-import { ViewClass } from "db://assets/scripts/frameworks/Framework";
+import { Logger } from "@utils/Utils";
+import { ViewClass } from "../../../../../frameworks/Framework";
 
 @ViewClass()
 export class CompPlayerHead extends FGUICompPlayerHead {
@@ -47,7 +48,7 @@ export class CompPlayerHead extends FGUICompPlayerHead {
     }
 
     onHeadClick(): void {
-        console.log("onHeadClick:", this.ctrl_pos.selectedIndex);
+        Logger.log("onHeadClick:", this.ctrl_pos.selectedIndex);
         const player = GameData.instance.getPlayerByLocal(this.localSeat);
         if (player) {
             PlayerInfoView.showView({ userid: player.userid, cp: player.cp });

@@ -6,6 +6,7 @@
 
 import { AssetManager, assetManager } from "cc";
 import * as fgui from "fairygui-cc";
+import { Logger } from "./utils/Utils";
 
 /**
  * @class PackageManager
@@ -86,7 +87,7 @@ export class PackageManager {
                 const bundle = assetManager.getBundle(bundleName) as AssetManager.Bundle;
                 fgui.UIPackage.loadPackage(bundle, packageName, (error, pkg)=>{
                     if(error){
-                        console.log('loadPackage error', error);
+                        Logger.log('loadPackage error', error);
                         return reject(error);
                     }
 
@@ -101,7 +102,7 @@ export class PackageManager {
             }
             assetManager.loadBundle(bundleName, (error, bundle) => {
                 if(error){
-                    console.log('loadBundle error', error);
+                    Logger.log('loadBundle error', error);
                     return reject(error);
                 }
                 this._packages[bundleName] = this._packages[bundleName] || [];

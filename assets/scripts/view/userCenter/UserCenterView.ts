@@ -13,6 +13,7 @@ import { PopMessageView } from "../common/PopMessageView";
 import { RevokeAccount } from "../../modules/RevokeAccount";
 import { LobbySocketManager } from "../../frameworks/LobbySocketManager";
 import { SoundManager } from "../../frameworks/SoundManager";
+import { Logger } from "../../frameworks/utils/Utils";
 import { TruncateString } from "../../frameworks/utils/Utils";
 
 /**
@@ -149,7 +150,7 @@ export class UserCenterView extends FGUIUserCenterView {
                 } else {
                     // 用户拒绝授权或获取失败
                     TipsView.showView({ content: "用户信息获取失败" });
-                    console.log("用户信息获取失败/拒绝授权");
+                    Logger.log("用户信息获取失败/拒绝授权");
                 }
             },
         });

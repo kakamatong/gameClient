@@ -8,9 +8,7 @@ import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { HttpPostWithDefaultJWT, DecodeURLRecursive } from "../frameworks/utils/Utils";
 import { BaseModule } from "../frameworks/base/BaseModule";
-
-// 添加console.log别名，方便使用日志颜色
-const log = console.log;
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class AuthList
@@ -30,12 +28,12 @@ export class AuthList extends BaseModule {
     req(callBack: (success: boolean, data?: any) => void) {
         const url = DataCenter.instance.appConfig.authList;
         if (!url) {
-            log(LogColors.red("authList URL not configured!"));
+            Logger.log(LogColors.red("authList URL not configured!"));
             callBack(false);
             return;
         }
 
-        log(LogColors.blue(`Sending POST request to: ${url}`));
+        Logger.log(LogColors.blue(`Sending POST request to: ${url}`));
 
         const payload = {
             "userid": 0,
@@ -44,7 +42,7 @@ export class AuthList extends BaseModule {
 
         HttpPostWithDefaultJWT(url, {}, payload)
             .then((data) => {
-                log(LogColors.green("authList request successful!"));
+                Logger.log(LogColors.green("authList request successful!"));
                 // 将认证列表数据存储到DataCenter
                 if (data && data.data) {
                     // 对data.data进行URL解码
@@ -59,7 +57,7 @@ export class AuthList extends BaseModule {
                 callBack(true, data);
             })
             .catch((error) => {
-                log(LogColors.red(`authList request failed: ${error.message}`));
+                Logger.log(LogColors.red(`authList request failed: ${error.message}`));
                 callBack(false, error);
             });
     }

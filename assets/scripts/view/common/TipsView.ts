@@ -9,6 +9,7 @@ import FGUITipsView from "../../fgui/common/FGUITipsView";
 import FGUICompTips from "../../fgui/common/FGUICompTips";
 import * as fgui from "fairygui-cc";
 import { ViewClass } from '../../frameworks/Framework';
+import { Logger } from '../../frameworks/utils/Utils';
 
 /**
  * @class TipsView
@@ -32,7 +33,7 @@ export class TipsView extends FGUITipsView {
         const bundle = assetManager.getBundle("fgui") as AssetManager.Bundle;
         fgui.UIPackage.loadPackage(bundle, this.packageName, (error, pkg)=> {
 
-            if(error){console.log("loadPackage error", error);return;}
+            if(error){Logger.log("loadPackage error", error);return;}
             const view = fgui.UIPackage.createObject("common", "TipsView") as TipsView;
 
             view.makeFullScreen();

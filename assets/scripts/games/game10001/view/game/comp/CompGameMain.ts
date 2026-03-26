@@ -65,7 +65,7 @@ import {
 import { SprotoGameRoomReady } from "../../../../../../types/protocol/lobby/s2c";
 import { TALK_LIST } from "../../talk/TalkConfig";
 import { TalkView } from "../../talk/TalkView";
-import { TruncateString } from "../../../../../frameworks/utils/Utils";
+import { TruncateString, Logger } from "../../../../../frameworks/utils/Utils";
 
 /**
  * 游戏主体组件
@@ -167,7 +167,7 @@ export class CompGameMain extends FGUICompGameMain {
      * @param data 转发消息数据
      */
     onSvrForwardMessage(data: SprotoForwardMessage.Request) {
-        console.log(data);
+        Logger.log(data);
         this.forwardMessage(data);
     }
 
@@ -541,13 +541,13 @@ export class CompGameMain extends FGUICompGameMain {
      * @param data 房间数据
      */
     onSvrGameRoomReady(data: any): void {
-        console.log("gameRoomReady", data);
+        Logger.log("gameRoomReady", data);
         MatchView.hideView();
         DataCenter.instance.gameid = data.gameid;
         DataCenter.instance.roomid = data.roomid;
         DataCenter.instance.gameAddr = data.addr;
         DataCenter.instance.shortRoomid = 0; // 匹配房
-        console.log(LogColors.green("游戏房间准备完成"));
+        Logger.log(LogColors.green("游戏房间准备完成"));
         this.connectToGame(data.addr, data.gameid, data.roomid);
     }
 
@@ -558,9 +558,9 @@ export class CompGameMain extends FGUICompGameMain {
     onRoomEnd(data: any): void {
         const msg = "房间销毁";
         if (data.code == ROOM_END_FLAG.GAME_END) {
-            console.log("游戏结束 " + msg);
+            Logger.log("游戏结束 " + msg);
         } else if (data.code == ROOM_END_FLAG.OUT_TIME_WAITING) {
-            console.log("等待超时 " + msg);
+            Logger.log("等待超时 " + msg);
             PopMessageView.showView({
                 content: "等待超时",
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
@@ -572,7 +572,7 @@ export class CompGameMain extends FGUICompGameMain {
                 },
             });
         } else if (data.code == ROOM_END_FLAG.OUT_TIME_PLAYING) {
-            console.log("游戏超时 " + msg);
+            Logger.log("游戏超时 " + msg);
             PopMessageView.showView({
                 content: "游戏超时",
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
@@ -599,7 +599,7 @@ export class CompGameMain extends FGUICompGameMain {
                 },
             });
         } else if (data.code == ROOM_END_FLAG.VOTE_DISBAND) {
-            console.log("投票解散 " + msg);
+            Logger.log("投票解散 " + msg);
             //this.onBtnClose()
         }
     }
@@ -609,7 +609,7 @@ export class CompGameMain extends FGUICompGameMain {
      * @param data 玩家信息数据
      */
     onSvrPlayerInfos(data: any): void {
-        console.log("onSvrPlayerInfos", data);
+        Logger.log("onSvrPlayerInfos", data);
         // 先存到playerInfos里面
         // enter 的时候在从里面取出来，放到playerlist里面去
         GameData.instance.playerInfos = data.infos;
@@ -778,7 +778,7 @@ export class CompGameMain extends FGUICompGameMain {
      * @param data 房间数据
      */
     onRoomInfo(data: any): void {
-        console.log(data);
+        Logger.log(data);
         GameData.instance.owner = data.owner;
         // 展示好友房信息
         if (data.shortRoomid) {
@@ -854,7 +854,7 @@ export class CompGameMain extends FGUICompGameMain {
         if (GameData.instance.isPrivateRoom) {
             if (!GameData.instance.roomEnd) {
                 if (GameData.instance.gameStart) {
-                    console.log("游戏中无法退出");
+                    Logger.log("游戏中无法退出");
                 } else {
                     GameSocketManager.instance.sendToServer(SprotoLeaveRoom, { flag: 1 });
                 }
@@ -877,7 +877,7 @@ export class CompGameMain extends FGUICompGameMain {
     onBtnReady(): void {
         const func = (res: any) => {
             if (res.code) {
-                console.log(res.msg);
+                Logger.log(res.msg);
                 //this.UI_BTN_READY.visible = false;
                 this.ctrl_btn.selectedIndex = CTRL_BTN_INDEX.NONE;
             }
@@ -923,9 +923,9 @@ export class CompGameMain extends FGUICompGameMain {
 
         GameSocketManager.instance.sendToServer(SprotoVoteDisbandRoom, data, (response: any) => {
             if (response && response.code === 1) {
-                console.log("发起解散投票成功");
+                Logger.log("发起解散投票成功");
             } else {
-                console.error("发起解散投票失败:", response?.msg || "未知错误");
+                Logger.error("发起解散投票失败:", response?.msg || "未知错误");
             }
         });
     }
@@ -1054,7 +1054,7 @@ export class CompGameMain extends FGUICompGameMain {
             MiniGameUtils.instance
                 .makeCanvasImage({ filename: "invite" })
                 .then((res: string) => {
-                    console.log(res);
+                    Logger.log(res);
                     resolve(res);
                 })
                 .catch((err: any) => {
@@ -1076,7 +1076,7 @@ export class CompGameMain extends FGUICompGameMain {
                 });
             })
             .catch((err: any) => {
-                console.log(err);
+                Logger.log(err);
             });
     }
 

@@ -1,14 +1,18 @@
 {
-  /* Base configuration. Do not edit this field. */
-  "extends": "./temp/tsconfig.cocos.json",
+    /* Base configuration. Do not edit this field. */
+    "extends": "./temp/tsconfig.cocos.json",
 
-  /* Add your custom configuration here. */
-  "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM"],
-    "module": "CommonJS",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    /* Add your custom configuration here. */
+    "compilerOptions": {
+        "target": "ES2020",
+        "lib": ["ES2020", "DOM"],
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "paths": {
+            "@utils/": ["./assets/scripts/frameworks/utils/"],
+            "@utils/Utils": ["./assets/scripts/frameworks/utils/Utils.ts"]
+        }
+    }
 }

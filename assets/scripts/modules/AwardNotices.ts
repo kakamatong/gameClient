@@ -7,6 +7,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { SprotoGetAwardNotice,SprotoSetAwardNoticeRead } from '../../types/protocol/lobby/c2s';
 import { BaseModule } from '../frameworks/base/BaseModule';
+import { Logger } from '../frameworks/utils/Utils';
 
 /**
  * @class AwardNotices
@@ -31,7 +32,7 @@ export class AwardNotices extends BaseModule {
      */
     resp(data: SprotoGetAwardNotice.Response) {
         // 这是未通知到的奖励，可以一个一个通知，或者合并通知
-        data && data.list && console.log(data.list)
+        data && data.list && Logger.log(data.list)
     }
 
     /**

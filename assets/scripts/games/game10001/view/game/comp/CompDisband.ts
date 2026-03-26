@@ -17,7 +17,7 @@ import { Color } from "cc";
 import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { SprotoVoteDisbandResponse } from "db://assets/types/protocol/game10001/c2s";
-import { TruncateString } from "../../../../../frameworks/utils/Utils";
+import { TruncateString, Logger } from "../../../../../frameworks/utils/Utils";
 
 /**
  * 解散房间投票组件
@@ -99,7 +99,7 @@ export class CompDisband extends FGUICompDisband {
      * 处理服务器发送的投票解散开始消息
      */
     onVoteDisbandStart(data: VoteDisbandStartData) {
-        console.log("收到投票解散开始消息:", data);
+        Logger.log("收到投票解散开始消息:", data);
         this.visible = true;
         this.ctrl_btn.selectedIndex = 0; // 初始化
         this._voteId = data.voteId;
@@ -122,7 +122,7 @@ export class CompDisband extends FGUICompDisband {
      * 处理投票状态更新
      */
     private onVoteDisbandUpdate(data: VoteDisbandUpdateData) {
-        console.log("投票状态更新:", data);
+        Logger.log("投票状态更新:", data);
 
         const votes = data.votes;
         this._timeLeft = data.timeLeft - Math.ceil(new Date().getTime() / 1000);
@@ -153,7 +153,7 @@ export class CompDisband extends FGUICompDisband {
      * 处理投票解散结果
      */
     private onVoteDisbandResult(data: VoteDisbandResultData) {
-        console.log("投票解散结果:", data);
+        Logger.log("投票解散结果:", data);
 
         // 停止倒计时
         this.stopCountdown();
@@ -163,14 +163,14 @@ export class CompDisband extends FGUICompDisband {
 
         if (data.result === 1) {
             // 投票通过，房间将被解散
-            console.log("投票通过，房间即将解散");
+            Logger.log("投票通过，房间即将解散");
             PopMessageView.showView({
                 content: "投票通过，房间已解散",
                 type: ENUM_POP_MESSAGE_TYPE.NUM1SURE,
             });
         } else {
             // 投票未通过
-            console.log("投票未通过，继续游戏");
+            Logger.log("投票未通过，继续游戏");
             TipsView.showView({
                 content: "投票未通过，请继续游戏",
             });
@@ -209,9 +209,9 @@ export class CompDisband extends FGUICompDisband {
 
         GameSocketManager.instance.sendToServer(SprotoVoteDisbandResponse, data, (response: any) => {
             if (response && response.code === 1) {
-                console.log("投票发送成功");
+                Logger.log("投票发送成功");
             } else {
-                console.error("投票发送失败:", response?.msg || "未知错误");
+                Logger.error("投票发送失败:", response?.msg || "未知错误");
             }
         });
     }

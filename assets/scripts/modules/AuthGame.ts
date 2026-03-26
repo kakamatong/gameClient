@@ -10,6 +10,7 @@ import { LogColors } from '../frameworks/Framework';
 import { GameSocketManager } from '../frameworks/GameSocketManager';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { BaseModule } from '../frameworks/base/BaseModule';
+import { Logger } from '../frameworks/utils/Utils';
 
 /**
  * @class AuthGame
@@ -64,9 +65,9 @@ export class AuthGame extends BaseModule {
     resp(success:boolean){
         if(success){
             DataCenter.instance.addSubid();
-            console.log(LogColors.green("连接游戏服务成功"))
+            Logger.log(LogColors.green("连接游戏服务成功"))
         }else{
-            console.log(LogColors.red("连接游戏服务失败"))
+            Logger.log(LogColors.red("连接游戏服务失败"))
         }
         this._callBack && this._callBack(success);
     }

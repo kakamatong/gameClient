@@ -2,6 +2,7 @@ import { sys } from "cc";
 import { DispatchEvent } from "../../Framework";
 import { REWORD_VIDEOAD_CODE } from "../../config/Config";
 import { FW_EVENT_NAMES } from "../../config/Config";
+import { Logger } from "../Utils";
 
 export class MiniGameUtils {
     private _userInfoBtn: any | null = null;
@@ -56,7 +57,7 @@ export class MiniGameUtils {
         if (this.isWeChatGame()) {
             wx &&
                 wx.onShow((res: any) => {
-                    console.log("App Show", res);
+                    Logger.log("App Show", res);
                     DispatchEvent(FW_EVENT_NAMES.ON_SHOW, res);
                 });
 
@@ -133,7 +134,7 @@ export class MiniGameUtils {
         if (this.isWeChatGame()) {
             wx &&
                 wx.onNeedPrivacyAuthorization((resolve: any, eventInfo: any) => {
-                    console.log("触发本次事件的接口是：" + eventInfo.referrer);
+                    Logger.log("触发本次事件的接口是：" + eventInfo.referrer);
                     callBack2 && callBack2(resolve);
                 });
 
@@ -154,10 +155,10 @@ export class MiniGameUtils {
             wx &&
                 wx.openPrivacyContract({
                     success: (res: any) => {
-                        console.log("隐私协议成功打开");
+                        Logger.log("隐私协议成功打开");
                     },
                     fail: (res: any) => {
-                        console.log("隐私协议打开失败");
+                        Logger.log("隐私协议打开失败");
                     },
                 });
         }
@@ -217,7 +218,7 @@ export class MiniGameUtils {
     createUserInfoButton(data: any) {
         if (this.isWeChatGame()) {
             if (!this._userInfoBtn) {
-                console.log("创建按钮");
+                Logger.log("创建按钮");
                 this._userInfoBtn =
                     wx &&
                     wx.createUserInfoButton({
@@ -237,7 +238,7 @@ export class MiniGameUtils {
                     });
 
                 this._userInfoBtn.onTap((res: any) => {
-                    console.log("用户点击了按钮");
+                    Logger.log("用户点击了按钮");
                     if (res.userInfo) {
                         data.callBack && data.callBack(res.userInfo);
                     } else {
@@ -390,13 +391,13 @@ export class MiniGameUtils {
             if (this._interstitialAdList[key]) {
                 this._interstitialAdList[key].show().catch((error: any) => {
                     // 失败重试
-                    console.error("插屏广告显示失败", error);
+                    Logger.error("插屏广告显示失败", error);
                 });
             } else {
                 this._interstitialAdList[key] = this.createInterstitialAd(key);
                 this._interstitialAdList[key].show().catch((error: any) => {
                     // 失败重试
-                    console.error("插屏广告显示失败", error);
+                    Logger.error("插屏广告显示失败", error);
                 });
             }
         }
@@ -416,11 +417,11 @@ export class MiniGameUtils {
                 });
 
             ad.onLoad(() => {
-                console.log("激励视频 广告加载成功");
+                Logger.log("激励视频 广告加载成功");
             });
 
             ad.onError((err) => {
-                console.error("激励视频 广告加载错误", err);
+                Logger.error("激励视频 广告加载错误", err);
                 this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
                 this._rewardedVideoAdCallBack = null;
             });
@@ -428,10 +429,10 @@ export class MiniGameUtils {
             ad.onClose((res) => {
                 if (this._rewardedVideoAdCallBack) {
                     if ((res && res.isEnded) || res === undefined) {
-                        console.log("激励视频 广告播放结束");
+                        Logger.log("激励视频 广告播放结束");
                         this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.SUCCESS);
                     } else {
-                        console.log("激励视频 广告播放未结束");
+                        Logger.log("激励视频 广告播放未结束");
                         this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.NOT_OVER);
                     }
                     this._rewardedVideoAdCallBack = null;
@@ -469,7 +470,7 @@ export class MiniGameUtils {
     playRewardedVideoAd(ad: any, callBack: (code: number) => void) {
         this._rewardedVideoAdCallBack = callBack;
         ad.show().catch((error: any) => {
-            console.error("激励视频 广告show错误", error);
+            Logger.error("激励视频 广告show错误", error);
             // this._rewardedVideoAdCallBack && this._rewardedVideoAdCallBack(REWORD_VIDEOAD_CODE.FAIL);
             // this._rewardedVideoAdCallBack = null;
         });

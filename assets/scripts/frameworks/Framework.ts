@@ -1,6 +1,7 @@
 import { Director, Scene } from "cc";
 import { PackageManager } from "./PackageManager";
 import { MiniGameUtils } from "./utils/sdk/MiniGameUtils";
+import { Logger } from "./utils/Utils";
 type eventFunc = (...args: any[]) => void;
 
 const events = new Map<string, eventFunc[]>();
@@ -92,7 +93,7 @@ export const PackageLoad = (packages: string[]) => {
         // 保存原方法引用
         const oldFunc = constructor["showView"];
         if (!oldFunc) {
-            console.log("showView not exists");
+            Logger.log("showView not exists");
             return;
         }
         constructor["showView"] = function (params?: any, callBack?: (b: boolean) => void) {
@@ -148,7 +149,7 @@ export const ViewClass = (data?: any) => {
                     // 获取动态安全区域高度
                     const safeAreaTop = MiniGameUtils.instance.getSafeAreaTopHeight();
 
-                    console.log(
+                    Logger.log(
                         `[ViewClass] Before adaptation - ${constructor.name}: height: ${originalHeight}, y: ${originalY}, x: ${
                             this.x
                         }, parent: ${this.parent ? "yes" : "no"}`
@@ -159,11 +160,11 @@ export const ViewClass = (data?: any) => {
                     // 调整y坐标，向下偏移
                     this.y += safeAreaTop;
 
-                    console.log(
+                    Logger.log(
                         `[ViewClass] After adaptation - ${constructor.name}: height: ${this.height}, y: ${this.y}, x: ${this.x} (reduced by ${safeAreaTop}px)`
                     );
                 } else {
-                    console.warn(
+                    Logger.warn(
                         `[ViewClass] Cannot apply curve screen adaptation to ${constructor.name}: height is ${this.height}, y: ${this.y}, x: ${this.x}`
                     );
                 }

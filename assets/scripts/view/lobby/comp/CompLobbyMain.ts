@@ -21,8 +21,9 @@ import { PrivateRoomView } from "../../privateRoom/PrivateRoomView";
 import { UserCenterView } from "../../userCenter/UserCenterView";
 import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
-import { SprotoGameRoomReady } from "db://assets/types/protocol/lobby/s2c";
+import { SprotoGameRoomReady } from "../../../../types/protocol/lobby/s2c";
 import { SignInView } from "../../signIn/SignInView";
+import { Logger } from "../../../frameworks/utils/Utils";
 import { sys } from "cc";
 import { AdReward } from "../../../modules/AdReward";
 import { AwardView } from "../../award/AwardView";
@@ -153,7 +154,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * 登入成功回调
      */
     onLoginSuccess() {
-        console.log("onLoginSuccess");
+        Logger.log("onLoginSuccess");
         const options = MiniGameUtils.instance.getLaunchOptionsSync();
         this.checkPrivateRoomid(options);
         this.autoShowSignIn();
@@ -166,7 +167,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
     reqAdInfo() {
         AdReward.instance.reqGetAdInfo((success: boolean, data: any) => {
             if (!success) {
-                console.log(LogColors.red("获取广告奖励信息失败"));
+                Logger.log(LogColors.red("获取广告奖励信息失败"));
             }
         });
     }
@@ -217,7 +218,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * @param data
      */
     onUserInfo(data: any): void {
-        console.log("userData", data);
+        Logger.log("userData", data);
         this.updateUserInfo();
     }
 
@@ -226,10 +227,10 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * @param data
      */
     onUserStatus(data: any): void {
-        console.log("userStatus", data);
+        Logger.log("userStatus", data);
         if (data.status == ENUM_USER_STATUS.GAMEING) {
             const func2 = () => {
-                console.log(LogColors.green("返回房间"));
+                Logger.log(LogColors.green("返回房间"));
                 ConnectGameSvr.instance.connectGame(data, (b: boolean) => {
                     b && this.changeToGameScene();
                 });
@@ -247,7 +248,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * 更新用户财富
      */
     onUserRiches(data: any): void {
-        console.log("userRiches", data);
+        Logger.log("userRiches", data);
         this.initRichs();
     }
 
@@ -263,7 +264,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
                 if (data && data.gameid && data.roomid) {
                     const func2 = () => {
                         //返回房间
-                        console.log(LogColors.green("返回房间"));
+                        Logger.log(LogColors.green("返回房间"));
                         ConnectGameSvr.instance.connectGame(data, (b: boolean) => {
                             b && this.changeToGameScene();
                         });
@@ -294,7 +295,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
         Mail.instance.list((success: boolean, data?: any) => {
             LoadingView.hideView();
             if (success) {
-                console.log(LogColors.green(data));
+                Logger.log(LogColors.green(data));
                 MailView.showView(data);
             } else {
                 TipsView.showView({ content: `拉取邮件数据失败` });
@@ -337,7 +338,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
      * 游戏服务器准备就绪
      */
     onSvrGameRoomReady(data: any): void {
-        console.log("gameRoomReady", data);
+        Logger.log("gameRoomReady", data);
         ConnectGameSvr.instance.connectGame(data, (success: boolean, data?: any) => {
             if (success) {
                 this.changeToGameScene();
@@ -399,7 +400,7 @@ export class CompLobbyMain extends FGUICompLobbyMain {
         LoadingView.showView({ content: "载入中...", time: 12 });
         MiniGameUtils.instance.showRewardedVideoAd("adunit-21e58350c401d5b6", (code: number) => {
             LoadingView.hideView();
-            console.log(code);
+            Logger.log(code);
             if (code == REWORD_VIDEOAD_CODE.SUCCESS) {
                 AdReward.instance.reqReceiveAdReward((success: boolean, data: any) => {
                     if (!success) {

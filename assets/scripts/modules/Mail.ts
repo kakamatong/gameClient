@@ -4,15 +4,11 @@
  * @category 网络请求模块
  */
 
-import {DataCenter} from '../datacenter/Datacenter';
-import { LogColors } from '../frameworks/Framework';
-import { HttpPostWithDefaultJWT } from '../frameworks/utils/Utils';
-import { BaseModule } from '../frameworks/base/BaseModule';
-
-/**
- * @description 添加console.log别名，方便使用日志颜色
- */
-const log = console.log;
+import { DataCenter } from "../datacenter/Datacenter";
+import { LogColors } from "../frameworks/Framework";
+import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
+import { BaseModule } from "../frameworks/base/BaseModule";
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class Mail
@@ -34,7 +30,7 @@ export class Mail extends BaseModule {
     constructor() {
         super();
         // 私有构造函数，防止实例化
-        this._url = DataCenter.instance.appConfig.webUrl + '/api/mail/'
+        this._url = DataCenter.instance.appConfig.webUrl + "/api/mail/";
     }
 
     /**
@@ -42,14 +38,13 @@ export class Mail extends BaseModule {
      * @description 获取邮件列表
      * @param {(success:boolean, data?:any)=>void} callBack - 回调函数，返回请求结果
      */
-    list(callBack:(success:boolean, data?:any)=>void){
+    list(callBack: (success: boolean, data?: any) => void) {
         const url = this._url + "list";
         const body = {
-            'userid':DataCenter.instance.userid
-        }
+            "userid": DataCenter.instance.userid,
+        };
 
-        this.req(url, body,callBack)
-
+        this.req(url, body, callBack);
     }
 
     /**
@@ -58,14 +53,14 @@ export class Mail extends BaseModule {
      * @param {number} id - 邮件ID
      * @param {(success:boolean, data?:any)=>void} callBack - 回调函数，返回请求结果
      */
-    detail(id:number, callBack:(success:boolean, data?:any)=>void){
+    detail(id: number, callBack: (success: boolean, data?: any) => void) {
         const url = this._url + "detail/" + id;
 
         const body = {
-            'userid':DataCenter.instance.userid,
-        }
+            "userid": DataCenter.instance.userid,
+        };
 
-        this.req(url, body,callBack)
+        this.req(url, body, callBack);
     }
 
     /**
@@ -74,14 +69,14 @@ export class Mail extends BaseModule {
      * @param {number} id - 邮件ID
      * @param {(success:boolean, data?:any)=>void} callBack - 回调函数，返回请求结果
      */
-    read(id:number, callBack:(success:boolean, data?:any)=>void){
+    read(id: number, callBack: (success: boolean, data?: any) => void) {
         const url = this._url + "read/" + id;
 
         const body = {
-            'userid':DataCenter.instance.userid,
-        }
+            "userid": DataCenter.instance.userid,
+        };
 
-        this.req(url, body,callBack)
+        this.req(url, body, callBack);
     }
 
     /**
@@ -90,14 +85,14 @@ export class Mail extends BaseModule {
      * @param {number} id - 邮件ID
      * @param {(success:boolean, data?:any)=>void} callBack - 回调函数，返回请求结果
      */
-    getAwards(id:number, callBack:(success:boolean, data?:any)=>void){
+    getAwards(id: number, callBack: (success: boolean, data?: any) => void) {
         const url = this._url + "getaward/" + id;
         const body = {
-            'userid':DataCenter.instance.userid,
-        }
-        this.req(url, body,callBack)
+            "userid": DataCenter.instance.userid,
+        };
+        this.req(url, body, callBack);
     }
-    
+
     /**
      * @method req
      * @description 发送HTTP请求的通用方法
@@ -105,33 +100,31 @@ export class Mail extends BaseModule {
      * @param {any} [body] - 请求体数据
      * @param {(success:boolean, data?:any)=>void} [callBack] - 回调函数
      */
-    req(url: string, body?:any, callBack?:(success:boolean, data?:any)=>void){
+    req(url: string, body?: any, callBack?: (success: boolean, data?: any) => void) {
         if (!url) {
-            log(LogColors.red('authList URL not configured!'));
+            Logger.log(LogColors.red("authList URL not configured!"));
             callBack && callBack(false);
             return;
         }
 
-        log(LogColors.blue(`Sending POST request to: ${url}`));
+        Logger.log(LogColors.blue(`Sending POST request to: ${url}`));
 
         const payload = {
-            'userid':DataCenter.instance.userid,
-            'channelid':DataCenter.instance.channelID
-        }
-        
-        HttpPostWithDefaultJWT( url, body, payload)
-        .then(data => {
-            log(LogColors.green('mail request successful!'));
-            // 将认证列表数据存储到DataCenter
-            if (data && data.data) {
-                
-            }
-            callBack && callBack(true, data.data);
-        })
-        .catch(error => {
-            log(LogColors.red(`mail request failed: ${error.message}`));
-            callBack && callBack(false, error);
-        });
+            "userid": DataCenter.instance.userid,
+            "channelid": DataCenter.instance.channelID,
+        };
+
+        HttpPostWithDefaultJWT(url, body, payload)
+            .then((data) => {
+                Logger.log(LogColors.green("mail request successful!"));
+                // 将认证列表数据存储到DataCenter
+                if (data && data.data) {
+                }
+                callBack && callBack(true, data.data);
+            })
+            .catch((error) => {
+                Logger.log(LogColors.red(`mail request failed: ${error.message}`));
+                callBack && callBack(false, error);
+            });
     }
-        
 }

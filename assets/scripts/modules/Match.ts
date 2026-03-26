@@ -9,6 +9,7 @@ import { UserStatus } from "./UserStatus";
 import { SprotoMatchJoin, SprotoMatchLeave } from "../../types/protocol/lobby/c2s";
 import { BaseModule } from "../frameworks/base/BaseModule";
 import { MAIN_GAME_ID } from "../datacenter/InterfaceConfig";
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class Match
@@ -43,10 +44,10 @@ export class Match extends BaseModule {
     resp(result: SprotoMatchJoin.Response) {
         UserStatus.instance.req();
         if (result && result.code == 1) {
-            console.log(LogColors.green(result.msg));
+            Logger.log(LogColors.green(result.msg));
             this._callBack && this._callBack(true);
         } else {
-            result && console.log(LogColors.red(result.msg));
+            result && Logger.log(LogColors.red(result.msg));
             this._callBack && this._callBack(false, result);
         }
     }

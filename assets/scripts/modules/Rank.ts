@@ -8,6 +8,7 @@ import { LogColors } from "../frameworks/Framework";
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { BaseModule } from "../frameworks/base/BaseModule";
 import { MAIN_GAME_ID } from "../datacenter/InterfaceConfig";
+import { Logger } from "../frameworks/utils/Utils";
 
 /**
  * @class Rank
@@ -45,7 +46,7 @@ export class Rank extends BaseModule {
         if (result && result.code == 1) {
             const res = JSON.parse(result.result);
             if (res.error) {
-                console.log(LogColors.red(res.error));
+                Logger.log(LogColors.red(res.error));
                 this._callBack && this._callBack(false, res);
             } else {
                 this._callBack && this._callBack(true, res);
