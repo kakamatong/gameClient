@@ -14,7 +14,7 @@ import { UserStatus } from './UserStatus';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { AwardNotices } from './AwardNotices';
 import { BaseModule } from '../frameworks/base/BaseModule';
-import { Logger } from '../frameworks/utils/Utils';
+import { Logger } from "@utils/Utils";
 
 /**
  * @class Auth

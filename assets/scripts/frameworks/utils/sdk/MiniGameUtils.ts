@@ -2,7 +2,7 @@ import { sys } from "cc";
 import { DispatchEvent } from "../../Framework";
 import { REWORD_VIDEOAD_CODE } from "../../config/Config";
 import { FW_EVENT_NAMES } from "../../config/Config";
-import { Logger } from "../Utils";
+import { Logger } from "@utils/Utils";
 
 export class MiniGameUtils {
     private _userInfoBtn: any | null = null;

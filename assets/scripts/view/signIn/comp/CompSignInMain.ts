@@ -11,7 +11,7 @@ import { AwardView } from "../../award/AwardView";
 import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
 import { REWORD_VIDEOAD_CODE } from "../../../frameworks/config/Config";
 import { LoadingView } from "../../common/LoadingView";
-import { Logger } from "../../../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * 签到视图

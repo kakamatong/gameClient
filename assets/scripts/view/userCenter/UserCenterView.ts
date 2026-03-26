@@ -13,7 +13,7 @@ import { PopMessageView } from "../common/PopMessageView";
 import { RevokeAccount } from "../../modules/RevokeAccount";
 import { LobbySocketManager } from "../../frameworks/LobbySocketManager";
 import { SoundManager } from "../../frameworks/SoundManager";
-import { Logger } from "../../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 import { TruncateString } from "../../frameworks/utils/Utils";
 
 /**

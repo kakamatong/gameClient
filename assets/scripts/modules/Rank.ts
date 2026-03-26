@@ -8,7 +8,7 @@ import { LogColors } from "../frameworks/Framework";
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { BaseModule } from "../frameworks/base/BaseModule";
 import { MAIN_GAME_ID } from "../datacenter/InterfaceConfig";
-import { Logger } from "../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * @class Rank

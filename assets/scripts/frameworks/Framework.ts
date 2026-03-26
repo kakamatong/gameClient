@@ -1,7 +1,7 @@
 import { Director, Scene } from "cc";
 import { PackageManager } from "./PackageManager";
 import { MiniGameUtils } from "./utils/sdk/MiniGameUtils";
-import { Logger } from "./utils/Utils";
+import { Logger } from "@utils/Utils";
 type eventFunc = (...args: any[]) => void;
 
 const events = new Map<string, eventFunc[]>();

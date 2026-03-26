@@ -23,7 +23,7 @@ import { MiniGameUtils } from "../../../frameworks/utils/sdk/MiniGameUtils";
 import { ConnectGameSvr } from "../../../modules/ConnectGameSvr";
 import { SprotoGameRoomReady } from "../../../../types/protocol/lobby/s2c";
 import { SignInView } from "../../signIn/SignInView";
-import { Logger } from "../../../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 import { sys } from "cc";
 import { AdReward } from "../../../modules/AdReward";
 import { AwardView } from "../../award/AwardView";

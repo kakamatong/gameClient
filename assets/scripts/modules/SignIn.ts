@@ -7,7 +7,7 @@
 import { SprotoCallActivityFunc } from "../../types/protocol/lobby/c2s";
 import { LogColors } from "../frameworks/Framework";
 import { BaseModule } from "../frameworks/base/BaseModule";
-import { Logger } from "../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 
 /**

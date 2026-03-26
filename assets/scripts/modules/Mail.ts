@@ -8,7 +8,7 @@ import { DataCenter } from "../datacenter/Datacenter";
 import { LogColors } from "../frameworks/Framework";
 import { HttpPostWithDefaultJWT } from "../frameworks/utils/Utils";
 import { BaseModule } from "../frameworks/base/BaseModule";
-import { Logger } from "../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * @class Mail

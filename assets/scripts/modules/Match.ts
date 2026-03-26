@@ -9,7 +9,7 @@ import { UserStatus } from "./UserStatus";
 import { SprotoMatchJoin, SprotoMatchLeave } from "../../types/protocol/lobby/c2s";
 import { BaseModule } from "../frameworks/base/BaseModule";
 import { MAIN_GAME_ID } from "../datacenter/InterfaceConfig";
-import { Logger } from "../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * @class Match

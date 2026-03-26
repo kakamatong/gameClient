@@ -7,7 +7,7 @@
 import { DataCenter } from '../datacenter/Datacenter';
 import { SprotoGetAwardNotice,SprotoSetAwardNoticeRead } from '../../types/protocol/lobby/c2s';
 import { BaseModule } from '../frameworks/base/BaseModule';
-import { Logger } from '../frameworks/utils/Utils';
+import { Logger } from "@utils/Utils";
 
 /**
  * @class AwardNotices

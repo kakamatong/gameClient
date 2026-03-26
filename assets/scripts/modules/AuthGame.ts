@@ -10,7 +10,7 @@ import { LogColors } from '../frameworks/Framework';
 import { GameSocketManager } from '../frameworks/GameSocketManager';
 import { CustomDESEncryptStr } from '../frameworks/utils/Utils';
 import { BaseModule } from '../frameworks/base/BaseModule';
-import { Logger } from '../frameworks/utils/Utils';
+import { Logger } from "@utils/Utils";
 
 /**
  * @class AuthGame

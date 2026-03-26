@@ -65,7 +65,7 @@ import {
 import { SprotoGameRoomReady } from "../../../../../../types/protocol/lobby/s2c";
 import { TALK_LIST } from "../../talk/TalkConfig";
 import { TalkView } from "../../talk/TalkView";
-import { TruncateString, Logger } from "../../../../../frameworks/utils/Utils";
+import { TruncateString, Logger } from "@utils/Utils";
 
 /**
  * 游戏主体组件

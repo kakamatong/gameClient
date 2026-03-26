@@ -9,7 +9,7 @@ import FGUITipsView from "../../fgui/common/FGUITipsView";
 import FGUICompTips from "../../fgui/common/FGUICompTips";
 import * as fgui from "fairygui-cc";
 import { ViewClass } from '../../frameworks/Framework';
-import { Logger } from '../../frameworks/utils/Utils';
+import { Logger } from "@utils/Utils";
 
 /**
  * @class TipsView

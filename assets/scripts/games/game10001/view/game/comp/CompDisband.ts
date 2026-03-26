@@ -17,7 +17,7 @@ import { Color } from "cc";
 import { SprotoVoteDisbandResult, SprotoVoteDisbandStart, SprotoVoteDisbandUpdate } from "../../../../../../types/protocol/game10001/s2c";
 import { ViewClass } from "db://assets/scripts/frameworks/Framework";
 import { SprotoVoteDisbandResponse } from "db://assets/types/protocol/game10001/c2s";
-import { TruncateString, Logger } from "../../../../../frameworks/utils/Utils";
+import { TruncateString, Logger } from "@utils/Utils";
 
 /**
  * 解散房间投票组件

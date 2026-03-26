@@ -6,7 +6,7 @@
 
 import { AssetManager, assetManager } from "cc";
 import * as fgui from "fairygui-cc";
-import { Logger } from "./utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * @class PackageManager

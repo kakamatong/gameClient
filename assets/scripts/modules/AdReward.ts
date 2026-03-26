@@ -9,7 +9,7 @@ import { LogColors } from "../frameworks/Framework";
 import { DataCenter } from "../datacenter/Datacenter";
 import { AD_REWARD_INFO, AD_RECEIVE_REWARD_RESULT } from "../datacenter/InterfaceConfig";
 import { BaseModule } from "../frameworks/base/BaseModule";
-import { Logger } from "../frameworks/utils/Utils";
+import { Logger } from "@utils/Utils";
 
 /**
  * @class AdReward

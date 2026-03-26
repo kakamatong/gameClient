@@ -9,7 +9,7 @@ import * as fgui from "fairygui-cc";
 import { Mail } from '../../modules/Mail';
 import { LoadingView } from '../common/LoadingView';
 import { ViewClass } from '../../frameworks/Framework';
-import { Logger } from '../../frameworks/utils/Utils';
+import { Logger } from "@utils/Utils";
 
 /**
  * @class MailView
