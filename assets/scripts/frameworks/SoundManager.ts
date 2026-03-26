@@ -183,7 +183,7 @@ export class SoundManager {
     adCloseMusicPlay() {
         const isOpen = this.getSoundMusicOpen();
         if (isOpen) {
-            const newAs = fgui.GRoot.inst.node.addComponent(AudioSourceComponent);
+            const newAs = fgui.GRoot.inst.node.getComponent(AudioSourceComponent);
             if (!newAs) return;
             newAs.pause();
             newAs.play();
