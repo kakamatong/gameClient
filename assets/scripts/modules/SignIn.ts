@@ -9,7 +9,6 @@ import { LogColors } from "../frameworks/Framework";
 import { BaseModule } from "../frameworks/base/BaseModule";
 import { Logger } from "@utils/Utils";
 
-
 /**
  * @class SignIn
  * @description 签到管理类，负责请求签到数据、执行签到和补签操作
@@ -31,26 +30,30 @@ export class SignIn extends BaseModule {
      * 请求签到数据
      * @param callBack 签到数据回调
      */
-    reqSignData(callBack: (success: boolean, data: any) => void){
+    reqSignData(callBack: (success: boolean, data: any) => void) {
         this._signDataCallBack = callBack;
-        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'getSignInInfo', args:JSON.stringify({})} , this.respSignData.bind(this))
+        this.reqLobby(
+            SprotoCallActivityFunc,
+            { moduleName: "daySignIn", funcName: "getSignInInfo", args: JSON.stringify({ cfgId: 1 }) },
+            this.respSignData.bind(this)
+        );
     }
 
     /**
      * 签到数据回调
      * @param result 签到数据
      */
-    respSignData(result: SprotoCallActivityFunc.Response): void { 
-        if(result && result.code == 1){
+    respSignData(result: SprotoCallActivityFunc.Response): void {
+        if (result && result.code == 1) {
             const res = JSON.parse(result.result);
-            if(res.error){
+            if (res.error) {
                 Logger.log(LogColors.red(res.error));
-                this._signDataCallBack && this._signDataCallBack(false, res)
-            }else{
-                this._signDataCallBack && this._signDataCallBack(true, res)
+                this._signDataCallBack && this._signDataCallBack(false, res);
+            } else {
+                this._signDataCallBack && this._signDataCallBack(true, res);
             }
-        }else{
-            this._signDataCallBack && this._signDataCallBack(false, null)
+        } else {
+            this._signDataCallBack && this._signDataCallBack(false, null);
         }
     }
 
@@ -59,26 +62,30 @@ export class SignIn extends BaseModule {
      * @param mult 是否翻倍
      * @param callBack 签到回调
      */
-    reqSignIn(mult:number, callBack: (success: boolean, data: any) => void):void{
-        this._signInCallBack = callBack
-        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'signIn', args:JSON.stringify({mult})} , this.respSignIn.bind(this))
+    reqSignIn(mult: number, callBack: (success: boolean, data: any) => void): void {
+        this._signInCallBack = callBack;
+        this.reqLobby(
+            SprotoCallActivityFunc,
+            { moduleName: "daySignIn", funcName: "signIn", args: JSON.stringify({ mult, cfgId: 1 }) },
+            this.respSignIn.bind(this)
+        );
     }
 
     /**
      * 签到回调
      * @param result 签到结果
      */
-    respSignIn(result: SprotoCallActivityFunc.Response): void { 
-        if(result && result.code == 1){
+    respSignIn(result: SprotoCallActivityFunc.Response): void {
+        if (result && result.code == 1) {
             const res = JSON.parse(result.result);
-            if(res.error){
+            if (res.error) {
                 Logger.log(LogColors.red(res.error));
-                this._signInCallBack && this._signInCallBack(false, res)
-            }else{
-                this._signInCallBack && this._signInCallBack(true, res)
+                this._signInCallBack && this._signInCallBack(false, res);
+            } else {
+                this._signInCallBack && this._signInCallBack(true, res);
             }
-        }else{
-            this._signInCallBack && this._signInCallBack(false, null)
+        } else {
+            this._signInCallBack && this._signInCallBack(false, null);
         }
     }
 
@@ -87,26 +94,30 @@ export class SignIn extends BaseModule {
      * @param callBack 签到回调
      * @param index 补签天数
      */
-    reqFillSignIn(index:number, callBack: (success: boolean, data: any) => void):void{
-        this._fillSignInCallBack = callBack
-        this.reqLobby(SprotoCallActivityFunc,{moduleName : 'daySignIn', funcName : 'fillSignIn', args:JSON.stringify({index})} , this.respFillSignIn.bind(this))
+    reqFillSignIn(index: number, callBack: (success: boolean, data: any) => void): void {
+        this._fillSignInCallBack = callBack;
+        this.reqLobby(
+            SprotoCallActivityFunc,
+            { moduleName: "daySignIn", funcName: "fillSignIn", args: JSON.stringify({ index, cfgId: 1 }) },
+            this.respFillSignIn.bind(this)
+        );
     }
 
     /**
      * 补签回调
      * @param result 签到结果
      */
-    respFillSignIn(result: SprotoCallActivityFunc.Response): void { 
-        if(result && result.code == 1){
+    respFillSignIn(result: SprotoCallActivityFunc.Response): void {
+        if (result && result.code == 1) {
             const res = JSON.parse(result.result);
-            if(res.error){
+            if (res.error) {
                 Logger.log(LogColors.red(res.error));
-                this._fillSignInCallBack && this._fillSignInCallBack(false, res)
-            }else{
-                this._fillSignInCallBack && this._fillSignInCallBack(true, res)
+                this._fillSignInCallBack && this._fillSignInCallBack(false, res);
+            } else {
+                this._fillSignInCallBack && this._fillSignInCallBack(true, res);
             }
-        }else{
-            this._fillSignInCallBack && this._fillSignInCallBack(false, null)
+        } else {
+            this._fillSignInCallBack && this._fillSignInCallBack(false, null);
         }
     }
 }

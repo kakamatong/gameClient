@@ -34,7 +34,7 @@ export class AdReward extends BaseModule {
         this._getAdInfoCallBack = callBack;
         this.reqLobby(
             SprotoCallActivityFunc,
-            { moduleName: "ad", funcName: "getAdInfo", args: JSON.stringify({}) },
+            { moduleName: "ad", funcName: "getAdInfo", args: JSON.stringify({ cfgId: 1 }) },
             this.respGetAdInfo.bind(this)
         );
     }
@@ -66,7 +66,7 @@ export class AdReward extends BaseModule {
         this._receiveAdRewardCallBack = callBack;
         this.reqLobby(
             SprotoCallActivityFunc,
-            { moduleName: "ad", funcName: "getAdReward", args: JSON.stringify({}) },
+            { moduleName: "ad", funcName: "getAdReward", args: JSON.stringify({ cfgId: 1 }) },
             this.respReceiveAdReward.bind(this)
         );
     }

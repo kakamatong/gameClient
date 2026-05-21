@@ -27,6 +27,7 @@
     </component>
     <text id="n7_fnug" name="n7" xy="336,994" size="148,49" group="n8_fnug" fontSize="36" color="#ffffff" align="center" vAlign="middle" strokeColor="#000000" strokeSize="2" text="自动加入"/>
     <group id="n8_fnug" name="UI_GROUP_AUTO" xy="275,992" size="209,56" group="n9_af5i" advanced="true"/>
+    <component id="n10_hywm" name="UI_BTN_CLOSE" src="muz3h" fileName="comp/CompBtnClose.xml" pkg="gj0r6g5i" xy="634,465" group="n9_af5i"/>
     <group id="n9_af5i" name="n9" xy="59,449" size="657,789" advanced="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
