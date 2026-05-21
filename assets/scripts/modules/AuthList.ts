@@ -48,7 +48,6 @@ export class AuthList extends BaseModule {
                     // 对data.data进行URL解码
                     const decodedData = DecodeURLRecursive(data.data);
                     DataCenter.instance.authList = decodedData.gate;
-                    DataCenter.instance.gameAuthList = decodedData.game;
                     DataCenter.instance.loginList = decodedData.login;
 
                     // 同时更新原始data对象中的data字段
