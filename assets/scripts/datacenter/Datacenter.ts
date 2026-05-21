@@ -5,7 +5,17 @@
  */
 
 import { UserdataResponse, UserstatusResponse } from "../../types/protocol/lobby/c2s";
-import { LOGIN_INFO, USER_STATUS, LOCAL_KEY, DEFAULT_HEADURL, GAME_RECORD, LOGIN_TYPE, ENUM_CHANNEL_ID, ENUM_ENV, AD_REWARD_INFO } from "./InterfaceConfig";
+import {
+    LOGIN_INFO,
+    USER_STATUS,
+    LOCAL_KEY,
+    DEFAULT_HEADURL,
+    GAME_RECORD,
+    LOGIN_TYPE,
+    ENUM_CHANNEL_ID,
+    ENUM_ENV,
+    AD_REWARD_INFO,
+} from "./InterfaceConfig";
 import { sys } from "cc";
 
 /**
@@ -31,7 +41,7 @@ export class DataCenter {
      * @property {Array<{richType:number, richNums:number}>} _userRiches - 用户财富数据
      * @private
      */
-    private _userRiches: Array<{richType:number, richNums:number}> = []
+    private _userRiches: Array<{ richType: number; richNums: number }> = [];
 
     /**
      * @property {UserstatusResponse | null} _userStatus - 用户状态信息
@@ -49,37 +59,42 @@ export class DataCenter {
      * @property {string} _launchRoomid - 启动携带的roomid
      * @private
      */
-    private _launchRoomid:number = 0;
+    private _launchRoomid: number = 0;
 
     /**
      * @property {number} _gameid - 当前游戏ID
      * @private
      */
     private _gameid: number = 0;
-    
+
     /**
      * @property {string} _roomid - 房间ID
      * @private
      */
-    private _roomid: string = '';
-    
+    private _roomid: string = "";
+
     /**
      * @property {string} _gameAddr - 游戏服务器地址
      * @private
      */
-    private _gameAddr: string = '';
-    
+    private _gameAddr: string = "";
+
+    /**
+     * 游戏网关url
+     */
+    private _gameGatewayUrl: string = "";
+
     /**
      * @property {number} _shortRoomid - 短房间ID
      * @private
      */
-    private _shortRoomid:number = 0;
+    private _shortRoomid: number = 0;
 
     /**
      * @property {Object.<string, string>} _authList - 认证服务器地址列表
      * @private
      */
-    private _authList: {[key:string]:string} = {
+    private _authList: { [key: string]: string } = {
         // 'gate1':'ws://192.168.1.140:9002',
         // 'gate2':'ws://192.168.1.140:9005',
     };
@@ -88,23 +103,23 @@ export class DataCenter {
      * @property {Object.<string, string>} _gameAuthList - 游戏认证服务器地址列表
      * @private
      */
-    private _gameAuthList: {[key:string]:string} = {
+    private _gameAuthList: { [key: string]: string } = {
         // 'game1':'ws://192.168.1.140:9003',
         // 'game2':'ws://192.168.1.140:9006',
-    }
+    };
 
     /**
      * @property {Object.<string, string>} _loginList - 登录服务器地址列表
      * @private
      */
-    private _loginList: {[key:string]:string} = {
+    private _loginList: { [key: string]: string } = {
         // 'game1':'ws://192.168.1.140:9003',
         // 'game2':'ws://192.168.1.140:9006',
-    }
+    };
 
-    private _channelID:ENUM_CHANNEL_ID = ENUM_CHANNEL_ID.ACCOUNT;
-    private _gameRecords:GAME_RECORD | null = null;
-    private _allreadyThirdLogin:boolean = false;
+    private _channelID: ENUM_CHANNEL_ID = ENUM_CHANNEL_ID.ACCOUNT;
+    private _gameRecords: GAME_RECORD | null = null;
+    private _allreadyThirdLogin: boolean = false;
 
     /**
      * @property {AD_REWARD_INFO | null} _adRewardInfo - 广告奖励信息
@@ -118,7 +133,7 @@ export class DataCenter {
      * @static
      */
     private static _instance: DataCenter;
-    
+
     /**
      * @method instance
      * @description 获取DataCenter的单例实例
@@ -137,20 +152,19 @@ export class DataCenter {
      * @description 私有构造函数，初始化时从本地存储中加载登录信息
      * @private
      */
-    private constructor(){
+    private constructor() {
         const loginInfo = sys.localStorage.getItem(LOCAL_KEY.LOGIN_INFO);
-        if(loginInfo){
+        if (loginInfo) {
             this._loginInfo = JSON.parse(loginInfo);
         }
-
     }
 
-    set appConfig(config:any){
-        this._appConfig = config
+    set appConfig(config: any) {
+        this._appConfig = config;
     }
 
-    get appConfig(){
-        return this._appConfig
+    get appConfig() {
+        return this._appConfig;
     }
 
     setLoginInfo(info: LOGIN_INFO) {
@@ -158,42 +172,42 @@ export class DataCenter {
         sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(info));
     }
 
-    getLoginInfo():LOGIN_INFO | null {
+    getLoginInfo(): LOGIN_INFO | null {
         return this._loginInfo;
     }
 
-    addSubid(subid?:number){
-        subid ? this._loginInfo && (this._loginInfo.subid = subid) : this._loginInfo && (this._loginInfo.subid++);
+    addSubid(subid?: number) {
+        subid ? this._loginInfo && (this._loginInfo.subid = subid) : this._loginInfo && this._loginInfo.subid++;
         sys.localStorage.setItem(LOCAL_KEY.LOGIN_INFO, JSON.stringify(this._loginInfo));
     }
 
-    get userid():number{
+    get userid(): number {
         return this._loginInfo?.userid ?? 0;
     }
 
-    set userData(data:UserdataResponse){
+    set userData(data: UserdataResponse) {
         this._userData = data;
     }
 
-    get userData():UserdataResponse | null{
+    get userData(): UserdataResponse | null {
         return this._userData;
     }
 
-    set headurl(url:string) {
+    set headurl(url: string) {
         if (this._userData) {
             this._userData.headurl = url;
         }
     }
 
-    get headurl():string {
-        if(!this._userData?.headurl){
-            return DEFAULT_HEADURL
-        }else{
-            return this._userData?.headurl
+    get headurl(): string {
+        if (!this._userData?.headurl) {
+            return DEFAULT_HEADURL;
+        } else {
+            return this._userData?.headurl;
         }
     }
 
-    set userRiches(data:Array<{richType:number, richNums:number}>) {
+    set userRiches(data: Array<{ richType: number; richNums: number }>) {
         this._userRiches = data;
     }
 
@@ -206,9 +220,9 @@ export class DataCenter {
      * @param type 财富类型
      * @param nums 财富数量
      */
-    addRichByType(type:number, nums:number) {
-        const item = this._userRiches.find(rich => rich.richType === type);
-        item && (item.richNums += nums)
+    addRichByType(type: number, nums: number) {
+        const item = this._userRiches.find((rich) => rich.richType === type);
+        item && (item.richNums += nums);
     }
 
     /**
@@ -216,9 +230,9 @@ export class DataCenter {
      * @param type 财富类型
      * @param nums 财富数量
      */
-    updateRichByType(type:number, nums:number) {
-        const item = this._userRiches.find(rich => rich.richType === type);
-        item && (item.richNums = nums)
+    updateRichByType(type: number, nums: number) {
+        const item = this._userRiches.find((rich) => rich.richType === type);
+        item && (item.richNums = nums);
     }
 
     /**
@@ -226,133 +240,148 @@ export class DataCenter {
      * @param type 财富类型
      * @returns {richType:number, richNums:number} | undefined
      */
-    getRichByType(type:number):{richType:number, richNums:number} | undefined {
-        return this._userRiches.find(rich => rich.richType === type);
+    getRichByType(type: number): { richType: number; richNums: number } | undefined {
+        return this._userRiches.find((rich) => rich.richType === type);
     }
 
-    set userStatus(data:UserstatusResponse) {
+    set userStatus(data: UserstatusResponse) {
         this._userStatus = data;
     }
 
-    get userStatus(): UserstatusResponse | null  {
+    get userStatus(): UserstatusResponse | null {
         return this._userStatus;
     }
 
-    set gameid(id:number) {
+    set gameid(id: number) {
         this._gameid = id;
     }
 
-    get gameid():number {
+    get gameid(): number {
         return this._gameid;
     }
 
-    set roomid(id:string) {
+    set roomid(id: string) {
         this._roomid = id;
     }
 
-    get roomid():string {
+    get roomid(): string {
         return this._roomid;
     }
 
-    set gameAddr(addr:string) {
+    set gameAddr(addr: string) {
         this._gameAddr = addr;
     }
 
-    get gameAddr():string {
+    get gameAddr(): string {
         return this._gameAddr;
     }
 
+    /**
+     * @method gameGatewayUrl
+     * @description 设置游戏网关地址
+     */
+    set gameGatewayUrl(url: string) {
+        this._gameGatewayUrl = url;
+    }
 
-    set authList(list:{[key:string]:string}){
+    /**
+     * @method gameGatewayUrl
+     * @description 获取游戏网关地址
+     * @returns 游戏服务网关地址
+     */
+    get gameGatewayUrl() {
+        return this._gameGatewayUrl;
+    }
+
+    set authList(list: { [key: string]: string }) {
         this._authList = list;
     }
 
-    get authList():{[key:string]:string} {
+    get authList(): { [key: string]: string } {
         return this._authList;
     }
 
-    set loginList(list:{[key:string]:string}){
+    set loginList(list: { [key: string]: string }) {
         this._loginList = list;
     }
 
-    get loginList():{[key:string]:string} {
+    get loginList(): { [key: string]: string } {
         return this._loginList;
     }
 
-
-    set gameAuthList(list:{[key:string]:string}){
+    set gameAuthList(list: { [key: string]: string }) {
         this._gameAuthList = list;
     }
 
-    get gameAuthList():{[key:string]:string} {
+    get gameAuthList(): { [key: string]: string } {
         return this._gameAuthList;
     }
 
-    get loginToken():string {
-        return this._loginInfo?.token ?? '';
+    get loginToken(): string {
+        return this._loginInfo?.token ?? "";
     }
 
-    get subid(){
+    get subid() {
         return this._loginInfo?.subid ?? 0;
     }
 
-    get shortRoomid(){
+    get shortRoomid() {
         return this._shortRoomid;
     }
 
-    set shortRoomid(id:number){
+    set shortRoomid(id: number) {
         this._shortRoomid = id;
     }
 
-    set gameRecords(data:GAME_RECORD){
+    set gameRecords(data: GAME_RECORD) {
         this._gameRecords = data;
     }
 
-    get gameRecords():GAME_RECORD | null{
+    get gameRecords(): GAME_RECORD | null {
         return this._gameRecords;
     }
 
-    set channelID(id:ENUM_CHANNEL_ID){
+    set channelID(id: ENUM_CHANNEL_ID) {
         this._channelID = id;
     }
 
-    get channelID():ENUM_CHANNEL_ID{
+    get channelID(): ENUM_CHANNEL_ID {
         return this._channelID;
     }
 
-    set allreadyThirdLogin(b:boolean){
+    set allreadyThirdLogin(b: boolean) {
         this._allreadyThirdLogin = b;
     }
 
-    get allreadyThirdLogin():boolean{
+    get allreadyThirdLogin(): boolean {
         return this._allreadyThirdLogin;
     }
 
-    get channelLoginType():string{
+    get channelLoginType(): string {
         return LOGIN_TYPE[this._channelID];
     }
 
-    isEnvDev():boolean{
+    isEnvDev(): boolean {
         return this.appConfig.env === ENUM_ENV.DEV;
     }
 
-    isEnvProd():boolean{
+    isEnvProd(): boolean {
         return this.appConfig.env === ENUM_ENV.PROD;
     }
 
-    get launchRoomid():number{ 
+    get launchRoomid(): number {
         return this._launchRoomid;
     }
 
-    set launchRoomid(id:number){
+    set launchRoomid(id: number) {
         this._launchRoomid = id;
     }
 
-    set adRewardInfo(data:AD_REWARD_INFO | null){
+    set adRewardInfo(data: AD_REWARD_INFO | null) {
         this._adRewardInfo = data;
     }
 
-    get adRewardInfo():AD_REWARD_INFO | null{
+    get adRewardInfo(): AD_REWARD_INFO | null {
         return this._adRewardInfo;
     }
 }

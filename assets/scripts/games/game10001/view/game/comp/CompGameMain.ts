@@ -524,7 +524,7 @@ export class CompGameMain extends FGUICompGameMain {
      * @param gameid 游戏ID
      * @param roomid 房间ID
      */
-    connectToGame(addr: string, gameid: number, roomid: string) {
+    connectToGame(addr: string, gatewayUrl: string, gameid: number, roomid: string) {
         const callBack = (success: boolean) => {
             if (success) {
                 //this.changeToGameScene()
@@ -533,7 +533,7 @@ export class CompGameMain extends FGUICompGameMain {
                 GameSocketManager.instance.sendToServer(SprotoClientReady, {});
             }
         };
-        AuthGame.instance.req(addr, gameid, roomid, callBack);
+        AuthGame.instance.req(addr, gatewayUrl, gameid, roomid, callBack);
     }
 
     /**
@@ -547,8 +547,9 @@ export class CompGameMain extends FGUICompGameMain {
         DataCenter.instance.roomid = data.roomid;
         DataCenter.instance.gameAddr = data.addr;
         DataCenter.instance.shortRoomid = 0; // 匹配房
+        DataCenter.instance.gameGatewayUrl = data.gatewayUrl;
         Logger.log(LogColors.green("游戏房间准备完成"));
-        this.connectToGame(data.addr, data.gameid, data.roomid);
+        this.connectToGame(data.addr, data.gatewayUrl, data.gameid, data.roomid);
     }
 
     /**

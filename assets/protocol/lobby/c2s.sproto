@@ -56,6 +56,7 @@ userStatus 4 {
         shortRoomid 2 : integer
         roomid 3 : string
         addr 4 : string
+        gatewayUrl 5 : string
     }
 }
 
@@ -72,6 +73,7 @@ matchJoin 5 {
         shortRoomid 3 : integer
         roomid 4 : string
         addr 5 : string
+        gatewayUrl 6 : string
     }
 }
 
@@ -172,6 +174,8 @@ joinPrivateRoom 13 {
         roomid 3 : string
         addr 4 : string
         rule 5 : string
+        shortRoomid 6 : integer
+        gatewayUrl 7 : string
     }
 }
 
@@ -189,6 +193,7 @@ createPrivateRoom 14 {
         roomid 4 : string
         addr 5 : string
         rule 6 : string
+        gatewayUrl 7 : string
     }
 }
 

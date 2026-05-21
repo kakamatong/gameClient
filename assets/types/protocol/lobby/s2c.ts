@@ -30,6 +30,7 @@ export interface GameroomreadyRequest {
     gameid: number;
     roomid: string;
     addr: string;
+    gatewayUrl: string;
 }
 
 /** 更新用户财富 - 请求参数 */

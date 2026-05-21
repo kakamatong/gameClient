@@ -38,6 +38,7 @@ gameRoomReady 4 {
         gameid 0 : integer
         roomid 1 : string
         addr 2 : string
+        gatewayUrl 3 : string
     }
 }
 

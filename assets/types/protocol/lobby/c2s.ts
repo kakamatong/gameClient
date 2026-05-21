@@ -58,6 +58,7 @@ export interface UserstatusResponse {
     shortRoomid: number;
     roomid: string;
     addr: string;
+    gatewayUrl: string;
 }
 
 /** 加入匹配 - 请求参数 */
@@ -74,6 +75,7 @@ export interface MatchjoinResponse {
     shortRoomid: number;
     roomid: string;
     addr: string;
+    gatewayUrl: string;
 }
 
 /** 退出匹配 - 请求参数 */
@@ -163,6 +165,8 @@ export interface JoinprivateroomResponse {
     roomid: string;
     addr: string;
     rule: string;
+    shortRoomid: number;
+    gatewayUrl: string;
 }
 
 /** 创建私有房间 - 请求参数 */
@@ -180,6 +184,7 @@ export interface CreateprivateroomResponse {
     roomid: string;
     addr: string;
     rule: string;
+    gatewayUrl: string;
 }
 
 /** 获取用户游戏记录 - 请求参数 */
